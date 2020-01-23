@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>UNIX环境高级编程读书记录 | Lsmg的大学之路</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="UNIX环境高级编程读书记录 | Lsmg的大学之路">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="编程规范极其重要这里就参考谷歌的编程规范整理下">
+<meta property="og:type" content="article">
+<meta property="og:title" content="编程规范">
+<meta property="og:url" content="http://blog.lsmg.xyz/2020/01/C++-C++%E9%87%8D%E7%82%B9-%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%83/index.html">
+<meta property="og:site_name" content="Lsmg的大学之路">
+<meta property="og:description" content="编程规范极其重要这里就参考谷歌的编程规范整理下">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-01-23T10:02:01.771Z">
+<meta property="article:modified_time" content="2020-01-03T12:40:21.225Z">
+<meta property="article:author" content="Lsmg">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1" ></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.0.1" ></script>
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+  <input class="theme_blog_path" value="">
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>Lsmg</span>
+</div>
+
+<div class="icon">
+    
+        
+        <a title="rss" href="/atom.xml" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-rss"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="github" href="https://github.com/rjd67441" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="email" href="mailto:rjd67441@hotmail.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=1609676181&site=qq&menu=yes" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-qq"></use>
+                </svg>
+            
+        </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(33)</small></div></li>
+    
+        
+            
+            <li><div data-rel="算法"><i class="fold iconfont icon-right"></i>算法<small>(1)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="基础算法">基础算法<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="C++"><i class="fold iconfont icon-right"></i>C++<small>(12)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="C++重点">C++重点<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="C++项目阅研读">C++项目阅研读<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="C++基础">C++基础<small>(4)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Protobuf">Protobuf<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="服务器编程-书籍记录">服务器编程-书籍记录<small>(3)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="数据库"><i class="fold iconfont icon-right"></i>数据库<small>(1)</small></div>
+                            
+                                <ul class="sub hide">
+                                    
+                                    <li><div data-rel="MongoDB">MongoDB<small>(1)</small></div>
+                                    </li>
+                                    
+                                </ul>
+                            
+                        </li>
+                            
+                        <li><div data-rel="学习计划">学习计划<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="必备技能"><i class="fold iconfont icon-right"></i>必备技能<small>(1)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="Git操作">Git操作<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Java"><i class="fold iconfont icon-right"></i>Java<small>(11)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="SDK"><i class="fold iconfont icon-right"></i>SDK<small>(1)</small></div>
+                            
+                                <ul class="sub hide">
+                                    
+                                    <li><div data-rel="FASTJson">FASTJson<small>(1)</small></div>
+                                    </li>
+                                    
+                                </ul>
+                            
+                        </li>
+                            
+                        <li><div data-rel="IDEA的使用">IDEA的使用<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="springboot">springboot<small>(4)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="java爬虫"><i class="fold iconfont icon-right"></i>java爬虫<small>(1)</small></div>
+                            
+                                <ul class="sub hide">
+                                    
+                                    <li><div data-rel="java爬虫初步">java爬虫初步<small>(1)</small></div>
+                                    </li>
+                                    
+                                </ul>
+                            
+                        </li>
+                            
+                        <li><div data-rel="知识整理"><i class="fold iconfont icon-right"></i>知识整理<small>(2)</small></div>
+                            
+                                <ul class="sub hide">
+                                    
+                                    <li><div data-rel="文件操作">文件操作<small>(1)</small></div>
+                                    </li>
+                                    
+                                    <li><div data-rel="IO流">IO流<small>(1)</small></div>
+                                    </li>
+                                    
+                                </ul>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Java设计模式">Java设计模式<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="第一个暑假学习">第一个暑假学习<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Linux"><i class="fold iconfont icon-right"></i>Linux<small>(2)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="Ubuntu">Ubuntu<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="入门学习">入门学习<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Windows"><i class="fold iconfont icon-right"></i>Windows<small>(2)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="终端">终端<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Dos">Dos<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="项目制作"><i class="fold iconfont icon-right"></i>项目制作<small>(2)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="中等项目">中等项目<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="小项目">小项目<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="游戏知识"><i class="fold iconfont icon-right"></i>游戏知识<small>(2)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="服务器">服务器<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="杂谈">杂谈<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+    <div></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="33">
+<input type="hidden" id="yelog_site_word_count" value="48.4k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode==13){return false;}">
+        <input class="search" type="text" placeholder="以 in: 开头进行全文搜索" autocomplete="off"id="local-search-input" >
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Mysql</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">C++</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">服务器编程</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Git操作</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">springboot</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">springboot数据交互</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">日志</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">java爬虫</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">java文件操作</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Java设计模式</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">java输入输出流</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">使用Ubuntu</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">windows终端设置</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">大量的此终端优化</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">校园网络助手1.5</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Linux</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">大学的第一个暑假</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">暑假学习的大纲</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">记录每天假期干了什么</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">自动查询题库</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        <a  class="算法 基础算法 "
+           href="/2019/08/Algorithm/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="基础算法学习记录">基础算法学习记录</span>
+            <span class="post-date" title="2019-08-20 17:23:59">2019/08/20</span>
+        </a>
+        
+        <a  class="C++ C++项目阅研读 "
+           href="/2019/10/C++-C++-%E9%A1%B9%E7%9B%AE-handy/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="C++-C++项目-handy">C++-C++项目-handy</span>
+            <span class="post-date" title="2019-10-23 20:48:10">2019/10/23</span>
+        </a>
+        
+        <a  class="C++ C++基础 "
+           href="/2019/10/C++-C++-%E5%9F%BA%E7%A1%80-%E7%89%9B%E5%AE%A2/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="牛客整理">牛客整理</span>
+            <span class="post-date" title="2019-10-19 12:31:37">2019/10/19</span>
+        </a>
+        
+        <a  class="C++ C++基础 "
+           href="/2019/11/C++-C++%E5%9F%BA%E7%A1%80-%E6%8C%87%E9%92%88/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="指针">指针</span>
+            <span class="post-date" title="2019-11-07 22:26:22">2019/11/07</span>
+        </a>
+        
+        <a  class="C++ C++基础 "
+           href="/2019/08/C++-C++%E5%9F%BA%E7%A1%80-1/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="C++Primer学习">C++Primer学习</span>
+            <span class="post-date" title="2019-08-16 19:13:22">2019/08/16</span>
+        </a>
+        
+        <a  class="C++ C++重点 "
+           href="/2020/01/C++-C++%E9%87%8D%E7%82%B9-%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%83/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="编程规范">编程规范</span>
+            <span class="post-date" title="2020-01-23 18:02:01">2020/01/23</span>
+        </a>
+        
+        <a  class="C++ C++基础 "
+           href="/2019/10/C++-C++%E5%9F%BA%E7%A1%80-2/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="C++薄书整理">C++薄书整理</span>
+            <span class="post-date" title="2019-10-20 19:13:22">2019/10/20</span>
+        </a>
+        
+        <a  class="C++ Protobuf "
+           href="/2019/11/C++-Protobuf-Protobuf%E5%85%A5%E9%97%A8/"
+           data-tag="Mysql"
+           data-author="" >
+            <span class="post-title" title="Protobuf入门">Protobuf入门</span>
+            <span class="post-date" title="2019-11-13 23:00:00">2019/11/13</span>
+        </a>
+        
+        <a  class="C++ 服务器编程-书籍记录 "
+           href="/2019/08/C++-Linux-%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95%E9%AB%98%E7%BA%A7%E9%83%A8%E5%88%86/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Linux高性能服务器编程读书记录-高级部分">Linux高性能服务器编程读书记录-高级部分</span>
+            <span class="post-date" title="2019-08-18 20:34:39">2019/08/18</span>
+        </a>
+        
+        <a  class="C++ 服务器编程-书籍记录 "
+           href="/2019/09/C++-Linux-UNIX%E7%8E%AF%E5%A2%83%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="UNIX环境高级编程读书记录">UNIX环境高级编程读书记录</span>
+            <span class="post-date" title="2019-09-22 17:51:27">2019/09/22</span>
+        </a>
+        
+        <a  class="C++ 数据库 MongoDB "
+           href="/2019/10/C++-%E6%95%B0%E6%8D%AE%E5%BA%93-MongoDB-MongoDB%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/"
+           data-tag="Mysql"
+           data-author="" >
+            <span class="post-title" title="C++-数据库-MongoDB-MongoDB">C++-数据库-MongoDB-MongoDB</span>
+            <span class="post-date" title="2019-10-13 19:25:28">2019/10/13</span>
+        </a>
+        
+        <a  class="C++ 学习计划 "
+           href="/2019/08/C++%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%A4%A7%E7%BA%B2/"
+           data-tag="C++,服务器编程"
+           data-author="" >
+            <span class="post-title" title="C++服务器学习大纲">C++服务器学习大纲</span>
+            <span class="post-date" title="2019-08-17 17:06:35">2019/08/17</span>
+        </a>
+        
+        <a  class="必备技能 Git操作 "
+           href="/2019/03/Git-%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/"
+           data-tag="Git操作"
+           data-author="" >
+            <span class="post-title" title="Git的使用">Git的使用</span>
+            <span class="post-date" title="2019-03-28 18:24:42">2019/03/28</span>
+        </a>
+        
+        <a  class="C++ 服务器编程-书籍记录 "
+           href="/2019/08/C++-Linux-%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95%E5%88%9D%E7%BA%A7%E9%83%A8%E5%88%86/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Linux高性能服务器编程读书记录-初级部分">Linux高性能服务器编程读书记录-初级部分</span>
+            <span class="post-date" title="2019-08-17 20:34:39">2019/08/17</span>
+        </a>
+        
+        <a  class="Java SDK FASTJson "
+           href="/2019/04/Java-SDK-Fastjson%E7%9A%84%E4%BD%BF%E7%94%A8/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="2019年4月13日 FASTJson解析json">2019年4月13日 FASTJson解析json</span>
+            <span class="post-date" title="2019-04-13 17:22:40">2019/04/13</span>
+        </a>
+        
+        <a  class="Java IDEA的使用 "
+           href="/2019/07/Java-IDEA/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="IDEA基本使用记录">IDEA基本使用记录</span>
+            <span class="post-date" title="2019-07-16 17:53:33">2019/07/16</span>
+        </a>
+        
+        <a  class="Java springboot "
+           href="/2019/06/Java-Springboot%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%862/"
+           data-tag="springboot"
+           data-author="" >
+            <span class="post-title" title="纯洁的微笑Gitchat 课程笔记2">纯洁的微笑Gitchat 课程笔记2</span>
+            <span class="post-date" title="2019-06-07 16:14:19">2019/06/07</span>
+        </a>
+        
+        <a  class="Java springboot "
+           href="/2019/05/Java-Springboot%E6%95%B0%E6%8D%AE%E4%BA%A4%E4%BA%92/"
+           data-tag="springboot数据交互"
+           data-author="" >
+            <span class="post-title" title="Springboot数据交互">Springboot数据交互</span>
+            <span class="post-date" title="2019-05-18 14:34:46">2019/05/18</span>
+        </a>
+        
+        <a  class="Java springboot "
+           href="/2019/06/Java-Springboot%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%861/"
+           data-tag="springboot"
+           data-author="" >
+            <span class="post-title" title="纯洁的微笑Gitchat 课程笔记1">纯洁的微笑Gitchat 课程笔记1</span>
+            <span class="post-date" title="2019-06-07 11:36:10">2019/06/07</span>
+        </a>
+        
+        <a  class="Java springboot "
+           href="/2019/05/Java-Springboot%E6%97%A5%E5%BF%97%E6%93%8D%E4%BD%9C/"
+           data-tag="springboot,日志"
+           data-author="" >
+            <span class="post-title" title="Springboot日志操作">Springboot日志操作</span>
+            <span class="post-date" title="2019-05-18 14:14:29">2019/05/18</span>
+        </a>
+        
+        <a  class="Java java爬虫 java爬虫初步 "
+           href="/2019/04/Java-%E7%88%AC%E8%99%AB/"
+           data-tag="java爬虫"
+           data-author="" >
+            <span class="post-title" title="2019年4月15日 java爬虫入门">2019年4月15日 java爬虫入门</span>
+            <span class="post-date" title="2019-04-16 13:02:32">2019/04/16</span>
+        </a>
+        
+        <a  class="Java 知识整理 文件操作 "
+           href="/2019/04/Java-%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/"
+           data-tag="java文件操作"
+           data-author="" >
+            <span class="post-title" title="4月11日 java文件操作">4月11日 java文件操作</span>
+            <span class="post-date" title="2019-04-11 21:24:48">2019/04/11</span>
+        </a>
+        
+        <a  class="Java Java设计模式 "
+           href="/2019/05/Java-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"
+           data-tag="Java设计模式"
+           data-author="" >
+            <span class="post-title" title="Java设计模式">Java设计模式</span>
+            <span class="post-date" title="2019-05-21 13:41:48">2019/05/21</span>
+        </a>
+        
+        <a  class="Java 知识整理 IO流 "
+           href="/2019/04/Java-%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%B5%81/"
+           data-tag="java输入输出流"
+           data-author="" >
+            <span class="post-title" title="java输入输出流">java输入输出流</span>
+            <span class="post-date" title="2019-04-16 12:04:41">2019/04/16</span>
+        </a>
+        
+        <a  class="Linux Ubuntu "
+           href="/2019/05/Linux-Ubuntu%E7%9A%84%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BE%8E%E5%8C%96/"
+           data-tag="使用Ubuntu"
+           data-author="" >
+            <span class="post-title" title="2019年5月30日">2019年5月30日</span>
+            <span class="post-date" title="2019-05-30 18:00:21">2019/05/30</span>
+        </a>
+        
+        <a  class="Windows 终端 "
+           href="/2019/04/Windows-%E7%BB%88%E7%AB%AF%E4%BD%BF%E7%94%A8/"
+           data-tag="windows终端设置,大量的此终端优化"
+           data-author="" >
+            <span class="post-title" title="windows终端设置">windows终端设置</span>
+            <span class="post-date" title="2019-04-04 23:14:53">2019/04/04</span>
+        </a>
+        
+        <a  class="项目制作 中等项目 "
+           href="/2019/06/%E5%B0%8F%E9%A1%B9%E7%9B%AE-%E6%A0%A1%E5%9B%AD%E7%BD%91%E7%BB%9C%E5%8A%A9%E6%89%8B%E6%9B%B4%E6%96%B0/"
+           data-tag="校园网络助手1.5"
+           data-author="" >
+            <span class="post-title" title="校园网络助手更新">校园网络助手更新</span>
+            <span class="post-date" title="2019-06-16 22:28:24">2019/06/16</span>
+        </a>
+        
+        <a  class="Windows Dos "
+           href="/2019/03/Windows-%E9%9A%90%E8%97%8FDos%E7%AA%97%E5%8F%A3/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="隐藏dos窗口">隐藏dos窗口</span>
+            <span class="post-date" title="2019-03-31 10:07:29">2019/03/31</span>
+        </a>
+        
+        <a  class="Linux 入门学习 "
+           href="/2019/10/Linux-%E8%8F%9C%E9%B8%9F%E5%85%A5%E9%97%A8/"
+           data-tag="Linux"
+           data-author="" >
+            <span class="post-title" title="Linux-菜鸟入门">Linux-菜鸟入门</span>
+            <span class="post-date" title="2019-10-13 16:03:17">2019/10/13</span>
+        </a>
+        
+        <a  class="Java 第一个暑假学习 "
+           href="/2019/07/%E6%9A%91%E5%81%87%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E4%B8%8E%E6%80%BB%E7%BB%93/"
+           data-tag="大学的第一个暑假,暑假学习的大纲,记录每天假期干了什么"
+           data-author="" >
+            <span class="post-title" title="暑假学习记录与总结">暑假学习记录与总结</span>
+            <span class="post-date" title="2019-07-13 12:13:22">2019/07/13</span>
+        </a>
+        
+        <a  class="项目制作 小项目 "
+           href="/2019/04/%E5%B0%8F%E9%A1%B9%E7%9B%AE-%E8%87%AA%E5%8A%A8%E6%9F%A5%E8%AF%A2%E9%A2%98%E5%BA%93/"
+           data-tag="自动查询题库"
+           data-author="" >
+            <span class="post-title" title="2019年4月19日">2019年4月19日</span>
+            <span class="post-date" title="2019-04-19 22:35:19">2019/04/19</span>
+        </a>
+        
+        <a  class="游戏知识 服务器 "
+           href="/2019/12/%E6%B8%B8%E6%88%8F%E7%9F%A5%E8%AF%86-%E6%9C%8D%E5%8A%A1%E5%99%A8-%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%80%9A%E4%BF%A1/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="游戏知识-服务器-服务器通信">游戏知识-服务器-服务器通信</span>
+            <span class="post-date" title="2019-12-22 20:50:02">2019/12/22</span>
+        </a>
+        
+        <a  class="游戏知识 杂谈 "
+           href="/2019/12/%E6%B8%B8%E6%88%8F%E7%9F%A5%E8%AF%86-%E6%9D%82%E8%B0%88-%E5%A6%82%E4%BD%95%E8%BF%9B%E5%85%A5%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E8%A1%8C%E4%B8%9A/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="游戏知识-杂谈-如何进入游戏开发行业">游戏知识-杂谈-如何进入游戏开发行业</span>
+            <span class="post-date" title="2019-12-22 20:50:02">2019/12/22</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-C++-Linux-UNIX环境高级编程读书记录" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">UNIX环境高级编程读书记录</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a  data-rel="C++">C++</a>/
+            
+                <a  data-rel="服务器编程-书籍记录">服务器编程-书籍记录</a>
+            
+        </span>
+        
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-01-03 20:40:21'>2019-09-22 17:51</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:4.1k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#第一章-UNIX基础知识"><span class="toc-text">第一章-UNIX基础知识</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第二章-UNIX标准化及实现"><span class="toc-text">第二章-UNIX标准化及实现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第三章-文件I-O"><span class="toc-text">第三章-文件I&#x2F;O</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Api"><span class="toc-text">Api</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数描述"><span class="toc-text">函数描述</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第四章-文件和目录"><span class="toc-text">第四章 文件和目录</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第五章-标准I-O库"><span class="toc-text">第五章 标准I&#x2F;O库</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Api-1"><span class="toc-text">Api</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#流的打开关闭和读写"><span class="toc-text">流的打开关闭和读写</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#格式化IO"><span class="toc-text">格式化IO</span></a></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="第一章-UNIX基础知识"><a href="#第一章-UNIX基础知识" class="headerlink" title="第一章-UNIX基础知识"></a>第一章-UNIX基础知识</h1><p>上一本书的学习暂时告一段落了. 剩下了框架多线程一级多进程部分<br>这些等我socket编程扎实后继续学习了</p>
+<p>这本书浏览了一下目录, 前边是一些关于Linux的基础知识<br>然后是文件IO部分, 文件和目录<br>其次是讲解标准IO库<br>系统信息, 进程以及进程的控制进程的关系<br>信号<br>终端IO, 高级IO<br>精灵进程, 进程间通信, 高级进程间通信<br>后面的一些章节- 数据库, 打印机?, 一个demo拨号器, 伪终端</p>
+<p>这本书感觉更加照顾了系统方面的基础知识以及讲解了IO部分, 接下来好几章介绍了进程间的操作<br>最后举出了例子</p>
+<a id="more"></a>
+
+<ul>
+<li><p><strong>文件描述符</strong><br>  小的非负整数, 内核用以标识一个特定进程正在存访的文件</p>
+</li>
+<li><p><strong>标准输入输出和出错</strong><br>  新打开的程序存在这三个描述符分别是 0 1 2</p>
+<p>  位于<code>unistd.h</code> 头文件中 定义了两个常数<code>STDIN_FILENO</code></p>
+</li>
+<li><p><strong>无缓存I/O</strong><br>  open, read, write, lseek, close 提供了不需要缓存的I/O, 均使用文件描述符工作</p>
+</li>
+</ul>
+<p>类属指针<br>read和write的第二个参数都是<code>void*</code>  用来代替早期大部分的<code>char*</code></p>
+<p>原始系统数据类型<br><code>POSIX</code>中的新规定, 以<code>_t</code>结尾的数据类型被称为<code>原始系统类型</code>, 通常在头文件 <code>&lt;sys/types.h&gt;</code>中</p>
+<p>出错处理, 这里发现一个新的Api</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// 以前都是使用如下的, 将ERRNO转化为错误信息, 再打印</span><br>strerror()<br><span class="hljs-comment">// 这个可以一步到位, 输出msg + ": " + errno对应的错误值</span><br>perror(<span class="hljs-keyword">char</span>* msg)<br></code></pre></td></tr></table></figure>
+
+<p>组ID<br>每个文件包含文件所有者的用户ID和组ID, 存放着两个只需要四个字节, 如果直接存储ID名称会需要更多的磁盘空间<br>所以存在一个口令文件, 包含登录名和用户ID之间的关系<br>存在组文件, 包含了组名和组ID直接的映射关系.<br>一个用户最多可属于16个另外的组</p>
+<p>信号<br>处理信号的三种方式: 忽略, 按默认方法处理, 提供函数<br>信号的产生: 键盘中断键(Delete, Ctrl-C)和退出键(Ctrl-) 用于中断当前运行的进程</p>
+<p>UNIX时间值</p>
+<ul>
+<li>日历时间, 自1970-1-1-00-00-00 以来的UTC所经过的秒数</li>
+<li>进程时间, 以滴答时钟计算</li>
+</ul>
+<p>习题<br>1.1 <code>cd ..</code> 切换到父目录, <code>cd .</code>本目录, 无实际意义?</p>
+<h1 id="第二章-UNIX标准化及实现"><a href="#第二章-UNIX标准化及实现" class="headerlink" title="第二章-UNIX标准化及实现"></a>第二章-UNIX标准化及实现</h1><h1 id="第三章-文件I-O"><a href="#第三章-文件I-O" class="headerlink" title="第三章-文件I/O"></a>第三章-文件I/O</h1><h2 id="Api"><a href="#Api" class="headerlink" title="Api"></a>Api</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/stat.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;fcntl.h&gt;</span></span><br><span class="hljs-comment">/* Open FILE and return a new file descriptor for it, or -1 on error.<br> * OFLAG determines the type of access used.  <br> * 0 - O_RDONLY - 只读打开<br> * 1 - O_WRONLY - 只写打开<br> * 2 - O_RDWR 读写打开<br> * O_APPEND 每次写文件加到文件的尾端<br> * O_CREAT 此文件不存在则创建<br> * O_EXCL 如果同时指定了 O_CREAT, 且文件已经存在则会出错.如果不存在则创建此文件成为一个原子操作<br> * O_TRUNC 如果文件存在, 而且为只读或只写成功打开, 则将其长度截断为0(测试了一下, 文件内容清空.....)<br>*/</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">open</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *__file, <span class="hljs-keyword">int</span> __oflag, ...)</span></span>;<br><br><span class="hljs-comment">/* 成功返回fd, 失败-1, 这个函数已经可以被open替换了*/</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">creat</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *__file, <span class="hljs-keyword">mode_t</span> __mode)</span><br><br><span class="hljs-comment">/* Close the file descriptor FD.*/</span><br><span class="hljs-keyword">int</span> <span class="hljs-title">close</span><span class="hljs-params">(<span class="hljs-keyword">int</span> __fd)</span></span>;<br><br><span class="hljs-comment">/* __whence的参数如下<br> *  -SEEK_SET  __offset 为距离文件开始处的字节数<br> *  -SEEK_CUR __offset 为距离当前字节 可正可负<br> *  -SEEK_END __offset 为文件长度+offset 可正可负<br> * 成功返回新的文件偏移量<br>*/</span><br> <span class="hljs-function"><span class="hljs-keyword">__off_t</span> <span class="hljs-title">lseek</span><span class="hljs-params">(<span class="hljs-keyword">int</span> __fd, <span class="hljs-keyword">__off_t</span> __offset, <span class="hljs-keyword">int</span> __whence)</span><br> <br> <span class="hljs-comment">/* Read NBYTES into BUF from FD.  Return the<br>  * number read, -1 for errors or 0 for EOF.<br>  * 可以一次读取/写入 65534个字节<br> */</span><br> <span class="hljs-keyword">ssize_t</span> <span class="hljs-title">read</span><span class="hljs-params">(<span class="hljs-keyword">int</span> __fd, <span class="hljs-keyword">void</span> *__buf, <span class="hljs-keyword">size_t</span> __nbytes)</span><br> <br> <span class="hljs-comment">/* Write N bytes of BUF to FD.  Return the number written, or -1.<br>  * 出错的常见原因, 磁盘已经写满, 或超出一个给定进程的文件长度限制<br>  * 从文件seek处开始<br>  */</span><br> <span class="hljs-keyword">ssize_t</span> <span class="hljs-title">write</span><span class="hljs-params">(<span class="hljs-keyword">int</span> __fd, <span class="hljs-keyword">const</span> <span class="hljs-keyword">void</span> *__buf, <span class="hljs-keyword">size_t</span> __n)</span></span><br></code></pre></td></tr></table></figure>
+<p>@fcntl@</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;fcntl.h&gt;</span></span><br><br><span class="hljs-comment">//cmd</span><br><span class="hljs-comment">//	- F_DUPED 复制一个现有的文件描述符</span><br><span class="hljs-comment">//	- F_GETFD F_SETFD</span><br><span class="hljs-comment">//	- F_GETFL F_SETFL 获得/设置文件状态标志</span><br><span class="hljs-comment">//	- F_GETOWN F_SETOWN 获得/设置异步I/O记录</span><br><span class="hljs-comment">//	- F_GETLK  F_SETLOCK F_SETLKW 获得/设置记录锁</span><br><span class="hljs-comment">// 操作出错返回 -1</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">fcntl</span><span class="hljs-params">(<span class="hljs-keyword">int</span> fd, <span class="hljs-keyword">int</span> cmd, ...)</span></span>;<br></code></pre></td></tr></table></figure>
+
+<h2 id="函数描述"><a href="#函数描述" class="headerlink" title="函数描述"></a>函数描述</h2><p><strong>read</strong></p>
+<p>起初我的代码如下, 想要测试下文件的写和读, 结果发现无论如何也读不到内容, 然后 加入了新的open发现可以读到.<br>查阅了一番并没有找到结果, 发现在本书后方就讲述了 <code>lseek()</code> 函数才了解到<code>每个打开的文件都有一个相关联的&quot;当前文件位移量&quot;</code> 后来查阅了解到每次<code>read()</code>和<code>write()</code> 这个”指针”都会向后移动, 两函数共用同一个指针.</p>
+<p>收获就是<code>理解不了的东西, 应该先记录下来, 多学学没准就回了</code>, 而且我在重新open之后文件能够正常读到内容.<br>问题就应该定位在<code>write()</code>修改了什么东西导致的</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-keyword">char</span> buf[<span class="hljs-number">1024</span>] = &#123;&#125;;<br><br><span class="hljs-keyword">int</span> ret = <span class="hljs-built_in">open</span>(<span class="hljs-string">"/home/lsmg/CLionProjects/BookDemo/test001"</span>, O_RDWR);<br>assert(ret != <span class="hljs-number">-1</span>);<br><br><span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* out = <span class="hljs-string">"Test0001\n"</span>;<br><span class="hljs-built_in">write</span>(ret, out, <span class="hljs-built_in">strlen</span>(out));<br><br><span class="hljs-comment">// ret = open("/home/lsmg/CLionProjects/BookDemo/test001", O_RDWR);</span><br><br><span class="hljs-comment">// lseek(ret, 0, SEEK_SET);</span><br><br><span class="hljs-built_in">read</span>(ret, buf, <span class="hljs-number">1024</span>);<br><span class="hljs-built_in">printf</span>(<span class="hljs-string">"%s"</span>, buf);<br><span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br></code></pre></td></tr></table></figure>
+
+<p><strong>lseek</strong></p>
+<p>函数开头的L字母代表表示长整型</p>
+<p>可以用如下方式获得当前文件的偏移量位置</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-keyword">off_t</span> currpos = lseek(fd, <span class="hljs-number">0</span>, SEEK_CUR);<br></code></pre></td></tr></table></figure>
+<p>这个方法还可以用来确定所涉及的文件是否可以设置偏移量, 如果fd是一个管道或FIFO则返 -1, <code>errno = EPIPE</code></p>
+<p><strong>I/O的效率</strong></p>
+<p><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/UNIX%E7%8E%AF%E5%A2%83%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/%E4%B8%8D%E5%90%8C%E7%BC%93%E5%AD%98%E9%95%BF%E5%BA%A6%E8%BF%9B%E8%A1%8C%E8%AF%BB%E6%93%8D%E4%BD%9C.png" alt=""></p>
+<p><strong>文件共享</strong><br>UNIX支持在不同进程之间共享打开文件<br>内核使用了三种数据结构</p>
+<ol>
+<li>每个进程在进程表中都有一个记录项, 每个记录项中有一张<code>打开文件描述符表</code>, 与每个文件描述符相关联的是<ul>
+<li>文件描述符标志(<code>只用于一个进程的一个描述符</code>)</li>
+<li>指向一个文件表项的指针</li>
+</ul>
+</li>
+<li>内核为所有打开文件维持一张文件表<ul>
+<li>文件状态表(读 写 增写) (<code>用于指向该给定文件表项的任何进程的所有描述符</code>)</li>
+<li>当前文件位移量</li>
+<li>指向该文件V节点表项的指针</li>
+</ul>
+</li>
+<li>每个打开文件(或设备)都有一个V节点结构. V节点结构包含了文件类型和对此文件进行各种操作的函数的指针信息.</li>
+</ol>
+<p>三者之间的关系<br><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/UNIX%E7%8E%AF%E5%A2%83%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/%E6%89%93%E5%BC%80%E6%96%87%E4%BB%B6%E7%9A%84%E5%86%85%E6%A0%B8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84.png" alt=""></p>
+<p>这三张表的关系, 会用于不同进程间共享文件的方式.</p>
+<p><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/UNIX%E7%8E%AF%E5%A2%83%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/%E4%B8%A4%E4%B8%AA%E7%8B%AC%E7%AB%8B%E8%BF%9B%E7%A8%8B%E5%90%84%E8%87%AA%E6%89%93%E5%BC%80%E5%90%8C%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6.png" alt=""></p>
+<ul>
+<li>进行<code>write()</code>操作后, 文件表项中的当前文件偏移量即增加所写的字节数.<br>如果这个操作使当前文件位移量超过了当前文件长度, 则在<code>I节点表项中的当前文件长度</code>被设置为<code>当前文件位移量</code>(也就是该文件加长了).</li>
+<li>如果用O_APPEND打开了一个文件, 则相应标志也被设置到文件表项的<code>文件状态标志</code>(标记这个属性).<br>每次进行文件写操作, 文件表项中的<code>当前文件位移量</code>首先被设置为<code>i节点</code>表项的文件长度, 这样就写到了文件尾部</li>
+<li><code>lseek()</code>只修改文件表中的<code>当前文件位移量</code> 没有进行I/O操作</li>
+<li>若一个文件用<code>lseek</code>被定为到文件当前的尾端, 则<code>文件表项中</code>的<code>当前文件位移量</code>被设置为<code>i节点表项</code>中的<code>当前文件长度</code>.</li>
+</ul>
+<p>多个进程读一个文件可以正常工作<br>但是多个文件写同一个文件, 可能产生各种问题. 需要通过原子操作解决</p>
+<p><strong>原子操作</strong><br>早期UNIX不支持OPEN的<code>O_APPEND</code><br>需要使用<code>lessk()</code>和<code>write</code>共同完成任务, 由于是两个函数, 可能会被分开执行<br>现在可以通过对<code>open</code>指定<code>O_APPEND</code>来实现</p>
+<p><strong>@fcntl@</strong></p>
+<ul>
+<li>F_DUPFD<br>  复制文件描述符, 新文件描述符作为返回值返回. 返回值为尚未打开的文件描述符中 &gt;= 第三个参数 的最小值.<br>  新文件描述符与原fd共享同一个文件表项, 但文件描述符标志各自分离.</li>
+<li>F_GETFD<br>  对应fd的文件描述符作为函数值返回</li>
+<li>F_SETFD<br>  对fd设置文件描述符标志, 新标志未第三个参数设置</li>
+<li>F_GETFL<br>  对应fd的文件状态标志作为函数值返回, 上文提到过文件状态标志(见open函数 的参数)</li>
+<li>F_SETFL<br>  将文件状态标志位设置为第三个参数的值 (O_APPEND, O_NONBLOCK, O_SYNC和O_ASYNC)</li>
+</ul>
+<h1 id="第四章-文件和目录"><a href="#第四章-文件和目录" class="headerlink" title="第四章 文件和目录"></a>第四章 文件和目录</h1><h1 id="第五章-标准I-O库"><a href="#第五章-标准I-O库" class="headerlink" title="第五章 标准I/O库"></a>第五章 标准I/O库</h1><h2 id="Api-1"><a href="#Api-1" class="headerlink" title="Api"></a>Api</h2><p>@setbuf@<br>@setvbuf@</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-comment">// 关闭或打开缓存机制, buf必须指向一个长度为BUFSIZ的缓存(定义在stdio.h的常量), 通常这样操作后该流</span><br><span class="hljs-comment">// 是全缓存, 但如果该流与一个终端设备相关, 也可以设置为行缓存.</span><br><span class="hljs-comment">// 如果需要关闭缓存可以将buf设置为NULL</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">setbuf</span><span class="hljs-params">(FILE* fp, <span class="hljs-keyword">char</span>* buf)</span></span>;<br><br><span class="hljs-comment">// mode参数如下</span><br><span class="hljs-comment">// -_IOFBF 全缓存 </span><br><span class="hljs-comment">// -_IOLBF 行缓存</span><br><span class="hljs-comment">// -_IONBF 不带缓存</span><br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">setvbuf</span><span class="hljs-params">(FILE* fp, <span class="hljs-keyword">char</span>* buf, <span class="hljs-keyword">int</span> mode, <span class="hljs-keyword">sizt_t</span> <span class="hljs-built_in">size</span>)</span></span>;<br></code></pre></td></tr></table></figure>
+<p><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/UNIX%E7%8E%AF%E5%A2%83%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/setbuf%E5%92%8Csetvbuf%E5%87%BD%E6%95%B0.png" alt=""></p>
+<p>@fflush@</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// 传入一个流并刷新这个流 如果传入NULL则会刷新所有的流</span><br>fflush(FILE* fp);<br></code></pre></td></tr></table></figure>
+<p>@fopen@@freopen@@fdopen@</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// 打开由pathname指定的文件, 返回这个流</span><br><span class="hljs-function">FILE* <span class="hljs-title">fopen</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* pathname, <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* type)</span></span>;<br><br><span class="hljs-comment">//在 流fp上打开pathname 指定的文件, 如果这个流已经带打开则会先关闭这个流. 一般用于将一个指定文件打开为一个预定义的流: 标准输入标准输入或标准出错.</span><br><span class="hljs-function">FILE* <span class="hljs-title">freopen</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* pathname, <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* type, FILE* fp)</span></span>;<br><span class="hljs-comment">// 取一个现存的文件描述符, 并令一个标准的I/O流与之结合</span><br><span class="hljs-comment">// 常用于创建管道和网络通信通道函数获得的描述符, 因为这些特殊文件不能用fopen打开</span><br><span class="hljs-function">FILE* <span class="hljs-title">fdopen</span><span class="hljs-params">(<span class="hljs-keyword">int</span> fd, <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* type)</span></span>;<br><br><span class="hljs-comment">// type有15种取值</span><br>r rb 只读<br>w wb 使文件成为<span class="hljs-number">0</span>长, 或为写而创建<br>a ab 为在文件尾写 或为写而创建<br><br>r+ r+b rb+ 读和写<br>w+ w+b wb+ 使文件成为<span class="hljs-number">0</span>长, 或为读和写而创建<br>a+ a+b ab+ 为在文件尾读和写而创建或打开<br></code></pre></td></tr></table></figure>
+<p>@exit@</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// exit函数会刷新任何未写的数据, 然后关闭所有打开的流</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">exit</span> <span class="hljs-params">(<span class="hljs-keyword">int</span> status)</span></span>;<br></code></pre></td></tr></table></figure>
+<h2 id="流的打开关闭和读写"><a href="#流的打开关闭和读写" class="headerlink" title="流的打开关闭和读写"></a>流的打开关闭和读写</h2><p><strong>流和FILE对象</strong><br>所有的I/O操作都是针对文件描述符的. 打开一个文件即返回一个文件描述符. </p>
+<p>标准I\O提供了三种类型的缓存</p>
+<ul>
+<li>全缓存, 当标准I/O填满后才进行实际操作, 可以用刷新(<code>fflush()</code> 来刷新对应的流)</li>
+<li>行缓存, 在输入和输入遇到换行符是执行IO操作<br>如果在遇到换行符前缓冲区已满则会进行IO操作<br>还有一个没读懂, 意思是行缓存可能被<code>fflush()</code>刷新 ????? 待试验</li>
+<li>不带缓存, </li>
+</ul>
+<p><strong>流的打开和关闭</strong><br>在查看流的打开的源码的时候<br>发现两个东西记录一下吧</p>
+<ul>
+<li>下划线开头的命名<br>以单下划线 _ 表明是标准库的变量<br>双下划线 __ 开头表明是编译器的变量</li>
+<li>restrict<br><a href="https://en.cppreference.com/w/c/language/restrict" target="_blank" rel="noopener">来自cppreference.com</a><br>用restrict修饰的说明这个指针指向的区域没有另一个指针指向</li>
+</ul>
+<p>指定w或a类型创建文件的时候 无法说明该文件的存取许可权位<br><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/UNIX%E7%8E%AF%E5%A2%83%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/%E6%89%93%E5%BC%80%E4%B8%80%E4%B8%AA%E6%A0%87%E5%87%86IO%E6%B5%81%E7%9A%84%E5%85%AD%E7%A7%8D%E4%B8%8D%E5%90%8C%E7%9A%84%E6%96%B9%E5%BC%8F.png" alt=""></p>
+<p>可以使用<code>fclose(FILE* fp)</code>关闭一个打开的流</p>
+<p><strong>读和写流</strong><br>流被打开之后, 可以从三种不同类型的非格式化I/O中进行选择, 对其进行读和写操作<br>(格式化I/O函数, printf和scanf)</p>
+<ul>
+<li>每次一个字符的I/O</li>
+<li>每次一行的I/O fgets和fputs 一次读或者写一行 fgets需要说明最大的行长</li>
+<li>直接I/O(又称为二进制I/O, 一次一个对象I/O 面向记录/结构的IO) fread和fwrite支持这种类型的I/O 常用与从二进制文件读或写一个结构</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// 以下三个函数成功则返回读取到的字符, 如果读取到文件尾部或者出错则为EOF(一个定义好的常量)</span><br><br><span class="hljs-comment">// 是一个宏 工作效率更高</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">getc</span><span class="hljs-params">(FILE* fp)</span></span>;<br><span class="hljs-comment">// 是一个函数, 所以能得到函数的地址 所以可以将fgetc的地址作为参数传送给另一个函数</span><br><span class="hljs-comment">// 极大可能慢于getc, 函数调用慢于宏</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">fgetc</span><span class="hljs-params">(FILE* fp)</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">getchar</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span>;<br></code></pre></td></tr></table></figure>
+<p>由于上面三个函数在读取到文件尾部或者出错都为同一个返回值, 所以需要使用其他函数来区分</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// 下面两个函数为真返回非0, 否则为0</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">ferror</span><span class="hljs-params">(FILE* fp)</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">feof</span><span class="hljs-params">(FILE* fp)</span></span>;<br><span class="hljs-comment">// 大多数FILE对象, 每个流保持了两个标志 出错标志和文件结束标志</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">clearerr</span><span class="hljs-params">(FILE* fp)</span></span>;<br></code></pre></td></tr></table></figure>
+<p>在从一个流读取之后, 可以将字符送回流中<br>送回到流中的字符还可以再次读出, 但读出的字符顺序和送回的顺序相反<br>EOF不能回送 但读取到达文件尾部后仍可以回送一个字符, 下次读将返回这个字符 再次读则为EOF</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">ungetc</span><span class="hljs-params">(<span class="hljs-keyword">int</span> c, FILE* fp)</span></span>;<br></code></pre></td></tr></table></figure>
+<p>输出函数 putc, fputc, putchar 三个函数相似三个输入函数</p>
+<p><em>每次一行的I/O</em><br>I</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// 从标准读读入 不推荐使用, 无法指定最大长度 可能会造成缓冲区溢出. 缓冲区中不包含换行符</span><br><span class="hljs-function"><span class="hljs-keyword">char</span>* <span class="hljs-title">gets</span><span class="hljs-params">(<span class="hljs-keyword">char</span>* buf)</span></span>;<br><br><span class="hljs-comment">// 从指定流读入, 最大读取长度为 n-1(其中包含 换行符) 缓冲区中包含换行符</span><br><span class="hljs-function"><span class="hljs-keyword">char</span>* <span class="hljs-title">fgets</span><span class="hljs-params">(<span class="hljs-keyword">char</span>* buf, <span class="hljs-keyword">int</span> n, FILE* fp)</span></span>;<br></code></pre></td></tr></table></figure>
+<p>O    </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c">null符号 不等于 换行符<br><span class="hljs-comment">// 将一个以null符终止的字符串写到标准输出, 终止符不写出但是 此函数会自己写出一个换行符</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">puts</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* str, FILE* fp)</span></span>;<br><span class="hljs-comment">// 将一个以null符终止的字符串写到指定的流, 终止符不写出</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">fputs</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* str)</span></span>;<br></code></pre></td></tr></table></figure>
+
+<p><strong>二进制I/O</strong></p>
+<p><em>api</em></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-function"><span class="hljs-keyword">size_t</span> <span class="hljs-title">fread</span><span class="hljs-params">(<span class="hljs-keyword">void</span>* ptr, <span class="hljs-keyword">size_t</span> <span class="hljs-built_in">size</span>, FILE* fp)</span></span>;<br><br><span class="hljs-comment">// nobj为要写的对象数</span><br><span class="hljs-function"><span class="hljs-keyword">size_t</span> <span class="hljs-title">fwrite</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">void</span>* ptr, <span class="hljs-keyword">size_t</span> <span class="hljs-built_in">size</span>, <span class="hljs-keyword">size_t</span> nobj, FILE* fp)</span></span>;<br></code></pre></td></tr></table></figure>
+<p>写了一个例子 结果察看1文件的 二进制代码</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span><br><br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">birthday</span>&#123;</span><br>	<span class="hljs-keyword">int</span> year;<br>	<span class="hljs-keyword">int</span> month;<br>	<span class="hljs-keyword">int</span> day;<br>	<span class="hljs-keyword">int</span> name;<br>&#125;;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span><br></span>&#123;<br>	birthday b = &#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>&#125;;<br>	FILE* fp = fopen(<span class="hljs-string">"/home/lsmg/1"</span>, <span class="hljs-string">"r+"</span>);<br>	<span class="hljs-keyword">if</span> (fwrite(&amp;b, <span class="hljs-keyword">sizeof</span>(birthday), <span class="hljs-number">1</span>, fp) != <span class="hljs-number">1</span>)<br>	&#123;<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">"error\n"</span>);<br>	&#125;<br>	<span class="hljs-built_in">exit</span>(<span class="hljs-number">0</span>);<br>&#125;<br><span class="hljs-number">0000000</span> <span class="hljs-number">0001</span> <span class="hljs-number">0000</span> <span class="hljs-number">0002</span> <span class="hljs-number">0000</span> <span class="hljs-number">0003</span> <span class="hljs-number">0000</span> <span class="hljs-number">0004</span> <span class="hljs-number">0000</span><br><span class="hljs-number">0000010</span><br></code></pre></td></tr></table></figure>
+<p>可能存在的问题</p>
+<ul>
+<li>同一成员的偏移量可能不同</li>
+<li>用来存储多字节整数和浮点值的二进制结构在不同系统中也可能不同</li>
+</ul>
+<p><strong>定位流</strong><br><em>定位标准I\O流</em></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// 成功返回当前文件的位置指示</span><br><span class="hljs-comment">// 出错则返回 -1L</span><br><span class="hljs-comment">// 用于二进制文件的时候, 返回就是这种字节的位置</span><br><span class="hljs-function"><span class="hljs-keyword">long</span> <span class="hljs-title">ftell</span><span class="hljs-params">(FILE* fp)</span></span>;<br><span class="hljs-comment">// 成功返回0 出错则为非0</span><br><span class="hljs-comment">// whence的值, 类似于 lseek</span><br><span class="hljs-comment">// -SEEK_SET从文件的起始位置开始</span><br><span class="hljs-comment">// -SEEK_CUR从文件的当前位置</span><br><span class="hljs-comment">// -SEEK_END从文件的尾端</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">fseek</span><span class="hljs-params">(FILE* fp, <span class="hljs-keyword">long</span> offset, <span class="hljs-keyword">int</span> whence)</span></span><br></code></pre></td></tr></table></figure>
+<p><em>新的Api</em></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">fgetpos</span><span class="hljs-params">(FILE* fp, <span class="hljs-keyword">fpos_t</span>* pos)</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">fsetpos</span><span class="hljs-params">(FILE* fp, <span class="hljs-keyword">const</span> <span class="hljs-keyword">fpos_t</span>* pos)</span></span>;<br></code></pre></td></tr></table></figure>
+
+<h2 id="格式化IO"><a href="#格式化IO" class="headerlink" title="格式化IO"></a>格式化IO</h2><p>执行格式化输出的三个printf函数</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// 下面两个函数成功则返回输出的字符数, 出错则为负值.</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">printf</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* format, ...)</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">fprintf</span><span class="hljs-params">(FILE* fp, <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* format, ...)</span></span>;<br><br><span class="hljs-comment">// 将格式化的字符放入数组buf中 数组末尾会自动加一个null字节 但这个字节不会加入返回值中</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">sprintf</span><span class="hljs-params">(<span class="hljs-keyword">char</span>* buf, <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* format, ...)</span></span>;<br></code></pre></td></tr></table></figure>
+<p>以上三个函数可以在前面加上字符v 构成另外三个三个函数<br>参数的… 变为arg(va_list)</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">scanf</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* format, ...)</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">fscanf</span><span class="hljs-params">(FILE* fp, <span class="hljs-keyword">const</span> *format)</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">sscanf</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* buf, <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* format, ...)</span></span>;<br></code></pre></td></tr></table></figure>
+<hr>
+<p>每个IO流都有一个相关联的文件描述符, 可以对fp调用fileno获得文件描述符<br><code>int fileno(FILE* fp)</code></p>
+
+      
+       
+    </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2016-2019 Yelog</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+<div class="acParent"></div>
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['#Mysql','#C++','#服务器编程','#Git操作','#springboot','#springboot数据交互','#日志','#java爬虫','#java文件操作','#Java设计模式','#java输入输出流','#使用Ubuntu','#windows终端设置','#大量的此终端优化','#校园网络助手1.5','#Linux','#大学的第一个暑假','#暑假学习的大纲','#记录每天假期干了什么','#自动查询题库',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().split('\n').length - 1, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: #fafafa;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 582px;
+    }
+    .nav.fullscreen {
+        margin-left: -582px;
+    }
+    .nav-left {
+        width: 160px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 522px;
+        }
+        .nav.fullscreen {
+            margin-left: -522px;
+        }
+        .nav-left {
+            width: 130px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 522px;
+            margin-left: -522px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 522px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
