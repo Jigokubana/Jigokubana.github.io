@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Linux高性能服务器编程读书记录-高级部分 | Lsmg的大学之路</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="Linux高性能服务器编程读书记录-高级部分 | Lsmg的大学之路">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="第一点有时, 把函数的定义同类的实例脱钩是有益的, 甚至是必要的. 这样的函数可以被定义成静态成员, 或是非成员函数. 非成员函数不应依赖于外部变量, 应尽量置于某个命名空间内.  12345678910111213141516&#x2F;&#x2F; 推荐namespace myproject &amp;#123;namespace foo_bar &amp;#123;void Function1();void Function2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="编程规范">
+<meta property="og:url" content="http://blog.lsmg.xyz/2020/01/C++-C++%E9%87%8D%E7%82%B9-%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%83/index.html">
+<meta property="og:site_name" content="Lsmg的大学之路">
+<meta property="og:description" content="第一点有时, 把函数的定义同类的实例脱钩是有益的, 甚至是必要的. 这样的函数可以被定义成静态成员, 或是非成员函数. 非成员函数不应依赖于外部变量, 应尽量置于某个命名空间内.  12345678910111213141516&#x2F;&#x2F; 推荐namespace myproject &amp;#123;namespace foo_bar &amp;#123;void Function1();void Function2">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-01-23T11:35:50.502Z">
+<meta property="article:modified_time" content="2020-01-23T11:34:45.214Z">
+<meta property="article:author" content="Lsmg">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1" ></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.0.1" ></script>
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+  <input class="theme_blog_path" value="">
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>Lsmg</span>
+</div>
+
+<div class="icon">
+    
+        
+        <a title="rss" href="/atom.xml" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-rss"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="github" href="https://github.com/rjd67441" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="email" href="mailto:rjd67441@hotmail.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=1609676181&site=qq&menu=yes" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-qq"></use>
+                </svg>
+            
+        </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(32)</small></div></li>
+    
+        
+            
+            <li><div data-rel="算法"><i class="fold iconfont icon-right"></i>算法<small>(1)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="基础算法">基础算法<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="CPP"><i class="fold iconfont icon-right"></i>CPP<small>(11)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="服务器编程-书籍记录">服务器编程-书籍记录<small>(3)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="CPP基础">CPP基础<small>(4)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="CPP重点">CPP重点<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Protobuf">Protobuf<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="学习计划">学习计划<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="数据库"><i class="fold iconfont icon-right"></i>数据库<small>(1)</small></div>
+                            
+                                <ul class="sub hide">
+                                    
+                                    <li><div data-rel="MongoDB">MongoDB<small>(1)</small></div>
+                                    </li>
+                                    
+                                </ul>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="必备技能"><i class="fold iconfont icon-right"></i>必备技能<small>(1)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="Git操作">Git操作<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Java"><i class="fold iconfont icon-right"></i>Java<small>(11)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="SDK"><i class="fold iconfont icon-right"></i>SDK<small>(1)</small></div>
+                            
+                                <ul class="sub hide">
+                                    
+                                    <li><div data-rel="FASTJson">FASTJson<small>(1)</small></div>
+                                    </li>
+                                    
+                                </ul>
+                            
+                        </li>
+                            
+                        <li><div data-rel="IDEA的使用">IDEA的使用<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="springboot">springboot<small>(4)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="知识整理"><i class="fold iconfont icon-right"></i>知识整理<small>(2)</small></div>
+                            
+                                <ul class="sub hide">
+                                    
+                                    <li><div data-rel="文件操作">文件操作<small>(1)</small></div>
+                                    </li>
+                                    
+                                    <li><div data-rel="IO流">IO流<small>(1)</small></div>
+                                    </li>
+                                    
+                                </ul>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Java设计模式">Java设计模式<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="java爬虫"><i class="fold iconfont icon-right"></i>java爬虫<small>(1)</small></div>
+                            
+                                <ul class="sub hide">
+                                    
+                                    <li><div data-rel="java爬虫初步">java爬虫初步<small>(1)</small></div>
+                                    </li>
+                                    
+                                </ul>
+                            
+                        </li>
+                            
+                        <li><div data-rel="第一个暑假学习">第一个暑假学习<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Linux"><i class="fold iconfont icon-right"></i>Linux<small>(2)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="Ubuntu">Ubuntu<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="入门学习">入门学习<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Windows"><i class="fold iconfont icon-right"></i>Windows<small>(2)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="终端">终端<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Dos">Dos<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="项目制作"><i class="fold iconfont icon-right"></i>项目制作<small>(2)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="中等项目">中等项目<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="小项目">小项目<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="游戏知识"><i class="fold iconfont icon-right"></i>游戏知识<small>(2)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="服务器">服务器<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="杂谈">杂谈<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+    <div></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="32">
+<input type="hidden" id="yelog_site_word_count" value="48.2k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode==13){return false;}">
+        <input class="search" type="text" placeholder="以 in: 开头进行全文搜索" autocomplete="off"id="local-search-input" >
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Mysql</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">C++</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">服务器编程</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Git操作</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">springboot</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">springboot数据交互</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">日志</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">java文件操作</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">Java设计模式</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">java爬虫</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">java输入输出流</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">使用Ubuntu</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Linux</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">windows终端设置</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">大量的此终端优化</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">校园网络助手1.5</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">自动查询题库</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">大学的第一个暑假</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">暑假学习的大纲</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">记录每天假期干了什么</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        <a  class="算法 基础算法 "
+           href="/2019/08/Algorithm/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="基础算法学习记录">基础算法学习记录</span>
+            <span class="post-date" title="2019-08-20 17:23:59">2019/08/20</span>
+        </a>
+        
+        <a  class="CPP CPP基础 "
+           href="/2019/10/C++-C++%E5%9F%BA%E7%A1%80-2/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="C++薄书整理">C++薄书整理</span>
+            <span class="post-date" title="2019-10-20 19:13:22">2019/10/20</span>
+        </a>
+        
+        <a  class="CPP CPP基础 "
+           href="/2019/11/C++-C++%E5%9F%BA%E7%A1%80-%E6%8C%87%E9%92%88/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="指针">指针</span>
+            <span class="post-date" title="2019-11-07 22:26:22">2019/11/07</span>
+        </a>
+        
+        <a  class="CPP CPP基础 "
+           href="/2019/08/C++-C++%E5%9F%BA%E7%A1%80-1/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="C++Primer学习">C++Primer学习</span>
+            <span class="post-date" title="2019-08-16 19:13:22">2019/08/16</span>
+        </a>
+        
+        <a  class="CPP CPP基础 "
+           href="/2019/10/C++-C++%E5%9F%BA%E7%A1%80-%E7%89%9B%E5%AE%A2/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="牛客整理">牛客整理</span>
+            <span class="post-date" title="2019-10-19 12:31:37">2019/10/19</span>
+        </a>
+        
+        <a  class="CPP 服务器编程-书籍记录 "
+           href="/2019/09/C++-Linux-UNIX%E7%8E%AF%E5%A2%83%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="UNIX环境高级编程读书记录">UNIX环境高级编程读书记录</span>
+            <span class="post-date" title="2019-09-22 17:51:27">2019/09/22</span>
+        </a>
+        
+        <a  class="CPP CPP重点 "
+           href="/2020/01/C++-C++%E9%87%8D%E7%82%B9-%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%83/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="编程规范">编程规范</span>
+            <span class="post-date" title="2020-01-23 19:35:50">2020/01/23</span>
+        </a>
+        
+        <a  class="CPP 服务器编程-书籍记录 "
+           href="/2019/08/C++-Linux-%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95%E5%88%9D%E7%BA%A7%E9%83%A8%E5%88%86/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Linux高性能服务器编程读书记录-初级部分">Linux高性能服务器编程读书记录-初级部分</span>
+            <span class="post-date" title="2019-08-17 20:34:39">2019/08/17</span>
+        </a>
+        
+        <a  class="CPP Protobuf "
+           href="/2019/11/C++-Protobuf-Protobuf%E5%85%A5%E9%97%A8/"
+           data-tag="Mysql"
+           data-author="" >
+            <span class="post-title" title="Protobuf入门">Protobuf入门</span>
+            <span class="post-date" title="2019-11-13 23:00:00">2019/11/13</span>
+        </a>
+        
+        <a  class="CPP 学习计划 "
+           href="/2019/08/C++%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%A4%A7%E7%BA%B2/"
+           data-tag="C++,服务器编程"
+           data-author="" >
+            <span class="post-title" title="C++服务器学习大纲">C++服务器学习大纲</span>
+            <span class="post-date" title="2019-08-17 17:06:35">2019/08/17</span>
+        </a>
+        
+        <a  class="CPP 服务器编程-书籍记录 "
+           href="/2019/08/C++-Linux-%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95%E9%AB%98%E7%BA%A7%E9%83%A8%E5%88%86/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Linux高性能服务器编程读书记录-高级部分">Linux高性能服务器编程读书记录-高级部分</span>
+            <span class="post-date" title="2019-08-18 20:34:39">2019/08/18</span>
+        </a>
+        
+        <a  class="CPP 数据库 MongoDB "
+           href="/2019/10/C++-%E6%95%B0%E6%8D%AE%E5%BA%93-MongoDB-MongoDB%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/"
+           data-tag="Mysql"
+           data-author="" >
+            <span class="post-title" title="MongoDB">MongoDB</span>
+            <span class="post-date" title="2019-10-13 19:25:28">2019/10/13</span>
+        </a>
+        
+        <a  class="必备技能 Git操作 "
+           href="/2019/03/Git-%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/"
+           data-tag="Git操作"
+           data-author="" >
+            <span class="post-title" title="Git的使用">Git的使用</span>
+            <span class="post-date" title="2019-03-28 18:24:42">2019/03/28</span>
+        </a>
+        
+        <a  class="Java SDK FASTJson "
+           href="/2019/04/Java-SDK-Fastjson%E7%9A%84%E4%BD%BF%E7%94%A8/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="2019年4月13日 FASTJson解析json">2019年4月13日 FASTJson解析json</span>
+            <span class="post-date" title="2019-04-13 17:22:40">2019/04/13</span>
+        </a>
+        
+        <a  class="Java IDEA的使用 "
+           href="/2019/07/Java-IDEA/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="IDEA基本使用记录">IDEA基本使用记录</span>
+            <span class="post-date" title="2019-07-16 17:53:33">2019/07/16</span>
+        </a>
+        
+        <a  class="Java springboot "
+           href="/2019/06/Java-Springboot%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%861/"
+           data-tag="springboot"
+           data-author="" >
+            <span class="post-title" title="纯洁的微笑Gitchat 课程笔记1">纯洁的微笑Gitchat 课程笔记1</span>
+            <span class="post-date" title="2019-06-07 11:36:10">2019/06/07</span>
+        </a>
+        
+        <a  class="Java springboot "
+           href="/2019/06/Java-Springboot%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%862/"
+           data-tag="springboot"
+           data-author="" >
+            <span class="post-title" title="纯洁的微笑Gitchat 课程笔记2">纯洁的微笑Gitchat 课程笔记2</span>
+            <span class="post-date" title="2019-06-07 16:14:19">2019/06/07</span>
+        </a>
+        
+        <a  class="Java springboot "
+           href="/2019/05/Java-Springboot%E6%95%B0%E6%8D%AE%E4%BA%A4%E4%BA%92/"
+           data-tag="springboot数据交互"
+           data-author="" >
+            <span class="post-title" title="Springboot数据交互">Springboot数据交互</span>
+            <span class="post-date" title="2019-05-18 14:34:46">2019/05/18</span>
+        </a>
+        
+        <a  class="Java springboot "
+           href="/2019/05/Java-Springboot%E6%97%A5%E5%BF%97%E6%93%8D%E4%BD%9C/"
+           data-tag="springboot,日志"
+           data-author="" >
+            <span class="post-title" title="Springboot日志操作">Springboot日志操作</span>
+            <span class="post-date" title="2019-05-18 14:14:29">2019/05/18</span>
+        </a>
+        
+        <a  class="Java 知识整理 文件操作 "
+           href="/2019/04/Java-%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/"
+           data-tag="java文件操作"
+           data-author="" >
+            <span class="post-title" title="4月11日 java文件操作">4月11日 java文件操作</span>
+            <span class="post-date" title="2019-04-11 21:24:48">2019/04/11</span>
+        </a>
+        
+        <a  class="Java Java设计模式 "
+           href="/2019/05/Java-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"
+           data-tag="Java设计模式"
+           data-author="" >
+            <span class="post-title" title="Java设计模式">Java设计模式</span>
+            <span class="post-date" title="2019-05-21 13:41:48">2019/05/21</span>
+        </a>
+        
+        <a  class="Java java爬虫 java爬虫初步 "
+           href="/2019/04/Java-%E7%88%AC%E8%99%AB/"
+           data-tag="java爬虫"
+           data-author="" >
+            <span class="post-title" title="2019年4月15日 java爬虫入门">2019年4月15日 java爬虫入门</span>
+            <span class="post-date" title="2019-04-16 13:02:32">2019/04/16</span>
+        </a>
+        
+        <a  class="Java 知识整理 IO流 "
+           href="/2019/04/Java-%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%B5%81/"
+           data-tag="java输入输出流"
+           data-author="" >
+            <span class="post-title" title="java输入输出流">java输入输出流</span>
+            <span class="post-date" title="2019-04-16 12:04:41">2019/04/16</span>
+        </a>
+        
+        <a  class="Linux Ubuntu "
+           href="/2019/05/Linux-Ubuntu%E7%9A%84%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BE%8E%E5%8C%96/"
+           data-tag="使用Ubuntu"
+           data-author="" >
+            <span class="post-title" title="2019年5月30日">2019年5月30日</span>
+            <span class="post-date" title="2019-05-30 18:00:21">2019/05/30</span>
+        </a>
+        
+        <a  class="Linux 入门学习 "
+           href="/2019/10/Linux-%E8%8F%9C%E9%B8%9F%E5%85%A5%E9%97%A8/"
+           data-tag="Linux"
+           data-author="" >
+            <span class="post-title" title="Linux-菜鸟入门">Linux-菜鸟入门</span>
+            <span class="post-date" title="2019-10-13 16:03:17">2019/10/13</span>
+        </a>
+        
+        <a  class="Windows 终端 "
+           href="/2019/04/Windows-%E7%BB%88%E7%AB%AF%E4%BD%BF%E7%94%A8/"
+           data-tag="windows终端设置,大量的此终端优化"
+           data-author="" >
+            <span class="post-title" title="windows终端设置">windows终端设置</span>
+            <span class="post-date" title="2019-04-04 23:14:53">2019/04/04</span>
+        </a>
+        
+        <a  class="Windows Dos "
+           href="/2019/03/Windows-%E9%9A%90%E8%97%8FDos%E7%AA%97%E5%8F%A3/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="隐藏dos窗口">隐藏dos窗口</span>
+            <span class="post-date" title="2019-03-31 10:07:29">2019/03/31</span>
+        </a>
+        
+        <a  class="项目制作 中等项目 "
+           href="/2019/06/%E5%B0%8F%E9%A1%B9%E7%9B%AE-%E6%A0%A1%E5%9B%AD%E7%BD%91%E7%BB%9C%E5%8A%A9%E6%89%8B%E6%9B%B4%E6%96%B0/"
+           data-tag="校园网络助手1.5"
+           data-author="" >
+            <span class="post-title" title="校园网络助手更新">校园网络助手更新</span>
+            <span class="post-date" title="2019-06-16 22:28:24">2019/06/16</span>
+        </a>
+        
+        <a  class="项目制作 小项目 "
+           href="/2019/04/%E5%B0%8F%E9%A1%B9%E7%9B%AE-%E8%87%AA%E5%8A%A8%E6%9F%A5%E8%AF%A2%E9%A2%98%E5%BA%93/"
+           data-tag="自动查询题库"
+           data-author="" >
+            <span class="post-title" title="2019年4月19日">2019年4月19日</span>
+            <span class="post-date" title="2019-04-19 22:35:19">2019/04/19</span>
+        </a>
+        
+        <a  class="游戏知识 服务器 "
+           href="/2019/12/%E6%B8%B8%E6%88%8F%E7%9F%A5%E8%AF%86-%E6%9C%8D%E5%8A%A1%E5%99%A8-%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%80%9A%E4%BF%A1/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="游戏知识-服务器-服务器通信">游戏知识-服务器-服务器通信</span>
+            <span class="post-date" title="2019-12-22 20:50:02">2019/12/22</span>
+        </a>
+        
+        <a  class="Java 第一个暑假学习 "
+           href="/2019/07/%E6%9A%91%E5%81%87%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E4%B8%8E%E6%80%BB%E7%BB%93/"
+           data-tag="大学的第一个暑假,暑假学习的大纲,记录每天假期干了什么"
+           data-author="" >
+            <span class="post-title" title="暑假学习记录与总结">暑假学习记录与总结</span>
+            <span class="post-date" title="2019-07-13 12:13:22">2019/07/13</span>
+        </a>
+        
+        <a  class="游戏知识 杂谈 "
+           href="/2019/12/%E6%B8%B8%E6%88%8F%E7%9F%A5%E8%AF%86-%E6%9D%82%E8%B0%88-%E5%A6%82%E4%BD%95%E8%BF%9B%E5%85%A5%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E8%A1%8C%E4%B8%9A/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="游戏知识-杂谈-如何进入游戏开发行业">游戏知识-杂谈-如何进入游戏开发行业</span>
+            <span class="post-date" title="2019-12-22 20:50:02">2019/12/22</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-C++-Linux-高性能服务器编程读书记录高级部分" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">Linux高性能服务器编程读书记录-高级部分</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a  data-rel="CPP">CPP</a>/
+            
+                <a  data-rel="服务器编程-书籍记录">服务器编程-书籍记录</a>
+            
+        </span>
+        
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-01-23 19:35:43'>2019-08-18 20:34</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:7.1k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#第九章-I-O复用"><span class="toc-text">第九章 I&#x2F;O复用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Api-select-poll-epoll"><span class="toc-text">Api - select, poll, epoll</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#select-poll-epoll系统调用"><span class="toc-text">select, poll, epoll系统调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三种IO复用的比较"><span class="toc-text">三种IO复用的比较</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#I-O-复用的高级应用-非阻塞connect"><span class="toc-text">I&#x2F;O 复用的高级应用, 非阻塞connect</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第十章信号"><span class="toc-text">第十章信号</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Api"><span class="toc-text">Api</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#null"><span class="toc-text">??</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第十一章定时器"><span class="toc-text">第十一章定时器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Api-1"><span class="toc-text">Api</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#正文"><span class="toc-text">正文</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第十二章高性能IO框架库"><span class="toc-text">第十二章高性能IO框架库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第十三章多进程编程"><span class="toc-text">第十三章多进程编程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#exec系列系统调用"><span class="toc-text">exec系列系统调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#fork系统调用"><span class="toc-text">fork系统调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#处理僵尸进程"><span class="toc-text">处理僵尸进程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#信号量-lt-sys-sem-h-gt"><span class="toc-text">信号量-&lt;sys&#x2F;sem.h&gt;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#共享内存-lt-sys-shm-h-gt"><span class="toc-text">共享内存-&lt;sys&#x2F;shm.h&gt;</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第十四章-多线程编程"><span class="toc-text">第十四章 多线程编程</span></a>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>第一个博客实在是太长了, 不方便建立目录这里将其拆开</p>
+<a id="more"></a>
+<h2 id="第九章-I-O复用"><a href="#第九章-I-O复用" class="headerlink" title="第九章 I/O复用"></a>第九章 I/O复用</h2><p>I/O复用使得程序能同时监听多个文件描述符.</p>
+<ul>
+<li>客户端程序需要同时处理多个socket 非阻塞connect技术</li>
+<li>客户端程序同时处理用户输入和网络连接 聊天室程序</li>
+<li>TCP服务器要同时处理监听socket和连接socket</li>
+<li>同时处理TCP和UDP请求 - 回射服务器</li>
+<li>同时监听多个端口, 或者处理多种服务 - xinetd服务器</li>
+</ul>
+<p>常用手段<code>select</code>, <code>poll</code>, <code>epoll</code></p>
+<h3 id="Api-select-poll-epoll"><a href="#Api-select-poll-epoll" class="headerlink" title="Api - select, poll, epoll"></a>Api - select, poll, epoll</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#inlcude <span class="hljs-meta-string">&lt;sys/select.h&gt;</span></span><br><span class="hljs-comment">// nfds - 被监听的文件描述符总数</span><br><span class="hljs-comment">// 后面三个分别指向 可读, 可写, 异常等事件对应的文件描述符集合</span><br><span class="hljs-comment">// timeval select超时时间 如果传递0 则为非阻塞, 设置为NULL则为阻塞</span><br><span class="hljs-comment">// 成功返回就绪(可读, 可写, 异常)文件描述符的总数, 没有则返回0 失败返回-1</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">select</span> <span class="hljs-params">(<span class="hljs-keyword">int</span> nfds, fd_set* readfds, fd_set* writefds, fd_set* exceptfds, struct timeval* timeout)</span></span>;<br><br><span class="hljs-comment">//操作fd_set的宏</span><br>FD_ZERO(fd_set* fdset);<br>FD_SET(<span class="hljs-keyword">int</span> fd, fd_set* fdset);<br>FD_CLR(<span class="hljs-keyword">int</span> fd, fd_set* fdset);<br>FD_ISSET(<span class="hljs-keyword">int</span> fd, fd_set* fdset);<br><span class="hljs-comment">// 设置 timeval 超时时间</span><br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">timeval</span> &#123;</span><br>	<span class="hljs-keyword">long</span> tv_sec; <span class="hljs-comment">// 秒</span><br>	<span class="hljs-keyword">long</span> tv_usec; <span class="hljs-comment">// 微秒</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;poll.h&gt;</span></span><br><span class="hljs-comment">// fds 结构体类型数组 指定我们感兴趣的文件描述符上发生的可读可写和异常事件\</span><br><span class="hljs-comment">// nfds 遍历结合大小</span><br><span class="hljs-comment">// timeout 单位为毫秒 -1 为阻塞 0 为立即返回</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">poll</span><span class="hljs-params">(struct pollfd* fds, <span class="hljs-keyword">nfds_t</span> nfds, <span class="hljs-keyword">int</span> timeout)</span></span>;<br><br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">pollfd</span> &#123;</span><br>	<span class="hljs-keyword">int</span> fd;<br>	short events;  <span class="hljs-comment">//注册的事件, 告知poll监听fd上的哪些事件</span><br>	short revents; <span class="hljs-comment">// 实际发生的事件</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;epoll.h&gt;</span></span><br><span class="hljs-comment">// size 参数只是给内核一个提示, 事件表需要多大</span><br><span class="hljs-comment">// 函数返回其他所有epoll系统调用的第一个参数, 来指定要访问的内核事件表</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">epoll_create</span><span class="hljs-params">(<span class="hljs-keyword">int</span> <span class="hljs-built_in">size</span>)</span></span>;<br><br><span class="hljs-comment">// epfd 为 epoll_create的返回值</span><br><span class="hljs-comment">// op为操作类型</span><br><span class="hljs-comment">// - EPOLL_CTL_ADD 向事件表中注册fd上的事件</span><br><span class="hljs-comment">// - EPOLL_CTL_MOD 修改fd上的注册事件</span><br><span class="hljs-comment">// - EPOLL_CTL_DEL 删除fd上的注册事件</span><br><span class="hljs-comment">// fd 为要操作的文件描述符</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">epoll_ctl</span><span class="hljs-params">(<span class="hljs-keyword">int</span> epfd, <span class="hljs-keyword">int</span> op, <span class="hljs-keyword">int</span> fd, struct epoll_event* event)</span></span>;<br><br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">epoll_event</span> &#123;</span><br>	<span class="hljs-keyword">_uint32_t</span> events; <span class="hljs-comment">// epoll事件</span><br>	<span class="hljs-keyword">epoll_data_t</span> data; <span class="hljs-comment">// 用户数据 是一个联合体</span><br>&#125;<br><br><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">union</span> epoll_data &#123;<br>	<span class="hljs-keyword">void</span>* ptr; <span class="hljs-comment">// ptr fd 不能同时使用</span><br>	<span class="hljs-keyword">int</span> fd;<br>	<span class="hljs-keyword">uint32_t</span> u32;<br>	<span class="hljs-keyword">uint64_t</span> u64;<br>&#125;<span class="hljs-keyword">epoll_data_t</span><br><br><span class="hljs-comment">// maxevents监听事件数 必须大于0</span><br><span class="hljs-comment">// timeout 为-1 表示阻塞</span><br><span class="hljs-comment">// 成功返回就绪的文件描述符个数 失败返回-1</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">epoll_wait</span><span class="hljs-params">(<span class="hljs-keyword">int</span> epfd, struct epoll_event* events, <span class="hljs-keyword">int</span> maxevents, <span class="hljs-keyword">int</span> timeout)</span></span>;<br></code></pre></td></tr></table></figure>
+<h3 id="select-poll-epoll系统调用"><a href="#select-poll-epoll系统调用" class="headerlink" title="select, poll, epoll系统调用"></a>select, poll, epoll系统调用</h3><ul>
+<li><strong>select</strong></li>
+</ul>
+<p>文件描述符就绪条件</p>
+<ul>
+<li><p>socket内核接收缓存区中的字节数大于或等于 其低水位标记</p>
+</li>
+<li><p>socket通信的对方关闭连接, 对socket的读操作返回0</p>
+</li>
+<li><p>监听socket上有新的连接请求</p>
+</li>
+<li><p>socket上有未处理的错误, 可以使用getsockopt来读取和清除错误</p>
+</li>
+<li><p>socket内核的发送缓冲区的可用字节数大于或等于 其低水位标记</p>
+</li>
+<li><p>socket的写操作被关闭, 对被关闭的socket执行写操作将会触发一个SIGPIPE信号</p>
+</li>
+<li><p>socket使用非阻塞connect 连接成功或失败后</p>
+</li>
+<li><p><strong>poll</strong><br><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95/poll%E6%97%B6%E9%97%B4%E7%B1%BB%E5%9E%8B1.png" alt=""><br><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95/poll%E6%97%B6%E9%97%B4%E7%B1%BB%E5%9E%8B2.png" alt=""></p>
+</li>
+<li><p><strong>epoll</strong></p>
+</li>
+</ul>
+<p>epoll是Linux特有的I/O复用函数, 实现上与select,poll有很大的差异</p>
+<ul>
+<li>epoll使用一组函数完成任务</li>
+<li>epoll把用户关心的文件描述符上的事件放在内核里的一个事件表中</li>
+<li>epoll无需每次调用都传入文件描述符集或事件集.</li>
+</ul>
+<p>有特定的文件描述符创建函数, 来标识这个事件表<code>epoll_create()</code><br><code>epoll_ctl()</code> 用来操作这个内核事件表<br><code>epoll_wait()</code> 为主要函数 成功返回就绪的文件描述符个数 失败返回-1<br>如果<code>epoll_wait()</code>函数检测到事件,就将所有就绪的事件从内核事件表(由第一个参数, epoll_create返回的结果) 中复制到第二个参数event指向的数组中, 这个数组只用于输出<code>epoll_wait</code>检测到的就绪事件.</p>
+<p><em>event不同于select和poll的数组参数 既用于传入用户注册的事件, 又用于输出内核检测到的就绪事件, 提高了效率</em></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// 索引poll返回的就绪文件描述符</span><br><span class="hljs-keyword">int</span> ret = poll(fds, MAX_EVENT_NUMBER - <span class="hljs-number">1</span>);<br><span class="hljs-comment">// 遍历</span><br><span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; MAX_EVENT_NUMBER; ++i) &#123;<br>	<span class="hljs-keyword">if</span>(fds[i].revents &amp; POLLIN) &#123;<br>		<span class="hljs-keyword">int</span> sockfd = fds[i].fd;<br>	&#125;<br>&#125;<br><br><span class="hljs-comment">// 索引epoll返回的就绪文件描述符</span><br><span class="hljs-keyword">int</span> ret = epoll_wait(epoll_fd, events, MAX_EVENT_NUMBER,  <span class="hljs-number">-1</span>);<br><span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; ret; i++) &#123;<br>	<span class="hljs-keyword">int</span> sockfd = events[i].data.fd;<br>	<span class="hljs-comment">// sockfd 一定就绪 ?????</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>LT和ET模式</strong><br>LT(电平触发, 默认的工作模式)<br>LT模式下的epoll相当于一个效率较高的poll<br>epoll_wait将会一只通知一个事件知道这个事件被处理</p>
+<p>ET(边沿触发, epoll的高效工作模式)模式<br>当向epoll内核事件表中注册一个文件描述符上的EPOLLET事件的时候, epoll将用ET模式来操作这个<br>文件描述符<br>epoll_wait只会通知一次, 不论这个事件有没有完成</p>
+<p>ET模式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs plain">-&gt; 123456789-123456789-123456789<br>event trigger once<br>get 9bytes of content: 123456789<br>get 9bytes of content: -12345678<br>get 9bytes of content: 9-1234567<br>get 4bytes of content: 89<br>read later<br></code></pre></td></tr></table></figure>
+<p>LT模式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs plain">-&gt; 123456789-123456789-123456789<br>event trigger once<br>get 9bytes of contents: 123456789<br>event trigger once<br>get 9bytes of contents: -12345678<br>event trigger once<br>get 9bytes of contents: 9-1234567<br>event trigger once<br>get 4bytes of contents: 89<br></code></pre></td></tr></table></figure>
+<p>ET模式有任务到来就必须做完, 因为后续将不会继续通知这个事件, 所以ET是epoll的高效工作模式<br>LT模式只要事件没被处理就会一直通知</p>
+<h3 id="三种IO复用的比较"><a href="#三种IO复用的比较" class="headerlink" title="三种IO复用的比较"></a>三种IO复用的比较</h3><p><code>select</code>以及<code>poll</code>和<code>epoll</code><br>相同</p>
+<ul>
+<li>都能同时监听多个文件描述符, 都将等待timeout参数指定的超时时间, 直到一个或多个文件描述符上有事件发生.</li>
+<li>返回值为就绪的文件描述符数量, 返回0则表示没有事件发生</li>
+<li><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95/%E4%B8%89%E7%A7%8DIO%E5%A4%8D%E7%94%A8%E6%AF%94%E8%BE%83.png" alt=""></li>
+</ul>
+<h3 id="I-O-复用的高级应用-非阻塞connect"><a href="#I-O-复用的高级应用-非阻塞connect" class="headerlink" title="I/O 复用的高级应用, 非阻塞connect"></a>I/O 复用的高级应用, 非阻塞connect</h3><p>connect出错的时候会返回一个errno值 EINPROGRESS - 表示对非阻塞socket调用connect, 连接又没有立即建立的时候, 这时可以调用select和poll函数来监听这个连接失败的socket上的可写事件.</p>
+<p>当函数返回的时候, 可以用getsockopt来读取错误码, 并清楚该socket上的错误. 错误码为0表示成功</p>
+<h2 id="第十章信号"><a href="#第十章信号" class="headerlink" title="第十章信号"></a>第十章信号</h2><h3 id="Api"><a href="#Api" class="headerlink" title="Api"></a>Api</h3><p>发送信号Api</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;signal.h&gt;</span></span><br><br><span class="hljs-comment">// pid &gt; 0 发送给PID为pid标识的进程</span><br><span class="hljs-comment">//  0 发送给本进程组的其他进程</span><br><span class="hljs-comment">// -1 发送给进程以外的所有进程, 但发送者需要有对目标进程发送信号的权限</span><br><span class="hljs-comment">// &lt; -1 发送给组ID为 -pid 的进程组中的所有成员</span><br><br><span class="hljs-comment">// 出错信息 EINVAL 无效信号, EPERM 该进程没有权限给任何一个目标进程 ESRCH 目标进程(组) 不存在</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">kill</span><span class="hljs-params">(<span class="hljs-keyword">pid_t</span> pid, <span class="hljs-keyword">int</span> sig)</span></span>;<br></code></pre></td></tr></table></figure>
+<p>接收信号Api</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;signal.h&gt;</span></span><br><span class="hljs-function"><span class="hljs-keyword">typedef</span> <span class="hljs-title">void</span><span class="hljs-params">(*<span class="hljs-keyword">_sighandler_t</span>)</span> <span class="hljs-params">(<span class="hljs-keyword">int</span>)</span></span>;<br><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/signum.h&gt; // 此头文件中有所有的linux可用信号</span></span><br><span class="hljs-comment">// 忽略目标信号</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> SIG_DFL ((_sighandler_t) 0)</span><br><span class="hljs-comment">// 使用信号的默认处理方式</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> SIG_IGN ((_sighandler_t) 1)</span><br></code></pre></td></tr></table></figure>
+<p>常用信号</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs plain">SIGHUP 控制终端挂起<br>SIGPIPE 往读端被关闭的管道或者socket连接中写数据<br>SIGURG socket连接上收到紧急数据<br>SIGALRM 由alarm或setitimer设置的实时闹钟超时引起<br>SIGCHLD 子进程状态变化<br></code></pre></td></tr></table></figure>
+<p>信号函数</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// 为一个信号设置处理函数</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;signal.h&gt;</span></span><br><span class="hljs-comment">// _handler 指定sig的处理函数</span><br><span class="hljs-function"><span class="hljs-keyword">_sighandler_t</span> <span class="hljs-title">signal</span><span class="hljs-params">(<span class="hljs-keyword">int</span> sig, <span class="hljs-keyword">__sighandler_t</span> _handler)</span><br><br><br><span class="hljs-keyword">int</span> <span class="hljs-title">sigaction</span><span class="hljs-params">(<span class="hljs-keyword">int</span> sig, struct sigaction* act, struct sigaction* oact)</span></span><br></code></pre></td></tr></table></figure>
+<h3 id=""><a href="#" class="headerlink" title="??"></a>??</h3><p>信号是用户, 系统, 或者进程发送给目标进程的信息, 以通知目标进程某个状态的改变或者系统异常.<br>产生条件</p>
+<ul>
+<li>对于前台进程<br>用户可以通过输入特殊的终端字符来给它发送信号, CTRL+C 通常为一个中断信号 <code>SIGINT</code></li>
+<li>系统异常<br>浮点异常和非法内存段的访问</li>
+<li>系统状态变化<br>由alarm定时器到期将引起<code>SIGALRM</code>信号</li>
+<li>运行kill命令或调用kill函数</li>
+</ul>
+<p><em>服务器必须处理(至少忽略) 一些常见的信号, 以免异常终止</em></p>
+<p>中断系统调用?</p>
+<h2 id="第十一章定时器"><a href="#第十一章定时器" class="headerlink" title="第十一章定时器"></a>第十一章定时器</h2><h3 id="Api-1"><a href="#Api-1" class="headerlink" title="Api"></a>Api</h3><h3 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h3><p>网络程序需要处理的第三类事件是定时事件<br>定时 - 指在一段时间之后触发某段代码的机制</p>
+<p>Linux提供了三种定时实现方法</p>
+<ul>
+<li>socket选项<code>SO_RCVTIMEO</code> 和 <code>SO_SNDTIMEO</code></li>
+<li>SIGALRM信号</li>
+<li>IO复用系统调用的超时参数</li>
+</ul>
+<p>第五章介绍了<code>SO_RCVTIMEO</code>和<code>SO_SNDTIMEO</code> 分别用来设置socket <code>接受数据超时时间</code> 和 <code>发送数据超时时间</code> 这两个选项对如下有效</p>
+<p>复习一下设定函数</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c">option_value在这里为 timeval 结构体<br><br><span class="hljs-comment">// sockfd 目标socket, level执行操作协议(IPv4, IPv6, TCP) option_name 参数指定了选项的名字. 后面值和长度</span><br><span class="hljs-comment">// 成功时返回0 失败返回-1</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">getsockopt</span><span class="hljs-params">(<span class="hljs-keyword">int</span> sockfd, <span class="hljs-keyword">int</span> level, <span class="hljs-keyword">int</span> option_name, <span class="hljs-keyword">void</span>* option_value, <br>						<span class="hljs-keyword">socklen_t</span> <span class="hljs-keyword">restrict</span> option_len)</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">setsockopt</span><span class="hljs-params">(<span class="hljs-keyword">int</span> sockfd, <span class="hljs-keyword">int</span> level, <span class="hljs-keyword">int</span> option_name, <span class="hljs-keyword">void</span>* option_value, <br>						<span class="hljs-keyword">socklen_t</span> <span class="hljs-keyword">restrict</span> option_len)</span></span>;<br></code></pre></td></tr></table></figure>
+<p><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95/SO_RCVTIMEO%E5%92%8CSO_SNDTIMEO%E9%80%89%E9%A1%B9%E7%9A%84%E4%BD%9C%E7%94%A8.png" alt=""></p>
+<p>定时器的SIGALRM信号<br>有<code>alarm</code>和<code>setitimer</code>函数设置的闹钟超时 - 触发SIGALRM信号</p>
+<h2 id="第十二章高性能IO框架库"><a href="#第十二章高性能IO框架库" class="headerlink" title="第十二章高性能IO框架库"></a>第十二章高性能IO框架库</h2><p>Linux服务器程序必须处理三类事件 IO事件, 信号, 和定时事件. 处理这三类事件需要考虑</p>
+<ul>
+<li>统一事件源<br>使代码简单易懂, 还能避免潜在的问题(我写我的项目的时候后来就这样重构了), 前面的例子使用IO复用</li>
+</ul>
+<p>来管理所有的事件</p>
+<ul>
+<li>可移植性</li>
+<li>对并发编程的成支持</li>
+</ul>
+<h2 id="第十三章多进程编程"><a href="#第十三章多进程编程" class="headerlink" title="第十三章多进程编程"></a>第十三章多进程编程</h2><h3 id="exec系列系统调用"><a href="#exec系列系统调用" class="headerlink" title="exec系列系统调用"></a>exec系列系统调用</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-comment">// 声明这个是外部函数或外部变量</span><br><span class="hljs-keyword">extern</span> <span class="hljs-keyword">char</span>** environ;<br><br><span class="hljs-comment">// path 参数指定可执行文件的完成路径 file接收文件名,具体位置在PATH中搜寻</span><br><span class="hljs-comment">// arg 和 argv用于向新的程序传递参数</span><br><span class="hljs-comment">// envp用于设置新程序的环境变量, 未设置则使用全局的环境变量</span><br><span class="hljs-comment">// exec函数是不返回的, 除非出错</span><br><span class="hljs-comment">// 如果未报错则源程序被新的程序完全替换</span><br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">execl</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* path, <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* arg, ....)</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">execlp</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* file, <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* arg, ..<span class="hljs-number">.0</span>)</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">execle</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* path, <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* arg, ...., <span class="hljs-keyword">char</span>* <span class="hljs-keyword">const</span> envp[])</span><br><span class="hljs-keyword">int</span> <span class="hljs-title">execv</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* path, <span class="hljs-keyword">char</span>* <span class="hljs-keyword">const</span> argv[])</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">execvp</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* file, <span class="hljs-keyword">char</span>* <span class="hljs-keyword">const</span> argv[])</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">execve</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* path, <span class="hljs-keyword">char</span>* <span class="hljs-keyword">const</span> argv[], <span class="hljs-keyword">char</span>* <span class="hljs-keyword">const</span> envp[])</span></span>;<br></code></pre></td></tr></table></figure>
+<h3 id="fork系统调用"><a href="#fork系统调用" class="headerlink" title="fork系统调用"></a>fork系统调用</h3><p><strong>fork系统调用api</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-comment">// 每次调用都返回两次, 在父进程中返回的子进程的PID, 在子进程中返回0</span><br><span class="hljs-comment">// 次返回值用于区分是父进程还是子进程</span><br><span class="hljs-comment">// 失败返回-1</span><br><span class="hljs-function"><span class="hljs-keyword">pid_t</span> <span class="hljs-title">fork</span><span class="hljs-params">(viod)</span></span>;<br></code></pre></td></tr></table></figure>
+
+<p><a name="13-1">fork系统调用</a><br>fork() 函数复制当前的进程, 在内核进程表中创建一个新的进程表项, 新的进程表项有很多的属性和原进程相同<br><code>堆指针``栈指针``标志寄存器的值</code>.<br>也存在不同的项目 该进程的PPID(父进程)被设置成原进程的PID,  信号位图被清除(原进程设置的信号处理函数对新进程无效)</p>
+<p>子进程代码与父进程完全相同, 同时复制(采用了写时复制, 父进程和子进程对数据执行了写操作才会复制)了父进程的数据(堆数据, 栈数据, 静态数据)<br>创建子进程后, 父进程打开的文件描述符默认在子进程中也是打开的<br><code>文件描述符的引用计数</code>, <code>父进程的用户根目录, 当前工作目录等变量的引用计数</code> 均加1<br>(引自维基百科-引用计数是计算机编程语言中的一种内存管理技术，是指将资源（可以是对象、内存或磁盘空间等等）的被引用次数保存起来，当被引用次数变为零时就将其释放的过程。)</p>
+<h3 id="处理僵尸进程"><a href="#处理僵尸进程" class="headerlink" title="处理僵尸进程"></a>处理僵尸进程</h3><p><strong>处理僵尸进程API</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/wait.h&gt;</span></span><br><span class="hljs-comment">// wait进程将阻塞进程, 直到该进程的某个子进程结束运行为止. 他返回结束的子进程的PID, 并将该子进程的退出状态存储于stat_loc参数指向的内存中. sys/wait.h 头文件中定义了宏来帮助解释退出信息.</span><br><span class="hljs-function"><span class="hljs-keyword">pid_t</span> <span class="hljs-title">wait</span><span class="hljs-params">(<span class="hljs-keyword">int</span>* stat_loc)</span></span>;<br><br><span class="hljs-comment">// 非阻塞, 只等待由pid指定的目标子进程(-1为阻塞)</span><br><span class="hljs-comment">// options函数取值WNOHANG-waitpid立即返回</span><br><span class="hljs-comment">// 如果目标子进程正常退出, 则返回子进程的pid</span><br><span class="hljs-comment">// 如果还没有结束或意外终止, 则立即返回0</span><br><span class="hljs-comment">// 调用失败返回-1</span><br><span class="hljs-function"><span class="hljs-keyword">pid_t</span> <span class="hljs-title">waitpid</span><span class="hljs-params">(<span class="hljs-keyword">pid_t</span> pid, <span class="hljs-keyword">int</span>* stat_loc, <span class="hljs-keyword">int</span> options)</span></span>;<br><br>WIFEXITED(stat_val); <span class="hljs-comment">// 子进程正常结束, 返回一个非0</span><br>WEXITSTATUS(stat_val); <span class="hljs-comment">// 如果WIFEXITED 非0, 它返回子进程的退出码</span><br>WIFSIGNALED(stat_val);<span class="hljs-comment">// 如果子进程是因为一个未捕获的信号而终止, 返回一个非0值</span><br>WTERMSIG(stat_val);<span class="hljs-comment">// 如果WIFSIGNALED非0 返回一个信号值</span><br>WIFSTOPPED(stat_val);<span class="hljs-comment">// 如果子进程意外终止, 它返回一个非0值</span><br>WSTOPSIG(stat_val);<span class="hljs-comment">// 如果WIFSTOPED非0, 它返回一个信号值</span><br></code></pre></td></tr></table></figure>
+
+<p>对于多进程程序而言, 父进程一般需要跟踪子进程的退出状态. 因此, 当子进程结束运行是, 内核不会立即释放该进程的进程表表项, 以满足父进程后续对孩子进程推出信息的查询</p>
+<ul>
+<li>在<code>子进程结束运行之后, 父进程读取其退出状态前</code>, 我们称该子进程处于<code>僵尸态</code></li>
+<li>另外一使子进程进入僵尸态的情况 - 父进程结束或者异常终止, 而子进程继续运行. (子进程的PPID设置为1,init进程接管了子进程) <code>父进程结束运行之后, 子进程退出之前</code>, 处于<code>僵尸态</code></li>
+</ul>
+<p>以上两种状态都是父进程没有正确处理子进程的返回信息, 子进程都停留在僵尸态, 占据着内核资源.</p>
+<p>waitpid()虽然为非阻塞, 则需要在 waitpid所监视的进程结束后再调用.<br>SIGCHLD信号- 子进程结束后将会给父进程发送此信号</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">handle_child</span><span class="hljs-params">(<span class="hljs-keyword">int</span> sig)</span><br></span>&#123;<br>	<span class="hljs-keyword">pid_t</span> pid;<br>	<span class="hljs-keyword">int</span> stat;<br>	<span class="hljs-keyword">while</span> ((pid = waitpid(<span class="hljs-number">-1</span>, &amp;stat, WNOHANG)) &gt; <span class="hljs-number">0</span>)<br>	&#123;<br>		<span class="hljs-comment">// 善后处理emmmm</span><br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><a name="13-4">管道</a><br>管道可以在父,子进程间传递数据, 利用的是fork调用后两个文件描述符(fd[0]和fd[1])都保持打开. 一对这样的文件描述符只能保证<br>父,子进程间一个方向的数据传输, 父进程和子进程必须有一个关闭fd[0], 另一个关闭fd[1].</p>
+<p>可以用两个管道来实现双向传输数据, 也可以用<code>socketpair</code>来创建管道</p>
+<h3 id="信号量-lt-sys-sem-h-gt"><a href="#信号量-lt-sys-sem-h-gt" class="headerlink" title="信号量-&lt;sys/sem.h&gt;"></a>信号量-&lt;sys/sem.h&gt;</h3><p><em>信号量原语</em><br>只支持两种操作, 等待(wait)和信号(signal) , 在LInux中等待和信号有特殊的含义, 所以又称为P(passeren, 传递就好像进入临界区)V(vrijgeven, 释放就好像退出临界区)操作.<br>假设有信号量SV(可取任何自然数, 这本书只讨论二进制信号量), 对它的PV操作含义为</p>
+<ul>
+<li>P(SV), 如果SV的值大于0, 就将它减1, 如果sv的值为0 则挂起进程的执行</li>
+<li>V(SV), 如果其他进程因为等待SV而挂起, 则唤醒之, 如果没有则将SV加1<br><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95/%E4%BD%BF%E7%94%A8%E4%BF%A1%E5%8F%B7%E9%87%8F%E4%BF%9D%E6%8A%A4%E5%85%B3%E9%94%AE%E4%BB%A3%E7%A0%81%E6%AE%B5.png" alt=""></li>
+</ul>
+<p>创建信号量</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// semeget 系统调用</span><br><span class="hljs-comment">// 创建一个全局唯一的信号量集, 或者获取一个已经存在的信号量集</span><br><span class="hljs-comment">// key 参数是一个键值, 用来标识一个全局唯一的信号量级, 就像文件名全局唯一地标识一个文件一样.</span><br><span class="hljs-comment">// num_sems 参数指定要创建/获取的信号量集中信号量的数目. 如果是创建信号量-必须指定, 如果是获取-可以指定为0</span><br><span class="hljs-comment">// sem_flags指定一组标志, 与调用open函数的mode参数相同</span><br><span class="hljs-comment">// - 可以与IPC_CREAT 做或运算创建新的信号量集, 即使信号量集存在也不会报错</span><br><span class="hljs-comment">// - 联合使用IPC_CREAT和IPC_EXCL来创建一组新的唯一额信号量集</span><br><span class="hljs-comment">// - 如果已经存在则会返回错误 errno = EEXIST</span><br><span class="hljs-comment">// 成功返回一个正整数, 是信号量集的标识符, 失败返回 -1</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">semget</span><span class="hljs-params">(<span class="hljs-keyword">key_t</span> key, <span class="hljs-keyword">int</span> num_sems, <span class="hljs-keyword">int</span> sem_flags)</span></span>;<br></code></pre></td></tr></table></figure>
+<p>semget成功时返回一个与之关联的内核结构体semid_ds</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">semid_ds</span><br>&#123;</span><br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">ipc_perm</span> <span class="hljs-title">sem_perm</span>;</span><br>	<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">int</span> sem_nsems; <span class="hljs-comment">// 被设置为num_sems</span><br>	<span class="hljs-keyword">time_t</span> sem_otime; <span class="hljs-comment">// 被设置为0</span><br>	<span class="hljs-keyword">time_t</span> sem_ctime; <span class="hljs-comment">// 被设置为当前的系统时间</span><br>&#125;<br><span class="hljs-comment">// 用来描述权限</span><br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">ipc_perm</span><br>&#123;</span><br>	<span class="hljs-keyword">uid_t</span> uid; <span class="hljs-comment">// 所有者的有效用户ID, 被semget设置为调用进程的有效用户ID</span><br>	<span class="hljs-keyword">gid_t</span> gid; <span class="hljs-comment">// 所有者的有效组ID, 被semget设置为调用进程的有效用户ID</span><br>	<span class="hljs-keyword">uid_t</span> cuid; <span class="hljs-comment">// 创建者的有效用户ID, 被semget设置为调用进程的有效用户ID</span><br>	<span class="hljs-keyword">gid_t</span> cgid; <span class="hljs-comment">// 创建者的有效组ID, 被semget设置为调用进程的有效用户ID</span><br>	<span class="hljs-keyword">mode_t</span> mode;<span class="hljs-comment">// 访问权限, 背着只为sem_flags参数的最低9位.</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<hr>
+<p>与semop信号量关联的一些重要的内核变量</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">unsigned</span> short semval; <span class="hljs-comment">// 信号量的值</span><br><span class="hljs-keyword">unsigned</span> short semzcnt; <span class="hljs-comment">// 等待信号量值变为0的进程数量</span><br><span class="hljs-keyword">unsigned</span> short semncnt<span class="hljs-comment">// 等待信号量值增加的进程数量</span><br><span class="hljs-keyword">pid_t</span> sempid; <span class="hljs-comment">// 最后一次执行semop操作的进程ID</span><br></code></pre></td></tr></table></figure>
+<p>操作信号量, 实际上就是对上面的内核变量操作</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">sembuf</span><br>&#123;</span><br>	<span class="hljs-keyword">unsigned</span> short <span class="hljs-keyword">int</span> sem_num;<span class="hljs-comment">// 信号量集中信号量的编号, 0表示信号量集中的第一个信号量</span><br>	short <span class="hljs-keyword">int</span> sem_op; <span class="hljs-comment">// 指定操作类型,</span><br>	short <span class="hljs-keyword">int</span> sem_flg;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// sem_id 是由semget调用返回的信号量集的标识符, 用以指定被操作的,目标信号量集.</span><br><span class="hljs-comment">// sem_ops 参数指向一个sembuf结构体类型的数组</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">semop</span><span class="hljs-params">(<span class="hljs-keyword">int</span> sem_id, struct sembuf* sem_ops, <span class="hljs-keyword">size_t</span> num_sem_ops)</span></span>;<br><br><span class="hljs-comment">// sem_op 每种类型的操作行为又受到sem_flags成员的影响</span><br><span class="hljs-comment">// sem_flag 可选值是可选正整数 0 负整数. </span><br><span class="hljs-comment">// - IPC_NOWAIT(无论信号量操作是否成功, 都立即返回), </span><br><span class="hljs-comment">// - SEM_UNDO (当进程退出的时候, 取消正在进行的semop操作)</span><br><span class="hljs-comment">// -- sem_op &gt; 0</span><br><span class="hljs-comment">// -- 则semop将被操作的信号量的值semval增加sem_op, 要求调用进程对被操作的信号量集有写权限</span><br><span class="hljs-comment">// -- 如果此时设置了SEM_UNDO标志, 则系统将更新进程的semadj变量(用以跟踪进程对信号量的修改情况)</span><br><span class="hljs-comment">// -- sem_op = 0</span><br><span class="hljs-comment">// -- 标着这是一个`等待0`的操作, 要求调用进程对被操作信号量集有用读权限</span><br><span class="hljs-comment">// -- 如果此时信号量的值是0, 则调用立即返回, 否则semop失败返回, 或者阻塞进程以等待信号量变为0</span><br><span class="hljs-comment">// -- 此时如果IPC_NOWAIT 标志被设置, sem_op立即返回错误 errno=EAGAIN</span><br><span class="hljs-comment">// -- 如果未指定此标志, 则信号量的semzcnt的值增加1, 这时进程被投入睡眠直到下列三个条件之一发生</span><br><span class="hljs-comment">// -- 1 信号量的值samval变为0, 此时系统将该信号量的semzcnt减1</span><br><span class="hljs-comment">// -- 2 被操作的信号量所在的信号量集被进程移除, 此时semop调用失败返回, errno=EIDRM</span><br><span class="hljs-comment">// -- 3 调用被系统中断, 此时semop调用失败返回, errno=EINTR, 同时将该信号量的semzcnt减1</span><br><span class="hljs-comment">// -- sem_op &lt; 0</span><br><span class="hljs-comment">// -- 表示对信号量的值进行减操作, 即期望获得信号量, 要求调用进程对被操作信号量集有写权限</span><br><span class="hljs-comment">// -- 如果semval的值大于等于sem_op的绝对值, 则操作成功, 调用进程立即获得信号量</span><br><span class="hljs-comment">// -- 且semval -= abs(sem_op)</span><br><span class="hljs-comment">// -- 如果此时这定了SEM_UNDO的标志, 系统更新进程的semadj变量</span><br><span class="hljs-comment">// -- 如果semval &lt; abs(sem_op) 则在被指定IPC_NOWAIT的时候semop立即返回error, errno=EAGIN</span><br><span class="hljs-comment">// -- 如果没有指定则阻塞进程等待信号量可用, 且semzcnt +=1, 等到下面三种情况唤醒</span><br><span class="hljs-comment">// -- 1 发生semval &gt;= abs(sem_op), semzcnt-=1, semval -= abs(sem_op). 在SEM_UNDO设置时更新semadj</span><br><span class="hljs-comment">// -- 2 被操作的信号量所在的信号量集被进程移除, 此时semop调用失败返回, errno=EIDRM (同 sem_op = 0)</span><br><span class="hljs-comment">// -- 3 调用被系统中断, 此时semop调用失败返回, errno=EINTR, 同时将该信号量的semzcnt减1 (同 sem_op = 0)</span><br><span class="hljs-comment">// num_sem_ops 指定要执行的操作个数, 即sem_ops数组中的元素个数, semop对sem_ops[] 中的每个成员按顺序操作,</span><br><span class="hljs-comment">// 并且是原子操作</span><br><span class="hljs-comment">// 成功返回0, 失败返回-1 errno. 失败的时候sem_ops[] 中的所有操作不执行</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// semctl 系统调用</span><br><span class="hljs-comment">// sem_id 参数是由semget返回的信号量集标识符</span><br><span class="hljs-comment">// sen_num指定被操作的信号量在信号集中的编号</span><br><span class="hljs-comment">// command指定命令, 可以追加命令所需的参数, 不过有推荐格式</span><br><span class="hljs-comment">// 成功返回对应command的参数, 失败返回-1 errno</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">semctl</span><span class="hljs-params">(<span class="hljs-keyword">int</span> sem_id, <span class="hljs-keyword">int</span> sem_num, <span class="hljs-keyword">int</span> command, ...)</span></span>;<br></code></pre></td></tr></table></figure>
+<p>结构体<br><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95/1.png" alt=""></p>
+<p>command参数<br><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95/semctl%E7%9A%84command%E5%8F%82%E6%95%B0.png" alt=""><br>除去GETALL以外的 其他GET都是操作的单个信号量, 由sem_id指定的第sem_num个信号量.<br>其他操作针对整个信号量集, 此时semctl的参数sem_num被忽略</p>
+<p><em>特殊键值IPC_PRIVATE</em><br>semget的调用者可以给其key参数传递一个特殊的键值<code>IPC_PRIVATE</code>, 这样无论该信号量是否已经存在<br>semget都将创建一个新的信号量.</p>
+<p><strong>总结PV使用方法</strong><br>使用<code>semget</code>获取到唯一的标识.<br>使用<code>semctl</code>的<code>SETVAL</code>传入初始化val的<code>sem_un</code>联合体.来初始化val<br>调用<code>semop</code> 传入唯一标识, <code>sem_op=-1</code>执行P(锁)操作<code>sem_op=1</code>执行V(开锁)操作<br>开关锁通过当<code>sem_op=-1,semval=0</code><br>且未指定<code>IPC_NOWAIT</code><br>等待<code>semval</code>被<code>sem_op=1</code>改为<code>semval=1</code></p>
+<h3 id="共享内存-lt-sys-shm-h-gt"><a href="#共享内存-lt-sys-shm-h-gt" class="headerlink" title="共享内存-&lt;sys/shm.h&gt;"></a>共享内存-&lt;sys/shm.h&gt;</h3><p>最高效的IPC(进程间通信)机制<br>需要自己同步进程对其的访问, 否则会产生竞态条件</p>
+<p><code>int shmget(key_t key, size_t size, int shmflg)</code><br>成功返回唯一标识, 失败返回-1 errno<br>key<br>与semget相同 标识一段全局唯一的共享内存<br>size 内存区域大小 单位字节<br>shmflg<br>shmflg的参数与semget相同, 同时多了两个额外的参数<br><code>SHM_HUGETLB</code>系统将使用”大页面”来为共享内存分配空间<br><code>SHM_NORESERVE</code>不为共享内存保留swap空间, 如果物理内存不足在执行写操作的<br>时候将会触发<code>SIGSEGV</code>信号</p>
+<p>同时会创建对应的<code>shmid_ds</code>结构体</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">shmid_ds</span><br>&#123;</span><br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">ipc_perm</span> <span class="hljs-title">shm_per</span>;</span> <span class="hljs-comment">// 权限相关</span><br>	<span class="hljs-keyword">size_t</span> shm_segsz; <span class="hljs-comment">// 共享内存大小 单位字节	size</span><br>	<span class="hljs-keyword">__time_t</span> shm_atime; <span class="hljs-comment">// 对这段内存最后一次调用semat的时间 0</span><br>	<span class="hljs-keyword">__time_t</span> shm_dtime; <span class="hljs-comment">// 对这段内存最后一次调用semdt的时间 0</span><br>	<span class="hljs-keyword">__time_t</span> shm_ctime; <span class="hljs-comment">// 对这段内存最后一次调用semctl的时间 当前时间</span><br>	<span class="hljs-keyword">__pid_t</span> shm_cpid; <span class="hljs-comment">// 创建者PID</span><br>	<span class="hljs-keyword">__pid_t</span> lpid; <span class="hljs-comment">// 最后一次执行shmat或shmdt的进程PID</span><br>	<span class="hljs-keyword">shmatt_t</span> shm_nattach <span class="hljs-comment">// 关联到此共享内存空间的进程数量</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<p><code>void* shmat(int shm_id, const void* shm_addr, int shmflg)</code><br>将共享内存关联到进程的地址空间<br>成功返回关联到的地址, 失败返回 (void<em>)-1 errno<br>shm_id<br>shmget返回的唯一标识<br>shm_addr<br>关联到进程的哪块地址空间, 其效果还受到shmflg的可选标识SHM_RND的影响<br>如果shm_addr = NULL, 则关联地址由操作系统决定, 代码可移植性强<br>如果 shm_addr 非空,且没有<code>SHM_RND</code>标志 则关联到指定的地址处<br>如果 shm_addr 非空, 但是设置了标志 *这里还没用到, 暂时不写</em><br>shmflg<br>SHM_RDONLY 设置后内存内容变成只读<br>SHM_REMAP 如果地址shmaddr已经关联到一段内存上则重新关联<br>SHM_EXEC 有执行权限 = 读权限<br>调用成功之后, 修改shmid_ds的部分<br>shm_nattach +1<br>更新 shm_lpid和shm_atime设置为当前时间</p>
+<p><code>int shmdt(const void* shm_addr)</code><br>将共享内存从进程地址空间中分离<br>成功返回0 失败返回-1 errno<br>成功后<br>shm_nattach -1<br>更新 shm_lpid和shm_dtime设置为当前时间</p>
+<p><code>int shm_ctl(int shm_id, int command, struct shmid_ds* buf)</code><br>,目前还不清楚哪些实用, 所以暂时贴图了<br>成功返回相关值, 失败返回 -1 errno<br><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95/shmctl.png" alt=""></p>
+<h1 id="第十四章-多线程编程"><a href="#第十四章-多线程编程" class="headerlink" title="第十四章 多线程编程"></a>第十四章 多线程编程</h1><p>根据运行环境和调度者身份, 线程可以分为两种<br>内核线程<br>运行在内核空间, 由内核来调度.<br>用户线程<br>运行在用空间, 由线程库来调用</p>
+<p>当内核线程获得CPU的使用权的时候, 他就加载并运行一个用户线程, 所以内核线程相当于用户线程的容器.</p>
+<p>线程有三种实现方式</p>
+<ul>
+<li>完全在用户空间实现-无需内核支持<br>  创建和调度线程无需内核干预, 速度很快.<br>  不占用额外的内核资源, 对系统影响较小<br>  但是无法运行在多个处理器上, 因为这些用户线程是是实现在一个内核线程上的</li>
+<li>完全由内核调度<br>  创建和调度线程的任务都交给了内核, 运行在用户空间的线程库无需管理<br>  优缺点正好与上一个相反</li>
+<li>双层调度<br>  结合了前两个的优点<br>  不会消耗过多的内核资源,而且线程切换快, 同时它可以充分利用多处理器的优势</li>
+</ul>
+<p><strong>创建和结束线程</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/pthreadtypes.h&gt;</span></span><br><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">int</span> <span class="hljs-keyword">pthread_t</span>;<br><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;pthread.h&gt;</span></span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">pthread_create</span><span class="hljs-params">(<span class="hljs-keyword">pthread_t</span>* thread, <span class="hljs-keyword">const</span> <span class="hljs-keyword">pthread_attr_t</span>* attr, <span class="hljs-keyword">void</span>* (*start_routine)(<span class="hljs-keyword">void</span>*), <span class="hljs-keyword">void</span>* arg)</span></span>;<br><span class="hljs-comment">// 成功返回0 失败返回错误码</span><br><span class="hljs-comment">// thread 用来唯一的标识一个新线程</span><br><span class="hljs-comment">// attr用来设置新县城的属性 传递NULL表示默认线程属性</span><br><span class="hljs-comment">// start_routine 指定新线程运行的函数</span><br><span class="hljs-comment">// arg指定函数的参数</span><br></code></pre></td></tr></table></figure>
+<p><code>void pthread_exit(void* retval);</code><br>用来保证线程安全干净的退出, 线程函数最好结束时调用.<br>通过<code>retval</code>参数向线程的回收者传递其退出信息<br>执行后不会返回到调用者, 而且永远不会失败</p>
+<p><code>int pthread_join(pthread_t thread, void** retval)</code><br>可以调用这个函数来回收其他线程 不过线程必须是可回收的该函数会一直阻塞知道被回收的线程结束.<br>成功时返回0, 失败返回错误码<br>等待其他线程结束<br>thread 线程标识符<br>retval 目标线程的退出返回信息</p>
+<p>错误码如下<br><code>EDEADLK</code>引起死锁, 两个线程互相针对对方调用pthread_join 或者对自身调用<br><code>EINVAL</code>目标线程是不可回收的, 或是其他线程在回收目标线程<br><code>ESRCH</code>目标线程不存在</p>
+<p><code>int pthread_cancel(pthread_t thread)</code><br>异常终止一个线程, 即为取消线程<br>成功返回0, 失败返回错误码</p>
+<p>接收到取消请求的目标线程可以决定是否允许被取消以及如何取消.<br>一下两个函数成功返回0 失败返回错误码<br><code>int pthread_setcancelstart(int state, int* oldstate)</code><br>第一个参数<br><code>PTHREAD_CANCEL_ENABLE</code> 允许线程被取消, 默认状态<br><code>PTHREAD_CANCEL_DISABLE</code> 不允许被取消, 如果这种线程接收到取消请求, 则会挂起请求指导<br>这个线程允许被取消<br>第二个参数 返回之前设定的状态</p>
+<p><code>int pthread_setcanceltype(int type, int* oldtype)</code><br>第一个参数<br><code>PTHREAD_CANCEL_ASYNCHRONOUS</code> 线程可以随时被取消<br><code>PTHREAD_CANCEL_DEFERRED</code>允许目标现成推迟行动, 知道调用了下面几个所谓的取消点函数<br>最好使用<code>pthread_testcancel</code>函数设置取消点<br>设置取消类型(如何取消)<br>第二个参数<br>原来的取消类型</p>
+<p><strong>线程属性</strong><br>这里的属性很多, 不清楚后面会不会用到暂时略过</p>
+<p><strong>POSIX信号量</strong><br>多线程也必须考虑线程同步的问题.<br>虽然<code>pthread_join</code>可以看做简单的线程同步方式不过它无法高效的实现复杂的同步需求<br>比如无法实现共享资源独占式访问, 或者在某种条件下唤醒指定的指定线程.</p>
+<p>以下函数成功返回0 失败返回-1 errno<br><code>int sem_init(sem_t* sem, int pshared, unsigned int value)</code><br>用于初始化一个未命名的信号量.<br>如果<code>pshared</code>为0 则表示是当前进程的局部信号量, 否则信号量可以在多个进程间共享<br><code>value</code>指定参数的初始值<br><em>初始化已经存在的信号量会导致无法预期的结果</em></p>
+<p><code>int sem_destory(sem_t* sem)</code><br>销毁信号量, 释放其占用的系统资源<br><em>销毁正被其他线程等待的信号量, 将会导致无法预期的结果</em></p>
+<p><code>int sem_wait(sem_t* sem)</code><br>以原子操作的形式将信号量的值 -1, 如果信号量的值为0, 则sem_wait将被阻塞, 知道信号量具有非0值</p>
+<p><code>int sem_trywait(sem_t* sem)</code><br>跟上面的函数相同不过不会阻塞. 信号量不为0 则 -1, 为0 则返回-1 errno</p>
+<p><code>int sem_post(sem_t sem)</code><br>原子操作将信号量的值 +1</p>
+
+      
+       
+    </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2016-2019 Yelog</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+<div class="acParent"></div>
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['#Mysql','#C++','#服务器编程','#Git操作','#springboot','#springboot数据交互','#日志','#java文件操作','#Java设计模式','#java爬虫','#java输入输出流','#使用Ubuntu','#Linux','#windows终端设置','#大量的此终端优化','#校园网络助手1.5','#自动查询题库','#大学的第一个暑假','#暑假学习的大纲','#记录每天假期干了什么',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().split('\n').length - 1, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: #fafafa;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 582px;
+    }
+    .nav.fullscreen {
+        margin-left: -582px;
+    }
+    .nav-left {
+        width: 160px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 522px;
+        }
+        .nav.fullscreen {
+            margin-left: -522px;
+        }
+        .nav-left {
+            width: 130px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 522px;
+            margin-left: -522px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 522px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
