@@ -1,0 +1,431 @@
+<!doctype html>
+<html>
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable"  content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no">
+    
+    
+    <!--Simple SEO-->
+
+
+<meta name="robots" content=all />
+<meta name="google" content=all />
+<meta name="googlebot" content=all />
+<meta name="verify" content=all />
+    <!--Title-->
+
+<title>Git的使用 | Lsmg的大学之路</title>
+
+<link rel="alternate" href="/atom.xml" title="Lsmg的大学之路" type="application/atom+xml">
+
+
+<link rel="icon" href="/favicon.ico">
+
+    
+
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/pages/post.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/thirdParty/highlight/github.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+
+<style>
+    figure .code .line:before{
+        display: none!important;
+    }
+</style>
+
+    <!--script-->
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+<script>
+  var admin = "GeekaholicLin";
+  admin = admin.split(",");
+  var gitalk = new Gitalk({
+    clientID: "xxxxx",
+    clientSecret: "xxxxx",
+    repo: "geekaholiclin.github.io",
+    owner: "GeekaholicLin",
+    admin: admin,
+    id: decodeURIComponent(location.pathname),
+    distractionFreeMode: false
+  })
+
+</script>
+
+    
+    
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body id="normal">
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<style>
+    header{ top: 71px; position: absolute!important;}
+    #container{padding-top: 151px!important;}
+</style>
+<div style="position:fixed;z-index:9999;left:0;top:0;width:100%;height:70px;background-color:#e0e0e0;color:#396CA5;border-bottom:1px solid #cecece;text-align:center;line-height:70px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<div id="wrap">
+    <header  style="position: absolute;" >
+    <div id="site-meta">
+        <a href="/" id="logo">
+            <h1 class="title">Lsmg的大学之路</h1>
+        </a>
+        
+    </div>
+    <ul id="nav">
+        
+            <li><a href="/"><i class="fa fa-home"></i>Home</a></li>
+        
+            <li><a href="/atom.xml"><i class="fa fa-rss"></i>RSS</a></li>
+        
+        <li id="search"><a href="javascript:void(0)"><i class="fa fa-search"></i>Search</a></li>
+    </ul>
+</header>
+
+    <div id="container">
+        
+<ul id="sidebar">
+    
+    
+<li class="widget notification">
+    <i class="fa fa-bell-o"></i>
+    <div>
+        
+<p>主题ylion v0.0.0版本即将上线，敬请期待~！
+主题作者：<a href="https://github.com/GeekaholicLin"
+title="fork me" target="_blank">Geekaholic</a></p>
+    </div>
+</li>
+
+    
+    
+<li class="widget widget-normal category">
+    <h3 class="fa fa-th widget-title">Categories</h3>
+    <ul class="category-list"><li class="category-list-item"><a class="category-list-link current" href="/categories/CPP/"><i class="fa" aria-hidden="true">CPP</i></a><span class="category-list-count">11</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/CPP/CPP%E5%9F%BA%E7%A1%80/"><i class="fa" aria-hidden="true">CPP基础</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link current" href="/categories/CPP/CPP%E9%87%8D%E7%82%B9/"><i class="fa" aria-hidden="true">CPP重点</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CPP/Protobuf/"><i class="fa" aria-hidden="true">Protobuf</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CPP/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/"><i class="fa" aria-hidden="true">学习计划</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CPP/%E6%95%B0%E6%8D%AE%E5%BA%93/"><i class="fa" aria-hidden="true">数据库</i></a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/CPP/%E6%95%B0%E6%8D%AE%E5%BA%93/MongoDB/"><i class="fa" aria-hidden="true">MongoDB</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/CPP/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B-%E4%B9%A6%E7%B1%8D%E8%AE%B0%E5%BD%95/"><i class="fa" aria-hidden="true">服务器编程-书籍记录</i></a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">11</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/IDEA%E7%9A%84%E4%BD%BF%E7%94%A8/"><i class="fa" aria-hidden="true">IDEA的使用</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"><i class="fa" aria-hidden="true">Java设计模式</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/SDK/"><i class="fa" aria-hidden="true">SDK</i></a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/SDK/FASTJson/"><i class="fa" aria-hidden="true">FASTJson</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/java%E7%88%AC%E8%99%AB/"><i class="fa" aria-hidden="true">java爬虫</i></a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/java%E7%88%AC%E8%99%AB/java%E7%88%AC%E8%99%AB%E5%88%9D%E6%AD%A5/"><i class="fa" aria-hidden="true">java爬虫初步</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/springboot/"><i class="fa" aria-hidden="true">springboot</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/"><i class="fa" aria-hidden="true">知识整理</i></a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/IO%E6%B5%81/"><i class="fa" aria-hidden="true">IO流</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/"><i class="fa" aria-hidden="true">文件操作</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/%E7%AC%AC%E4%B8%80%E4%B8%AA%E6%9A%91%E5%81%87%E5%AD%A6%E4%B9%A0/"><i class="fa" aria-hidden="true">第一个暑假学习</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/"><i class="fa" aria-hidden="true">Linux</i></a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Ubuntu/"><i class="fa" aria-hidden="true">Ubuntu</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/"><i class="fa" aria-hidden="true">入门学习</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/"><i class="fa" aria-hidden="true">Windows</i></a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/Dos/"><i class="fa" aria-hidden="true">Dos</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/%E7%BB%88%E7%AB%AF/"><i class="fa" aria-hidden="true">终端</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BF%85%E5%A4%87%E6%8A%80%E8%83%BD/"><i class="fa" aria-hidden="true">必备技能</i></a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BF%85%E5%A4%87%E6%8A%80%E8%83%BD/Git%E6%93%8D%E4%BD%9C/"><i class="fa" aria-hidden="true">Git操作</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F%E7%9F%A5%E8%AF%86/"><i class="fa" aria-hidden="true">游戏知识</i></a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F%E7%9F%A5%E8%AF%86/%E6%9C%8D%E5%8A%A1%E5%99%A8/"><i class="fa" aria-hidden="true">服务器</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F%E7%9F%A5%E8%AF%86/%E6%9D%82%E8%B0%88/"><i class="fa" aria-hidden="true">杂谈</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/"><i class="fa" aria-hidden="true">算法</i></a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/"><i class="fa" aria-hidden="true">基础算法</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%A1%B9%E7%9B%AE%E5%88%B6%E4%BD%9C/"><i class="fa" aria-hidden="true">项目制作</i></a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%A1%B9%E7%9B%AE%E5%88%B6%E4%BD%9C/%E4%B8%AD%E7%AD%89%E9%A1%B9%E7%9B%AE/"><i class="fa" aria-hidden="true">中等项目</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%A1%B9%E7%9B%AE%E5%88%B6%E4%BD%9C/%E5%B0%8F%E9%A1%B9%E7%9B%AE/"><i class="fa" aria-hidden="true">小项目</i></a><span class="category-list-count">1</span></li></ul></li></ul>
+</li>
+
+
+    
+    
+<li class="widget widget-normal archive">
+  <h3 class="fa fa-archive widget-title">Archives</h3>
+    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/"><i class="fa" aria-hidden="true">一月 2020</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/"><i class="fa" aria-hidden="true">十二月 2019</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/"><i class="fa" aria-hidden="true">十一月 2019</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/"><i class="fa" aria-hidden="true">十月 2019</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/"><i class="fa" aria-hidden="true">九月 2019</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/"><i class="fa" aria-hidden="true">八月 2019</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/"><i class="fa" aria-hidden="true">七月 2019</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/"><i class="fa" aria-hidden="true">六月 2019</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/"><i class="fa" aria-hidden="true">五月 2019</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/"><i class="fa" aria-hidden="true">四月 2019</i></a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/"><i class="fa" aria-hidden="true">三月 2019</i></a><span class="archive-list-count">2</span></li></ul>
+</li>
+
+
+    
+    
+<li class="widget widget-normal popular-posts" id="popular-posts">
+    <h3 class="fa fa-thermometer-3 widget-title">Popular Posts</h3>
+    <ul id="popular-content">
+        <li class="load-first"><i class="fa fa-spinner fa-pulse"></i></li>
+    </ul>
+</li>
+
+    
+    
+<li class="widget widget-normal tags">
+  <h3 class="fa fa-tags widget-title">Tag Cloud</h3>
+  <div class="tagcloud-content">
+    
+      <a href="/tags/Mysql/" style="font-size: 0.17rem; color: #386da4">Mysql</a> <a href="/tags/C/" style="font-size: 0.14rem; color: #69c">C++</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/" style="font-size: 0.14rem; color: #69c">服务器编程</a> <a href="/tags/springboot/" style="font-size: 0.2rem; color: #0a407c">springboot</a> <a href="/tags/Git%E6%93%8D%E4%BD%9C/" style="font-size: 0.14rem; color: #69c">Git操作</a> <a href="/tags/springboot%E6%95%B0%E6%8D%AE%E4%BA%A4%E4%BA%92/" style="font-size: 0.14rem; color: #69c">springboot数据交互</a> <a href="/tags/java%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" style="font-size: 0.14rem; color: #69c">java文件操作</a> <a href="/tags/%E6%97%A5%E5%BF%97/" style="font-size: 0.14rem; color: #69c">日志</a> <a href="/tags/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 0.14rem; color: #69c">Java设计模式</a> <a href="/tags/java%E7%88%AC%E8%99%AB/" style="font-size: 0.14rem; color: #69c">java爬虫</a> <a href="/tags/java%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%B5%81/" style="font-size: 0.14rem; color: #69c">java输入输出流</a> <a href="/tags/Linux/" style="font-size: 0.14rem; color: #69c">Linux</a> <a href="/tags/%E4%BD%BF%E7%94%A8Ubuntu/" style="font-size: 0.14rem; color: #69c">使用Ubuntu</a> <a href="/tags/windows%E7%BB%88%E7%AB%AF%E8%AE%BE%E7%BD%AE/" style="font-size: 0.14rem; color: #69c">windows终端设置</a> <a href="/tags/%E5%A4%A7%E9%87%8F%E7%9A%84%E6%AD%A4%E7%BB%88%E7%AB%AF%E4%BC%98%E5%8C%96/" style="font-size: 0.14rem; color: #69c">大量的此终端优化</a> <a href="/tags/%E6%A0%A1%E5%9B%AD%E7%BD%91%E7%BB%9C%E5%8A%A9%E6%89%8B1-5/" style="font-size: 0.14rem; color: #69c">校园网络助手1.5</a> <a href="/tags/%E8%87%AA%E5%8A%A8%E6%9F%A5%E8%AF%A2%E9%A2%98%E5%BA%93/" style="font-size: 0.14rem; color: #69c">自动查询题库</a> <a href="/tags/%E5%A4%A7%E5%AD%A6%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E6%9A%91%E5%81%87/" style="font-size: 0.14rem; color: #69c">大学的第一个暑假</a> <a href="/tags/%E6%9A%91%E5%81%87%E5%AD%A6%E4%B9%A0%E7%9A%84%E5%A4%A7%E7%BA%B2/" style="font-size: 0.14rem; color: #69c">暑假学习的大纲</a> <a href="/tags/%E8%AE%B0%E5%BD%95%E6%AF%8F%E5%A4%A9%E5%81%87%E6%9C%9F%E5%B9%B2%E4%BA%86%E4%BB%80%E4%B9%88/" style="font-size: 0.14rem; color: #69c">记录每天假期干了什么</a>
+  </div>
+</li>
+
+
+    
+    
+<li class="widget widget-normal friends-link">
+    <h3 class="fa fa-globe widget-title">Friends</h3><br/>
+
+    
+        <a href="http://geekaholiclin.github.io" class="fa" target="_blank">主题作者</a>
+
+    
+
+</li>
+
+    
+</ul>
+
+
+        <div id="main">
+    <article id="post">
+        <div id="post-header">
+
+            <h1 id="Git的使用">
+                
+                Git的使用
+                
+            </h1>
+            <div class="article-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+            <i class="fa fa-folder-open-o"></i>
+        <span>Git操作</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+         <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            Git操作
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta ">2019/03/28</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+            <i class="fa fa-thermometer-three-quarters"></i>
+        <span class="hits hits-meta " data-leadcloud-title="Git的使用"
+              data-leadcloud-url="/2019/03/Git-%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/"><i class="fa fa-spinner fa-spin"></i></span>
+    </span>
+    
+    
+</div>
+
+            
+            
+            <p class="fa fa-exclamation-triangle warning">
+                本文于<strong>304</strong>天之前发表，文中内容可能已经过时。如有疑问，请在评论区留言。
+            </p>
+            
+        </div>
+        
+        <div id="post-body">
+            <p>之前的Git博客 写的终于是自己都看不下去了. 所以打算来重新写一个博客<br>这篇博客主要还是参照的廖雪峰大佬的Git博客<br>自己只做整理方便自己察看</p>
+<a id="more"></a>
+<h1 id="命令总结"><a href="#命令总结" class="headerlink" title="命令总结"></a>命令总结</h1><figure class="highlight plain"><table><tr><td class="code"><pre><code class="hljs plain">ssh-keygen -t rsa -C &quot;youremail@example.com&quot;<br><br>git init<br>git add &lt;file&gt;<br>git commit -m &lt;message&gt;<br>git remote add origin  # origin 意为远程库的名字, git的默认叫法<br><br>git status<br>git diff<br>git log<br>git log --pretty&#x3D;oneline # <br><br><br>git checkout -- &lt;filename&gt; # 恢复工作区, 可用于恢复修改和恢复勿删文件<br>git reset HEAD &lt;file&gt; # 恢复暂存区<br>git reset HEAD^ # 恢复版本库<br>git reflog # 所有版本日志<br><br>git rm 从版本库中删除文件<br><br>git push -u origin master # 带上 -u 以后提交就不需要加入origin master, 类似记忆功能<br></code></pre></td></tr></table></figure>
+
+<h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><p>首先把Git的三个区说明一下吧 自己后来慢慢感觉这些理论还是很重要的<br><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/%E6%9D%82%E9%A1%B9/Git%E4%B8%89%E5%A4%A7%E5%88%86%E5%8C%BA.png" alt=""><br>工作区<br>顾名思义, 你当前在IDE直接修改的代码全部都是位于工作区的代码<br>暂存区<br>暂时存取的区域, 你每次使用add提交的文件全部在这个区域中, 这些文件等待你的commit<br>版本库<br>这里存放的是若干个版本, 你每次的commit就是将暂存区的文件作为一个版本提交到版本库, 同时相应的文件被提交后 暂存区的文件被清除</p>
+<h1 id="基础的操作"><a href="#基础的操作" class="headerlink" title="基础的操作"></a>基础的操作</h1><p><strong>你的第一次提交</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><code class="hljs plain">git init<br>git add &lt;file&gt;<br>git commit -m &lt;message&gt;<br></code></pre></td></tr></table></figure>
+<p><code>git init</code><br>在你命令所执行的文件夹生成版本库<br><code>git add &lt;file&gt;</code><br>将指定文件从工作区添加到暂存区<br>如果<code>&lt;file&gt;</code>用 <code>.</code> 代替则为所有相对上一次commit修改过的文件<br><code>git commit -m &lt;message&gt;</code><br>提交暂存区的文件到版本库中成为一个版本 message为这个版本(提交)的描述</p>
+<p><strong>好了你已经成功完成了一次提交, 继续去写代码了</strong><br>好你又写完了一堆代码 这时你想知道你工作区的状态是啥-你修改了哪些文件</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><code class="hljs plain">$git status<br>-------提示如下-----------<br>位于分支 master<br>尚未暂存以备提交的变更：<br>  （使用 &quot;git add &lt;文件&gt;...&quot; 更新要提交的内容）<br>  （使用 &quot;git checkout -- &lt;文件&gt;...&quot; 丢弃工作区的改动）<br><br>	修改：     test.txt<br><br>修改尚未加入提交（使用 &quot;git add&quot; 和&#x2F;或 &quot;git commit -a&quot;）<br></code></pre></td></tr></table></figure>
+<p><code>git status</code>告诉你 你修改了test.txt文件, 但是你想知道你怎么修改了这些文件, 做了什么改动<br>这时候就需要<code>git diff</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><code class="hljs plain">$git diff<br>-------提示如下-----------<br>diff --git a&#x2F;test.txt b&#x2F;test.txt<br>index 0858ae8..8c14912 100644<br>--- a&#x2F;test.txt<br>+++ b&#x2F;test.txt<br>@@ -1,3 +1,4 @@<br> 111111111111111<br> 222222222222222<br> 333333333333333<br>+444444444444444<br></code></pre></td></tr></table></figure>
+<p><strong>现在你知道你进行了什么修改, 又进行了一次提交</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><code class="hljs plain">lsmg@ubuntu:~&#x2F;temp$ git status<br>位于分支 master<br>尚未暂存以备提交的变更：<br>  （使用 &quot;git add &lt;文件&gt;...&quot; 更新要提交的内容）<br>  （使用 &quot;git checkout -- &lt;文件&gt;...&quot; 丢弃工作区的改动）<br>	修改：     test.txt<br>修改尚未加入提交（使用 &quot;git add&quot; 和&#x2F;或 &quot;git commit -a&quot;）<br>lsmg@ubuntu:~&#x2F;temp$ git add test.txt <br>lsmg@ubuntu:~&#x2F;temp$ git status<br>位于分支 master<br>要提交的变更：<br>  （使用 &quot;git reset HEAD &lt;文件&gt;...&quot; 以取消暂存）<br>	修改：     test.txt<br>lsmg@ubuntu:~&#x2F;temp$ git commit -m &quot;ver 0.02&quot;<br>[master ee4400f] ver 0.02<br> 1 file changed, 1 insertion(+)<br>lsmg@ubuntu:~&#x2F;temp$ git status<br>位于分支 master<br>无文件要提交，干净的工作区<br></code></pre></td></tr></table></figure>
+
+<h1 id="时光穿梭机"><a href="#时光穿梭机" class="headerlink" title="时光穿梭机"></a>时光穿梭机</h1><p>我感觉廖雪峰大佬的博客, 生动诙谐, 其中用到了很多形象的比喻.<br>自己由于是为了方便日后察看 所以省略了这些内容, 感兴趣的可以去看看<br><strong>在commit之间切换</strong><br>Git还可以在不同commit间切换, 当然你必须知道进行过哪些commit, 你不能自己都记在脑子里吧, 所以也存在相关的命令<code>git log</code>来查看你的commit记录</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><code class="hljs plain">lsmg@ubuntu:~&#x2F;temp$ git log<br>commit ee4400fc2b5694282b866b701f7c21655149e5a2 (HEAD -&gt; master)<br>Author: ***********<br>Date:   Sat Dec 7 21:06:42 2019 -0800<br>    ver 0.02<br><br>commit 603260e28ac0cc8fb8e4243120eb00bca83585d2<br>Author: ***********<br>Date:   Sat Dec 7 20:57:58 2019 -0800<br>    ver 0.01<br><br>lsmg@ubuntu:~&#x2F;temp$ git log --pretty&#x3D;oneline # 简洁显示<br>ee4400fc2b5694282b866b701f7c21655149e5a2 (HEAD -&gt; master) ver 0.02<br>603260e28ac0cc8fb8e4243120eb00bca83585d2 ver 0.01<br></code></pre></td></tr></table></figure>
+<p>上面的<code>HEAD</code>代表当前版本, 上一个版本为<code>HEAD^</code>, 上上一个版本为<code>HEAD^^</code>如此类推<br>回到前N个版本<code>HEAD~N</code><br><code>git reset --hard HEAD^</code> 回到上一个版本.<br>这时你当前版本将会丢失, 使用<code>git log</code>也不会查看到原来的版本信息<br>这时使用<code>git reflog</code>来查看你的所有版本日志</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><code class="hljs plain">lsmg@ubuntu:~&#x2F;temp$ git reset --hard 603260e28ac0cc8fb8e4243120eb00bca83585d2<br>HEAD 现在位于 603260e ver 0.01<br>lsmg@ubuntu:~&#x2F;temp$ git log<br>commit 603260e28ac0cc8fb8e4243120eb00bca83585d2 (HEAD -&gt; master)<br>Author: rjd67441 &lt;rjd67441@hotmail.com&gt;<br>Date:   Sat Dec 7 20:57:58 2019 -0800<br><br>    ver 0.01<br>lsmg@ubuntu:~&#x2F;temp$ git reflog <br>603260e (HEAD -&gt; master) HEAD@&#123;0&#125;: reset: moving to 603260e28ac0cc8fb8e4243120eb00bca83585d2<br>ee4400f HEAD@&#123;1&#125;: commit: ver 0.02<br>603260e (HEAD -&gt; master) HEAD@&#123;2&#125;: commit (initial): ver 0.01<br>lsmg@ubuntu:~&#x2F;temp$ git reset --hard ee4400f<br>HEAD 现在位于 ee4400f ver 0.02<br></code></pre></td></tr></table></figure>
+
+<p><strong>撤销修改</strong><br>工作区中的撤销<br><code>git checkout -- &lt;filename&gt;</code><br>一种是readme.txt自修改后还没有被放到暂存区，现在，撤销修改就回到和版本库一模一样的状态；<br>一种是readme.txt已经添加到暂存区后，又作了修改，现在，撤销修改就回到添加到暂存区后的状态。<br>总之，就是让这个文件回到最近一次git commit或git add时的状态。<br>暂存区中的撤销<br><code>git reset HEAD &lt;file&gt;</code><br>版本库的撤销<br><code>git reset HEAD^</code> 乖乖回退一次</p>
+<p><strong>删除文件</strong><br>删除本地文件后<br>确实需要从版本库中删除<br><code>git rm</code>删除然后<code>git commit</code>提交即可<br>误删除需要使用<code>git chechout -- &lt;filename&gt;</code>来恢复</p>
+<h1 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h1><p><code>git checkout -b dev</code>相当于一下两条命令<br><code>git branch dev</code> 分支创建<br><code>git branch -d dev</code> 分支删除<br><code>git checkout dev</code> 分支切换</p>
+<p><code>git branch</code> 查看当前所有分支</p>
+<p><code>git merge dev</code> 将制定的dev分支合并到当前的分支</p>
+<p><strong>冲突解决</strong><br><code>git merge dev</code> 将制定的dev分支合并到当前的分支</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><code class="hljs plain">1 111111111111111<br>2 222222222222222<br>3 333333333333333<br>4 444444444444444<br>5 &lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD  # 我在master分支下添加了6666666 并提交<br>6 6666666<br>7 &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;<br>8 7777777<br>9 &gt;&gt;&gt;&gt;&gt;&gt;&gt; deb # 我在deb分支下添加了7777777 并提交<br></code></pre></td></tr></table></figure>
+<p>  最后需要我手动修改这个文件为自己需要的内容 然后提交即可</p>
+<p>  <strong>分支管理</strong><br>  通常Git会使用<code>Fast forward</code>模式 这样删除分支后会丢失分支的信息<br>  可以再merge的时候加入<code>--no-ff</code>这样就能解决问题<br>  <code>git merge --no-ff -m &quot;merge with no-ff&quot; dev</code><br>  由于禁用<code>Fast forward</code>后<br>  会生成新的commit所以需要加入<code>-m &quot;merge with no-ff&quot;</code></p>
+<p>  <code>git stash</code> 可以储存当前的工作区 继续其他的工作<br>  <code>git stash list</code> 查看储存的工作区列表<br>  <code>git stash apply stash@{0}</code> 恢复指定的储存<br>  <code>git stash pop</code> 恢复并drop最近的存储</p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><code class="hljs plain">$ cat test.txt # stash前<br>111111<br>$ vim test.txt <br>$ cat test.txt # 进行了修改<br>111111<br>222222<br>333333<br>$ git status<br>位于分支 master<br>	修改：     test.txt<br>$ git stash # stash<br>保存工作目录和索引状态 WIP on master: 854b710 1<br>$ cat test.txt <br>111111<br>$ git status<br>位于分支 master<br>无文件要提交，干净的工作区<br>$ git stash pop<br>位于分支 master<br>	修改：     test.txt<br>$ cat test.txt <br>111111<br>222222<br>333333<br></code></pre></td></tr></table></figure>
+        </div>
+        <div id="post-footer">
+            <div class="avatar" >
+                <img src="http://example.com/author.jpg" alt="avatar"/>
+                
+                <a href="javascript:void(0)" class="high-song">high起来 &#128541;</a>
+                
+                
+                <a href="javascript:void(0)" class="donate fa">赠我一杯 &#128536;</a>
+                
+            </div>
+            <ul class="author-profile-section">
+                <li>
+                  
+                  Author:
+                  
+                    
+                    <a href="/about.html">Lsmg</a>
+                </li>
+                
+                <li>Published Date: <span>2019-03-28  18:24:42</span></li>
+                
+                <li>Updated Date: <span>2020-01-03  20:40:21</span></li>
+                
+                <li class="post-category">
+                    Categories:
+                    
+                    <a href="/categories/%E5%BF%85%E5%A4%87%E6%8A%80%E8%83%BD/">必备技能</a>
+                    
+                    <a href="/categories/%E5%BF%85%E5%A4%87%E6%8A%80%E8%83%BD/Git%E6%93%8D%E4%BD%9C/">Git操作</a>
+                    
+                </li>
+                <li class="post-tags">
+                    Tags:
+                    
+                    <a href="/tags/Git%E6%93%8D%E4%BD%9C/">Git操作</a>
+                    
+                </li>
+                
+                <li> License: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+知识共享署名-非商业性使用-禁止演绎 3.0 未本地化版本许可协议（CC BY-NC-ND 3.0）
+</a></li>
+                
+            </ul>
+            <div id="donate-wrap">
+                
+                
+                
+                <img src="http://example.com/alipay.jpg" alt="支付宝付款" class="donate-img">
+                
+                <img src="http://example.com/wechat.png" alt="微信付款" class="donate-img">
+                
+                
+            </div>
+        </div>
+    </article>
+    <div class="article-nav">
+        
+        <a href="/2019/03/Windows-%E9%9A%90%E8%97%8FDos%E7%AA%97%E5%8F%A3/" class="pre-post fa fa-caret-left">隐藏dos窗口</a>
+        
+        
+    </div>
+    
+    <div id="comments">
+        
+
+<script>
+  gitalk.render("comments");
+</script>
+
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+    <footer id="footer">
+    
+    <div class="social">
+        
+        <a href="https://www.example1.com" class="fa fa-free-code-camp" target="_blank" title="freecodecamp"></a>
+        
+        <a href="https://www.example2.com" class="fa fa-github" target="_blank" title="Follow me~"></a>
+        
+    </div>
+    
+    <div>
+        
+        <a href="/" class="copyright-links">Lsmg</a>&copy;2015 - 2020.All Rights
+        Reserved.
+    </div>
+    <p>Powered by <a href="https://hexo.io" class="copyright-links" target="_blank">Hexo</a> | Theme by <a
+                href="https://github.com/GeekaholicLin" class="copyright-links" target="_blank">GeekaholicLin</a>
+    </p>
+    
+    
+    <p>
+        <span id="busuanzi_container_site_uv" class="fa fa-bar-chart">
+        欢迎第<span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span>位小伙伴~
+        </span>
+    </p>
+    
+</footer>
+
+</div>
+    <ul id="tools">
+    <li class="totop-btn fa fa-angle-up"></li>
+    <li class="exchange-btn fa fa-exchange"></li>
+  
+    <li class="toc-btn fa fa-list-ul"></li>
+    
+    
+
+    
+    <li class="comment-btn fa fa-comments-o">
+        <a href="#comments" title="comments"></a>
+    </li>
+    
+</ul>
+<p id="process"></p>
+<div id="search-overlay">
+    <div class="search-area-wrap">
+        <div id="search-area">
+            <div class="input-wrap focus">
+                <i class="fa fa-search" aria-hidden="true"></i>
+                <input id="search-input" autofocus autocomplete="off" type="text"
+                       placeholder="search this website..."/>
+            </div>
+            <ul id="search-result">
+                <li class="load-first"><i class="fa fa-spinner fa-pulse"></i></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#命令总结"><span class="toc-number">1.</span> <span class="toc-text">命令总结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#基本概念"><span class="toc-number">2.</span> <span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#基础的操作"><span class="toc-number">3.</span> <span class="toc-text">基础的操作</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#时光穿梭机"><span class="toc-number">4.</span> <span class="toc-text">时光穿梭机</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#分支管理"><span class="toc-number">5.</span> <span class="toc-text">分支管理</span></a></li></ol>
+
+
+    
+<script src="/js/highsong.js"></script>
+
+
+
+
+
+<script src="/js/search.js"></script>
+
+<script type="text/javascript">
+    //theme config datas
+    var copyrightObj = {};
+    copyrightObj.enable = 'true';
+    copyrightObj.triggerCopyLength = '200';
+    copyrightObj.appendText = '商业转载请联系作者获得授权,非商业转载请注明出处 © example';
+    var leancloudObj = {};
+    leancloudObj.enable = 'true';
+    leancloudObj.className = 'BlogCounter';
+    leancloudObj.limits = '10';
+</script>
+<script type="text/javascript">
+    var search = {};
+    var search_path = "search.xml";
+    if (!search_path) {
+        search_path = "search.xml";
+    }
+    search.path = "/" + search_path;
+    search.func =  _ajax.init();
+</script>
+
+<script src="/js/app.js"></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,478 @@
+<!doctype html>
+<html>
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable"  content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no">
+    
+    
+    <!--Simple SEO-->
+
+
+<meta name="robots" content=all />
+<meta name="google" content=all />
+<meta name="googlebot" content=all />
+<meta name="verify" content=all />
+    <!--Title-->
+
+<title>C++Primer学习 | Lsmg的大学之路</title>
+
+<link rel="alternate" href="/atom.xml" title="Lsmg的大学之路" type="application/atom+xml">
+
+
+<link rel="icon" href="/favicon.ico">
+
+    
+
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/pages/post.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/thirdParty/highlight/github.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+
+<style>
+    figure .code .line:before{
+        display: none!important;
+    }
+</style>
+
+    <!--script-->
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+<script>
+  var admin = "GeekaholicLin";
+  admin = admin.split(",");
+  var gitalk = new Gitalk({
+    clientID: "xxxxx",
+    clientSecret: "xxxxx",
+    repo: "geekaholiclin.github.io",
+    owner: "GeekaholicLin",
+    admin: admin,
+    id: decodeURIComponent(location.pathname),
+    distractionFreeMode: false
+  })
+
+</script>
+
+    
+    
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body id="normal">
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<style>
+    header{ top: 71px; position: absolute!important;}
+    #container{padding-top: 151px!important;}
+</style>
+<div style="position:fixed;z-index:9999;left:0;top:0;width:100%;height:70px;background-color:#e0e0e0;color:#396CA5;border-bottom:1px solid #cecece;text-align:center;line-height:70px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<div id="wrap">
+    <header  style="position: absolute;" >
+    <div id="site-meta">
+        <a href="/" id="logo">
+            <h1 class="title">Lsmg的大学之路</h1>
+        </a>
+        
+    </div>
+    <ul id="nav">
+        
+            <li><a href="/"><i class="fa fa-home"></i>Home</a></li>
+        
+            <li><a href="/atom.xml"><i class="fa fa-rss"></i>RSS</a></li>
+        
+        <li id="search"><a href="javascript:void(0)"><i class="fa fa-search"></i>Search</a></li>
+    </ul>
+</header>
+
+    <div id="container">
+        
+<ul id="sidebar">
+    
+    
+<li class="widget notification">
+    <i class="fa fa-bell-o"></i>
+    <div>
+        
+<p>主题ylion v0.0.0版本即将上线，敬请期待~！
+主题作者：<a href="https://github.com/GeekaholicLin"
+title="fork me" target="_blank">Geekaholic</a></p>
+    </div>
+</li>
+
+    
+    
+<li class="widget widget-normal category">
+    <h3 class="fa fa-th widget-title">Categories</h3>
+    <ul class="category-list"><li class="category-list-item"><a class="category-list-link current" href="/categories/CPP/"><i class="fa" aria-hidden="true">CPP</i></a><span class="category-list-count">11</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/CPP/CPP%E5%9F%BA%E7%A1%80/"><i class="fa" aria-hidden="true">CPP基础</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link current" href="/categories/CPP/CPP%E9%87%8D%E7%82%B9/"><i class="fa" aria-hidden="true">CPP重点</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CPP/Protobuf/"><i class="fa" aria-hidden="true">Protobuf</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CPP/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/"><i class="fa" aria-hidden="true">学习计划</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CPP/%E6%95%B0%E6%8D%AE%E5%BA%93/"><i class="fa" aria-hidden="true">数据库</i></a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/CPP/%E6%95%B0%E6%8D%AE%E5%BA%93/MongoDB/"><i class="fa" aria-hidden="true">MongoDB</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/CPP/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B-%E4%B9%A6%E7%B1%8D%E8%AE%B0%E5%BD%95/"><i class="fa" aria-hidden="true">服务器编程-书籍记录</i></a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">11</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/IDEA%E7%9A%84%E4%BD%BF%E7%94%A8/"><i class="fa" aria-hidden="true">IDEA的使用</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"><i class="fa" aria-hidden="true">Java设计模式</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/SDK/"><i class="fa" aria-hidden="true">SDK</i></a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/SDK/FASTJson/"><i class="fa" aria-hidden="true">FASTJson</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/java%E7%88%AC%E8%99%AB/"><i class="fa" aria-hidden="true">java爬虫</i></a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/java%E7%88%AC%E8%99%AB/java%E7%88%AC%E8%99%AB%E5%88%9D%E6%AD%A5/"><i class="fa" aria-hidden="true">java爬虫初步</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/springboot/"><i class="fa" aria-hidden="true">springboot</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/"><i class="fa" aria-hidden="true">知识整理</i></a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/IO%E6%B5%81/"><i class="fa" aria-hidden="true">IO流</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/"><i class="fa" aria-hidden="true">文件操作</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/%E7%AC%AC%E4%B8%80%E4%B8%AA%E6%9A%91%E5%81%87%E5%AD%A6%E4%B9%A0/"><i class="fa" aria-hidden="true">第一个暑假学习</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/"><i class="fa" aria-hidden="true">Linux</i></a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Ubuntu/"><i class="fa" aria-hidden="true">Ubuntu</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/"><i class="fa" aria-hidden="true">入门学习</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/"><i class="fa" aria-hidden="true">Windows</i></a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/Dos/"><i class="fa" aria-hidden="true">Dos</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/%E7%BB%88%E7%AB%AF/"><i class="fa" aria-hidden="true">终端</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BF%85%E5%A4%87%E6%8A%80%E8%83%BD/"><i class="fa" aria-hidden="true">必备技能</i></a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BF%85%E5%A4%87%E6%8A%80%E8%83%BD/Git%E6%93%8D%E4%BD%9C/"><i class="fa" aria-hidden="true">Git操作</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F%E7%9F%A5%E8%AF%86/"><i class="fa" aria-hidden="true">游戏知识</i></a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F%E7%9F%A5%E8%AF%86/%E6%9C%8D%E5%8A%A1%E5%99%A8/"><i class="fa" aria-hidden="true">服务器</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F%E7%9F%A5%E8%AF%86/%E6%9D%82%E8%B0%88/"><i class="fa" aria-hidden="true">杂谈</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/"><i class="fa" aria-hidden="true">算法</i></a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/"><i class="fa" aria-hidden="true">基础算法</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%A1%B9%E7%9B%AE%E5%88%B6%E4%BD%9C/"><i class="fa" aria-hidden="true">项目制作</i></a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%A1%B9%E7%9B%AE%E5%88%B6%E4%BD%9C/%E4%B8%AD%E7%AD%89%E9%A1%B9%E7%9B%AE/"><i class="fa" aria-hidden="true">中等项目</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%A1%B9%E7%9B%AE%E5%88%B6%E4%BD%9C/%E5%B0%8F%E9%A1%B9%E7%9B%AE/"><i class="fa" aria-hidden="true">小项目</i></a><span class="category-list-count">1</span></li></ul></li></ul>
+</li>
+
+
+    
+    
+<li class="widget widget-normal archive">
+  <h3 class="fa fa-archive widget-title">Archives</h3>
+    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/"><i class="fa" aria-hidden="true">一月 2020</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/"><i class="fa" aria-hidden="true">十二月 2019</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/"><i class="fa" aria-hidden="true">十一月 2019</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/"><i class="fa" aria-hidden="true">十月 2019</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/"><i class="fa" aria-hidden="true">九月 2019</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/"><i class="fa" aria-hidden="true">八月 2019</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/"><i class="fa" aria-hidden="true">七月 2019</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/"><i class="fa" aria-hidden="true">六月 2019</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/"><i class="fa" aria-hidden="true">五月 2019</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/"><i class="fa" aria-hidden="true">四月 2019</i></a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/"><i class="fa" aria-hidden="true">三月 2019</i></a><span class="archive-list-count">2</span></li></ul>
+</li>
+
+
+    
+    
+<li class="widget widget-normal popular-posts" id="popular-posts">
+    <h3 class="fa fa-thermometer-3 widget-title">Popular Posts</h3>
+    <ul id="popular-content">
+        <li class="load-first"><i class="fa fa-spinner fa-pulse"></i></li>
+    </ul>
+</li>
+
+    
+    
+<li class="widget widget-normal tags">
+  <h3 class="fa fa-tags widget-title">Tag Cloud</h3>
+  <div class="tagcloud-content">
+    
+      <a href="/tags/Mysql/" style="font-size: 0.17rem; color: #386da4">Mysql</a> <a href="/tags/C/" style="font-size: 0.14rem; color: #69c">C++</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/" style="font-size: 0.14rem; color: #69c">服务器编程</a> <a href="/tags/springboot/" style="font-size: 0.2rem; color: #0a407c">springboot</a> <a href="/tags/Git%E6%93%8D%E4%BD%9C/" style="font-size: 0.14rem; color: #69c">Git操作</a> <a href="/tags/springboot%E6%95%B0%E6%8D%AE%E4%BA%A4%E4%BA%92/" style="font-size: 0.14rem; color: #69c">springboot数据交互</a> <a href="/tags/java%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" style="font-size: 0.14rem; color: #69c">java文件操作</a> <a href="/tags/%E6%97%A5%E5%BF%97/" style="font-size: 0.14rem; color: #69c">日志</a> <a href="/tags/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 0.14rem; color: #69c">Java设计模式</a> <a href="/tags/java%E7%88%AC%E8%99%AB/" style="font-size: 0.14rem; color: #69c">java爬虫</a> <a href="/tags/java%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%B5%81/" style="font-size: 0.14rem; color: #69c">java输入输出流</a> <a href="/tags/Linux/" style="font-size: 0.14rem; color: #69c">Linux</a> <a href="/tags/%E4%BD%BF%E7%94%A8Ubuntu/" style="font-size: 0.14rem; color: #69c">使用Ubuntu</a> <a href="/tags/windows%E7%BB%88%E7%AB%AF%E8%AE%BE%E7%BD%AE/" style="font-size: 0.14rem; color: #69c">windows终端设置</a> <a href="/tags/%E5%A4%A7%E9%87%8F%E7%9A%84%E6%AD%A4%E7%BB%88%E7%AB%AF%E4%BC%98%E5%8C%96/" style="font-size: 0.14rem; color: #69c">大量的此终端优化</a> <a href="/tags/%E6%A0%A1%E5%9B%AD%E7%BD%91%E7%BB%9C%E5%8A%A9%E6%89%8B1-5/" style="font-size: 0.14rem; color: #69c">校园网络助手1.5</a> <a href="/tags/%E8%87%AA%E5%8A%A8%E6%9F%A5%E8%AF%A2%E9%A2%98%E5%BA%93/" style="font-size: 0.14rem; color: #69c">自动查询题库</a> <a href="/tags/%E5%A4%A7%E5%AD%A6%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E6%9A%91%E5%81%87/" style="font-size: 0.14rem; color: #69c">大学的第一个暑假</a> <a href="/tags/%E6%9A%91%E5%81%87%E5%AD%A6%E4%B9%A0%E7%9A%84%E5%A4%A7%E7%BA%B2/" style="font-size: 0.14rem; color: #69c">暑假学习的大纲</a> <a href="/tags/%E8%AE%B0%E5%BD%95%E6%AF%8F%E5%A4%A9%E5%81%87%E6%9C%9F%E5%B9%B2%E4%BA%86%E4%BB%80%E4%B9%88/" style="font-size: 0.14rem; color: #69c">记录每天假期干了什么</a>
+  </div>
+</li>
+
+
+    
+    
+<li class="widget widget-normal friends-link">
+    <h3 class="fa fa-globe widget-title">Friends</h3><br/>
+
+    
+        <a href="http://geekaholiclin.github.io" class="fa" target="_blank">主题作者</a>
+
+    
+
+</li>
+
+    
+</ul>
+
+
+        <div id="main">
+    <article id="post">
+        <div id="post-header">
+
+            <h1 id="C++Primer学习">
+                
+                C++Primer学习
+                
+            </h1>
+            <div class="article-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+            <i class="fa fa-folder-open-o"></i>
+        <span>CPP基础</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+         <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            null
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta ">2019/08/16</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+            <i class="fa fa-thermometer-three-quarters"></i>
+        <span class="hits hits-meta " data-leadcloud-title="C++Primer学习"
+              data-leadcloud-url="/2019/08/CPP-CPP%E5%9F%BA%E7%A1%80-1/"><i class="fa fa-spinner fa-spin"></i></span>
+    </span>
+    
+    
+</div>
+
+            
+            
+        </div>
+        
+        <div id="post-body">
+            <h1 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h1><h2 id="c-11-的-初始方式"><a href="#c-11-的-初始方式" class="headerlink" title="c++11 的{}初始方式"></a>c++11 的{}初始方式</h2><figure class="highlight c++"><table><tr><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// c++11 的初始化方式, 有助于防范类型转换错误.</span><br><span class="hljs-keyword">int</span> a1 = &#123; <span class="hljs-number">24</span> &#125;;<br><span class="hljs-keyword">int</span> b1 = &#123;&#125;; <span class="hljs-comment">// 默认为0</span><br><br><span class="hljs-comment">// 没有 = 同样可以</span><br><span class="hljs-keyword">int</span> a2 &#123; <span class="hljs-number">24</span> &#125;;<br><span class="hljs-keyword">int</span> b2 &#123;&#125;; <span class="hljs-comment">// 默认为0</span><br><br><span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br></code></pre></td></tr></table></figure>
+
+<p>无符号的变量在 超出范围的时候对应变化<br><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/C%2B%2B%E5%9F%BA%E7%A1%80%E5%A4%8D%E4%B9%A0/%E6%9C%89%E7%AC%A6%E5%8F%B7%E5%92%8C%E6%97%A0%E7%AC%A6%E5%8F%B7%E7%9A%84%E9%87%8D%E7%BD%AE%E7%82%B9.jpg" alt=""></p>
+<h2 id="转义字符表"><a href="#转义字符表" class="headerlink" title="转义字符表"></a>转义字符表</h2><p><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/C%2B%2B%E5%9F%BA%E7%A1%80%E5%A4%8D%E4%B9%A0/c%2B%2B%E8%BD%AC%E4%B9%89.jpg" alt=""></p>
+<h2 id="char-在默认情况下-既不是有符号-也不是无符号"><a href="#char-在默认情况下-既不是有符号-也不是无符号" class="headerlink" title="char 在默认情况下, 既不是有符号. 也不是无符号."></a>char 在默认情况下, 既不是有符号. 也不是无符号.</h2><figure class="highlight c++"><table><tr><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">char</span> a; <span class="hljs-comment">// 此时a可能是 signed char 也可能是 unsigned char 可能会在不同系统之前产生错误</span><br><span class="hljs-comment">// 可以显式声明, 来确保不会出现此错误</span><br><span class="hljs-keyword">signed</span> <span class="hljs-keyword">char</span> a;<br><span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> a;<br></code></pre></td></tr></table></figure>
+
+<h2 id="输入"><a href="#输入" class="headerlink" title="输入"></a>输入</h2><figure class="highlight c++"><table><tr><td class="code"><pre><code class="hljs c++"><br><span class="hljs-keyword">char</span> name[<span class="hljs-number">10</span>];<br><span class="hljs-built_in">cin</span>.getline(name, <span class="hljs-number">10</span>); <span class="hljs-comment">// 可以读取换行符, 但不保存</span><br><span class="hljs-built_in">cin</span>.<span class="hljs-built_in">get</span>(name, <span class="hljs-number">10</span>); <span class="hljs-comment">// 不读取换行符, 可能导致get到换行符</span><br><br><span class="hljs-comment">// 空行和超出长度问题 将在后面说明</span><br></code></pre></td></tr></table></figure>
+<p>运算符优先级<br><img src="https://gss2.bdstatic.com/-fo3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike80%2C5%2C5%2C80%2C26/sign=59a3e1017d3e6709aa0d4dad5aaef458/63d9f2d3572c11df57c9a205612762d0f703c2f8.jpg" alt=""></p>
+<h2 id="基础的数组"><a href="#基础的数组" class="headerlink" title="基础的数组"></a>基础的数组</h2><figure class="highlight c++"><table><tr><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">int</span> a[] = &#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>&#125;;<br><span class="hljs-comment">// 下方由于 new 只是返回一个地址所以用 int* 接收 </span><br><span class="hljs-keyword">int</span>* b = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[<span class="hljs-number">4</span>];<br><span class="hljs-built_in">cout</span> &lt;&lt; a[<span class="hljs-number">0</span>] &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-comment">// 1</span><br><span class="hljs-built_in">cout</span> &lt;&lt; *(a + <span class="hljs-number">1</span>) &lt;&lt; <span class="hljs-built_in">endl</span>;<span class="hljs-comment">// 2</span><br></code></pre></td></tr></table></figure>
+<h2 id="对指针解引用"><a href="#对指针解引用" class="headerlink" title="对指针解引用"></a>对指针解引用</h2><p>第一印象是 解除引用, 然而并不是</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">/*<br>"*"的作用是引用指针指向的变量值，引用其实就是引用该变量的地址，“解”就是把该地址对应的东西解开，解出来，就像打开一个包裹一样，那就是该变量的值了，所以称为“解引用”。也就是说，解引用是返回内存地址中保存的值。<br>比如int a=10; int *p=&amp;a;<br>cout&lt;&lt;*p&lt;&lt;endl; 输出a的值，就是解引用操作。<br>*/</span><br></code></pre></td></tr></table></figure>
+<h2 id="c-风格字符串相关"><a href="#c-风格字符串相关" class="headerlink" title="c 风格字符串相关"></a>c 风格字符串相关</h2><p>对字符数组的赋值, 不建议使用 = 赋值, 可能会导致内存覆盖<br>建议使用 <code>strncpy(目标位置, 字符串, 长度)</code> 然后手动在目标字符数组最后一位写入<code>\0</code><br>这样安全, 不过这是c风格的, 在c++中可以使用<strong>string来代替字符数组</strong></p>
+<h2 id="自动变量-静态存储-动态存储"><a href="#自动变量-静态存储-动态存储" class="headerlink" title="自动变量 静态存储 动态存储"></a>自动变量 静态存储 动态存储</h2><p>自动变量</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">char</span> * <span class="hljs-title">getInut</span><span class="hljs-params">()</span> </span>&#123;<br>	<span class="hljs-keyword">char</span> temp[<span class="hljs-number">100</span>]; <span class="hljs-comment">// 局部变量(自动变量), 函数结束时自动释放 存入栈中</span><br>	<span class="hljs-built_in">cin</span> &gt;&gt; temp;<br>	<span class="hljs-keyword">char</span>* pn = <span class="hljs-keyword">new</span> <span class="hljs-keyword">char</span>[<span class="hljs-built_in">strlen</span>(temp) + <span class="hljs-number">1</span>];<br>	<span class="hljs-built_in">strcpy</span>(pn, temp);<br><br>	<span class="hljs-keyword">return</span> pn;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>动态存储 通过new 和 delete操作内存池(自由存储空间, 堆)</p>
+<h1 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h1><p>代码可以使用throw来抛出异常<br><em>大部分</em>可以指定msg来初始化异常<br>throw exception_type(“msg”)<br>表中exception不能指定msg, 来初始化, 除此外表中其他都需要msg初始</p>
+<table>
+<thead>
+<tr>
+<th>错误名称</th>
+<th>对应原因</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>exception</td>
+<td>最常见的问题</td>
+</tr>
+<tr>
+<td>runtime_error</td>
+<td>只有运行的时候才能查到错误</td>
+</tr>
+<tr>
+<td>range_error</td>
+<td>运行时错误: 超范围</td>
+</tr>
+<tr>
+<td>overflow_error</td>
+<td>运行时错误: 上溢</td>
+</tr>
+<tr>
+<td>underflow_error</td>
+<td>运行时错误: 下溢</td>
+</tr>
+<tr>
+<td>logic_error</td>
+<td>程序逻辑错误</td>
+</tr>
+<tr>
+<td>domain_error</td>
+<td>程序逻辑错误: 参数对应的结果不存在</td>
+</tr>
+<tr>
+<td>invalid_argument</td>
+<td>程序逻辑错误: 无效参数</td>
+</tr>
+<tr>
+<td>length_error</td>
+<td></td>
+</tr>
+<tr>
+<td>out_of_range</td>
+<td>程序逻辑错误: 超范围</td>
+</tr>
+</tbody></table>
+<h1 id="函数相关"><a href="#函数相关" class="headerlink" title="函数相关"></a>函数相关</h1><p><strong>默认参数</strong><br>函数可以设定默认参数.</p>
+<p>在调用设置有默认参数的函数时只能省略右边的带默认值参数<br>如果一个参数设置了默认值, 则其右边的参数都需要设置默认值</p>
+<p>如果一个函数在头文件中已经声明了默认参数, 实现的时候不能更该已经设定的默认参数</p>
+<p>但可以将未设置默认参数的函数设置默认参数</p>
+<h1 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h1><p><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/C%2B%2B%E5%9F%BA%E7%A1%80%E5%A4%8D%E4%B9%A02/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88.png" alt=""></p>
+<p>使用unique_ptr的时候要注意</p>
+<ol>
+<li>不要再函数调用传参的括号中 使用临时变量 这样一旦函数调用完成就会被销毁<figure class="highlight c++"><table><tr><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">process</span><span class="hljs-params">(<span class="hljs-built_in">shared_ptr</span>&lt;<span class="hljs-keyword">int</span>&gt; ptr)</span><br><br><span class="hljs-built_in">shared_ptr</span>&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">p</span><span class="hljs-params">(<span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>(<span class="hljs-number">42</span> ))</span> </span>; <span class="hljs-comment">// 引用 = 1</span><br><span class="hljs-built_in">process</span>(p); <span class="hljs-comment">// 拷贝 会递增它的引用计数 ;在 process 中引用计数位为2</span><br><span class="hljs-keyword">int</span> i = *p; <span class="hljs-comment">// 正确 引用计数为1</span><br><br><span class="hljs-function"><span class="hljs-keyword">int</span> *<span class="hljs-title">x</span><span class="hljs-params">(<span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>(<span class="hljs-number">1024</span>))</span></span>; <span class="hljs-comment">// 危险 这是一个普通指针，不是一个智能指针</span><br><span class="hljs-built_in">process</span>(x) ; <span class="hljs-comment">// 错误 不能将 int* 转换为 一个 shared_ptr&lt;int&gt; </span><br><span class="hljs-built_in">process</span>(<span class="hljs-built_in">shared_ptr</span>&lt;<span class="hljs-keyword">int</span>&gt; (x)); <span class="hljs-comment">// 合法的，但内存会被释放! 因为临时对象会被销毁</span><br><span class="hljs-keyword">int</span> j =*x <span class="hljs-comment">//未定义的 是一个空悬指针!</span><br></code></pre></td></tr></table></figure></li>
+<li>如果使用unique_ptr不要使用get函数初始化另一个智能指针或为其赋值<br>因为一旦新生成的智能指针离开作用域或者被释放, 会影响到原来的智能指针<figure class="highlight c++"><table><tr><td class="code"><pre><code class="hljs c++"><span class="hljs-built_in">std</span>::<span class="hljs-built_in">shared_ptr</span>&lt;<span class="hljs-keyword">int</span>&gt; p = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>(<span class="hljs-number">8</span>); <span class="hljs-comment">// 不能将一个int* 赋值给shared_ptr&lt;int&gt;</span><br><br><span class="hljs-built_in">std</span>::<span class="hljs-built_in">shared_ptr</span>&lt;<span class="hljs-keyword">int</span>&gt; p1;<br>p1.reset(<span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>(<span class="hljs-number">8</span>)); <span class="hljs-comment">// 可以</span><br><br><span class="hljs-function"><span class="hljs-built_in">std</span>::<span class="hljs-built_in">shared_ptr</span>&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">p2</span><span class="hljs-params">(<span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>(<span class="hljs-number">8</span>))</span></span>; <span class="hljs-comment">// OK</span><br><br><span class="hljs-comment">// 使用make_share来创建shared_ptr指针</span><br><span class="hljs-built_in">std</span>::<span class="hljs-built_in">shared_ptr</span>&lt;<span class="hljs-keyword">int</span>&gt; p3 = <span class="hljs-built_in">std</span>::make_shared&lt;<span class="hljs-keyword">int</span>&gt;(<span class="hljs-number">20</span>);<br><span class="hljs-keyword">auto</span> p4 = <span class="hljs-built_in">std</span>::make_shared&lt;<span class="hljs-keyword">int</span>&gt;(<span class="hljs-number">20</span>);<br><br><span class="hljs-comment">// make_share不能用来创建unique_ptr</span><br><span class="hljs-built_in">std</span>::<span class="hljs-built_in">unique_ptr</span>&lt;<span class="hljs-keyword">int</span>&gt; d;<br><span class="hljs-function"><span class="hljs-built_in">std</span>::<span class="hljs-built_in">unique_ptr</span>&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">d1</span> <span class="hljs-params">(<span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>(<span class="hljs-number">8</span>))</span></span>;<br></code></pre></td></tr></table></figure>
+unique_ptr不支持普通的赋值和拷贝操作, 因为unique_ptr要独占所指向的对象</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-built_in">std</span>::<span class="hljs-built_in">unique_ptr</span>&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">d1</span> <span class="hljs-params">(<span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>(<span class="hljs-number">1</span>))</span></span>; <br><span class="hljs-function"><span class="hljs-built_in">std</span>::<span class="hljs-built_in">unique_ptr</span>&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">d2</span> <span class="hljs-params">(<span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>(<span class="hljs-number">8</span>))</span></span>; <br><br>d1.<span class="hljs-built_in">release</span>(); <span class="hljs-comment">// 释放原来所指向的对象</span><br>d1.reset(d2.<span class="hljs-built_in">release</span>()); <span class="hljs-comment">// d2释放后由d1获取</span><br></code></pre></td></tr></table></figure>
+
+<h1 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h1><p><strong>顺序访问</strong>: 访问元素的成本<em>(最常见的成本-时间成本)</em>与元素的位置<strong>有关</strong></p>
+<p><strong>随机访问</strong>: 访问元素的成本<em>(最常见的成本-时间成本)</em>与元素的位置<strong>无关</strong></p>
+<h2 id="顺序容器"><a href="#顺序容器" class="headerlink" title="顺序容器"></a>顺序容器</h2><p>以下三个成员从C++11加入,<br>emplace_front: 放在容器头部<br>emplace_back: 放在容器尾部<br>emplace: 放在容器的任意位置</p>
+<p>与push_front insert push_back不同的是<br>新的三个成员通过传入参数构造 而原来的三个成员需要通过传入构造好的对象传入</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><code class="hljs c++"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Dialogue</span><br>&#123;</span><br><span class="hljs-keyword">private</span>:<br>	<span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span> name_;<br>	<span class="hljs-keyword">int</span> phone_;<br><br><span class="hljs-keyword">public</span>:<br>	Dialogue(<span class="hljs-keyword">const</span> <span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span> &amp;name, <span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> &amp;phone):name_(name), phone_(phone)&#123;&#125;;<br>&#125;;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span><br></span>&#123;<br>	<span class="hljs-built_in">std</span>::<span class="hljs-built_in">vector</span>&lt;Dialogue&gt; a&#123;&#125;;<br>	a.push_back(Dialogue(<span class="hljs-string">"xiao"</span>, <span class="hljs-number">1</span>));<br>	a.emplace_back(<span class="hljs-string">"xiao"</span>, <span class="hljs-number">2</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+        </div>
+        <div id="post-footer">
+            <div class="avatar" >
+                <img src="http://example.com/author.jpg" alt="avatar"/>
+                
+                <a href="javascript:void(0)" class="high-song">high起来 &#128541;</a>
+                
+                
+                <a href="javascript:void(0)" class="donate fa">赠我一杯 &#128536;</a>
+                
+            </div>
+            <ul class="author-profile-section">
+                <li>
+                  
+                  Author:
+                  
+                    
+                    <a href="/about.html">Lsmg</a>
+                </li>
+                
+                <li>Published Date: <span>2019-08-16  19:13:22</span></li>
+                
+                <li>Updated Date: <span>2020-01-23  19:34:51</span></li>
+                
+                <li class="post-category">
+                    Categories:
+                    
+                    <a href="/categories/CPP/">CPP</a>
+                    
+                    <a href="/categories/CPP/CPP%E5%9F%BA%E7%A1%80/">CPP基础</a>
+                    
+                </li>
+                <li class="post-tags">
+                    Tags:
+                    
+                </li>
+                
+                <li> License: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+知识共享署名-非商业性使用-禁止演绎 3.0 未本地化版本许可协议（CC BY-NC-ND 3.0）
+</a></li>
+                
+            </ul>
+            <div id="donate-wrap">
+                
+                
+                
+                <img src="http://example.com/alipay.jpg" alt="支付宝付款" class="donate-img">
+                
+                <img src="http://example.com/wechat.png" alt="微信付款" class="donate-img">
+                
+                
+            </div>
+        </div>
+    </article>
+    <div class="article-nav">
+        
+        <a href="/2019/08/CPP%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%A4%A7%E7%BA%B2/" class="pre-post fa fa-caret-left">C++服务器学习大纲</a>
+        
+        
+        <a href="/2019/07/Java-IDEA/" class="next-post fa">IDEA基本使用记录</a>
+        
+    </div>
+    
+    <div id="comments">
+        
+
+<script>
+  gitalk.render("comments");
+</script>
+
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+    <footer id="footer">
+    
+    <div class="social">
+        
+        <a href="https://www.example1.com" class="fa fa-free-code-camp" target="_blank" title="freecodecamp"></a>
+        
+        <a href="https://www.example2.com" class="fa fa-github" target="_blank" title="Follow me~"></a>
+        
+    </div>
+    
+    <div>
+        
+        <a href="/" class="copyright-links">Lsmg</a>&copy;2015 - 2020.All Rights
+        Reserved.
+    </div>
+    <p>Powered by <a href="https://hexo.io" class="copyright-links" target="_blank">Hexo</a> | Theme by <a
+                href="https://github.com/GeekaholicLin" class="copyright-links" target="_blank">GeekaholicLin</a>
+    </p>
+    
+    
+    <p>
+        <span id="busuanzi_container_site_uv" class="fa fa-bar-chart">
+        欢迎第<span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span>位小伙伴~
+        </span>
+    </p>
+    
+</footer>
+
+</div>
+    <ul id="tools">
+    <li class="totop-btn fa fa-angle-up"></li>
+    <li class="exchange-btn fa fa-exchange"></li>
+  
+    <li class="toc-btn fa fa-list-ul"></li>
+    
+    
+
+    
+    <li class="comment-btn fa fa-comments-o">
+        <a href="#comments" title="comments"></a>
+    </li>
+    
+</ul>
+<p id="process"></p>
+<div id="search-overlay">
+    <div class="search-area-wrap">
+        <div id="search-area">
+            <div class="input-wrap focus">
+                <i class="fa fa-search" aria-hidden="true"></i>
+                <input id="search-input" autofocus autocomplete="off" type="text"
+                       placeholder="search this website..."/>
+            </div>
+            <ul id="search-result">
+                <li class="load-first"><i class="fa fa-spinner fa-pulse"></i></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#基础知识"><span class="toc-number">1.</span> <span class="toc-text">基础知识</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#c-11-的-初始方式"><span class="toc-number">1.1.</span> <span class="toc-text">c++11 的{}初始方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#转义字符表"><span class="toc-number">1.2.</span> <span class="toc-text">转义字符表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#char-在默认情况下-既不是有符号-也不是无符号"><span class="toc-number">1.3.</span> <span class="toc-text">char 在默认情况下, 既不是有符号. 也不是无符号.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#输入"><span class="toc-number">1.4.</span> <span class="toc-text">输入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基础的数组"><span class="toc-number">1.5.</span> <span class="toc-text">基础的数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对指针解引用"><span class="toc-number">1.6.</span> <span class="toc-text">对指针解引用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#c-风格字符串相关"><span class="toc-number">1.7.</span> <span class="toc-text">c 风格字符串相关</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自动变量-静态存储-动态存储"><span class="toc-number">1.8.</span> <span class="toc-text">自动变量 静态存储 动态存储</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#异常处理"><span class="toc-number">2.</span> <span class="toc-text">异常处理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#函数相关"><span class="toc-number">3.</span> <span class="toc-text">函数相关</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#指针"><span class="toc-number">4.</span> <span class="toc-text">指针</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#容器"><span class="toc-number">5.</span> <span class="toc-text">容器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#顺序容器"><span class="toc-number">5.1.</span> <span class="toc-text">顺序容器</span></a></li></ol></li></ol>
+
+
+    
+<script src="/js/highsong.js"></script>
+
+
+
+
+
+<script src="/js/search.js"></script>
+
+<script type="text/javascript">
+    //theme config datas
+    var copyrightObj = {};
+    copyrightObj.enable = 'true';
+    copyrightObj.triggerCopyLength = '200';
+    copyrightObj.appendText = '商业转载请联系作者获得授权,非商业转载请注明出处 © example';
+    var leancloudObj = {};
+    leancloudObj.enable = 'true';
+    leancloudObj.className = 'BlogCounter';
+    leancloudObj.limits = '10';
+</script>
+<script type="text/javascript">
+    var search = {};
+    var search_path = "search.xml";
+    if (!search_path) {
+        search_path = "search.xml";
+    }
+    search.path = "/" + search_path;
+    search.func =  _ajax.init();
+</script>
+
+<script src="/js/app.js"></script>
+
+
+
+</body>
+</html>
