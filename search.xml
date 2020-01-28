@@ -104,25 +104,6 @@
     </entry>
     
     <entry>
-        <title><![CDATA[游戏知识-杂谈-如何进入游戏开发行业]]></title>
-        <url>http://blog.lsmg.xyz/2019/12/%25E6%25B8%25B8%25E6%2588%258F%25E7%259F%25A5%25E8%25AF%2586-%25E6%259D%2582%25E8%25B0%2588-%25E5%25A6%2582%25E4%25BD%2595%25E8%25BF%259B%25E5%2585%25A5%25E6%25B8%25B8%25E6%2588%258F%25E5%25BC%2580%25E5%258F%2591%25E8%25A1%258C%25E4%25B8%259A/</url>
-        <content type="html"><![CDATA[<p>由于自己了解的实在是不足, 所以来腾讯游戏课堂来学习一些架构之类的东西 来完善自己的知识面<br><a href="https://gameinstitute.qq.com/course/detail/10156" target="_blank" rel="noopener">想做游戏吗？如何开始我的游戏开发职业生涯</a></p>
-<a id="more"></a>
-<p>做游戏不会重复做同样的工作, 项目不同</p>
-]]></content>
-        
-        <categories>
-            
-            <category> 游戏知识 </category>
-            
-            <category> 杂谈 </category>
-            
-        </categories>
-        
-        
-    </entry>
-    
-    <entry>
         <title><![CDATA[游戏知识-服务器-服务器通信]]></title>
         <url>http://blog.lsmg.xyz/2019/12/%25E6%25B8%25B8%25E6%2588%258F%25E7%259F%25A5%25E8%25AF%2586-%25E6%259C%258D%25E5%258A%25A1%25E5%2599%25A8-%25E6%259C%258D%25E5%258A%25A1%25E5%2599%25A8%25E9%2580%259A%25E4%25BF%25A1/</url>
         <content type="html"><![CDATA[<p>由于自己了解的实在是不足, 所以来腾讯游戏课堂来学习一些架构之类的东西 来完善自己的知识面<br><a href="https://gameinstitute.qq.com/course/detail/10096" target="_blank" rel="noopener">服务器通信</a></p>
@@ -152,6 +133,25 @@
             <category> 游戏知识 </category>
             
             <category> 服务器 </category>
+            
+        </categories>
+        
+        
+    </entry>
+    
+    <entry>
+        <title><![CDATA[游戏知识-杂谈-如何进入游戏开发行业]]></title>
+        <url>http://blog.lsmg.xyz/2019/12/%25E6%25B8%25B8%25E6%2588%258F%25E7%259F%25A5%25E8%25AF%2586-%25E6%259D%2582%25E8%25B0%2588-%25E5%25A6%2582%25E4%25BD%2595%25E8%25BF%259B%25E5%2585%25A5%25E6%25B8%25B8%25E6%2588%258F%25E5%25BC%2580%25E5%258F%2591%25E8%25A1%258C%25E4%25B8%259A/</url>
+        <content type="html"><![CDATA[<p>由于自己了解的实在是不足, 所以来腾讯游戏课堂来学习一些架构之类的东西 来完善自己的知识面<br><a href="https://gameinstitute.qq.com/course/detail/10156" target="_blank" rel="noopener">想做游戏吗？如何开始我的游戏开发职业生涯</a></p>
+<a id="more"></a>
+<p>做游戏不会重复做同样的工作, 项目不同</p>
+]]></content>
+        
+        <categories>
+            
+            <category> 游戏知识 </category>
+            
+            <category> 杂谈 </category>
             
         </categories>
         
