@@ -20,7 +20,7 @@
 <meta name="verify" content=all />
     <!--Title-->
 
-<title>Archives: 2019 | Lsmg的大学之路</title>
+<title>CPP-CPP重点-字节对齐 | Lsmg的大学之路</title>
 
 <link rel="alternate" href="/atom.xml" title="Lsmg的大学之路" type="application/atom+xml">
 
@@ -30,9 +30,10 @@
     
 
 <link rel="stylesheet" href="/css/base.css">
-<link rel="stylesheet" href="/css/pages/archive.css">
+<link rel="stylesheet" href="/css/pages/post.css">
 <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="/css/thirdParty/highlight/github.css">
+<link rel="stylesheet" href="/.css">
 
 
     <!--script-->
@@ -137,20 +138,21 @@
 </ul>
 
 
-        
-<div id="main">
-  <div id="post-list">
-    <ul class="archives-post-list">
-        
-      <li class="post-items" _href="/2019/08/CPP-Linux-%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95%E5%88%9D%E7%BA%A7%E9%83%A8%E5%88%86/">
-        <p class="info">2019</p>
-        <h2 class="post-item-title">Linux高性能服务器编程读书记录-初级部分</h2>
-          <div class="article-meta">
+        <div id="main">
+    <article id="post">
+        <div id="post-header">
+
+            <h1 id="CPP-CPP重点-字节对齐">
+                
+                CPP-CPP重点-字节对齐
+                
+            </h1>
+            <div class="article-meta">
     
     
     <span class="categories-meta fa-wrap">
             <i class="fa fa-folder-open-o"></i>
-        <span>服务器编程-书籍记录</span>
+        <span>CPP重点</span>
     </span>
     
     
@@ -166,322 +168,100 @@
     
     <span class="fa-wrap">
         <i class="fa fa-clock-o"></i>
-        <span class="date-meta ">08/17</span>
+        <span class="date-meta ">2020/02/06</span>
     </span>
     
     
     
 </div>
 
-      </li>
+            
+            
+        </div>
         
-      <li class="post-items" _href="/2019/08/CPP%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%A4%A7%E7%BA%B2/">
-        <p class="info">2019</p>
-        <h2 class="post-item-title">C++服务器学习大纲</h2>
-          <div class="article-meta">
-    
-    
-    <span class="categories-meta fa-wrap">
-            <i class="fa fa-folder-open-o"></i>
-        <span>学习计划</span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-         <i class="fa fa-tags"></i>
-        <span class="tags-meta">
-            
-            C++
-            
-        </span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-        <i class="fa fa-clock-o"></i>
-        <span class="date-meta ">08/17</span>
-    </span>
-    
-    
-    
-</div>
+        <div id="post-body">
+            <p>以前在牛客碰到不少字节对齐的题目, 当时只是为了记住而记住 今天我在学习自定义TCP二进制数据包<br>的时候 遇到了必须考虑下字节对齐的情景.</p>
+<p><strong>解释</strong><br>现代计算机中内存空间都是按照byte划分的，从理论上讲似乎对任何类型的变量的访问可以从任何地址开始，但实际情况是在访问特定类型变量的时候经常在特 定的内存地址访问，这就需要各种类型数据按照一定的规则在空间上排列，而不是顺序的一个接一个的排放，这就是对齐。–百度百科</p>
+<p><strong>原因</strong><br>各个硬件平台对存储空间的处理上有很大的不同。一些平台对某些特定类型的数据只能从某些特定地址开始存取。比如有些架构的CPU在访问 一个没有进行对齐的变量的时候会发生错误，那么在这种架构下编程必须保证字节对齐.其他平台可能没有这种情况<br>但是最常见的是如果不按照适合其平台要求对 数据存放进行对齐，会在存取效率上带来损失。比如有些平台每次读都是从偶地址开始，如果一个int型（假设为32位系统）如果存放在偶地址开始的地方，那么一个读周期就可以读出这32bit，而如果存放在奇地址开始的地方，就需要2个读周期，并对两次读出的结果的高低字节进行拼凑才能得到该32bit数据。–百度百科</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Foo</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">char</span> foo1;</span><br><span class="line">    <span class="keyword">int</span> foo2;</span><br><span class="line">    short foo3;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">sizeof</span>(Foo) = <span class="number">12</span></span><br><span class="line"><span class="keyword">sizeof</span>(<span class="keyword">char</span>) + <span class="keyword">sizeof</span>(<span class="keyword">int</span>) + <span class="keyword">sizeof</span>(short) = <span class="number">7</span></span><br></pre></td></tr></table></figure>
+<p>说明内存中并不是连续存储的这三个变量;</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Foo foo1&#123;<span class="string">'1'</span>, <span class="number">2</span>, <span class="number">3</span>&#125;;</span><br><span class="line"><span class="built_in">write</span>(fd, &amp;foo1, <span class="keyword">sizeof</span>(foo1));</span><br></pre></td></tr></table></figure>
+<p>// hexdump 查看<br>0000000 5631 0000 0002 0000 0003 0000<br>对应图示如下<br><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/%E6%9D%82%E9%A1%B9/%E5%AD%97%E8%8A%82%E5%AF%B9%E9%BD%90.png" alt=""></p>
+<p>第一字节 0x31 正好是 ‘1’ <em>蓝色区域</em><br>二三四字节 为填充 <em>红色区域</em><br>因为sizeof(int)=4所以foo2的偏移量是四的倍数 , 故需要填充三个字节 3+1 = 4</p>
+<p>第五六七八字节 0x02对应2 <em>灰色区域</em><br>这里没有填充是因为sizeof(short)=2所以foo3的偏移量是2的倍数 由于偏移量是8 所以不需要填充</p>
+<p>第九十字节 0x03 对应3<br>第十一十二字节填充<em>黑色区域</em><br>因为此结构中最大的sizeof()=4所以需要将字节数对齐到4的倍数 目前10字节 所以需要填充2字节到<br>12字节满足四的倍数</p>
 
-      </li>
+        </div>
+        <div id="post-footer">
+            <div class="avatar" >
+                <img src="http://lsmg-img.oss-cn-beijing.aliyuncs.com/%E5%8D%9A%E5%AE%A2%E5%B0%81%E9%9D%A2/2676.png" alt="avatar"/>
+                
+                
+            </div>
+            <ul class="author-profile-section">
+                <li>
+                  
+                  Author:
+                  
+                    
+                    <a href="/about.html">Lsmg</a>
+                </li>
+                
+                <li>Published Date: <span>2020-02-06  11:38:08</span></li>
+                
+                <li>Updated Date: <span>2020-02-06  17:06:58</span></li>
+                
+                <li class="post-category">
+                    Categories:
+                    
+                    <a href="/categories/CPP/">CPP</a>
+                    
+                    <a href="/categories/CPP/CPP%E9%87%8D%E7%82%B9/">CPP重点</a>
+                    
+                </li>
+                <li class="post-tags">
+                    Tags:
+                    
+                </li>
+                
+                <li> License: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+知识共享署名-非商业性使用-禁止演绎 3.0 未本地化版本许可协议（CC BY-NC-ND 3.0）
+</a></li>
+                
+            </ul>
+            <div id="donate-wrap">
+                
+                
+                
+                <img src="http://example.com/alipay.jpg" alt="支付宝付款" class="donate-img">
+                
+                <img src="http://example.com/wechat.png" alt="微信付款" class="donate-img">
+                
+                
+            </div>
+        </div>
+    </article>
+    <div class="article-nav">
         
-      <li class="post-items" _href="/2019/08/CPP-CPP%E5%9F%BA%E7%A1%80-1/">
-        <p class="info">2019</p>
-        <h2 class="post-item-title">C++Primer学习</h2>
-          <div class="article-meta">
-    
-    
-    <span class="categories-meta fa-wrap">
-            <i class="fa fa-folder-open-o"></i>
-        <span>CPP基础</span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-         <i class="fa fa-tags"></i>
-        <span class="tags-meta">
-            
-            null
-            
-        </span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-        <i class="fa fa-clock-o"></i>
-        <span class="date-meta ">08/16</span>
-    </span>
-    
-    
-    
-</div>
-
-      </li>
+        <a href="/2020/02/CPP-CPP%E9%87%8D%E7%82%B9-CMAKE/" class="pre-post fa fa-caret-left">CPP-CPP重点-CMAKE</a>
         
-      <li class="post-items" _href="/2019/07/Java-IDEA/">
-        <p class="info">2019</p>
-        <h2 class="post-item-title">IDEA基本使用记录</h2>
-          <div class="article-meta">
-    
-    
-    <span class="categories-meta fa-wrap">
-            <i class="fa fa-folder-open-o"></i>
-        <span>IDEA的使用</span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-         <i class="fa fa-tags"></i>
-        <span class="tags-meta">
-            
-            null
-            
-        </span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-        <i class="fa fa-clock-o"></i>
-        <span class="date-meta ">07/16</span>
-    </span>
-    
-    
-    
-</div>
-
-      </li>
         
-      <li class="post-items" _href="/2019/07/%E5%A4%A7%E4%B8%80%E6%9A%91%E5%81%87%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E4%B8%8E%E6%80%BB%E7%BB%93/">
-        <p class="info">2019</p>
-        <h2 class="post-item-title">暑假学习记录与总结</h2>
-          <div class="article-meta">
-    
-    
-    <span class="categories-meta fa-wrap">
-            <i class="fa fa-folder-open-o"></i>
-        <span>第一个暑假学习</span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-         <i class="fa fa-tags"></i>
-        <span class="tags-meta">
-            
-            大学的第一个暑假
-            
-        </span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-        <i class="fa fa-clock-o"></i>
-        <span class="date-meta ">07/13</span>
-    </span>
-    
-    
-    
-</div>
-
-      </li>
+        <a href="/2020/02/%E5%A4%A7%E4%BA%8C%E5%AF%92%E5%81%87%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E4%B8%8E%E6%80%BB%E7%BB%93/" class="next-post fa">大二寒假及下学期学习记录</a>
         
-      <li class="post-items" _href="/2019/06/Java-Springboot%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%862/">
-        <p class="info">2019</p>
-        <h2 class="post-item-title">纯洁的微笑Gitchat 课程笔记2</h2>
-          <div class="article-meta">
-    
-    
-    <span class="categories-meta fa-wrap">
-            <i class="fa fa-folder-open-o"></i>
-        <span>springboot</span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-         <i class="fa fa-tags"></i>
-        <span class="tags-meta">
-            
-            springboot
-            
-        </span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-        <i class="fa fa-clock-o"></i>
-        <span class="date-meta ">06/07</span>
-    </span>
-    
-    
-    
-</div>
-
-      </li>
-        
-      <li class="post-items" _href="/2019/06/Java-Springboot%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%861/">
-        <p class="info">2019</p>
-        <h2 class="post-item-title">纯洁的微笑Gitchat 课程笔记1</h2>
-          <div class="article-meta">
-    
-    
-    <span class="categories-meta fa-wrap">
-            <i class="fa fa-folder-open-o"></i>
-        <span>springboot</span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-         <i class="fa fa-tags"></i>
-        <span class="tags-meta">
-            
-            springboot
-            
-        </span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-        <i class="fa fa-clock-o"></i>
-        <span class="date-meta ">06/07</span>
-    </span>
-    
-    
-    
-</div>
-
-      </li>
-        
-      <li class="post-items" _href="/2019/05/Linux-Ubuntu%E7%9A%84%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BE%8E%E5%8C%96/">
-        <p class="info">2019</p>
-        <h2 class="post-item-title">2019年5月30日</h2>
-          <div class="article-meta">
-    
-    
-    <span class="categories-meta fa-wrap">
-            <i class="fa fa-folder-open-o"></i>
-        <span>Ubuntu</span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-         <i class="fa fa-tags"></i>
-        <span class="tags-meta">
-            
-            使用Ubuntu
-            
-        </span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-        <i class="fa fa-clock-o"></i>
-        <span class="date-meta ">05/30</span>
-    </span>
-    
-    
-    
-</div>
-
-      </li>
-        
-      <li class="post-items" _href="/2019/05/Java-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
-        <p class="info">2019</p>
-        <h2 class="post-item-title">Java设计模式</h2>
-          <div class="article-meta">
-    
-    
-    <span class="categories-meta fa-wrap">
-            <i class="fa fa-folder-open-o"></i>
-        <span>Java设计模式</span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-         <i class="fa fa-tags"></i>
-        <span class="tags-meta">
-            
-            Java设计模式
-            
-        </span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-        <i class="fa fa-clock-o"></i>
-        <span class="date-meta ">05/21</span>
-    </span>
-    
-    
-    
-</div>
-
-      </li>
-        
-      <li class="post-items" _href="/2019/05/Java-Springboot%E6%95%B0%E6%8D%AE%E4%BA%A4%E4%BA%92/">
-        <p class="info">2019</p>
-        <h2 class="post-item-title">Springboot数据交互</h2>
-          <div class="article-meta">
-    
-    
-    <span class="categories-meta fa-wrap">
-            <i class="fa fa-folder-open-o"></i>
-        <span>springboot</span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-         <i class="fa fa-tags"></i>
-        <span class="tags-meta">
-            
-            springboot数据交互
-            
-        </span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-        <i class="fa fa-clock-o"></i>
-        <span class="date-meta ">05/18</span>
-    </span>
-    
-    
-    
-</div>
-
-      </li>
-        
-    </ul>
-  </div>
-</div>
-
-<div id="page-pagination">
-    <div id="page-nav">
-        <a class="extend prev" rel="prev" href="/archives/2019/">&laquo; Prev</a><a class="page-number" href="/archives/2019/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/2019/page/3/">3</a><a class="extend next" rel="next" href="/archives/2019/page/3/">Next &raquo;</a>
     </div>
-</div>
+    
+    <div id="comments">
+        
 
+<script>
+  gitalk.render("comments");
+</script>
+
+
+
+    </div>
+    
+</div>
 
 
     </div>
@@ -516,6 +296,8 @@
     <li class="totop-btn fa fa-angle-up"></li>
     <li class="exchange-btn fa fa-exchange"></li>
   
+    <li class="toc-btn fa fa-list-ul"></li>
+    
     
 
     
@@ -535,6 +317,8 @@
         </div>
     </div>
 </div>
+
+    
 
 
 

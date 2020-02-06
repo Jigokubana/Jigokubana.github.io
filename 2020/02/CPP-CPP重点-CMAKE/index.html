@@ -20,7 +20,7 @@
 <meta name="verify" content=all />
     <!--Title-->
 
-<title>Archives: 2019 | Lsmg的大学之路</title>
+<title>CPP-CPP重点-CMAKE | Lsmg的大学之路</title>
 
 <link rel="alternate" href="/atom.xml" title="Lsmg的大学之路" type="application/atom+xml">
 
@@ -30,9 +30,10 @@
     
 
 <link rel="stylesheet" href="/css/base.css">
-<link rel="stylesheet" href="/css/pages/archive.css">
+<link rel="stylesheet" href="/css/pages/post.css">
 <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="/css/thirdParty/highlight/github.css">
+<link rel="stylesheet" href="/.css">
 
 
     <!--script-->
@@ -137,20 +138,21 @@
 </ul>
 
 
-        
-<div id="main">
-  <div id="post-list">
-    <ul class="archives-post-list">
-        
-      <li class="post-items" _href="/2019/08/CPP-Linux-%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95%E5%88%9D%E7%BA%A7%E9%83%A8%E5%88%86/">
-        <p class="info">2019</p>
-        <h2 class="post-item-title">Linux高性能服务器编程读书记录-初级部分</h2>
-          <div class="article-meta">
+        <div id="main">
+    <article id="post">
+        <div id="post-header">
+
+            <h1 id="CPP-CPP重点-CMAKE">
+                
+                CPP-CPP重点-CMAKE
+                
+            </h1>
+            <div class="article-meta">
     
     
     <span class="categories-meta fa-wrap">
             <i class="fa fa-folder-open-o"></i>
-        <span>服务器编程-书籍记录</span>
+        <span>CPP重点</span>
     </span>
     
     
@@ -166,322 +168,94 @@
     
     <span class="fa-wrap">
         <i class="fa fa-clock-o"></i>
-        <span class="date-meta ">08/17</span>
+        <span class="date-meta ">2020/02/06</span>
     </span>
     
     
     
 </div>
 
-      </li>
+            
+            
+        </div>
         
-      <li class="post-items" _href="/2019/08/CPP%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%A4%A7%E7%BA%B2/">
-        <p class="info">2019</p>
-        <h2 class="post-item-title">C++服务器学习大纲</h2>
-          <div class="article-meta">
-    
-    
-    <span class="categories-meta fa-wrap">
-            <i class="fa fa-folder-open-o"></i>
-        <span>学习计划</span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-         <i class="fa fa-tags"></i>
-        <span class="tags-meta">
-            
-            C++
-            
-        </span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-        <i class="fa fa-clock-o"></i>
-        <span class="date-meta ">08/17</span>
-    </span>
-    
-    
-    
-</div>
+        <div id="post-body">
+            <p>CMAKE并不打算专门去学, 所以就用到哪里学到哪里</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 必须片段</span></span><br><span class="line"><span class="comment"># CMake 最低版本号要求</span></span><br><span class="line"><span class="keyword">cmake_minimum_required</span> (VERSION <span class="number">2.8</span>)</span><br><span class="line"><span class="comment"># 项目信息</span></span><br><span class="line"><span class="keyword">project</span> (Demo1)</span><br><span class="line"><span class="comment"># 指定生成目标</span></span><br><span class="line"><span class="keyword">add_executable</span>(Demo main.cc)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 多文件</span></span><br><span class="line"><span class="comment"># 如果一味地在add_executable中添加源文件, 会导致太长了</span></span><br><span class="line"><span class="comment"># 将dir目录中所有源文件保存在变量中</span></span><br><span class="line"><span class="keyword">aux_source_directory</span>(. DIR_SOURCE)</span><br><span class="line"><span class="comment"># 将变量赋值给Demo</span></span><br><span class="line"><span class="keyword">add_executable</span>(Demo <span class="variable">$&#123;DIR_SOURCE&#125;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 多文件多目录</span></span><br><span class="line"><span class="comment"># 需要在主目录和子文件夹中都编写CMakeLists.txt文件</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 主文件添加子目录</span></span><br><span class="line"><span class="keyword">add_subdirectory</span>(dir1)</span><br><span class="line"><span class="comment"># 添加链接库</span></span><br><span class="line"><span class="keyword">target_link_libraries</span>(Demo Foo)</span><br><span class="line"></span><br><span class="line"><span class="comment"># dir1目录中</span></span><br><span class="line"><span class="keyword">aux_source_directory</span>(. DIR1_SOURCE)</span><br><span class="line"><span class="comment"># 生成链接库 Foo 在主文件中添加即可</span></span><br><span class="line"><span class="keyword">add_library</span>(Foo <span class="variable">$&#123;DIR1_SOURCE&#125;</span>)</span><br></pre></td></tr></table></figure>
 
-      </li>
+<h1 id="CMAKE和MAKE之间的区别"><a href="#CMAKE和MAKE之间的区别" class="headerlink" title="CMAKE和MAKE之间的区别"></a>CMAKE和MAKE之间的区别</h1><p><a href="https://my.oschina.net/xunxun/blog/86781" target="_blank" rel="noopener">博客原文</a></p>
+<p>自己的理解<br>通过为cmake编写CMakeList文件, cmake即可按照规则生成相应的Makefile文件<br>然后make读取Makefile文件就可以按照规则将源代码编译</p>
+<p>总的来说cmake就是为make生成Makefile文件, (Makefile文件可以自己编写, 也可以用Cmake生成)<br>应该是编写CMakeList的代码量少于或者简单于Makefile, 简化了操作</p>
+
+        </div>
+        <div id="post-footer">
+            <div class="avatar" >
+                <img src="http://lsmg-img.oss-cn-beijing.aliyuncs.com/%E5%8D%9A%E5%AE%A2%E5%B0%81%E9%9D%A2/2676.png" alt="avatar"/>
+                
+                
+            </div>
+            <ul class="author-profile-section">
+                <li>
+                  
+                  Author:
+                  
+                    
+                    <a href="/about.html">Lsmg</a>
+                </li>
+                
+                <li>Published Date: <span>2020-02-06  17:07:45</span></li>
+                
+                <li>Updated Date: <span>2020-02-06  22:47:27</span></li>
+                
+                <li class="post-category">
+                    Categories:
+                    
+                    <a href="/categories/CPP/">CPP</a>
+                    
+                    <a href="/categories/CPP/CPP%E9%87%8D%E7%82%B9/">CPP重点</a>
+                    
+                </li>
+                <li class="post-tags">
+                    Tags:
+                    
+                </li>
+                
+                <li> License: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+知识共享署名-非商业性使用-禁止演绎 3.0 未本地化版本许可协议（CC BY-NC-ND 3.0）
+</a></li>
+                
+            </ul>
+            <div id="donate-wrap">
+                
+                
+                
+                <img src="http://example.com/alipay.jpg" alt="支付宝付款" class="donate-img">
+                
+                <img src="http://example.com/wechat.png" alt="微信付款" class="donate-img">
+                
+                
+            </div>
+        </div>
+    </article>
+    <div class="article-nav">
         
-      <li class="post-items" _href="/2019/08/CPP-CPP%E5%9F%BA%E7%A1%80-1/">
-        <p class="info">2019</p>
-        <h2 class="post-item-title">C++Primer学习</h2>
-          <div class="article-meta">
-    
-    
-    <span class="categories-meta fa-wrap">
-            <i class="fa fa-folder-open-o"></i>
-        <span>CPP基础</span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-         <i class="fa fa-tags"></i>
-        <span class="tags-meta">
-            
-            null
-            
-        </span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-        <i class="fa fa-clock-o"></i>
-        <span class="date-meta ">08/16</span>
-    </span>
-    
-    
-    
-</div>
-
-      </li>
         
-      <li class="post-items" _href="/2019/07/Java-IDEA/">
-        <p class="info">2019</p>
-        <h2 class="post-item-title">IDEA基本使用记录</h2>
-          <div class="article-meta">
-    
-    
-    <span class="categories-meta fa-wrap">
-            <i class="fa fa-folder-open-o"></i>
-        <span>IDEA的使用</span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-         <i class="fa fa-tags"></i>
-        <span class="tags-meta">
-            
-            null
-            
-        </span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-        <i class="fa fa-clock-o"></i>
-        <span class="date-meta ">07/16</span>
-    </span>
-    
-    
-    
-</div>
-
-      </li>
+        <a href="/2020/02/CPP-CPP%E9%87%8D%E7%82%B9-%E5%AD%97%E8%8A%82%E5%AF%B9%E9%BD%90/" class="next-post fa">CPP-CPP重点-字节对齐</a>
         
-      <li class="post-items" _href="/2019/07/%E5%A4%A7%E4%B8%80%E6%9A%91%E5%81%87%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E4%B8%8E%E6%80%BB%E7%BB%93/">
-        <p class="info">2019</p>
-        <h2 class="post-item-title">暑假学习记录与总结</h2>
-          <div class="article-meta">
-    
-    
-    <span class="categories-meta fa-wrap">
-            <i class="fa fa-folder-open-o"></i>
-        <span>第一个暑假学习</span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-         <i class="fa fa-tags"></i>
-        <span class="tags-meta">
-            
-            大学的第一个暑假
-            
-        </span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-        <i class="fa fa-clock-o"></i>
-        <span class="date-meta ">07/13</span>
-    </span>
-    
-    
-    
-</div>
-
-      </li>
-        
-      <li class="post-items" _href="/2019/06/Java-Springboot%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%862/">
-        <p class="info">2019</p>
-        <h2 class="post-item-title">纯洁的微笑Gitchat 课程笔记2</h2>
-          <div class="article-meta">
-    
-    
-    <span class="categories-meta fa-wrap">
-            <i class="fa fa-folder-open-o"></i>
-        <span>springboot</span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-         <i class="fa fa-tags"></i>
-        <span class="tags-meta">
-            
-            springboot
-            
-        </span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-        <i class="fa fa-clock-o"></i>
-        <span class="date-meta ">06/07</span>
-    </span>
-    
-    
-    
-</div>
-
-      </li>
-        
-      <li class="post-items" _href="/2019/06/Java-Springboot%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%861/">
-        <p class="info">2019</p>
-        <h2 class="post-item-title">纯洁的微笑Gitchat 课程笔记1</h2>
-          <div class="article-meta">
-    
-    
-    <span class="categories-meta fa-wrap">
-            <i class="fa fa-folder-open-o"></i>
-        <span>springboot</span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-         <i class="fa fa-tags"></i>
-        <span class="tags-meta">
-            
-            springboot
-            
-        </span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-        <i class="fa fa-clock-o"></i>
-        <span class="date-meta ">06/07</span>
-    </span>
-    
-    
-    
-</div>
-
-      </li>
-        
-      <li class="post-items" _href="/2019/05/Linux-Ubuntu%E7%9A%84%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BE%8E%E5%8C%96/">
-        <p class="info">2019</p>
-        <h2 class="post-item-title">2019年5月30日</h2>
-          <div class="article-meta">
-    
-    
-    <span class="categories-meta fa-wrap">
-            <i class="fa fa-folder-open-o"></i>
-        <span>Ubuntu</span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-         <i class="fa fa-tags"></i>
-        <span class="tags-meta">
-            
-            使用Ubuntu
-            
-        </span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-        <i class="fa fa-clock-o"></i>
-        <span class="date-meta ">05/30</span>
-    </span>
-    
-    
-    
-</div>
-
-      </li>
-        
-      <li class="post-items" _href="/2019/05/Java-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
-        <p class="info">2019</p>
-        <h2 class="post-item-title">Java设计模式</h2>
-          <div class="article-meta">
-    
-    
-    <span class="categories-meta fa-wrap">
-            <i class="fa fa-folder-open-o"></i>
-        <span>Java设计模式</span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-         <i class="fa fa-tags"></i>
-        <span class="tags-meta">
-            
-            Java设计模式
-            
-        </span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-        <i class="fa fa-clock-o"></i>
-        <span class="date-meta ">05/21</span>
-    </span>
-    
-    
-    
-</div>
-
-      </li>
-        
-      <li class="post-items" _href="/2019/05/Java-Springboot%E6%95%B0%E6%8D%AE%E4%BA%A4%E4%BA%92/">
-        <p class="info">2019</p>
-        <h2 class="post-item-title">Springboot数据交互</h2>
-          <div class="article-meta">
-    
-    
-    <span class="categories-meta fa-wrap">
-            <i class="fa fa-folder-open-o"></i>
-        <span>springboot</span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-         <i class="fa fa-tags"></i>
-        <span class="tags-meta">
-            
-            springboot数据交互
-            
-        </span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-        <i class="fa fa-clock-o"></i>
-        <span class="date-meta ">05/18</span>
-    </span>
-    
-    
-    
-</div>
-
-      </li>
-        
-    </ul>
-  </div>
-</div>
-
-<div id="page-pagination">
-    <div id="page-nav">
-        <a class="extend prev" rel="prev" href="/archives/2019/">&laquo; Prev</a><a class="page-number" href="/archives/2019/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/2019/page/3/">3</a><a class="extend next" rel="next" href="/archives/2019/page/3/">Next &raquo;</a>
     </div>
-</div>
+    
+    <div id="comments">
+        
 
+<script>
+  gitalk.render("comments");
+</script>
+
+
+
+    </div>
+    
+</div>
 
 
     </div>
@@ -516,6 +290,8 @@
     <li class="totop-btn fa fa-angle-up"></li>
     <li class="exchange-btn fa fa-exchange"></li>
   
+    <li class="toc-btn fa fa-list-ul"></li>
+    
     
 
     
@@ -535,6 +311,8 @@
         </div>
     </div>
 </div>
+
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#CMAKE和MAKE之间的区别"><span class="toc-number">1.</span> <span class="toc-text">CMAKE和MAKE之间的区别</span></a></li></ol>
 
 
 
