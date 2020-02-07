@@ -75,11 +75,104 @@
 <p>最后自己作为一个想开发游戏的人, 总感觉不玩游戏是不合适的, 但要玩的适度, 毕竟自己还有一年的时间就要找寒假实习, 为了自己的大三暑假进入大厂打下基础.<br>平衡好才是上策.</p>
 <p>接下文, 我发现自己有点?(自信点把点去掉)好高骛远了, 好高骛远会消磨一个人的兴趣和信心. 最终决定不做什么大游戏, 不研究什么框架, 先用自己所会的写一个小游戏,<br>一是为了试着重新拾起兴趣, 二是如果只学而不去写项目, 没有太大收获的</p>
 <p>昨天一天都是策划和编写一个游戏, 游戏逻辑十分的简单. 猜数字 初期的流程图我大概画了下, 姑且算作第一版吧 下面放出来, 我后面可以逐渐丰富这个东西 加上日志登录<br>断线重连等等功能.感觉还是可以的~~ 尽管逻辑很简单.<br><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/%E5%B0%8F%E6%B8%B8%E6%88%8F-%E7%8C%9C%E6%95%B0%E5%AD%97/%E6%B8%B8%E6%88%8F%E6%B5%81%E7%A8%8B1.png" alt=""><br><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/%E5%B0%8F%E6%B8%B8%E6%88%8F-%E7%8C%9C%E6%95%B0%E5%AD%97/%E6%B8%B8%E6%88%8F%E6%A0%B8%E5%BF%83%E9%80%BB%E8%BE%911.png" alt=""></p>
-<p>听说在写代码前规划好, 可以更好地组织代码, 昨天尝试了下感觉还不错. 我在写代码前把游戏的流程图画了一下, 然后标上了哪里会有什么数据交互,<br>之后我去写了数据包头格式<br><strong>头部</strong><br>| 偏移量 | 长度 | 含义<br>| — | — | — |<br>| 0 | 4 | 封包总大小 |<br>| 4 | 2 | 头部长度 |<br>| 6 | 2 | 操作码 |</p>
-<p><strong>操作码</strong><br>| 代码 | 含义 | 数据格式 |<br>| — | — | — |<br>| 00 | 登录 | |<br>| 01 | 桌位信息(服务器发送桌位列表) | [1000-0-4][1001-0-4] |<br>| 02 | 桌位操作信息(客户端加入 退出桌位) | 1000 |<br>| 03 | 服务器桌位操作信息反馈(加入退出成功1 加入退出失败0) | 1 |<br>| 04 | 准备 | 无 |<br>| 05 | 取消准备 | 无 |<br>| 06 | 服务器广播桌位信息 | 4[11][10][00][00] (桌位总数, 有人1 准备1) |<br>| A1 | 服务器广播游戏开始 | 空 |<br>| A2 | 服务器下发轮到的客户端 | 空 |<br>| A3 | 客户端发送猜测的数字 | 50 |<br>| A4 | 服务器发送猜测数字反馈 (数据合理1, 数据非法0) | 1 |<br>| A5 | 服务器广播游戏状态 | 50-0-75[A][B] (A玩家猜出50 当前范围 0到75 B玩家准备) |</p>
+<p>听说在写代码前规划好, 可以更好地组织代码, 昨天尝试了下感觉还不错. 我在写代码前把游戏的流程图画了一下, 然后标上了哪里会有什么数据交互,<br>之后我去写了数据包头格式<br><strong>头部</strong></p>
+<table>
+<thead>
+<tr>
+<th>偏移量</th>
+<th>长度</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>4</td>
+<td>封包总大小</td>
+</tr>
+<tr>
+<td>4</td>
+<td>2</td>
+<td>头部长度</td>
+</tr>
+<tr>
+<td>6</td>
+<td>2</td>
+<td>操作码</td>
+</tr>
+</tbody></table>
+<p><strong>操作码</strong></p>
+<table>
+<thead>
+<tr>
+<th>代码</th>
+<th>含义</th>
+<th>数据格式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>00</td>
+<td>登录</td>
+<td></td>
+</tr>
+<tr>
+<td>01</td>
+<td>桌位信息(服务器发送桌位列表)</td>
+<td>[1000-0-4][1001-0-4]</td>
+</tr>
+<tr>
+<td>02</td>
+<td>桌位操作信息(客户端加入 退出桌位)</td>
+<td>1000</td>
+</tr>
+<tr>
+<td>03</td>
+<td>服务器桌位操作信息反馈(加入退出成功1 加入退出失败0)</td>
+<td>1</td>
+</tr>
+<tr>
+<td>04</td>
+<td>准备</td>
+<td>无</td>
+</tr>
+<tr>
+<td>05</td>
+<td>取消准备</td>
+<td>无</td>
+</tr>
+<tr>
+<td>06</td>
+<td>服务器广播桌位信息</td>
+<td>4[11][10][00][00] (桌位总数, 有人1 准备1)</td>
+</tr>
+<tr>
+<td>A1</td>
+<td>服务器广播游戏开始</td>
+<td>空</td>
+</tr>
+<tr>
+<td>A2</td>
+<td>服务器下发轮到的客户端</td>
+<td>空</td>
+</tr>
+<tr>
+<td>A3</td>
+<td>客户端发送猜测的数字</td>
+<td>50</td>
+</tr>
+<tr>
+<td>A4</td>
+<td>服务器发送猜测数字反馈 (数据合理1, 数据非法0)</td>
+<td>1</td>
+</tr>
+<tr>
+<td>A5</td>
+<td>服务器广播游戏状态</td>
+<td>50-0-75[A][B] (A玩家猜出50 当前范围 0到75 B玩家准备)</td>
+</tr>
+</tbody></table>
 <p>然后草拟了一下 用到的类 用到的数据结构 分几个类 怎么联系起来, 最终我才去写代码, 感觉比一边写<br>一边想要好不少. 写的过程中也发现了一些问题</p>
 <ol>
-<li><code>EPOLLRDHUP</code>这个绑定在listenfd还是newfd?? 如果是newfd还能理解下原理, listenfd就有点理解不了.</li>
+<li><code>EPOLLRDHUP</code>这个绑定在listenfd还是newfd?? 如果是newfd还能理解下原理, listenfd就有点理解不了.(试了下, 是newfd)</li>
 <li><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Foo *a;</span><br><span class="line">Foos b[<span class="number">3</span>];</span><br><span class="line">b[<span class="number">1</span>] = *a;</span><br><span class="line"><span class="comment">// 修改a不会影响b[1], 这个问题听到过, 自己真正试了试才发现如此</span></span><br></pre></td></tr></table></figure>
 
 </li>
@@ -105,19 +198,21 @@
 </ol>
 <p>定一下明天的任务吧, 试运行</p>
 <ol>
-<li>定义游戏的json格式, 把所有的json都定义出来</li>
+<li>定义游戏的json格式, 把所有的json都定义出来 √</li>
 <li>游戏完成度达到能够正确解析包并分发到合理的部分即可</li>
 <li>写一遍采坑博客-头文件互相引用</li>
 <li>针对今天Git遇到的文件 在做研究下</li>
 <li>简单学习下jsoncpp的使用</li>
 </ol>
+<h2 id="七日-2020年2月7日10-14-53"><a href="#七日-2020年2月7日10-14-53" class="headerlink" title="七日 2020年2月7日10:14:53"></a>七日 2020年2月7日10:14:53</h2><p>今天博客写的格外早, 主要是又遇到一个奇葩问题(其实是我自己使用有误)<br>我昨天最后发现代码跑不起来, 就没有管, 今天看了下跑不起来是因为<code>未定义引用</code><br>好吧, 未定义引用, 我检查了一下发现不对啊, 我加上了<br><code>target_link_libraries(Guess -ljsoncpp network game)</code><br>我当时是这样写的, 结果就是报错<code>未定义引用</code>, 然后我把报错的部分另开一个项目放进去<br>运行起来没问题?????.<br>然后我把报错的代码放在我项目的main文件中, 结果原来的报错也消失了 main中的也没报错?????<br>最后阴差阳错发现这个博客<a href="https://blog.csdn.net/qq_33249383/article/details/88908218" target="_blank" rel="noopener">初入职常见问题：gcc编译时对’xxxx’未定义的引用</a>. 我发现其中的一段话</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">这个主要的原因是gcc编译的时候，各个文件依赖顺序的问题。</span><br><span class="line">在gcc编译的时候，如果文件a依赖于文件b，那么编译的时候必须把a放前面，b放后面。</span><br><span class="line">例如:在main.c中使用了pthread库相关函数，那么编译的时候必须是main.c在前，-lpthread在后。 gcc main.c -lpthread -o a.out 。</span><br></pre></td></tr></table></figure>
+<p>虽然使用的是cmake然后make 不确定编译器, 但我感觉应该试一试. 因为我的软件是编译<code>network.a</code>的时候报错,<br>结果我改成了如下<br><code>target_link_libraries(Guess network game -ljsoncpp)</code><br>发现报错消失了……</p>
+<p>以前一直没有在意这里的顺序问题. 现在知道了问题所在 去搜索target_link_libraries顺序问题<br>找到了一堆解释 哎….</p>
 ]]></content>
         
         <categories>
             
-            <category> CPP </category>
-            
-            <category> 大二寒假及下学期学习记录 </category>
+            <category> 学习记录 </category>
             
         </categories>
         
@@ -1266,8 +1361,6 @@ unique_ptr不支持普通的赋值和拷贝操作, 因为unique_ptr要独占所�
             
             <category> Java </category>
             
-            <category> IDEA的使用 </category>
-            
         </categories>
         
         
@@ -1403,22 +1496,10 @@ unique_ptr不支持普通的赋值和拷贝操作, 因为unique_ptr要独占所�
         
         <categories>
             
-            <category> Java </category>
-            
-            <category> 第一个暑假学习 </category>
+            <category> 学习记录 </category>
             
         </categories>
         
-        
-        <tags>
-            
-            <tag> 大学的第一个暑假 </tag>
-            
-            <tag> 暑假学习的大纲 </tag>
-            
-            <tag> 记录每天假期干了什么 </tag>
-            
-        </tags>
         
     </entry>
     
@@ -1551,16 +1632,8 @@ unique_ptr不支持普通的赋值和拷贝操作, 因为unique_ptr要独占所�
             
             <category> Java </category>
             
-            <category> springboot </category>
-            
         </categories>
         
-        
-        <tags>
-            
-            <tag> springboot </tag>
-            
-        </tags>
         
     </entry>
     
@@ -1581,16 +1654,8 @@ unique_ptr不支持普通的赋值和拷贝操作, 因为unique_ptr要独占所�
             
             <category> Java </category>
             
-            <category> springboot </category>
-            
         </categories>
         
-        
-        <tags>
-            
-            <tag> springboot </tag>
-            
-        </tags>
         
     </entry>
     
@@ -1661,16 +1726,8 @@ unique_ptr不支持普通的赋值和拷贝操作, 因为unique_ptr要独占所�
             
             <category> Java </category>
             
-            <category> Java设计模式 </category>
-            
         </categories>
         
-        
-        <tags>
-            
-            <tag> Java设计模式 </tag>
-            
-        </tags>
         
     </entry>
     
@@ -1712,16 +1769,8 @@ unique_ptr不支持普通的赋值和拷贝操作, 因为unique_ptr要独占所�
             
             <category> Java </category>
             
-            <category> springboot </category>
-            
         </categories>
         
-        
-        <tags>
-            
-            <tag> springboot数据交互 </tag>
-            
-        </tags>
         
     </entry>
     
@@ -1742,18 +1791,8 @@ unique_ptr不支持普通的赋值和拷贝操作, 因为unique_ptr要独占所�
             
             <category> Java </category>
             
-            <category> springboot </category>
-            
         </categories>
         
-        
-        <tags>
-            
-            <tag> springboot </tag>
-            
-            <tag> 日志 </tag>
-            
-        </tags>
         
     </entry>
     
@@ -1783,18 +1822,8 @@ unique_ptr不支持普通的赋值和拷贝操作, 因为unique_ptr要独占所�
             
             <category> Java </category>
             
-            <category> java爬虫 </category>
-            
-            <category> java爬虫初步 </category>
-            
         </categories>
         
-        
-        <tags>
-            
-            <tag> java爬虫 </tag>
-            
-        </tags>
         
     </entry>
     
@@ -1827,18 +1856,8 @@ unique_ptr不支持普通的赋值和拷贝操作, 因为unique_ptr要独占所�
             
             <category> Java </category>
             
-            <category> 知识整理 </category>
-            
-            <category> IO流 </category>
-            
         </categories>
         
-        
-        <tags>
-            
-            <tag> java输入输出流 </tag>
-            
-        </tags>
         
     </entry>
     
@@ -1879,10 +1898,6 @@ unique_ptr不支持普通的赋值和拷贝操作, 因为unique_ptr要独占所�
             
             <category> Java </category>
             
-            <category> SDK </category>
-            
-            <category> FASTJson </category>
-            
         </categories>
         
         
@@ -1913,18 +1928,8 @@ unique_ptr不支持普通的赋值和拷贝操作, 因为unique_ptr要独占所�
             
             <category> Java </category>
             
-            <category> 知识整理 </category>
-            
-            <category> 文件操作 </category>
-            
         </categories>
         
-        
-        <tags>
-            
-            <tag> java文件操作 </tag>
-            
-        </tags>
         
     </entry>
     
