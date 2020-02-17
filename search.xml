@@ -3,11 +3,136 @@
     
     
     <entry>
+        <title><![CDATA[3DMAX快捷键及基础知识]]></title>
+        <url>http://blog.lsmg.xyz/2020/02/3DMAX-3dmax%25E5%25BF%25AB%25E6%258D%25B7%25E9%2594%25AE%25E5%258F%258A%25E5%259F%25BA%25E7%25A1%2580%25E7%259F%25A5%25E8%25AF%2586/</url>
+        <content type="html"><![CDATA[<p>由于自己日后可能需要使用3d建模, 所以今天学习了下. 为了速成 看的B站的一个视频. 感觉效果还行吧.<br>基础的建模可以完成了, 后续需要的话 再继续学习</p>
+<table>
+<thead>
+<tr>
+<th>按键</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>shift</td>
+<td>绘制直线</td>
+</tr>
+<tr>
+<td>删除键</td>
+<td>可以回退一次</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>W</td>
+<td>移动</td>
+</tr>
+<tr>
+<td>E</td>
+<td>旋转</td>
+</tr>
+<tr>
+<td>R</td>
+<td>缩放</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>F3</td>
+<td>线框显示模式</td>
+</tr>
+<tr>
+<td>F4</td>
+<td>实体+线框限时模式</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Shift</td>
+<td>按住可以复制</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Alt+T+A</td>
+<td>阵列</td>
+</tr>
+<tr>
+<td>Alt+T+M</td>
+<td>镜像</td>
+</tr>
+<tr>
+<td>Alt+A+对齐</td>
+<td></td>
+</tr>
+<tr>
+<td>Shitf+I</td>
+<td>间隔工具</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Ctrl+X</td>
+<td>专家模式, 隐藏所有多余的东西 获得最大的空间</td>
+</tr>
+<tr>
+<td>Alt+X</td>
+<td>半透明显示</td>
+</tr>
+<tr>
+<td>Ctrl+Shift+X</td>
+<td>变换虚拟体显示切换 可以看到变换虚拟体的明显变化</td>
+</tr>
+<tr>
+<td>O</td>
+<td>自适应降级</td>
+</tr>
+</tbody></table>
+<p><strong>编辑样条线-&gt;顶点</strong><br>优化 在线上添加点<br>焊接 连接两点<br>自动焊接 两点在距离之内自动焊接</p>
+<p><strong>车削修改器</strong><br>将二维图形 指定一个轴然后旋转 得到立体图形</p>
+<p><strong>可编辑多边形</strong><br><em>细分曲面</em><br>迭代次数2-3<br>无需子层级修改后 可以勾选 等值线显示(勾选后 显示真实的渲染线? 不勾选显得线条少 利于编辑子层面)<br><em>细分置换-经常使用置换网格WSM修改器</em><br>需要给立体图形 设置好材质球 材质球需要置换这个属性的贴图<br><em>绘制变形-未学-用于雕刻地形</em><br><strong>倒角剖面和扫描的区别</strong></p>
+<ol>
+<li>结合点不同</li>
+<li>倒角剖面不能用三维轮廓, 扫描可以使用三维轮廓</li>
+<li>倒角剖面不能将 图形包含图形(一个圆中再画一个圆) 的图形作为剖面,扫描可以.</li>
+</ol>
+]]></content>
+        
+        <categories>
+            
+            <category> 3DMAX </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 3DMAX </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
         <title><![CDATA[Git的使用]]></title>
         <url>http://blog.lsmg.xyz/2020/02/Git-%25E5%259F%25BA%25E7%25A1%2580%25E6%2593%258D%25E4%25BD%259C/</url>
         <content type="html"><![CDATA[<p>之前的Git博客 写的终于是自己都看不下去了. 所以打算来重新写一个博客<br>这篇博客主要还是参照的廖雪峰的Git博客<br>自己只做整理方便自己察看</p>
 <p>2020年2月7日18:49:25 再来重新编辑下这些内容</p>
-<h1 id="命令总结"><a href="#命令总结" class="headerlink" title="命令总结"></a>命令总结</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"># -t Specifies the type of key to create.  The possible values are</span><br><span class="line">#“dsa”, “ecdsa”, “ed25519”, or “rsa”.</span><br><span class="line"># -C 生成注释 ...所以后面的邮箱就是个注释????</span><br><span class="line">ssh-keygen -t rsa -C &quot;youremail@example.com&quot;</span><br><span class="line"></span><br><span class="line">git init</span><br><span class="line">git add &lt;file&gt;</span><br><span class="line">git commit -m &lt;message&gt;</span><br><span class="line">git remote add origin  # origin 意为远程库的名字, git的默认叫法</span><br><span class="line"></span><br><span class="line">git status</span><br><span class="line">git diff</span><br><span class="line">git log</span><br><span class="line">git log --pretty&#x3D;oneline # 简单显示</span><br><span class="line"></span><br><span class="line"># 注意reset是恢复到上一个版本 即为你上一次commit版本或者pull最近的一次</span><br><span class="line">git checkout --&lt;filename&gt; # 恢复工作区, 可用于恢复修改和恢复勿删文件</span><br><span class="line">git reset HEAD &lt;file&gt; # 恢复暂存区</span><br><span class="line">git reset HEAD^ # 恢复版本库</span><br><span class="line">git reset --hard &lt;hash版本号 即为log中的一串英文字母, 只需要前几个字母即可&gt;</span><br><span class="line">git reflog # 所有版本日志</span><br><span class="line"></span><br><span class="line">git rm 从版本库中删除文件</span><br><span class="line"></span><br><span class="line">git push -u origin master # 带上 -u 以后提交就不需要加入origin master, 类似记忆功能</span><br></pre></td></tr></table></figure>
+<h1 id="命令总结"><a href="#命令总结" class="headerlink" title="命令总结"></a>命令总结</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"># -t Specifies the type of key to create.  The possible values are</span><br><span class="line">#“dsa”, “ecdsa”, “ed25519”, or “rsa”.</span><br><span class="line"># -C 生成注释 ...所以后面的邮箱就是个注释????</span><br><span class="line">ssh-keygen -t rsa -C &quot;youremail@example.com&quot;</span><br><span class="line"></span><br><span class="line">git init</span><br><span class="line">git add &lt;file&gt;</span><br><span class="line">git commit -m &lt;message&gt;</span><br><span class="line">git remote add origin  # origin 意为远程库的名字, git的默认叫法</span><br><span class="line"></span><br><span class="line">git status</span><br><span class="line">git diff</span><br><span class="line">git log</span><br><span class="line">git log --pretty&#x3D;oneline # 简单显示</span><br><span class="line"></span><br><span class="line"># 注意reset是恢复到上一个版本 即为你上一次commit版本或者pull最近的一次</span><br><span class="line">git checkout --&lt;filename&gt; # 恢复工作区, 可用于恢复修改和恢复勿删文件</span><br><span class="line">git reset HEAD &lt;file&gt; # 恢复暂存区</span><br><span class="line">git reset HEAD^ # 恢复版本库</span><br><span class="line">git reset --hard &lt;hash版本号 即为log中的一串英文字母, 只需要前几个字母即可&gt;</span><br><span class="line">git reflog # 所有版本日志</span><br><span class="line"></span><br><span class="line">git rm 从版本库中删除文件</span><br><span class="line"></span><br><span class="line">git push -u origin master # 带上 -u 以后提交就不需要加入origin master, 类似记忆功能</span><br><span class="line"></span><br><span class="line">&#96;git checkout -b dev&#96; #相当于一下两条命令</span><br><span class="line">&#96;git branch dev&#96; # 分支创建</span><br><span class="line">&#96;git checkout dev&#96; # 分支切换</span><br><span class="line">&#96;git branch -d dev&#96; # 分支删除</span><br><span class="line">&#96;git branch&#96; # 查看当前所有分支</span><br><span class="line">&#96;git merge dev&#96; # 将制定的dev分支合并到当前的分支</span><br></pre></td></tr></table></figure>
 
 <h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><p>首先把Git的三个区说明一下吧 自己后来慢慢感觉这些理论还是很重要的<br><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/%E6%9D%82%E9%A1%B9/Git%E4%B8%89%E5%A4%A7%E5%88%86%E5%8C%BA.png" alt=""><br>工作区<br>顾名思义, 你当前在IDE直接修改的代码全部都是位于工作区的代码<br>暂存区<br>暂时存取的区域, 你每次使用add提交的文件全部在这个区域中, 这些文件等待你的commit<br>版本库<br>这里存放的是若干个版本, 你每次的commit就是将暂存区的文件作为一个版本提交到版本库, 同时相应的文件被提交后 暂存区的文件被清除</p>
 <h1 id="基础的操作"><a href="#基础的操作" class="headerlink" title="基础的操作"></a>基础的操作</h1><p><strong>你的第一次提交</strong></p>
@@ -36,7 +161,20 @@
 <p>  最后需要我手动修改这个文件为自己需要的内容 然后提交即可</p>
 <p>  <strong>分支管理</strong><br>  通常Git会使用<code>Fast forward</code>模式 这样删除分支后会丢失分支的信息<br>  可以再merge的时候加入<code>--no-ff</code>这样就能解决问题<br>  <code>git merge --no-ff -m &quot;merge with no-ff&quot; dev</code><br>  由于禁用<code>Fast forward</code>后<br>  会生成新的commit所以需要加入<code>-m &quot;merge with no-ff&quot;</code></p>
 <p>  <code>git stash</code> 可以储存当前的工作区 继续其他的工作<br>  <code>git stash list</code> 查看储存的工作区列表<br>  <code>git stash apply stash@{0}</code> 恢复指定的储存<br>  <code>git stash pop</code> 恢复并drop最近的存储</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">$ cat test.txt # stash前</span><br><span class="line">111111</span><br><span class="line">$ vim test.txt </span><br><span class="line">$ cat test.txt # 进行了修改</span><br><span class="line">111111</span><br><span class="line">222222</span><br><span class="line">333333</span><br><span class="line">$ git status</span><br><span class="line">位于分支 master</span><br><span class="line">	修改：     test.txt</span><br><span class="line">$ git stash # stash</span><br><span class="line">保存工作目录和索引状态 WIP on master: 854b710 1</span><br><span class="line">$ cat test.txt </span><br><span class="line">111111</span><br><span class="line">$ git status</span><br><span class="line">位于分支 master</span><br><span class="line">无文件要提交，干净的工作区</span><br><span class="line">$ git stash pop</span><br><span class="line">位于分支 master</span><br><span class="line">	修改：     test.txt</span><br><span class="line">$ cat test.txt </span><br><span class="line">111111</span><br><span class="line">222222</span><br><span class="line">333333</span><br></pre></td></tr></table></figure>]]></content>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">$ cat test.txt # stash前</span><br><span class="line">111111</span><br><span class="line">$ vim test.txt </span><br><span class="line">$ cat test.txt # 进行了修改</span><br><span class="line">111111</span><br><span class="line">222222</span><br><span class="line">333333</span><br><span class="line">$ git status</span><br><span class="line">位于分支 master</span><br><span class="line">	修改：     test.txt</span><br><span class="line">$ git stash # stash</span><br><span class="line">保存工作目录和索引状态 WIP on master: 854b710 1</span><br><span class="line">$ cat test.txt </span><br><span class="line">111111</span><br><span class="line">$ git status</span><br><span class="line">位于分支 master</span><br><span class="line">无文件要提交，干净的工作区</span><br><span class="line">$ git stash pop</span><br><span class="line">位于分支 master</span><br><span class="line">	修改：     test.txt</span><br><span class="line">$ cat test.txt </span><br><span class="line">111111</span><br><span class="line">222222</span><br><span class="line">333333</span><br></pre></td></tr></table></figure>
+
+<h1 id="实际工作中分支的应用"><a href="#实际工作中分支的应用" class="headerlink" title="实际工作中分支的应用"></a>实际工作中分支的应用</h1><p><a href="https://zhuanlan.zhihu.com/p/38772378" target="_blank" rel="noopener">主要参考</a><br><strong>主分支</strong></p>
+<ul>
+<li><strong>master</strong>: 这个分支最稳定, 相当于放的可发布版本</li>
+<li><strong>develop</strong>: 开发分支, 平行于master分支, 负责合并各种<code>用于开发子功能</code>的分支</li>
+</ul>
+<p><strong>支持分支</strong>:解决某个问题, 结束后合并回<code>master</code>或<code>develop</code>分支</p>
+<ul>
+<li><strong>feature</strong>功能分支, 用于开发一个个子功能, 来自<code>develop</code>合并到<code>develop</code>去</li>
+<li><strong>release</strong>:发布分支, 用于修改版本号等小修改, 来自<code>develop</code>分支合并到<code>master</code>分支</li>
+<li><strong>hotfixes</strong>:紧急修复bug分支, 从<code>master</code>创建, 合并回<code>develop</code>分支和<code>master</code>分支<br><img src="https://pic4.zhimg.com/80/v2-aef704a4c112eaaf5e8637587ee17df3_hd.jpg" alt=""></li>
+</ul>
+]]></content>
         
         <categories>
             
@@ -311,11 +449,145 @@
 <p>2020年2月7日18:10:20<br>终于把头文件互相引用给搞明白了, 感觉这篇博客写的还可以吧, 就发到了<a href="https://blog.csdn.net/qq_26790181/article/details/104213520" target="_blank" rel="noopener">csdn上面</a>,自己的博客上也会发的. 就先这样吧<br>今天的第三项任务完成了, 概第四项任务了Git</p>
 <p>2020年2月7日22:17:41<br>今天的任务完成了 还发现一个联系git的网站… 真的是纯偶然发现的<a href="https://learngitbranching.js.org/" target="_blank" rel="noopener">这个</a><br>大创那里今天看了下文档 找了找模板 还可以吧 明天的话</p>
 <ol>
-<li>游戏把服务器端写完</li>
-<li>把找到的大创模板改到springboot上面去</li>
+<li>游戏把服务器端写完 一半</li>
+<li>把找到的大创模板改到springboot上面去  后续再套</li>
 <li>练习并搞懂两道中等算法题目</li>
 <li>在有时间的话把牛客整理了</li>
 </ol>
+<h2 id="八日九日-2020年2月9日18-04-35"><a href="#八日九日-2020年2月9日18-04-35" class="headerlink" title="八日九日 2020年2月9日18:04:35"></a>八日九日 2020年2月9日18:04:35</h2><p>简单写下吧, 昨天 不小心挂彩了, 还好运气还好, 没有太大的伤, 不然特别时期真的难搞.<br>不幸中的万幸</p>
+<p>今天一天都没写代码 或许明天会好一些把</p>
+<h1 id="十日"><a href="#十日" class="headerlink" title="十日"></a>十日</h1><p>2020年2月10日10:02:22<br>今天问题不大了, 继续写游戏的服务器<br>写完服务器后, 做算法题吧</p>
+<h1 id="十四日"><a href="#十四日" class="headerlink" title="十四日"></a>十四日</h1><p>昨天基本问题就不大了, 眼睛周围青了一圈成了大熊猫, 经过四天的休息 看东西倒是不流眼泪了.<br>今天的话, 实际的学习方面有</p>
+<p>终于自己还是要找开源项目看看了, 不过今天2020年2月14日17:08:40头脑不是很清醒, 中午没有睡好. 看了个大概就没看了<br><a href="http://tengine.taobao.org/book/chapter_02.html" target="_blank" rel="noopener">nginx剖析</a></p>
+<p>偶尔发现了一本书, 这不就是我想要看的吗!!!!!!, 准备看这本书 这本书从输入网址到网页返回都很详细的写了写<br><img src="https://pic2.zhimg.com/v2-1336c859990173751b77ad9eb4318602_r.jpg" alt=""></p>
+<h1 id="十五日"><a href="#十五日" class="headerlink" title="十五日"></a>十五日</h1><p>理论上大二寒假就要过完了. 昨天晚上想了很多</p>
+<p>先说一下游戏把: 感觉自己不喜欢玩手机游戏了, 手机游戏非肝即氪 自己没有时间去肝游戏, 肝游戏不会给你工作, 自己没有钱去氪金, 自己又非.抱着这种念头时间长了, 自己对游戏更加提不起兴趣了. 而我又想去做游戏, 一个不想玩游戏的人能做游戏吗? 虽说我的不想玩是在各种因素长时间影响下形成的.</p>
+<p>再说下我对编程吧: 怎么说呢, 我在大二上学期的上半学期之前, 都很喜欢写代码的, 我能在电脑前面坐上一整天. 后来我对代码提不起兴趣了. 原因的话昨天晚上整理了下.</p>
+<ol>
+<li>目的不同了: 我在大二上学期的上半学期之前(包括大一整个学期)都是抱着解决某个问题去写软件的, 说起来是为自己写代码?首先就是我学的Javaweb为了解决校园网登录难的问题, 我用Java写一个客户端, 同时配上了后台和下载站(用的阿里云的OSS). 我记得的那段时间真的快乐. 后面我又为解决手动签到的问题, 做了个签到软件, 也是如此.——后来我学习的目的就是为了增进自己的知识(目的只有一个–进入大公司), 变成了为了学而学(之所以为了学而学是感觉时间真的有限, 我想在大三暑假能够实习, 我只有一年半的时间), 而不是之前, 通过做自己喜欢的东西不会了就去补一补. 长时间这样学习我大二上整个学期一个正经的项目都没有, 长时间为了学而学消磨了我的兴趣??</li>
+<li>我发现我现在好像失去了对编程的乐趣, 现在写项目总想写出更优的结构, 总想写出大项目, 然而我的能力不足. 想实现和无法实现的思想一直持续着, 也是消磨的原因之一? 我现在在想我是不是期初就对linux服务器不感兴趣? 可我感觉当初自己确实想去的, 我想着游戏行业的人员兴趣基本相同, 能够一起做游戏,一边骂着策划脑洞一边做2333, 而不是做自己不喜欢的网站后端, 我发现目前自己都是一个人学习, 一个人做着, 何谈团队的乐趣?</li>
+</ol>
+<p>症状就如上了, 自己也得想想办法了.</p>
+<ol>
+<li>首要任务找个人(找个团队)一起做游戏吧, 自己一个人的话, 说不上我向往的一起写代码的氛围</li>
+<li>找到团队之后, 就能通过一边做游戏一边学习自己的不足了</li>
+<li>我长时间的学习, 做不出自己满意的项目也是原因之一吧.</li>
+<li>手机游戏的话, 暂时不去玩网游了. 我自己更适合单机? 找人做独立游戏?? emm不错</li>
+</ol>
+<h1 id="十六日"><a href="#十六日" class="headerlink" title="十六日"></a>十六日</h1><p>爆肝学习了一天3dmax , 现在是会基本的操作 能够完成一些简单的建模了.</p>
+<p>从B站找个那个课程也是很不错<br><a href="https://www.bilibili.com/video/av18210293/" target="_blank" rel="noopener">3Dmax2018零基础入门教程（第一，二，三，四，五阶段）</a></p>
+<p>一天的事件我就从 P0看到了    P51 过得很快, 但感觉掌握的还能接受</p>
+<hr>
+<table>
+<thead>
+<tr>
+<th>按键</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>shift</td>
+<td>绘制直线</td>
+</tr>
+<tr>
+<td>删除键</td>
+<td>可以回退一次</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>W</td>
+<td>移动</td>
+</tr>
+<tr>
+<td>E</td>
+<td>旋转</td>
+</tr>
+<tr>
+<td>R</td>
+<td>缩放</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>F3</td>
+<td>线框显示模式</td>
+</tr>
+<tr>
+<td>F4</td>
+<td>实体+线框限时模式</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Shift</td>
+<td>按住可以复制</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Alt+T+A</td>
+<td>阵列</td>
+</tr>
+<tr>
+<td>Alt+T+M</td>
+<td>镜像</td>
+</tr>
+<tr>
+<td>Alt+A+对齐</td>
+<td></td>
+</tr>
+<tr>
+<td>Shitf+I</td>
+<td>间隔工具</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Ctrl+X</td>
+<td>专家模式, 隐藏所有多余的东西 获得最大的空间</td>
+</tr>
+<tr>
+<td>Alt+X</td>
+<td>半透明显示</td>
+</tr>
+<tr>
+<td>Ctrl+Shift+X</td>
+<td>变换虚拟体显示切换 可以看到变换虚拟体的明显变化</td>
+</tr>
+<tr>
+<td>O</td>
+<td>自适应降级</td>
+</tr>
+</tbody></table>
+<p><strong>编辑样条线-&gt;顶点</strong><br>优化 在线上添加点<br>焊接 连接两点<br>自动焊接 两点在距离之内自动焊接</p>
+<p><strong>车削修改器</strong><br>将二维图形 指定一个轴然后旋转 得到立体图形</p>
+<p><strong>可编辑多边形</strong><br><em>细分曲面</em><br>迭代次数2-3<br>无需子层级修改后 可以勾选 等值线显示(勾选后 显示真实的渲染线? 不勾选显得线条少 利于编辑子层面)<br><em>细分置换-经常使用置换网格WSM修改器</em><br>需要给立体图形 设置好材质球 材质球需要置换这个属性的贴图<br><em>绘制变形-未学-用于雕刻地形</em><br><strong>倒角剖面和扫描的区别</strong></p>
+<ol>
+<li>结合点不同</li>
+<li>倒角剖面不能用三维轮廓, 扫描可以使用三维轮廓</li>
+<li>倒角剖面不能将 图形包含图形(一个圆中再画一个圆) 的图形作为剖面,扫描可以.</li>
+</ol>
+<hr>
+<p>好了暑假也算是结束了</p>
+<p>哦对了 我还在做一个游戏 从YouTube上看到一个打砖块游戏.<br>这只是开始, 因为我是做服务器的所以我要把游戏改成双人联机哒!!!!目前进展还不错</p>
+<p>我打算模仿一个知乎大佬在知乎更新下专栏? 貌似可以诶</p>
+<p>网上讲解服务器的不少 讲解客户端的不少  讲解一套的就少了</p>
+<p>好了博客整理下 寒假结束了</p>
 ]]></content>
         
         <categories>
@@ -726,58 +998,6 @@
         <tags>
             
             <tag> Mysql </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-        <title><![CDATA[Linux-菜鸟入门]]></title>
-        <url>http://blog.lsmg.xyz/2019/10/Linux-%25E8%258F%259C%25E9%25B8%259F%25E5%2585%25A5%25E9%2597%25A8/</url>
-        <content type="html"><![CDATA[<p>如果写起来C++有点不想写的话, 就来学一点Linux 日常中也是能用到. 这次先选择一个简单的网址来学习了<br><a href="https://www.zhihu.com/question/30328004/answer/751243297" target="_blank" rel="noopener">网址推荐的知乎问答</a><br><a href="https://linuxtools-rst.readthedocs.io/zh_CN/latest/base/01_use_man.html" target="_blank" rel="noopener">学习网页</a></p>
-<a id="more"></a>
-
-<h1 id="杂项"><a href="#杂项" class="headerlink" title="杂项"></a>杂项</h1><p>这部分是我之前整理的一些, 整合到这里</p>
-<h2 id="基础命令"><a href="#基础命令" class="headerlink" title="基础命令"></a>基础命令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">du -s .&#x2F;*	# 查看当前目录的占比</span><br><span class="line"></span><br><span class="line">		19M	.&#x2F;bin</span><br><span class="line">		4.0K	.&#x2F;etc</span><br><span class="line">		4.0K	.&#x2F;games</span><br><span class="line">		40K	.&#x2F;include</span><br><span class="line">		98M	.&#x2F;lib</span><br><span class="line">		55M	.&#x2F;lib64</span><br><span class="line">		7.8M	.&#x2F;libexec</span><br><span class="line">		132K	.&#x2F;local</span><br><span class="line">		24M	.&#x2F;sbin</span><br><span class="line">		182M	.&#x2F;share</span><br><span class="line">		12K	.&#x2F;src</span><br><span class="line">		0	.&#x2F;tmp</span><br></pre></td></tr></table></figure>
-<p><strong>vi</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">打开文件</span><br><span class="line">vi /path/to/somefile</span><br><span class="line">vi +#4 :打开文件，并定位于第#4行 </span><br><span class="line">vi + 打开文件，定位至最后一行</span><br><span class="line">vi +/PATTERN : 打开文件，定位至第一次被PATTERN匹配到的行的行首</span><br><span class="line"></span><br><span class="line">关闭文件</span><br><span class="line">:q! 不保存并退出  动过了，后悔了</span><br><span class="line">shift + zz 或直接两个大写Z: 保存并退出   不需要冒号，编辑模式</span><br><span class="line"></span><br><span class="line">移动</span><br><span class="line">f b 翻屏</span><br><span class="line">n ? 查找上一个下一个	</span><br><span class="line">w 下一个单词词首</span><br><span class="line">0 绝对行首 $绝对行位 ^首字符</span><br></pre></td></tr></table></figure>
-<p>** 限**</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">useradd lsmg001</span><br><span class="line">groupadd lsmg</span><br><span class="line"></span><br><span class="line">chown root:lsmg share # chown + 拥有者 + : + 拥有组 + 目录</span><br><span class="line">chmod o-rx share # chmod u(用户)g(组)o(其他人) + wrx </span><br><span class="line">可以用数字代表 wrx 4 2 1 最多为7代表wrx</span><br></pre></td></tr></table></figure>
-
-<p><strong>镜像更改</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:&#x2F;&#x2F;opsx.alibaba.com&#x2F;mirror?lang&#x3D;zh-CN</span><br></pre></td></tr></table></figure>
-
-<h2 id="网络配置"><a href="#网络配置" class="headerlink" title="网络配置"></a>网络配置</h2><ol>
-<li><code>etc/sysconfig/network-scripts/</code></li>
-</ol>
-<p>ifcfg-eth0 文件</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">DEVICE=eth0</span><br><span class="line"><span class="meta">#</span><span class="bash">HWADDR=00:0C:29:78:06:E4 <span class="comment"># 需要注释掉, 因为克隆虚拟机的时候mac地址会改变而文件不会改变, 导致两者不同</span></span></span><br><span class="line">TYPE=Ethernet</span><br><span class="line">UUID=effa4a9a-0ca5-414b-95c1-516a3b9f1d5d</span><br><span class="line">ONBOOT=yes	# 默认此网卡为关闭状态, linux是能关的功能就是关闭的</span><br><span class="line">NM_CONTROLLED=yes</span><br><span class="line">BOOTPROTO=static # 更改为静态方式, 需要配置以下四个选项</span><br><span class="line">IPADDR=192.168.9.31 # 需要在vm的地址段内 编辑-映射虚拟-NAT模式-子网ip</span><br><span class="line">NETMASK=255.255.255.0</span><br><span class="line">GATEWAY=192.168.9.2</span><br><span class="line">DNS1=114.114.114.114</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li><p>在 <code>etc/sysconfig</code> 中有一个network文件, </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">NETWORKING=yes</span><br><span class="line">HOSTNAME=node0001</span><br></pre></td></tr></table></figure></li>
-<li><p>在<code>/etc/</code>中的hosts文件可以修改映射</p>
-</li>
-<li><p>需要删除<code>/etc/udev/rules.d/70-persistent-net.rules</code>文件</p>
-</li>
-<li><p>关闭防火墙</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">servcie iptables stop                     --临时关闭防火墙</span><br><span class="line">chkconfig iptables off                    --永久关闭防火墙</span><br></pre></td></tr></table></figure></li>
-<li><p><code>vi /etc/selinux/config</code> 将SELINUX改为disabled</p>
-</li>
-</ol>
-]]></content>
-        
-        <categories>
-            
-            <category> Linux </category>
-            
-            <category> 入门学习 </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Linux </tag>
             
         </tags>
         
@@ -1700,54 +1920,6 @@ unique_ptr不支持普通的赋值和拷贝操作, 因为unique_ptr要独占所�
     </entry>
     
     <entry>
-        <title><![CDATA[2019年5月30日]]></title>
-        <url>http://blog.lsmg.xyz/2019/05/Linux-Ubuntu%25E7%259A%2584%25E5%25AE%2589%25E8%25A3%2585%25E4%25BB%25A5%25E5%258F%258A%25E7%25BE%258E%25E5%258C%2596/</url>
-        <content type="html"><![CDATA[<p>由于自己的电脑配置太低了。 没想到8G内存都不够netty项目吃的 CPU每次运行飙升。<br>所以来试一试Ubuntu<br>我把我整块硬盘格式化了 重装了win10系统 然后安装了ubuntu18.04STL 版本</p>
-<a id="more"></a>
-<h3 id="安装Ubuntu"><a href="#安装Ubuntu" class="headerlink" title="安装Ubuntu"></a>安装Ubuntu</h3><p>安装的时候出现了好多问题弄得我 重新装了一次。<br>出现的问题就是root文件夹里没有相关的启动项目， 无奈只能重新安装。<br>    —自己找了个U盘做了个启动盘才安装上。<br>最后选择的是共存， 使用Ubuntu来引导Win10 还可以吧就这样</p>
-<p><a href="https://www.sysgeek.cn/speed-up-ubuntu-linux-top-10/" target="_blank" rel="noopener">一些优化操作</a></p>
-<h3 id="既然用了Ubuntu怎么能没有界面的美化"><a href="#既然用了Ubuntu怎么能没有界面的美化" class="headerlink" title="既然用了Ubuntu怎么能没有界面的美化"></a>既然用了Ubuntu怎么能没有界面的美化</h3><p><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/%E6%9D%82%E9%A1%B9/Ubuntu1.png" alt=""><br>先上一张图片 就是这样子<br>之前用过黑苹果就安装了苹果的主题<br>参考的博客也挺多的</p>
-<p><a href="https://zhuanlan.zhihu.com/p/37314255" target="_blank" rel="noopener">Ubuntu 18.04 LTS 安装、美化</a></p>
-<p><a href="https://www.jianshu.com/p/4fb9f91a5866" target="_blank" rel="noopener">Ubuntu18.04美化主题(mac主题)</a></p>
-<p><a href="https://blog.csdn.net/zyqblog/article/details/80152016" target="_blank" rel="noopener">Gnome-shell Extensions安装 这个是好多的基础操作</a></p>
-<p><a href="https://blog.csdn.net/qq_32447361/article/details/85946268" target="_blank" rel="noopener">其中一个主题</a></p>
-<p><a href="https://jasongrass.gitee.io/2018-06-mac%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%BE%8E%E5%8C%96/" target="_blank" rel="noopener">怎么能少的了命令行</a><br><img src="./2019n5y30r/zsh.png" alt=""></p>
-<p><a href="https://blog.csdn.net/tecn14/article/details/24489031" target="_blank" rel="noopener">实时显示网速插件</a></p>
-<h3 id="怎么能少的了梯子"><a href="#怎么能少的了梯子" class="headerlink" title="怎么能少的了梯子?"></a>怎么能少的了梯子?</h3><p><a href="https://www.jianshu.com/p/9fd29c00d881" target="_blank" rel="noopener">作者的Github关闭了, 这是备份</a><br>开始用了各种办法, 最后还是找到了这个备份解决的问题 默默的fork一份</p>
-<h3 id="一些常用的软件"><a href="#一些常用的软件" class="headerlink" title="一些常用的软件"></a>一些常用的软件</h3><p>没想到 有搜狗输入法 不爽的是没有QQ和微信… 只能使用网页版微信来传输文件了. 目前有办法安装QQ不过还没有去查看</p>
-<p>IDEA 全家桶没想到也有Linux版本的 现在是通过命令行启动 等我以后找找有没有其他的便捷方式</p>
-<h3 id="一些小的问题"><a href="#一些小的问题" class="headerlink" title="一些小的问题"></a>一些小的问题</h3><p>比如文件夹 桌面 这类中文的改成了英文, 中文的话不太好打出来</p>
-<p><a href="https://www.cnblogs.com/vincent-hv/p/3348920.html" target="_blank" rel="noopener">【原】中文Ubuntu主目录下的文档文件夹改回英文</a></p>
-<p>打开终端，在终端中输入命令:<br>export LANG=en_US<br>xdg-user-dirs-gtk-update<br>在弹出的窗口中询问是否将目录转化为英文路径,同意并关闭.<br>在终端中输入命令:<br>export LANG=zh_CN<br>关闭终端,并注销或重启.下次进入系统,系统会提示是否把转化好的目录改回中文.选择不许要并且勾上不再提示,并取消修改.主目录的中文转英文就完成了~</p>
-<p>markdown编辑器使用了atom 这个编辑器喜欢上了,</p>
-<h3 id="一个神奇的网站"><a href="#一个神奇的网站" class="headerlink" title="一个神奇的网站"></a>一个神奇的网站</h3><p>可以无损放大图片!!!!</p>
-<p><a href="http://waifu2x.udp.jp/index.zh-CN.html" target="_blank" rel="noopener">中文网页</a></p>
-<p>本程序使用卷积神经网络对动漫风格的图片进行放大操作（支持照片）。<br>…咋也不懂啥是 卷积神经网络</p>
-<p><img src="http://wx1.sinaimg.cn/large/0066wpcPly1g29v0exyslj306o06o3yo.jpg" alt=""></p>
-<h3 id="Ubuntu-快捷方式制作"><a href="#Ubuntu-快捷方式制作" class="headerlink" title="Ubuntu 快捷方式制作"></a>Ubuntu 快捷方式制作</h3><p>2019年05月30日21:51:14</p>
-<p>[Desktop Entry]<br>Encoding=UTF-8<br>Version=1.0<br>Name=图标名称<br>GenericName=Java IDE<br>Comment= 这里是描述<br>Exec=sh /home/lsmg/software/idea-IU-191.7479.19/bin/idea.sh<br>Icon=/home/lsmg/software/idea-IU-191.7479.19/bin/idea.png<br>Terminal=false<br>Type=Application<br>StartupNotify=true<br>StartupWMClass=jetbrains-idea<br>Categories=Development;IDE</p>
-<p>Exec后写sh完整路径<br>Icon后写完整图标路径<br>StartupWMClass 这个设置正确则会显示小点 而不是显示多个图标</p>
-<p><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/%E6%9D%82%E9%A1%B9/Ubuntu2.png" alt=""></p>
-]]></content>
-        
-        <categories>
-            
-            <category> Linux </category>
-            
-            <category> Ubuntu </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> 使用Ubuntu </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
         <title><![CDATA[Java设计模式]]></title>
         <url>http://blog.lsmg.xyz/2019/05/Java-%25E8%25AE%25BE%25E8%25AE%25A1%25E6%25A8%25A1%25E5%25BC%258F/</url>
         <content type="html"><![CDATA[<div class="alert-red">Java设计模式</div>
@@ -1967,87 +2139,6 @@ unique_ptr不支持普通的赋值和拷贝操作, 因为unique_ptr要独占所�
         <categories>
             
             <category> Java </category>
-            
-        </categories>
-        
-        
-    </entry>
-    
-    <entry>
-        <title><![CDATA[windows终端设置]]></title>
-        <url>http://blog.lsmg.xyz/2019/04/Windows-%25E7%25BB%2588%25E7%25AB%25AF%25E4%25BD%25BF%25E7%2594%25A8/</url>
-        <content type="html"><![CDATA[<div class="alert-red">今天和明天重装了系统配置电脑ing</div>
-<div class="alert-blue">wsl-terminal终端的使用</div>
-<div class="alert-green"></div>
-<a id="more"></a>
-
-<p>先放两张完成图噗噗噗<br><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/%E6%9D%82%E9%A1%B9/Windows%E7%BB%88%E7%AB%AF%E4%BD%BF%E7%94%A81.png" alt=""><br><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/%E6%9D%82%E9%A1%B9/Windows%E7%BB%88%E7%AB%AF%E4%BD%BF%E7%94%A82.png" alt=""></p>
-<h4 id="windows一直没有一个好用的终端-昨天苦苦查找终于找到了下面是从零开始的配置"><a href="#windows一直没有一个好用的终端-昨天苦苦查找终于找到了下面是从零开始的配置" class="headerlink" title="windows一直没有一个好用的终端 昨天苦苦查找终于找到了下面是从零开始的配置"></a>windows一直没有一个好用的终端 昨天苦苦查找终于找到了下面是从零开始的配置</h4><p><a href="https://goreliu.github.io/wsl-terminal/README.zh_CN.html" target="_blank" rel="noopener">来源</a><br>从<a href="https://github.com/goreliu/wsl-terminal/releases" target="_blank" rel="noopener">这里</a>下载最新版本并解压</p>
-<p>运行 open-wsl.exe 可以在当前目录打开一个 WSL 终端模拟器 *<em>没错你会发现你怎么都打不开2333333333 *</em></p>
-<p>运行 tools/1-add-open-wsl-terminal-here-menu.js (帮助) 来添加一个 Open wsl-terminal Here 右键菜单到资源管理器上 (运行 tools/1-remove-open-wsl-terminal-here-menu.js 可以将其删除）</p>
-<hr>
-<p><a href="https://www.jianshu.com/p/b147735ff3f2" target="_blank" rel="noopener">来源</a></p>
-<h4 id="设置-gt-搜索启用或关闭Windows功能-gt-在选项中勾上使用于Linux的Windows子系统"><a href="#设置-gt-搜索启用或关闭Windows功能-gt-在选项中勾上使用于Linux的Windows子系统" class="headerlink" title="设置-&gt;搜索启用或关闭Windows功能-&gt;在选项中勾上使用于Linux的Windows子系统:"></a>设置-&gt;搜索启用或关闭Windows功能-&gt;在选项中勾上使用于Linux的Windows子系统:</h4><p><img src="http://ww1.sinaimg.cn/mw690/7de3675bgy1fg9pi8iighj20bx0bt3zb.jpg" alt=""><br>重启电脑</p>
-<h4 id="安装WSL"><a href="#安装WSL" class="headerlink" title="安装WSL"></a>安装WSL</h4><p>打开Win10应用商店，搜索Ubuntu，进行安装。安装成功后，在开始菜单中输入Ubuntu即可启动linux终端。<br><img src="https://upload-images.jianshu.io/upload_images/12990480-38923fd90957cbb0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/493/format/webp" alt=""><br>等上小10分钟 输入账号密码 安装成功</p>
-<p>等你安装完就会发现上边下载的可以打开了 意不意外.</p>
-<p>不行我要美化他</p>
-<h3 id="美化设置"><a href="#美化设置" class="headerlink" title="美化设置"></a>美化设置</h3><p><a href="https://www.jianshu.com/p/b147735ff3f2" target="_blank" rel="noopener">来源</a></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install zsh</span><br><span class="line">sh -c <span class="string">"<span class="variable">$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)</span>"</span></span><br></pre></td></tr></table></figure>
-<p>要让我们的终端变得更加漂亮，要配置两个部分：zsh主题（zsh theme）和终端的颜色主题（Color Theme）</p>
-<h4 id="zsh主题（zsh-theme"><a href="#zsh主题（zsh-theme" class="headerlink" title="zsh主题（zsh theme)"></a>zsh主题（zsh theme)</h4><p>由于使用了oh-my-zsh，修改zsh的主题很容易，只要编辑~/.zshrc(直接输入 vim ~/.zshrc)文件，找到ZSH_THEME一行，改为agnoster即可<br><img src="https://upload-images.jianshu.io/upload_images/12990480-56f8f82cfbae3959.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/319/format/webp" alt=""></p>
-<h4 id="终端的颜色主题（Color-Theme）"><a href="#终端的颜色主题（Color-Theme）" class="headerlink" title="终端的颜色主题（Color Theme）"></a>终端的颜色主题（Color Theme）</h4><p>但是Windows默认终端的Color Theme改起来比较费劲，需要使用一个叫做colortool的工具。他是微软自带的一个修改终端配色方案的工具<br>首先在<a href="https://github.com/Microsoft/console/releases" target="_blank" rel="noopener">这里</a> 下载压缩包</p>
-<p>下载<code>colortool.zip</code>并解压后，进入文件夹，按住<code>shift并点击右键</code>选择在此处打开Powershell窗口<br>输入</p>
-<pre><code>.\colortool.exe -d solarized_dark</code></pre><p>回到wsl输入</p>
-<pre><code>source ~/.zshrc</code></pre><h4 id="这个字体要安装上"><a href="#这个字体要安装上" class="headerlink" title="这个字体要安装上"></a>这个字体要安装上</h4><p><a href="https://raw.githubusercontent.com/tonsky/FiraCode/master/distr/ttf/FiraCode-Retina.ttf" target="_blank" rel="noopener">下载</a><br><img src="https://upload-images.jianshu.io/upload_images/12990480-d8d28bcfb8e54925.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/889/format/webp" alt=""></p>
-<p>安装好右键wsl的标题栏 选项 文本 选择(选择刚才的FiraCode-Retina)</p>
-<h4 id="插件篇"><a href="#插件篇" class="headerlink" title="插件篇"></a>插件篇</h4><p>插件repo<br><a href="https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md#oh-my-zsh" target="_blank" rel="noopener">https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md#oh-my-zsh</a><br><a href="https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md" target="_blank" rel="noopener">https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md</a><br>这两个插件可以让你在终端输入命令时有语法高亮和自动补全。</p>
-<p>自动补全了后面的路径<br><img src="https://upload-images.jianshu.io/upload_images/12990480-9c4aa71dfe25f4da.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/793/format/webp" alt=""><br>错误的命令会显示成红色<br><img src="https://upload-images.jianshu.io/upload_images/12990480-e011eb347ba2215d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/677/format/webp" alt=""></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/zsh-users/zsh-syntax-highlighting.git <span class="variable">$&#123;ZSH_CUSTOM:-~/.oh-my-zsh/custom&#125;</span>/plugins/zsh-syntax-highlighting</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/zsh-users/zsh-autosuggestions <span class="variable">$&#123;ZSH_CUSTOM:-~/.oh-my-zsh/custom&#125;</span>/plugins/zsh-autosuggestions</span><br></pre></td></tr></table></figure>
-
-<p>完毕后输入 vim ~/.zshrc<br>找到plugins=(git)这一行 改为<br>plugins=(git colored-man-pages zsh-autosuggestions zsh-syntax-highlighting)</p>
-<h3 id="修改完了设置wsl启动后默认zsh"><a href="#修改完了设置wsl启动后默认zsh" class="headerlink" title="修改完了设置wsl启动后默认zsh"></a>修改完了设置wsl启动后默认zsh</h3><p>输入<br>vim ~/.bashrc<br>然后加入 <code>bash -c zsh</code><br>重新启动wsl吧</p>
-<h3 id="问题处理篇"><a href="#问题处理篇" class="headerlink" title="问题处理篇"></a>问题处理篇</h3><h4 id="如果你上边配置完了-重启发现多了好多字符提示你权限问题"><a href="#如果你上边配置完了-重启发现多了好多字符提示你权限问题" class="headerlink" title="如果你上边配置完了 重启发现多了好多字符提示你权限问题"></a>如果你上边配置完了 重启发现多了好多字符提示你权限问题</h4><p>chmod 755 问题路径 就可以了</p>
-<h4 id="方向键和滑轮乱码"><a href="#方向键和滑轮乱码" class="headerlink" title="方向键和滑轮乱码"></a>方向键和滑轮乱码</h4><p><a href="https://blog.csdn.net/as82984895ok/article/details/52067948" target="_blank" rel="noopener">来源</a></p>
-<p>sudo vim /etc/vim/vimrc.tiny<br>set compatible–&gt;改为 set nocompatible<br>在下面加上 set backspace=2</p>
-<p>就好了</p>
-<p>sudo chmod 777 /etc/vim/vimrc<br>修改权限</p>
-]]></content>
-        
-        <categories>
-            
-            <category> Windows </category>
-            
-            <category> 终端 </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> windows终端设置 </tag>
-            
-            <tag> 大量的此终端优化 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-        <title><![CDATA[隐藏dos窗口]]></title>
-        <url>http://blog.lsmg.xyz/2019/03/Windows-%25E9%259A%2590%25E8%2597%258FDos%25E7%25AA%2597%25E5%258F%25A3/</url>
-        <content type="html"><![CDATA[<a id="more"></a>
-
-<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> "%<span class="number">1</span>"=="hide" <span class="keyword">goto</span> CmdBegin</span><br><span class="line">	<span class="built_in">start</span> mshta vbscript:createobject("wscript.shell").run("""%~<span class="number">0</span>"" hide",<span class="number">0</span>)(window.close)&amp;&amp;<span class="keyword">exit</span></span><br><span class="line">:CmdBegin</span><br></pre></td></tr></table></figure>
-<p>bat开头加上这段可以 隐藏dos窗口</p>
-<p>jre\bin\java -jar Demo.jar 用这种方式就可以独立的jar运行了</p>
-<p>完整代码</p>
-<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> "%<span class="number">1</span>"=="hide" <span class="keyword">goto</span> CmdBegin</span><br><span class="line">	<span class="built_in">start</span> mshta vbscript:createobject("wscript.shell").run("""%~<span class="number">0</span>"" hide",<span class="number">0</span>)(window.close)&amp;&amp;<span class="keyword">exit</span></span><br><span class="line">:CmdBegin</span><br><span class="line">jre\bin\java -jar Demo.jar</span><br></pre></td></tr></table></figure>]]></content>
-        
-        <categories>
-            
-            <category> Windows </category>
-            
-            <category> Dos </category>
             
         </categories>
         
