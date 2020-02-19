@@ -3,6 +3,72 @@
     
     
     <entry>
+        <title><![CDATA[学校笔记]]></title>
+        <url>http://blog.lsmg.xyz/2020/02/%25E6%2595%25B0%25E6%258D%25AE%25E5%25BA%2593-%25E7%2590%2586%25E8%25AE%25BA%25E7%259F%25A5%25E8%25AF%2586-%25E5%25AD%25A6%25E6%25A0%25A1%25E7%25AC%2594%25E8%25AE%25B0/</url>
+        <content type="html"><![CDATA[<h1 id="2020年2月19日-第二次课"><a href="#2020年2月19日-第二次课" class="headerlink" title="2020年2月19日 第二次课"></a>2020年2月19日 第二次课</h1><p><strong>数据库是如何产生的</strong><br>数据存储从古至今都很重要</p>
+<p>人工管理阶段<br>数据和程序混合在一起 - 数据不共享, 不具备独立性<br>程序员需要规定好数据的逻辑结构. 设定物理结构 - 我太难了</p>
+<p>文件系统阶段<br>有了专门的管理系统  数据可以长期保存, 可以被多个程序使用</p>
+<ol>
+<li>数据冗余度大, 共享性差, 易产生数据的不一致<br>共享性差-&gt; 由于早期系统的用户和用户组等设置, 相同的数据也必须放在各自的文件中<br>易产生数据的不一致-&gt;各自维护自己的信息</li>
+<li>独立性差<br>修改数据的存储结构 必须修改对应的程序</li>
+<li>用户负担重</li>
+<li>无结构</li>
+<li>一般不支持并发访问</li>
+</ol>
+<p>产生了数据库系统阶段</p>
+<p><strong>数据库系统和文件系统的区别？</strong><br>文件系统-&gt;整体无结构 数据和文件缺乏独立性, 程序需要特定的算法才能读写文件, 不便于修改<br>数据库系统-&gt;有结构 数据库通过分层实现了修改程序 数据库的数据不用改 只需要改动映射</p>
+<p><strong>数据库系统的特点</strong><br>数据结构化<br>冗余度低, 共享高, 避免了文件的不一致. -&gt;不同部门所使用同一数据库<br>数据独立性 全局逻辑结构和局部的独立性 全局逻辑结构和物理存储结构独立性<br>由DBMS统一管控 安全保护 完整保护 并发控制 数据库恢复<br><strong>数据库系统的三个里程碑</strong><br><code>层次数据库</code>-&gt;<code>网状数据库</code>-&gt;<code>关系模型</code></p>
+<p>第一代<br><code>层次数据库</code><br>树形结构 - 树结构<br>优点: 逻辑清晰, 查询速率较高, 结构清晰简单<br>缺点: 现实中很多是非层次性的, 不适用于层次管理, 而且查询子女节点必须要通过双亲, 太过结构严密</p>
+<p><code>网状数据库</code><br>网状结构 - 图结构<br>优点: 能够更好地描述现实世界<br>缺点: 最终结构会越来越复杂<br>第二代<br><code>关系模型</code><br>用表结构</p>
+<p>第三代<br>无典型代表</p>
+<p><strong>建立数据模型的要求</strong><br><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/%E6%95%B0%E6%8D%AE%E5%BA%93/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/%E7%AC%94%E8%AE%B0-%E5%BB%BA%E7%AB%8B%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B%E7%9A%84%E8%A6%81%E6%B1%82.png" alt=""><br>1）真实性<br>2）易理解<br>3）易实现</p>
+<p>概念数据模型(E-R模型) - 面向用户<br>逻辑数据模型(层次, 网状, 关系模型, 面向对象模型) - 面向系统和用户 - 概念的结构抽象<br>物理数据模型 - 面向系统 - 对应逻辑结构模型的存储方式<br><strong>数据模型的组成三要素</strong><br>数据结构 - 层次 网状 关系 对象<br>数据操作 - 增删改查的规定和实现方式<br>数据的约束条件</p>
+<p><strong>你对E-R图的理解</strong></p>
+]]></content>
+        
+        <categories>
+            
+            <category> 数据库 </category>
+            
+            <category> 理论知识 </category>
+            
+        </categories>
+        
+        
+    </entry>
+    
+    <entry>
+        <title><![CDATA[联机打砖块]]></title>
+        <url>http://blog.lsmg.xyz/2020/02/%25E5%25B0%258F%25E6%25B8%25B8%25E6%2588%258F-%25E8%2581%2594%25E6%259C%25BA%25E6%2589%2593%25E7%25A0%2596%25E5%259D%2597/</url>
+        <content type="html"><![CDATA[<p>这篇博客写的有点晚了, 自己的打砖块 已经写了一个段落了. 不过问题不大.</p>
+<p>重要的部分还在后面, 目前还没写到</p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>因为自己发现需要多做一些项目, 然后逐渐的丰富这些项目 来学习. 希望不断地提升自己, 让自己离鹅厂越来越近. 同时写博客能够让我了解得更深刻</p>
+<p>在看到知乎<code>日撸代码100行</code>的一篇推荐博客</p>
+<p><a href="https://zhuanlan.zhihu.com/p/92422059" target="_blank" rel="noopener">UE4的C++教程汇总 - 日撸代码100行的文章 - 知乎</a><br>找到了那个油管的游戏制作.</p>
+<p><a href="https://www.youtube.com/playlist?list=PLZhNP5qJ2IA0KK3ddSl2JWEL8jOcGe6xY" target="_blank" rel="noopener">这个连接-Unreal Engine 4 Tutorials</a><br>选择了一个游戏-打砖块</p>
+<p>那个小游戏还是很简单的 也学到了不少的东西. 不过我想了想 我既然是做游戏服务器, 我为什么不把打砖块修改成联机版打砖块??   不对!!!!我想把那个博主发布的我喜欢的游戏都改成联机版. 然后慢慢丰富游戏前端和后端的功能, 想到这里 我晚上失眠了…. 越想越兴奋.</p>
+<p>自己的话 注意下代码复用. 尤其是后端的代码. 每次把经常用的代码块抽出来 然后总结出一个自己的框架?库?</p>
+<h1 id="联机的实现"><a href="#联机的实现" class="headerlink" title="联机的实现"></a>联机的实现</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// a.h</span></span><br><span class="line">UFUNCTION(BlueprintCallable, Category = <span class="string">"TCP Network"</span>)</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">CreateSocket</span><span class="params">(<span class="keyword">const</span> FString IPStr, int32 Port)</span></span>;</span><br><span class="line"></span><br><span class="line">UFUNCTION(BlueprintCallable, Category = <span class="string">"TCP Network"</span>)</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">SendMessage</span><span class="params">(FString Msg)</span></span>;</span><br><span class="line"></span><br><span class="line">UFUNCTION(BlueprintCallable, Category = <span class="string">"TCP Network"</span>)</span><br><span class="line"><span class="function">FString <span class="title">RecvMessage</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function">FString <span class="title">StringFromUint8Array</span><span class="params">(TArray&lt;uint8&gt; Array)</span></span>;</span><br><span class="line"></span><br><span class="line">FIPv4Address Ip;</span><br><span class="line"></span><br><span class="line">FSocket* ClientFd;</span><br><span class="line"></span><br><span class="line"><span class="comment">// a.cpp</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">ANetActor::CreateSocket</span><span class="params">(<span class="keyword">const</span> FString IPStr, int32 Port)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">// 将字符串ip转换为点分十进制ip</span></span><br><span class="line">	FIPv4Address::Parse(IPStr, Ip);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 将十进制ip 转化成网络地址</span></span><br><span class="line">	TSharedPtr&lt;FInternetAddr&gt; addr = ISocketSubsystem::Get(PLATFORM_SOCKETSUBSYSTEM)-&gt;CreateInternetAddr();</span><br><span class="line">	addr-&gt;SetIp(Ip.Value);</span><br><span class="line">	addr-&gt;SetPort(Port);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 创建TCP Socket 文件描述符</span></span><br><span class="line">	ClientFd = ISocketSubsystem::Get(PLATFORM_SOCKETSUBSYSTEM)-&gt;CreateSocket(NAME_Stream, TEXT(<span class="string">"TCP SOCKET"</span>), <span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span> (ClientFd-&gt;Connect(*addr))</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// 连接成功</span></span><br><span class="line">		UE_LOG(LogTemp, Warning, TEXT(<span class="string">"Connect success!"</span>));</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// 连接失败</span></span><br><span class="line">		UE_LOG(LogTemp, Warning, TEXT(<span class="string">"Connect failed!"</span>));</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">ANetActor::SendMessage</span><span class="params">(FString Msg)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//后面直接传送json数据</span></span><br><span class="line">	TCHAR* SeriallizedMsg = Msg.GetCharArray().GetData();</span><br><span class="line">	int32 MsgSize = FCString::Strlen(SeriallizedMsg);</span><br><span class="line">	int32 Send = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (ClientFd-&gt;Send((uint8*)TCHAR_TO_UTF8(SeriallizedMsg), MsgSize, Send))</span><br><span class="line">	&#123;</span><br><span class="line">		UE_LOG(LogTemp, Log, TEXT(<span class="string">"MsgSend-Success-&gt;%s"</span>), *Msg);</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		UE_LOG(LogTemp, Log, TEXT(<span class="string">"MsgSend-Failed-&gt;%s"</span>), *Msg);</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">FString <span class="title">ANetActor::RecvMessage</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (!ClientFd)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	TArray&lt;uint8&gt; RecvData;</span><br><span class="line">	uint32 Size;</span><br><span class="line">	uint32 Element = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (ClientFd-&gt;HasPendingData(Size))</span><br><span class="line">	&#123;</span><br><span class="line">		RecvData.Init(Element, FMath::Min(Size, <span class="number">65507u</span>)); <span class="comment">// 65535 - 20 Ip头 - 8 Tcp头</span></span><br><span class="line">		int32 Read = <span class="number">0</span>;</span><br><span class="line">		ClientFd-&gt;Recv(RecvData.GetData(), RecvData.Num(), Read);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (RecvData.Num() &lt;= <span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">const</span> FString RecvJsonString = StringFromUint8Array(RecvData);</span><br><span class="line">	UE_LOG(LogTemp, Log, TEXT(<span class="string">"MsgRecv-Success-&gt;%s"</span>), *RecvJsonString);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> RecvJsonString;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>蓝图连接<br><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/%E5%B0%8F%E6%B8%B8%E6%88%8F/%E6%89%93%E7%A0%96%E5%9D%97/socket%E8%93%9D%E5%9B%BE.png" alt=""></p>
+<p>这样就能连接到TCP的后台了</p>
+]]></content>
+        
+        <categories>
+            
+            <category> 小游戏 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 小游戏 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
         <title><![CDATA[3DMAX快捷键及基础知识]]></title>
         <url>http://blog.lsmg.xyz/2020/02/3DMAX-3dmax%25E5%25BF%25AB%25E6%258D%25B7%25E9%2594%25AE%25E5%258F%258A%25E5%259F%25BA%25E7%25A1%2580%25E7%259F%25A5%25E8%25AF%2586/</url>
         <content type="html"><![CDATA[<p>由于自己日后可能需要使用3d建模, 所以今天学习了下. 为了速成 看的B站的一个视频. 感觉效果还行吧.<br>基础的建模可以完成了, 后续需要的话 再继续学习</p>
