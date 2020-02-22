@@ -117,7 +117,7 @@
   <h3 class="fa fa-tags widget-title">Tag Cloud</h3>
   <div class="tagcloud-content">
     
-      <a href="/tags/3DMAX/" style="font-size: 0.14rem; color: #69c">3DMAX</a> <a href="/tags/CPP%E8%B8%A9%E5%9D%91%E8%AE%B0/" style="font-size: 0.14rem; color: #69c">CPP踩坑记</a> <a href="/tags/CPP/" style="font-size: 0.14rem; color: #69c">CPP</a> <a href="/tags/Mysql/" style="font-size: 0.14rem; color: #69c">Mysql</a> <a href="/tags/Git%E6%93%8D%E4%BD%9C/" style="font-size: 0.14rem; color: #69c">Git操作</a> <a href="/tags/%E5%B0%8F%E6%B8%B8%E6%88%8F/" style="font-size: 0.14rem; color: #69c">小游戏</a>
+      <a href="/tags/3DMAX/" style="font-size: 0.14rem; color: #69c">3DMAX</a> <a href="/tags/CPP%E8%B8%A9%E5%9D%91%E8%AE%B0/" style="font-size: 0.14rem; color: #69c">CPP踩坑记</a> <a href="/tags/CPP/" style="font-size: 0.14rem; color: #69c">CPP</a> <a href="/tags/Git%E6%93%8D%E4%BD%9C/" style="font-size: 0.14rem; color: #69c">Git操作</a> <a href="/tags/Mysql/" style="font-size: 0.14rem; color: #69c">Mysql</a> <a href="/tags/%E5%B0%8F%E6%B8%B8%E6%88%8F/" style="font-size: 0.14rem; color: #69c">小游戏</a>
   </div>
 </li>
 
@@ -181,7 +181,7 @@
         
         <div id="post-body">
             <p>之前的Git博客 写的终于是自己都看不下去了. 所以打算来重新写一个博客<br>这篇博客主要还是参照的廖雪峰的Git博客<br>自己只做整理方便自己察看</p>
-<p>2020年2月7日18:49:25 再来重新编辑下这些内容</p>
+<p>2020年2月7日18:49:25 再来重新编辑下这些内容<br>2020年2月22日17:29:17 再次更新内容 增加commit规范</p>
 <h1 id="命令总结"><a href="#命令总结" class="headerlink" title="命令总结"></a>命令总结</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"># -t Specifies the type of key to create.  The possible values are</span><br><span class="line">#“dsa”, “ecdsa”, “ed25519”, or “rsa”.</span><br><span class="line"># -C 生成注释 ...所以后面的邮箱就是个注释????</span><br><span class="line">ssh-keygen -t rsa -C &quot;youremail@example.com&quot;</span><br><span class="line"></span><br><span class="line">git init</span><br><span class="line">git add &lt;file&gt;</span><br><span class="line">git commit -m &lt;message&gt;</span><br><span class="line">git remote add origin  # origin 意为远程库的名字, git的默认叫法</span><br><span class="line"></span><br><span class="line">git status</span><br><span class="line">git diff</span><br><span class="line">git log</span><br><span class="line">git log --pretty&#x3D;oneline # 简单显示</span><br><span class="line"></span><br><span class="line"># 注意reset是恢复到上一个版本 即为你上一次commit版本或者pull最近的一次</span><br><span class="line">git checkout --&lt;filename&gt; # 恢复工作区, 可用于恢复修改和恢复勿删文件</span><br><span class="line">git reset HEAD &lt;file&gt; # 恢复暂存区</span><br><span class="line">git reset HEAD^ # 恢复版本库</span><br><span class="line">git reset --hard &lt;hash版本号 即为log中的一串英文字母, 只需要前几个字母即可&gt;</span><br><span class="line">git reflog # 所有版本日志</span><br><span class="line"></span><br><span class="line">git rm 从版本库中删除文件</span><br><span class="line"></span><br><span class="line">git push -u origin master # 带上 -u 以后提交就不需要加入origin master, 类似记忆功能</span><br><span class="line"></span><br><span class="line">&#96;git checkout -b dev&#96; #相当于一下两条命令</span><br><span class="line">&#96;git branch dev&#96; # 分支创建</span><br><span class="line">&#96;git checkout dev&#96; # 分支切换</span><br><span class="line">&#96;git branch -d dev&#96; # 分支删除</span><br><span class="line">&#96;git branch&#96; # 查看当前所有分支</span><br><span class="line">&#96;git merge dev&#96; # 将制定的dev分支合并到当前的分支</span><br></pre></td></tr></table></figure>
 
 <h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><p>首先把Git的三个区说明一下吧 自己后来慢慢感觉这些理论还是很重要的<br><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/%E6%9D%82%E9%A1%B9/Git%E4%B8%89%E5%A4%A7%E5%88%86%E5%8C%BA.png" alt=""><br>工作区<br>顾名思义, 你当前在IDE直接修改的代码全部都是位于工作区的代码<br>暂存区<br>暂时存取的区域, 你每次使用add提交的文件全部在这个区域中, 这些文件等待你的commit<br>版本库<br>这里存放的是若干个版本, 你每次的commit就是将暂存区的文件作为一个版本提交到版本库, 同时相应的文件被提交后 暂存区的文件被清除</p>
@@ -224,6 +224,36 @@
 <li><strong>release</strong>:发布分支, 用于修改版本号等小修改, 来自<code>develop</code>分支合并到<code>master</code>分支</li>
 <li><strong>hotfixes</strong>:紧急修复bug分支, 从<code>master</code>创建, 合并回<code>develop</code>分支和<code>master</code>分支<br><img src="https://pic4.zhimg.com/80/v2-aef704a4c112eaaf5e8637587ee17df3_hd.jpg" alt=""></li>
 </ul>
+<h1 id="commit-规范"><a href="#commit-规范" class="headerlink" title="commit 规范"></a>commit 规范</h1><p><a href="https://www.ruanyifeng.com/blog/2016/01/commit_message_change_log.html" target="_blank" rel="noopener">阮一峰 Commit message 和 Change log 编写指南</a></p>
+<p>Angular 规范.<br>每个commit message 包括三分部<br>Header Body 和 Footer</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;type&gt;(&lt;scope&gt;): &lt;subject&gt; &#x2F;&#x2F; 必须</span><br><span class="line">&#x2F;&#x2F; 空一行</span><br><span class="line">&lt;body&gt; &#x2F;&#x2F; 非必须</span><br><span class="line">&#x2F;&#x2F; 空一行</span><br><span class="line">&lt;footer&gt; &#x2F;&#x2F;非必须</span><br></pre></td></tr></table></figure>
+<p><strong>Header</strong></p>
+<ol>
+<li>type 必需 - 说明commit的类别, 只允许下面七个标识</li>
+</ol>
+<ul>
+<li>feat：新功能（feature）</li>
+<li>fix：修补bug</li>
+<li>docs：文档（documentation）</li>
+<li>style： 格式（不影响代码运行的变动）</li>
+<li>refactor：重构（即不是新增功能，也不是修改bug的代码变动）</li>
+<li>test：增加测试</li>
+<li>chore：构建过程或辅助工具的变动</li>
+</ul>
+<ol start="2">
+<li><p>scope 非必需 - 用于说明 commit影响的范围<br>比如登录、注册、充值逻辑等等，视项目不同而不同。</p>
+</li>
+<li><p>subject 必需 - commit 目的的简短描述 </p>
+</li>
+</ol>
+<ul>
+<li>不超过50字符 </li>
+<li>第一人称现在时动词开头</li>
+<li>首字母小写</li>
+<li>句尾不加句号</li>
+</ul>
+<p><strong>Body</strong><br>本次commit的详细描述, 可以分成多行</p>
+<p><strong>Footer</strong><br>只用于两种情况 目前用不动 不摘了</p>
 
         </div>
         <div id="post-footer">
@@ -243,7 +273,7 @@
                 
                 <li>Published Date: <span>2020-02-07  18:24:42</span></li>
                 
-                <li>Updated Date: <span>2020-02-08  12:12:58</span></li>
+                <li>Updated Date: <span>2020-02-22  17:44:40</span></li>
                 
                 <li class="post-category">
                     Categories:
@@ -354,7 +384,7 @@
     </div>
 </div>
 
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#命令总结"><span class="toc-number">1.</span> <span class="toc-text">命令总结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#基本概念"><span class="toc-number">2.</span> <span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#基础的操作"><span class="toc-number">3.</span> <span class="toc-text">基础的操作</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#时光穿梭机"><span class="toc-number">4.</span> <span class="toc-text">时光穿梭机</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#分支管理"><span class="toc-number">5.</span> <span class="toc-text">分支管理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实际工作中分支的应用"><span class="toc-number">6.</span> <span class="toc-text">实际工作中分支的应用</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#命令总结"><span class="toc-number">1.</span> <span class="toc-text">命令总结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#基本概念"><span class="toc-number">2.</span> <span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#基础的操作"><span class="toc-number">3.</span> <span class="toc-text">基础的操作</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#时光穿梭机"><span class="toc-number">4.</span> <span class="toc-text">时光穿梭机</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#分支管理"><span class="toc-number">5.</span> <span class="toc-text">分支管理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实际工作中分支的应用"><span class="toc-number">6.</span> <span class="toc-text">实际工作中分支的应用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#commit-规范"><span class="toc-number">7.</span> <span class="toc-text">commit 规范</span></a></li></ol>
 
 
 

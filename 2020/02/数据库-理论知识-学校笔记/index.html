@@ -117,7 +117,7 @@
   <h3 class="fa fa-tags widget-title">Tag Cloud</h3>
   <div class="tagcloud-content">
     
-      <a href="/tags/3DMAX/" style="font-size: 0.14rem; color: #69c">3DMAX</a> <a href="/tags/CPP%E8%B8%A9%E5%9D%91%E8%AE%B0/" style="font-size: 0.14rem; color: #69c">CPP踩坑记</a> <a href="/tags/CPP/" style="font-size: 0.14rem; color: #69c">CPP</a> <a href="/tags/Mysql/" style="font-size: 0.14rem; color: #69c">Mysql</a> <a href="/tags/Git%E6%93%8D%E4%BD%9C/" style="font-size: 0.14rem; color: #69c">Git操作</a> <a href="/tags/%E5%B0%8F%E6%B8%B8%E6%88%8F/" style="font-size: 0.14rem; color: #69c">小游戏</a>
+      <a href="/tags/3DMAX/" style="font-size: 0.14rem; color: #69c">3DMAX</a> <a href="/tags/CPP%E8%B8%A9%E5%9D%91%E8%AE%B0/" style="font-size: 0.14rem; color: #69c">CPP踩坑记</a> <a href="/tags/CPP/" style="font-size: 0.14rem; color: #69c">CPP</a> <a href="/tags/Git%E6%93%8D%E4%BD%9C/" style="font-size: 0.14rem; color: #69c">Git操作</a> <a href="/tags/Mysql/" style="font-size: 0.14rem; color: #69c">Mysql</a> <a href="/tags/%E5%B0%8F%E6%B8%B8%E6%88%8F/" style="font-size: 0.14rem; color: #69c">小游戏</a>
   </div>
 </li>
 
@@ -199,6 +199,35 @@
 <p><strong>建立数据模型的要求</strong><br><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/%E6%95%B0%E6%8D%AE%E5%BA%93/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/%E7%AC%94%E8%AE%B0-%E5%BB%BA%E7%AB%8B%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B%E7%9A%84%E8%A6%81%E6%B1%82.png" alt=""><br>1）真实性<br>2）易理解<br>3）易实现</p>
 <p>概念数据模型(E-R模型) - 面向用户<br>逻辑数据模型(层次, 网状, 关系模型, 面向对象模型) - 面向系统和用户 - 概念的结构抽象<br>物理数据模型 - 面向系统 - 对应逻辑结构模型的存储方式<br><strong>数据模型的组成三要素</strong><br>数据结构 - 层次 网状 关系 对象<br>数据操作 - 增删改查的规定和实现方式<br>数据的约束条件</p>
 <p><strong>你对E-R图的理解</strong></p>
+<h1 id="2020年2月21日-第三次课"><a href="#2020年2月21日-第三次课" class="headerlink" title="2020年2月21日 第三次课"></a>2020年2月21日 第三次课</h1><ol>
+<li>什么是实体、实体集、实体特性、实体标识符？举例说明。<br>实体：客观存在并可相互区别的个体.<br>二刺猿网站</li>
+</ol>
+<p>实体集：同一类实体的所有实例<br>A B P站三个二次元网站这个实体的实例 构成实体集</p>
+<p>实体特性：描述实体的主要特征。<br>网站名字<br>域名</p>
+<p>实体标识符：唯一能确定实体集中某个实体的最小实体特性集。<br>名字不同<br>域名不同</p>
+<p><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/%E6%95%B0%E6%8D%AE%E5%BA%93/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/%E5%AD%A6%E6%A0%A1%E7%AC%94%E8%AE%B0-%E4%B8%89%E4%B8%AA%E4%B8%96%E7%95%8C%E7%9A%84%E5%85%B3%E7%B3%BB.png" alt=""></p>
+<p><strong>属性</strong><br>一个实体有若干属性<br>原子属性: 不能再细分的属性<br>可分属性: 可以再次细分<br>原子和可分是相对关系–&gt;比如出生日期有的时候需要作为整体使用 有的时候需要拆分出年月日等<br>属性(成绩)-&gt;属性值(0-100)  还可能是0-150 会根据实际变化</p>
+<ol start="2">
+<li><p>实体、实体集、实体特性、实体标识符之间的关系。<br>实体 作为一个个体<br>实体集 作为个体中所有实例的集合<br>实体特性 可以描述实体的主要特征<br>实体标识符 用来标识实体的一个或多个属性</p>
+</li>
+<li><p>实体集之间联系有哪些？举例说明？<br>二元联系 –&gt;只有两个实体集参与的联系<br>一对一联系 网站和站长<br>一对多联系 网站和用户<br>多对多联系 UP主和白嫖怪</p>
+</li>
+</ol>
+<p>多元联系<br>互相联系的实体集个数大于等于三<br>网站 视频 用户</p>
+<p>自反联系<br>同为网站用户存在看视频投币和看视频不投币两部分实体</p>
+<ol start="4">
+<li><p>绘制E-R图的步骤？<br>第一部 找出相关的实体集<br>第二部 找出实体集之间的联系<br>第三部 找出实体集之间联系的属性</p>
+</li>
+<li><p>举一个例子绘制出E-R图（手工绘制，照个照片，然后提问时，发到群里，让大家看看），并给与解释。</p>
+</li>
+</ol>
+<p><strong>三级模式结构</strong><br><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/%E6%95%B0%E6%8D%AE%E5%BA%93/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/%E5%AD%A6%E6%A0%A1%E7%AC%94%E8%AE%B0-%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E4%B8%89%E7%BA%A7%E6%A8%A1%E5%BC%8F%E7%BB%93%E6%9E%84.png" alt=""></p>
+<ul>
+<li>逻辑数据库-外模式</li>
+<li>概念数据库-模式 一个数据库只有一个</li>
+<li>物理数据库-内模式 一个数据库只有一个 规定各种</li>
+</ul>
+<p>两层映像 外模式/模式映像 模式/内模式映像 保证独立性</p>
 
         </div>
         <div id="post-footer">
@@ -218,7 +247,7 @@
                 
                 <li>Published Date: <span>2020-02-19  10:46:03</span></li>
                 
-                <li>Updated Date: <span>2020-02-19  11:53:21</span></li>
+                <li>Updated Date: <span>2020-02-21  16:08:36</span></li>
                 
                 <li class="post-category">
                     Categories:
@@ -327,7 +356,7 @@
     </div>
 </div>
 
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#2020年2月19日-第二次课"><span class="toc-number">1.</span> <span class="toc-text">2020年2月19日 第二次课</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#2020年2月19日-第二次课"><span class="toc-number">1.</span> <span class="toc-text">2020年2月19日 第二次课</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2020年2月21日-第三次课"><span class="toc-number">2.</span> <span class="toc-text">2020年2月21日 第三次课</span></a></li></ol>
 
 
 
