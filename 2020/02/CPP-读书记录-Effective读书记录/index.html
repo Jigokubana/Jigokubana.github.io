@@ -20,7 +20,7 @@
 <meta name="verify" content=all />
     <!--Title-->
 
-<title>Springboot日志操作 | Lsmg的大学之路</title>
+<title>Effective读书记录 | Lsmg的大学之路</title>
 
 <link rel="alternate" href="/atom.xml" title="Lsmg的大学之路" type="application/atom+xml">
 
@@ -142,9 +142,9 @@
     <article id="post">
         <div id="post-header">
 
-            <h1 id="Springboot日志操作">
+            <h1 id="Effective读书记录">
                 
-                Springboot日志操作
+                Effective读书记录
                 
             </h1>
             <div class="article-meta">
@@ -152,7 +152,7 @@
     
     <span class="categories-meta fa-wrap">
             <i class="fa fa-folder-open-o"></i>
-        <span>Java</span>
+        <span>服务器编程-书籍记录</span>
     </span>
     
     
@@ -168,7 +168,7 @@
     
     <span class="fa-wrap">
         <i class="fa fa-clock-o"></i>
-        <span class="date-meta ">2019/05/18</span>
+        <span class="date-meta ">2020/02/26</span>
     </span>
     
     
@@ -180,15 +180,28 @@
         </div>
         
         <div id="post-body">
-            <div class="alert-red">springboot</div>
-<div class="alert-blue">日志</div>
-<div class="alert-green"></div>
-<a id="more"></a>
+            <h1 id="让自己习惯C"><a href="#让自己习惯C" class="headerlink" title="让自己习惯C++"></a>让自己习惯C++</h1><h2 id="条款02-尽量用const-enum-inline-替换-define"><a href="#条款02-尽量用const-enum-inline-替换-define" class="headerlink" title="条款02 尽量用const, enum, inline 替换#define"></a>条款02 尽量用const, enum, inline 替换#define</h2><p>前言 我目前自己做的框架中大量用了#define…. 因为用enum涉及到转换才能到int. 来学习下这条</p>
+<p><strong>使用 const 常量来替换 #define</strong><br>谨防机号表出错, 特殊情况下 还能减少字量</p>
+<p>#define无法限定作用域, 这点我已经感受到了</p>
+<p>定义C风格常量字符串<br>const char* const NAME = “lsmg”; 防止指向和指向内容改变<br>定义C++风格常量字符串<br>const std::string NAME = “lsmg”;</p>
+<p>class专属常量, 使用如下方式. 可以限定作用域</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Game</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">int</span> MAX_ROOM = <span class="number">10000</span>; <span class="comment">// 常量声明式 - 常量且只有一份</span></span><br><span class="line">	Gameroom* rooms[MAX_ROOM];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果要获取class专属常量的地址, 或者需要定义式. 则需要在<code>实现文件</code>而非<code>头文件</code>, 如下声明<br><code>const int Game::MAX_ROOM</code> - 未给定初值<br>由于class常量已经在声明时获得初值, 所以不用在给定初值</p>
+<p>这里我发现一件事情, 这本书 不能只读一遍, 最少两边完整的<br>前面就已经开始使用后面的条款了, 先着重本条款, 跨条款的等第二遍</p>
+<h2 id="条款03-尽可能使用const"><a href="#条款03-尽可能使用const" class="headerlink" title="条款03 尽可能使用const"></a>条款03 尽可能使用const</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> greeting[] = <span class="string">"Hello"</span>;</span><br><span class="line"><span class="keyword">char</span> *p = greeting;</span><br><span class="line"><span class="comment">// const 在 * 左边 被指物是常量 在右边自己是常量 两边都是常量</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span> *p = greeting; <span class="comment">// 指针指向可以变, 指向的值不能变</span></span><br><span class="line"><span class="keyword">char</span>* <span class="keyword">const</span> p = greeting; <span class="comment">// 指针指向不可以变, 指向的值可以变</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span>* <span class="keyword">const</span> p = greeting; <span class="comment">// 都不可以变</span></span><br></pre></td></tr></table></figure>
+<p><strong>const 参数, 可你帮你检查 == 被写成=的情况</strong><br>这本书看来挺有意思的2333333</p>
+<p><strong>const 函数, 这里看不太懂 没有原来如此的感觉</strong></p>
+<h2 id="条款04-确定对象使用前已经被初始化"><a href="#条款04-确定对象使用前已经被初始化" class="headerlink" title="条款04 确定对象使用前已经被初始化"></a>条款04 确定对象使用前已经被初始化</h2><p>永远在使用对象前, 进行初始化.<br>在构造函数中, 对所有值进行初始化<br>构造函数使用<code>成员初始列</code>进行<code>初始化操作</code>而非<code>赋值操作</code><br><strong>减少default构造函数不必要的调用</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">Class A</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	A(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span> &amp;name, <span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">list</span>&lt;Gameroom&gt; &amp;room_list);</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">string</span> name_;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">list</span>&lt;Gameroom&gt; room_list_;</span><br><span class="line">	<span class="keyword">int</span> roomnum_;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">A::A(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span> &amp;name, <span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">list</span>&lt;Gameroom&gt; &amp;room_list)</span><br><span class="line">&#123;</span><br><span class="line">	name_ = name; <span class="comment">// 这些都是赋值 不是初始化</span></span><br><span class="line">	room_list_ = room_list;</span><br><span class="line">	roomnum_ = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// C++规定 对象的 成员变量  初始化动作  发生在  进入构造函数本体  之前</span></span><br><span class="line"><span class="comment">// name_  room_list_  两个在构造函数中被赋值, 而初始化在进入构造函数之前</span></span><br><span class="line"><span class="comment">// ---发生在这些成员的default构造函数被调用的时候, (发生在进入构造函数前)</span></span><br><span class="line"><span class="comment">// ---roomnum_例外 int属于内置类型</span></span><br></pre></td></tr></table></figure>
+<p>上面的初始化方式, 浪费了default的构造函数 所以推荐使用下面的形式</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">A::A(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span> &amp;name, <span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">list</span>&lt;Gameroom&gt; &amp;room_list)</span><br><span class="line">	:name_(name), room_list_(room_list), roomnum_(<span class="number">0</span>)</span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>虽然最终结果相同, 但没有浪费default构造函数. 前两个调用的copy构造函数.</p>
+<p><strong>还可以使用成员初值列 来default构造一个成员变量.</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">A::A()</span><br><span class="line">	:name_(), room_list_(), roomnum_(<span class="number">0</span>)</span><br><span class="line">&#123; <span class="comment">// 前两个全部调用的default构造函数</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Logger logger = LoggerFactory.getLogger(getClass());</span><br><span class="line">logger.trace();</span><br><span class="line">logger.debug();</span><br><span class="line">logger.info();</span><br><span class="line">logger.warn();</span><br><span class="line">logger.error();</span><br><span class="line"></span><br><span class="line">springboot 默认日志级别为info及以上</span><br></pre></td></tr></table></figure>
-
-<h3 id="日志配置"><a href="#日志配置" class="headerlink" title="日志配置"></a>日志配置</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># com.xyz 下日志级别</span><br><span class="line">logging.level.com.xyz=trace</span><br><span class="line"># 设置root级别 设置默认级别</span><br><span class="line">logging.level.root=debug</span><br><span class="line"></span><br><span class="line">#输出到当前项目根路径下的 springboot.log 文件中</span><br><span class="line">#logging.file=springboot.log</span><br><span class="line">#输出到当前项目所在磁盘根路径下的 /springboot/log目录中的 spring.log 文件中,</span><br><span class="line">logging.path=springboot/log</span><br></pre></td></tr></table></figure>
-<h3 id="更改输出格式"><a href="#更改输出格式" class="headerlink" title="更改输出格式"></a>更改输出格式</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># 日志输出格式说明：</span><br><span class="line"># %d 输出日期时间，</span><br><span class="line"># %thread 输出当前线程名，</span><br><span class="line"># %-5level 输出日志级别，左对齐5个字符宽度</span><br><span class="line"># %logger&#123;50&#125; 输出全类名最长50个字符，超过按照句点分割</span><br><span class="line"># %msg 日志信息</span><br><span class="line"># %n 换行符</span><br><span class="line"># 修改控制台输出的日志格式</span><br><span class="line">logging.pattern.console=%d&#123;yyyy-MM-dd&#125; [%thread] %-<span class="number">5l</span>evel %logger&#123;<span class="number">50</span>&#125; - %msg%n</span><br><span class="line"># 修改文件中输出的日志格式</span><br><span class="line">logging.pattern.file=%d&#123;yyyy-MM-dd HH:mm:ss.SSS&#125; &gt;&gt;&gt; [%thread] &gt;&gt;&gt; %-<span class="number">5l</span>evel &gt;&gt;&gt;</span><br><span class="line">%logger&#123;<span class="number">50</span>&#125; &gt;&gt;&gt; %msg%n</span><br></pre></td></tr></table></figure>
+<p><strong>const reference 内置类型(初始化与赋值等成本) 一定成员初始值列</strong></p>
+<p><strong>初始值列总是使用 声明次序进行初始化, 而非写的顺序, 所以最好按声明次序列出</strong></p>
+<h1 id="构造析构赋值运算"><a href="#构造析构赋值运算" class="headerlink" title="构造析构赋值运算"></a>构造析构赋值运算</h1>
         </div>
         <div id="post-footer">
             <div class="avatar" >
@@ -205,14 +218,16 @@
                     <a href="/about.html">Lsmg</a>
                 </li>
                 
-                <li>Published Date: <span>2019-05-18  14:14:29</span></li>
+                <li>Published Date: <span>2020-02-26  21:43:46</span></li>
                 
-                <li>Updated Date: <span>2020-02-07  16:32:51</span></li>
+                <li>Updated Date: <span>2020-02-26  23:16:11</span></li>
                 
                 <li class="post-category">
                     Categories:
                     
-                    <a href="/categories/Java/">Java</a>
+                    <a href="/categories/CPP/">CPP</a>
+                    
+                    <a href="/categories/CPP/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B-%E4%B9%A6%E7%B1%8D%E8%AE%B0%E5%BD%95/">服务器编程-书籍记录</a>
                     
                 </li>
                 <li class="post-tags">
@@ -239,10 +254,8 @@
     </article>
     <div class="article-nav">
         
-        <a href="/2019/05/Java-Springboot%E6%95%B0%E6%8D%AE%E4%BA%A4%E4%BA%92/" class="pre-post fa fa-caret-left">Springboot数据交互</a>
         
-        
-        <a href="/2019/04/Java-%E7%88%AC%E8%99%AB/" class="next-post fa">2019年4月15日 java爬虫入门</a>
+        <a href="/2020/02/CPP-%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95-%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95%E8%BF%9B%E7%A8%8B%E7%BA%BF%E7%A8%8B%E9%83%A8%E5%88%86/" class="next-post fa">Linux高性能服务器编程读书记录-高级部分</a>
         
     </div>
     
@@ -314,7 +327,7 @@
     </div>
 </div>
 
-    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#日志"><span class="toc-number">1.</span> <span class="toc-text">日志</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#日志配置"><span class="toc-number">2.</span> <span class="toc-text">日志配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#更改输出格式"><span class="toc-number">3.</span> <span class="toc-text">更改输出格式</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#让自己习惯C"><span class="toc-number">1.</span> <span class="toc-text">让自己习惯C++</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#条款02-尽量用const-enum-inline-替换-define"><span class="toc-number">1.1.</span> <span class="toc-text">条款02 尽量用const, enum, inline 替换#define</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#条款03-尽可能使用const"><span class="toc-number">1.2.</span> <span class="toc-text">条款03 尽可能使用const</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#条款04-确定对象使用前已经被初始化"><span class="toc-number">1.3.</span> <span class="toc-text">条款04 确定对象使用前已经被初始化</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#构造析构赋值运算"><span class="toc-number">2.</span> <span class="toc-text">构造析构赋值运算</span></a></li></ol>
 
 
 
