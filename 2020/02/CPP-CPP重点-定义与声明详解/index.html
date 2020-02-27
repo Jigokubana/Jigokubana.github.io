@@ -20,7 +20,7 @@
 <meta name="verify" content=all />
     <!--Title-->
 
-<title>Category: 服务器 | Lsmg的大学之路</title>
+<title>定义与声明详解 | Lsmg的大学之路</title>
 
 <link rel="alternate" href="/atom.xml" title="Lsmg的大学之路" type="application/atom+xml">
 
@@ -30,9 +30,10 @@
     
 
 <link rel="stylesheet" href="/css/base.css">
-<link rel="stylesheet" href="/css/pages/archive.css">
+<link rel="stylesheet" href="/css/pages/post.css">
 <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="/css/thirdParty/highlight/github.css">
+<link rel="stylesheet" href="/.css">
 
 
     <!--script-->
@@ -138,14 +139,21 @@
 
 
         <div id="main">
-    <div id="post-list">
-        <ul class="archives-post-list">
-            
-            <li class="post-items" _href="/2019/12/%E6%B8%B8%E6%88%8F%E7%9F%A5%E8%AF%86-%E6%9C%8D%E5%8A%A1%E5%99%A8-%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%80%9A%E4%BF%A1/">
+    <article id="post">
+        <div id="post-header">
+
+            <h1 id="定义与声明详解">
                 
-                <p class="info">服务器</p>
-                <h2 class="post-item-title">游戏知识-服务器-服务器通信</h2>
-                <div class="article-meta">
+                定义与声明详解
+                
+            </h1>
+            <div class="article-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+            <i class="fa fa-folder-open-o"></i>
+        <span>CPP重点</span>
+    </span>
     
     
     <span class="fa-wrap">
@@ -160,22 +168,85 @@
     
     <span class="fa-wrap">
         <i class="fa fa-clock-o"></i>
-        <span class="date-meta ">2019/12/22</span>
+        <span class="date-meta ">2020/02/27</span>
     </span>
     
     
     
 </div>
 
-            </li>
             
-        </ul>
+            
+        </div>
+        
+        <div id="post-body">
+            <h1 id="变量声明和变量定义"><a href="#变量声明和变量定义" class="headerlink" title="变量声明和变量定义"></a>变量声明和变量定义</h1><p>变量声明: 用于向程序表明变量的类型和名字<br>变量定义: 用于为变量<em>分配存储空间</em>, 同时可为变量指定初始值</p>
+<p>定义时会自动声明, 变量只能被定义一次, 却可以声明多次<br>extern声明不是定义</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="keyword">int</span> i; <span class="comment">// 声明i 但没有定义i</span></span><br><span class="line"><span class="keyword">int</span> i; <span class="comment">// 定义且声明i</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">int</span> i = <span class="number">10</span>; <span class="comment">// 定义并声明</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果再函数体内部试图初始化一个由extern标记的变量,会引发错误</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="extern"><a href="#extern" class="headerlink" title="extern"></a>extern</h1><p>只有extern声明位于函数外部的时候,才能被初始化</p>
+<p><strong>在C++中 可以用来声明全局变量</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// file1.cpp</span></span><br><span class="line"><span class="keyword">int</span> global_int = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// file2.cpp</span></span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">int</span> global_int;</span><br><span class="line"><span class="comment">// 后面可以直接使用 global_int, 因为他在其他地方定义了</span></span><br></pre></td></tr></table></figure>
+        </div>
+        <div id="post-footer">
+            <div class="avatar" style="padding-bottom: 0.2rem"
+                    >
+                <img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/%E5%8D%9A%E5%AE%A2%E5%B0%81%E9%9D%A2/2676.png" alt="avatar"/>
+                
+                
+            </div>
+            <ul class="author-profile-section">
+                <li>
+                  
+                  Author:
+                  
+                    
+                    <a href="/about.html">Lsmg</a>
+                </li>
+                
+                <li>Published Date: <span>2020-02-27  10:38:08</span></li>
+                
+                <li>Updated Date: <span>2020-02-27  11:26:16</span></li>
+                
+                <li class="post-category">
+                    Categories:
+                    
+                    <a href="/categories/CPP/">CPP</a>
+                    
+                    <a href="/categories/CPP/CPP%E9%87%8D%E7%82%B9/">CPP重点</a>
+                    
+                </li>
+                <li class="post-tags">
+                    Tags:
+                    
+                </li>
+                
+                <li> License: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+知识共享署名-非商业性使用-禁止演绎 3.0 未本地化版本许可协议（CC BY-NC-ND 3.0）
+</a></li>
+                
+            </ul>
+        </div>
+    </article>
+    <div class="article-nav">
+        
+        
+        <a href="/2020/02/CPP-%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95-Effective%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95/" class="next-post fa">Effective读书记录</a>
+        
     </div>
+    
+    <div id="comments">
+        
+
+<script>
+  gitalk.render("comments");
+</script>
+
+
+
+    </div>
+    
 </div>
-
-
-
-
 
 
     </div>
@@ -210,6 +281,8 @@
     <li class="totop-btn fa fa-angle-up"></li>
     <li class="exchange-btn fa fa-exchange"></li>
   
+    <li class="toc-btn fa fa-list-ul"></li>
+    
     
 
     
@@ -229,6 +302,8 @@
         </div>
     </div>
 </div>
+
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#变量声明和变量定义"><span class="toc-number">1.</span> <span class="toc-text">变量声明和变量定义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#extern"><span class="toc-number">2.</span> <span class="toc-text">extern</span></a></li></ol>
 
 
 

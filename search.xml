@@ -3,6 +3,28 @@
     
     
     <entry>
+        <title><![CDATA[定义与声明详解]]></title>
+        <url>http://blog.lsmg.xyz/2020/02/CPP-CPP%25E9%2587%258D%25E7%2582%25B9-%25E5%25AE%259A%25E4%25B9%2589%25E4%25B8%258E%25E5%25A3%25B0%25E6%2598%258E%25E8%25AF%25A6%25E8%25A7%25A3/</url>
+        <content type="html"><![CDATA[<h1 id="变量声明和变量定义"><a href="#变量声明和变量定义" class="headerlink" title="变量声明和变量定义"></a>变量声明和变量定义</h1><p>变量声明: 用于向程序表明变量的类型和名字<br>变量定义: 用于为变量<em>分配存储空间</em>, 同时可为变量指定初始值</p>
+<p>定义时会自动声明, 变量只能被定义一次, 却可以声明多次<br>extern声明不是定义</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="keyword">int</span> i; <span class="comment">// 声明i 但没有定义i</span></span><br><span class="line"><span class="keyword">int</span> i; <span class="comment">// 定义且声明i</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">int</span> i = <span class="number">10</span>; <span class="comment">// 定义并声明</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果再函数体内部试图初始化一个由extern标记的变量,会引发错误</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="extern"><a href="#extern" class="headerlink" title="extern"></a>extern</h1><p>只有extern声明位于函数外部的时候,才能被初始化</p>
+<p><strong>在C++中 可以用来声明全局变量</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// file1.cpp</span></span><br><span class="line"><span class="keyword">int</span> global_int = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// file2.cpp</span></span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">int</span> global_int;</span><br><span class="line"><span class="comment">// 后面可以直接使用 global_int, 因为他在其他地方定义了</span></span><br></pre></td></tr></table></figure>]]></content>
+        
+        <categories>
+            
+            <category> CPP </category>
+            
+            <category> CPP重点 </category>
+            
+        </categories>
+        
+        
+    </entry>
+    
+    <entry>
         <title><![CDATA[Effective读书记录]]></title>
         <url>http://blog.lsmg.xyz/2020/02/CPP-%25E8%25AF%25BB%25E4%25B9%25A6%25E8%25AE%25B0%25E5%25BD%2595-Effective%25E8%25AF%25BB%25E4%25B9%25A6%25E8%25AE%25B0%25E5%25BD%2595/</url>
         <content type="html"><![CDATA[<h1 id="让自己习惯C"><a href="#让自己习惯C" class="headerlink" title="让自己习惯C++"></a>让自己习惯C++</h1><h2 id="条款02-尽量用const-enum-inline-替换-define"><a href="#条款02-尽量用const-enum-inline-替换-define" class="headerlink" title="条款02 尽量用const, enum, inline 替换#define"></a>条款02 尽量用const, enum, inline 替换#define</h2><p>前言 我目前自己做的框架中大量用了#define…. 因为用enum涉及到转换才能到int. 来学习下这条</p>
@@ -13,10 +35,21 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Game</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">int</span> MAX_ROOM = <span class="number">10000</span>; <span class="comment">// 常量声明式 - 常量且只有一份</span></span><br><span class="line">	Gameroom* rooms[MAX_ROOM];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>如果要获取class专属常量的地址, 或者需要定义式. 则需要在<code>实现文件</code>而非<code>头文件</code>, 如下声明<br><code>const int Game::MAX_ROOM</code> - 未给定初值<br>由于class常量已经在声明时获得初值, 所以不用在给定初值</p>
 <p>这里我发现一件事情, 这本书 不能只读一遍, 最少两边完整的<br>前面就已经开始使用后面的条款了, 先着重本条款, 跨条款的等第二遍</p>
-<h2 id="条款03-尽可能使用const"><a href="#条款03-尽可能使用const" class="headerlink" title="条款03 尽可能使用const"></a>条款03 尽可能使用const</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> greeting[] = <span class="string">"Hello"</span>;</span><br><span class="line"><span class="keyword">char</span> *p = greeting;</span><br><span class="line"><span class="comment">// const 在 * 左边 被指物是常量 在右边自己是常量 两边都是常量</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span> *p = greeting; <span class="comment">// 指针指向可以变, 指向的值不能变</span></span><br><span class="line"><span class="keyword">char</span>* <span class="keyword">const</span> p = greeting; <span class="comment">// 指针指向不可以变, 指向的值可以变</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span>* <span class="keyword">const</span> p = greeting; <span class="comment">// 都不可以变</span></span><br></pre></td></tr></table></figure>
+<h2 id="条款03-尽可能使用const"><a href="#条款03-尽可能使用const" class="headerlink" title="条款03 尽可能使用const"></a>条款03 尽可能使用const</h2><p><strong>总结</strong></p>
+<ul>
+<li>将某些东西声明为const可帮助编译器探测到错误用法<br>const可以用作在任何作用域内的对象, 函数参数, 函数返回类型, 成员函数本体</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> greeting[] = <span class="string">"Hello"</span>;</span><br><span class="line"><span class="keyword">char</span> *p = greeting;</span><br><span class="line"><span class="comment">// const 在 * 左边 被指物是常量 在右边自己是常量 两边都是常量</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span> *p = greeting; <span class="comment">// 指针指向可以变, 指向的值不能变</span></span><br><span class="line"><span class="keyword">char</span>* <span class="keyword">const</span> p = greeting; <span class="comment">// 指针指向不可以变, 指向的值可以变</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span>* <span class="keyword">const</span> p = greeting; <span class="comment">// 都不可以变</span></span><br></pre></td></tr></table></figure>
 <p><strong>const 参数, 可你帮你检查 == 被写成=的情况</strong><br>这本书看来挺有意思的2333333</p>
 <p><strong>const 函数, 这里看不太懂 没有原来如此的感觉</strong></p>
-<h2 id="条款04-确定对象使用前已经被初始化"><a href="#条款04-确定对象使用前已经被初始化" class="headerlink" title="条款04 确定对象使用前已经被初始化"></a>条款04 确定对象使用前已经被初始化</h2><p>永远在使用对象前, 进行初始化.<br>在构造函数中, 对所有值进行初始化<br>构造函数使用<code>成员初始列</code>进行<code>初始化操作</code>而非<code>赋值操作</code><br><strong>减少default构造函数不必要的调用</strong></p>
+<h2 id="条款04-确定对象使用前已经被初始化"><a href="#条款04-确定对象使用前已经被初始化" class="headerlink" title="条款04 确定对象使用前已经被初始化"></a>条款04 确定对象使用前已经被初始化</h2><p><strong>总结</strong></p>
+<ul>
+<li>为内置型对象进行手工初始化.</li>
+<li>构造函数对号食用成员初值列, 不要在构造函数中赋值. 初值列次数应该与声明次序相同</li>
+<li>为了免除 跨编译单元的初始化次数问题, 用<code>local static</code>对象替换<code>non-local static</code>对象</li>
+</ul>
+<p>永远在使用对象前, 进行初始化.<br>在构造函数中, 对所有值进行初始化<br>构造函数使用<code>成员初始列</code>进行<code>初始化操作</code>而非<code>赋值操作</code></p>
+<p><strong>减少default构造函数不必要的调用</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">Class A</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	A(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span> &amp;name, <span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">list</span>&lt;Gameroom&gt; &amp;room_list);</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">string</span> name_;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">list</span>&lt;Gameroom&gt; room_list_;</span><br><span class="line">	<span class="keyword">int</span> roomnum_;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">A::A(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span> &amp;name, <span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">list</span>&lt;Gameroom&gt; &amp;room_list)</span><br><span class="line">&#123;</span><br><span class="line">	name_ = name; <span class="comment">// 这些都是赋值 不是初始化</span></span><br><span class="line">	room_list_ = room_list;</span><br><span class="line">	roomnum_ = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// C++规定 对象的 成员变量  初始化动作  发生在  进入构造函数本体  之前</span></span><br><span class="line"><span class="comment">// name_  room_list_  两个在构造函数中被赋值, 而初始化在进入构造函数之前</span></span><br><span class="line"><span class="comment">// ---发生在这些成员的default构造函数被调用的时候, (发生在进入构造函数前)</span></span><br><span class="line"><span class="comment">// ---roomnum_例外 int属于内置类型</span></span><br></pre></td></tr></table></figure>
 <p>上面的初始化方式, 浪费了default的构造函数 所以推荐使用下面的形式</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">A::A(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span> &amp;name, <span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">list</span>&lt;Gameroom&gt; &amp;room_list)</span><br><span class="line">	:name_(name), room_list_(room_list), roomnum_(<span class="number">0</span>)</span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -26,7 +59,33 @@
 
 <p><strong>const reference 内置类型(初始化与赋值等成本) 一定成员初始值列</strong></p>
 <p><strong>初始值列总是使用 声明次序进行初始化, 而非写的顺序, 所以最好按声明次序列出</strong></p>
-<h1 id="构造析构赋值运算"><a href="#构造析构赋值运算" class="headerlink" title="构造析构赋值运算"></a>构造析构赋值运算</h1>]]></content>
+<p><strong>不同编译单元内定义之 non-local static对象 的初始化 次序</strong><br>static对象: 虚构函数会在main() 结束时被自动调用<br>local static对象: 函数内的static对象<br>non-local对象: 其他static对象</p>
+<p>编译单元: 产出单一目标文件的那些源码, 基本是单一源码文件和他包含的头文件</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// filesystem.h</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FileSystem</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="built_in">std</span>::<span class="keyword">size_t</span> <span class="title">GetNum</span><span class="params">()</span> <span class="keyword">const</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">extern</span> FIieSystem tfs;</span><br><span class="line"></span><br><span class="line"><span class="comment">// directory.h</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Directory</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	Directory(params);	</span><br><span class="line">&#125;</span><br><span class="line">Directory::Directory(params)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">std</span>::<span class="keyword">size_t</span> num = tfs.GetNum(); <span class="comment">// 使用tfs对象</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// main.cpp</span></span><br><span class="line"><span class="function">Directory <span class="title">temp_dir</span><span class="params">(params)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>只有当 tfs在temp_dir初始化之前被初始化 才能得到正确的结果. 否则会调用未初始化的对象</p>
+<p>但是这个次序无法保证<br>因为C++ 对这种情况没有明确定义</p>
+<p>如何解决这个问题呢??<br>将每个<code>non-local static</code>对象搬到自己的专属函数内(该对象在此函数内被声明为static)<br>函数返回一个reference对象他所包含的对象<br>用户调用这个函数而不是直接调用对象</p>
+<p>解决的原因呢?<br>C++ 保证函数内的<code>local static</code>对象 会在<code>函数被调用期间</code>, <code>首次遇到该对象的定义式</code>被初始化</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// filesystem.h</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FileSystem</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="built_in">std</span>::<span class="keyword">size_t</span> <span class="title">GetNum</span><span class="params">()</span> <span class="keyword">const</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="built_in">FileSystem</span>&amp; <span class="title">tfs</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">static</span> <span class="built_in">FileSystem</span> fs;</span><br><span class="line">	<span class="keyword">return</span> fd;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// directory.h</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Directory</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	Directory(params);	</span><br><span class="line">&#125;</span><br><span class="line">Directory::Directory(params)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">std</span>::<span class="keyword">size_t</span> num = tfs().GetNum(); <span class="comment">// 使用tfs对象</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function">Directory&amp; <span class="title">temp_dir</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">static</span> Directory td;</span><br><span class="line">	<span class="keyword">return</span> td;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="构造析构赋值运算"><a href="#构造析构赋值运算" class="headerlink" title="构造析构赋值运算"></a>构造析构赋值运算</h1><h2 id="条款0506-了解C-默认编写并调用哪些函数-并适当拒绝"><a href="#条款0506-了解C-默认编写并调用哪些函数-并适当拒绝" class="headerlink" title="条款0506 了解C++默认编写并调用哪些函数 并适当拒绝"></a>条款0506 了解C++默认编写并调用哪些函数 并适当拒绝</h2><p><strong>夹带如下私货-public-inline</strong></p>
+<ul>
+<li>一个构造函数(如果你没有任何构造函数)</li>
+<li>一个拷贝构造函数</li>
+<li>一个析构函数</li>
+<li>一个拷贝</li>
+</ul>
+<p>拷贝构造函数和拷贝运算符 自动生成的只是单纯的将来源对象的每一个<code>non-static</code>成员变量<br>拷贝到目标对象</p>
+<p><strong>遇到const 和 引用成员 默认的拷贝无法工作, 编译器会发出警告</strong></p>
+<p><strong>将不需要的成员函数声明为private, 并且不实现</strong></p>
+<h2 id="条款07-为多态基类声明virtual析构函数"><a href="#条款07-为多态基类声明virtual析构函数" class="headerlink" title="条款07 为多态基类声明virtual析构函数"></a>条款07 为多态基类声明virtual析构函数</h2><p>返回指向子类的 父类型指针.<br>如果delete这个指针, 在父类析构函数不是virtual的情况下, 很可能会导致<br>父类的成分被销毁, 然而子类多出来的部分不被销毁. 造成局部销毁!!</p>
+<p><strong>防止局部销毁很简单, 将父类的析构函数声明为virtual</strong></p>
+<p><strong>任何class 只要带有virtual函数 几乎确定应该有一个virtual析构函数</strong></p>
+<p><strong>无端的声明virtual函数是错误的</strong><br>如果class不含virtual函数, 通常表示这个class 不是想做为父类, 这时如果将其析构函数声明为virual<br>是一个馊主意………….</p>
+<p><em>class类的大小 = 成员变量占据大小 + vptr(vitual table pointer)指针大小(4~8 字节)</em></p>
+<p>每一个带有virtual函数的class都有对应的vtbl</p>
+<p>当对象调用某一vitual函数的时候, 实际调用的函数取决于<br>vptr(vitual table pointer)指针指向的vtbl(vitual table)</p>
+<p>无端的使用virtual函数 会导致占用空间的增大</p>
+]]></content>
         
         <categories>
             
@@ -956,6 +1015,25 @@
     </entry>
     
     <entry>
+        <title><![CDATA[游戏知识-杂谈-如何进入游戏开发行业]]></title>
+        <url>http://blog.lsmg.xyz/2019/12/%25E6%25B8%25B8%25E6%2588%258F%25E7%259F%25A5%25E8%25AF%2586-%25E6%259D%2582%25E8%25B0%2588-%25E5%25A6%2582%25E4%25BD%2595%25E8%25BF%259B%25E5%2585%25A5%25E6%25B8%25B8%25E6%2588%258F%25E5%25BC%2580%25E5%258F%2591%25E8%25A1%258C%25E4%25B8%259A/</url>
+        <content type="html"><![CDATA[<p>由于自己了解的实在是不足, 所以来腾讯游戏课堂来学习一些架构之类的东西 来完善自己的知识面<br><a href="https://gameinstitute.qq.com/course/detail/10156" target="_blank" rel="noopener">想做游戏吗？如何开始我的游戏开发职业生涯</a></p>
+<a id="more"></a>
+<p>做游戏不会重复做同样的工作, 项目不同</p>
+]]></content>
+        
+        <categories>
+            
+            <category> 游戏知识 </category>
+            
+            <category> 杂谈 </category>
+            
+        </categories>
+        
+        
+    </entry>
+    
+    <entry>
         <title><![CDATA[游戏知识-服务器-服务器通信]]></title>
         <url>http://blog.lsmg.xyz/2019/12/%25E6%25B8%25B8%25E6%2588%258F%25E7%259F%25A5%25E8%25AF%2586-%25E6%259C%258D%25E5%258A%25A1%25E5%2599%25A8-%25E6%259C%258D%25E5%258A%25A1%25E5%2599%25A8%25E9%2580%259A%25E4%25BF%25A1/</url>
         <content type="html"><![CDATA[<p>由于自己了解的实在是不足, 所以来腾讯游戏课堂来学习一些架构之类的东西 来完善自己的知识面<br><a href="https://gameinstitute.qq.com/course/detail/10096" target="_blank" rel="noopener">服务器通信</a></p>
@@ -985,25 +1063,6 @@
             <category> 游戏知识 </category>
             
             <category> 服务器 </category>
-            
-        </categories>
-        
-        
-    </entry>
-    
-    <entry>
-        <title><![CDATA[游戏知识-杂谈-如何进入游戏开发行业]]></title>
-        <url>http://blog.lsmg.xyz/2019/12/%25E6%25B8%25B8%25E6%2588%258F%25E7%259F%25A5%25E8%25AF%2586-%25E6%259D%2582%25E8%25B0%2588-%25E5%25A6%2582%25E4%25BD%2595%25E8%25BF%259B%25E5%2585%25A5%25E6%25B8%25B8%25E6%2588%258F%25E5%25BC%2580%25E5%258F%2591%25E8%25A1%258C%25E4%25B8%259A/</url>
-        <content type="html"><![CDATA[<p>由于自己了解的实在是不足, 所以来腾讯游戏课堂来学习一些架构之类的东西 来完善自己的知识面<br><a href="https://gameinstitute.qq.com/course/detail/10156" target="_blank" rel="noopener">想做游戏吗？如何开始我的游戏开发职业生涯</a></p>
-<a id="more"></a>
-<p>做游戏不会重复做同样的工作, 项目不同</p>
-]]></content>
-        
-        <categories>
-            
-            <category> 游戏知识 </category>
-            
-            <category> 杂谈 </category>
             
         </categories>
         
