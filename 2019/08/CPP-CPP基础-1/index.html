@@ -128,7 +128,7 @@
     <h3 class="fa fa-globe widget-title">Friends</h3><br/>
 
     
-        <a href="http://geekaholiclin.github.io" class="fa" target="_blank">主题作者</a>
+        <a href="https://geekaholiclin.github.io" class="fa" target="_blank">主题作者</a>
 
     
 
@@ -292,7 +292,8 @@ unique_ptr不支持普通的赋值和拷贝操作, 因为unique_ptr要独占所�
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dialogue</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">string</span> name_;</span><br><span class="line">	<span class="keyword">int</span> phone_;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	Dialogue(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span> &amp;name, <span class="keyword">const</span> <span class="keyword">int</span> &amp;phone):name_(name), phone_(phone)&#123;&#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;Dialogue&gt; a&#123;&#125;;</span><br><span class="line">	a.push_back(Dialogue(<span class="string">"xiao"</span>, <span class="number">1</span>));</span><br><span class="line">	a.emplace_back(<span class="string">"xiao"</span>, <span class="number">2</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
         </div>
         <div id="post-footer">
-            <div class="avatar" >
+            <div class="avatar" style="padding-bottom: 0.2rem"
+                    >
                 <img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/%E5%8D%9A%E5%AE%A2%E5%B0%81%E9%9D%A2/2676.png" alt="avatar"/>
                 
                 
@@ -328,16 +329,6 @@ unique_ptr不支持普通的赋值和拷贝操作, 因为unique_ptr要独占所�
 </a></li>
                 
             </ul>
-            <div id="donate-wrap">
-                
-                
-                
-                <img src="http://example.com/alipay.jpg" alt="支付宝付款" class="donate-img">
-                
-                <img src="http://example.com/wechat.png" alt="微信付款" class="donate-img">
-                
-                
-            </div>
         </div>
     </article>
     <div class="article-nav">

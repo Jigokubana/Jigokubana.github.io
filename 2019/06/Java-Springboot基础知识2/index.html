@@ -128,7 +128,7 @@
     <h3 class="fa fa-globe widget-title">Friends</h3><br/>
 
     
-        <a href="http://geekaholiclin.github.io" class="fa" target="_blank">主题作者</a>
+        <a href="https://geekaholiclin.github.io" class="fa" target="_blank">主题作者</a>
 
     
 
@@ -240,13 +240,13 @@
 </tr>
 </tbody></table>
 <h2 id="配置文件的使用"><a href="#配置文件的使用" class="headerlink" title="配置文件的使用"></a>配置文件的使用</h2><h3 id="读取配置文件"><a href="#读取配置文件" class="headerlink" title="读取配置文件"></a>读取配置文件</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//application.properties --&gt;neo.title=lsmg</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@Value</span>(<span class="string">"$&#123;neo.title&#125;"</span>) <span class="comment">//使用注解来获取内容</span></span><br><span class="line"><span class="keyword">private</span> String title;</span><br></pre></td></tr></table></figure>
-<h2 id="thymeleaf"><a href="#thymeleaf" class="headerlink" title="thymeleaf"></a>thymeleaf</h2><p>引入命令空间<br><code>&lt;html xmlns:th=&quot;http://www.thymeleaf.org&quot;&gt;</code></p>
+<h2 id="thymeleaf"><a href="#thymeleaf" class="headerlink" title="thymeleaf"></a>thymeleaf</h2><p>引入命令空间<br><code>&lt;html xmlns:th=&quot;https://www.thymeleaf.org&quot;&gt;</code></p>
 <h3 id="基础使用"><a href="#基础使用" class="headerlink" title="基础使用"></a>基础使用</h3><h4 id="字符串赋值拼接"><a href="#字符串赋值拼接" class="headerlink" title="字符串赋值拼接"></a>字符串赋值拼接</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"$&#123;属性名&#125;"</span></span><br><span class="line"><span class="string">"'这是固定部分' + $&#123;变化部分属性名&#125;"</span></span><br><span class="line"></span><br><span class="line">简写形式</span><br><span class="line"><span class="string">"|固定部分$&#123;变化部分属性名&#125;|"</span> <span class="comment">//直接混合</span></span><br></pre></td></tr></table></figure>
 
 <h4 id="条件判断"><a href="#条件判断" class="headerlink" title="条件判断"></a>条件判断</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//if只有内容为真才会显示, unless内容为假才会显示</span></span><br><span class="line">th:<span class="keyword">if</span>=<span class="string">"$&#123;flag == 'yes'&#125;"</span></span><br><span class="line">th:unless=<span class="string">"$&#123;flag == 'yes'&#125;"</span></span><br></pre></td></tr></table></figure>
 <h4 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">table</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tr</span>  <span class="attr">th:each</span>=<span class="string">"user,iterStat : $&#123;users&#125;"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span> <span class="attr">th:text</span>=<span class="string">"$&#123;user.name&#125;"</span>&gt;</span>neo<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span> <span class="attr">th:text</span>=<span class="string">"$&#123;iterStat.index&#125;"</span>&gt;</span>index<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p><strong>iterStat 属性值</strong><br>index，当前迭代对象的 index（从 0 开始计算）；<br>count，当前迭代对象的 index（从 1 开始计算）；<br>size，被迭代对象的大小；<br>current，当前迭代变量；<br>even/odd，布尔值，当前循环是否是偶数/奇数（从 0 开始计算）；<br>first，布尔值，当前循环是否是第一个；<br>last，布尔值，当前循环是否是最后一个。</p>
-<h4 id="URL"><a href="#URL" class="headerlink" title="URL"></a>URL</h4><p><code>th:href=&quot;@{http://www.lsmg.xyz/{id}(id=${id})}&quot;</code><br><strong>如果需要 Thymeleaf 对 URL 进行渲染，那么务必使用 th:href、th:src 等属性</strong></p>
+<h4 id="URL"><a href="#URL" class="headerlink" title="URL"></a>URL</h4><p><code>th:href=&quot;@{https://www.lsmg.xyz/{id}(id=${id})}&quot;</code><br><strong>如果需要 Thymeleaf 对 URL 进行渲染，那么务必使用 th:href、th:src 等属性</strong></p>
 <div th:style="'background:url(' + @{${img url}} + ');'">
 `{id}(id=${id})` 这部分方便了阅读
 
@@ -303,7 +303,8 @@
 
         </div>
         <div id="post-footer">
-            <div class="avatar" >
+            <div class="avatar" style="padding-bottom: 0.2rem"
+                    >
                 <img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/%E5%8D%9A%E5%AE%A2%E5%B0%81%E9%9D%A2/2676.png" alt="avatar"/>
                 
                 
@@ -319,7 +320,7 @@
                 
                 <li>Published Date: <span>2019-06-07  16:14:19</span></li>
                 
-                <li>Updated Date: <span>2020-02-07  16:32:54</span></li>
+                <li>Updated Date: <span>2020-02-27  09:49:16</span></li>
                 
                 <li class="post-category">
                     Categories:
@@ -337,16 +338,6 @@
 </a></li>
                 
             </ul>
-            <div id="donate-wrap">
-                
-                
-                
-                <img src="http://example.com/alipay.jpg" alt="支付宝付款" class="donate-img">
-                
-                <img src="http://example.com/wechat.png" alt="微信付款" class="donate-img">
-                
-                
-            </div>
         </div>
     </article>
     <div class="article-nav">

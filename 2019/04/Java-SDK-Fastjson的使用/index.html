@@ -128,7 +128,7 @@
     <h3 class="fa fa-globe widget-title">Friends</h3><br/>
 
     
-        <a href="http://geekaholiclin.github.io" class="fa" target="_blank">主题作者</a>
+        <a href="https://geekaholiclin.github.io" class="fa" target="_blank">主题作者</a>
 
     
 
@@ -185,7 +185,7 @@
 <div class="alert-green"></div>
 <a id="more"></a>
 
-<h3 id="调用api部分"><a href="#调用api部分" class="headerlink" title="调用api部分"></a>调用api部分</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">String u = <span class="string">"http://route.showapi.com/341-1?showapi_appid=搞了好久A&amp;showapi_sign=搞了好久B"</span>;</span><br><span class="line">URL url = <span class="keyword">new</span> URL(u);</span><br><span class="line">HttpURLConnection connection = (HttpURLConnection)url.openConnection();</span><br><span class="line">connection.connect();</span><br><span class="line"></span><br><span class="line">InputStreamReader in = <span class="keyword">new</span> InputStreamReader(connection.getInputStream());</span><br><span class="line">BufferedReader bf = <span class="keyword">new</span> BufferedReader(in);</span><br><span class="line">String stringJsonbf=<span class="keyword">null</span>; <span class="comment">//暂时存储</span></span><br><span class="line">StringBuffer stringBuffer = <span class="keyword">new</span> StringBuffer();</span><br><span class="line"><span class="keyword">while</span> ((stringJsonbf= bf.readLine())!=<span class="keyword">null</span>)&#123;</span><br><span class="line">	stringBuffer.append(stringJsonbf);</span><br><span class="line">&#125;</span><br><span class="line">String stringJson=stringBuffer.toString(); <span class="comment">//得到json数据转为String</span></span><br><span class="line">System.out.println(stringJson);</span><br></pre></td></tr></table></figure>
+<h3 id="调用api部分"><a href="#调用api部分" class="headerlink" title="调用api部分"></a>调用api部分</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">String u = <span class="string">"https://route.showapi.com/341-1?showapi_appid=搞了好久A&amp;showapi_sign=搞了好久B"</span>;</span><br><span class="line">URL url = <span class="keyword">new</span> URL(u);</span><br><span class="line">HttpURLConnection connection = (HttpURLConnection)url.openConnection();</span><br><span class="line">connection.connect();</span><br><span class="line"></span><br><span class="line">InputStreamReader in = <span class="keyword">new</span> InputStreamReader(connection.getInputStream());</span><br><span class="line">BufferedReader bf = <span class="keyword">new</span> BufferedReader(in);</span><br><span class="line">String stringJsonbf=<span class="keyword">null</span>; <span class="comment">//暂时存储</span></span><br><span class="line">StringBuffer stringBuffer = <span class="keyword">new</span> StringBuffer();</span><br><span class="line"><span class="keyword">while</span> ((stringJsonbf= bf.readLine())!=<span class="keyword">null</span>)&#123;</span><br><span class="line">	stringBuffer.append(stringJsonbf);</span><br><span class="line">&#125;</span><br><span class="line">String stringJson=stringBuffer.toString(); <span class="comment">//得到json数据转为String</span></span><br><span class="line">System.out.println(stringJson);</span><br></pre></td></tr></table></figure>
 
 <h3 id="json解析部分"><a href="#json解析部分" class="headerlink" title="json解析部分"></a>json解析部分</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">List&lt;类&gt; happies = <span class="keyword">new</span> ArrayList&lt;类&gt;(); <span class="comment">//类为json中所需要对象的对应类</span></span><br><span class="line">JSONObject jsonObject1 = <span class="keyword">new</span> JSONObject(stringJson); <span class="comment">//string转换为json对象</span></span><br><span class="line">JSONObject jsonObject2 = jsonObject1.getJSONObject(<span class="string">"showapi_res_body"</span>);<span class="comment">//这个对象中还有个对象用jsonObject1.getJSONObject获取</span></span><br><span class="line">JSONArray jsonArray =jsonObject2.getJSONArray(<span class="string">"contentlist"</span>);<span class="comment">//获取后的对象里有数组获取数组</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;jsonArray.length();i++)&#123;</span><br><span class="line">	JSONObject jsTempt = jsonArray.getJSONObject(i);</span><br><span class="line">	String title = jsTempt.getString(<span class="string">"title"</span>);</span><br><span class="line">	String text = jsTempt.getString(<span class="string">"text"</span>);</span><br><span class="line">	String ct = jsTempt.getString(<span class="string">"ct"</span>);</span><br><span class="line">	Happy 对象 = <span class="keyword">new</span> 类(title,text,ct);</span><br><span class="line">	happies.add(对象);<span class="comment">//加入list中</span></span><br><span class="line">&#125;</span><br><span class="line">System.out.println(happies);</span><br></pre></td></tr></table></figure>
 <h3 id="注意问题"><a href="#注意问题" class="headerlink" title="注意问题"></a>注意问题</h3><h4 id="搞了好久A和搞了好久B"><a href="#搞了好久A和搞了好久B" class="headerlink" title="搞了好久A和搞了好久B"></a>搞了好久A和搞了好久B</h4><p><img src="./2019n4y12r/2.png" alt=""><br>这里的appid和sign<strong>不是这个应用的id</strong>=, =而是你账号里的<br><img src="./2019n4y12r/1.png" alt=""><br>好吧………………生成sign的方式官方有</p>
@@ -211,7 +211,8 @@
 <h3 id="解析数组"><a href="#解析数组" class="headerlink" title="解析数组"></a>解析数组</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String json2 = <span class="string">"['北京','天津','杭州']"</span>;</span><br><span class="line">List&lt;String&gt; list=JSON.parseArray(json2, String<span class="class">.<span class="keyword">class</span>)</span>;</span><br></pre></td></tr></table></figure>
         </div>
         <div id="post-footer">
-            <div class="avatar" >
+            <div class="avatar" style="padding-bottom: 0.2rem"
+                    >
                 <img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/%E5%8D%9A%E5%AE%A2%E5%B0%81%E9%9D%A2/2676.png" alt="avatar"/>
                 
                 
@@ -227,7 +228,7 @@
                 
                 <li>Published Date: <span>2019-04-13  17:22:40</span></li>
                 
-                <li>Updated Date: <span>2020-02-07  16:33:03</span></li>
+                <li>Updated Date: <span>2020-02-27  09:49:16</span></li>
                 
                 <li class="post-category">
                     Categories:
@@ -245,16 +246,6 @@
 </a></li>
                 
             </ul>
-            <div id="donate-wrap">
-                
-                
-                
-                <img src="http://example.com/alipay.jpg" alt="支付宝付款" class="donate-img">
-                
-                <img src="http://example.com/wechat.png" alt="微信付款" class="donate-img">
-                
-                
-            </div>
         </div>
     </article>
     <div class="article-nav">
