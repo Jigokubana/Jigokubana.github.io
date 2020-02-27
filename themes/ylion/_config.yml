@@ -58,7 +58,7 @@ tagcloud_config:
 ### friends' links settings
 ### 友链设置:{@links:[,,,]}
 links:
-- 主题作者: http://geekaholiclin.github.io
+- 主题作者: https://geekaholiclin.github.io
 
 
 
@@ -96,14 +96,14 @@ outdated_browser_text: '你使用的浏览器版本过低，为了你更好的�
 ### outdated post warning
 ### 文章过期提醒功能 {@warning:{days:临界天数,text:提醒文字/*%d为过期总天数占位符*/}}
 warning:
-  days: 300 #default is 300 days
+  days: 900 #default is 300 days
   text: '本文于%d天之前发表，文中内容可能已经过时。如有疑问，请在评论区留言。'
 
 ### index article excerpt
 ### 首页文章简介的图片
 ### 规则:Front-matter中的自定义'img'字段 > 文章内的图片(随机获取) > defaultImgs(随机获取)
 defaultImgs:
-  - http://lsmg-img.oss-cn-beijing.aliyuncs.com/%E5%8D%9A%E5%AE%A2%E5%B0%81%E9%9D%A2/1.png
+  - https://lsmg-img.oss-cn-beijing.aliyuncs.com/%E5%8D%9A%E5%AE%A2%E5%B0%81%E9%9D%A2/1.png
   - /img/default-1.jpg
 excerptLength: 400
 
@@ -115,15 +115,9 @@ whichCategory: 0
 ### post footer
 ### 作者信息部分设置
 high_song: ''  ### 歌曲显示文字，若不需要该功能，则留空或移除
-author_img: http://lsmg-img.oss-cn-beijing.aliyuncs.com/%E5%8D%9A%E5%AE%A2%E5%B0%81%E9%9D%A2/2676.png
+author_img: https://lsmg-img.oss-cn-beijing.aliyuncs.com/%E5%8D%9A%E5%AE%A2%E5%B0%81%E9%9D%A2/2676.png
 author_profile_page: /about.html
-donate:
-  text: '' ### 打赏功能显示文字，若不需要，则留空或移除
-  img: ### 打赏图片地址
-  - url: http://example.com/alipay.jpg
-    alt: '支付宝付款'
-  - url: http://example.com/wechat.png
-    alt: '微信付款'
+
 
 ### support html&text like notification's support in this theme,
 ### but please don't use <li> tag
@@ -152,7 +146,7 @@ leancloud:
   app_key:
   region:
   limits: 10
-  serverURLs: http://xxxx.example
+  serverURLs: https://xxxx.example
 
 ## comments -- 评论框
 ### disqus
@@ -185,14 +179,14 @@ mathjax:
   src: //cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML
 # cdn or local files --开启对应文件的cdn，默认使用本地文件。国内用户建议开启而不是使用github上的文件
 ## style cdn --样式 cdn
-## icon -- 官网地址：http://fontawesome.io/icons/
+## icon -- 官网地址：https://fontawesome.io/icons/
 fontAwesome: //cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css
 
 
 ## script cdn --脚本cdn
 ## leancloud -- 官网:https://leancloud.cn/
 leancloud_src: //cdn.jsdelivr.net/npm/leancloud-storage@3.15.0/dist/av-min.js
-## busuanzi -- 官网：http://busuanzi.ibruce.info/
+## busuanzi -- 官网：https://busuanzi.ibruce.info/
 busuanzi_src: //busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js
 
 # theme and site self settings

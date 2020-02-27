@@ -75,14 +75,6 @@
                 <li> <%= __('post_licence') %>: <%- theme.cc %></li>
                 <% } %>
             </ul>
-            <div id="donate-wrap">
-                <%var donateImgs = theme.donate.img%>
-                <%if(donateImgs.length&&donateImgs.length>0){%>
-                <%donateImgs.forEach(function (img) {%>
-                <img src="<%- img.url%>" alt="<%= img.alt%>" class="donate-img">
-                <%})%>
-                <%}%>
-            </div>
         </div>
     </article>
     <div class="article-nav">
