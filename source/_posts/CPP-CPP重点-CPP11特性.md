@@ -1,0 +1,132 @@
+---
+title: CPP11特性
+date: 2020-02-19 17:41:27
+tags:
+categories:
+ - CPP
+ - CPP重点
+---
+# Lambda
+参考资料
+https://zh.cppreference.com/w/cpp/language/lambda
+https://blog.csdn.net/qq_34199383/article/details/80469780
+
+```c++
+[ 捕获 ] ( 形参 ) -> ret { 函数体 }
+[ 捕获 ] ( 形参 ) { 函数体 }
+[ 捕获 ] { 函数体 }
+
+& 以引用隐式捕获被使用的自动变量
+= 以复制隐式捕获被使用的自动变量
+
+[&]{};          // OK：默认以引用捕获
+[&, i]{};       // OK：以引用捕获，但 i 以值捕获
+
+[=]{};          // OK：默认以复制捕获
+[=, &i]{};      // OK：以复制捕获，但 i 以引用捕获
+
+[this]{}; // 获取this指针, 如果使用了&和=则会默认包括this
+```
+**使用场景一**
+以sort为代表的函数 需要传入函数的函数
+```c++
+// 原版
+bool compare(int &a, int &b)
+{
+	return a > b;
+}
+
+xxx(compare);
+
+// 新版
+xxx([](int a, int b){return a > b;});
+```
+**使用场景二**
+```c++
+auto add = [](int a, int b){return a + b;};
+int bar = add(1, 2);
+```
+
+# 类型特性
+https://zh.cppreference.com/w/cpp/types#.E7.B1.BB.E5.9E.8B.E7.89.B9.E6.80.A7.28C.2B.2B11_.E8.B5.B7.29
+
+神仙的头文件<type_traits> 可以判断一个值是否是某个类型
+
+比如判断一个值
+是不是 整形
+是不是 void
+是不是 数组 等等
+
+目前不知道用在什么地方合适..... 留个连接备用吧
+
+# 花括号初始
+# 函数对象
+## std::function  functional
+```c++
+#include <functional>
+#include <iostream>
+
+void PrintA()
+{
+    std::cout << "A" << std::endl;
+}
+void PrintB(int bar)
+{
+    std::cout << "B" << std::endl;
+}
+int main()
+{
+    std::function<void()> FPrintA = PrintA;
+    FPrintA();
+
+    std::function<void(int)> FPrintB = PrintB;
+    FPrintB(1);
+
+// 感觉配合Lambad 挺不错, 在一个函数中经常使用的功能可以这样定义
+    std::function<void()> FLambad = [](){std::cout << "Lambad" << std::endl;};
+    FLambad();
+	
+	// 不过使用auto貌似更简单
+	auto ALambad = [](){std::cout << "Lambad" << std::endl;};
+    ALambad();
+}
+
+$ A
+$ B
+$ Lambad
+```
+
+## std::pair utility std::tuple tuple
+
+https://zh.cppreference.com/w/cpp/utility/tuple
+
+pair是 结构体模板, 可在一个单元中存储两个相异对象. pair是tuple拥有两个元素的特殊情况
+
+tuple是固定大小的异类值(啥是异类值??)汇集
+```c++
+std::tuple<int, double > GetInfoById(int id)
+{
+    if (id == 0) return std::make_tuple(1, 1.1);
+    if (id == 1) return std::make_tuple(2, 2.2);
+
+    throw std::invalid_argument("id");
+}
+
+int main()
+{
+    auto info = GetInfoById(0);
+	// 获取指定位置
+    std::cout << "1:" << std::get<0>(info)
+            << " 2:" << std::get<1>(info) << std::endl;
+
+    int val1;
+    double val2;
+	// 直接创建引用的tuple
+    std::tie(val1, val2) = GetInfoById(1);
+    std::cout << "1:" << val1
+              << " 2:" << val2 << std::endl;
+			  
+$ 1:1 2:1.1
+$ 1:2 2:2.2
+}
+```

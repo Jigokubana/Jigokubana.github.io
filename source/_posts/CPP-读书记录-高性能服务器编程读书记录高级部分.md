@@ -1,0 +1,418 @@
+---
+title: Linux高性能服务器编程读书记录-高级部分
+tags:
+  - null
+categories:
+  - CPP
+  - 服务器编程-书籍记录
+date: 2019-08-18 20:34:39
+
+top: 11
+img: https://lsmg-img.oss-cn-beijing.aliyuncs.com/%E5%8D%9A%E5%AE%A2%E5%B0%81%E9%9D%A2/%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B.jpg
+---
+# 第九章 I/O复用
+
+I/O复用使得程序能同时监听多个文件描述符.
+- 客户端程序需要同时处理多个socket 非阻塞connect技术
+- 客户端程序同时处理用户输入和网络连接 聊天室程序
+- TCP服务器要同时处理监听socket和连接socket
+- 同时处理TCP和UDP请求 - 回射服务器
+- 同时监听多个端口, 或者处理多种服务 - xinetd服务器
+
+常用手段`select`, `poll`, `epoll`
+
+## select
+```c++
+#include <sys/select.h>
+// nfds - 被监听的文件描述符总数
+// 后面三个分别指向 可读, 可写, 异常等事件对应的文件描述符集合
+// timeval select超时时间 如果传递0 则为非阻塞, 设置为NULL则为阻塞
+// 成功返回就绪(可读, 可写, 异常)文件描述符的总数, 没有则返回0 失败返回-1
+int select (int nfds, fd_set* readfds, fd_set* writefds, fd_set* exceptfds, struct timeval* timeout);
+
+//操作fd_set的宏
+FD_ZERO(fd_set* fdset);
+FD_SET(int fd, fd_set* fdset);
+FD_CLR(int fd, fd_set* fdset);
+FD_ISSET(int fd, fd_set* fdset);
+// 设置 timeval 超时时间
+struct timeval
+{
+	long tv_sec; // 秒
+	long tv_usec; // 微秒
+}
+```
+**select**
+
+文件描述符就绪条件
+- socket内核接收缓存区中的字节数大于或等于 其低水位标记
+- socket通信的对方关闭连接, 对socket的读操作返回0
+- 监听socket上有新的连接请求
+- socket上有未处理的错误, 可以使用getsockopt来读取和清除错误
+- socket内核的发送缓冲区的可用字节数大于或等于 其低水位标记
+- socket的写操作被关闭, 对被关闭的socket执行写操作将会触发一个SIGPIPE信号
+- socket使用非阻塞connect 连接成功或失败后
+## poll
+**poll**
+![](https://lsmg-img.oss-cn-beijing.aliyuncs.com/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95/poll%E6%97%B6%E9%97%B4%E7%B1%BB%E5%9E%8B1.png)
+![](https://lsmg-img.oss-cn-beijing.aliyuncs.com/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95/poll%E6%97%B6%E9%97%B4%E7%B1%BB%E5%9E%8B2.png)
+
+```c++
+#include <poll.h>
+// fds 结构体类型数组 指定我们感兴趣的文件描述符上发生的可读可写和异常事件\
+// nfds 遍历结合大小 左闭右开
+// timeout 单位为毫秒 -1 为阻塞 0 为立即返回
+int poll(struct pollfd* fds, nfds_t nfds, int timeout);
+
+struct pollfd
+{
+	int fd;
+	short events;  //注册的事件, 告知poll监听fd上的哪些事件
+	short revents; // 实际发生的事件
+}
+```
+```c++
+#define exit_if(r, ...) \
+{   \
+    if (r)  \
+    {   \
+        printf(__VA_ARGS__);    \
+        printf("errno no: %d, error msg is %s", errno, strerror(errno));    \
+        exit(1);    \
+    }   \
+}   \
+
+struct client_info
+{
+    char *ip_;
+    int port_;
+};
+
+int main(int argc, char* argv[])
+{
+    int port = 8001;
+    char ip[] = "127.0.0.1";
+
+    struct sockaddr_in address;
+    address.sin_port = htons(port);
+    address.sin_family = AF_INET;
+    address.sin_addr.s_addr = htons(INADDR_ANY);
+
+    int listenfd = socket(PF_INET, SOCK_STREAM, 0);
+    exit_if(listenfd < 0, "socket error\n");
+
+    int ret = bind(listenfd, (struct sockaddr*)&address, sizeof(address));
+    exit_if(ret == -1, "bind error\n");
+
+    ret = listen(listenfd, 5);
+    exit_if(ret == -1, "listen error\n");
+
+    constexpr int MAX_CLIENTS = 1024;
+    struct pollfd polls[MAX_CLIENTS] = {};
+    struct client_info clientsinfo[MAX_CLIENTS] = {};
+
+    polls[3].fd = listenfd;
+    polls[3].events = POLLIN | POLLRDHUP;
+
+
+    while (true)
+    {
+        ret = poll(polls, MAX_CLIENTS + 1, -1);
+        exit_if(ret == -1, "poll error\n");
+
+        for (int i = 3; i <= MAX_CLIENTS; ++i)
+        {
+            int fd = polls[i].fd;
+
+            if (polls[i].revents & POLLRDHUP)
+            {
+                polls[i].events = 0;
+                printf("close fd-%d from %s:%d\n", fd, clientsinfo[fd].ip_, clientsinfo[fd].port_);
+            }
+
+            if (polls[i].revents & POLLIN)
+            {
+                if (fd == listenfd)
+                {
+                    struct sockaddr_in client_address;
+                    socklen_t client_addresslen = sizeof(client_address);
+
+                    int clientfd = accept(listenfd, (struct sockaddr*)&client_address,
+                            &client_addresslen);
+
+                    struct client_info *clientinfo = &clientsinfo[clientfd];
+
+                    clientinfo->ip_ = inet_ntoa(client_address.sin_addr);
+                    clientinfo->port_ = ntohs(client_address.sin_port);
+
+                    exit_if(clientfd < 0, "accpet error, from %s:%d\n", clientinfo->ip_,
+                            clientinfo->port_);
+                    printf("accept from %s:%d\n", clientinfo->ip_, clientinfo->port_);
+
+                    polls[clientfd].fd = clientfd;
+                    polls[clientfd].events = POLLIN | POLLRDHUP;
+                }
+                else
+                {
+                    char buffer[1024];
+                    memset(buffer, '\0', sizeof(buffer));
+
+                    ret = read(fd, buffer, 1024);
+                    if(ret == 0)
+                    {
+                        close(fd);
+                    }
+                    else
+                    {
+                        printf("recv from %s:%d:\n%s\n", clientsinfo[fd].ip_,
+                               clientsinfo[fd].port_, buffer);
+                    }
+                }
+            }
+        }
+    }
+}
+```
+## epoll
+**epoll**
+
+epoll是Linux特有的I/O复用函数, 实现上与select,poll有很大的差异
+- epoll使用一组函数完成任务
+- epoll把用户关心的文件描述符上的事件放在内核里的一个事件表中
+- epoll无需每次调用都传入文件描述符集或事件集.
+
+有特定的文件描述符创建函数, 来标识这个事件表`epoll_create()`
+`epoll_ctl()` 用来操作这个内核事件表
+`epoll_wait()` 为主要函数 成功返回就绪的文件描述符个数 失败返回-1
+如果`epoll_wait()`函数检测到事件,就将所有就绪的事件从内核事件表(由第一个参数, epoll_create返回的结果) 中复制到第二个参数event指向的数组中, 这个数组只用于输出`epoll_wait`检测到的就绪事件.
+
+*event不同于select和poll的数组参数 既用于传入用户注册的事件, 又用于输出内核检测到的就绪事件, 提高了效率*
+
+```c++
+// 索引poll返回的就绪文件描述符
+int ret = poll(fds, MAX_EVENT_NUMBER - 1);
+// 遍历
+for(int i = 0; i < MAX_EVENT_NUMBER; ++i) {
+	if(fds[i].revents & POLLIN) {
+		int sockfd = fds[i].fd;
+	}
+}
+
+// 索引epoll返回的就绪文件描述符
+int ret = epoll_wait(epoll_fd, events, MAX_EVENT_NUMBER,  -1);
+for(int i = 0; i < ret; i++) {
+	int sockfd = events[i].data.fd;
+	// sockfd 一定就绪 ?????
+}
+```
+
+**LT和ET模式**
+LT(电平触发, 默认的工作模式)
+LT模式下的epoll相当于一个效率较高的poll
+epoll_wait将会一只通知一个事件知道这个事件被处理
+
+ET(边沿触发, epoll的高效工作模式)模式
+当向epoll内核事件表中注册一个文件描述符上的EPOLLET事件的时候, epoll将用ET模式来操作这个
+文件描述符
+epoll_wait只会通知一次, 不论这个事件有没有完成
+
+ET模式
+```
+-> 123456789-123456789-123456789
+event trigger once
+get 9bytes of content: 123456789
+get 9bytes of content: -12345678
+get 9bytes of content: 9-1234567
+get 4bytes of content: 89
+read later
+```
+LT模式
+```
+-> 123456789-123456789-123456789
+event trigger once
+get 9bytes of contents: 123456789
+event trigger once
+get 9bytes of contents: -12345678
+event trigger once
+get 9bytes of contents: 9-1234567
+event trigger once
+get 4bytes of contents: 89
+```
+ET模式有任务到来就必须做完, 因为后续将不会继续通知这个事件, 所以ET是epoll的高效工作模式
+LT模式只要事件没被处理就会一直通知
+
+```c++
+#include <epoll.h>
+// size 参数只是给内核一个提示, 事件表需要多大
+// 函数返回其他所有epoll系统调用的第一个参数, 来指定要访问的内核事件表
+int epoll_create(int size);
+
+// epfd 为 epoll_create的返回值
+// op为操作类型
+// - EPOLL_CTL_ADD 向事件表中注册fd上的事件
+// - EPOLL_CTL_MOD 修改fd上的注册事件
+// - EPOLL_CTL_DEL 删除fd上的注册事件
+// fd 为要操作的文件描述符
+int epoll_ctl(int epfd, int op, int fd, struct epoll_event* event);
+
+struct epoll_event
+{
+	_uint32_t events; // epoll事件
+	epoll_data_t data; // 用户数据 是一个联合体
+}
+
+typedef union epoll_data
+{
+	void* ptr; // ptr fd 不能同时使用
+	int fd;
+	uint32_t u32;
+	uint64_t u64;
+}epoll_data_t
+
+// maxevents监听事件数 必须大于0
+// timeout 为-1 表示阻塞
+// 成功返回就绪的文件描述符个数 失败返回-1
+int epoll_wait(int epfd, struct epoll_event* events, int maxevents, int timeout);
+```
+
+## 三种IO复用的比较
+`select`以及`poll`和`epoll`
+相同
+- 都能同时监听多个文件描述符, 都将等待timeout参数指定的超时时间, 直到一个或多个文件描述符上有事件发生.
+- 返回值为就绪的文件描述符数量, 返回0则表示没有事件发生
+- ![](https://lsmg-img.oss-cn-beijing.aliyuncs.com/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95/%E4%B8%89%E7%A7%8DIO%E5%A4%8D%E7%94%A8%E6%AF%94%E8%BE%83.png)
+
+## I/O 复用的高级应用, 非阻塞connect
+
+connect出错的时候会返回一个errno值 EINPROGRESS - 表示对非阻塞socket调用connect, 连接又没有立即建立的时候, 这时可以调用select和poll函数来监听这个连接失败的socket上的可写事件.
+
+当函数返回的时候, 可以用getsockopt来读取错误码, 并清楚该socket上的错误. 错误码为0表示成功
+
+
+# 第十章信号
+
+## Api
+发送信号Api
+```c++
+#include <sys/types.h>
+#include <signal.h>
+
+// pid > 0 发送给PID为pid标识的进程
+//  0 发送给本进程组的其他进程
+// -1 发送给进程以外的所有进程, 但发送者需要有对目标进程发送信号的权限
+// < -1 发送给组ID为 -pid 的进程组中的所有成员
+
+// 出错信息 EINVAL 无效信号, EPERM 该进程没有权限给任何一个目标进程 ESRCH 目标进程(组) 不存在
+int kill(pid_t pid, int sig);
+```
+接收信号Api
+```c++
+#include <signal.h>
+typedef void(*_sighandler_t) (int);
+
+#include <bits/signum.h> // 此头文件中有所有的linux可用信号
+// 忽略目标信号
+#define SIG_DFL ((_sighandler_t) 0)
+// 使用信号的默认处理方式
+#define SIG_IGN ((_sighandler_t) 1)
+```
+常用信号
+```
+SIGHUP 控制终端挂起
+SIGPIPE 往读端被关闭的管道或者socket连接中写数据
+SIGURG socket连接上收到紧急数据
+SIGALRM 由alarm或setitimer设置的实时闹钟超时引起
+SIGCHLD 子进程状态变化
+```
+信号函数
+```c++
+// 为一个信号设置处理函数
+#include <signal.h>
+// _handler 指定sig的处理函数
+_sighandler_t signal(int sig, __sighandler_t _handler)
+
+
+int sigaction(int sig, struct sigaction* act, struct sigaction* oact)
+```
+## 概述
+
+信号是用户, 系统, 或者进程发送给目标进程的信息, 以通知目标进程某个状态的改变或者系统异常.
+产生条件
+- 对于前台进程
+用户可以通过输入特殊的终端字符来给它发送信号, CTRL+C 通常为一个中断信号 `SIGINT`
+- 系统异常
+浮点异常和非法内存段的访问
+- 系统状态变化
+由alarm定时器到期将引起`SIGALRM`信号
+- 运行kill命令或调用kill函数
+
+*服务器必须处理(至少忽略) 一些常见的信号, 以免异常终止*
+
+中断系统调用?
+
+# 第十一章定时器
+## socket选项`SO_RCVTIMEO` 和 `SO_SNDTIMEO`
+![](https://lsmg-img.oss-cn-beijing.aliyuncs.com/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95/SO_RCVTIMEO%E5%92%8CSO_SNDTIMEO%E9%80%89%E9%A1%B9%E7%9A%84%E4%BD%9C%E7%94%A8.png)
+
+使用示例, 通过设置对应的SO_SNDTIMEO 得到超时后的路线
+```c++
+int timeout_connect(const char* ip, const int port, const int sec)
+{
+    struct sockaddr_in address{};
+    address.sin_family = AF_INET;
+    address.sin_port = htons(port);
+    address.sin_addr.s_addr = inet_addr(ip);
+
+    int sockfd = socket(PF_INET, SOCK_STREAM, 0);
+    exit_if(sockfd < 0, "socket error\n");
+
+    struct timeval timeout{};
+    timeout.tv_sec = sec;
+    timeout.tv_usec = 0;
+    socklen_t timeout_len = sizeof(timeout);
+
+    setsockopt(sockfd, SOL_SOCKET, SO_SNDTIMEO, &timeout, timeout_len);
+
+    int ret = connect(sockfd, (struct sockaddr*)&address, sizeof(address));
+    if (ret == -1)
+    {
+		// 当 errno为EINPROGRESS 说明 等待了 10S后依然无法连接成功 实现了定时器
+        if (errno == EINPROGRESS)
+        {
+            printf("connecting timeout, process timeout logic\n");
+            return -1;
+        }
+        printf("error occur when connecting to server\n");
+        return -1;
+    }
+    return sockfd;
+}
+
+int main(int argc, char* argv[])
+{
+    exit_if(argc <= 2, "wrong number of parameters\n")
+    const char* ip = argv[1];
+    const int port = atoi(argv[2]);
+
+    int sockfd = timeout_connect(ip, port, 10);
+    if (sockfd < 0)
+    {
+        return 1;
+    }
+    return 0;
+}
+```
+
+## SIGALRM信号-基于升序链表的定时器
+由alarm和setitimer函数设定的实时闹钟一旦超时, 将会触发SIGALRM信号, 用信号处理函数处理定时任务
+ 相关的代码放在了github上 代码还是很多的就不放上来了[连接](https://github.com/rjd67441/Notes-HighPerformanceLinuxServerProgramming/tree/master/12.%20%E4%BB%A3%E7%A0%81%E6%B8%85%E5%8D%9511-2%E5%92%8C11-3%E5%8F%8A11-4%20%E9%93%BE%E8%A1%A8%E5%AE%9A%E6%97%B6%E5%99%A8%2C%20%E5%A4%84%E7%90%86%E9%9D%9E%E6%B4%BB%E5%8A%A8%E8%BF%9E%E6%8E%A5)
+
+总结放在了 日记的博客上 链接后面再甩出来
+## IO复用系统调用的超时参数
+
+## 高性能定时器
+## # 时间轮
+## # 时间堆
+
+# 第十二章高性能IO框架库
+另出一篇博客
