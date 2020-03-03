@@ -71,7 +71,7 @@ stick: true
 ## social config
 ## 社交功能设置 {@social:[url:地址,title:a标签的title,icon:显示图标],[]}
 social:
-- url: https://github.com/rjd67441
+- url: https://github.com/Jigokubana
   title: GitHub
   icon: fa-github
 
@@ -104,7 +104,6 @@ warning:
 ### 规则:Front-matter中的自定义'img'字段 > 文章内的图片(随机获取) > defaultImgs(随机获取)
 defaultImgs:
   - https://lsmg-img.oss-cn-beijing.aliyuncs.com/%E5%8D%9A%E5%AE%A2%E5%B0%81%E9%9D%A2/1.png
-  - /img/default-1.jpg
 excerptLength: 400
 
 ### article meta
@@ -132,7 +131,7 @@ highlightStyle: github
 # third party service --第三方服务
 ## busuanzi --不蒜子站点总人数统计 {@visits_count:{enable:是否开启,icon:图标,text:显示文字/*%d为占位符*/,method:统计方式}}
 visits_count:
-  enable:  true
+  enable:  false
   icon: fa-bar-chart
   text: '欢迎第%d位小伙伴~'
   count_method: 'uv' ### uv 为多次点击算一次，pv为每篇文章算一次
