@@ -40,8 +40,6 @@
 
 
 
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
 
 
     
@@ -224,9 +222,9 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// shm_id </span></span><br><span class="line"><span class="comment">// shmget返回的唯一标识</span></span><br><span class="line"><span class="comment">// shm_addr </span></span><br><span class="line"><span class="comment">// 关联到进程的哪块地址空间, 其效果还受到shmflg的可选标识SHM_RND的影响</span></span><br><span class="line"><span class="comment">// 如果shm_addr = NULL, 则关联地址由操作系统决定, 代码可移植性强</span></span><br><span class="line"><span class="comment">// 如果 shm_addr 非空,且没有`SHM_RND`标志 则关联到指定的地址处</span></span><br><span class="line"><span class="comment">// 如果 shm_addr 非空, 但是设置了标志 *这里还没用到, 暂时不写*</span></span><br><span class="line"><span class="comment">// shmflg</span></span><br><span class="line"><span class="comment">// SHM_RDONLY 设置后内存内容变成只读</span></span><br><span class="line"><span class="comment">// SHM_REMAP 如果地址shmaddr已经关联到一段内存上则重新关联</span></span><br><span class="line"><span class="comment">// SHM_EXEC 有执行权限 = 读权限</span></span><br><span class="line"><span class="comment">// 成功返回关联到的地址, 失败返回 (void*)-1 errno</span></span><br><span class="line"><span class="function"><span class="keyword">void</span>* <span class="title">shmat</span><span class="params">(<span class="keyword">int</span> shm_id, <span class="keyword">const</span> <span class="keyword">void</span>* shm_addr, <span class="keyword">int</span> shmflg)</span></span></span><br></pre></td></tr></table></figure>
 
 <p>将共享内存从进程地址空间中分离<br>成功后<br>shm_nattach -1<br>更新 shm_lpid和shm_dtime设置为当前时间</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 成功返回0 失败返回-1 errno</span></span><br><span class="line">`int shmdt(const void* shm_addr)`</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 成功返回0 失败返回-1 errno</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">shmdt</span><span class="params">(<span class="keyword">const</span> <span class="keyword">void</span>* shm_addr)</span></span></span><br></pre></td></tr></table></figure>
 
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`int shm_ctl(int shm_id, int command, struct shmid_ds* buf)`</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">shm_ctl</span><span class="params">(<span class="keyword">int</span> shm_id, <span class="keyword">int</span> command, struct shmid_ds* buf)</span></span></span><br></pre></td></tr></table></figure>
 <p><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95/shmctl.png" alt=""></p>
 <h1 id="第十四章-多线程编程"><a href="#第十四章-多线程编程" class="headerlink" title="第十四章 多线程编程"></a>第十四章 多线程编程</h1><p>根据运行环境和调度者身份, 线程可以分为两种<br>内核线程<br>运行在内核空间, 由内核来调度.<br>用户线程<br>运行在用空间, 由线程库来调用</p>
 <p>当内核线程获得CPU的使用权的时候, 他就加载并运行一个用户线程, 所以内核线程相当于用户线程的容器.</p>
@@ -267,7 +265,7 @@
                 
                 <li>Published Date: <span>2020-02-25  22:34:39</span></li>
                 
-                <li>Updated Date: <span>2020-03-02  15:58:36</span></li>
+                <li>Updated Date: <span>2020-03-02  16:01:19</span></li>
                 
                 <li class="post-category">
                     Categories:
@@ -328,13 +326,6 @@
     </div>
     <p>Powered by <a href="https://hexo.io" class="copyright-links" target="_blank">Hexo</a> | Theme by <a
                 href="https://github.com/GeekaholicLin" class="copyright-links" target="_blank">GeekaholicLin</a>
-    </p>
-    
-    
-    <p>
-        <span id="busuanzi_container_site_uv" class="fa fa-bar-chart">
-        欢迎第<span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span>位小伙伴~
-        </span>
     </p>
     
 </footer>
