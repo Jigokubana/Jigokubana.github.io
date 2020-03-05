@@ -1,4 +1,3 @@
----
 title: 编程规范
 tags:
   - null
@@ -44,7 +43,7 @@ class FooBar {
 
 如果你的类型需要, 就让它们支持拷贝 / 移动. 否则, 就把隐式产生的拷贝和移动函数禁用.
 - MyClass(const MyClass&) = delete;
-MyClass& operator=(const MyClass&) = delete;
+- MyClass& operator=(const MyClass&) = delete;
 
 仅当`只有`数据成员的时候`struct`, `其他一律`使用class
 
@@ -94,7 +93,7 @@ MyClass& operator=(const MyClass&) = delete;
 - 变量 (包括函数参数) 和数据成员名一律小写, 单词之间用下划线连接. 类的成员变量以下划线结尾
 
 常量命名
-- 字母k开头
+- 全部大写
 - 声明为 constexpr 或 const
 
 函数命名
@@ -105,14 +104,14 @@ MyClass& operator=(const MyClass&) = delete;
 - 小写字母命名
 
 枚举命名
-- 枚举的命名应当和 常量 或 宏 一致: kEnumName
+- 枚举的命名应当和 常量 或 宏 一致
 
 **第六点-格式**
 
-缩进两个空格
+缩进四个空格
 
 函数定义与声明
-- 左圆括号总是和函数名在同一行.(没有标准,,,,,,,,,, emmm 我想我还是换行吧 不过对于else换行挺难受的)
+- 左圆括号总是和函数名在同一行.(没有标准,,,,,,,,,, emmm 我想我还是换行吧)
 - 函数名和左圆括号间永远没有空格.
 - 圆括号与参数间没有空格.
 
