@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.lsmg.xyz/2020/02/Git-%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/</loc>
+    
+    <lastmod>2020-03-06T03:41:36.634Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.lsmg.xyz/2020/03/%E6%B8%B8%E6%88%8F%E7%9F%A5%E8%AF%86-%E8%85%BE%E8%AE%AF%E6%B8%B8%E6%88%8F%E5%AD%A6%E9%99%A2-%E7%90%83%E7%90%83/</loc>
     
     <lastmod>2020-03-05T14:42:14.972Z</lastmod>
@@ -145,13 +152,6 @@
     <loc>http://blog.lsmg.xyz/2019/10/CPP-%E6%95%B0%E6%8D%AE%E5%BA%93-MongoDB-MongoDB%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</loc>
     
     <lastmod>2020-02-27T01:49:16.303Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.lsmg.xyz/2020/02/Git-%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/</loc>
-    
-    <lastmod>2020-02-22T09:44:40.216Z</lastmod>
     
   </url>
   
