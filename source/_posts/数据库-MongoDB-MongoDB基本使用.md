@@ -1,9 +1,8 @@
 ---
-title: MongoDB
+title: MongoDB基本使用
 tags:
-  - Mysql
+  - MongoDB
 categories:
-  - CPP
   - 数据库
   - MongoDB
 date: 2019-10-13 19:25:28

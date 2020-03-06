@@ -13,6 +13,7 @@ tags:
 
 2020年2月7日18:49:25 再来重新编辑下这些内容
 2020年2月22日17:29:17 再次更新内容 增加commit规范
+2020年3月6日11:31:59 再次更新 添加分支管理细则
 # 命令总结
 ```
 # -t Specifies the type of key to create.  The possible values are
@@ -260,6 +261,52 @@ $ cat test.txt
 - **release**:发布分支, 用于修改版本号等小修改, 来自`develop`分支合并到`master`分支
 - **hotfixes**:紧急修复bug分支, 从`master`创建, 合并回`develop`分支和`master`分支
 ![](https://pic4.zhimg.com/80/v2-aef704a4c112eaaf5e8637587ee17df3_hd.jpg)
+
+
+[Git 分支管理规范](https://juejin.im/post/5d82e1f3e51d4561d044cd88#heading-14)
+
+[Git 基础 - 打标签](https://git-scm.com/book/zh/v2/Git-%E5%9F%BA%E7%A1%80-%E6%89%93%E6%A0%87%E7%AD%BE)
+
+**develop分支完成了操作, 准备发布新的版本**
+```shell
+# 从 develop 分支上创建 release 分支:
+# 命名规则如下 release-事件-版本
+git checkout –b release-20190919-v1.0.0 develop
+
+# 修复完release的bug后再次提交修改:
+git checkout release-20190919-v1.0.0
+# 提交本地修改, 如果没有修改bug 可以跳过
+git add .
+git commit –m “提交日志”
+# 推送 release 分支
+git push origin release-20190919-v1.0.0
+
+# 发布新版本
+# 合并 release 分支到 master 分支:
+git checkout master
+git merge --no-ff release-20190919-v1.0.0
+# 合并 release 分支到 develop 分支:
+git checkout develop
+git merge --no-ff release-20190919-v1.0.0
+# 在 master 分支上创建标签:
+git tag tag-20190919-v1.0.0
+# 删除本地 release 分支:
+git branch –d release-20190919-v1.0.0
+# 删除远程 release 分支:
+git push origin :release-20190919-v1.0.0
+```
+
+新版本完成之后
+```shell
+# 推送master分支
+git push origin master
+
+# 注意上边打的tag需要手动提交 默认push不会提交tag
+git push origin [tag name]
+# 也可以给push增加参数
+git push origin --tags
+```
+
 
 # commit 规范
 [阮一峰 Commit message 和 Change log 编写指南](https://www.ruanyifeng.com/blog/2016/01/commit_message_change_log.html)
