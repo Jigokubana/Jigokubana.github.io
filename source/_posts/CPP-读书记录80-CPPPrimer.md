@@ -95,7 +95,7 @@ char * getInut() {
 | `__LINE__` | 存放当前行号的整形字面值 |
 | `__TIME__` | 存放文件编译时间的字符串字面量 |
 | `__DATE__` | 存放文件编译日期的字符串字面值 |
-| `__VA_ARGS__` | 用来接受函数参数中`...`, 类似printf函数 |
+| `__VA_ARGS__` | 用来接受函数参数中`...`, 类似printf函数, 这个宏只能在宏中使用 |
 
 **异常处理**
 代码可以使用throw来抛出异常
@@ -178,6 +178,97 @@ r = q; // 给r赋值, 令他指向另一个地址
 ```
 
 **使用动态内存的原因**
+- 程序不知道自己需要使用多少对象 容器类
+- 程序不知道所需对象的准确类型
+- 程序需要在多个对象间共享数据
+
+**程序需要在多个对象间共享数据**
+一般情况
+```c++
+vector<string> v1; // empty
+{ // 新的作用域
+	vector<string> v2 = {"a", "b", "c"};
+	v1 = v2;
+} // 离开作用域 v2被销毁
+// v1中有三个元素, 是原来三个元素的拷贝
+```
+
+下面是我们要实现的情况
+```c++
+vector<string> v1; // empty
+{ // 新的作用域
+	vector<string> v2 = {"a", "b", "c"};
+	v1 = v2; // v1 v2共享相同的元素
+} // 离开作用域 v2被销毁 但v2的元素不能被销毁
+// v1中有三个元素, 指向原来三个元素
+```
+
+创建一个类来管理这个vector, 但是不能直接保存在其中, 因为当这个类的对象销毁的时候内部的vector也就销毁
+所以需要保存在动态内存中
+
+所以使用shared_ptr来管理动态分配的vector, 当最后一个vector的使用者被销毁的时候才释放内存
+
+确定下这个类提供的操作
+- 修改元素的操作会进行校验 不合法则抛出异常
+- 默认构造函数
+- 接受单一的initiaizer_list\<string>类型的参数. 这个参数可以接受一个初始器的花括号列表
+
+```c++
+class StrBlob // 我还去查了下 Blob是二进制数据块...
+{
+public:
+	typedef std::vector<std::string>::size_type size_type;
+	StrBlob();
+	StrBlob(std::initializer_list<std::string> il);
+	size_type size() const {return data_->size();}
+	bool empty() const {return data_->empty();}
+	// 增删
+	void push_back(const std::string &t) {data_->push_back(t)}
+	void pop_back();
+	// 访问
+	std::string& front();
+	std::string& back();
+
+private:
+	std::shared_ptr<std::vector<std::string>> data_;
+	// 如果data[i] 不合法, 抛出一个异常
+	void check(size_type i, const std::string &msg) const;
+}
+
+StrBlob::StrBlob(): data_(make_shared<vector<string>>()) {}
+StrBlob::StrBlob(initializer_list<std::string> il):
+data_(make_shared<vector<string>>(il)) {}
+
+// 下标检查
+void StrBlob::check(size_type i, const string &msg) const
+{
+	if (i >= data_->size())
+	{
+		throw out_of_range(msg);
+	}
+}
+
+string& StrBlob::front()
+{
+	check(0, "front on empty StrBlob");
+	return data->front();
+}
+string& StrBlob::back()
+{
+	check(0, "back on empty StrBlob");
+	return data->back();
+}
+void StrBlob::pop_back()
+{
+	check(0, "pop_back on empty StrBlob");
+	data->pop_back();
+}
+```
+
+
+
+
+
 
 
 使用unique_ptr的时候要注意
