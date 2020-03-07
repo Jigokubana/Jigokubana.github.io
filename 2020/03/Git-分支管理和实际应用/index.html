@@ -20,7 +20,7 @@
 <meta name="verify" content=all />
     <!--Title-->
 
-<title>字节对齐 | Lsmg的大学之路</title>
+<title>分支管理和实际应用 | Lsmg的大学之路</title>
 
 <link rel="alternate" href="/atom.xml" title="Lsmg的大学之路" type="application/atom+xml">
 
@@ -140,9 +140,9 @@
     <article id="post">
         <div id="post-header">
 
-            <h1 id="字节对齐">
+            <h1 id="分支管理和实际应用">
                 
-                字节对齐
+                分支管理和实际应用
                 
             </h1>
             <div class="article-meta">
@@ -150,7 +150,7 @@
     
     <span class="categories-meta fa-wrap">
             <i class="fa fa-folder-open-o"></i>
-        <span>CPP重点</span>
+        <span>Git操作</span>
     </span>
     
     
@@ -158,7 +158,7 @@
          <i class="fa fa-tags"></i>
         <span class="tags-meta">
             
-            null
+            Git操作
             
         </span>
     </span>
@@ -166,7 +166,7 @@
     
     <span class="fa-wrap">
         <i class="fa fa-clock-o"></i>
-        <span class="date-meta ">2020/02/06</span>
+        <span class="date-meta ">2020/03/06</span>
     </span>
     
     
@@ -178,17 +178,35 @@
         </div>
         
         <div id="post-body">
-            <p>以前在牛客碰到不少字节对齐的题目, 当时只是为了记住而记住 今天我在学习自定义TCP二进制数据包<br>的时候 遇到了必须考虑下字节对齐的情景.</p>
-<p><strong>解释</strong><br>现代计算机中内存空间都是按照byte划分的，从理论上讲似乎对任何类型的变量的访问可以从任何地址开始，但实际情况是在访问特定类型变量的时候经常在特 定的内存地址访问，这就需要各种类型数据按照一定的规则在空间上排列，而不是顺序的一个接一个的排放，这就是对齐。–百度百科</p>
-<p><strong>原因</strong><br>各个硬件平台对存储空间的处理上有很大的不同。一些平台对某些特定类型的数据只能从某些特定地址开始存取。比如有些架构的CPU在访问 一个没有进行对齐的变量的时候会发生错误，那么在这种架构下编程必须保证字节对齐.其他平台可能没有这种情况<br>但是最常见的是如果不按照适合其平台要求对 数据存放进行对齐，会在存取效率上带来损失。比如有些平台每次读都是从偶地址开始，如果一个int型（假设为32位系统）如果存放在偶地址开始的地方，那么一个读周期就可以读出这32bit，而如果存放在奇地址开始的地方，就需要2个读周期，并对两次读出的结果的高低字节进行拼凑才能得到该32bit数据。–百度百科</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Foo</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">char</span> foo1;</span><br><span class="line">    <span class="keyword">int</span> foo2;</span><br><span class="line">    short foo3;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">sizeof</span>(Foo) = <span class="number">12</span></span><br><span class="line"><span class="keyword">sizeof</span>(<span class="keyword">char</span>) + <span class="keyword">sizeof</span>(<span class="keyword">int</span>) + <span class="keyword">sizeof</span>(short) = <span class="number">7</span></span><br></pre></td></tr></table></figure>
-<p>说明内存中并不是连续存储的这三个变量;</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Foo foo1&#123;<span class="string">'1'</span>, <span class="number">2</span>, <span class="number">3</span>&#125;;</span><br><span class="line"><span class="built_in">write</span>(fd, &amp;foo1, <span class="keyword">sizeof</span>(foo1));</span><br></pre></td></tr></table></figure>
-<p>// hexdump 查看<br>0000000 5631 0000 0002 0000 0003 0000<br>对应图示如下<br><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/%E6%9D%82%E9%A1%B9/%E5%AD%97%E8%8A%82%E5%AF%B9%E9%BD%90.png" alt=""></p>
-<p>第一字节 0x31 正好是 ‘1’ <em>蓝色区域</em><br>二三四字节 为填充 <em>红色区域</em><br>因为sizeof(int)=4所以foo2的偏移量是四的倍数 , 故需要填充三个字节 3+1 = 4</p>
-<p>第五六七八字节 0x02对应2 <em>灰色区域</em><br>这里没有填充是因为sizeof(short)=2所以foo3的偏移量是2的倍数 由于偏移量是8 所以不需要填充</p>
-<p>第九十字节 0x03 对应3<br>第十一十二字节填充<em>黑色区域</em><br>因为此结构中最大的sizeof()=4所以需要将字节数对齐到4的倍数 目前10字节 所以需要填充2字节到<br>12字节满足四的倍数</p>
+            <h1 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h1><p><code>git checkout -b dev</code>相当于一下两条命令<br><code>git branch dev</code> 分支创建<br><code>git checkout dev</code> 分支切换</p>
+<p><code>git branch -d dev</code> 分支删除</p>
+<p><code>git branch</code> 查看当前所有分支</p>
+<p><code>git merge dev</code> 将制定的dev分支合并到当前的分支</p>
+<p><strong>冲突解决</strong><br><code>git merge dev</code> 将制定的dev分支合并到当前的分支</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1 111111111111111</span><br><span class="line">2 222222222222222</span><br><span class="line">3 333333333333333</span><br><span class="line">4 444444444444444</span><br><span class="line">5 &lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD  # 我在master分支下添加了6666666 并提交</span><br><span class="line">6 6666666</span><br><span class="line">7 &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">8 7777777</span><br><span class="line">9 &gt;&gt;&gt;&gt;&gt;&gt;&gt; deb # 我在deb分支下添加了7777777 并提交</span><br></pre></td></tr></table></figure>
+<p>  最后需要我手动修改这个文件为自己需要的内容 然后提交即可</p>
+<p>  <strong>分支管理</strong><br>  通常Git会使用<code>Fast forward</code>模式 这样删除分支后会丢失分支的信息<br>  可以再merge的时候加入<code>--no-ff</code>这样就能解决问题<br>  <code>git merge --no-ff -m &quot;merge with no-ff&quot; dev</code><br>  由于禁用<code>Fast forward</code>后<br>  会生成新的commit所以需要加入<code>-m &quot;merge with no-ff&quot;</code></p>
+<p>  <code>git stash</code> 可以储存当前的工作区 继续其他的工作<br>  <code>git stash list</code> 查看储存的工作区列表<br>  <code>git stash apply stash@{0}</code> 恢复指定的储存<br>  <code>git stash pop</code> 恢复并drop最近的存储</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">$ cat test.txt # stash前</span><br><span class="line">111111</span><br><span class="line">$ vim test.txt </span><br><span class="line">$ cat test.txt # 进行了修改</span><br><span class="line">111111</span><br><span class="line">222222</span><br><span class="line">333333</span><br><span class="line">$ git status</span><br><span class="line">位于分支 master</span><br><span class="line">	修改：     test.txt</span><br><span class="line">$ git stash # stash</span><br><span class="line">保存工作目录和索引状态 WIP on master: 854b710 1</span><br><span class="line">$ cat test.txt </span><br><span class="line">111111</span><br><span class="line">$ git status</span><br><span class="line">位于分支 master</span><br><span class="line">无文件要提交，干净的工作区</span><br><span class="line">$ git stash pop</span><br><span class="line">位于分支 master</span><br><span class="line">	修改：     test.txt</span><br><span class="line">$ cat test.txt </span><br><span class="line">111111</span><br><span class="line">222222</span><br><span class="line">333333</span><br></pre></td></tr></table></figure>
 
+<h1 id="实际工作中分支的应用"><a href="#实际工作中分支的应用" class="headerlink" title="实际工作中分支的应用"></a>实际工作中分支的应用</h1><p><a href="https://zhuanlan.zhihu.com/p/38772378" target="_blank" rel="noopener">主要参考</a><br><strong>主分支</strong></p>
+<ul>
+<li><strong>master</strong>: 这个分支最稳定, 相当于放的可发布版本</li>
+<li><strong>develop</strong>: 开发分支, 平行于master分支, 负责合并各种<code>用于开发子功能</code>的分支</li>
+</ul>
+<p><strong>支持分支</strong>:解决某个问题, 结束后合并回<code>master</code>或<code>develop</code>分支</p>
+<ul>
+<li><strong>feature</strong>功能分支, 用于开发一个个子功能, 来自<code>develop</code>合并到<code>develop</code>去</li>
+<li><strong>release</strong>:发布分支, 用于修改版本号等小修改, 来自<code>develop</code>分支合并到<code>master</code>分支</li>
+<li><strong>hotfixes</strong>:紧急修复bug分支, 从<code>master</code>创建, 合并回<code>develop</code>分支和<code>master</code>分支<br><img src="https://pic4.zhimg.com/80/v2-aef704a4c112eaaf5e8637587ee17df3_hd.jpg" alt=""></li>
+</ul>
+<p><a href="https://juejin.im/post/5d82e1f3e51d4561d044cd88#heading-14" target="_blank" rel="noopener">Git 分支管理规范</a></p>
+<p><a href="https://git-scm.com/book/zh/v2/Git-%E5%9F%BA%E7%A1%80-%E6%89%93%E6%A0%87%E7%AD%BE" target="_blank" rel="noopener">Git 基础 - 打标签</a></p>
+<p><strong>develop分支完成了操作, 准备发布新的版本</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 从 develop 分支上创建 release 分支:</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 命名规则如下 release-事件-版本</span></span><br><span class="line">git checkout –b release-20190919-v1.0.0 develop</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 修复完release的bug后再次提交修改:</span></span><br><span class="line">git checkout release-20190919-v1.0.0</span><br><span class="line"><span class="meta">#</span><span class="bash"> 提交本地修改, 如果没有修改bug 可以跳过</span></span><br><span class="line">git add .</span><br><span class="line">git commit –m “提交日志”</span><br><span class="line"><span class="meta">#</span><span class="bash"> 推送 release 分支</span></span><br><span class="line">git push origin release-20190919-v1.0.0</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 发布新版本</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 合并 release 分支到 master 分支:</span></span><br><span class="line">git checkout master</span><br><span class="line">git merge --no-ff release-20190919-v1.0.0</span><br><span class="line"><span class="meta">#</span><span class="bash"> 合并 release 分支到 develop 分支:</span></span><br><span class="line">git checkout develop</span><br><span class="line">git merge --no-ff release-20190919-v1.0.0</span><br><span class="line"><span class="meta">#</span><span class="bash"> 在 master 分支上创建标签:</span></span><br><span class="line">git tag tag-20190919-v1.0.0</span><br><span class="line"><span class="meta">#</span><span class="bash"> 删除本地 release 分支:</span></span><br><span class="line">git branch –d release-20190919-v1.0.0</span><br><span class="line"><span class="meta">#</span><span class="bash"> 删除远程 release 分支:</span></span><br><span class="line">git push origin :release-20190919-v1.0.0</span><br></pre></td></tr></table></figure>
+
+<p>新版本完成之后</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 推送master分支</span></span><br><span class="line">git push origin master</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 注意上边打的tag需要手动提交 默认push不会提交tag</span></span><br><span class="line">git push origin [tag name]</span><br><span class="line"><span class="meta">#</span><span class="bash"> 也可以给push增加参数</span></span><br><span class="line">git push origin --tags</span><br></pre></td></tr></table></figure>
         </div>
         <div id="post-footer">
             <div class="avatar" style="padding-bottom: 0.2rem"
@@ -206,20 +224,22 @@
                     <a href="/about.html">Lsmg</a>
                 </li>
                 
-                <li>Published Date: <span>2020-02-06  11:38:08</span></li>
+                <li>Published Date: <span>2020-03-06  19:34:25</span></li>
                 
-                <li>Updated Date: <span>2020-02-07  16:38:13</span></li>
+                <li>Updated Date: <span>2020-03-07  20:51:34</span></li>
                 
                 <li class="post-category">
                     Categories:
                     
-                    <a href="/categories/CPP/">CPP</a>
+                    <a href="/categories/%E5%BF%85%E5%A4%87%E6%8A%80%E8%83%BD/">必备技能</a>
                     
-                    <a href="/categories/CPP/CPP%E9%87%8D%E7%82%B9/">CPP重点</a>
+                    <a href="/categories/%E5%BF%85%E5%A4%87%E6%8A%80%E8%83%BD/Git%E6%93%8D%E4%BD%9C/">Git操作</a>
                     
                 </li>
                 <li class="post-tags">
                     Tags:
+                    
+                    <a href="/tags/Git%E6%93%8D%E4%BD%9C/">Git操作</a>
                     
                 </li>
                 
@@ -232,10 +252,10 @@
     </article>
     <div class="article-nav">
         
-        <a href="/2020/02/CPP-CPP%E9%87%8D%E7%82%B9-CMAKE/" class="pre-post fa fa-caret-left">CMAKE</a>
+        <a href="/2020/03/CPP-%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%9599-%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95%E7%90%86%E8%AE%BA%E9%83%A8%E5%88%86/" class="pre-post fa fa-caret-left">Linux高性能服务器编程读书记录-理论部分</a>
         
         
-        <a href="/2020/02/%E5%A4%A7%E4%BA%8C%E5%AF%92%E5%81%87%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E4%B8%8E%E6%80%BB%E7%BB%93/" class="next-post fa">大二寒假及下学期学习记录</a>
+        <a href="/2020/03/CPP-CPP%E9%87%87%E5%9D%91-%E5%BE%AA%E7%8E%AF%E5%88%A4%E6%96%AD%E4%B9%8B%E6%97%A0%E7%AC%A6%E5%8F%B7%E7%B1%BB%E5%9E%8B/" class="next-post fa">循环判断中使用无符号类型</a>
         
     </div>
     
@@ -300,7 +320,7 @@
     </div>
 </div>
 
-    
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#分支管理"><span class="toc-number">1.</span> <span class="toc-text">分支管理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实际工作中分支的应用"><span class="toc-number">2.</span> <span class="toc-text">实际工作中分支的应用</span></a></li></ol>
 
 
 

@@ -20,7 +20,7 @@
 <meta name="verify" content=all />
     <!--Title-->
 
-<title>Category: 服务器编程-书籍记录 | Lsmg的大学之路</title>
+<title>commit规范 | Lsmg的大学之路</title>
 
 <link rel="alternate" href="/atom.xml" title="Lsmg的大学之路" type="application/atom+xml">
 
@@ -30,9 +30,10 @@
     
 
 <link rel="stylesheet" href="/css/base.css">
-<link rel="stylesheet" href="/css/pages/archive.css">
+<link rel="stylesheet" href="/css/pages/post.css">
 <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="/css/thirdParty/highlight/github.css">
+<link rel="stylesheet" href="/.css">
 
 
     <!--script-->
@@ -136,21 +137,28 @@
 
 
         <div id="main">
-    <div id="post-list">
-        <ul class="archives-post-list">
-            
-            <li class="post-items" _href="/2020/03/CPP-%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%9599-%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95%E7%90%86%E8%AE%BA%E9%83%A8%E5%88%86/">
+    <article id="post">
+        <div id="post-header">
+
+            <h1 id="commit规范">
                 
-                <p class="info">服务器编程-书籍记录</p>
-                <h2 class="post-item-title">Linux高性能服务器编程读书记录-理论部分</h2>
-                <div class="article-meta">
+                commit规范
+                
+            </h1>
+            <div class="article-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+            <i class="fa fa-folder-open-o"></i>
+        <span>Git操作</span>
+    </span>
     
     
     <span class="fa-wrap">
          <i class="fa fa-tags"></i>
         <span class="tags-meta">
             
-            null
+            Git操作
             
         </span>
     </span>
@@ -158,162 +166,113 @@
     
     <span class="fa-wrap">
         <i class="fa fa-clock-o"></i>
-        <span class="date-meta ">2020/03/06</span>
+        <span class="date-meta ">2020/02/22</span>
     </span>
     
     
     
 </div>
 
-            </li>
             
-            <li class="post-items" _href="/2020/02/CPP-%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95110-Effective%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95/">
+            
+        </div>
+        
+        <div id="post-body">
+            <h1 id="commit-规范"><a href="#commit-规范" class="headerlink" title="commit 规范"></a>commit 规范</h1><p><a href="https://www.ruanyifeng.com/blog/2016/01/commit_message_change_log.html" target="_blank" rel="noopener">阮一峰 Commit message 和 Change log 编写指南</a></p>
+<p>Angular 规范.<br>每个commit message 包括三分部<br>Header Body 和 Footer</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;type&gt;(&lt;scope&gt;): &lt;subject&gt; &#x2F;&#x2F; 必须</span><br><span class="line">&#x2F;&#x2F; 空一行</span><br><span class="line">&lt;body&gt; &#x2F;&#x2F; 非必须</span><br><span class="line">&#x2F;&#x2F; 空一行</span><br><span class="line">&lt;footer&gt; &#x2F;&#x2F;非必须</span><br></pre></td></tr></table></figure>
+<p><strong>Header</strong></p>
+<ol>
+<li>type 必需 - 说明commit的类别, 只允许下面七个标识</li>
+</ol>
+<ul>
+<li>feat：新功能（feature）</li>
+<li>fix：修补bug</li>
+<li>docs：文档（documentation）</li>
+<li>style： 格式（不影响代码运行的变动）</li>
+<li>refactor：重构（即不是新增功能，也不是修改bug的代码变动）</li>
+<li>test：增加测试</li>
+<li>chore：构建过程或辅助工具的变动</li>
+</ul>
+<ol start="2">
+<li><p>scope 非必需 - 用于说明 commit影响的范围<br>比如登录、注册、充值逻辑等等，视项目不同而不同。</p>
+</li>
+<li><p>subject 必需 - commit 目的的简短描述 </p>
+</li>
+</ol>
+<ul>
+<li>不超过50字符 </li>
+<li>第一人称现在时动词开头</li>
+<li>首字母小写</li>
+<li>句尾不加句号</li>
+</ul>
+<p><strong>Body</strong><br>本次commit的详细描述, 可以分成多行</p>
+<p><strong>Footer</strong><br>只用于两种情况 目前用不动 不摘了</p>
+
+        </div>
+        <div id="post-footer">
+            <div class="avatar" style="padding-bottom: 0.2rem"
+                    >
+                <img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/%E5%8D%9A%E5%AE%A2%E5%B0%81%E9%9D%A2/2676.png" alt="avatar"/>
                 
-                <p class="info">服务器编程-书籍记录</p>
-                <h2 class="post-item-title">Effective读书记录</h2>
-                <div class="article-meta">
-    
-    
-    <span class="fa-wrap">
-         <i class="fa fa-tags"></i>
-        <span class="tags-meta">
-            
-            null
-            
-        </span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-        <i class="fa fa-clock-o"></i>
-        <span class="date-meta ">2020/02/26</span>
-    </span>
-    
-    
-    
-</div>
-
-            </li>
-            
-            <li class="post-items" _href="/2020/02/CPP-%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95102-%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95%E8%BF%9B%E7%A8%8B%E7%BA%BF%E7%A8%8B%E9%83%A8%E5%88%86/">
                 
-                <p class="info">服务器编程-书籍记录</p>
-                <h2 class="post-item-title">Linux高性能服务器编程读书记录-进程线程</h2>
-                <div class="article-meta">
-    
-    
-    <span class="fa-wrap">
-         <i class="fa fa-tags"></i>
-        <span class="tags-meta">
-            
-            null
-            
-        </span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-        <i class="fa fa-clock-o"></i>
-        <span class="date-meta ">2020/02/25</span>
-    </span>
-    
-    
-    
-</div>
-
-            </li>
-            
-            <li class="post-items" _href="/2019/08/CPP-%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95101-%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95%E9%AB%98%E7%BA%A7%E9%83%A8%E5%88%86/">
+            </div>
+            <ul class="author-profile-section">
+                <li>
+                  
+                  Author:
+                  
+                    
+                    <a href="/about.html">Lsmg</a>
+                </li>
                 
-                <p class="info">服务器编程-书籍记录</p>
-                <h2 class="post-item-title">Linux高性能服务器编程读书记录-高级部分</h2>
-                <div class="article-meta">
-    
-    
-    <span class="fa-wrap">
-         <i class="fa fa-tags"></i>
-        <span class="tags-meta">
-            
-            null
-            
-        </span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-        <i class="fa fa-clock-o"></i>
-        <span class="date-meta ">2019/08/18</span>
-    </span>
-    
-    
-    
-</div>
-
-            </li>
-            
-            <li class="post-items" _href="/2019/08/CPP-%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95100-%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95%E5%88%9D%E7%BA%A7%E9%83%A8%E5%88%86/">
+                <li>Published Date: <span>2020-02-22  12:22:02</span></li>
                 
-                <p class="info">服务器编程-书籍记录</p>
-                <h2 class="post-item-title">Linux高性能服务器编程读书记录-初级部分</h2>
-                <div class="article-meta">
-    
-    
-    <span class="fa-wrap">
-         <i class="fa fa-tags"></i>
-        <span class="tags-meta">
-            
-            null
-            
-        </span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-        <i class="fa fa-clock-o"></i>
-        <span class="date-meta ">2019/08/17</span>
-    </span>
-    
-    
-    
-</div>
-
-            </li>
-            
-            <li class="post-items" _href="/2019/08/CPP-%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%9580-CPPPrimer/">
+                <li>Updated Date: <span>2020-03-07  20:51:06</span></li>
                 
-                <p class="info">服务器编程-书籍记录</p>
-                <h2 class="post-item-title">C++Primer学习</h2>
-                <div class="article-meta">
-    
-    
-    <span class="fa-wrap">
-         <i class="fa fa-tags"></i>
-        <span class="tags-meta">
-            
-            null
-            
-        </span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-        <i class="fa fa-clock-o"></i>
-        <span class="date-meta ">2019/08/16</span>
-    </span>
-    
-    
-    
-</div>
-
-            </li>
-            
-        </ul>
+                <li class="post-category">
+                    Categories:
+                    
+                    <a href="/categories/%E5%BF%85%E5%A4%87%E6%8A%80%E8%83%BD/">必备技能</a>
+                    
+                    <a href="/categories/%E5%BF%85%E5%A4%87%E6%8A%80%E8%83%BD/Git%E6%93%8D%E4%BD%9C/">Git操作</a>
+                    
+                </li>
+                <li class="post-tags">
+                    Tags:
+                    
+                    <a href="/tags/Git%E6%93%8D%E4%BD%9C/">Git操作</a>
+                    
+                </li>
+                
+                <li> License: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+知识共享署名-非商业性使用-禁止演绎 3.0 未本地化版本许可协议（CC BY-NC-ND 3.0）
+</a></li>
+                
+            </ul>
+        </div>
+    </article>
+    <div class="article-nav">
+        
+        <a href="/2020/02/CPP-%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95102-%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95%E8%BF%9B%E7%A8%8B%E7%BA%BF%E7%A8%8B%E9%83%A8%E5%88%86/" class="pre-post fa fa-caret-left">Linux高性能服务器编程读书记录-进程线程</a>
+        
+        
+        <a href="/2020/02/CPP-CPP%E9%87%8D%E7%82%B9-CPP11%E7%89%B9%E6%80%A7/" class="next-post fa">CPP11特性</a>
+        
     </div>
+    
+    <div id="comments">
+        
+
+<script>
+  gitalk.render("comments");
+</script>
+
+
+
+    </div>
+    
 </div>
-
-
-
-
 
 
     </div>
@@ -341,6 +300,8 @@
     <li class="totop-btn fa fa-angle-up"></li>
     <li class="exchange-btn fa fa-exchange"></li>
   
+    <li class="toc-btn fa fa-list-ul"></li>
+    
     
 
     
@@ -360,6 +321,8 @@
         </div>
     </div>
 </div>
+
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#commit-规范"><span class="toc-number">1.</span> <span class="toc-text">commit 规范</span></a></li></ol>
 
 
 
