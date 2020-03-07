@@ -20,7 +20,7 @@
 <meta name="verify" content=all />
     <!--Title-->
 
-<title>4月11日 java文件操作 | Lsmg的大学之路</title>
+<title>Linux高性能服务器编程读书记录-初级部分 | Lsmg的大学之路</title>
 
 <link rel="alternate" href="/atom.xml" title="Lsmg的大学之路" type="application/atom+xml">
 
@@ -140,9 +140,9 @@
     <article id="post">
         <div id="post-header">
 
-            <h1 id="4月11日 java文件操作">
+            <h1 id="Linux高性能服务器编程读书记录-初级部分">
                 
-                4月11日 java文件操作
+                Linux高性能服务器编程读书记录-初级部分
                 
             </h1>
             <div class="article-meta">
@@ -150,7 +150,7 @@
     
     <span class="categories-meta fa-wrap">
             <i class="fa fa-folder-open-o"></i>
-        <span>Java</span>
+        <span>服务器编程-书籍记录</span>
     </span>
     
     
@@ -166,7 +166,7 @@
     
     <span class="fa-wrap">
         <i class="fa fa-clock-o"></i>
-        <span class="date-meta ">2019/04/11</span>
+        <span class="date-meta ">2020/03/06</span>
     </span>
     
     
@@ -178,22 +178,36 @@
         </div>
         
         <div id="post-body">
-            <div class="alert-red">java文件操作</div>
-<div class="alert-blue">#$%&^*%^&%$</div>
-<div class="alert-green"></div>
-<a id="more"></a>
-
-<p><a href="https://blog.csdn.net/yhl_jxy/article/details/79272792" target="_blank" rel="noopener">博客来源</a></p>
-<p><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/%E6%9D%82%E9%A1%B9/Java%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C.png" alt="来源"></p>
-<p>Java IO读写文件的IO流分为两大类，字节流和字符流，<br>基于字节流的读写基类: InputStream和OutputStream<br>基于字符流的读写基类: Reader和Writer</p>
-<p>如果是二进制文件，使用FileInputStream读取；如果是文本文件，使用FileReader读取；<br>这两个类允许我们从文件开始至文件结尾一个字节或字符的读取文件，或者将读取的文件写入字节数组或字符数组。<br>如果我们想随机的读取文件内容，可以使用RandomAccessFile。</p>
-<h3 id="简单的文件读写"><a href="#简单的文件读写" class="headerlink" title="简单的文件读写"></a>简单的文件读写</h3><p><strong>File file = new File(“123.txt”);</strong></p>
-<h4 id="字节流读取文件"><a href="#字节流读取文件" class="headerlink" title="字节流读取文件"></a>字节流读取文件</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> (InputStream is = <span class="keyword">new</span> FileInputStream(file))&#123;</span><br><span class="line">	<span class="keyword">byte</span>[] dataB=<span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">	is.read(dataB);</span><br><span class="line">	System.out.println(<span class="string">"字节文件内容:"</span> + <span class="keyword">new</span> String(dataB));</span><br><span class="line">&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">	e.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="字节流写文件"><a href="#字节流写文件" class="headerlink" title="字节流写文件"></a>字节流写文件</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>(OutputStream os = <span class="keyword">new</span> FileOutputStream(file))&#123;</span><br><span class="line">	<span class="keyword">byte</span>[] dataB = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">	String str = <span class="string">"1234567890abcdef"</span>;</span><br><span class="line">	dataB = str.getBytes();</span><br><span class="line">	os.write(dataB);</span><br><span class="line">&#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">	e.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="字符流读取文件"><a href="#字符流读取文件" class="headerlink" title="字符流读取文件"></a>字符流读取文件</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">File file = <span class="keyword">new</span> File(<span class="string">"123.txt"</span>);</span><br><span class="line"><span class="keyword">try</span> (Reader reader = <span class="keyword">new</span> FileReader(file))&#123;</span><br><span class="line">	<span class="keyword">char</span>[] dataC = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="number">1024</span>];</span><br><span class="line">	reader.read(dataC);</span><br><span class="line">	System.out.println(<span class="string">"字符文件内容:"</span>+<span class="keyword">new</span> String(dataC));</span><br><span class="line">&#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">	e.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="字符流写文件"><a href="#字符流写文件" class="headerlink" title="字符流写文件"></a>字符流写文件</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> (Writer writer = <span class="keyword">new</span> FileWriter(file))&#123;</span><br><span class="line">	<span class="keyword">char</span>[] dataC = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="number">1024</span>];</span><br><span class="line">	String str=<span class="string">"@@@@1234567890abcdef"</span>;</span><br><span class="line">	dataC=str.toCharArray();</span><br><span class="line">	writer.write(dataC);</span><br><span class="line">&#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">	e.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="简单的写文件-指定位置"><a href="#简单的写文件-指定位置" class="headerlink" title="简单的写文件-指定位置"></a>简单的写文件-指定位置</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> (RandomAccessFile raf = <span class="keyword">new</span> RandomAccessFile(file, <span class="string">"r"</span>)) &#123;</span><br><span class="line">	<span class="comment">//获取RandomAccessFile对象文件指针的位置，初始位置是0</span></span><br><span class="line">	System.out.println(<span class="string">"RandomAccessFile文件指针的初始位置:"</span>+raf.getFilePointer());</span><br><span class="line">	<span class="comment">//移动文件指针位置</span></span><br><span class="line">	raf.seek(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">byte</span>[]  buff=<span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">	<span class="comment">//用于保存实际读取的字节数</span></span><br><span class="line">	<span class="keyword">int</span> hasRead=<span class="number">0</span>;</span><br><span class="line">	<span class="comment">//循环读取</span></span><br><span class="line">	<span class="keyword">while</span>((hasRead=raf.read(buff))&gt;<span class="number">0</span>)&#123;</span><br><span class="line">		<span class="comment">//打印读取的内容,并将字节转为字符串输入</span></span><br><span class="line">		System.out.println(<span class="keyword">new</span> String(buff,<span class="number">0</span>,hasRead));</span><br><span class="line">	&#125;</span><br><span class="line">&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">	e.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+            <p>距离我开始读这本书已经过去了半年了, 真是时光飞逝. 当初跳过了前四章.<br>半年后开始准备补上这四章</p>
+<h1 id="第一章-TCP-IP协议族"><a href="#第一章-TCP-IP协议族" class="headerlink" title="第一章 TCP/IP协议族"></a>第一章 TCP/IP协议族</h1><h2 id="TCP-IP协议族体系结构和主要协议"><a href="#TCP-IP协议族体系结构和主要协议" class="headerlink" title="TCP/IP协议族体系结构和主要协议"></a>TCP/IP协议族体系结构和主要协议</h2><p>协议族中协议众多, 这本书只选取了IP和TCP协议 - 对网络编程影响最直接</p>
+<p><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95/%E5%9B%9B%E5%B1%82%E7%BB%93%E6%9E%84.jpg" alt=""></p>
+<p><img src="https://gss1.bdstatic.com/9vo3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike80%2C5%2C5%2C80%2C26/sign=3a1768f4c6fc1e17e9b284632bf99d66/0dd7912397dda144d48ab350bbb7d0a20df48655.jpg" alt=""></p>
+<p>同样七层是osi参考模型, 简化后得到四层<br>不同层次之间, 通过接口互相交流, 这样方便了各层次的修改</p>
+<p><strong>应用层</strong><br>负责处理应用程序的逻辑</p>
+<p><strong>表示层</strong><br>定义了数据的格式及加密</p>
+<p><strong>会话层</strong><br>它定义了如何开始、控制和结束一个会话，包括对多个双向消息的控制和管理，以便在只完成连续消息的一部分时可以通知应用，从而使表示层看到的数据是连续的</p>
+<p><strong>传输层</strong><br>为两台主机的应用提供端到端(end to end)的通信. 与网络层使用的下一跳不同, 他只关心起始和终止, 中转过程交给下层处理.<br>此层存在两大协议TCP协议和UDP协议<br>TCP协议(Transmission Control Protocol 传输控制协议)</p>
+<ul>
+<li>为应用层提供<code>可靠的, 面向连接, 基于流的服</code></li>
+<li>通过<code>超时重传</code>和<code>数据确认</code>等确保数据正常送达.</li>
+<li>TCP需要存储一些必要的状态, 可靠的协议<br>UPD协议(User Datagram Protocol 用户数据报协议)</li>
+<li>为应用层提供<code>不可靠的, 无连接的, 基于数据报的服务</code></li>
+<li>一般需要自己处理<code>数据确认</code>和<code>超时重传</code>的问题</li>
+<li>通信两者不存储状态, 每次发送都需要指定地址信息. <code>有自己的长度</code></li>
+</ul>
+<p><strong>网络层</strong><br>实现了数据包的选路和转发.  只有数据包到不了目标地址, 就<code>下一跳</code>(hop by hop), 选择最近的.<br><em>IP协议(Internet Protocol)</em> 以及 <em>ICMP协议(Internet Control Message Protocol)</em><br>后者协议是IP协议的补充, 用来检测网络连接 1. 差错报文, 用来回应状态 2. 查询报文(ping程序就是使用的此报文来判断信息是否送达)</p>
+<p><strong>数据链路层</strong><br>实现了网卡接口的网络驱动程序. 这里驱动程序方便了厂商的下层修改, 只需要向上层提供规定的接口即可.<br>存在两个协议 <em>ARP协议(Address Resolve Protocol, 地址解析协议)</em>. 还有<em>RARP(Reverse ~, 逆地址解析协议)</em>.  由于网络层使用IP地址寻址机器, 但是数据链路层使用物理地址(通常为MAC地址), 之间的转化涉及到ARP协议<em>ARP欺骗, 可能与这个有关, 目前不去学习</em></p>
+<p><strong>封装</strong><br>上层协议发送到下层协议. 通过封装实现, 层与层之间传输的时候, 加上自己的头部信息.<br>被TCP封装的数据成为 <code>TCP报文段</code></p>
+<ul>
+<li>内核部分发送成功后删除数据</li>
+</ul>
+<p>被UDP封装的数据成为 <code>UDP数据报</code></p>
+<ul>
+<li>发送后即删除</li>
+</ul>
+<p>再经IP封装后成为<code>IP数据报</code><br>最后经过数据链路层封装后为 <code>帧</code></p>
+<p><strong>ARP</strong><br>ARP协议能实现任意网络层地址到任意物理地址的转换</p>
+<h1 id="第二章-IP协议详解"><a href="#第二章-IP协议详解" class="headerlink" title="第二章 IP协议详解"></a>第二章 IP协议详解</h1><p>IP协议是TCP/IP协议簇的核心协议, 是socket网络编程的基础之一<br>IP协议为上层协议提供无状态, 无连接, 不可靠的服务</p>
 
         </div>
         <div id="post-footer">
@@ -212,14 +226,16 @@
                     <a href="/about.html">Lsmg</a>
                 </li>
                 
-                <li>Published Date: <span>2019-04-11  21:24:48</span></li>
+                <li>Published Date: <span>2020-03-06  22:53:00</span></li>
                 
-                <li>Updated Date: <span>2020-02-07  16:33:09</span></li>
+                <li>Updated Date: <span>2020-03-06  23:02:25</span></li>
                 
                 <li class="post-category">
                     Categories:
                     
-                    <a href="/categories/Java/">Java</a>
+                    <a href="/categories/CPP/">CPP</a>
+                    
+                    <a href="/categories/CPP/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B-%E4%B9%A6%E7%B1%8D%E8%AE%B0%E5%BD%95/">服务器编程-书籍记录</a>
                     
                 </li>
                 <li class="post-tags">
@@ -236,8 +252,8 @@
     </article>
     <div class="article-nav">
         
-        <a href="/2019/04/Java-SDK-Fastjson%E7%9A%84%E4%BD%BF%E7%94%A8/" class="pre-post fa fa-caret-left">2019年4月13日 FASTJson解析json</a>
         
+        <a href="/2020/03/CPP-CPP%E9%87%87%E5%9D%91-%E5%BE%AA%E7%8E%AF%E5%88%A4%E6%96%AD%E4%B9%8B%E6%97%A0%E7%AC%A6%E5%8F%B7%E7%B1%BB%E5%9E%8B/" class="next-post fa">循环判断中使用无符号类型</a>
         
     </div>
     
@@ -302,7 +318,7 @@
     </div>
 </div>
 
-    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#简单的文件读写"><span class="toc-number">1.</span> <span class="toc-text">简单的文件读写</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#字节流读取文件"><span class="toc-number">1.1.</span> <span class="toc-text">字节流读取文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#字节流写文件"><span class="toc-number">1.2.</span> <span class="toc-text">字节流写文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#字符流读取文件"><span class="toc-number">1.3.</span> <span class="toc-text">字符流读取文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#字符流写文件"><span class="toc-number">1.4.</span> <span class="toc-text">字符流写文件</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#简单的写文件-指定位置"><span class="toc-number">2.</span> <span class="toc-text">简单的写文件-指定位置</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#第一章-TCP-IP协议族"><span class="toc-number">1.</span> <span class="toc-text">第一章 TCP&#x2F;IP协议族</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP-IP协议族体系结构和主要协议"><span class="toc-number">1.1.</span> <span class="toc-text">TCP&#x2F;IP协议族体系结构和主要协议</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第二章-IP协议详解"><span class="toc-number">2.</span> <span class="toc-text">第二章 IP协议详解</span></a></li></ol>
 
 
 
