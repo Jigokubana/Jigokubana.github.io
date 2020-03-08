@@ -265,9 +265,22 @@ void StrBlob::pop_back()
 }
 ```
 
+**直接管理内存**
+了解到两个概念 一个`默认初始化`一个`值初始化`
 
+```c++
+int i, *pi1 = &i, *pi2 = nullptr;
+double *pd = new double(33), *pd2 = pd;
+delete i; // 错误 i不是指针
+delete pi1; // 未定义 pi1指向一个局部变量 具有潜在性危害
+delete pd; // ok
+delete pd2; // 未定义 内存已经被释放 具有潜在性危害
+delete pi2; // 正确 释放空指针没有错误
 
-
+const int *pci = new const int(1024);
+delete pci // 正确 释放一个const对象
+```
+delete之后指针就变成了`空悬指针` 需要将其置为`nullptr`
 
 
 
