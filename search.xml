@@ -324,7 +324,18 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">singleNumber</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> ret = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> n : nums)</span><br><span class="line">	&#123;</span><br><span class="line">		ret ^= n;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>还有哈希表做法, 应该是利用的哈希表快速索引, 我也是才知道map范围for循环是pair不是iter auto不能用太多</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">singleNumber</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">unordered_map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; <span class="built_in">map</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> n : nums)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">map</span>[n]++;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span> (pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; n : <span class="built_in">map</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (n.second == <span class="number">1</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">return</span> n.first;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">singleNumber</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">unordered_map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; <span class="built_in">map</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> n : nums)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">map</span>[n]++;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span> (pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; n : <span class="built_in">map</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (n.second == <span class="number">1</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">return</span> n.first;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="List"><a href="#List" class="headerlink" title="List"></a>List</h1><h2 id="Linked-List-Cycle-双指针赛跑-单一体现key-set-Linked-List-Cycle-II顺带也做了"><a href="#Linked-List-Cycle-双指针赛跑-单一体现key-set-Linked-List-Cycle-II顺带也做了" class="headerlink" title="Linked List Cycle-双指针赛跑 单一体现key-set  Linked List Cycle II顺带也做了"></a>Linked List Cycle-双指针赛跑 单一体现key-set  Linked List Cycle II顺带也做了</h2><p><a href="https://leetcode.com/problems/linked-list-cycle/" target="_blank" rel="noopener">https://leetcode.com/problems/linked-list-cycle/</a><br><a href="https://leetcode.com/problems/linked-list-cycle-ii/" target="_blank" rel="noopener">https://leetcode.com/problems/linked-list-cycle-ii/</a></p>
+<p>大意就是判断一个链表是否有环, 因为之前在那本小灰上看到过. 脑子中首先想的两个指针赛跑.</p>
+<p>快的指针一次走两步, 慢的一次走一步. 快的终将会追上慢的, 如果碰到了nullptr就返回false</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">hasCycle</span><span class="params">(ListNode *head)</span></span></span><br><span class="line"><span class="function">    </span>&#123;    </span><br><span class="line">        <span class="keyword">if</span> (head == <span class="literal">nullptr</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        ListNode *walk = head;</span><br><span class="line">        ListNode *<span class="built_in">run</span> = head;</span><br><span class="line">        <span class="keyword">while</span> (<span class="built_in">run</span>-&gt;next != <span class="literal">nullptr</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            walk = walk-&gt;next;</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">run</span>-&gt;next-&gt;next != <span class="literal">nullptr</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">run</span> = <span class="built_in">run</span>-&gt;next-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (walk == <span class="built_in">run</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>修改了一下, 感觉下面的代码要好一些?</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">hasCycle</span><span class="params">(ListNode *head)</span></span></span><br><span class="line"><span class="function"></span>&#123;    </span><br><span class="line">	<span class="keyword">if</span> ((head == <span class="literal">nullptr</span>) || (head-&gt;next == <span class="literal">nullptr</span>))</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	ListNode *walk = head;</span><br><span class="line">	ListNode *<span class="built_in">run</span> = head-&gt;next;</span><br><span class="line">	<span class="keyword">while</span> (walk != <span class="built_in">run</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> ((<span class="built_in">run</span> == <span class="literal">nullptr</span>) || (<span class="built_in">run</span>-&gt;next == <span class="literal">nullptr</span>))</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		walk = walk-&gt;next;</span><br><span class="line">		<span class="built_in">run</span> = <span class="built_in">run</span>-&gt;next-&gt;next;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>既然是要保证访问过的单一, 就是用set了</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">hasCycle</span><span class="params">(ListNode *head)</span></span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">	<span class="built_in">set</span>&lt;ListNode*&gt; hashset&#123;&#125;;	</span><br><span class="line">	<span class="keyword">while</span> (head != <span class="literal">nullptr</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (hashset.count(head) != <span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		hashset.insert(head);</span><br><span class="line">		</span><br><span class="line">		head = head-&gt;next;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
         
         <categories>
             
@@ -340,9 +351,105 @@
     <entry>
         <title><![CDATA[STL与实现记录]]></title>
         <url>http://blog.lsmg.xyz/2020/03/CPP-CPP%25E9%2587%258D%25E7%2582%25B9-STL%25E8%25AE%25B0%25E5%25BD%2595/</url>
-        <content type="html"><![CDATA[<h1 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h1><h2 id="lower-bound-和-upper-bound"><a href="#lower-bound-和-upper-bound" class="headerlink" title="lower_bound()和 upper_bound()"></a>lower_bound()和 upper_bound()</h2><p><strong>lower_bound(const Key&amp; key)</strong><br><a href="https://zh.cppreference.com/w/cpp/container/map/lower_bound" target="_blank" rel="noopener">https://zh.cppreference.com/w/cpp/container/map/lower_bound</a><br>返回指向首个不小于 key 的元素的迭代器。若找不到这种元素，则返回尾后迭代器</p>
+        <content type="html"><![CDATA[<h1 id="容器库"><a href="#容器库" class="headerlink" title="容器库"></a>容器库</h1><table>
+<thead>
+<tr>
+<th>顺序容器</th>
+<th>按序访问</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>array</td>
+<td>静态的连续数组</td>
+</tr>
+<tr>
+<td>vector</td>
+<td>动态的连续数组</td>
+</tr>
+<tr>
+<td>deque</td>
+<td>双端队列</td>
+</tr>
+<tr>
+<td>forward_list</td>
+<td>单链表</td>
+</tr>
+<tr>
+<td>list</td>
+<td>双链表</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>关联容器</th>
+<th>能实现快速查找O(logn)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>set</td>
+<td>唯一key的集合, 按照key排序</td>
+</tr>
+<tr>
+<td>map</td>
+<td>k v集合, 按照k排序, k是唯一的</td>
+</tr>
+<tr>
+<td>multiset</td>
+<td>key的集合 按照key排序</td>
+</tr>
+<tr>
+<td>multimap</td>
+<td>k v的集合, 按照key排序</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>无序关联容器</th>
+<th>快速查找均摊O(1)最坏O(n)的无序(哈希)数据结构</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>unordered_set</td>
+<td>唯一key的集合, 按照key生成散列</td>
+</tr>
+<tr>
+<td>unordered_map</td>
+<td>唯一key, k v的集合, 按照key生成散列</td>
+</tr>
+<tr>
+<td>unordered_multiset</td>
+<td>key的集合, 按照key生成散列</td>
+</tr>
+<tr>
+<td>unordered_multimap</td>
+<td>k v的集合, 按照key生成散列</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>容器适配器</th>
+<th>提供顺序容器的不同接口</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>stack</td>
+<td>适配一个容器提供栈</td>
+</tr>
+<tr>
+<td>queue</td>
+<td>适配一个容器提供队列</td>
+</tr>
+<tr>
+<td>priority_queue</td>
+<td>适配一个容器提供优先级队列</td>
+</tr>
+</tbody></table>
+<h1 id="map"><a href="#map" class="headerlink" title="map"></a>map</h1><h2 id="lower-bound-和-upper-bound"><a href="#lower-bound-和-upper-bound" class="headerlink" title="lower_bound()和 upper_bound()"></a>lower_bound()和 upper_bound()</h2><p><strong>lower_bound(const Key&amp; key)</strong><br><a href="https://zh.cppreference.com/w/cpp/container/map/lower_bound" target="_blank" rel="noopener">https://zh.cppreference.com/w/cpp/container/map/lower_bound</a><br>返回指向首个不小于 key 的元素的迭代器。若找不到这种元素，则返回尾后迭代器</p>
 <p><strong>upper_bound()</strong><br>返回指向首个大于 key 的元素的迭代器。</p>
-<h1 id="std-vertor"><a href="#std-vertor" class="headerlink" title="std::vertor"></a>std::vertor</h1><table>
+<h1 id="vertor"><a href="#vertor" class="headerlink" title="vertor"></a>vertor</h1><table>
 <thead>
 <tr>
 <th>函数名称</th>
@@ -366,6 +473,10 @@
 <td>实际最大容量</td>
 </tr>
 </tbody></table>
+<h1 id="图片Warn"><a href="#图片Warn" class="headerlink" title="图片Warn"></a>图片Warn</h1><p><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/STL%E8%AE%B0%E5%BD%95/%E9%A1%BA%E5%BA%8F%E5%AE%B9%E5%99%A8.png" alt=""></p>
+<p><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/STL%E8%AE%B0%E5%BD%95/%E5%85%B3%E8%81%94%E5%AE%B9%E5%99%A8.png" alt=""></p>
+<p><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/STL%E8%AE%B0%E5%BD%95/%E6%97%A0%E5%BA%8F%E5%85%B3%E8%81%94%E5%AE%B9%E5%99%A8.png" alt=""></p>
+<p><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/STL%E8%AE%B0%E5%BD%95/%E5%AE%B9%E5%99%A8%E9%80%82%E9%85%8D%E5%99%A8.png" alt=""></p>
 ]]></content>
         
         <categories>

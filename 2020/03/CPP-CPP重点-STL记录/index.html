@@ -115,7 +115,7 @@
   <h3 class="fa fa-tags widget-title">Tag Cloud</h3>
   <div class="tagcloud-content">
     
-      <a href="/tags/3DMAX/" style="font-size: 0.14rem; color: #69c">3DMAX</a> <a href="/tags/CPP%E8%B8%A9%E5%9D%91%E8%AE%B0/" style="font-size: 0.17rem; color: #386da4">CPP踩坑记</a> <a href="/tags/CPP/" style="font-size: 0.17rem; color: #386da4">CPP</a> <a href="/tags/Git%E6%93%8D%E4%BD%9C/" style="font-size: 0.2rem; color: #0a407c">Git操作</a> <a href="/tags/%E5%B0%8F%E6%B8%B8%E6%88%8F/" style="font-size: 0.14rem; color: #69c">小游戏</a> <a href="/tags/%E8%85%BE%E8%AE%AF%E6%B8%B8%E6%88%8F%E5%AD%A6%E9%99%A2/" style="font-size: 0.2rem; color: #0a407c">腾讯游戏学院</a> <a href="/tags/Mysql/" style="font-size: 0.14rem; color: #69c">Mysql</a> <a href="/tags/MongoDB/" style="font-size: 0.14rem; color: #69c">MongoDB</a>
+      <a href="/tags/3DMAX/" style="font-size: 0.14rem; color: #69c">3DMAX</a> <a href="/tags/CPP%E8%B8%A9%E5%9D%91%E8%AE%B0/" style="font-size: 0.17rem; color: #386da4">CPP踩坑记</a> <a href="/tags/CPP/" style="font-size: 0.17rem; color: #386da4">CPP</a> <a href="/tags/Git%E6%93%8D%E4%BD%9C/" style="font-size: 0.2rem; color: #0a407c">Git操作</a> <a href="/tags/Mysql/" style="font-size: 0.14rem; color: #69c">Mysql</a> <a href="/tags/%E8%85%BE%E8%AE%AF%E6%B8%B8%E6%88%8F%E5%AD%A6%E9%99%A2/" style="font-size: 0.2rem; color: #0a407c">腾讯游戏学院</a> <a href="/tags/%E5%B0%8F%E6%B8%B8%E6%88%8F/" style="font-size: 0.14rem; color: #69c">小游戏</a> <a href="/tags/MongoDB/" style="font-size: 0.14rem; color: #69c">MongoDB</a>
   </div>
 </li>
 
@@ -178,9 +178,105 @@
         </div>
         
         <div id="post-body">
-            <h1 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h1><h2 id="lower-bound-和-upper-bound"><a href="#lower-bound-和-upper-bound" class="headerlink" title="lower_bound()和 upper_bound()"></a>lower_bound()和 upper_bound()</h2><p><strong>lower_bound(const Key&amp; key)</strong><br><a href="https://zh.cppreference.com/w/cpp/container/map/lower_bound" target="_blank" rel="noopener">https://zh.cppreference.com/w/cpp/container/map/lower_bound</a><br>返回指向首个不小于 key 的元素的迭代器。若找不到这种元素，则返回尾后迭代器</p>
+            <h1 id="容器库"><a href="#容器库" class="headerlink" title="容器库"></a>容器库</h1><table>
+<thead>
+<tr>
+<th>顺序容器</th>
+<th>按序访问</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>array</td>
+<td>静态的连续数组</td>
+</tr>
+<tr>
+<td>vector</td>
+<td>动态的连续数组</td>
+</tr>
+<tr>
+<td>deque</td>
+<td>双端队列</td>
+</tr>
+<tr>
+<td>forward_list</td>
+<td>单链表</td>
+</tr>
+<tr>
+<td>list</td>
+<td>双链表</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>关联容器</th>
+<th>能实现快速查找O(logn)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>set</td>
+<td>唯一key的集合, 按照key排序</td>
+</tr>
+<tr>
+<td>map</td>
+<td>k v集合, 按照k排序, k是唯一的</td>
+</tr>
+<tr>
+<td>multiset</td>
+<td>key的集合 按照key排序</td>
+</tr>
+<tr>
+<td>multimap</td>
+<td>k v的集合, 按照key排序</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>无序关联容器</th>
+<th>快速查找均摊O(1)最坏O(n)的无序(哈希)数据结构</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>unordered_set</td>
+<td>唯一key的集合, 按照key生成散列</td>
+</tr>
+<tr>
+<td>unordered_map</td>
+<td>唯一key, k v的集合, 按照key生成散列</td>
+</tr>
+<tr>
+<td>unordered_multiset</td>
+<td>key的集合, 按照key生成散列</td>
+</tr>
+<tr>
+<td>unordered_multimap</td>
+<td>k v的集合, 按照key生成散列</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>容器适配器</th>
+<th>提供顺序容器的不同接口</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>stack</td>
+<td>适配一个容器提供栈</td>
+</tr>
+<tr>
+<td>queue</td>
+<td>适配一个容器提供队列</td>
+</tr>
+<tr>
+<td>priority_queue</td>
+<td>适配一个容器提供优先级队列</td>
+</tr>
+</tbody></table>
+<h1 id="map"><a href="#map" class="headerlink" title="map"></a>map</h1><h2 id="lower-bound-和-upper-bound"><a href="#lower-bound-和-upper-bound" class="headerlink" title="lower_bound()和 upper_bound()"></a>lower_bound()和 upper_bound()</h2><p><strong>lower_bound(const Key&amp; key)</strong><br><a href="https://zh.cppreference.com/w/cpp/container/map/lower_bound" target="_blank" rel="noopener">https://zh.cppreference.com/w/cpp/container/map/lower_bound</a><br>返回指向首个不小于 key 的元素的迭代器。若找不到这种元素，则返回尾后迭代器</p>
 <p><strong>upper_bound()</strong><br>返回指向首个大于 key 的元素的迭代器。</p>
-<h1 id="std-vertor"><a href="#std-vertor" class="headerlink" title="std::vertor"></a>std::vertor</h1><table>
+<h1 id="vertor"><a href="#vertor" class="headerlink" title="vertor"></a>vertor</h1><table>
 <thead>
 <tr>
 <th>函数名称</th>
@@ -204,6 +300,10 @@
 <td>实际最大容量</td>
 </tr>
 </tbody></table>
+<h1 id="图片Warn"><a href="#图片Warn" class="headerlink" title="图片Warn"></a>图片Warn</h1><p><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/STL%E8%AE%B0%E5%BD%95/%E9%A1%BA%E5%BA%8F%E5%AE%B9%E5%99%A8.png" alt=""></p>
+<p><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/STL%E8%AE%B0%E5%BD%95/%E5%85%B3%E8%81%94%E5%AE%B9%E5%99%A8.png" alt=""></p>
+<p><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/STL%E8%AE%B0%E5%BD%95/%E6%97%A0%E5%BA%8F%E5%85%B3%E8%81%94%E5%AE%B9%E5%99%A8.png" alt=""></p>
+<p><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/STL%E8%AE%B0%E5%BD%95/%E5%AE%B9%E5%99%A8%E9%80%82%E9%85%8D%E5%99%A8.png" alt=""></p>
 
         </div>
         <div id="post-footer">
@@ -224,7 +324,7 @@
                 
                 <li>Published Date: <span>2020-03-01  10:26:55</span></li>
                 
-                <li>Updated Date: <span>2020-03-04  15:52:46</span></li>
+                <li>Updated Date: <span>2020-03-10  15:08:24</span></li>
                 
                 <li class="post-category">
                     Categories:
@@ -316,7 +416,7 @@
     </div>
 </div>
 
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Map"><span class="toc-number">1.</span> <span class="toc-text">Map</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#lower-bound-和-upper-bound"><span class="toc-number">1.1.</span> <span class="toc-text">lower_bound()和 upper_bound()</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#std-vertor"><span class="toc-number">2.</span> <span class="toc-text">std::vertor</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#容器库"><span class="toc-number">1.</span> <span class="toc-text">容器库</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#map"><span class="toc-number">2.</span> <span class="toc-text">map</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#lower-bound-和-upper-bound"><span class="toc-number">2.1.</span> <span class="toc-text">lower_bound()和 upper_bound()</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#vertor"><span class="toc-number">3.</span> <span class="toc-text">vertor</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#图片Warn"><span class="toc-number">4.</span> <span class="toc-text">图片Warn</span></a></li></ol>
 
 
 
