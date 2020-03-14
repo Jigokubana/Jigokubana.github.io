@@ -7,6 +7,9 @@ categories:
 tags:
 - Git操作
 ---
+
+2020年3月12日15:42:41 更新 实操了一次hotfix 惊心动魄... 来更新下
+
 # 分支管理
 `git checkout -b dev`相当于一下两条命令
 `git branch dev` 分支创建
@@ -21,31 +24,30 @@ tags:
 **冲突解决**
 `git merge dev` 将制定的dev分支合并到当前的分支
 ```
-  1 111111111111111
-  2 222222222222222
-  3 333333333333333
-  4 444444444444444
-  5 <<<<<<< HEAD  # 我在master分支下添加了6666666 并提交
-  6 6666666
-  7 =======
-  8 7777777
-  9 >>>>>>> deb # 我在deb分支下添加了7777777 并提交
-  ```
-  最后需要我手动修改这个文件为自己需要的内容 然后提交即可
+1 111111111111111
+2 222222222222222
+3 333333333333333
+4 444444444444444
+5 <<<<<<< HEAD  # 我在master分支下添加了6666666 并提交
+6 6666666
+7 =======
+8 7777777
+9 >>>>>>> deb # 我在deb分支下添加了7777777 并提交
+```
+最后需要我手动修改这个文件为自己需要的内容 然后提交即可
   
-  **分支管理**
-  通常Git会使用`Fast forward`模式 这样删除分支后会丢失分支的信息
-  可以再merge的时候加入`--no-ff`这样就能解决问题
-  `git merge --no-ff -m "merge with no-ff" dev`
-  由于禁用`Fast forward`后
-  会生成新的commit所以需要加入` -m "merge with no-ff"`
-  
-  `git stash` 可以储存当前的工作区 继续其他的工作
-  `git stash list` 查看储存的工作区列表
-  `git stash apply stash@{0}` 恢复指定的储存
-  `git stash pop` 恢复并drop最近的存储
-  
-  ```
+**分支管理**
+通常Git会使用`Fast forward`模式 这样删除分支后会丢失分支的信息
+可以再merge的时候加入`--no-ff`这样就能解决问题
+`git merge --no-ff -m "merge with no-ff" dev`
+由于禁用`Fast forward`后
+会生成新的commit所以需要加入` -m "merge with no-ff"`
+
+git stash 可以储存当前的工作区 继续其他的工作
+git stash list 查看储存的工作区列表
+git stash apply stash@{0} 恢复指定的储存
+git stash pop 恢复并drop最近的存储 慎用这个 建议使用上边的
+```
 $ cat test.txt # stash前
 111111
 $ vim test.txt 
@@ -70,7 +72,7 @@ $ cat test.txt
 111111
 222222
 333333
-  ```
+```
   
 # 实际工作中分支的应用
 [主要参考](https://zhuanlan.zhihu.com/p/38772378)
@@ -127,4 +129,15 @@ git push origin master
 git push origin [tag name]
 # 也可以给push增加参数
 git push origin --tags
+```
+
+# 本地和远程分支和tag的删除
+```shell
+# 本地
+git tag -d xxx
+git branch -d xxx
+
+# 远程
+git push origin :refs/tags/xxx
+git push origin :xxx
 ```
