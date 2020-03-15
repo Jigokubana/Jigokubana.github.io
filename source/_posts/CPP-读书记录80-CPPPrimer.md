@@ -325,3 +325,52 @@ std::unique_ptr<int> d2 (new int(8));
 d1.release(); // 释放原来所指向的对象
 d1.reset(d2.release()); // d2释放后由d1获取
 ```
+
+
+# 模板与泛型编程
+
+`template <typename T>`
+
+编译器用推断出的模板参数来`实例化`一个特定版本的函数.
+不同的模板参数类型`实例化`出不同的函数 然后进行调用.
+
+**模板类型参数**
+
+如果有多个模板参数
+```c++
+// 错误
+template <typename T, U>
+
+// 正确
+template <typename T, typename U>
+
+// 正确
+template <typename T, class U>
+```
+
+**非类型模板参数**
+
+```c++
+template <unsigned N, unsigned M>
+int compare(const char (&p1)[N], const char (&p2)[M])
+{
+	return strcmp(p1, p2);
+}
+
+compare("hi", "mmm");
+int compare(const char (&p1)[3], const char (&p2)[4]) // 注意空字符
+```
+编译器会使用字面常量的大小来代替N和M, 从而实例化模板
+
+非类型参数可以使`整形`或者是一个指向对象或者函数类型的`指针`或者`(左值)引用`
+绑定到`非类型整数参数`的实参必须是一个常量表达式.
+绑定到`指针`或者`引用非类型模板参数`的实参必须具有静态的生存期
+
+静态内存用来保存`局部static对象`, `类static数据成员`和`定义于任何函数之外的变量`
+栈内存用来保存定义在函数内的非static对象.
+分配在静态内存和栈内存的由编译器自动创建和销毁
+
+堆 用来存储动态分配的对象
+
+
+编译器遇到一个模板类型定义的时候并不会生成代码, 而是实例化出一个特定版本的时候才会实例化
