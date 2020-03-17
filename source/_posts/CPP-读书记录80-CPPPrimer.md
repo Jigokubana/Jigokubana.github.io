@@ -283,6 +283,42 @@ delete pci // 正确 释放一个const对象
 delete之后指针就变成了`空悬指针` 需要将其置为`nullptr`
 
 
+**shared_ptr和new结合使用**
+
+```c++
+// 错误智能指针构造函数是explicit
+// 无法将内置指针隐式转换成一个智能指针, 必须使用直接初始化
+shared_ptr<int> p1 = new int(1024); 
+
+// 正确  使用了直接初始化
+shared_ptr<int> p2(new int(1024));
+```
+
+定义和改变方式
+```c++
+// p管理内置指针q所指向的对象, q必须指向new分配的内存, 且能够转换为T*类型
+shared_ptr<T> p(q)
+
+// p从unique_ptr u那里接管了对象的所有权 将U置为空
+shared_ptr<T> p(u)
+
+// p 接管了内置指针q所指向的对象的所有权, q必须能转化为T* 类型
+// p将使用可调用对象d来代替delete
+shared_ptr<T> p(q, d)
+
+// p是shared_ptr p2的拷贝
+// p将用可调用对象d来代替delete
+shared_ptr<T> p(p2, d)
+
+// 若p是唯一指向其对象的shared_ptr, reset会释放此对象
+// 如果传递了可选的参数-内置指针q, 则会令p指向q 否则将p置为空
+// 如果还传递了d, 会调用d而不是delete来释放q
+p.reset()
+p.reset(q)
+p.reset(q, d)
+```
+
+
 
 使用unique_ptr的时候要注意
 1. 不要再函数调用传参的括号中 使用临时变量 这样一旦函数调用完成就会被销毁

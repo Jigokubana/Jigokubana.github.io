@@ -41,6 +41,7 @@ https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/gdb.html
 | list | | 不带参数, 接着上一次的list命令输出下边的内容 |
 
 | 打印表达式 | 功能 |
+| --- | --- |
 | print p | |
 | p a | 显示a的值 |
 | p ++a | a的值 |
