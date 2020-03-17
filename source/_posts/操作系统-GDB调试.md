@@ -9,6 +9,24 @@ tags:
 
 https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/gdb.html
 
+对多线程的支持
+set follow-fork-mode [parent|child]
+set detach-on-fork [on|off]
+
+| follow-fork-mode | detach-on-fork | 说明 |
+| --- | --- | --- |
+| parent | on | 只调试主进程 |
+| child | on | 只调试子进程 |
+| parent | off | 同时调试父子进程, gdb跟踪父进程, 子进程阻塞在fork位置 |
+| child | off | 同上 gdb跟踪子进程, 父进程阻塞 |
+
+进程间切换
+| 命令 | 功能 |
+| --- | --- |
+| info inferiors | 查询正在调试的进程 |
+| inferior \<number> | 切换进程 |
+
+
 | 运行命令 | 缩写 | 功能 |
 | --- | --- | --- |
 | run | r | 运行程序 |
@@ -52,3 +70,13 @@ https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/gdb.html
 | whatis | 查询变量或函数 |
 | info function | 查询函数 |
 | info local | 显示当前堆栈页的所有变量 |
+
+
+| 查询运行信息 | 功能 |
+| --- | --- |
+| where/bt | 当前运行的堆栈列表 |
+| bt backtrace | 显示当前的调用堆栈 |
+| up/down | 改变堆栈的显示深度 |
+| set args | 指定程序运行参数 |
+| show args | 查看程序参数 |
+| info program | 查看程序是否运行, 进程号, 被暂停原因 |

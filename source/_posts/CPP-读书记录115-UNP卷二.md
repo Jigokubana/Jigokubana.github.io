@@ -122,3 +122,37 @@ writefd = open(FIFO1, O_WRONLY, 0);
 
 
 ## POSIX消息队列
+
+```c++
+#include <mqueue.h>
+
+// oflag O_RDONLY O_WRONLY O_RDWR 可以加上O_CREAT和O_EXCL或者O_NONBLOCK
+// 创建一个新队列的时候(制定了O_CREAT且消息队列不存在)后两个参数都需要
+// 权限位 和 指定某些属性 nullptr则使用默认属性
+
+// 成功返回消息队列 fd 失败 -1
+mqd_t mq_open(const char *name, int oflag,
+ /*mode_t mode, struct mq_attr *attr*/);
+```
+注意
+消息队列文件描述符不必是(而且很可能不是)像文件描述符或者socket文件描述符那样的短整数
+
+```c++
+// 关闭消息队列 引用计数 -1
+int mq_close(mqd_t mqdes);
+```
+类似close函数, 调用进程可以不再使用该文件描述符, 但是其消息队列并不会从系统中删除
+
+当一个进程终止的时候, 所有打开着的消息队列都将关闭, 就像自动调用了mq_close
+
+
+如果要从系统中删除`mq_open`第一个参数`name` 必须调用下面的函数
+```c++
+// 引用计数 -1
+int mq_unlink(const char *name);
+```
+
+每个消息队列有一个保存着当前打开描述符数的引用计数器
+
+当消息队列的引用计数仍大于0时, 其name就能删除
+但是队列的析构会在`引用计数为0`的时候自动析构.
