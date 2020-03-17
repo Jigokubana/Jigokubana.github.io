@@ -3,9 +3,146 @@
     
     
     <entry>
+        <title><![CDATA[Linux的使用]]></title>
+        <url>http://blog.lsmg.xyz/2020/03/%25E6%2593%258D%25E4%25BD%259C%25E7%25B3%25BB%25E7%25BB%259F-Linux%25E4%25BD%25BF%25E7%2594%25A8/</url>
+        <content type="html"><![CDATA[<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>cp -r</td>
+<td>复制目录</td>
+</tr>
+<tr>
+<td>cd -</td>
+<td>切换到上一个工作目录</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>查找</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>find ./ -name “core*”</td>
+<td>xargs file</td>
+</tr>
+<tr>
+<td>find ./ -name ‘*.o’</td>
+<td>查找目标文件夹是否有obj文件</td>
+</tr>
+<tr>
+<td>find ./ -name “*.o” | xargs rm -f</td>
+<td>递归删除当前目录所有obj文件</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>查看文件内容</th>
+<th>功能</th>
+<th>一般用法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>cat -n</td>
+<td>显示的同时显示行号</td>
+<td>使用管道 ls | cat -n</td>
+</tr>
+<tr>
+<td>head -10 filename</td>
+<td>查看前十行</td>
+<td></td>
+</tr>
+<tr>
+<td>tail -10 failname</td>
+<td>查看后十行</td>
+<td></td>
+</tr>
+<tr>
+<td>diff file1 file2</td>
+<td>查看文件差别</td>
+<td></td>
+</tr>
+<tr>
+<td>tail -f filename</td>
+<td>动态显示文本的最新信息</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>| 给文件增加别名 | 功能 |<br>| ln a b | 创建硬链接, 删除一个另一个仍能使用 |<br>| ln -s a b | 创建符号链接(软连接) 删除源后另一个无法使用 |</p>
+<p>命令行快捷键<br>Ctl-U   删除光标到行首的所有字符 <code>$ 1111 222  --&gt; $</code><br>Ctl-W   删除光标到前边最近一个空格之间的字符 <code>$ 1111 222 --&gt; $ 1111</code></p>
+]]></content>
+        
+        <categories>
+            
+            <category> 操作系统 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Linux </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
         <title><![CDATA[UNP卷二读书记录]]></title>
         <url>http://blog.lsmg.xyz/2020/03/CPP-%25E8%25AF%25BB%25E4%25B9%25A6%25E8%25AE%25B0%25E5%25BD%2595115-UNP%25E5%258D%25B7%25E4%25BA%258C/</url>
-        <content type="html"><![CDATA[<h1 id="消息传递"><a href="#消息传递" class="headerlink" title="消息传递"></a>消息传递</h1><h2 id="管道和有名管道FIFO"><a href="#管道和有名管道FIFO" class="headerlink" title="管道和有名管道FIFO"></a>管道和有名管道FIFO</h2>]]></content>
+        <content type="html"><![CDATA[<h1 id="消息传递"><a href="#消息传递" class="headerlink" title="消息传递"></a>消息传递</h1><h2 id="管道和有名管道FIFO"><a href="#管道和有名管道FIFO" class="headerlink" title="管道和有名管道FIFO"></a>管道和有名管道FIFO</h2><p><strong>popen pclose</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="comment">// 成功返回文件指针, 出错为NULL</span></span><br><span class="line"><span class="function">FILE* <span class="title">popen</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *command, <span class="keyword">const</span> <span class="keyword">char</span> *type)</span></span>;</span><br><span class="line">FILE* fp = popen(command, <span class="string">"r"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 成功为shell终止状态, 出错则为 -1</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pclose</span><span class="params">(FILE *stream)</span></span>;</span><br><span class="line">pclose(fp);</span><br></pre></td></tr></table></figure>
+<p>popen创建一个管道并启动另外一个进程 创建者要么从管道读出标准输入, 要么将标准输出写到管道<br>返回的文件指针作用<br>通过type参数控制<br>type = “r” 创建者 通过文件指针读入command命令产生的标准输出<br>type = “w” 创建者 通过文件指针为command命令提供标准输入</p>
+<p>pclose 关闭这个标准IO流</p>
+<p><strong>FIFO 先进先出(first in, first out)</strong></p>
+<p>又称为有名管道(named pipe) 单向(半双工)数据流, 每个FIFO都有一个路径名与之对应.<br>从而允许无亲缘关系的进程访问同一个FIFO</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 成功返回 0 失败返回 -1</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">mkfifo</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">mode_t</span> mode)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span> FIFO1 = <span class="string">"/tmp/fifo.1"</span>;</span><br><span class="line">mkfifo(FIFO1, <span class="number">0666</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建之后需要打开来进行读或者写 可以使用open也可以使用其他标准IO打开函数</span></span><br><span class="line"><span class="keyword">int</span> writefd = <span class="built_in">open</span>(FIFO1, O_WRONLY, <span class="number">0</span>); <span class="comment">/* 在父进程中打开 父进程写 */</span></span><br><span class="line"><span class="keyword">int</span> readfd = <span class="built_in">open</span>(FIFO1, O_RDONLY, <span class="number">0</span>); <span class="comment">/* 在子进程中打开 子进程读 */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 只有调用unlink才能从文件系统删除文件名字</span></span><br><span class="line">unlink(FIFO1);</span><br></pre></td></tr></table></figure>
+<p>mkfifo 隐含已经指定 O_CREAT | O_EXCL<br>要么不存在创建一个新的, 要么返回 errno=EEXIST(所指定名字的FIFO已经存在)</p>
+<p>如果想要打开已经存在的FIFO可以使用open函数.<br>可以判断 如果返回-1 并且errno=EEXIST 就调用open函数打开</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 子进程</span></span><br><span class="line">readfd = <span class="built_in">open</span>(FIFO1, O_RDONLY, <span class="number">0</span>);</span><br><span class="line">writefd = <span class="built_in">open</span>(FIFO2, O_WRONLY, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 父进程</span></span><br><span class="line">writefd = <span class="built_in">open</span>(FIFO1, O_WRONLY, <span class="number">0</span>);</span><br><span class="line">readfd = <span class="built_in">open</span>(FIFO2, O_RDONLY, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 父进程 这样会阻塞</span></span><br><span class="line">readfd = <span class="built_in">open</span>(FIFO2, O_RDONLY, <span class="number">0</span>);</span><br><span class="line">writefd = <span class="built_in">open</span>(FIFO1, O_WRONLY, <span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+<p>如果调换父进程的两行代码 程序就会进入死锁<br>因为如果当前没有任何进程<code>打开某个FIFO来写</code>, 打开这个<code>FIFO来读</code>的进程将会<code>阻塞</code></p>
+<p>当对一个管道或者FIFO的最终close发生的时候, 该管道或FIFO中的任何残余数据都将被丢弃</p>
+<p>即使在A主机上能够访问到B主机的目录, 即使不同主机上的两个进程都能够通过NFS打开同一个FIFO<br>他们之间也不能通过FIFO从一个进程到另一个进程发送数据</p>
+<p>拒绝服务型攻击Dos<br>如果是单进程可能会让服务器处于阻塞状态, 多进程也可能会由于一个恶意客户发送大量独立请求<br>导致服务器子进程数达到上限, 使得后续的fork失败</p>
+<p><strong>其他</strong><br>从字节流中获取完整的单个信息</p>
+<ul>
+<li>带特殊终止序列<br>许多UNIX应用使用换行分割 因特尔应用程序使用回车符加上一个换行符</li>
+<li>显式长度<br>将长度增加在请求中</li>
+<li>每次连接一个记录<br>应用通过关闭对端连接指示一个记录结束. HTTP1.0使用的这一技术</li>
+</ul>
+<p>标准IO函数fdopen可以将标准IO流与pipe返回的文件描述符相关联’</p>
+<p>系统加在管道和FIFO的唯一限制是</p>
+<ul>
+<li>OPEN_MAX<br>一个进程在任意时刻打开的最大描述符数量 &gt;=16</li>
+<li>PIPE_BUF<br>可以原子性的写入一个管道或FIFO的最大数据量 &gt;= 512</li>
+</ul>
+<p><strong>习题练习</strong></p>
+<ol>
+<li>父进程终止的时候, 如果子进程的fd[1]仍处于打开状态, 则子进程对fd[0]的read 不会返回文件结束符,<br>因为fd[1]虽然在父进程中关闭了, 但是在子进程中依然打开. 如果关闭子进程fd[1], 则父进程一旦关闭,<br>他的所有文件描述符即关闭, 子进程对fd[0]的read就会返回0.(想到了自己写的服务器, 客户端断开连接就会read出一个0长度的内容)</li>
+<li>从 不存在即创建, 存在-&gt;打开 变成 存在-&gt;打开, 不存在即创建. 可能会在open打开失败后 创建fifo之前<br>被其他进程抢先创建fifo, 导致本进程的mkfifo调用失败</li>
+<li>出错信息写到了标准错误输出</li>
+<li>可以把第一个open调用设置成非阻塞, 但是为了避免readline返回错误, 标志必须在readline之前去除</li>
+<li>死锁</li>
+<li>读进程关闭管道或者FIFO后给写进程一个信号(往关闭的管道写会产生SIGPIPE信号),<br>写进程关闭管道或者FIFO后将文件结束符发送给读进程(读进程读到长度为0的文件结束符)</li>
+</ol>
+<h2 id="POSIX消息队列"><a href="#POSIX消息队列" class="headerlink" title="POSIX消息队列"></a>POSIX消息队列</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;mqueue.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// oflag O_RDONLY O_WRONLY O_RDWR 可以加上O_CREAT和O_EXCL或者O_NONBLOCK</span></span><br><span class="line"><span class="comment">// 创建一个新队列的时候(制定了O_CREAT且消息队列不存在)后两个参数都需要</span></span><br><span class="line"><span class="comment">// 权限位 和 指定某些属性 nullptr则使用默认属性</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 成功返回消息队列 fd 失败 -1</span></span><br><span class="line"><span class="function"><span class="keyword">mqd_t</span> <span class="title">mq_open</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *name, <span class="keyword">int</span> oflag,</span></span></span><br><span class="line"><span class="function"><span class="params"> <span class="comment">/*mode_t mode, struct mq_attr *attr*/</span>)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>注意<br>消息队列文件描述符不必是(而且很可能不是)像文件描述符或者socket文件描述符那样的短整数</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 关闭消息队列 引用计数 -1</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">mq_close</span><span class="params">(<span class="keyword">mqd_t</span> mqdes)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>类似close函数, 调用进程可以不再使用该文件描述符, 但是其消息队列并不会从系统中删除</p>
+<p>当一个进程终止的时候, 所有打开着的消息队列都将关闭, 就像自动调用了mq_close</p>
+<p>如果要从系统中删除<code>mq_open</code>第一个参数<code>name</code> 必须调用下面的函数</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引用计数 -1</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">mq_unlink</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *name)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>每个消息队列有一个保存着当前打开描述符数的引用计数器</p>
+<p>当消息队列的引用计数仍大于0时, 其name就能删除<br>但是队列的析构会在<code>引用计数为0</code>的时候自动析构.</p>
+]]></content>
         
         <categories>
             
@@ -22,6 +159,37 @@
         <title><![CDATA[GDB调试]]></title>
         <url>http://blog.lsmg.xyz/2020/03/%25E6%2593%258D%25E4%25BD%259C%25E7%25B3%25BB%25E7%25BB%259F-GDB%25E8%25B0%2583%25E8%25AF%2595/</url>
         <content type="html"><![CDATA[<p><a href="https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/gdb.html" target="_blank" rel="noopener">https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/gdb.html</a></p>
+<p>对多线程的支持<br>set follow-fork-mode [parent|child]<br>set detach-on-fork [on|off]</p>
+<table>
+<thead>
+<tr>
+<th>follow-fork-mode</th>
+<th>detach-on-fork</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>parent</td>
+<td>on</td>
+<td>只调试主进程</td>
+</tr>
+<tr>
+<td>child</td>
+<td>on</td>
+<td>只调试子进程</td>
+</tr>
+<tr>
+<td>parent</td>
+<td>off</td>
+<td>同时调试父子进程, gdb跟踪父进程, 子进程阻塞在fork位置</td>
+</tr>
+<tr>
+<td>child</td>
+<td>off</td>
+<td>同上 gdb跟踪子进程, 父进程阻塞</td>
+</tr>
+</tbody></table>
+<p>进程间切换<br>| 命令 | 功能 |<br>| — | — |<br>| info inferiors | 查询正在调试的进程 |<br>| inferior &lt;number&gt; | 切换进程 |</p>
 <table>
 <thead>
 <tr>
@@ -205,6 +373,38 @@
 <tr>
 <td>info local</td>
 <td>显示当前堆栈页的所有变量</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>查询运行信息</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>where/bt</td>
+<td>当前运行的堆栈列表</td>
+</tr>
+<tr>
+<td>bt backtrace</td>
+<td>显示当前的调用堆栈</td>
+</tr>
+<tr>
+<td>up/down</td>
+<td>改变堆栈的显示深度</td>
+</tr>
+<tr>
+<td>set args</td>
+<td>指定程序运行参数</td>
+</tr>
+<tr>
+<td>show args</td>
+<td>查看程序参数</td>
+</tr>
+<tr>
+<td>info program</td>
+<td>查看程序是否运行, 进程号, 被暂停原因</td>
 </tr>
 </tbody></table>
 ]]></content>
@@ -555,48 +755,8 @@
     </entry>
     
     <entry>
-        <title><![CDATA[LeetCode中等算法]]></title>
-        <url>http://blog.lsmg.xyz/2020/03/%25E7%25AE%2597%25E6%25B3%259591-%25E4%25B8%25AD%25E7%25AD%2589%25E7%25AE%2597%25E6%25B3%2595/</url>
-        <content type="html"><![CDATA[<h1 id="Jump-Game-动态规划-贪婪"><a href="#Jump-Game-动态规划-贪婪" class="headerlink" title="Jump Game-动态规划 贪婪"></a>Jump Game-动态规划 贪婪</h1><p><a href="https://leetcode.com/problems/jump-game/" target="_blank" rel="noopener">https://leetcode.com/problems/jump-game/</a></p>
-<p>Given an array of non-negative integers, you are initially positioned at the first index of the array.<br>Each element in the array represents your maximum jump length at that position.<br>Determine if you are able to reach the last index.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Example <span class="number">1</span>:</span><br><span class="line">Input: [<span class="number">2</span>,<span class="number">3</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">4</span>]</span><br><span class="line">Output: <span class="literal">true</span></span><br><span class="line">Explanation: Jump <span class="number">1</span> <span class="built_in">step</span> from index <span class="number">0</span> to <span class="number">1</span>, then <span class="number">3</span> steps to the last index.</span><br><span class="line"></span><br><span class="line">Example <span class="number">2</span>:</span><br><span class="line">Input: [<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">4</span>]</span><br><span class="line">Output: <span class="literal">false</span></span><br><span class="line">Explanation: You will always arrive at index <span class="number">3</span> no matter what. Its maximum</span><br><span class="line">             jump length is <span class="number">0</span>, which makes it impossible to reach the last index.</span><br></pre></td></tr></table></figure>
-<p>这是我LeetCode第一道中等难度算法, 刚上来不知道怎么做. 然后瞟了一眼题解说是动态规划问题.我就去查了下动态规划的问题解法</p>
-<p><a href="https://www.zhihu.com/question/23995189/answer/613096905" target="_blank" rel="noopener">什么是动态规划（Dynamic Programming）？动态规划的意义是什么？ - 阮行止的回答 - 知乎</a></p>
-<p><strong>贪心</strong><br>这样算是有了个初步了解, 不过我上来先用了贪心… 因为简单一些, 动态规划暂时没有想到怎么解.<br>结果运行时间超过 11%的人好吧 最坏的时间复杂度应该是O(n!)… 最优O(n)</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">canJump</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> sum_step = nums.<span class="built_in">size</span>();</span><br><span class="line">    <span class="keyword">int</span> now_sub = sum_step - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> min_sub = now_sub;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">bool</span> jumpout = <span class="literal">true</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = now_sub - <span class="number">1</span>; i &gt;= <span class="number">0</span>; --i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (nums[i] &gt;= (now_sub - i))</span><br><span class="line">            &#123;</span><br><span class="line">                min_sub = i;</span><br><span class="line">                jumpout = <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        now_sub = min_sub;</span><br><span class="line">        <span class="keyword">if</span> (jumpout)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> now_sub == <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        jumpout = <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>我看了下题解的贪婪算法… 我的应该也是贪婪的一种. 不过题解的贪婪更加快.<br>我的想法是从顶开始 每次遍历找到<code>最低的能跳过来的一层</code> 然后再从<code>最低的能跳过来的一层</code>遍历.直到到不能再跳就返回当前是不是底层</p>
-<p>题解的解法粗略看就是差在了第一个if的判断条件, 我判断的当前的层, 题解判断的<code>最低的能跳过来的一层</code>题解的解法是<code>能跳则跳</code> 我的解法是<code>跳最少的次数</code> 实际上针对此题<code>能跳则跳</code>就好</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">canJump</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> now_sub = nums.<span class="built_in">size</span>() - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> min_sub = now_sub;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = now_sub - <span class="number">1</span>; i &gt;= <span class="number">0</span>; --i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (nums[i] + i &gt;= min_sub)</span><br><span class="line">        &#123;</span><br><span class="line">            min_sub = i;    </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="keyword">return</span> min_sub == <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>然后我猜测绝对有一道题输出最少的跳跃次数, 没想到真有. 结果试了下时间超限…..<br>理论上我第一种解法能够完成emmm, 不过先不管那道题目了.</p>
-<p><strong>递归回溯</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">canJumpFromPosition</span><span class="params">(<span class="keyword">int</span> <span class="built_in">position</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;nums)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">position</span> == nums.<span class="built_in">size</span>() - <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> max_position = <span class="built_in">min</span>(<span class="built_in">position</span> + nums[<span class="built_in">position</span>], (<span class="keyword">int</span>)nums.<span class="built_in">size</span>() - <span class="number">1</span>);</span><br><span class="line">    <span class="comment">// for (int i = max_position; i &gt; position; --i)</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="built_in">position</span> + <span class="number">1</span>; i &lt;= max_position; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (canJumpFromPosition(i, nums))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">canJump</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> canJumpFromPosition(<span class="number">0</span>, nums);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>上面这种方法思考起来简单些, 你只要知道递归的条件是什么</p>
-<p>递归到什么时候返回值来回溯</p>
-<p>这个题目, 你只要在当前位置不断跳到所有能去的位置, 然后递归下去. 直到你的位置到了尾部就返回true, 或者你不能再跳返回false. 自然时间超限了</p>
-<p>上面的解法, 还有优化的空间. 因为这个是从左到右依次进行, 然而实际上从越远的地方进行更容易到达尾部. 所以可以修改for的判断条件在图中注释部分</p>
-<p><strong>动态规划 自上而下</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> Index &#123;UNKNOW, GOOD, BAD&#125;;</span><br><span class="line">Index *memo;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">canJumpFromPosition</span><span class="params">(<span class="keyword">int</span> <span class="built_in">position</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;nums)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (memo[<span class="built_in">position</span>] != UNKNOW)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> memo[<span class="built_in">position</span>] == GOOD;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> max_position = <span class="built_in">min</span>(<span class="built_in">position</span> + nums[<span class="built_in">position</span>], (<span class="keyword">int</span>)nums.<span class="built_in">size</span>() - <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = max_position; i &gt; <span class="built_in">position</span>; --i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (canJumpFromPosition(i, nums))</span><br><span class="line">        &#123;</span><br><span class="line">            memo[<span class="built_in">position</span>] = GOOD;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    memo[<span class="built_in">position</span>] = BAD;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">canJump</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    memo = <span class="keyword">new</span> Index[nums.<span class="built_in">size</span>()]&#123;&#125;;</span><br><span class="line">    memo[nums.<span class="built_in">size</span>() - <span class="number">1</span>] = GOOD;</span><br><span class="line">    <span class="keyword">return</span> canJumpFromPosition(<span class="number">0</span>, nums);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>之前的方法中, 仔细想想就会发现 会有很多的下标被多次调用, 尽管那个下标是无法到达结尾的. 怎么解决呢? 当然是保存状态了, 每次递归结束后就标记当前的下标能不能到达. 之后遇到被标记的下标就能直接返回</p>
-<p>然而现在的时间复杂度依然高达 O(n^2)</p>
-<p><strong>自下而上的动态规划</strong></p>
-<p>通过消除递归的方式, 消除递归的一个好方法就是颠倒顺序. 上面那是从左到右向右跳, 这次我们从右向左向右跳, 就能更容易的知道知道某个下标是<code>GOOD</code>还是<code>BAD</code>了, 因为离最右端更近了.</p>
-<p>时间复杂度依然是O(n^2)</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> Index &#123;UNKNOW, GOOD, BAD&#125;;</span><br><span class="line">Index *memo;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">canJump</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    memo = <span class="keyword">new</span> Index[nums.<span class="built_in">size</span>()]&#123;&#125;;</span><br><span class="line">    memo[nums.<span class="built_in">size</span>() - <span class="number">1</span>] = GOOD;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = nums.<span class="built_in">size</span>() - <span class="number">2</span>; i &gt;= <span class="number">0</span>; --i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> furthest_jump = <span class="built_in">min</span>(nums[i] + i, (<span class="keyword">int</span>)nums.<span class="built_in">size</span>() - <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt;= furthest_jump; ++j)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (memo[j] == GOOD)</span><br><span class="line">            &#123;</span><br><span class="line">                memo[i] = GOOD;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> memo[<span class="number">0</span>] == GOOD;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-        
-        <categories>
-            
-            <category> 算法 </category>
-            
-            <category> 中等算法 </category>
-            
-        </categories>
-        
-        
-    </entry>
-    
-    <entry>
-        <title><![CDATA[LeetCode简单算法]]></title>
-        <url>http://blog.lsmg.xyz/2020/03/%25E7%25AE%2597%25E6%25B3%259590-%25E7%25AE%2580%25E5%258D%2595%25E7%25AE%2597%25E6%25B3%2595/</url>
+        <title><![CDATA[数据结构指针简答应用]]></title>
+        <url>http://blog.lsmg.xyz/2020/03/%25E7%25AE%2597%25E6%25B3%259590-%25E7%25AE%2597%25E6%25B3%2595%25E5%2588%25B7%25E9%25A2%2598%25E8%25AE%25B0%25E5%25BD%2595-%25E6%2595%25B0%25E6%258D%25AE%25E7%25BB%2593%25E6%259E%2584%25E7%25AE%2580%25E5%258D%2595%25E5%25BA%2594%25E7%2594%25A8/</url>
         <content type="html"><![CDATA[<p>由于国内LeetCode解题时间有点微妙, 基本题目只在英文版做</p>
 <p>为了压缩长度. 所有空行都删掉了</p>
 <h1 id="unordered-map"><a href="#unordered-map" class="headerlink" title="unordered_map"></a>unordered_map</h1><h2 id="Two-Sum-哈希表建立快速索引-一遍和两遍哈希的使用"><a href="#Two-Sum-哈希表建立快速索引-一遍和两遍哈希的使用" class="headerlink" title="Two Sum-哈希表建立快速索引, 一遍和两遍哈希的使用"></a>Two Sum-哈希表建立快速索引, 一遍和两遍哈希的使用</h2><p><a href="https://leetcode.com/problems/two-sum" target="_blank" rel="noopener">https://leetcode.com/problems/two-sum</a><br>题目很简单</p>
@@ -655,13 +815,76 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">hasCycle</span><span class="params">(ListNode *head)</span></span></span><br><span class="line"><span class="function"></span>&#123;    </span><br><span class="line">	<span class="keyword">if</span> ((head == <span class="literal">nullptr</span>) || (head-&gt;next == <span class="literal">nullptr</span>))</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	ListNode *walk = head;</span><br><span class="line">	ListNode *<span class="built_in">run</span> = head-&gt;next;</span><br><span class="line">	<span class="keyword">while</span> (walk != <span class="built_in">run</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> ((<span class="built_in">run</span> == <span class="literal">nullptr</span>) || (<span class="built_in">run</span>-&gt;next == <span class="literal">nullptr</span>))</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		walk = walk-&gt;next;</span><br><span class="line">		<span class="built_in">run</span> = <span class="built_in">run</span>-&gt;next-&gt;next;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>既然是要保证访问过的单一, 就是用set了</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">hasCycle</span><span class="params">(ListNode *head)</span></span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">	<span class="built_in">set</span>&lt;ListNode*&gt; hashset&#123;&#125;;	</span><br><span class="line">	<span class="keyword">while</span> (head != <span class="literal">nullptr</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (hashset.count(head) != <span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		hashset.insert(head);</span><br><span class="line">		</span><br><span class="line">		head = head-&gt;next;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">hasCycle</span><span class="params">(ListNode *head)</span></span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">	<span class="built_in">set</span>&lt;ListNode*&gt; hashset&#123;&#125;;	</span><br><span class="line">	<span class="keyword">while</span> (head != <span class="literal">nullptr</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (hashset.count(head) != <span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		hashset.insert(head);</span><br><span class="line">		</span><br><span class="line">		head = head-&gt;next;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="双指针"><a href="#双指针" class="headerlink" title="双指针"></a>双指针</h1><h2 id="Container-With-Most-Water-双指针-数学问题"><a href="#Container-With-Most-Water-双指针-数学问题" class="headerlink" title="Container With Most Water 双指针-数学问题"></a>Container With Most Water 双指针-数学问题</h2><p><a href="https://leetcode.com/problems/container-with-most-water/" target="_blank" rel="noopener">https://leetcode.com/problems/container-with-most-water/</a></p>
+<p>存水量 = a(宽) * b(长);</p>
+<p>从a最大的时候开始, 如果想要获得更大的存水量, 只能减少a, 增加b</p>
+<p>使用两个指针 一个指向最左边 一个指向最右边</p>
+<p>这就有了移动哪个指针的问题, 为了得到更长的b 只能移动指向较短b的指针</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">maxArea</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; <span class="built_in">height</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> <span class="built_in">max</span> = <span class="number">0</span>;   </span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::const_iterator left = <span class="built_in">height</span>.<span class="built_in">begin</span>();</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::const_iterator right = <span class="built_in">height</span>.<span class="built_in">end</span>() - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (left &lt; right)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> temp = <span class="built_in">min</span>(*left, *right) * (right - left);</span><br><span class="line">        <span class="keyword">if</span> (temp &gt; <span class="built_in">max</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">max</span> = temp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 移动较短边</span></span><br><span class="line">        <span class="keyword">if</span> (*left &lt;= *right)</span><br><span class="line">        &#123;</span><br><span class="line">            left++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            right--;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">max</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
         
         <categories>
             
             <category> 算法 </category>
             
-            <category> 简单算法 </category>
+            <category> 算法刷题记录 </category>
+            
+        </categories>
+        
+        
+    </entry>
+    
+    <entry>
+        <title><![CDATA[算法]]></title>
+        <url>http://blog.lsmg.xyz/2020/03/%25E7%25AE%2597%25E6%25B3%259591-%25E7%25AE%2597%25E6%25B3%2595%25E5%2588%25B7%25E9%25A2%2598%25E8%25AE%25B0%25E5%25BD%2595-%25E7%25AE%2597%25E6%25B3%2595/</url>
+        <content type="html"><![CDATA[<h1 id="动态规划-贪婪"><a href="#动态规划-贪婪" class="headerlink" title="动态规划 贪婪"></a>动态规划 贪婪</h1><h2 id="Jump-Game"><a href="#Jump-Game" class="headerlink" title="Jump Game"></a>Jump Game</h2><p><a href="https://leetcode.com/problems/jump-game/" target="_blank" rel="noopener">https://leetcode.com/problems/jump-game/</a></p>
+<p>Given an array of non-negative integers, you are initially positioned at the first index of the array.<br>Each element in the array represents your maximum jump length at that position.<br>Determine if you are able to reach the last index.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Example <span class="number">1</span>:</span><br><span class="line">Input: [<span class="number">2</span>,<span class="number">3</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">4</span>]</span><br><span class="line">Output: <span class="literal">true</span></span><br><span class="line">Explanation: Jump <span class="number">1</span> <span class="built_in">step</span> from index <span class="number">0</span> to <span class="number">1</span>, then <span class="number">3</span> steps to the last index.</span><br><span class="line"></span><br><span class="line">Example <span class="number">2</span>:</span><br><span class="line">Input: [<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">4</span>]</span><br><span class="line">Output: <span class="literal">false</span></span><br><span class="line">Explanation: You will always arrive at index <span class="number">3</span> no matter what. Its maximum</span><br><span class="line">             jump length is <span class="number">0</span>, which makes it impossible to reach the last index.</span><br></pre></td></tr></table></figure>
+<p>这是我LeetCode第一道中等难度算法, 刚上来不知道怎么做. 然后瞟了一眼题解说是动态规划问题.我就去查了下动态规划的问题解法</p>
+<p><a href="https://www.zhihu.com/question/23995189/answer/613096905" target="_blank" rel="noopener">什么是动态规划（Dynamic Programming）？动态规划的意义是什么？ - 阮行止的回答 - 知乎</a></p>
+<p><strong>贪心</strong><br>这样算是有了个初步了解, 不过我上来先用了贪心… 因为简单一些, 动态规划暂时没有想到怎么解.<br>结果运行时间超过 11%的人好吧 最坏的时间复杂度应该是O(n!)… 最优O(n)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">canJump</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> sum_step = nums.<span class="built_in">size</span>();</span><br><span class="line">    <span class="keyword">int</span> now_sub = sum_step - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> min_sub = now_sub;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">bool</span> jumpout = <span class="literal">true</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = now_sub - <span class="number">1</span>; i &gt;= <span class="number">0</span>; --i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (nums[i] &gt;= (now_sub - i))</span><br><span class="line">            &#123;</span><br><span class="line">                min_sub = i;</span><br><span class="line">                jumpout = <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        now_sub = min_sub;</span><br><span class="line">        <span class="keyword">if</span> (jumpout)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> now_sub == <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        jumpout = <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我看了下题解的贪婪算法… 我的应该也是贪婪的一种. 不过题解的贪婪更加快.<br>我的想法是从顶开始 每次遍历找到<code>最低的能跳过来的一层</code> 然后再从<code>最低的能跳过来的一层</code>遍历.直到到不能再跳就返回当前是不是底层</p>
+<p>题解的解法粗略看就是差在了第一个if的判断条件, 我判断的当前的层, 题解判断的<code>最低的能跳过来的一层</code>题解的解法是<code>能跳则跳</code> 我的解法是<code>跳最少的次数</code> 实际上针对此题<code>能跳则跳</code>就好</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">canJump</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> now_sub = nums.<span class="built_in">size</span>() - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> min_sub = now_sub;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = now_sub - <span class="number">1</span>; i &gt;= <span class="number">0</span>; --i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (nums[i] + i &gt;= min_sub)</span><br><span class="line">        &#123;</span><br><span class="line">            min_sub = i;    </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="keyword">return</span> min_sub == <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后我猜测绝对有一道题输出最少的跳跃次数, 没想到真有. 结果试了下时间超限…..<br>理论上我第一种解法能够完成emmm, 不过先不管那道题目了.</p>
+<p><strong>递归回溯</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">canJumpFromPosition</span><span class="params">(<span class="keyword">int</span> <span class="built_in">position</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;nums)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">position</span> == nums.<span class="built_in">size</span>() - <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> max_position = <span class="built_in">min</span>(<span class="built_in">position</span> + nums[<span class="built_in">position</span>], (<span class="keyword">int</span>)nums.<span class="built_in">size</span>() - <span class="number">1</span>);</span><br><span class="line">    <span class="comment">// for (int i = max_position; i &gt; position; --i)</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="built_in">position</span> + <span class="number">1</span>; i &lt;= max_position; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (canJumpFromPosition(i, nums))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">canJump</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> canJumpFromPosition(<span class="number">0</span>, nums);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面这种方法思考起来简单些, 你只要知道递归的条件是什么</p>
+<p>递归到什么时候返回值来回溯</p>
+<p>这个题目, 你只要在当前位置不断跳到所有能去的位置, 然后递归下去. 直到你的位置到了尾部就返回true, 或者你不能再跳返回false. 自然时间超限了</p>
+<p>上面的解法, 还有优化的空间. 因为这个是从左到右依次进行, 然而实际上从越远的地方进行更容易到达尾部. 所以可以修改for的判断条件在图中注释部分</p>
+<p><strong>动态规划 自上而下</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> Index &#123;UNKNOW, GOOD, BAD&#125;;</span><br><span class="line">Index *memo;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">canJumpFromPosition</span><span class="params">(<span class="keyword">int</span> <span class="built_in">position</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;nums)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (memo[<span class="built_in">position</span>] != UNKNOW)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> memo[<span class="built_in">position</span>] == GOOD;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> max_position = <span class="built_in">min</span>(<span class="built_in">position</span> + nums[<span class="built_in">position</span>], (<span class="keyword">int</span>)nums.<span class="built_in">size</span>() - <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = max_position; i &gt; <span class="built_in">position</span>; --i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (canJumpFromPosition(i, nums))</span><br><span class="line">        &#123;</span><br><span class="line">            memo[<span class="built_in">position</span>] = GOOD;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    memo[<span class="built_in">position</span>] = BAD;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">canJump</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    memo = <span class="keyword">new</span> Index[nums.<span class="built_in">size</span>()]&#123;&#125;;</span><br><span class="line">    memo[nums.<span class="built_in">size</span>() - <span class="number">1</span>] = GOOD;</span><br><span class="line">    <span class="keyword">return</span> canJumpFromPosition(<span class="number">0</span>, nums);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>之前的方法中, 仔细想想就会发现 会有很多的下标被多次调用, 尽管那个下标是无法到达结尾的. 怎么解决呢? 当然是保存状态了, 每次递归结束后就标记当前的下标能不能到达. 之后遇到被标记的下标就能直接返回</p>
+<p>然而现在的时间复杂度依然高达 O(n^2)</p>
+<p><strong>自下而上的动态规划</strong></p>
+<p>通过消除递归的方式, 消除递归的一个好方法就是颠倒顺序. 上面那是从左到右向右跳, 这次我们从右向左向右跳, 就能更容易的知道知道某个下标是<code>GOOD</code>还是<code>BAD</code>了, 因为离最右端更近了.</p>
+<p>时间复杂度依然是O(n^2)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> Index &#123;UNKNOW, GOOD, BAD&#125;;</span><br><span class="line">Index *memo;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">canJump</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    memo = <span class="keyword">new</span> Index[nums.<span class="built_in">size</span>()]&#123;&#125;;</span><br><span class="line">    memo[nums.<span class="built_in">size</span>() - <span class="number">1</span>] = GOOD;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = nums.<span class="built_in">size</span>() - <span class="number">2</span>; i &gt;= <span class="number">0</span>; --i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> furthest_jump = <span class="built_in">min</span>(nums[i] + i, (<span class="keyword">int</span>)nums.<span class="built_in">size</span>() - <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt;= furthest_jump; ++j)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (memo[j] == GOOD)</span><br><span class="line">            &#123;</span><br><span class="line">                memo[i] = GOOD;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> memo[<span class="number">0</span>] == GOOD;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+        
+        <categories>
+            
+            <category> 算法 </category>
+            
+            <category> 算法刷题记录 </category>
+            
+        </categories>
+        
+        
+    </entry>
+    
+    <entry>
+        <title><![CDATA[算法分类学习]]></title>
+        <url>http://blog.lsmg.xyz/2020/03/%25E7%25AE%2597%25E6%25B3%259592-%25E7%25AE%2597%25E6%25B3%2595%25E7%2590%2586%25E8%25AE%25BA-%25E7%25AE%2597%25E6%25B3%2595%25E5%2588%2586%25E7%25B1%25BB%25E5%25AD%25A6%25E4%25B9%25A0/</url>
+        <content type="html"></content>
+        
+        <categories>
+            
+            <category> 算法 </category>
+            
+            <category> 算法理论 </category>
             
         </categories>
         
@@ -1994,6 +2217,31 @@
     </entry>
     
     <entry>
+        <title><![CDATA[游戏知识-腾讯游戏学院-如何进入游戏开发行业]]></title>
+        <url>http://blog.lsmg.xyz/2019/12/%25E6%25B8%25B8%25E6%2588%258F%25E7%259F%25A5%25E8%25AF%2586-%25E8%2585%25BE%25E8%25AE%25AF%25E6%25B8%25B8%25E6%2588%258F%25E5%25AD%25A6%25E9%2599%25A2-%25E5%25A6%2582%25E4%25BD%2595%25E8%25BF%259B%25E5%2585%25A5%25E6%25B8%25B8%25E6%2588%258F%25E5%25BC%2580%25E5%258F%2591%25E8%25A1%258C%25E4%25B8%259A/</url>
+        <content type="html"><![CDATA[<p>由于自己了解的实在是不足, 所以来腾讯游戏课堂来学习一些架构之类的东西 来完善自己的知识面<br><a href="https://gameinstitute.qq.com/course/detail/10156" target="_blank" rel="noopener">想做游戏吗？如何开始我的游戏开发职业生涯</a></p>
+<a id="more"></a>
+<p>做游戏不会重复做同样的工作, 项目不同</p>
+]]></content>
+        
+        <categories>
+            
+            <category> 游戏知识 </category>
+            
+            <category> 腾讯游戏学院 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 腾讯游戏学院 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
         <title><![CDATA[游戏知识-服务器-服务器通信]]></title>
         <url>http://blog.lsmg.xyz/2019/12/%25E6%25B8%25B8%25E6%2588%258F%25E7%259F%25A5%25E8%25AF%2586-%25E6%259C%258D%25E5%258A%25A1%25E5%2599%25A8-%25E6%259C%258D%25E5%258A%25A1%25E5%2599%25A8%25E9%2580%259A%25E4%25BF%25A1/</url>
         <content type="html"><![CDATA[<p>由于自己了解的实在是不足, 所以来腾讯游戏课堂来学习一些架构之类的东西 来完善自己的知识面<br><a href="https://gameinstitute.qq.com/course/detail/10096" target="_blank" rel="noopener">服务器通信</a></p>
@@ -2023,31 +2271,6 @@
             <category> 游戏知识 </category>
             
             <category> 服务器 </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> 腾讯游戏学院 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-        <title><![CDATA[游戏知识-腾讯游戏学院-如何进入游戏开发行业]]></title>
-        <url>http://blog.lsmg.xyz/2019/12/%25E6%25B8%25B8%25E6%2588%258F%25E7%259F%25A5%25E8%25AF%2586-%25E8%2585%25BE%25E8%25AE%25AF%25E6%25B8%25B8%25E6%2588%258F%25E5%25AD%25A6%25E9%2599%25A2-%25E5%25A6%2582%25E4%25BD%2595%25E8%25BF%259B%25E5%2585%25A5%25E6%25B8%25B8%25E6%2588%258F%25E5%25BC%2580%25E5%258F%2591%25E8%25A1%258C%25E4%25B8%259A/</url>
-        <content type="html"><![CDATA[<p>由于自己了解的实在是不足, 所以来腾讯游戏课堂来学习一些架构之类的东西 来完善自己的知识面<br><a href="https://gameinstitute.qq.com/course/detail/10156" target="_blank" rel="noopener">想做游戏吗？如何开始我的游戏开发职业生涯</a></p>
-<a id="more"></a>
-<p>做游戏不会重复做同样的工作, 项目不同</p>
-]]></content>
-        
-        <categories>
-            
-            <category> 游戏知识 </category>
-            
-            <category> 腾讯游戏学院 </category>
             
         </categories>
         
@@ -2823,6 +3046,14 @@
 <p><strong>直接管理内存</strong><br>了解到两个概念 一个<code>默认初始化</code>一个<code>值初始化</code></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i, *pi1 = &amp;i, *pi2 = <span class="literal">nullptr</span>;</span><br><span class="line"><span class="keyword">double</span> *pd = <span class="keyword">new</span> <span class="keyword">double</span>(<span class="number">33</span>), *pd2 = pd;</span><br><span class="line"><span class="keyword">delete</span> i; <span class="comment">// 错误 i不是指针</span></span><br><span class="line"><span class="keyword">delete</span> pi1; <span class="comment">// 未定义 pi1指向一个局部变量 具有潜在性危害</span></span><br><span class="line"><span class="keyword">delete</span> pd; <span class="comment">// ok</span></span><br><span class="line"><span class="keyword">delete</span> pd2; <span class="comment">// 未定义 内存已经被释放 具有潜在性危害</span></span><br><span class="line"><span class="keyword">delete</span> pi2; <span class="comment">// 正确 释放空指针没有错误</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> *pci = <span class="keyword">new</span> <span class="keyword">const</span> <span class="keyword">int</span>(<span class="number">1024</span>);</span><br><span class="line"><span class="keyword">delete</span> pci <span class="comment">// 正确 释放一个const对象</span></span><br></pre></td></tr></table></figure>
 <p>delete之后指针就变成了<code>空悬指针</code> 需要将其置为<code>nullptr</code></p>
+<p><strong>shared_ptr和new结合使用</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 错误智能指针构造函数是explicit</span></span><br><span class="line"><span class="comment">// 无法将内置指针隐式转换成一个智能指针, 必须使用直接初始化</span></span><br><span class="line"><span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; p1 = <span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">1024</span>); </span><br><span class="line"></span><br><span class="line"><span class="comment">// 正确  使用了直接初始化</span></span><br><span class="line"><span class="function"><span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; <span class="title">p2</span><span class="params">(<span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">1024</span>))</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>定义和改变方式</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// p管理内置指针q所指向的对象, q必须指向new分配的内存, 且能够转换为T*类型</span></span><br><span class="line"><span class="function"><span class="built_in">shared_ptr</span>&lt;T&gt; <span class="title">p</span><span class="params">(q)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="comment">// p从unique_ptr u那里接管了对象的所有权 将U置为空</span></span></span><br><span class="line"><span class="function"><span class="built_in">shared_ptr</span>&lt;T&gt; <span class="title">p</span><span class="params">(u)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="comment">// p 接管了内置指针q所指向的对象的所有权, q必须能转化为T* 类型</span></span></span><br><span class="line"><span class="function"><span class="comment">// p将使用可调用对象d来代替delete</span></span></span><br><span class="line"><span class="function"><span class="built_in">shared_ptr</span>&lt;T&gt; <span class="title">p</span><span class="params">(q, d)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="comment">// p是shared_ptr p2的拷贝</span></span></span><br><span class="line"><span class="function"><span class="comment">// p将用可调用对象d来代替delete</span></span></span><br><span class="line"><span class="function"><span class="built_in">shared_ptr</span>&lt;T&gt; <span class="title">p</span><span class="params">(p2, d)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="comment">// 若p是唯一指向其对象的shared_ptr, reset会释放此对象</span></span></span><br><span class="line"><span class="function"><span class="comment">// 如果传递了可选的参数-内置指针q, 则会令p指向q 否则将p置为空</span></span></span><br><span class="line"><span class="function"><span class="comment">// 如果还传递了d, 会调用d而不是delete来释放q</span></span></span><br><span class="line">p.reset()</span><br><span class="line">p.reset(q)</span><br><span class="line">p.reset(q, d)</span><br></pre></td></tr></table></figure>
+
+
+
 <p>使用unique_ptr的时候要注意</p>
 <ol>
 <li>不要再函数调用传参的括号中 使用临时变量 这样一旦函数调用完成就会被销毁<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">process</span><span class="params">(<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; ptr)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; <span class="title">p</span><span class="params">(<span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">42</span> ))</span> </span>; <span class="comment">// 引用 = 1</span></span><br><span class="line"><span class="built_in">process</span>(p); <span class="comment">// 拷贝 会递增它的引用计数 ;在 process 中引用计数位为2</span></span><br><span class="line"><span class="keyword">int</span> i = *p; <span class="comment">// 正确 引用计数为1</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> *<span class="title">x</span><span class="params">(<span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">1024</span>))</span></span>; <span class="comment">// 危险 这是一个普通指针，不是一个智能指针</span></span><br><span class="line"><span class="built_in">process</span>(x) ; <span class="comment">// 错误 不能将 int* 转换为 一个 shared_ptr&lt;int&gt; </span></span><br><span class="line"><span class="built_in">process</span>(<span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; (x)); <span class="comment">// 合法的，但内存会被释放! 因为临时对象会被销毁</span></span><br><span class="line"><span class="keyword">int</span> j =*x <span class="comment">//未定义的 是一个空悬指针!</span></span><br></pre></td></tr></table></figure></li>
