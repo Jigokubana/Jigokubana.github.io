@@ -60,6 +60,7 @@ https://zh.cppreference.com/w/cpp/types#.E7.B1.BB.E5.9E.8B.E7.89.B9.E6.80.A7.28C
 目前不知道用在什么地方合适..... 留个连接备用吧
 
 # 花括号初始
+
 # 函数对象
 ## std::function  functional
 ```c++
@@ -95,6 +96,61 @@ $ A
 $ B
 $ Lambad
 ```
+
+## std::bind std::ref std::cref
+今天在学习
+https://github.com/baloonwj/flamingo
+的时候, 从中发现的这个函数. 这个函数跟std::function 一起使用.
+竟然实现了回调函数调用类的成员函数!!!!
+
+https://zh.cppreference.com/w/cpp/utility/functional/bind
+
+```c++
+#include <functional>
+#include <cstdio>
+
+void f(int n1, int n2, int n3, int n4)
+{
+    printf("f function-->n1: %d, n2: %d, n3: %d, n4: %d\n", n1, n2, n3, n4);
+}
+
+void ff(int &n1, int& n2, const int& n3)
+{
+    printf("before ff function-->n1: %d, n2: %d, n3: %d\n", n1, n2, n3);
+    n1 = 11;
+    n2 = 22;
+    // n3 = 33; 编译错误
+    printf("after ff function-->n1: %d, n2: %d, n3: %d\n", n1, n2, n3);
+}
+
+int main()
+{
+    auto f1 = std::bind(f, std::placeholders::_2, std::placeholders::_3, 666, std::placeholders::_1);
+
+    f1(1, 2, 3, 4, 5);
+    // infunction-->n1: 2, n2: 3, n3: 666, n4: 1
+    // 1 绑定_1  2绑定_2  3绑定_3   // 4 5被忽略
+    // 按照 f1的顺序传入参数
+    // 所以调用为 f(2, 3, 666, 1);
+
+    int n1 = 1, n2 = 2, n3 = 3;
+    auto ff1 = std::bind(ff, n1, std::ref(n2), std::cref(n3));
+    n1 = -1;
+    n2 = -2;
+    n3 = -3;
+    printf("before ff1 function-->n1: %d, n2: %d, n3: %d\n", n1, n2, n3);
+    ff1(n1, n2, n3);
+    printf("after ff1 function-->n1: %d, n2: %d, n3: %d\n", n1, n2, n3);
+    // before ff1 function-->n1: -1, n2: -2, n3: -3
+    // before ff function-- > n1: 1, n2 : -2, n3 : -3 // 这里说明了值传递 参数是绑定时就决定好了 引用参数还是可以改变的
+    // after ff function-- > n1: 11, n2 : 22, n3 : -3
+    // after ff1 function-- > n1: -1, n2 : 22, n3 : -3 // 引用传入成功改变, 值传入和const引用传入未变
+
+    // std::ref 按引用传入参数 std::cref按const引用传入参数
+}
+```
+
+
 
 ## std::pair utility std::tuple tuple
 

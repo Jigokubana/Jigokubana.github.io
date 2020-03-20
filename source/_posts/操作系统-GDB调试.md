@@ -77,6 +77,6 @@ set detach-on-fork [on|off]
 | where/bt | 当前运行的堆栈列表 |
 | bt backtrace | 显示当前的调用堆栈 |
 | up/down | 改变堆栈的显示深度 |
-| set args | 指定程序运行参数 |
-| show args | 查看程序参数 |
+| set args [args]| 指定程序运行参数 |
+| show args| 查看程序参数 |
 | info program | 查看程序是否运行, 进程号, 被暂停原因 |

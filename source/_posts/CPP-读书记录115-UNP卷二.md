@@ -101,6 +101,7 @@ writefd = open(FIFO1, O_WRONLY, 0);
 标准IO函数fdopen可以将标准IO流与pipe返回的文件描述符相关联'
 
 
+**限制**
 系统加在管道和FIFO的唯一限制是
 - OPEN_MAX
 一个进程在任意时刻打开的最大描述符数量 >=16
@@ -123,6 +124,7 @@ writefd = open(FIFO1, O_WRONLY, 0);
 
 ## POSIX消息队列
 
+**mqueue创建和删除**
 ```c++
 #include <mqueue.h>
 
@@ -156,3 +158,105 @@ int mq_unlink(const char *name);
 
 当消息队列的引用计数仍大于0时, 其name就能删除
 但是队列的析构会在`引用计数为0`的时候自动析构.
+
+
+第一个demo敲完之后 一直是errno=13.
+在`man mq_overview`
+```
+On Linux, message queues are created in a virtual filesystem.   (Other  implementa‐
+tions may also provide such a feature, but the details are likely to differ.)  This
+filesystem can be mounted (by the superuser) using the following commands:
+
+# mkdir /dev/mqueue
+# mount -t mqueue none /dev/mqueue
+
+The sticky bit is automatically enabled on the mount directory.
+```
+而且 name参数的格式是`/somename` 这个是相对挂载目录的
+
+
+**属性设置**
+```c++
+struct mq_attr
+{
+    long mq_flags; /* 0, O_NONBLOCK */
+    long mq_maxmsg; /* max number */
+    long mq_msgsize; /* max size of a msg in bytes */
+    long mq_curmsgs; /* number of message currently on queue */
+}
+
+int mq_getattr(mqd_t mqdes, struct mq_attr *attr);
+
+// set 的时候 只有mq_attr中的mq_flags起作用 设置取消O_NONBLOCK
+// 最大消息数和最大字节数 只能在创建队列的时候设置
+// 队列中房钱消息数 只能获取不能设置
+// 第三个参数 不为nullptr则返回之前的属性
+int mq_setattr(mqd_t mqdes, const struct mq_attr *attr, struct mq_attr *oattr);
+```
+
+**发送接收信息**
+```c++
+// prio 优先级 必须 <= MQ_PRIO_MAX
+int mq_send(mqd_t mqdes, const char *ptr, size_t len, unsigned int prio);
+
+// len 必须 >= mq_attr.mq_msgsize 如果小于则 errno = EMSGSIZE
+ssize_t mq_receive(mqd_t mqdes, const char *ptr, size_t len, unsigned int *priop);
+```
+如果不使用优先级 发送的时候可以将 mq_send的 prio 设置为0
+接受的时候 mq_receive priop 设置为 nullptr
+
+
+**消息队列的限制**
+- mq_maxmsg 队列中最大消息数
+- mq_msgsize单个消息的最大字节
+- MQ_OPEN_MAX 一个进程同时打开消息队列的最大数目
+- MQ_PRIO_MAX 最大优先级+1
+
+**异步事件通知**
+- 产生信号
+- 创建一个线程执行一个指定的函数
+
+```c++
+// 为指定队列建立或者删除异步事件通知.
+
+// 成功返回 0 失败返回 -1
+int mq_notify(mqd_t mqdes, struct sigevent *nofification);
+
+struct sigval
+{
+    int sival_int;
+    void *sival_ptr;
+}
+
+struct sigevent
+{
+    int sigev_notify; // SIGEV_NONE SIGEV_SIGNAL SIGEV_THREAD
+    int sigev_signo; // signal number if SIGEV_SIGNAL
+    union sigval sigev_value; // passed to signal handler pr thread
+    // 下面两个用于 SIGEV_THREAD
+    void (*sigev_notify_function)(union sigval);
+    pthread_attr_t *sigev_notify_attributes;
+}
+```
+1. 如果 notification != nullptr
+当前进程希望 在有一个消息 到达所指定的 先前为空的队列 时得到通知
+我们说 该进程被注册为接收该队列的通知
+
+2. 如果 notification == nullptr
+如果 该进程被注册为 接受所指定队列通知 则取消它
+
+3. 任何时刻只有一个进程可以被注册为 接收某个队列的通知
+4. 当一个消息到达某个空队列, 而且已经注册, 那么只有当
+没有因为调用mq_reveive导致的阻塞 的时候才会发出通知
+5. 通知发出后 注册立即被撤销.. 需要重新注册???
+
+Unix信号产生后会复位成默认行为.
+信号处理程序通常第一个调用signal函数, 用于重新建立处理程序
+这时会产生一个空窗时期(信号产生 与 当前进程重建信号处理程序之间)
+空窗时期再次产生同一信号 可能终止当前进程
+
+初看起来, mq_notify可能也有这个问题.
+不过在消息队列`为空前` `通知不会再次产生`
+所以不要在`读出消息后`重新注册
+而应该在`读出消息前`重新注册
+
