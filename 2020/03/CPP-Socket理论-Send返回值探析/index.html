@@ -20,7 +20,7 @@
 <meta name="verify" content=all />
     <!--Title-->
 
-<title>Archives: 2019/8 | Lsmg的大学之路</title>
+<title>Send返回值引出的(非)阻塞IO | Lsmg的大学之路</title>
 
 <link rel="alternate" href="/atom.xml" title="Lsmg的大学之路" type="application/atom+xml">
 
@@ -30,9 +30,10 @@
     
 
 <link rel="stylesheet" href="/css/base.css">
-<link rel="stylesheet" href="/css/pages/archive.css">
+<link rel="stylesheet" href="/css/pages/post.css">
 <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="/css/thirdParty/highlight/github.css">
+<link rel="stylesheet" href="/.css">
 
 
     <!--script-->
@@ -135,20 +136,21 @@
 </ul>
 
 
-        
-<div id="main">
-  <div id="post-list">
-    <ul class="archives-post-list">
-        
-      <li class="post-items" _href="/2019/08/CPP-%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95101-%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95%E9%AB%98%E7%BA%A7%E9%83%A8%E5%88%86/">
-        <p class="info">2019</p>
-        <h2 class="post-item-title">Linux高性能服务器-高级部分</h2>
-          <div class="article-meta">
+        <div id="main">
+    <article id="post">
+        <div id="post-header">
+
+            <h1 id="Send返回值引出的(非)阻塞IO">
+                
+                Send返回值引出的(非)阻塞IO
+                
+            </h1>
+            <div class="article-meta">
     
     
     <span class="categories-meta fa-wrap">
             <i class="fa fa-folder-open-o"></i>
-        <span>服务器编程-书籍记录</span>
+        <span>Socket理论</span>
     </span>
     
     
@@ -164,85 +166,94 @@
     
     <span class="fa-wrap">
         <i class="fa fa-clock-o"></i>
-        <span class="date-meta ">08/18</span>
+        <span class="date-meta ">2020/03/20</span>
     </span>
     
     
     
 </div>
 
-      </li>
+            
+            
+        </div>
         
-      <li class="post-items" _href="/2019/08/CPP-%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95100-%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95%E5%88%9D%E7%BA%A7%E9%83%A8%E5%88%86/">
-        <p class="info">2019</p>
-        <h2 class="post-item-title">Linux高性能服务器-初级部分</h2>
-          <div class="article-meta">
-    
-    
-    <span class="categories-meta fa-wrap">
-            <i class="fa fa-folder-open-o"></i>
-        <span>服务器编程-书籍记录</span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-         <i class="fa fa-tags"></i>
-        <span class="tags-meta">
-            
-            null
-            
-        </span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-        <i class="fa fa-clock-o"></i>
-        <span class="date-meta ">08/17</span>
-    </span>
-    
-    
-    
-</div>
+        <div id="post-body">
+            <h1 id="现存疑问"><a href="#现存疑问" class="headerlink" title="现存疑问"></a>现存疑问</h1><ol>
+<li>WNOWAIT和O_NONBLOCK 的关系?</li>
+<li>当非阻塞send时, 返回值与什么有关? 本地socket发送缓冲区空余还是对端空余?</li>
+<li>对端接收缓冲区满了会发生什么?</li>
+<li>暂且认为send返回值是拷贝到缓冲区中的字节数, 如果这些数据没有成功发送呢?</li>
+<li>send函数发送的字节数 超出了recv端的接受能力 会发生什么?</li>
+</ol>
+<p>最近这两天在实战一个http服务器的编写.</p>
+<p>遇到了一个问题: send的返回值小于传入的len, 因为我仅调用一次send函数 导致页面一直显示加载</p>
+<p>然后找了下为什么? 什么时候? send返回值会小于len;</p>
+<h1 id="send"><a href="#send" class="headerlink" title="send"></a>send</h1><p><a href="https://stackoverflow.com/questions/14700906/socket-programming-send-return-value" target="_blank" rel="noopener">https://stackoverflow.com/questions/14700906/socket-programming-send-return-value</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">In practice, send() in blocking mode sends all the data, regardless of what the documentation says, unless there was an error, in which case nothing is sent.</span><br><span class="line">实战中, send() 处于阻塞状态会发送所有的数据, 除非发生错误 但这会导致数据没有发送</span><br><span class="line"></span><br><span class="line">In non-blocking mode, it sends whatever will fit into the socket send buffer and returns that length if &gt; 0. If the socket send buffer is full, it returns -1 with errno &#x3D; EWOULDBLOCK&#x2F;EAGAIN.</span><br><span class="line">在非阻塞模式下, 只要能放入socket发送缓冲区 就返回放入的长度 如果缓冲区满了就返回-1 设置EWOULDBLOCK&#x2F;EAGAIN</span><br></pre></td></tr></table></figure>
 
-      </li>
+<p><a href="https://mp.weixin.qq.com/s?__biz=MzU2MTkwMTE4Nw==&mid=2247486643&idx=1&sn=9db678398f390759ff81b354ef056000&chksm=fc70f75fcb077e49363b087ba45609fdfbcba286338e70c2d4c7092e83e2d3feac56455e02a2&scene=27#wechat_redirect" target="_blank" rel="noopener">非阻塞模式下 send 和 recv 函数的返回值</a></p>
+<p>这篇博客里也说明了这个问题. 下面是原博客的代码稍作修改</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//推荐的方式二：在一个循环里面根据偏移量发送数据</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">SendData</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* buf , <span class="keyword">int</span> buf_length)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//已发送的字节数目</span></span><br><span class="line">    <span class="keyword">int</span> sent_bytes = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> ret = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        ret = send(fd, buf + sent_bytes, buf_length - sent_bytes, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">if</span> (ret == <span class="number">-1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (errno == EAGIN)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">//严谨的做法，这里如果发不出去，应该缓存尚未发出去的数据，后面介绍</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;             </span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (errno == EINTR)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (ret == <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//认为对端关闭了连接</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        sent_bytes += ret;</span><br><span class="line">        <span class="keyword">if</span> (sent_bytes == buf_length)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//稍稍降低 CPU 的使用率</span></span><br><span class="line">        usleep(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        </div>
+        <div id="post-footer">
+            <div class="avatar" style="padding-bottom: 0.2rem"
+                    >
+                <img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/%E5%8D%9A%E5%AE%A2%E5%B0%81%E9%9D%A2/2676.png" alt="avatar"/>
+                
+                
+            </div>
+            <ul class="author-profile-section">
+                <li>
+                  
+                  Author:
+                  
+                    
+                    <a href="/about.html">Lsmg</a>
+                </li>
+                
+                <li>Published Date: <span>2020-03-20  11:14:20</span></li>
+                
+                <li>Updated Date: <span>2020-03-20  12:20:31</span></li>
+                
+                <li class="post-category">
+                    Categories:
+                    
+                    <a href="/categories/CPP/">CPP</a>
+                    
+                    <a href="/categories/CPP/Socket%E7%90%86%E8%AE%BA/">Socket理论</a>
+                    
+                </li>
+                <li class="post-tags">
+                    Tags:
+                    
+                </li>
+                
+                <li> License: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+知识共享署名-非商业性使用-禁止演绎 3.0 未本地化版本许可协议（CC BY-NC-ND 3.0）
+</a></li>
+                
+            </ul>
+        </div>
+    </article>
+    <div class="article-nav">
         
-      <li class="post-items" _href="/2019/08/CPP-%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%9580-CPPPrimer/">
-        <p class="info">2019</p>
-        <h2 class="post-item-title">C++Primer学习</h2>
-          <div class="article-meta">
-    
-    
-    <span class="categories-meta fa-wrap">
-            <i class="fa fa-folder-open-o"></i>
-        <span>服务器编程-书籍记录</span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-         <i class="fa fa-tags"></i>
-        <span class="tags-meta">
-            
-            null
-            
-        </span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-        <i class="fa fa-clock-o"></i>
-        <span class="date-meta ">08/16</span>
-    </span>
-    
-    
-    
-</div>
-
-      </li>
         
-    </ul>
-  </div>
-</div>
+        <a href="/2020/03/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-Linux%E4%BD%BF%E7%94%A8/" class="next-post fa">Linux的使用</a>
+        
+    </div>
+    
+    <div id="comments">
+        
 
+<script>
+  gitalk.render("comments");
+</script>
+
+
+
+    </div>
+    
+</div>
 
 
     </div>
@@ -270,6 +281,8 @@
     <li class="totop-btn fa fa-angle-up"></li>
     <li class="exchange-btn fa fa-exchange"></li>
   
+    <li class="toc-btn fa fa-list-ul"></li>
+    
     
 
     
@@ -289,6 +302,8 @@
         </div>
     </div>
 </div>
+
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#现存疑问"><span class="toc-number">1.</span> <span class="toc-text">现存疑问</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#send"><span class="toc-number">2.</span> <span class="toc-text">send</span></a></li></ol>
 
 
 
