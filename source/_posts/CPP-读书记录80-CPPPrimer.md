@@ -319,7 +319,6 @@ p.reset(q, d)
 ```
 
 
-
 使用unique_ptr的时候要注意
 1. 不要再函数调用传参的括号中 使用临时变量 这样一旦函数调用完成就会被销毁
 ```c++
@@ -334,7 +333,7 @@ process(x) ; // 错误 不能将 int* 转换为 一个 shared_ptr<int>
 process(shared_ptr<int> (x)); // 合法的，但内存会被释放! 因为临时对象会被销毁
 int j =*x //未定义的 是一个空悬指针!
 ```
-2. 如果使用unique_ptr不要使用get函数初始化另一个智能指针或为其赋值
+2. 如果使用智能指针不要使用get函数初始化另一个智能指针或为其赋值
 因为一旦新生成的智能指针离开作用域或者被释放, 会影响到原来的智能指针
 ```c++
 std::shared_ptr<int> p = new int(8); // 不能将一个int* 赋值给shared_ptr<int>
@@ -361,6 +360,63 @@ std::unique_ptr<int> d2 (new int(8));
 d1.release(); // 释放原来所指向的对象
 d1.reset(d2.release()); // d2释放后由d1获取
 ```
+
+**智能指针陷阱**
+1. 不使用相同的内置指针值初始化(或reset)多个智能指针
+2. 不使用delete get返回的指针
+3. 不使用get初始化或者reset另一个智能指针
+4. 如果你使用get返回指针, 当最后一个对应的智能指针销毁 这个指针就变成了垂悬指针
+5. 使用智能指针管理非new分配的内存, 需要传递一个删除器.
+
+**weak_ptr**
+不控制所指向对象生存周期, 指向一个shared_ptr管理的对象.
+
+| 表示 | 含义 |
+| --- | --- |
+| weak_ptr/<T> w | 空格weak_ptr可以指向类型为T的对象 |
+| weak_ptr/<T> w(sp) | 与shared_ptr sp智能指针指向相同的对象, 但引用计数不增加 |
+| w = p | p可以是shared_ptr或者weak_ptr, 赋值后w与p共享对象 |
+| w.reset() | |
+| w.use_count() | 与w共享对象的shared_ptr的数量 |
+| w.expire() | return w.use_count() == 0; |
+| w.lock() | 如果expire为true返回一个空的 sp 否则返回指向w对象的sp |
+
+```c++
+class StrBlobPtr
+{
+public:
+	StrBlobPtr():curr(0) {}
+	StrBlobPtr(StrBlob &a, size_t sz = 0):
+		wptr(a.data), curr(sz) {}
+	std::sting& deref() const;
+	StrBlobPtr& incr(); // 前缀自增
+
+private:
+	std::shared_ptr<std::vector<std::string>>
+		check(std::size_t, const std::string&) const;
+	std::weak_ptr<std::vector<std::string>> wptr;
+	std::size_t curr;
+}
+
+std::shared_ptr<std::vector<std::string>>
+	check(std::size_t i, const std::string &msg) const
+{
+	auto ret = wptr.lock() // 判断vector是否还存在
+	if (!ret)
+	{
+		throw std::runtime_error("unbond StrBlobPtr");
+	}
+	if (i >= ret->size())
+	{
+		throw std::out_of_range(msg);
+	}
+	return ret;
+}
+```
+由于weak_ptr不参与对应的shared_ptr的引用计数, vector可能已经被释放了
+释放后 lock将返回一个空指针
+
+
 
 
 # 模板与泛型编程
