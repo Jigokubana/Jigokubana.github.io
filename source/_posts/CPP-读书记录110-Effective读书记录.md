@@ -62,7 +62,7 @@ const char* const p = greeting; // 都不可以变
 ## 条款04 确定对象使用前已经被初始化
 **总结**
 - 为内置型对象进行手工初始化.
-- 构造函数对号食用成员初值列, 不要在构造函数中赋值. 初值列次数应该与声明次序相同
+- 构造函数最好使用成员初值列, 不要在构造函数中赋值. 初值列次数应该与声明次序相同
 - 为了免除 跨编译单元的初始化次数问题, 用`local static`对象替换`non-local static`对象
 
 永远在使用对象前, 进行初始化.
@@ -127,9 +127,12 @@ non-local对象: 其他static对象
 class FileSystem
 {
 public:
-	std::size_t GetNum() const;
-}
-extern FIieSystem tfs;
+	size_t GetNum() const;
+};
+extern FIieSystem tfs; // 声明
+
+// filesystem.cpp
+FIieSystem tfs; //定义
 
 // directory.h
 class Directory
@@ -139,7 +142,7 @@ public:
 }
 Directory::Directory(params)
 {
-	std::size_t num = tfs.GetNum(); // 使用tfs对象
+	size_t num = tfs.GetNum(); // 使用tfs对象
 }
 
 // main.cpp
@@ -147,7 +150,7 @@ Directory temp_dir(params);
 ```
 只有当 tfs在temp_dir初始化之前被初始化 才能得到正确的结果. 否则会调用未初始化的对象
 
-但是这个次序无法保证
+但是这个次序无法保证, tfs和tempdir是不同的人在不同的时间于不同的源码文件建立起来的
 因为C++ 对这种情况没有明确定义
 
 如何解决这个问题呢??

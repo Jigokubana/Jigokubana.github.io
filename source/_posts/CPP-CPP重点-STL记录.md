@@ -1,5 +1,5 @@
 ---
-title: STL与实现记录
+title: STL记录
 date: 2020-03-01 10:26:55
 tags:
 categories:
@@ -34,9 +34,9 @@ img: https://lsmg-img.oss-cn-beijing.aliyuncs.com/STL%E8%AE%B0%E5%BD%95/%E5%B0%8
 
 | 容器适配器 | 提供顺序容器的不同接口 |
 | --- | --- |
-| stack | 适配一个容器提供栈 |
-| queue | 适配一个容器提供队列 |
-| priority_queue | 适配一个容器提供优先级队列 |
+| stack | 适配一个容器提供栈 vector deque list满足要求 默认是deque|
+| queue | 适配一个容器提供队列 deque list 默认是deque|
+| priority_queue | 适配一个容器提供优先级队列 vector deque 默认是 vector|
 
 # map
 ## lower_bound()和 upper_bound()
