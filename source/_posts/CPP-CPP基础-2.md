@@ -248,8 +248,8 @@ int main()
     return 0; 
 }
 ```
-![](https://lsmg-img.oss-cn-beijing.aliyuncs.com/C%2B%2B%E5%9F%BA%E7%A1%80%E5%A4%8D%E4%B9%A02/C%2B%2B%E5%86%85%E5%AD%98.png)
+![](https://lsmg-img.oss-cn-beijing.aliyuncs.com/CPPPrimer/C%2B%2B%E5%86%85%E5%AD%98.png)
 C++堆的内存需要手动new和delete, 如果一个对象new出来没有在能被释放的时候释放就会造成--**内存泄漏**(需要及时delete不需要的对象)
 一个指向动态内存的指针, 在动态内存被释放后, 指针依然指向原来的地址--**空悬指针**(释放内存后将相应的指针设置为nullptr)
 
-![](https://lsmg-img.oss-cn-beijing.aliyuncs.com/C%2B%2B%E5%9F%BA%E7%A1%80%E5%A4%8D%E4%B9%A02/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88.png)
+![](https://lsmg-img.oss-cn-beijing.aliyuncs.com/CPPPrimer/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88.png)

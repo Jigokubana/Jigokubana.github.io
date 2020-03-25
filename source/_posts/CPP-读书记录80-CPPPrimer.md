@@ -26,11 +26,11 @@ return 0;
 ```
 
 无符号的变量在 超出范围的时候对应变化
-![](https://lsmg-img.oss-cn-beijing.aliyuncs.com/C%2B%2B%E5%9F%BA%E7%A1%80%E5%A4%8D%E4%B9%A0/%E6%9C%89%E7%AC%A6%E5%8F%B7%E5%92%8C%E6%97%A0%E7%AC%A6%E5%8F%B7%E7%9A%84%E9%87%8D%E7%BD%AE%E7%82%B9.jpg)
+![](https://lsmg-img.oss-cn-beijing.aliyuncs.com/CPPPrimer/%E6%9C%89%E7%AC%A6%E5%8F%B7%E5%92%8C%E6%97%A0%E7%AC%A6%E5%8F%B7%E7%9A%84%E9%87%8D%E7%BD%AE%E7%82%B9.jpg)
 
 
 ## 转义字符表
-![](https://lsmg-img.oss-cn-beijing.aliyuncs.com/C%2B%2B%E5%9F%BA%E7%A1%80%E5%A4%8D%E4%B9%A0/c%2B%2B%E8%BD%AC%E4%B9%89.jpg)
+![](https://lsmg-img.oss-cn-beijing.aliyuncs.com/CPPPrimer/c%2B%2B%E8%BD%AC%E4%B9%89.jpg)
 
 **char 在默认情况下, 既不是有符号. 也不是无符号.**
 ```c++
@@ -127,7 +127,7 @@ throw exception_type("msg")
 但可以将未设置默认参数的函数设置默认参数
 
 # 动态内存-自由空间(堆)
-![](https://lsmg-img.oss-cn-beijing.aliyuncs.com/C%2B%2B%E5%9F%BA%E7%A1%80%E5%A4%8D%E4%B9%A02/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88.png)
+![](https://lsmg-img.oss-cn-beijing.aliyuncs.com/CPPPrimer/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88.png)
 
 ## 动态内存与智能指针
 | 共同操作 | 描述 |
