@@ -20,7 +20,7 @@
 <meta name="verify" content=all />
     <!--Title-->
 
-<title>游戏知识-服务器-服务器通信 | Lsmg的大学之路</title>
+<title>TCP状态机 | Lsmg的大学之路</title>
 
 <link rel="alternate" href="/atom.xml" title="Lsmg的大学之路" type="application/atom+xml">
 
@@ -140,9 +140,9 @@
     <article id="post">
         <div id="post-header">
 
-            <h1 id="游戏知识-服务器-服务器通信">
+            <h1 id="TCP状态机">
                 
-                游戏知识-服务器-服务器通信
+                TCP状态机
                 
             </h1>
             <div class="article-meta">
@@ -150,7 +150,7 @@
     
     <span class="categories-meta fa-wrap">
             <i class="fa fa-folder-open-o"></i>
-        <span>服务器</span>
+        <span>Socket理论</span>
     </span>
     
     
@@ -158,7 +158,7 @@
          <i class="fa fa-tags"></i>
         <span class="tags-meta">
             
-            腾讯游戏学院
+            null
             
         </span>
     </span>
@@ -166,7 +166,7 @@
     
     <span class="fa-wrap">
         <i class="fa fa-clock-o"></i>
-        <span class="date-meta ">2019/12/22</span>
+        <span class="date-meta ">2020/03/25</span>
     </span>
     
     
@@ -178,26 +178,27 @@
         </div>
         
         <div id="post-body">
-            <p>由于自己了解的实在是不足, 所以来腾讯游戏课堂来学习一些架构之类的东西 来完善自己的知识面<br><a href="https://gameinstitute.qq.com/course/detail/10096" target="_blank" rel="noopener">服务器通信</a></p>
-<a id="more"></a>
-<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>作业型-单纯多个client对一个server .. 比如我开始写过的聊天室程序</p>
-<h1 id="CS通信"><a href="#CS通信" class="headerlink" title="CS通信"></a>CS通信</h1><p>DNS协议-基于UDP协议</p>
-<p>TCP<br>面向连接的可靠的有时序性的-流式协议<br>窗口管理<br>流量控制<br>数据确认<br>UDP<br>无连接不保证可靠性的无法保证时序-报文协议</p>
-<p>QQ-CS<br>网络状况较好-UDP????-好吧还是处理了<br>网络状况差-TCP<br>大文件-TCP-TCP适合大文件交互, 因为他保持连接流式协议~</p>
-<p>微信-CS<br>前台运行-TCP长连接<br>后台运行-TCP短连接<br>查看文章-HTTP(TCP短连接)</p>
-<p>QQ-早期产品, 花最少的前~榨干性能<br>微信-腾讯后期产品</p>
-<hr>
-<p>字符串<br>自定义<br>Protobuf</p>
-<p>序列化反序列化.</p>
-<p>UDP协议-不要让单个包的数据量超过1K, 否则会由于分片等 导致一个大包一旦一个分片失败就都失败</p>
-<p>存在的问题</p>
+            <ul>
+<li>待补充 双向管道的建立和断开细节</li>
+<li>异常三次握手</li>
+<li>异常四次挥手</li>
+</ul>
+<p><a href="https://blog.csdn.net/q1007729991/article/details/69675752" target="_blank" rel="noopener">资料参考TCP 协议状态机</a></p>
+<p><a href="https://blog.csdn.net/randyjiawenjie/article/details/6397477" target="_blank" rel="noopener">TCP有限状态机分析</a></p>
+<p>Tcp状态图, 虚线代表客户端 实线代表服务器<br><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/CPP/Socket%E7%90%86%E8%AE%BA/TCP%E7%8A%B6%E6%80%81%E6%9C%BA.png" alt=""></p>
+<p>正常的连接建立还是比较容易理解的</p>
+<p>说一下从<code>CLOSE_WAIT</code>到<code>LAST_ACK</code><br>当被动关闭方<code>B</code>接收到<code>FIN</code>后知道对方<code>A</code>要关闭连接, <code>B</code>回复一个<code>ACK</code>给<code>A</code></p>
 <ol>
-<li>客户端和服务端数据一直对不上<br>可能是字节序的问题 - 字节序转换(网络字节数传送)</li>
-<li>服务器发送的数据延迟-小包<br>NAGLE算法-小包并不是立即发送-等存多了在一起发送-可以禁用掉~~</li>
-<li>数据较大或者网络波动<br>发送缓冲区慢了.. 适当加大发送缓冲区</li>
+<li>如果此时<code>B</code>没有额外要发送的数据就给<code>A</code>, 就发送<code>FIN</code>告知<code>A</code>自己也要关闭了, 然后<code>B</code>进入<code>LAST_ACK</code></li>
+<li>如果此时<code>B</code>有额外信息要发送等发送完毕后. 这时<code>B</code>发送一个<code>FIN</code>告知<code>A</code>然后B进入<code>LAST_ACK</code></li>
 </ol>
-<p>非阻塞IO<br>O_NONBLOCK<br>多路复用<br>select<br>poll<br>epoll</p>
-<h1 id="SS通信"><a href="#SS通信" class="headerlink" title="SS通信"></a>SS通信</h1><p>TCP-最常用<br>UDP-非关键数据-日志服务-内网通信网络状况好可以超过MTU<br>非SOCKET通信-进程间通信?-管道-信号-共享内存-信息队列-文件..</p>
+<p>再说一下从<code>FIN_WAIT_1</code>到<code>TIME_WAIT</code></p>
+<ol>
+<li>直接从<code>FIN_WAIT_1</code>到<code>TIME_WAIT</code>, 这个对应上面的第一种情况, 由于<code>B</code>没有额外信息发送直接发送了<code>FIN和ACK</code>, 这时<code>A</code>再发送一个<code>ACK</code>, 进入<code>TIME_WAIT</code></li>
+<li>经过中转状态<code>FIN_WAIT2</code>对应上面第二种情况, 由于<code>B</code>有额外信息发送, 只发送了<code>ACK</code>, 这时<code>A</code>还可以接受数据, 直到<code>B</code>发来<code>FIN</code>然后<code>A</code>发送<code>ACK</code>进入<code>TIME_WAIT</code></li>
+</ol>
+<p>再说一下<code>TIME_WAIT</code>状态<br>主动关闭方<code>A</code>最后发送了<code>ACK</code>确认被动关闭方<code>B</code>的<code>FIN</code>.<br>但是如果这个<code>ACK</code>由于各种原因<code>B</code>没有收到, 所以<code>B</code>会再次发送<code>FIN</code>. 然后<code>A</code>会在<code>2MSL</code>时间内接受到这个<code>FYN</code>, 之后<code>A</code>再次回复一个<code>ACk</code>.计时器重置<code>2MSL</code>时间, 重复上面过程. 直到<code>2MSL</code>时间内<code>A</code>没有收到<code>FIN</code>,说明<code>B</code>已经收到了.则结束连接</p>
+<p><code>2MSL</code>指的是两个<code>MSL</code>时间 单个指的是一个片段在网络中的最大存活时间,<br>A发送的<code>ACK</code>可能消耗一个, B重新发送的<code>FIN</code>可能也要消耗一个.最大两个</p>
 
         </div>
         <div id="post-footer">
@@ -216,22 +217,20 @@
                     <a href="/about.html">Lsmg</a>
                 </li>
                 
-                <li>Published Date: <span>2019-12-22  20:50:02</span></li>
+                <li>Published Date: <span>2020-03-25  12:55:20</span></li>
                 
-                <li>Updated Date: <span>2020-03-05  22:04:59</span></li>
+                <li>Updated Date: <span>2020-03-25  16:47:53</span></li>
                 
                 <li class="post-category">
                     Categories:
                     
-                    <a href="/categories/%E6%B8%B8%E6%88%8F%E7%9F%A5%E8%AF%86/">游戏知识</a>
+                    <a href="/categories/CPP/">CPP</a>
                     
-                    <a href="/categories/%E6%B8%B8%E6%88%8F%E7%9F%A5%E8%AF%86/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
+                    <a href="/categories/CPP/Socket%E7%90%86%E8%AE%BA/">Socket理论</a>
                     
                 </li>
                 <li class="post-tags">
                     Tags:
-                    
-                    <a href="/tags/%E8%85%BE%E8%AE%AF%E6%B8%B8%E6%88%8F%E5%AD%A6%E9%99%A2/">腾讯游戏学院</a>
                     
                 </li>
                 
@@ -244,10 +243,10 @@
     </article>
     <div class="article-nav">
         
-        <a href="/2020/01/CPP-CPP%E9%87%8D%E7%82%B9-%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%83/" class="pre-post fa fa-caret-left">编程规范</a>
+        <a href="/2020/03/CPP-Socket%E7%90%86%E8%AE%BA-EPOLL%E6%9C%AC%E8%B4%A8/" class="pre-post fa fa-caret-left">EPOLL本质</a>
         
         
-        <a href="/2019/12/%E6%B8%B8%E6%88%8F%E7%9F%A5%E8%AF%86-%E8%85%BE%E8%AE%AF%E6%B8%B8%E6%88%8F%E5%AD%A6%E9%99%A2-%E5%A6%82%E4%BD%95%E8%BF%9B%E5%85%A5%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E8%A1%8C%E4%B8%9A/" class="next-post fa">游戏知识-腾讯游戏学院-如何进入游戏开发行业</a>
+        <a href="/2020/03/CPP-Socket%E7%90%86%E8%AE%BA-Send%E8%BF%94%E5%9B%9E%E5%80%BC%E6%8E%A2%E6%9E%90/" class="next-post fa">Send返回值引出的(非)阻塞IO</a>
         
     </div>
     
@@ -312,7 +311,7 @@
     </div>
 </div>
 
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#概述"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CS通信"><span class="toc-number">2.</span> <span class="toc-text">CS通信</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SS通信"><span class="toc-number">3.</span> <span class="toc-text">SS通信</span></a></li></ol>
+    
 
 
 

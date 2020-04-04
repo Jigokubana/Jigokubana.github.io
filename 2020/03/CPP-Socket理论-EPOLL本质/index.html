@@ -20,7 +20,7 @@
 <meta name="verify" content=all />
     <!--Title-->
 
-<title>游戏知识-服务器-服务器通信 | Lsmg的大学之路</title>
+<title>EPOLL本质 | Lsmg的大学之路</title>
 
 <link rel="alternate" href="/atom.xml" title="Lsmg的大学之路" type="application/atom+xml">
 
@@ -140,9 +140,9 @@
     <article id="post">
         <div id="post-header">
 
-            <h1 id="游戏知识-服务器-服务器通信">
+            <h1 id="EPOLL本质">
                 
-                游戏知识-服务器-服务器通信
+                EPOLL本质
                 
             </h1>
             <div class="article-meta">
@@ -150,7 +150,7 @@
     
     <span class="categories-meta fa-wrap">
             <i class="fa fa-folder-open-o"></i>
-        <span>服务器</span>
+        <span>Socket理论</span>
     </span>
     
     
@@ -158,7 +158,7 @@
          <i class="fa fa-tags"></i>
         <span class="tags-meta">
             
-            腾讯游戏学院
+            null
             
         </span>
     </span>
@@ -166,7 +166,7 @@
     
     <span class="fa-wrap">
         <i class="fa fa-clock-o"></i>
-        <span class="date-meta ">2019/12/22</span>
+        <span class="date-meta ">2020/03/25</span>
     </span>
     
     
@@ -178,26 +178,22 @@
         </div>
         
         <div id="post-body">
-            <p>由于自己了解的实在是不足, 所以来腾讯游戏课堂来学习一些架构之类的东西 来完善自己的知识面<br><a href="https://gameinstitute.qq.com/course/detail/10096" target="_blank" rel="noopener">服务器通信</a></p>
-<a id="more"></a>
-<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>作业型-单纯多个client对一个server .. 比如我开始写过的聊天室程序</p>
-<h1 id="CS通信"><a href="#CS通信" class="headerlink" title="CS通信"></a>CS通信</h1><p>DNS协议-基于UDP协议</p>
-<p>TCP<br>面向连接的可靠的有时序性的-流式协议<br>窗口管理<br>流量控制<br>数据确认<br>UDP<br>无连接不保证可靠性的无法保证时序-报文协议</p>
-<p>QQ-CS<br>网络状况较好-UDP????-好吧还是处理了<br>网络状况差-TCP<br>大文件-TCP-TCP适合大文件交互, 因为他保持连接流式协议~</p>
-<p>微信-CS<br>前台运行-TCP长连接<br>后台运行-TCP短连接<br>查看文章-HTTP(TCP短连接)</p>
-<p>QQ-早期产品, 花最少的前~榨干性能<br>微信-腾讯后期产品</p>
-<hr>
-<p>字符串<br>自定义<br>Protobuf</p>
-<p>序列化反序列化.</p>
-<p>UDP协议-不要让单个包的数据量超过1K, 否则会由于分片等 导致一个大包一旦一个分片失败就都失败</p>
-<p>存在的问题</p>
-<ol>
-<li>客户端和服务端数据一直对不上<br>可能是字节序的问题 - 字节序转换(网络字节数传送)</li>
-<li>服务器发送的数据延迟-小包<br>NAGLE算法-小包并不是立即发送-等存多了在一起发送-可以禁用掉~~</li>
-<li>数据较大或者网络波动<br>发送缓冲区慢了.. 适当加大发送缓冲区</li>
-</ol>
-<p>非阻塞IO<br>O_NONBLOCK<br>多路复用<br>select<br>poll<br>epoll</p>
-<h1 id="SS通信"><a href="#SS通信" class="headerlink" title="SS通信"></a>SS通信</h1><p>TCP-最常用<br>UDP-非关键数据-日志服务-内网通信网络状况好可以超过MTU<br>非SOCKET通信-进程间通信?-管道-信号-共享内存-信息队列-文件..</p>
+            <p>EPOLL本质是什么?  <del>本质当然是复读机</del></p>
+<p>参考和图片来源<br><a href="https://zhuanlan.zhihu.com/p/64138532" target="_blank" rel="noopener">如果这篇文章说不清epoll的本质，那就过来掐死我吧！</a></p>
+<p>一个socket对应一个端口号, 网络数据包中包含了端口, 内核可以通过端口号找到对应的socket</p>
+<p><strong>select的不足</strong><br>select需要遍历两次socket列表, 第一次遍历用于将进程加入到所有socket的等待队列<br>第二次遍历是每次唤醒都需要将进程从每个socket等待队列移除<br>由于遍历开销大, 所以才规定了select最大的监视数量</p>
+<p><strong>功能分离</strong><br><img src="https://pic2.zhimg.com/80/v2-5ce040484bbe61df5b484730c4cf56cd_720w.jpg" alt=""><br>select将 <code>维护等待队列</code> 和 <code>阻塞进程</code>两个步骤合二为一, 每次select都需要这两部操作, 然而socket并不需要每次都修改<br>epoll将操作分开, 使用epoll_ctl维护等待队列, 使用epoll_wait阻塞进程</p>
+<p><strong>就绪队列</strong><br>select不知道哪些socket接收到了数据, 只能一个个遍历.<br>如果内核维护一个”就绪队列” 引用存储事件就绪的socket, 进程唤醒后获取”就绪队列”就能够知道<br>哪些socket接收到数据</p>
+<p><strong>epoll_create创建了什么?</strong><br>创建了一次eventpoll对象, epollfd正是他所代表的对象. 由于epollfd也是文件系统一员也存在等待队列</p>
+<p>select将进程加入到每个socket的等待队列, 而epoll将进程加入到了eventpoll的等待队列 只加入了一次.</p>
+<p><strong>epoll_ctl修改了什么</strong><br>epoll_ctl将 eventpoll添加到sockfd的等待队列中</p>
+<p>当socket接收到数据后, 中断程序会操作eventpoll对象, 而不是直接操作进程(socket的等待队列中就是eventpoll)</p>
+<p><strong>接收数据</strong><br>socket接收到数据后, 中断程序会给epollpoll的<code>就绪列表</code>添加socket的引用.</p>
+<p>这样socket就不会直接影响进程, 而是通过改变eventpoll的<code>就绪列表</code>来改变进程状态</p>
+<p><strong>epoll_wait</strong><br>当程序执行到epoll_wait后如果<code>就绪队列</code>已经有socket引用就会返回, 如果为空就阻塞进程</p>
+<p><strong>阻塞和唤醒进程</strong><br>进程被添加到了eventpoll的等待队列中, socket接收到数据后, 中断程序一方面修改<code>就绪队列</code>一方面唤醒<br>eventpoll等待队列的进程, 由于<code>就绪队列</code> 进程便知道哪些socket发生变化</p>
+<p><strong>实现细节</strong><br>eventpoll的数据结构是双向链表, 能够快速的插入和删除的数据结构</p>
+<p>就绪队列的数据结构是红黑树, 方便添加删除检索避免重复添加.</p>
 
         </div>
         <div id="post-footer">
@@ -216,22 +212,20 @@
                     <a href="/about.html">Lsmg</a>
                 </li>
                 
-                <li>Published Date: <span>2019-12-22  20:50:02</span></li>
+                <li>Published Date: <span>2020-03-25  17:35:20</span></li>
                 
-                <li>Updated Date: <span>2020-03-05  22:04:59</span></li>
+                <li>Updated Date: <span>2020-03-25  18:24:04</span></li>
                 
                 <li class="post-category">
                     Categories:
                     
-                    <a href="/categories/%E6%B8%B8%E6%88%8F%E7%9F%A5%E8%AF%86/">游戏知识</a>
+                    <a href="/categories/CPP/">CPP</a>
                     
-                    <a href="/categories/%E6%B8%B8%E6%88%8F%E7%9F%A5%E8%AF%86/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
+                    <a href="/categories/CPP/Socket%E7%90%86%E8%AE%BA/">Socket理论</a>
                     
                 </li>
                 <li class="post-tags">
                     Tags:
-                    
-                    <a href="/tags/%E8%85%BE%E8%AE%AF%E6%B8%B8%E6%88%8F%E5%AD%A6%E9%99%A2/">腾讯游戏学院</a>
                     
                 </li>
                 
@@ -244,10 +238,10 @@
     </article>
     <div class="article-nav">
         
-        <a href="/2020/01/CPP-CPP%E9%87%8D%E7%82%B9-%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%83/" class="pre-post fa fa-caret-left">编程规范</a>
+        <a href="/2020/03/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-shell%E8%84%9A%E6%9C%AC%E7%BC%96%E5%86%99/" class="pre-post fa fa-caret-left">Shell脚本编写</a>
         
         
-        <a href="/2019/12/%E6%B8%B8%E6%88%8F%E7%9F%A5%E8%AF%86-%E8%85%BE%E8%AE%AF%E6%B8%B8%E6%88%8F%E5%AD%A6%E9%99%A2-%E5%A6%82%E4%BD%95%E8%BF%9B%E5%85%A5%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E8%A1%8C%E4%B8%9A/" class="next-post fa">游戏知识-腾讯游戏学院-如何进入游戏开发行业</a>
+        <a href="/2020/03/CPP-Socket%E7%90%86%E8%AE%BA-TCP%E7%8A%B6%E6%80%81%E6%9C%BA/" class="next-post fa">TCP状态机</a>
         
     </div>
     
@@ -312,7 +306,7 @@
     </div>
 </div>
 
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#概述"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CS通信"><span class="toc-number">2.</span> <span class="toc-text">CS通信</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SS通信"><span class="toc-number">3.</span> <span class="toc-text">SS通信</span></a></li></ol>
+    
 
 
 

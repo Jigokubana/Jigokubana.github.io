@@ -1,0 +1,503 @@
+<!doctype html>
+<html>
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable"  content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no">
+    
+    
+    <!--Simple SEO-->
+
+
+<meta name="robots" content=all />
+<meta name="google" content=all />
+<meta name="googlebot" content=all />
+<meta name="verify" content=all />
+    <!--Title-->
+
+<title>Linux多线程服务器端编程 | Lsmg的大学之路</title>
+
+<link rel="alternate" href="/atom.xml" title="Lsmg的大学之路" type="application/atom+xml">
+
+
+<link rel="icon" href="/favicon.ico">
+
+    
+
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/pages/post.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/thirdParty/highlight/github.css">
+<link rel="stylesheet" href="/.css">
+
+
+    <!--script-->
+
+
+
+
+
+    
+    
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body id="normal">
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<style>
+    header{ top: 71px; position: absolute!important;}
+    #container{padding-top: 151px!important;}
+</style>
+<div style="position:fixed;z-index:9999;left:0;top:0;width:100%;height:70px;background-color:#e0e0e0;color:#396CA5;border-bottom:1px solid #cecece;text-align:center;line-height:70px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<div id="wrap">
+    <header  style="position: absolute;" >
+    <div id="site-meta">
+        <a href="/" id="logo">
+            <h1 class="title">Lsmg的大学之路</h1>
+        </a>
+        
+    </div>
+    <ul id="nav">
+        
+            <li><a href="/"><i class="fa fa-home"></i>Home</a></li>
+        
+            <li><a href="/atom.xml"><i class="fa fa-rss"></i>RSS</a></li>
+        
+        <li id="search"><a href="javascript:void(0)"><i class="fa fa-search"></i>Search</a></li>
+    </ul>
+</header>
+
+    <div id="container">
+        
+<ul id="sidebar">
+    
+    
+<li class="widget notification">
+    <i class="fa fa-bell-o"></i>
+    <div>
+        
+<p>TCP LINK START</p>
+    </div>
+</li>
+
+    
+    
+<li class="widget widget-normal category">
+    <h3 class="fa fa-th widget-title">Categories</h3>
+    <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/3DMAX/"><i class="fa" aria-hidden="true">3DMAX</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link current" href="/categories/CPP/"><i class="fa" aria-hidden="true">CPP</i></a><span class="category-list-count">24</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/CPP/CPP%E5%9F%BA%E7%A1%80/"><i class="fa" aria-hidden="true">CPP基础</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CPP/CPP%E8%B8%A9%E5%9D%91/"><i class="fa" aria-hidden="true">CPP踩坑</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CPP/CPP%E9%87%8D%E7%82%B9/"><i class="fa" aria-hidden="true">CPP重点</i></a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CPP/Socket%E7%90%86%E8%AE%BA/"><i class="fa" aria-hidden="true">Socket理论</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link current" href="/categories/CPP/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B-%E4%B9%A6%E7%B1%8D%E8%AE%B0%E5%BD%95/"><i class="fa" aria-hidden="true">服务器编程-书籍记录</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CPP/%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/"><i class="fa" aria-hidden="true">源码学习</i></a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/UE4/"><i class="fa" aria-hidden="true">UE4</i></a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/UE4/%E7%BD%91%E7%BB%9C/"><i class="fa" aria-hidden="true">网络</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"><i class="fa" aria-hidden="true">学习记录</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BF%85%E5%A4%87%E6%8A%80%E8%83%BD/"><i class="fa" aria-hidden="true">必备技能</i></a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BF%85%E5%A4%87%E6%8A%80%E8%83%BD/Git%E6%93%8D%E4%BD%9C/"><i class="fa" aria-hidden="true">Git操作</i></a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"><i class="fa" aria-hidden="true">操作系统</i></a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"><i class="fa" aria-hidden="true">数据库</i></a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/MongoDB/"><i class="fa" aria-hidden="true">MongoDB</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/Mysql/"><i class="fa" aria-hidden="true">Mysql</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F%E7%9F%A5%E8%AF%86/"><i class="fa" aria-hidden="true">游戏知识</i></a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F%E7%9F%A5%E8%AF%86/%E6%9C%8D%E5%8A%A1%E5%99%A8/"><i class="fa" aria-hidden="true">服务器</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F%E7%9F%A5%E8%AF%86/%E8%85%BE%E8%AE%AF%E6%B8%B8%E6%88%8F%E5%AD%A6%E9%99%A2/"><i class="fa" aria-hidden="true">腾讯游戏学院</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/"><i class="fa" aria-hidden="true">算法</i></a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/"><i class="fa" aria-hidden="true">算法刷题记录</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E7%90%86%E8%AE%BA/"><i class="fa" aria-hidden="true">算法理论</i></a><span class="category-list-count">1</span></li></ul></li></ul>
+</li>
+
+
+    
+    
+<li class="widget widget-normal archive">
+  <h3 class="fa fa-archive widget-title">Archives</h3>
+    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/"><i class="fa" aria-hidden="true">三月 2020</i></a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/"><i class="fa" aria-hidden="true">二月 2020</i></a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/"><i class="fa" aria-hidden="true">一月 2020</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/"><i class="fa" aria-hidden="true">十二月 2019</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/"><i class="fa" aria-hidden="true">十一月 2019</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/"><i class="fa" aria-hidden="true">十月 2019</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/"><i class="fa" aria-hidden="true">八月 2019</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/"><i class="fa" aria-hidden="true">七月 2019</i></a><span class="archive-list-count">1</span></li></ul>
+</li>
+
+
+    
+    
+    
+    
+<li class="widget widget-normal tags">
+  <h3 class="fa fa-tags widget-title">Tag Cloud</h3>
+  <div class="tagcloud-content">
+    
+      <a href="/tags/3DMAX/" style="font-size: 0.14rem; color: #69c">3DMAX</a> <a href="/tags/CPP%E8%B8%A9%E5%9D%91%E8%AE%B0/" style="font-size: 0.17rem; color: #386da4">CPP踩坑记</a> <a href="/tags/CPP/" style="font-size: 0.17rem; color: #386da4">CPP</a> <a href="/tags/Git%E6%93%8D%E4%BD%9C/" style="font-size: 0.2rem; color: #0a407c">Git操作</a> <a href="/tags/csapp/" style="font-size: 0.14rem; color: #69c">csapp</a> <a href="/tags/GDB%E8%B0%83%E8%AF%95/" style="font-size: 0.14rem; color: #69c">GDB调试</a> <a href="/tags/Linux/" style="font-size: 0.14rem; color: #69c">Linux</a> <a href="/tags/Mysql/" style="font-size: 0.14rem; color: #69c">Mysql</a> <a href="/tags/%E8%85%BE%E8%AE%AF%E6%B8%B8%E6%88%8F%E5%AD%A6%E9%99%A2/" style="font-size: 0.2rem; color: #0a407c">腾讯游戏学院</a> <a href="/tags/Shell/" style="font-size: 0.14rem; color: #69c">Shell</a> <a href="/tags/%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/" style="font-size: 0.14rem; color: #69c">权限管理</a> <a href="/tags/MongoDB/" style="font-size: 0.14rem; color: #69c">MongoDB</a>
+  </div>
+</li>
+
+
+    
+    
+<li class="widget widget-normal friends-link">
+    <h3 class="fa fa-globe widget-title">Friends</h3><br/>
+
+    
+        <a href="https://geekaholiclin.github.io" class="fa" target="_blank">主题作者</a>
+
+    
+
+</li>
+
+    
+</ul>
+
+
+        <div id="main">
+    <article id="post">
+        <div id="post-header">
+
+            <h1 id="Linux多线程服务器端编程">
+                
+                Linux多线程服务器端编程
+                
+            </h1>
+            <div class="article-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+            <i class="fa fa-folder-open-o"></i>
+        <span>服务器编程-书籍记录</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+         <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            null
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta ">2020/03/31</span>
+    </span>
+    
+    
+    
+</div>
+
+            
+            
+        </div>
+        
+        <div id="post-body">
+            <p>Linux高性能服务器编程基本看玩了, 现在需要进行实战练习, 然而从单纯的只会api到做出项目, 之间的距离<br>不是一般的小, 最终我选择了这本书…..</p>
+<p>相关自己写的代码 大部分放在github 少部分会写在博客中</p>
+<h1 id="第一部分-C-多线程系统编程"><a href="#第一部分-C-多线程系统编程" class="headerlink" title="第一部分 C++多线程系统编程"></a>第一部分 C++多线程系统编程</h1><h2 id="第一章-线程安全的对象生命期管理"><a href="#第一章-线程安全的对象生命期管理" class="headerlink" title="第一章 线程安全的对象生命期管理"></a>第一章 线程安全的对象生命期管理</h2><p>一个线程安全的class需要满足的条件</p>
+<ul>
+<li>多个线程同时访问, 其表现出正确的行为</li>
+<li>无论操作系统如何调度这些线程, 无论这些线程的执行顺序如何交织</li>
+<li>调用端代码无需额外的同步或其他协调操作</li>
+</ul>
+<p>对象构造的安全, 在构造期间不要泄露this指针, 如果不按照以下规定可能会早对象构造完成前就被访问</p>
+<ul>
+<li>不要在构造函数中注册任何回调</li>
+<li>不要在构造函数中把this传给跨线程的对象</li>
+<li>即便在构造函数最后一行也不行, 因为对象可能是一个父类, 会先构造父类部分, 再构造子类部分</li>
+</ul>
+<p>二段式构造有时候可以解决上面的问题</p>
+<p>二段式构造-构造函数+initialize()<br>因为构造函数没有办法告知是否构造成功, 如果使用异常处理将会使代码复杂化.<br>比如在构造函数中使用new操作, 如果new操作失败就会出现不可预料的后果, 然后外部却无法知道<br>再比如将this传给其他跨线程对象, 如果构造结束前传入, 可能就会发生问题</p>
+<p><strong>shared_ptr的引出</strong><br>如果在一个对象中通过指针访问资源(另一个对象), 知道这个资源是否活着是很难的.<br>如果简单的判断指针是否为空, 可能会在线程B已经判断了指针不为空还没有执行后续操作时, 线程A就把<br>这个资源释放掉了</p>
+<p>当然可以通过资源管理对象 管理上面的资源, 但是也存在上面的问题.</p>
+<p>所以要想安全的销毁对象最好在其他线程都看不到的情况下偷偷进行. (垃圾回收原理, 所有人用不到的东西一定是垃圾)</p>
+<p>所以可以再资源管理对象中增加引用计数, 外部对象在释放资源管理对象中资源的时候, 只是将引用计数减一, 当引用计数为0的时候 在进行释放.</p>
+<p>C++可能出现的内存问题</p>
+<ul>
+<li>缓冲区溢出<br>使用<code>std::vector&lt;char&gt;/std::string</code>或者自己编写<code>Buffer Class来管理缓冲区</code>. 记住缓冲区长度, 通过成员函数而不是裸指针修改缓冲区</li>
+<li>空悬指针/野指针<br>使用shared_ptr/weak_ptr</li>
+<li>重复释放<br>使用scoped_ptr, 只在对象析构的时候释放一次</li>
+<li>内存泄漏<br>使用scoped_ptr, 对象析构时自动释放内存</li>
+<li>不配对的new[]/delete<br>把new[] 统统替换成std::vector, scoped_array</li>
+<li>内存碎片</li>
+</ul>
+<p>使用智能指针存在的一些问题</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Book</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Book(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span>&amp; name) :name_(name) &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">DoSomething</span><span class="params">()</span> </span>&#123;&#125;;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">string</span> name_;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BookShelf</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Register</span><span class="params">(<span class="built_in">std</span>::weak_ptr&lt;Book&gt; book)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        books_.push_back(book);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">CheckBook</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// 锁争用</span></span><br><span class="line">        <span class="comment">// 这里开头上锁 很可能影响其他的函数, 因为这里调用了用户提供的函数, 等待时间可能会非常长</span></span><br><span class="line">        <span class="comment">// 比如Register函数就没有办法在这段时间中插入新的book</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">// mutex lock 开头上锁 保护vector</span></span><br><span class="line">        Iterator iter = books_.<span class="built_in">begin</span>();</span><br><span class="line">        <span class="keyword">while</span> (iter != books_.<span class="built_in">end</span>())</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;Book&gt; <span class="title">obj</span><span class="params">(iter-&gt;lock())</span></span>;</span><br><span class="line">            <span class="keyword">if</span> (obj)</span><br><span class="line">            &#123;</span><br><span class="line">                obj-&gt;DoSomething();</span><br><span class="line">                iter++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> </span><br><span class="line">            &#123;</span><br><span class="line">                iter = books_.erase(iter);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="comment">// 这样就强制要求了Book必须以shared_ptr管理</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::weak_ptr&lt;Book&gt;&gt; books_;</span><br><span class="line">    <span class="keyword">typedef</span> <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::weak_ptr&lt;Book&gt;&gt;::iterator Iterator;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+<p>在对象的成员变量vector中保存shared_ptr 会导致管理的资源无法被释放, 因为引用计数最少为1.<br>如果保存weak_ptr可能会导致vector只增不减, 因为weak_ptr只管自己管理的资源, 不管自己.<br>通过定制shared_ptr的析构函数可以解决这个问题</p>
+<p>如果将某个类的this指针 bind到一个function对象, 可能在函数调用时传进入一个已经被释放的对象地址<br>建议使用shared_ptr解决上面的问题, 如果想要获得this指针对应的shared_ptr, 可以另类继承<br><code>enable_shared_from_this&lt;T&gt;</code>, 通过在bind函数绑定<code>shared_from_this()返回的shared_ptr</code>.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BookShelf</span>:</span><span class="built_in">std</span>::enable_shared_from_this&lt;BookShelf&gt;</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Book对象固然可以销毁, 但是出现了轻微的内存泄漏</span></span><br><span class="line">    <span class="comment">// book_只增不减!!!!. 虽然Book对象销毁了但是book_中依然保存着weak_ptr</span></span><br><span class="line">    <span class="comment">// 所以需要定制析构功能</span></span><br><span class="line">    <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;Book&gt; <span class="title">GetBook</span><span class="params">(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span> &amp;bookname)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;Book&gt; pbook;</span><br><span class="line">        <span class="comment">// 上锁</span></span><br><span class="line">        <span class="built_in">std</span>::weak_ptr&lt;Book&gt;&amp; wkbook = books_[bookname];</span><br><span class="line">        pbook = wkbook.lock();</span><br><span class="line">        <span class="keyword">if</span> (!pbook)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// pbook.reset(new Book(bookname));</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">// 依然有问题 绑定this指针可能到时候this指向的对象已经不复存在了</span></span><br><span class="line">            <span class="comment">// pbook.reset(new Book(bookname),</span></span><br><span class="line">            <span class="comment">//   std::bind(&amp;BookShelf::DeleteBook, this, std::placeholders::_1));</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">// 注意shared_from_this不能在构造函数中调用, 因为构造Bookshelf的时候 他还没有</span></span><br><span class="line">            <span class="comment">// 被交给shared_ptr管理</span></span><br><span class="line">            pbook.reset(<span class="keyword">new</span> Book(bookname),</span><br><span class="line">                <span class="built_in">std</span>::bind(&amp;BookShelf::DeleteBook, shared_from_this(), <span class="built_in">std</span>::placeholders::_1));</span><br><span class="line"></span><br><span class="line">            wkbook = pbook;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> pbook;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">map</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>, <span class="built_in">std</span>::weak_ptr&lt;Book&gt;&gt; books_;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">DeleteBook</span><span class="params">(Book* book)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (book)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 上锁</span></span><br><span class="line">            books_.erase(book-&gt;GetName());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">delete</span> book;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>然而上面的代码依然有问题<br>依然有个问题. BookShelf的生命期似乎被意外延长了, 他不会短于function对象<br>所以改用weak_pr不就可以了吗</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BookShelf</span>:</span><span class="built_in">std</span>::enable_shared_from_this&lt;BookShelf&gt;</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;Book&gt; <span class="title">GetBook</span><span class="params">(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span> &amp;bookname)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;Book&gt; pbook;</span><br><span class="line">        <span class="built_in">std</span>::weak_ptr&lt;Book&gt;&amp; wkbook = books_[bookname];</span><br><span class="line">        pbook = wkbook.lock();</span><br><span class="line">        <span class="keyword">if</span> (!pbook)</span><br><span class="line">        &#123;</span><br><span class="line">            pbook.reset(<span class="keyword">new</span> Book(bookname),</span><br><span class="line">                <span class="built_in">std</span>::bind(&amp;BookShelf::WkDeleteCallback,</span><br><span class="line">                    <span class="built_in">std</span>::weak_ptr&lt;BookShelf&gt;(shared_from_this()),</span><br><span class="line">                    <span class="built_in">std</span>::placeholders::_1));</span><br><span class="line"></span><br><span class="line">            wkbook = pbook;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> pbook;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">map</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>, <span class="built_in">std</span>::weak_ptr&lt;Book&gt;&gt; books_;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">WkDeleteCallback</span><span class="params">(<span class="keyword">const</span> <span class="built_in">std</span>::weak_ptr&lt;BookShelf&gt; wk_shelf, Book* book)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;BookShelf&gt; <span class="title">bookshelf</span><span class="params">(wk_shelf.lock())</span></span>;</span><br><span class="line">        <span class="keyword">if</span> (bookshelf)</span><br><span class="line">        &#123;</span><br><span class="line">            DeleteBook(book);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">delete</span> book;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">DeleteBook</span><span class="params">(Book* book)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (book)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 上锁</span></span><br><span class="line">            books_.erase(book-&gt;GetName());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>第一章已经读完了, 笔记只有上面那点. 我在学习Linux高性能服务器编程的大二上半年时间照着书边读边写笔记, 然后后来到了大二下我改成了读完一部分后脑中有什么记什么, 重要的地方如果记不清写不出来就去再看一下. 这样花费在记笔记的时间就少了很多, 写出来的笔记更加方便自己阅读.</p>
+<p>第一章部分内容能看懂 真是谢了之前看的那个项目代码, 那个项目中大量使用了智能指针, 我在读哪个项目的代码的时候查了不少的东西, 现在才能看懂第一章的部分东西.<br>然而大部分?的东西感觉还是似懂非懂, 想写又写不出什么来. 我对于智能指针的使用还是过于晚了把.</p>
+<p>第一章看来后续还要读一遍了</p>
+<h2 id="第二章-线程同步精要"><a href="#第二章-线程同步精要" class="headerlink" title="第二章 线程同步精要"></a>第二章 线程同步精要</h2><p><strong>线程同步的四项原则</strong><br>按重要性排列</p>
+<ol>
+<li>最低限度的共享对象, 减少需要同步的场合, <em>不用就不需要同步了nice!!!</em></li>
+<li>使用高级的并发编程构建, 线程池, 队列, 倒计时</li>
+<li>不得已使用底层同步原语时, 只使用非递归的互斥器和条件变量, 慎用读写锁, 不要用信号量</li>
+<li>除了使用atomic整数外, 不要自己编写lock-free代码, 也不要用内核级的同步原语. 不凭空猜测<br>哪种做法性能更好 比如自旋锁和互斥锁</li>
+</ol>
+<p><strong>互斥器 mutex</strong><br>使用mutex的原则</p>
+<ul>
+<li>使用RAII手法封装mutex的创建销毁加锁解锁这四个操作, 不会因异常而忘记解锁</li>
+<li>只使用非递归的mutex即不可重入的mutex<br>容易排查错误 使用递归mutex问题可能出现也可能不出现(可能由于逻辑问题对一个mutex加锁两次), 而使用非递归即可发现错误并改正</li>
+<li>不手工调用lock()和unlock() 函数, <em>一切交给栈上的Guard对象的构造和析构函数负责</em></li>
+<li>Gruad对象的生命期正好等于临界区</li>
+</ul>
+<p>次要原则</p>
+<ul>
+<li>不使用跨进程的mutex, 进程间通信只用TCP sockets</li>
+<li>加锁解锁在同一个线程 不会出现跨线程的操作 (RAII自动保证)</li>
+<li>不忘记解锁(包括各种提前返回和异常抛出) 不重复解锁 均由RAII自动保证</li>
+<li>必要时考虑用PTHREAD_MUTEX_ERRORCHECK来排错</li>
+</ul>
+<p><strong>封装MutexLock MutexLockGuard Condition</strong><br>在Linux高性能服务器编程中 我也看过了封装mutex, 不过当时并没有使用RAII<br>从这里开始算是对RAII(Resource Acquisition Is Initialization)有了了解</p>
+<p><a href="https://zh.cppreference.com/w/cpp/language/raii" target="_blank" rel="noopener">https://zh.cppreference.com/w/cpp/language/raii</a><br>拥有open()/close()、lock()/unlock()，或 init()/copyFrom()/destroy()成员函数的类是非RAII类的典型例子</p>
+<p>RAII将资源封装入一个类 如MutexLock类</p>
+<ul>
+<li>构造函数请求资源, 建立所有类不变式, 或在无法完成时抛出异常</li>
+<li>析构函数释放资源并绝不抛出异常<br>始终经由RALL类的实例使用满足要求的资源如MutexLockGuard类, 资源需满足</li>
+<li>自身拥有自动存储期或临时生存期</li>
+<li>或具有与自动或临时对象的生存期绑定的生存期</li>
+</ul>
+<p>自己的理解就是经由RAII类生存期管理资源, RAII生存期开始即使用资源,<br>当RAII类生存期结束, RAII类中保存着的资源也自动销毁<br>RAII可以有效防止上面那些成对函数调用前一个后 由于异常抛出提前返回等 后一个函数没有被调用 造成资源状态异常</p>
+<p><strong>线程安全的Singleton实现</strong><br>这个类在 flamingo 中也见到了, 这次是升级版<br>借由pthread_once保证线程安全</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> :</span> noncopyable</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">static</span> T&amp; <span class="title">GetInstance</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        pthread_once(&amp;ponce_, Init);</span><br><span class="line">        <span class="keyword">return</span> *value_;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    Singleton();</span><br><span class="line">    ~Singleton();</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Init</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        value_ = <span class="keyword">new</span> T();</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">pthread_once_t</span> ponce_;</span><br><span class="line">    <span class="keyword">static</span> T *value_;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">pthread_once_t</span> Singleton&lt;T&gt;::ponce_ = PTHREAD_ONCE_INIT;</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line">T* Singleton&lt;T&gt;::value_ = <span class="literal">nullptr</span>;</span><br></pre></td></tr></table></figure>
+
+<p><strong>copy-on-write?? copy-on-other-write!!</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="built_in">std</span>::pair&lt;<span class="built_in">string</span>, <span class="keyword">int</span>&gt; Entry;</span><br><span class="line"><span class="keyword">typedef</span> <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;Entry&gt; EntryList;</span><br><span class="line"><span class="keyword">typedef</span> <span class="built_in">std</span>::<span class="built_in">map</span>&lt;<span class="built_in">string</span>, EntryList&gt; Map;</span><br><span class="line"><span class="keyword">typedef</span> <span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;Map&gt; MapPtr;</span><br><span class="line"></span><br><span class="line">MapPtr data_;</span><br></pre></td></tr></table></figure>
+<p>好的现在数据存储在data_ 中 系统中存在多个读线程和一个写线程 针对data_<br>如果写线程不管不顾 有数据就往data_中写入 出现了读写进程同时访问data_就会出问题.<br>就书中描述来意思来说 不用大刀阔斧的使用读写锁, 能用mutex简单解决为什么要用读写锁.<br>那么如何保证读写安全呢?</p>
+<p>当读进程读的时候 拷贝一次data_ data_的引用计数至少为2.<br>就在这时写进程判断 data_引用计数不为1, 于是拷贝原来指向的map, 然后将data_ reset指向新的map<br>这时data_引用计数变为1 可以正常写了. 而读进程中保存的map拷贝是稍久的 引用计数降为1, 执行完后就自动析构了旧数据</p>
+<p>下面的代码 读部分只在GetData中加锁, 缩小了临界区</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">MapPtr <span class="title">GetData</span><span class="params">()</span> <span class="keyword">const</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// binding reference of type ‘MutexLock&amp;’ to ‘const MutexLock’ discards qualifiers</span></span><br><span class="line">    <span class="function">MutexLockGuard <span class="title">lock</span><span class="params">(mutex_)</span></span>;</span><br><span class="line">    <span class="keyword">return</span> data_;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">CustomerData::Query</span><span class="params">(<span class="keyword">const</span> <span class="built_in">string</span> &amp;custmoner, <span class="keyword">const</span> <span class="built_in">string</span> &amp;stock)</span> <span class="keyword">const</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    MapPtr data = GetData();</span><br><span class="line">    Map::const_iterator entries = data-&gt;<span class="built_in">find</span>(custmoner);</span><br><span class="line">    <span class="keyword">if</span> (entries != data-&gt;<span class="built_in">end</span>())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> FindEntry(entries-&gt;second, stock);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">CustomerData::Update</span><span class="params">(<span class="keyword">const</span> <span class="built_in">string</span> &amp;customer, <span class="keyword">const</span> CustomerData::EntryList &amp;entries)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">MutexLockGuard <span class="title">lock</span><span class="params">(mutex_)</span></span>;</span><br><span class="line">    <span class="keyword">if</span> (!data_.unique())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function">MapPtr <span class="title">new_data</span><span class="params">(<span class="keyword">new</span> Map(*data_))</span></span>;</span><br><span class="line">        data_.swap(new_data);</span><br><span class="line">        <span class="comment">// sawp后 先前某个线程通过GetData拿到MapPtr 他会读到稍旧的数据</span></span><br><span class="line">    &#125;</span><br><span class="line">    assert(data_.unique());</span><br><span class="line">    (*data_)[customer] = entries;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="第三章-多线程服务器的适用场合与常用编程模型"><a href="#第三章-多线程服务器的适用场合与常用编程模型" class="headerlink" title="第三章 多线程服务器的适用场合与常用编程模型"></a>第三章 多线程服务器的适用场合与常用编程模型</h2><p>单线程服务器常用的编程模型<br><code>non-blocking IO + IO multiplexing</code> 即为<code>Reactor模式</code><br>程序的基本结构是一个事件循环, 以事件驱动和事件回调的方式实现业务逻辑</p>
+<p>本质的缺点<br>要求事件回调函数必须是非阻塞的, 单线程还阻塞 这还怎么玩…<br>对于涉及网络IO的请求响应式协议, 容易割裂业务逻辑, 使其散布于多个回调函数中</p>
+<p>多线程服务器常用编程模型</p>
+<ol>
+<li>每个请求创建一个线程, 使用阻塞式IO操作</li>
+<li>使用线程池, 同样是阻塞式IO操作</li>
+<li>非阻塞IO + IO多路复用 即Java NIO方法</li>
+<li>领导者追随者等高级模式</li>
+</ol>
+<p>推荐的C++多线程服务器端编程模式为 one (event) loop per thread + thread pool<br>一个线程一个事件循环 + 线程池<br>事件循环用作IO多路复用, 配合非阻塞IO和定时器<br>线程池用作计算, 具体可以是任务队列或生产者消费者队列</p>
+<p>必须使用单线程的场合</p>
+<ul>
+<li>程序可能会fork</li>
+<li>限制程序的CPU占用率 一个线程最多占满一个核心</li>
+</ul>
+<p>适用多线程程序的场景</p>
+<ul>
+<li>有多个CPU可用, 单核机器上多线程没有性能优势</li>
+<li>线程间有共享数据, 否则建议使用 主进程+工作进程 每个进程都是单线程的模型</li>
+<li>共享数据是可以修改的. 如果数据不能修改可以进程间使用共享内存</li>
+<li>事件响应有优先级差异, 防止优先级反转</li>
+<li>程序要有相当的计算量</li>
+<li>利用异步操作</li>
+<li>能享受到增加CPU数目带来的好处</li>
+<li>多线程有有效地划分责任与功能</li>
+</ul>
+<p>后面大部分我都是看看就过去了, 自己没有丝毫经验 也不打算现在细看</p>
+<h2 id="第四章-C-多线程系统编程精要"><a href="#第四章-C-多线程系统编程精要" class="headerlink" title="第四章 C++多线程系统编程精要"></a>第四章 C++多线程系统编程精要</h2><p>学习多线程编程面临的最大思维方式转变</p>
+<ul>
+<li>当前进程随时可能被切出去</li>
+<li>多线程程序中事件的发生顺序不再有全局统一的先后关系</li>
+</ul>
+<p>常用的11个pthreads函数</p>
+<ul>
+<li>pthread_create() pthread_join()</li>
+<li>pthread_mutex_(create/destory/lock/unlock)</li>
+<li>pthread_cond_(create/destory/wait/signal/broadcast)</li>
+</ul>
+<p>多线程系统编程的难点不在于学习线程原语, 而在于理解多线程与现有的C/C++库函数和系统调用的交互关系<br>以进一步学习如何设计并实现线程安全且高效的程序</p>
+<p>pthread_t并不适合作为程序中对线程的标识符</p>
+<ul>
+<li>他可能会同一进程的两个线程相同</li>
+<li>或者是不利于打印</li>
+<li>无法判断其是否非法</li>
+<li>文件系统中没有对应项</li>
+<li>脱离进程便没意义</li>
+</ul>
+<p>推荐使用gettid()作为线程标识符</p>
+<ul>
+<li>任何时刻都是全局唯一的</li>
+<li>类型为pid_t通常为一个小整数利于在日志中打印.</li>
+<li>0就是非法值1, 因为操作系统第一个进程init的pid是1</li>
+<li>在现代Linux中, 他直接表示内核的任务调度id, 容易在/proc文件系统中找到对应项</li>
+<li>在其他系统工具中也容易定位到某一个具体线程, 列如使用top按线程列出任务,<br>便可以找到线程id, 再根据程序日志判断是哪一个具体线程</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// .h</span></span><br><span class="line"><span class="keyword">extern</span> __thread <span class="keyword">int</span> t_cachedTid;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">cacheTid</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">tid</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (__builtin_expect(t_cachedTid == <span class="number">0</span>, <span class="number">0</span>))</span><br><span class="line">    &#123;</span><br><span class="line">        cacheTid();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> t_cachedTid;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// .cpp</span></span><br><span class="line">__thread <span class="keyword">int</span> t_cachedTid = <span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">CurrentThread::cacheTid</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (t_cachedTid == <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        t_cachedTid = gettid();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// .cpp</span></span><br><span class="line"><span class="function"><span class="keyword">pid_t</span> <span class="title">gettid</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">static_cast</span>&lt;<span class="keyword">pid_t</span>&gt;(::syscall(SYS_gettid));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>thread<br>只能修饰POD类型, 不能修饰class类型, 因为无法自动调用构造析构函数. 可以用于修饰全局变量函数内的静态变量.是GCC内置的线程局部存储设施，存取效率可以和全局变量相比。</strong>thread变量每一个线程有一份独立实体，各个线程的值互不干扰.</p>
+<p><strong>builtin_expect<br>这个指令是gcc引入的，作用是允许程序员将最有可能执行的分支告诉编译器。这个指令的写法为：</strong>builtin_expect(EXP, N)。<br>意思是：EXP==N的概率很大. 就图中代码翻译过来就是 <code>t_cachedTid == 0</code>为<code>0(假)</code>, 即为<code>t_cachedTid</code>最可能不是0.</p>
+<ul>
+<li>使用同一个class创建线程, 全局统一. 一般不会为每个网络连接创建线程, 除非并发数与cpu数目相同<br>一个服务程序的线程数目应该与当前负载无关, 而应该有CPU数目有关.</li>
+<li>程序运行期间不要再创建和销毁线程, 最好在初始化的时候创建所有的线程</li>
+</ul>
+<p>线程销毁的方式</p>
+<ul>
+<li>正常死亡, 从线程主函数返回, 线程正常退出</li>
+<li>非正常死亡, 从线程主函数抛出异常或线程触发segfault信号等非法操作</li>
+<li>自杀 调用pthread_exit() 立刻终止线程</li>
+<li>他杀 其他线程调用pthread_cancel() 来强制终止某个线程</li>
+</ul>
+<p>线程只有一种正常死亡方式, 即第一种 其他方法都是错的Java中甚至把相关函数都废弃了</p>
+<p>每个文件描述符只由一个线程操作, 从而解决消息收发的顺序问题, 把一个文件描述符读写分开未必会提高性能. 同时我们不知道epoll_wait阻塞的时候, 其他线程添加新的fd会发生什么. 为了稳妥起见应该把对同一个epollfd的操作放入同一个线程中执行.</p>
+<p><strong>包装文件描述符和连接</strong><br>用Socket对象包装文件描述符<br>所有对此文件描述符的读写操作都通过此对象进行, 对象的析构函数里关闭文件描述符. 这样只要Socket对象还活着 就不会与其他Socket对象有相同的文件描述符, 也就不会发生串话. 包装文件描述符已经见过了, 同样是在flamingo中看到的.</p>
+<p>用Tcpconnection包装连接<br>如果仅仅记住 fd = 8 这样的文件描述符, A线程accept后转身去处理业务B线程把 fd = 8 给关闭了!! 同时accept一个新的fd 同样是8!!. 这时A线程回复就会出现问题. 所以应该持有封装了Socket对象的Tcpconnection, 保证请求处理期间 文件描述符不会被关闭. 或者是持有Tcpconnection的弱引用. 这样就能知道 fd = 8 到底是原来的还是被关闭后新创建的. Tcpconnection对象不能提前销毁, 所以使用了shared_ptr来管理其生存期, 保证不会提前销毁造成串话.</p>
+<h2 id="第五章-高效的多线程日志"><a href="#第五章-高效的多线程日志" class="headerlink" title="第五章 高效的多线程日志"></a>第五章 高效的多线程日志</h2><h1 id="第二部分-muduo网络库"><a href="#第二部分-muduo网络库" class="headerlink" title="第二部分 muduo网络库"></a>第二部分 muduo网络库</h1><h2 id="第六章-muduo网络库简介"><a href="#第六章-muduo网络库简介" class="headerlink" title="第六章 muduo网络库简介"></a>第六章 muduo网络库简介</h2><p><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/MultithreadingServer/ClassDiagram.png" alt=""></p>
+<p>看完前面的一小部分, 我真心觉得这个库跟之前那个flamingo特别像, 估计这种管理方式就是某种主流方式?<br>估计我以后自己写的时候也是会按照这个模式来写了吧</p>
+<p>TCP网络编程最本质的是处理三个半事件</p>
+<ul>
+<li>连接的建立</li>
+<li>连接断开 主动断开close 被动断开 read返回0</li>
+<li>消息到达, 文件描述符可读. 最为重要的一个事件, 对它的处理方式决定了网络编程的风格.(阻塞还是非阻塞, 如何处理分包, 应用层缓冲如何设计)</li>
+<li>消息发送完毕 这算半个</li>
+</ul>
+<p>现在存在的问题</p>
+<ul>
+<li>如果保证发送完应用层缓冲区数据才断开连接<br>自己思考的可以设立标志位, 如果设置了标志位发送完成后检测标志位 关闭连接</li>
+<li>如果要主动发起连接, 但是对方主动拒绝, 如何定期重试<br>按照TCP重试机制 发送SYN 开启定时器 如果定时内没有收到确认ACK则重发SYN</li>
+</ul>
+<p>这里了解到一个词 前向声明,<br>在程序设计中，前向声明（Forward Declaration）是指声明标识符(表示编程的实体，如数据类型、变量、函数)时还没有给出完整的定义。<br>通常为了简化头文件的关系 可以在A的头文件中 声明<code>class B</code>, 这样在你的代码中就可以使用<code>B*</code>而不需要引入B的头文件</p>
+<h2 id="第七章-muduo编程示例"><a href="#第七章-muduo编程示例" class="headerlink" title="第七章 muduo编程示例"></a>第七章 muduo编程示例</h2><p>本章大部分都是实战小例子, 自然要在代码中注释了.<br>博客这里就简单写一写<br><strong>关于<code>input buffer</code>和<code>output buffer</code>已经有所了解过</strong></p>
+<p><code>output buffer</code>在<code>write</code>调用一次没有发送完全的时候起到大用途. 一次没有发送完不应该等待在那里, 应该是接管这些未发送的数据, 阻塞代价是很大的. 应该是注册<code>EPILOUT</code>事件, 直到数据全部发送完毕. 否则就一直注册事件, 当然这是在连接正常的时候.<br>使用<code>output buffer</code>还有一个小问题, 一般情况下一次发送未完成才会使用到<code>output buffer</code>. 当缓冲区中存在数据的时候. 下一次的数据不能进行发送, 而应该是直接追加到尾部.</p>
+<p><code>input buffer</code>某种意义上作用更大, 这涉及到一个重要概念”粘包”的处理. </p>
+<p>这里我了解到了<code>capacity()</code>机制, 可以用来减少内存分配次数. <code>capacity()</code>代表预分配的内存大小,<br>而<code>size()</code>是你写入的数据大小, 当<code>size == capacity</code>的时候<code>再写入内容</code>内存会分配更长的一个数组将旧数据拷贝过去<code>size()</code>依然是你写入的大小, <code>capacity()</code>则会变大</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">char</span>&gt; <span class="title">buff</span><span class="params">(<span class="number">20</span>)</span></span>; <span class="comment">// 填充了20个元素 0</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Foo</span><span class="params">(<span class="keyword">size_t</span> <span class="built_in">size</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    buff.resize(<span class="built_in">size</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%ld %ld\n"</span>, buff.<span class="built_in">size</span>(), buff.capacity());</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%ld %ld\n"</span>, buff.<span class="built_in">size</span>(), buff.capacity()); <span class="comment">// 20 20</span></span><br><span class="line">    Foo(<span class="number">512</span>); <span class="comment">// 512 512</span></span><br><span class="line">    Foo(<span class="number">1024</span>); <span class="comment">// 1024 1024</span></span><br><span class="line">    Foo(<span class="number">1025</span>); <span class="comment">// 1025 2048</span></span><br><span class="line">    Foo(<span class="number">2048</span>); <span class="comment">// 2048 2048</span></span><br><span class="line">    Foo(<span class="number">2049</span>); <span class="comment">// 2049 4096</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        </div>
+        <div id="post-footer">
+            <div class="avatar" style="padding-bottom: 0.2rem"
+                    >
+                <img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/%E5%8D%9A%E5%AE%A2%E5%B0%81%E9%9D%A2/2676.png" alt="avatar"/>
+                
+                
+            </div>
+            <ul class="author-profile-section">
+                <li>
+                  
+                  Author:
+                  
+                    
+                    <a href="/about.html">Lsmg</a>
+                </li>
+                
+                <li>Published Date: <span>2020-03-31  17:19:39</span></li>
+                
+                <li>Updated Date: <span>2020-04-04  17:22:32</span></li>
+                
+                <li class="post-category">
+                    Categories:
+                    
+                    <a href="/categories/CPP/">CPP</a>
+                    
+                    <a href="/categories/CPP/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B-%E4%B9%A6%E7%B1%8D%E8%AE%B0%E5%BD%95/">服务器编程-书籍记录</a>
+                    
+                </li>
+                <li class="post-tags">
+                    Tags:
+                    
+                </li>
+                
+                <li> License: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+知识共享署名-非商业性使用-禁止演绎 3.0 未本地化版本许可协议（CC BY-NC-ND 3.0）
+</a></li>
+                
+            </ul>
+        </div>
+    </article>
+    <div class="article-nav">
+        
+        
+        <a href="/2020/03/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-shell%E8%84%9A%E6%9C%AC%E7%BC%96%E5%86%99/" class="next-post fa">Shell脚本编写</a>
+        
+    </div>
+    
+    <div id="comments">
+        
+
+<script>
+  gitalk.render("comments");
+</script>
+
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+    <footer id="footer">
+    
+    <div class="social">
+        
+        <a href="https://github.com/Jigokubana" class="fa fa-github" target="_blank" title="GitHub"></a>
+        
+    </div>
+    
+    <div>
+        
+        <a href="/" class="copyright-links">Lsmg</a>&copy;2015 - 2020.All Rights
+        Reserved.
+    </div>
+    <p>Powered by <a href="https://hexo.io" class="copyright-links" target="_blank">Hexo</a> | Theme by <a
+                href="https://github.com/GeekaholicLin" class="copyright-links" target="_blank">GeekaholicLin</a>
+    </p>
+    
+</footer>
+
+</div>
+    <ul id="tools">
+    <li class="totop-btn fa fa-angle-up"></li>
+    <li class="exchange-btn fa fa-exchange"></li>
+  
+    <li class="toc-btn fa fa-list-ul"></li>
+    
+    
+
+    
+</ul>
+<p id="process"></p>
+<div id="search-overlay">
+    <div class="search-area-wrap">
+        <div id="search-area">
+            <div class="input-wrap focus">
+                <i class="fa fa-search" aria-hidden="true"></i>
+                <input id="search-input" autofocus autocomplete="off" type="text"
+                       placeholder="search this website..."/>
+            </div>
+            <ul id="search-result">
+                <li class="load-first"><i class="fa fa-spinner fa-pulse"></i></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#第一部分-C-多线程系统编程"><span class="toc-number">1.</span> <span class="toc-text">第一部分 C++多线程系统编程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#第一章-线程安全的对象生命期管理"><span class="toc-number">1.1.</span> <span class="toc-text">第一章 线程安全的对象生命期管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第二章-线程同步精要"><span class="toc-number">1.2.</span> <span class="toc-text">第二章 线程同步精要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第三章-多线程服务器的适用场合与常用编程模型"><span class="toc-number">1.3.</span> <span class="toc-text">第三章 多线程服务器的适用场合与常用编程模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第四章-C-多线程系统编程精要"><span class="toc-number">1.4.</span> <span class="toc-text">第四章 C++多线程系统编程精要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第五章-高效的多线程日志"><span class="toc-number">1.5.</span> <span class="toc-text">第五章 高效的多线程日志</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第二部分-muduo网络库"><span class="toc-number">2.</span> <span class="toc-text">第二部分 muduo网络库</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#第六章-muduo网络库简介"><span class="toc-number">2.1.</span> <span class="toc-text">第六章 muduo网络库简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第七章-muduo编程示例"><span class="toc-number">2.2.</span> <span class="toc-text">第七章 muduo编程示例</span></a></li></ol></li></ol>
+
+
+
+
+
+<script src="/js/search.js"></script>
+
+<script type="text/javascript">
+    //theme config datas
+    var copyrightObj = {};
+    copyrightObj.enable = 'false';
+    copyrightObj.triggerCopyLength = '200';
+    copyrightObj.appendText = '商业转载请联系作者获得授权,非商业转载请注明出处 © example';
+    var leancloudObj = {};
+    leancloudObj.enable = 'false';
+    leancloudObj.className = 'BlogCounter';
+    leancloudObj.limits = '10';
+</script>
+<script type="text/javascript">
+    var search = {};
+    var search_path = "search.xml";
+    if (!search_path) {
+        search_path = "search.xml";
+    }
+    search.path = "/" + search_path;
+    search.func =  _ajax.init();
+</script>
+
+<script src="/js/app.js"></script>
+
+
+
+</body>
+</html>
