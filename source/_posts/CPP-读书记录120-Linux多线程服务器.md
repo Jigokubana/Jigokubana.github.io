@@ -479,6 +479,196 @@ __builtin_expect
 如果仅仅记住 fd = 8 这样的文件描述符, A线程accept后转身去处理业务B线程把 fd = 8 给关闭了!! 同时accept一个新的fd 同样是8!!. 这时A线程回复就会出现问题. 所以应该持有封装了Socket对象的Tcpconnection, 保证请求处理期间 文件描述符不会被关闭. 或者是持有Tcpconnection的弱引用. 这样就能知道 fd = 8 到底是原来的还是被关闭后新创建的. Tcpconnection对象不能提前销毁, 所以使用了shared_ptr来管理其生存期, 保证不会提前销毁造成串话.
 
 ## 第五章 高效的多线程日志
+日志库大体分为前端和后端两部分, 两端之间的联系可能简单到只有一个函数
+大多数感觉都是宏命令
+
+日志的滚动也很重要 根据文件大小 和 时间 自动创建新的日志文件, 而不是全写入一个文件中
+
+避免出现正则表达的元字符(列如我最喜欢的`'['和']'`) 便于使用正则表达式查找
+
+这一章的笔记是在我照着代码实现了简单的相似功能后才写的, 记录一下好的地方
+大体分为了 LogStream类和Logger类 前者负责通过`<<`维护LogBuffer缓冲区, 后者做包装提供接口
+LogBuffer使用了简单的数组作为缓冲区, 使用Append添加内容 维护写指针
+
+LogStream重载了多种 参数情况, char和char* 很方便写入到缓冲区中
+数字则需要转化成字符串
+```c++
+LogStream& operator<<(short num);
+LogStream& operator<<(unsigned short num);
+LogStream& operator<<(int num);
+LogStream& operator<<(unsigned num);
+LogStream& operator<<(long num);
+LogStream& operator<<(unsigned long num);
+LogStream& operator<<(long long num);
+LogStream& operator<<(unsigned long long num);
+
+LogStream& operator<<(char str);
+LogStream& operator<<(const char* str);
+```
+
+转化函数, 不得不说设计的真好. 通过模板解决了多种数字类型
+```c++
+const char digits_character[] = "0123456789";
+// LEARN https://www.drdobbs.com/flexible-c-1-efficient-integer-to-string/184401596
+template<typename T>
+size_t Convert(char buff[], T value)
+{
+    T i = value;
+    char* p = buff;
+    do
+    {
+        unsigned lsd = static_cast<unsigned>(i % 10);
+        i /= 10;
+        // *p++ = '0' + lsd; 不高效
+        *p++ = digits_character[lsd];
+    } while (i != 0);
+
+    if (value < 0)
+    {
+        *p++ = '-';
+    }
+    *p = '\0';
+
+    // LEARN 原文中是从buff最后一个字节开始写入 但是这里需要从开头写入 所以改为倒置一下
+    std::reverse(buff, p);
+    return p - buff;
+}
+
+template<typename T>
+void LogStream::FormatInteger(T t)
+{
+    if (buffer_.WriteableBytes() > MAX_NUMBER_SIZE)
+    {
+        size_t len = Convert(buffer_.WritePeek(), t);
+        buffer_.MoveWritePeek(len);
+    }
+}
+```
+将格式化也单独出了一个类
+```c++
+class Fmt
+{
+public:
+    template<typename T>
+    Fmt(const char* fmt, T val);
+
+    const char* GetData() const
+    {
+        return buff_;
+    }
+    int GetLength() const
+    {
+        return length_;
+    }
+
+private:
+    char buff_[32];
+    size_t length_;
+};
+
+template<typename T>
+Fmt::Fmt(const char* fmt, T val)
+{
+    static_assert(std::is_arithmetic<T>::value == true, "Must be arithmetic type");
+    length_ = snprintf(buff_, sizeof buff_, fmt, val);
+    assert(length_ < sizeof buff_);
+}
+```
+
+Logger类的设计
+方便了日志的打印, 实现了高效的转换
+```c++
+enum LogLevel
+{
+    DEBUG,
+    INFO,
+    WARN,
+    ERROR,
+    FATAL,
+    NUM_LOG_LEVELS /* 仅用于表示LogLevel元素个数 不做实际使用 */
+};
+// LEARN 处处保持长度一致 使用NUM_LOG_LEVELS表示大小
+const char* LogLevelName[Logger::NUM_LOG_LEVELS] =
+{
+    "DEBUG ",
+    "INFO  ",
+    "WARN  ",
+    "ERROR ",
+    "FATAL ",
+};
+```
+字符串指针包装类, 减少strlen的调用 或者字符串没有终止
+```c++
+// LEARN 临时包装字符串指针和长度
+class T
+{
+public:
+
+    T(const char* str, size_t len):
+    str_(str),
+    len_(len)
+    {
+        assert(strlen(str) == len);
+    }
+
+    const char* str_;
+    const size_t len_;
+};
+```
+使用内部类Impl包装了LogStream LogStream负责的是单纯的维护缓冲区 重载各种运算符.
+Impl的构造函数输出了日志前边的固定部分
+Logger的构造函数负责根据有无函数名等重载输出额外的固定内容
+构造和析构之间完成 纯用户自定义部分输出
+Logger的析构函数负责输出每条日志的结尾部分 文件名和行号
+```c++
+class Impl
+{
+public:
+    typedef Logger::LogLevel LogLevel;
+    Impl(LogLevel level, const SourceFile& file, int line);
+    void FormatTime();
+    void Finish();
+
+    Timestamp time_;
+    LogStream stream_;
+    LogLevel level_;
+    SourceFile filename_;
+    int line_;
+};
+```
+内部类SourceFile负责将`__FILE__`宏产生的字符数组转换成单纯的文件名. 使用了数组引用
+```c++
+class SourceFile
+{
+public:
+    /**
+        * 数组的引用 使数组在传参时不会降为 指针
+        */
+    template<int N>
+    SourceFile(const char (&arr)[N]):
+    data_(arr),
+    size_(N - 1)
+    {
+        const char* name = strrchr(data_, '/'); /* /name */
+        if (name)
+        {
+            data_ = name + 1;
+            size_ -= static_cast<int>(data_ - arr);
+        }
+    }
+
+    const char* data_;
+    int size_;
+};
+```
+
+其他高效设计
+```c++
+// LEARN 缓存上一次输出的秒 同一秒输出时避免多次格式化
+// 同一秒输出仅仅格式化 微秒部分
+__thread char t_time[64];
+__thread time_t t_last_second;
+```
 
 # 第二部分 muduo网络库
 ## 第六章 muduo网络库简介
@@ -535,3 +725,63 @@ int main()
     Foo(2049); // 2049 4096
 }
 ```
+
+花了小半天时间去了解配置了下 protobuf, 是一把很锋利的剑不错!
+
+网络编程中使用protobuf的两个先决条件
+- 长度问题, protobuf打包的数据没有自带长度信息或终结符, 这就需要程序自己在发送和接受的时候做正确的切分
+- 类型问题, protobuf打包的数据没有自带类型信息, 需要由发送方把类型信息传给接收方, 接收方创建对应的具体protobuf message对象, 再做反序列化
+
+我第一印象解决上面的方法, 就如书中所言是山寨的做法.... 增加header部分
+
+![Protobuf类图](https://lsmg-img.oss-cn-beijing.aliyuncs.com/MultithreadingServer/protobuf%20class.png)
+
+大概意思就是大部分人通过在头部增加代号标识消息类型(具体对应那个message), 而protobuf提供了
+根据反射 根据typename 选择对应的Message对象的功能, 由于我没有用过protobuf 目前不是很了解 不过大概就这样了, 后续会专门学习 先用即可
+```c++
+// eg typename=muduo.Query
+google::protobuf::Message* ProtobufCodec::createMessage(const std::string& typeName)
+{
+    google::protobuf::Message* message = nullptr;
+    const google::protobuf::Descriptor* descriptor =
+        google::protobuf::DescriptorPool::generated_pool()->FindMessageTypeByName(typeName);
+    if (descriptor)
+    {
+        const google::protobuf::Message* prototype =
+            google::protobuf::MessageFactory::generated_factory()->GetPrototype(descriptor);
+        if (prototype)
+        {
+            message = prototype->New(); // 返回的是动态创建的指针
+        }
+    }
+    return message;
+}
+
+typedef std::shared_ptr<google::protobuf::Message> MessagePtr;
+MessagePtr message;
+message.reset(createMessage(typeName)); // 接管指针
+```
+
+作者设计的格式如下
+![](https://lsmg-img.oss-cn-beijing.aliyuncs.com/MultithreadingServer/protobuf%E4%BC%A0%E8%BE%93%E6%A0%BC%E5%BC%8F.png)
+
+```c++
+struct Foo
+{
+    // int32_t version; 根本不需要版本号
+    int32_t len; // 没有使用uin32_t 是为了跨语言, Java没有unsigned
+    int32_t namelen;
+    char type_name[namelen]; // 以 /0 结尾 方便接收方处理 节省strlen() 空间换时间
+    char protobuf_data[len-namelen-8]
+    int32_t checksum; // adler32算法 进行校验
+}
+```
+
+终于知道编码器解码器合起来叫什么了... 编解码器(codec)
+
+后面的一些例子就跳过了, 去准备阅读第八章然后动手写库了 这里才是重点 至于例子当时候自己再写.
+自己的库不香吗?
+
+## 第八章 muduo网路库设计与实现
+~~第八章从第0节开始 一看就是程序员~~
+
