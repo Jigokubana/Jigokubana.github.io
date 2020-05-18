@@ -466,3 +466,27 @@ int compare(const char (&p1)[3], const char (&p2)[4]) // 注意空字符
 
 
 编译器遇到一个模板类型定义的时候并不会生成代码, 而是实例化出一个特定版本的时候才会实例化
+
+
+**使用类的类型成员**
+
+```c++
+template <typename T>
+
+T::size_type* p;
+```
+默认情况下, C++语言假定通过域运算符访问名字而不是类型.
+如果想要使用模板类型参数(T)的类型成员(size_type) 必须使用`typename`而不是`class`
+
+
+**默认模板实参**
+
+```c++
+template <typename T, typename F = less<T>>
+int compare(const T& v1, const T& v2, F f = f())
+{
+	if (f(v1, v2)) return -1;
+	if (f(v2, v1)) return 1;
+	return 0;
+}
+```
