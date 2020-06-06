@@ -114,7 +114,7 @@
   <h3 class="fa fa-tags widget-title">Tag Cloud</h3>
   <div class="tagcloud-content">
     
-      <a href="/tags/3DMAX/" style="font-size: 0.14rem; color: #69c">3DMAX</a> <a href="/tags/CPP%E8%B8%A9%E5%9D%91%E8%AE%B0/" style="font-size: 0.17rem; color: #386da4">CPP踩坑记</a> <a href="/tags/CPP/" style="font-size: 0.17rem; color: #386da4">CPP</a> <a href="/tags/Git%E6%93%8D%E4%BD%9C/" style="font-size: 0.2rem; color: #0a407c">Git操作</a> <a href="/tags/GDB%E8%B0%83%E8%AF%95/" style="font-size: 0.14rem; color: #69c">GDB调试</a> <a href="/tags/Linux/" style="font-size: 0.14rem; color: #69c">Linux</a> <a href="/tags/csapp/" style="font-size: 0.14rem; color: #69c">csapp</a> <a href="/tags/Shell/" style="font-size: 0.14rem; color: #69c">Shell</a> <a href="/tags/%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/" style="font-size: 0.14rem; color: #69c">权限管理</a> <a href="/tags/Mysql/" style="font-size: 0.14rem; color: #69c">Mysql</a> <a href="/tags/%E9%99%80%E8%9E%BA%E7%90%83/" style="font-size: 0.14rem; color: #69c">陀螺球</a> <a href="/tags/MongoDB/" style="font-size: 0.14rem; color: #69c">MongoDB</a> <a href="/tags/%E8%85%BE%E8%AE%AF%E6%B8%B8%E6%88%8F%E5%AD%A6%E9%99%A2/" style="font-size: 0.2rem; color: #0a407c">腾讯游戏学院</a>
+      <a href="/tags/3DMAX/" style="font-size: 0.14rem; color: #69c">3DMAX</a> <a href="/tags/CPP%E8%B8%A9%E5%9D%91%E8%AE%B0/" style="font-size: 0.17rem; color: #386da4">CPP踩坑记</a> <a href="/tags/CPP/" style="font-size: 0.17rem; color: #386da4">CPP</a> <a href="/tags/Git%E6%93%8D%E4%BD%9C/" style="font-size: 0.2rem; color: #0a407c">Git操作</a> <a href="/tags/csapp/" style="font-size: 0.14rem; color: #69c">csapp</a> <a href="/tags/Linux/" style="font-size: 0.14rem; color: #69c">Linux</a> <a href="/tags/GDB%E8%B0%83%E8%AF%95/" style="font-size: 0.14rem; color: #69c">GDB调试</a> <a href="/tags/Mysql/" style="font-size: 0.14rem; color: #69c">Mysql</a> <a href="/tags/%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/" style="font-size: 0.14rem; color: #69c">权限管理</a> <a href="/tags/Shell/" style="font-size: 0.14rem; color: #69c">Shell</a> <a href="/tags/%E8%85%BE%E8%AE%AF%E6%B8%B8%E6%88%8F%E5%AD%A6%E9%99%A2/" style="font-size: 0.2rem; color: #0a407c">腾讯游戏学院</a> <a href="/tags/MongoDB/" style="font-size: 0.14rem; color: #69c">MongoDB</a> <a href="/tags/%E9%99%80%E8%9E%BA%E7%90%83/" style="font-size: 0.14rem; color: #69c">陀螺球</a>
   </div>
 </li>
 
@@ -823,7 +823,7 @@ char 在默认情况下, 既不是有符号. 也不是无符号.
             </a>
             
             <p class="article-content">
-                基本玩法使用手机陀螺仪控制圆形小球的移动.  存在各种关卡组件以及小球装备 从初始点最终到达目的地
+                基础设计基本玩法使用手机陀螺仪控制圆形小球的移动.  存在各种关卡组件以及小球装备 从初始点最终到达目的地
 首先考虑制作出地图编辑器玩家可以下载并游玩其他人创建的地图
 其次增加双人联机的功能 双人共同通关?
 包含计时以及通关星数 通过碰撞获得两颗星 关卡时间一颗星
@@ -861,10 +861,11 @@ char 在默认情况下, 既不是有符号. 也不是无符号.
 提供一个方向的瞬时力
 
 
-基础方块均使用int 10*4 = 40B
+基础方块均使用int
 | 10001 | 位置X | 位置Y | 位置Z | 物品旋转X | 物品旋转Y | 物品旋转Z | 物品缩放X | 物品缩放Y | 物品缩放Z |
 出生点| 10002 | 位置X | 位置Y | 位置Z |
-终点| 10003 | 位置X | 位置Y |...
+终点| 10003 | 位置X | 位置Y | 位置Z |
+...
             </p>
             <div class="article-meta">
     

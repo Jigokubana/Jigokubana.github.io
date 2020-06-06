@@ -115,7 +115,7 @@
   <h3 class="fa fa-tags widget-title">Tag Cloud</h3>
   <div class="tagcloud-content">
     
-      <a href="/tags/3DMAX/" style="font-size: 0.14rem; color: #69c">3DMAX</a> <a href="/tags/CPP%E8%B8%A9%E5%9D%91%E8%AE%B0/" style="font-size: 0.17rem; color: #386da4">CPP踩坑记</a> <a href="/tags/CPP/" style="font-size: 0.17rem; color: #386da4">CPP</a> <a href="/tags/Git%E6%93%8D%E4%BD%9C/" style="font-size: 0.2rem; color: #0a407c">Git操作</a> <a href="/tags/GDB%E8%B0%83%E8%AF%95/" style="font-size: 0.14rem; color: #69c">GDB调试</a> <a href="/tags/Linux/" style="font-size: 0.14rem; color: #69c">Linux</a> <a href="/tags/csapp/" style="font-size: 0.14rem; color: #69c">csapp</a> <a href="/tags/Shell/" style="font-size: 0.14rem; color: #69c">Shell</a> <a href="/tags/%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/" style="font-size: 0.14rem; color: #69c">权限管理</a> <a href="/tags/Mysql/" style="font-size: 0.14rem; color: #69c">Mysql</a> <a href="/tags/%E9%99%80%E8%9E%BA%E7%90%83/" style="font-size: 0.14rem; color: #69c">陀螺球</a> <a href="/tags/MongoDB/" style="font-size: 0.14rem; color: #69c">MongoDB</a> <a href="/tags/%E8%85%BE%E8%AE%AF%E6%B8%B8%E6%88%8F%E5%AD%A6%E9%99%A2/" style="font-size: 0.2rem; color: #0a407c">腾讯游戏学院</a>
+      <a href="/tags/3DMAX/" style="font-size: 0.14rem; color: #69c">3DMAX</a> <a href="/tags/CPP%E8%B8%A9%E5%9D%91%E8%AE%B0/" style="font-size: 0.17rem; color: #386da4">CPP踩坑记</a> <a href="/tags/CPP/" style="font-size: 0.17rem; color: #386da4">CPP</a> <a href="/tags/Git%E6%93%8D%E4%BD%9C/" style="font-size: 0.2rem; color: #0a407c">Git操作</a> <a href="/tags/csapp/" style="font-size: 0.14rem; color: #69c">csapp</a> <a href="/tags/Linux/" style="font-size: 0.14rem; color: #69c">Linux</a> <a href="/tags/GDB%E8%B0%83%E8%AF%95/" style="font-size: 0.14rem; color: #69c">GDB调试</a> <a href="/tags/Mysql/" style="font-size: 0.14rem; color: #69c">Mysql</a> <a href="/tags/%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/" style="font-size: 0.14rem; color: #69c">权限管理</a> <a href="/tags/Shell/" style="font-size: 0.14rem; color: #69c">Shell</a> <a href="/tags/%E8%85%BE%E8%AE%AF%E6%B8%B8%E6%88%8F%E5%AD%A6%E9%99%A2/" style="font-size: 0.2rem; color: #0a407c">腾讯游戏学院</a> <a href="/tags/MongoDB/" style="font-size: 0.14rem; color: #69c">MongoDB</a> <a href="/tags/%E9%99%80%E8%9E%BA%E7%90%83/" style="font-size: 0.14rem; color: #69c">陀螺球</a>
   </div>
 </li>
 
@@ -178,11 +178,11 @@
         </div>
         
         <div id="post-body">
-            <h1 id="基本玩法"><a href="#基本玩法" class="headerlink" title="基本玩法"></a>基本玩法</h1><p>使用手机陀螺仪控制圆形小球的移动.  存在各种关卡组件以及小球装备 从初始点最终到达目的地</p>
+            <h1 id="基础设计"><a href="#基础设计" class="headerlink" title="基础设计"></a>基础设计</h1><h2 id="基本玩法"><a href="#基本玩法" class="headerlink" title="基本玩法"></a>基本玩法</h2><p>使用手机陀螺仪控制圆形小球的移动.  存在各种关卡组件以及小球装备 从初始点最终到达目的地</p>
 <p>首先考虑制作出地图编辑器<br>玩家可以下载并游玩其他人创建的地图</p>
 <p>其次增加双人联机的功能 双人共同通关?</p>
 <p>包含计时以及通关星数 通过碰撞获得两颗星 关卡时间一颗星</p>
-<h1 id="关卡组件"><a href="#关卡组件" class="headerlink" title="关卡组件"></a>关卡组件</h1><table>
+<h2 id="关卡组件"><a href="#关卡组件" class="headerlink" title="关卡组件"></a>关卡组件</h2><table>
 <thead>
 <tr>
 <th>物品代码</th>
@@ -216,19 +216,36 @@
 <td>提供一个方向的瞬时力</td>
 </tr>
 </tbody></table>
-<h2 id="基础方块"><a href="#基础方块" class="headerlink" title="基础方块"></a>基础方块</h2><p>均使用int <code>10*4 = 40B</code></p>
+<h3 id="基础方块"><a href="#基础方块" class="headerlink" title="基础方块"></a>基础方块</h3><p>均使用int</p>
 <p>| 10001 | 位置X | 位置Y | 位置Z | 物品旋转X | 物品旋转Y | 物品旋转Z | 物品缩放X | 物品缩放Y | 物品缩放Z |</p>
-<h2 id="出生点"><a href="#出生点" class="headerlink" title="出生点"></a>出生点</h2><p>| 10002 | 位置X | 位置Y | 位置Z |</p>
-<h2 id="终点"><a href="#终点" class="headerlink" title="终点"></a>终点</h2><p>| 10003 | 位置X | 位置Y | 位置Z |</p>
-<h2 id="关卡星星"><a href="#关卡星星" class="headerlink" title="关卡星星"></a>关卡星星</h2><p>| 10004 | 位置X | 位置Y | 位置Z |</p>
+<h3 id="出生点"><a href="#出生点" class="headerlink" title="出生点"></a>出生点</h3><p>| 10002 | 位置X | 位置Y | 位置Z |</p>
+<h3 id="终点"><a href="#终点" class="headerlink" title="终点"></a>终点</h3><p>| 10003 | 位置X | 位置Y | 位置Z |</p>
+<h3 id="关卡星星"><a href="#关卡星星" class="headerlink" title="关卡星星"></a>关卡星星</h3><p>| 10004 | 位置X | 位置Y | 位置Z |</p>
 <p>增加一颗通关星</p>
-<h2 id="加速"><a href="#加速" class="headerlink" title="加速"></a>加速</h2><p>| 10100 | 位置X | 位置Y | 位置Z | 物品旋转X | 物品旋转Y | 物品旋转Z |</p>
+<h3 id="加速"><a href="#加速" class="headerlink" title="加速"></a>加速</h3><p>| 10100 | 位置X | 位置Y | 位置Z | 物品旋转X | 物品旋转Y | 物品旋转Z |</p>
 <p>提供方块对向的瞬时力</p>
 <ul>
 <li>用于改善体验</li>
 <li>用于所短时间完成要求</li>
 </ul>
-<h1 id="小球装备"><a href="#小球装备" class="headerlink" title="小球装备"></a>小球装备</h1><h1 id="地图设计"><a href="#地图设计" class="headerlink" title="地图设计"></a>地图设计</h1>
+<h2 id="小球装备"><a href="#小球装备" class="headerlink" title="小球装备"></a>小球装备</h2><h2 id="地图设计"><a href="#地图设计" class="headerlink" title="地图设计"></a>地图设计</h2><h1 id="前端实现"><a href="#前端实现" class="headerlink" title="前端实现"></a>前端实现</h1><p>创建基础方块父类</p>
+<p>父类必要组件</p>
+<ul>
+<li>Static Mesh</li>
+</ul>
+<p>父类函数</p>
+<ul>
+<li>Serialize(TArray<int32>&amp; Data);</li>
+</ul>
+<p>必要成员变量</p>
+<ul>
+<li>物品代码</li>
+<li>物品参数数量</li>
+</ul>
+<h2 id="地图保存"><a href="#地图保存" class="headerlink" title="地图保存"></a>地图保存</h2><p>调用各个组件的Serialize将各自的数据保存入Data</p>
+<h2 id="地图加载"><a href="#地图加载" class="headerlink" title="地图加载"></a>地图加载</h2><p>struct Component<br>{<br>  TSubclassOf&lt;组件父类&gt; Obj<br>  int Nums 生成此组件需要的参数数量<br>}</p>
+<p>TMap&lt;int32, Component&gt;</p>
+
         </div>
         <div id="post-footer">
             <div class="avatar" style="padding-bottom: 0.2rem"
@@ -248,7 +265,7 @@
                 
                 <li>Published Date: <span>2020-06-02  12:50:02</span></li>
                 
-                <li>Updated Date: <span>2020-06-02  13:07:51</span></li>
+                <li>Updated Date: <span>2020-06-03  11:12:07</span></li>
                 
                 <li class="post-category">
                     Categories:
@@ -338,7 +355,7 @@
     </div>
 </div>
 
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#基本玩法"><span class="toc-number">1.</span> <span class="toc-text">基本玩法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#关卡组件"><span class="toc-number">2.</span> <span class="toc-text">关卡组件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#基础方块"><span class="toc-number">2.1.</span> <span class="toc-text">基础方块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#出生点"><span class="toc-number">2.2.</span> <span class="toc-text">出生点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#终点"><span class="toc-number">2.3.</span> <span class="toc-text">终点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关卡星星"><span class="toc-number">2.4.</span> <span class="toc-text">关卡星星</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#加速"><span class="toc-number">2.5.</span> <span class="toc-text">加速</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#小球装备"><span class="toc-number">3.</span> <span class="toc-text">小球装备</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#地图设计"><span class="toc-number">4.</span> <span class="toc-text">地图设计</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#基础设计"><span class="toc-number">1.</span> <span class="toc-text">基础设计</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本玩法"><span class="toc-number">1.1.</span> <span class="toc-text">基本玩法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关卡组件"><span class="toc-number">1.2.</span> <span class="toc-text">关卡组件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基础方块"><span class="toc-number">1.2.1.</span> <span class="toc-text">基础方块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#出生点"><span class="toc-number">1.2.2.</span> <span class="toc-text">出生点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#终点"><span class="toc-number">1.2.3.</span> <span class="toc-text">终点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关卡星星"><span class="toc-number">1.2.4.</span> <span class="toc-text">关卡星星</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#加速"><span class="toc-number">1.2.5.</span> <span class="toc-text">加速</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小球装备"><span class="toc-number">1.3.</span> <span class="toc-text">小球装备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#地图设计"><span class="toc-number">1.4.</span> <span class="toc-text">地图设计</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#前端实现"><span class="toc-number">2.</span> <span class="toc-text">前端实现</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#地图保存"><span class="toc-number">2.1.</span> <span class="toc-text">地图保存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#地图加载"><span class="toc-number">2.2.</span> <span class="toc-text">地图加载</span></a></li></ol></li></ol>
 
 
 
