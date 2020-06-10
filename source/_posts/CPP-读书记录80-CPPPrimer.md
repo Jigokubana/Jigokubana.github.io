@@ -11,7 +11,10 @@ top: 80
 img: https://lsmg-img.oss-cn-beijing.aliyuncs.com/%E5%8D%9A%E5%AE%A2%E5%B0%81%E9%9D%A2/C%2B%2BPrimer.png
 ---
 
-# 基础知识
+# TOOD
+explicit 参见7.5.4节 265
+
+# 第一部分 基础知识
 ## c++11 的{}初始方式
 ```c++
 // c++11 的初始化方式, 有助于防范类型转换错误.
@@ -126,8 +129,12 @@ throw exception_type("msg")
 
 但可以将未设置默认参数的函数设置默认参数
 
-# 动态内存-自由空间(堆)
+
+# 第二部分 cpp标准库
+
+## 动态内存-自由空间(堆)
 ![](https://lsmg-img.oss-cn-beijing.aliyuncs.com/CPPPrimer/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88.png)
+
 
 ## 动态内存与智能指针
 | 共同操作 | 描述 |
@@ -418,8 +425,8 @@ std::shared_ptr<std::vector<std::string>>
 
 
 
-
-# 模板与泛型编程
+# 第三部分 类设计者的工具
+## 模板与泛型编程
 
 `template <typename T>`
 
@@ -490,3 +497,47 @@ int compare(const T& v1, const T& v2, F f = f())
 	return 0;
 }
 ```
+
+# 第四部分 高级主题
+
+tuple这里看了, 例子写了总感觉实用性不是很大? 或许可以用在便捷处理输入参数?
+
+biset感觉还是有点用
+```c++
+std::bitset<32> b;
+
+// 以下位不足 高位都补0
+
+unsigned long long u = ULLONG_MAX;
+std::bitset<32> bu(u);
+
+std::string s1 = "10101010101010";
+std::bitset<32> bs1(s1);
+std::string s2 = "ababaabbababb";
+// std::bitset<32> bs2(s2); std::invalid_argument
+// a instand 0 b instand 1
+std::bitset<32> bs2(s2, 0, 32, 'a', 'b');
+
+bu.any(); // 存在 置位(1) 的二进制位吗
+bu.all(); // 所有位都置位了吗
+bu.none(); // b中不存在置位的二进制位吗
+bu.count(); // 置位数目
+bu.size(); // 数目
+
+bu.test(1); // 位置1是置位的返回true 否则返回false
+bu.set(1, true); // 将1位 置 true->1 false->0
+bu.reset(1); // 将1位复位 置0
+bu.reset(); // 将所有位复位 置0
+
+bu.flip(1); // 1位取反
+bu.flip(); // 全部取反
+bu[1].flip();
+
+bu[1]; // 1位 1->true 0->false
+
+bu.to_ulong();
+bu.to_ullong();
+
+bu.to_string('a', 'b'); // 0->a 1->b
+```
+
