@@ -6,7 +6,96 @@ categories:
  - CPP
  - CPP重点
 ---
-# Lambda
+
+# 库新特性
+
+## std::move
+
+用于指示对象可以被移动
+
+- 用于移动字符串 表示不复制字符串而是将内容移动 降低成本 原字符串变量将会未定义
+- 从左值带std::move构造 不会进行别名检查 这就意味着不进行自我赋值检查 导致未定义行为
+
+## std::forward<T>
+
+1. 转发左值为左值或右值 依赖于T
+
+```c++
+template<class T>
+void Wrapper(T&& arg)
+{
+    Foo(std::forward<T>(arg));
+}
+
+```
+传递 右值std::string时, 推导T为 std::string
+forward将右值引用传递给Foo
+
+传递 左值const std::string时推导T为 const std::string&
+将const左值引用传递给Foo
+
+传递 左值非const std::string时推导T为 std::string&
+将非const左值引用传递给Foo
+
+2. 转发右值为右值 并禁止右值的转发为左值
+
+
+```c++
+#include <iostream>
+#include <memory>
+#include <utility>
+
+struct A
+{
+    A(int&& n) { std::cout << "rvalue overload, n=" << n << "\n"; }
+    A(int& n) { std::cout << "lvalue overload, n=" << n << "\n"; }
+};
+
+class B
+{
+public:
+    template<class T1, class T2, class T3>
+    B(T1&& t1, T2&& t2, T3&& t3) :
+        a1_{ std::forward<T1>(t1) },
+        a2_{ std::forward<T2>(t2) },
+        a3_{ std::forward<T3>(t3) }
+    {
+    }
+
+private:
+    A a1_, a2_, a3_;
+};
+
+template<class T, class... U>
+std::unique_ptr<T> make_unique1(U&&... u)
+{
+    return std::unique_ptr<T>(new T(u...));
+}
+
+template<class T, class... U>
+std::unique_ptr<T> make_unique2(U&&... u)
+{
+    return std::unique_ptr<T>(new T(std::forward<U>(u)...));
+}
+
+int main()
+{
+    int i = 1;
+    make_unique1<B>(2, i, 3);
+    make_unique2<B>(2, i, 3);
+}
+```
+lvalue overload, n=2
+lvalue overload, n=1
+lvalue overload, n=3
+
+rvalue overload, n=2
+lvalue overload, n=1
+rvalue overload, n=3
+
+
+# 语言新特性
+## Lambda
 参考资料
 https://zh.cppreference.com/w/cpp/language/lambda
 https://blog.csdn.net/qq_34199383/article/details/80469780
@@ -47,8 +136,8 @@ auto add = [](int a, int b){return a + b;};
 int bar = add(1, 2);
 ```
 
-# 类型特性
-https://zh.cppreference.com/w/cpp/types#.E7.B1.BB.E5.9E.8B.E7.89.B9.E6.80.A7.28C.2B.2B11_.E8.B5.B7.29
+## 类型特性
+https://zh.cppreference.com/w/cpp/types##.E7.B1.BB.E5.9E.8B.E7.89.B9.E6.80.A7.28C.2B.2B11_.E8.B5.B7.29
 
 神仙的头文件<type_traits> 可以判断一个值是否是某个类型
 
@@ -59,13 +148,13 @@ https://zh.cppreference.com/w/cpp/types#.E7.B1.BB.E5.9E.8B.E7.89.B9.E6.80.A7.28C
 
 目前不知道用在什么地方合适..... 留个连接备用吧
 
-# 花括号初始
+## 花括号初始
 
-# 函数对象
-## std::function  functional
+## 函数对象
+#### std::function  functional
 ```c++
-#include <functional>
-#include <iostream>
+##include <functional>
+##include <iostream>
 
 void PrintA()
 {
@@ -97,7 +186,7 @@ $ B
 $ Lambad
 ```
 
-## std::bind std::ref std::cref
+#### std::bind std::ref std::cref
 今天在学习
 https://github.com/baloonwj/flamingo
 的时候, 从中发现的这个函数. 这个函数跟std::function 一起使用.
@@ -106,8 +195,8 @@ https://github.com/baloonwj/flamingo
 https://zh.cppreference.com/w/cpp/utility/functional/bind
 
 ```c++
-#include <functional>
-#include <cstdio>
+##include <functional>
+##include <cstdio>
 
 void f(int n1, int n2, int n3, int n4)
 {
@@ -152,7 +241,7 @@ int main()
 
 
 
-## std::pair utility std::tuple tuple
+#### std::pair utility std::tuple tuple
 
 https://zh.cppreference.com/w/cpp/utility/tuple
 

@@ -106,7 +106,7 @@ UPD协议(User Datagram Protocol 用户数据报协议)
 
 以太网最大数据帧1518字节 抛去14头部 帧尾4校验
 MTU: 帧的最大传输单元 一般为1500字节
-MSS: TCP数据包最大的数据载量 1460字节 = 1500字节 - 20Ip头-20TCP头 还有额外的40字节可选部分
+MSS: TCP数据包最大的数据载量 1460字节 = 1500字节 - 20Ip头 - 20TCP头 还有额外的40字节可选部分
 
 **ARP**
 ARP协议能实现任意网络层地址到任意物理地址的转换
@@ -161,41 +161,27 @@ FIN标志: 通知对方本端连接要关闭了, 携带..`结束报文段`
 **TCP连接的建立和关闭**
 
 ```s
-# 三次握手
-# 客户端发送请求连接 ISN=seq + 0 = 3683340920
-# mss 最大数据载量1460
-IP 192.168.80.1.7467 > ubuntu.8000: 
-Flags [S], seq 3683340920, win 64240, 
-options [mss 1460,nop,wscale 8,nop,nop,sackOK], length 0
+# 同步报文段 需要占用一个序号值
 
-# 同意客户端连接
-# ack = 客户端发送 seq + 1
-# 同时发送服务端的seq
-IP ubuntu.8000 > 192.168.80.1.7467: 
-Flags [S.], seq 938535101, ack 3683340921, win 64240, 
-options [mss 1460,nop,nop,sackOK,nop,wscale 7], length 0
+10:19:15.870206 IP localhost.46836 > localhost.8222: Flags [S], seq 559157932, win 43690, options [mss 65495,sackOK,TS val 2968784041 ecr 0,nop,wscale 7], length 0
+10:19:15.870219 IP localhost.8222 > localhost.46836: Flags [S.], seq 900113542, ack 559157933, win 43690, options [mss 65495,sackOK,TS val 2968784041 ecr 2968784041,nop,wscale 7], length 0
+10:19:15.870228 IP localhost.46836 > localhost.8222: Flags [.], ack 1, win 342, options [nop,nop,TS val 2968784041 ecr 2968784041], length 0
 
-# 虽然这个报文段没有字节 但由于是同步报文段 需要占用一个序号值
-# 这里是tcpdump的处理 ack显示相对值 即 3683340921 - 3683340920 = 1
-IP 192.168.80.1.7467 > ubuntu.8000: 
-Flags [.], ack 938535102, win 4106, length 0
+10:19:18.113588 IP localhost.46836 > localhost.8222: Flags [F.], seq 1, ack 1, win 342, options [nop,nop,TS val 2968786284 ecr 2968784041], length 0
+# 由于被动方没有数据要发送同时发送了 FIN ACK 
+10:19:18.113664 IP localhost.8222 > localhost.46836: Flags [F.], seq 1, ack 2, win 342, options [nop,nop,TS val 2968786284 ecr 2968786284], length 0
+10:19:18.113678 IP localhost.46836 > localhost.8222: Flags [.], ack 2, win 342, options [nop,nop,TS val 2968786284 ecr 2968786284], length 0
 
 
-# 包含FIN标志 说明要求结束连接 也需要占用一个序号值
-IP 192.168.80.1.7467 > ubuntu.8000: 
-Flags [F.], seq 1, ack 1, win 4106, length 0
+# 完整序号
+10:31:15.259169 IP localhost.46944 > localhost.8222: Flags [S], seq 898081536, win 43690, options [mss 65495,sackOK,TS val 2969503401 ecr 0,nop,wscale 7], length 0
+10:31:15.259180 IP localhost.8222 > localhost.46944: Flags [S.], seq 3168567292, ack 898081537, win 43690, options [mss 65495,sackOK,TS val 2969503401 ecr 2969503401,nop,wscale 7], length 0
+10:31:15.259190 IP localhost.46944 > localhost.8222: Flags [.], ack 3168567293, win 342, options [nop,nop,TS val 2969503401 ecr 2969503401], length 0
 
-# 服务端确认关闭连接
-IP ubuntu.8000 > 192.168.80.1.7467: 
-Flags [.], ack 2, win 502, length 0
+10:31:17.144633 IP localhost.46944 > localhost.8222: Flags [F.], seq 898081537, ack 3168567293, win 342, options [nop,nop,TS val 2969505287 ecr 2969503401], length 0
+10:31:17.144800 IP localhost.8222 > localhost.46944: Flags [F.], seq 3168567293, ack 898081538, win 342, options [nop,nop,TS val 2969505287 ecr 2969505287], length 0
+10:31:17.144814 IP localhost.46944 > localhost.8222: Flags [.], ack 3168567294, win 342, options [nop,nop,TS val 2969505287 ecr 2969505287], length 0
 
-# 服务端发送关闭连接
-IP ubuntu.8000 > 192.168.80.1.7467: 
-Flags [F.], seq 1, ack 2, win 4105, length 0
-
-# 客户端确认
-IP 192.168.80.1.7467 > ubuntu.8000: 
-Flags [.], ack 2, win 503, length 0
 ```
 
 **TCP超时重传**
