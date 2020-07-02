@@ -2,7 +2,7 @@
 title: csapp笔记
 date: 2020-06-07 9:09:20
 categories: 
-- 操作系统
+- Linux
 tags:
 - csapp
 

@@ -2,7 +2,7 @@
 title: Linux的使用
 date: 2020-03-17 12:29:20
 categories: 
-- 操作系统
+- Linux
 tags:
 - Linux
 ---

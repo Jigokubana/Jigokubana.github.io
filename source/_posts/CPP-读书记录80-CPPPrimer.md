@@ -137,34 +137,11 @@ throw exception_type("msg")
 
 
 ## 动态内存与智能指针
-| 共同操作 | 描述 |
-| --- | --- |
-| shared_ptr\<T\> sp | 空智能指针, 指向类型为T的对象 |
-| unique_ptr\<T\> up | |
-| p | 将p作为一个条件判断 若p指向对象则为true |
-| \*p | 解引用, 获得指向的对象 |
-| p->mem | 等价于 (\*p).mem |
-| p.get() | 返回p中保存的指针, 若智能指针释放了对象, 这个函数返回的指针就成了垂悬指针|
-| swap(p, q) p.swap(q) | 交换p q中的指针|
 
-| shared_ptr 独有操作 | 描述 |
-| -- | --- |
-| make_shared\<T\>(args) | 返回一个shared_ptr 指向一个动态分配的T类型对象, 使用args初始化对象 |
-| shared_ptr\<T\> p (q) | p是shared_ptr的拷贝, 此操作会递增q中的计数器. q中的指针必须能转换为T* |
-| p = q | 两者均为shared_ptr 所保存的智能指针必须能相互转换, 此操作会递减p的引用计数, 增加q的引用计数, 当p的引用计数为0则其管理的原内存释放 |
-| p.unique() | return p.use_count() == 1 |
-
-**make_shared**
-最安全的分配和使用动态内存的方法
-```c++
-// p指向 "pppppppppp"的string
-shared_ptr<string> p = make_shared<string>(10, 'p');
-// 一般使用auto
-auto p = make_shared<string>(10, 'p');
-```
 **shared_ptr的拷贝和赋值**
 当进行拷贝或者赋值操作时候 shared_ptr都会记录有多少个其他的shared_ptr
 指向相同的对象
+
 引用计数增加的情况
 - 拷贝shared_ptr 
 - 初始化其他shared_ptr指针
@@ -176,13 +153,6 @@ auto p = make_shared<string>(10, 'p');
 - 被销毁(例如离开作用域)
 
 当引用计数为0的时候, 就会释放自己管理的对象
-```c++
-auto r = make_shared<int>(42);
-r = q; // 给r赋值, 令他指向另一个地址
-		// q原来指向对象的引用计数 递增
-		// r 原来指向对象的引用计数 递减
-		// r的引用计数 为0 则自动释放
-```
 
 **使用动态内存的原因**
 - 程序不知道自己需要使用多少对象 容器类
@@ -220,59 +190,9 @@ vector<string> v1; // empty
 - 默认构造函数
 - 接受单一的initiaizer_list\<string>类型的参数. 这个参数可以接受一个初始器的花括号列表
 
-```c++
-class StrBlob // 我还去查了下 Blob是二进制数据块...
-{
-public:
-	typedef std::vector<std::string>::size_type size_type;
-	StrBlob();
-	StrBlob(std::initializer_list<std::string> il);
-	size_type size() const {return data_->size();}
-	bool empty() const {return data_->empty();}
-	// 增删
-	void push_back(const std::string &t) {data_->push_back(t)}
-	void pop_back();
-	// 访问
-	std::string& front();
-	std::string& back();
-
-private:
-	std::shared_ptr<std::vector<std::string>> data_;
-	// 如果data[i] 不合法, 抛出一个异常
-	void check(size_type i, const std::string &msg) const;
-}
-
-StrBlob::StrBlob(): data_(make_shared<vector<string>>()) {}
-StrBlob::StrBlob(initializer_list<std::string> il):
-data_(make_shared<vector<string>>(il)) {}
-
-// 下标检查
-void StrBlob::check(size_type i, const string &msg) const
-{
-	if (i >= data_->size())
-	{
-		throw out_of_range(msg);
-	}
-}
-
-string& StrBlob::front()
-{
-	check(0, "front on empty StrBlob");
-	return data->front();
-}
-string& StrBlob::back()
-{
-	check(0, "back on empty StrBlob");
-	return data->back();
-}
-void StrBlob::pop_back()
-{
-	check(0, "pop_back on empty StrBlob");
-	data->pop_back();
-}
-```
 
 **直接管理内存**
+
 了解到两个概念 一个`默认初始化`一个`值初始化`
 
 ```c++
@@ -286,9 +206,9 @@ delete pi2; // 正确 释放空指针没有错误
 
 const int *pci = new const int(1024);
 delete pci // 正确 释放一个const对象
-```
-delete之后指针就变成了`空悬指针` 需要将其置为`nullptr`
 
+// delete之后指针就变成了`空悬指针` 需要将其置为`nullptr`
+```
 
 **shared_ptr和new结合使用**
 
@@ -325,9 +245,10 @@ p.reset(q)
 p.reset(q, d)
 ```
 
+**注意**
 
 使用unique_ptr的时候要注意
-1. 不要再函数调用传参的括号中 使用临时变量 这样一旦函数调用完成就会被销毁
+1. 不要在函数调用传参的括号中 使用临时变量 这样一旦函数调用完成就会被销毁
 ```c++
 void process(shared_ptr<int> ptr)
 
@@ -340,6 +261,7 @@ process(x) ; // 错误 不能将 int* 转换为 一个 shared_ptr<int>
 process(shared_ptr<int> (x)); // 合法的，但内存会被释放! 因为临时对象会被销毁
 int j =*x //未定义的 是一个空悬指针!
 ```
+
 2. 如果使用智能指针不要使用get函数初始化另一个智能指针或为其赋值
 因为一旦新生成的智能指针离开作用域或者被释放, 会影响到原来的智能指针
 ```c++
@@ -358,8 +280,9 @@ auto p4 = std::make_shared<int>(20);
 std::unique_ptr<int> d;
 std::unique_ptr<int> d1 (new int(8)); 
 ```
-unique_ptr不支持普通的赋值和拷贝操作, 因为unique_ptr要独占所指向的对象
 
+
+3. unique_ptr不支持普通的赋值和拷贝操作, 因为unique_ptr要独占所指向的对象
 ```c++
 std::unique_ptr<int> d1 (new int(1)); 
 std::unique_ptr<int> d2 (new int(8)); 
@@ -378,51 +301,10 @@ d1.reset(d2.release()); // d2释放后由d1获取
 **weak_ptr**
 不控制所指向对象生存周期, 指向一个shared_ptr管理的对象.
 
-| 表示 | 含义 |
-| --- | --- |
-| weak_ptr/<T> w | 空格weak_ptr可以指向类型为T的对象 |
-| weak_ptr/<T> w(sp) | 与shared_ptr sp智能指针指向相同的对象, 但引用计数不增加 |
-| w = p | p可以是shared_ptr或者weak_ptr, 赋值后w与p共享对象 |
-| w.reset() | |
-| w.use_count() | 与w共享对象的shared_ptr的数量 |
-| w.expire() | return w.use_count() == 0; |
-| w.lock() | 如果expire为true返回一个空的 sp 否则返回指向w对象的sp |
 
-```c++
-class StrBlobPtr
-{
-public:
-	StrBlobPtr():curr(0) {}
-	StrBlobPtr(StrBlob &a, size_t sz = 0):
-		wptr(a.data), curr(sz) {}
-	std::sting& deref() const;
-	StrBlobPtr& incr(); // 前缀自增
 
-private:
-	std::shared_ptr<std::vector<std::string>>
-		check(std::size_t, const std::string&) const;
-	std::weak_ptr<std::vector<std::string>> wptr;
-	std::size_t curr;
-}
-
-std::shared_ptr<std::vector<std::string>>
-	check(std::size_t i, const std::string &msg) const
-{
-	auto ret = wptr.lock() // 判断vector是否还存在
-	if (!ret)
-	{
-		throw std::runtime_error("unbond StrBlobPtr");
-	}
-	if (i >= ret->size())
-	{
-		throw std::out_of_range(msg);
-	}
-	return ret;
-}
-```
 由于weak_ptr不参与对应的shared_ptr的引用计数, vector可能已经被释放了
 释放后 lock将返回一个空指针
-
 
 
 # 第三部分 类设计者的工具

@@ -2,7 +2,7 @@
 title: Shell脚本编写
 date: 2020-03-26 17:30:22
 categories: 
-- 操作系统
+- Linux
 tags:
 - Shell
 ---
