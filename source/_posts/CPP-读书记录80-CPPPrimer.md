@@ -14,26 +14,8 @@ img: https://lsmg-img.oss-cn-beijing.aliyuncs.com/%E5%8D%9A%E5%AE%A2%E5%B0%81%E9
 # TOOD
 explicit 参见7.5.4节 265
 
-# 第一部分 基础知识
-## c++11 的{}初始方式
-```c++
-// c++11 的初始化方式, 有助于防范类型转换错误.
-int a1 = { 24 };
-int b1 = {}; // 默认为0
 
-// 没有 = 同样可以
-int a2 { 24 };
-int b2 {}; // 默认为0
-
-return 0;
-```
-
-无符号的变量在 超出范围的时候对应变化
-![](https://lsmg-img.oss-cn-beijing.aliyuncs.com/CPPPrimer/%E6%9C%89%E7%AC%A6%E5%8F%B7%E5%92%8C%E6%97%A0%E7%AC%A6%E5%8F%B7%E7%9A%84%E9%87%8D%E7%BD%AE%E7%82%B9.jpg)
-
-
-## 转义字符表
-![](https://lsmg-img.oss-cn-beijing.aliyuncs.com/CPPPrimer/c%2B%2B%E8%BD%AC%E4%B9%89.jpg)
+# 杂项
 
 **char 在默认情况下, 既不是有符号. 也不是无符号.**
 ```c++
@@ -45,7 +27,6 @@ unsigned char a;
 
 **输入**
 ```c++
-
 char name[10];
 cin.getline(name, 10); // 可以读取换行符, 但不保存
 cin.get(name, 10); // 不读取换行符, 可能导致get到换行符
@@ -72,26 +53,8 @@ cout << *(a + 1) << endl;// 2
 cout<<*p<<endl; 输出a的值，就是解引用操作。
 */
 ```
-## c 风格字符串相关
-对字符数组的赋值, 不建议使用 = 赋值, 可能会导致内存覆盖
-建议使用 `strncpy(目标位置, 字符串, 长度)` 然后手动在目标字符数组最后一位写入`\0`
-这样安全, 不过这是c风格的, 在c++中可以使用**string来代替字符数组**
 
-## 自动变量 静态存储 动态存储
-自动变量
-```c++
-char * getInut() {
-	char temp[100]; // 局部变量(自动变量), 函数结束时自动释放 存入栈中
-	cin >> temp;
-	char* pn = new char[strlen(temp) + 1];
-	strcpy(pn, temp);
-
-	return pn;
-}
-```
-动态存储 通过new 和 delete操作内存池(自由存储空间, 堆)
-
-## 宏 异常处理  函数相关
+**宏 异常处理  函数相关**
 | 定义 | 说明 |
 | ----- | ----- |
 | `__FILE__` | 存放文件名的字符串字面值 |
@@ -99,6 +62,7 @@ char * getInut() {
 | `__TIME__` | 存放文件编译时间的字符串字面量 |
 | `__DATE__` | 存放文件编译日期的字符串字面值 |
 | `__VA_ARGS__` | 用来接受函数参数中`...`, 类似printf函数, 这个宏只能在宏中使用 |
+
 
 **异常处理**
 代码可以使用throw来抛出异常
@@ -119,24 +83,116 @@ throw exception_type("msg")
 | length_error     |                                    |
 | out_of_range     | 程序逻辑错误: 超范围               |
 
-**默认参数**
-函数可以设定默认参数.
 
-在调用设置有默认参数的函数时只能省略右边的带默认值参数
-如果一个参数设置了默认值, 则其右边的参数都需要设置默认值
+# 第一部分 基础知识
 
-如果一个函数在头文件中已经声明了默认参数, 实现的时候不能更该已经设定的默认参数
+## 第二章 变量和基本类型
+### 习题
 
-但可以将未设置默认参数的函数设置默认参数
+**2.2 与钱相关的数据存储 使用的类型**
+银行相关钱相关的数据 保存 使用整形, 不太可能使用浮点数. 浮点数运算可能会出现误差
+使用`1`代表`1RMB` 或者使用`1`代表`0.01RMB`
+
+**2.9 解释下列定义 对于非法说出错在哪里**
+```c++
+std::cin >> int input_value; // error: expected primary-expression before ‘int’
+
+int i1 = {3.14};// narrowing conversion of ‘3.1400000000000001e+0’ from ‘double’ to ‘int’ inside { } [-Wnarrowing]
+
+double salary = wage = 9999.99;// error: ‘wage’ was not declared in this scope 如果定义wage则语句不报错
+
+int i2 = 3.14;
+```
+
+**2.10 下列变量的初始值是什么**
+内置类型变量未被显示初始化  函数体之外初始化为0  函数体内是未被定义的
+类	一般都拥有默认的初始化方式
+```c++
+std::string g_str; // 全局变量 且拥有默认初始化方式 为空字符串
+int g_int; // 	全局变量 初值为0
+int main()
+{
+	int local_int; // 局部变量 未定义
+	std::string local_str; // 拥有默认初始化方式 空字符串
+}
+```
+
+**2.14 下面代码输出什么**
+起初一看 以为会是循环到溢出 直接就把代码码了下来运行 发现是正常的.
+就算for中 `int i = 0`改为`i = 0`依然不会溢出
+for的i覆盖了外面的i
+```c++
+#include <iostream>
+
+int main()
+{
+    int i = 100, sum = 0;
+    for (int i = 0; i != 10; ++i)
+    {
+        sum += i;
+    }
+
+    std::cout << i << " " << sum << std::endl; // $ 100 45
+
+    return 0;
+}
+```
+
+
+### tips
+一个形如42的值被称为`字面值常量(literal)`, 这样的值你一看到(面), 就知道是多少
+
+scope 作用域
+
+### 无符号
+**unsigned int和int运算的时候 自动转换为unsigned**
+```c++
+unsigned int a = 10;
+int b = -11;
+
+std::cout << a + b << std::endl; //$ 4294967295
+```
+
+**警惕for循环中的 无符号类型**
+size_t
+
+
+### 声明定义初始化赋值
+**声明**
+声明不是定义, 可以多次声明
+指明变量的type和name.
+对于变量的声明需要使用`extern`关键字, 如果使用了`extern`关键字的同时初始化就成了定义
+```c++
+int i; // 声明并定义 未初始化
+extern int a; // 声明
+extern int a = 10; // 定义 声明 初始化
+```
+
+**定义**
+声明并定义, 只能定义一次
+定义的时候需要指定type和name. 申请空间, 可能进行初始化.
+
+
+**初始化 赋值**
+初始化 不是赋值
+初始化是创建变量时 赋予其一个初始值
+赋值是擦除当前的值 赋予新的值
+
+
+**变量类型选择**
+数值范围超过`int` 建议使用`long long`, `long`的长度仅是大于等于`int`
+char类型可能是 `signed` 还可能是`unsigned` 如果针对范围有特殊要求 应该注明是否有无符号
+浮点运算建议使用double float经常精度不够, 然而两者运算效率却相差无几. `long double`反而绝大多数情况用不到
+
+
 
 
 # 第二部分 cpp标准库
 
-## 动态内存-自由空间(堆)
 ![](https://lsmg-img.oss-cn-beijing.aliyuncs.com/CPPPrimer/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88.png)
 
 
-## 动态内存与智能指针
+## 第十二章 动态内存与智能指针
 
 **shared_ptr的拷贝和赋值**
 当进行拷贝或者赋值操作时候 shared_ptr都会记录有多少个其他的shared_ptr
