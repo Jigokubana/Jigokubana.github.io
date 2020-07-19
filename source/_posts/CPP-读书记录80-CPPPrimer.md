@@ -132,8 +132,23 @@ int main()
         sum += i;
     }
 
-    std::cout << i << " " << sum << std::endl; // $ 100 45
+    std::cout << i << " " << sum << std::endl; //$ 100 45
 
+    return 0;
+}
+```
+
+输出~~~
+```c++
+#include <iostream>
+
+int main()
+{
+    int i, &ri = i;
+    i = 5;
+    ri = 10;
+
+    std::cout << i << " " << ri <<std::endl; //$ 10 10
     return 0;
 }
 ```
@@ -184,8 +199,108 @@ extern int a = 10; // 定义 声明 初始化
 char类型可能是 `signed` 还可能是`unsigned` 如果针对范围有特殊要求 应该注明是否有无符号
 浮点运算建议使用double float经常精度不够, 然而两者运算效率却相差无几. `long double`反而绝大多数情况用不到
 
+### const
+const变量必须被初始化
+
+所谓指向常量的引用或指针, 不过是指针或引用自以为是罢了, 他们觉得自己指向了常量, 所以自觉不去修改
+
+顶层const: 表示指针本身是常量
+底层const: 表示指针指向是一个常量
+指针本身是一个对象, 他可以指向另一个对象. 因此, 指针本身是不是常量, 以及指针所向是不是一个常量就是两个独立的问题.
 
 
+执行拷贝的时候, 常量是顶层const还是底层const区别明显, 顶层const可以视为不见
+然而底层const的限制不能忽视, 拷入和拷出对象必须具有相同的底层const资格
+
+**指针常量和类型别名**
+```c++
+typedef char* pstring;
+const pstring cstr = 0;
+```
+这里pstring是指向char的指针 const pstring是指向char的常量指针 指针指向不能变
+而不是简单地将pstring替换掉
+
+
+### constexpr
+在一个复杂系统中, 很难分辨一个初始值到底是不是常量表达式.
+当然可以定义一个const变量 并把初始值设定为我们认为的常量表达式, 然而实际依然有非常量表达式的情况
+
+C++11标准 将变量声明为constexpr由编译器来验证变量是否是一个常量表达式
+
+```c++
+constexpr int mm = 20; // 20是常量表达式
+constexpr int yy = mm + 1; // mf + 1是常量表达式
+constexpr int sz = size(); // 当size是一个constexpr函数时才是正确的声明语句
+```
+
+指针和引用都能定义成constexpr, 但初始值受到严格限制.
+constexpr指针的初始值必须是nullptr或者0 或者存储于某个固定地址中的对象(位于所有函数体之外)
+constexpr引用能绑定到 某个固定地址中的对象
+
+**decltype和引用**
+`decltype((i)) d` 双层括号是引用
+`decltype(i) d`单层括号只有i是引用的时候 d才是引用
+
+## 第三章 字符串 向量和数组
+## 习题
+
+## {} = ()
+```c++
+string a = "cccc";  // 只有一个参数值
+string b(10, 'c'); // 拥有两个参数值 10和'c'
+```
+
+使用=, 进行拷贝初始化 只能提供一个初始值
+使用(), 进行直接初始化, 可以提供多个初始值进行初始化
+
+```c++
+class A
+{
+  int a1 = 10;
+  int a2(10);
+  // temp.cpp:4:12: error: expected identifier before numeric constant
+  // int a2(10);
+  // temp.cpp:4:12: error: expected ‘,’ or ‘...’ before numeric constant
+  int a3{10};
+}
+```
+类内初始值 不能使用小括号
+
+
+列表初始化只能放在花括号中 
+
+## vector
+vector中不能保存引用, 因为使用引用就必须初始化.
+
+设想, 你设置了vector包含十个元素, 这十个空间就必须被初始化, 
+然而引用必须要绑定到具体的对象上, 此时却没有对象进行绑定
+
+再者如果容器复制的时候 引用怎么复制?
+
+```c++
+vector<int> v1(10); // 10个元素, 全为0
+vector<int> v2{10}; // 一个元素, 为10
+
+vector<int> v3(10, 1); // 10个元素, 全为1
+vector<int> v4{10, 1}; // 两个元素, 10和1
+
+// -----------------------------------------
+
+vector<string> v5{"hi"}; // 列表初始化 有一个元素
+vector<string> v6("hi"); // 错误不能使用字符串字面值构建vector元素
+
+vector<string> v7{10}; // 10个默认初始化的对象
+vector<string> v8{10, "hi"}; // 十个值为"hi"的元素
+```
+
+因为不能使用int来初始化string对象, 列表初始化要求列表值类型与尖括号种类型相同
+v7和v8并不是列表初始化, 而是转去尝试用默认值(默认值????)初始化
+
+这里感觉有点?去看了下英文原版
+the compiler looks for
+other ways to initialize the object from the given values.
+
+116
 
 # 第二部分 cpp标准库
 
