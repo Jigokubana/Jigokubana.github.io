@@ -115,7 +115,7 @@
   <h3 class="fa fa-tags widget-title">Tag Cloud</h3>
   <div class="tagcloud-content">
     
-      <a href="/tags/3DMAX/" style="font-size: 0.14rem; color: #69c">3DMAX</a> <a href="/tags/CPP%E8%B8%A9%E5%9D%91%E8%AE%B0/" style="font-size: 0.17rem; color: #386da4">CPP踩坑记</a> <a href="/tags/CPP/" style="font-size: 0.17rem; color: #386da4">CPP</a> <a href="/tags/Git%E6%93%8D%E4%BD%9C/" style="font-size: 0.2rem; color: #0a407c">Git操作</a> <a href="/tags/Linux/" style="font-size: 0.14rem; color: #69c">Linux</a> <a href="/tags/GDB%E8%B0%83%E8%AF%95/" style="font-size: 0.14rem; color: #69c">GDB调试</a> <a href="/tags/spf-13/" style="font-size: 0.14rem; color: #69c">spf-13</a> <a href="/tags/csapp/" style="font-size: 0.14rem; color: #69c">csapp</a> <a href="/tags/%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/" style="font-size: 0.14rem; color: #69c">权限管理</a> <a href="/tags/Shell/" style="font-size: 0.14rem; color: #69c">Shell</a> <a href="/tags/%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/" style="font-size: 0.14rem; color: #69c">网络配置</a> <a href="/tags/Mysql/" style="font-size: 0.14rem; color: #69c">Mysql</a> <a href="/tags/%E8%82%89%E7%96%BC/" style="font-size: 0.14rem; color: #69c">肉疼</a> <a href="/tags/%E5%B0%8F%E6%96%B9%E8%AF%B4/" style="font-size: 0.14rem; color: #69c">小方说</a> <a href="/tags/%E8%85%BE%E8%AE%AF%E6%B8%B8%E6%88%8F%E5%AD%A6%E9%99%A2/" style="font-size: 0.2rem; color: #0a407c">腾讯游戏学院</a> <a href="/tags/MongoDB/" style="font-size: 0.14rem; color: #69c">MongoDB</a> <a href="/tags/%E9%99%80%E8%9E%BA%E7%90%83/" style="font-size: 0.14rem; color: #69c">陀螺球</a> <a href="/tags/%E8%87%AA%E5%BA%95%E5%90%91%E4%B8%8A/" style="font-size: 0.14rem; color: #69c">自底向上?</a>
+      <a href="/tags/3DMAX/" style="font-size: 0.14rem; color: #69c">3DMAX</a> <a href="/tags/CPP%E8%B8%A9%E5%9D%91%E8%AE%B0/" style="font-size: 0.17rem; color: #386da4">CPP踩坑记</a> <a href="/tags/CPP/" style="font-size: 0.17rem; color: #386da4">CPP</a> <a href="/tags/Git%E6%93%8D%E4%BD%9C/" style="font-size: 0.2rem; color: #0a407c">Git操作</a> <a href="/tags/Linux/" style="font-size: 0.14rem; color: #69c">Linux</a> <a href="/tags/GDB%E8%B0%83%E8%AF%95/" style="font-size: 0.14rem; color: #69c">GDB调试</a> <a href="/tags/spf-13/" style="font-size: 0.14rem; color: #69c">spf-13</a> <a href="/tags/csapp/" style="font-size: 0.14rem; color: #69c">csapp</a> <a href="/tags/Shell/" style="font-size: 0.14rem; color: #69c">Shell</a> <a href="/tags/%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/" style="font-size: 0.14rem; color: #69c">权限管理</a> <a href="/tags/%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/" style="font-size: 0.14rem; color: #69c">网络配置</a> <a href="/tags/Mysql/" style="font-size: 0.14rem; color: #69c">Mysql</a> <a href="/tags/%E8%85%BE%E8%AE%AF%E6%B8%B8%E6%88%8F%E5%AD%A6%E9%99%A2/" style="font-size: 0.2rem; color: #0a407c">腾讯游戏学院</a> <a href="/tags/%E8%82%89%E7%96%BC/" style="font-size: 0.14rem; color: #69c">肉疼</a> <a href="/tags/%E5%B0%8F%E6%96%B9%E8%AF%B4/" style="font-size: 0.14rem; color: #69c">小方说</a> <a href="/tags/MongoDB/" style="font-size: 0.14rem; color: #69c">MongoDB</a> <a href="/tags/%E9%99%80%E8%9E%BA%E7%90%83/" style="font-size: 0.14rem; color: #69c">陀螺球</a> <a href="/tags/%E8%87%AA%E5%BA%95%E5%90%91%E4%B8%8A/" style="font-size: 0.14rem; color: #69c">自底向上?</a>
   </div>
 </li>
 
@@ -186,9 +186,69 @@
 </ul>
 <p>插入排序</p>
 <ul>
+<li>适合小规模数组</li>
 <li>对于部分有序的数组, 处理起来很有效</li>
 <li>倒置的数量很少时, 插入排序很可能比其他算法还要快</li>
 </ul>
+<p>希尔排序</p>
+<ul>
+<li>插入排序对于大规模乱序数组很慢, 因为它只会交换相邻元素, 因此为了改进插入排序的局部性,提出了希尔排序</li>
+<li>希尔排序交换不相邻的元素以对数组的局部性进行排序, 最终用插入排序调整局部有序的数组</li>
+</ul>
+<p>归并排序</p>
+<ul>
+<li>原地归并排序</li>
+<li>自顶向下 递归实现 分治思想</li>
+<li>自底向上 从归并微型数组到整体归并</li>
+</ul>
+<p>快速排序</p>
+<ul>
+<li>分治排序算法</li>
+</ul>
+<p><strong>2.4 优先队列</strong></p>
+<p>需要支持两种操作, 删除最大元素和插入元素  - 优先级队列</p>
+<ol>
+<li>数组实现(无序) - 插入快 删除慢</li>
+</ol>
+<p>Insert方法 直接将元素插入尾部, 类似栈的push方法</p>
+<p>DelMax方法 使用一个内部循环找出最大的元素和边界元素交换 然后删除边界元素, 删除的时候类似pop方法</p>
+<ol start="2">
+<li>数组实现(有序) - 插入慢 删除快</li>
+</ol>
+<p>Insert方法 中进行排序, 插入新的元素的时候将较大元素向右移动一格位置, 然后插入新的元素</p>
+<p>DelMax方法 直接删除右侧元素, 类似栈的pop方法</p>
+<ol start="3">
+<li>链表表示法</li>
+</ol>
+<p>无序序列是解决问题的惰性方法, 仅在必要的时候才会采取行动 找出最大元素</p>
+<p>有序序列是解决问题的积极方法, 尽可能的未雨绸缪, 使得找出最大元素高效</p>
+<ol start="4">
+<li><code>二叉堆</code>表示法 - 插入和删除都为线性对数级别</li>
+</ol>
+<p>Insert方法 将新元素添加到数组末端, 增加了堆的大小 将新元素<code>上浮</code>到合适的位置</p>
+<p>DelMax方法 删除顶部元素 将数组的最后一个元素放到顶部 将其<code>下沉</code>到合适的位置 减小了堆的大小 将</p>
+<p><strong>堆</strong></p>
+<p>二叉堆: 每个元素都要保证小于等于(大于等于)另外两个特定位置的元素. 其根节点是最小(最大)元素</p>
+<ol>
+<li>二叉堆的指针表示法</li>
+</ol>
+<p>需要使用三个指针, 指向父节点和两个子节点</p>
+<ol start="2">
+<li>使用数组</li>
+</ol>
+<p>完全二叉树可以使用数组表示 不使用数组的0位置元素 从1开始 k的子节点分别在2k和2k+1</p>
+<p><strong>堆的有序化</strong></p>
+<p>以最大堆为例</p>
+<ol>
+<li>由下至上的堆有序化 <code>上浮</code></li>
+</ol>
+<p>堆的有序状态因为 某个节点比他的父节点更大 被打破.</p>
+<p>需要与父节点交换, 不断向上直到遇到一个更大的父节点 或者到了顶部</p>
+<ol start="2">
+<li>由上至下的堆有序化 <code>下浮</code></li>
+</ol>
+<p>堆的有序状态因为 某个父节点比 他的两个子节点或其中之一子节点 小 被打破.</p>
+<p>将父节点与子节点中较大的一个进行交换直到它的子节点都比它小 获得到了底部</p>
 
         </div>
         <div id="post-footer">
@@ -209,7 +269,7 @@
                 
                 <li>Published Date: <span>2020-07-17  15:51:28</span></li>
                 
-                <li>Updated Date: <span>2020-07-19  16:03:01</span></li>
+                <li>Updated Date: <span>2020-07-27  16:49:37</span></li>
                 
                 <li class="post-category">
                     Categories:
