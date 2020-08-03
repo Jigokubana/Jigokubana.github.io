@@ -14,6 +14,7 @@ img: https://lsmg-img.oss-cn-beijing.aliyuncs.com/%E5%8D%9A%E5%AE%A2%E5%B0%81%E9
 # TOOD
 explicit 参见7.5.4节 265
 
+运算符优先级...........
 
 # 杂项
 
@@ -54,6 +55,7 @@ cout<<*p<<endl; 输出a的值，就是解引用操作。
 */
 ```
 
+
 **宏 异常处理  函数相关**
 | 定义 | 说明 |
 | ----- | ----- |
@@ -62,26 +64,6 @@ cout<<*p<<endl; 输出a的值，就是解引用操作。
 | `__TIME__` | 存放文件编译时间的字符串字面量 |
 | `__DATE__` | 存放文件编译日期的字符串字面值 |
 | `__VA_ARGS__` | 用来接受函数参数中`...`, 类似printf函数, 这个宏只能在宏中使用 |
-
-
-**异常处理**
-代码可以使用throw来抛出异常
-*大部分*可以指定msg来初始化异常
-throw exception_type("msg")
-表中exception不能指定msg, 来初始化, 除此外表中其他都需要msg初始
-
-| 错误名称        | 对应原因                       |
-| ---------------- | ---------------------------------- |
-| exception        | 最常见的问题                       |
-| runtime_error    | 只有运行的时候才能查到错误         |
-| range_error      | 运行时错误: 超范围                 |
-| overflow_error   | 运行时错误: 上溢                   |
-| underflow_error  | 运行时错误: 下溢                   |
-| logic_error      | 程序逻辑错误                       |
-| domain_error     | 程序逻辑错误: 参数对应的结果不存在 |
-| invalid_argument | 程序逻辑错误: 无效参数             |
-| length_error     |                                    |
-| out_of_range     | 程序逻辑错误: 超范围               |
 
 
 # 第一部分 基础知识
@@ -105,6 +87,7 @@ int i2 = 3.14;
 ```
 
 **2.10 下列变量的初始值是什么**
+
 内置类型变量未被显示初始化  函数体之外初始化为0  函数体内是未被定义的
 类	一般都拥有默认的初始化方式
 ```c++
@@ -242,9 +225,15 @@ constexpr引用能绑定到 某个固定地址中的对象
 `decltype(i) d`单层括号只有i是引用的时候 d才是引用
 
 ## 第三章 字符串 向量和数组
-## 习题
+### 习题
 
-## {} = ()
+**3.34**
+p1和p2指向同一数组中的元素, 则下面程序的功能是什么? 什么情况下程序是非法的?
+p1 += p2 - p1;
+将p1移动到p2的位置  不会非法..........
+
+
+### {} = ()
 ```c++
 string a = "cccc";  // 只有一个参数值
 string b(10, 'c'); // 拥有两个参数值 10和'c'
@@ -269,7 +258,7 @@ class A
 
 列表初始化只能放在花括号中 
 
-## vector
+### vector
 vector中不能保存引用, 因为使用引用就必须初始化.
 
 设想, 你设置了vector包含十个元素, 这十个空间就必须被初始化, 
@@ -300,7 +289,256 @@ v7和v8并不是列表初始化, 而是转去尝试用默认值(默认值????)�
 the compiler looks for
 other ways to initialize the object from the given values.
 
-116
+
+
+**迭代器**
+使用的时候注意迭代器失效, 
+
+### 数组和指针
+```c++
+int (*array_ptr)[10] = &arr; // 指向十个整数的数组
+int (&array_ref)[10] = arr; // 十个整数数组的引用
+```
+
+```c++
+int a[] = {0, 1, 2, 3, 4, 5, 6, 7};
+
+auto a1(a); // a1是指针类型
+decltype(a) a2; //a2是有八个元素的数组
+
+int* b = std::begin(a); // 指向首元素
+int* c = std::end(a); // 指向最后一个元素的后一位
+
+ptrdiff_t d = c - b; // ptrdiff_t 定义在cstddef中
+
+int* p = &a[2];
+int k = p[-1];// 内置下标运算符所用的索引值不是无符号型 可以为负
+```
+
+## 第四章 表达式
+当一个对象被用作右值的时候, 使用的是对象的值(内容)
+当一个对象被用做左值的时候, 使用的是对象的身份(在内存中的位置)
+
+如果表达式的求值结果是左值, decltype作用于该表达式得到一个引用类型.
+
+`int* p`
+解引用运算符生成左值 `decltype(*p)`得到的是`int&`
+取地址运算符生成右值 `decltype(&p)`的结果是`int**`
+
+
+大多数运算符没有规定按照什么顺序求值
+`int i = f1() * f2()`
+这两函数的调用顺序是未定义的
+
+只有四种运算符规定了运算对象的求值顺序
+短路求值
+`&&` 从左到右
+`||` 从左到右
+
+`?:`
+`,` 逗号运算符 从左到右 首先求值左侧然后丢掉结果 真正返回的是右侧结果
+
+
+书写表达式的建议
+1. 拿不准的时候最好使用括号来组合表达式. 括号不香吗?
+2. 如果改变了某个运算对象的值, 在表达使得其他地方就不要再使用这个运算对象
+
+`(-m) / n` 和 `m / (-n)` 等于 `-(m / n)`
+`m % (-n)` 等于 `m % n`
+`(-m) % n` 等于 `-(m % n)`
+
+
+```c++
+int ival, jval
+ival = jval = 0;
+```
+赋值运算符右结合, 所以右侧的`jval = 0`是左侧赋值运算符的右侧运算对象
+又因为赋值运算符返回的是其左侧运算对象, 所以右侧赋值运算符的结果(Jval)赋给了ival
+
+
+赋值运算符的优先级低于关系运算符, 所以条件语句中, 赋值部分应该加上括号
+
+
+`sizeof *p`
+sizeof 不会实际求运算对象的值, 所以即使p是无效指针也不会有什么影响
+sizeof对解引用指针执行sizeof运算得到指针指向的对象所占空间的大小
+sizeof对string对象和vector对象 只返回该类型固定部分的大小, 不会计算对象中元素占用了多少空间
+sizeof(string) 与string长度无关, 不同的编译器有不同的具体实现
+http://www.cplusplus.com/forum/general/218642/
+
+sizeof(vector<int>) 返回24字节 64位系统指针8字节 三个指针24字节 (头指针, 尾指针, 当前容量尾指针)
+pointer _M_start;
+pointer _M_finish;
+pointer _M_end_of_storage;
+
+非内置类型基本都含有指针, 指向堆中分配的内存, 所以存在存储任意大小都会返回固定sizeof
+
+
+`const-name<type>(expr)`
+命名显式强制类型转换
+
+static_cast 静态类型转换 用于替代隐式类型转换
+- 子类向父类转换 安全
+- 父类向子类转换 无动态类型检查 不安全
+- 基本数据类型转换
+- 指针类型转换
+- 将任何其他类型转换为void类型
+
+任何具有明确定义的类型转换, 只要底层不包含const, 都能使用. 值类型转换以及指针类型转换
+如果类型不兼容, 则编译阶段报错.
+
+dynamic_cast
+运行时转换, 如果转换失败返回null. type和expr必须同是类指针或者类引用
+用于父类向子类的转换
+
+const_cast
+增加或删除运算对象的底层const, 如果对象本身不是一个常量 获取写权限是合法的, 如果是常量则会产生未定义后果.
+
+
+reinterpret_cast
+为运算对象的位模式提供较低层次上的重新解析
+https://zhuanlan.zhihu.com/p/33040213
+
+
+## 第五章 语句
+
+
+即使不准备在default标签下做任何工作, 定义一个default标签也是有作用的. 可以告知读者, 
+我们已经考虑到了默认情况, 只是目前什么也没做
+
+
+**switch-case关于变量定义的问题**
+```c++
+#include <string>
+#include <iostream>
+int main()
+{
+    switch (true)
+    {
+        case true:
+            std::string v1;
+            std::string v2 {};
+            int v3 = 0;
+            int v4;
+            break;
+
+        case false:
+            std::cout << v1 << std::endl;
+            std::cout << v2 << std::endl;
+            std::cout << v3 << std::endl;
+            std::cout << v4 << std::endl;
+            break;
+    }
+
+    return 0;
+}
+
+// 编译报错 注意没有   v4  控制流绕过了初始化变量的语句
+
+switch-case.cpp: In function ‘int main()’:
+switch-case.cpp:16:14: error: jump to case label [-fpermissive]
+         case false:
+              ^~~~~
+switch-case.cpp:12:17: note:   crosses initialization of ‘int v3’
+             int v3 = 0;
+                 ^~
+switch-case.cpp:11:25: note:   crosses initialization of ‘std::__cxx11::string v2’
+             std::string v2 {};
+                         ^~
+switch-case.cpp:10:25: note:   crosses initialization of ‘std::__cxx11::string v1’
+             std::string v1;
+
+// 两个case语句加上括号后报错变为
+switch-case.cpp: In function ‘int main()’:
+switch-case.cpp:18:26: error: ‘v1’ was not declared in this scope
+             std::cout << v1 << std::endl;
+                          ^~
+switch-case.cpp:19:26: error: ‘v2’ was not declared in this scope
+             std::cout << v2 << std::endl;
+                          ^~
+switch-case.cpp:20:26: error: ‘v3’ was not declared in this scope
+             std::cout << v3 << std::endl;
+                          ^~
+switch-case.cpp:21:26: error: ‘v4’ was not declared in this scope
+             std::cout << v4 << std::endl;
+```
+
+
+定义在while条件部分或者while循环体内的变量每次迭代都经历从创建到销毁的过程
+
+
+牢记for语句头中定义的对象只在for循环体内可见.~~~~~~~~~~~
+
+
+**break continue**
+
+break负责终止离他最近的while, do while, for或者switch. 并从这些语句后的第一条开始继续执行
+
+continue语句终止最近的循环中当前迭代, 并立即开始下一次迭代
+
+**异常处理**
+代码可以使用throw来抛出异常
+大部分可以指定msg来初始化异常
+throw exception_type("msg")
+表中exception不能指定msg, 来初始化, 除此外表中其他都需要msg初始
+
+位于`stdexcept`头文件中
+
+| 错误名称        | 对应原因                       |
+| ---------------- | ---------------------------------- |
+| exception        | 最常见的问题 |
+| runtime_error    | 只有运行的时候才能查到错误         |
+| range_error      | 运行时错误: 超范围                 |
+| overflow_error   | 运行时错误: 上溢                   |
+| underflow_error  | 运行时错误: 下溢                   |
+| logic_error      | 程序逻辑错误                       |
+| domain_error     | 程序逻辑错误: 参数对应的结果不存在 |
+| invalid_argument | 程序逻辑错误: 无效参数             |
+| length_error     | 程序逻辑错误: 试图创建一个超出该类型最大长度的对象  如vector::reserve  |
+| out_of_range     | 程序逻辑错误: 超范围               |
+
+
+## 第六章 函数
+
+形参名是可选的, 但是由于无法使用未命名的形参, 所以一般都有一个名字.
+
+
+自动对象: 只存在于块执行期间的对象
+局部静态对象: 只在`第一次`经过对象语句时进行初始化, 直到程序终止才被销毁.
+
+
+数组引用形参
+```c++
+void print(int (&arr)[10])
+{
+    for (auto elem : arr)
+    {
+        cout << elem << endl;
+    }
+}
+```
+
+函数返回引用得到左值
+返回其他类型得到右值
+
+p205页 还真没见过 返回数组指针这种形式
+
+
+## 第七章 类
+
+默认构造函数, 会造成 内置类型和复合类型成员 默认初始化后 值未定义
+
+关于未定义这点我去写了小段程序看了下, 也搜了一下
+
+https://stackoverflow.com/a/2218275/11581349
+
+- it's a class/struct instance in which the default constructor initializes all primitive types; like MyClass instance; 有默认构造函数类或者结构体, 并且默认构造函数初始化所有内置类型
+- you use array initializer syntax, e.g. int a[10] = {} (all zeroed) or int a[10] = {1,2}; (all zeroed except the first two items: a[0] == 1 and a[1] == 2) 使用了大括号初始化
+- same applies to non-aggregate classes/structs, e.g. MyClass instance = {}; (more information on this can be found here) 同大括号初始化
+- it's a global/extern variable 全局或者extern类型
+- the variable is defined static (no matter if inside a function or in global/namespace scope) 变量被声明为static
+
+
 
 # 第二部分 cpp标准库
 

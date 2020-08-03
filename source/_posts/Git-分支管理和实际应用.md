@@ -9,8 +9,10 @@ tags:
 ---
 
 2020年3月12日15:42:41 更新 实操了一次hotfix 惊心动魄... 来更新下
+2020年7月29日10:53:32 更新 删除一些无意义的话....
 
 # 分支管理
+
 `git checkout -b dev`相当于一下两条命令
 `git branch dev` 分支创建
 `git checkout dev` 分支切换
@@ -22,6 +24,7 @@ tags:
 `git merge dev` 将制定的dev分支合并到当前的分支
 
 **冲突解决**
+
 `git merge dev` 将制定的dev分支合并到当前的分支
 ```
 1 111111111111111
@@ -37,45 +40,24 @@ tags:
 最后需要我手动修改这个文件为自己需要的内容 然后提交即可
   
 **分支管理**
+
 通常Git会使用`Fast forward`模式 这样删除分支后会丢失分支的信息
 可以再merge的时候加入`--no-ff`这样就能解决问题
 `git merge --no-ff -m "merge with no-ff" dev`
 由于禁用`Fast forward`后
 会生成新的commit所以需要加入` -m "merge with no-ff"`
 
-git stash 可以储存当前的工作区 继续其他的工作
+**暂存代码**
+
+git stash 可以储存当前的工作区 恢复到上一次commit后
 git stash list 查看储存的工作区列表
 git stash apply stash@{0} 恢复指定的储存
 git stash pop 恢复并drop最近的存储 慎用这个 建议使用上边的
-```
-$ cat test.txt # stash前
-111111
-$ vim test.txt 
-$ cat test.txt # 进行了修改
-111111
-222222
-333333
-$ git status
-位于分支 master
-	修改：     test.txt
-$ git stash # stash
-保存工作目录和索引状态 WIP on master: 854b710 1
-$ cat test.txt 
-111111
-$ git status
-位于分支 master
-无文件要提交，干净的工作区
-$ git stash pop
-位于分支 master
-	修改：     test.txt
-$ cat test.txt 
-111111
-222222
-333333
-```
+
   
 # 实际工作中分支的应用
 [主要参考](https://zhuanlan.zhihu.com/p/38772378)
+
 **主分支**
 - **master**: 这个分支最稳定, 相当于放的可发布版本
 - **develop**: 开发分支, 平行于master分支, 负责合并各种`用于开发子功能`的分支
@@ -90,6 +72,7 @@ $ cat test.txt
 [Git 分支管理规范](https://juejin.im/post/5d82e1f3e51d4561d044cd88#heading-14)
 
 [Git 基础 - 打标签](https://git-scm.com/book/zh/v2/Git-%E5%9F%BA%E7%A1%80-%E6%89%93%E6%A0%87%E7%AD%BE)
+
 
 **develop分支完成了操作, 准备发布新的版本**
 ```shell
