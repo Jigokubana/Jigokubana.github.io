@@ -3,6 +3,54 @@
     
     
     <entry>
+        <title><![CDATA[EPOLLET丢失新连接事件]]></title>
+        <url>http://blog.lsmg.xyz/2020/08/%25E9%2587%2587%25E5%259D%2591%25E8%25AE%25B0-EPOLLET%25E4%25B8%25A2%25E5%25A4%25B1%25E6%2596%25B0%25E8%25BF%259E%25E6%258E%25A5%25E4%25BA%258B%25E4%25BB%25B6/</url>
+        <content type="html"><![CDATA[<p>谨以此文献给我, 两次踩坑.</p>
+<p>第一次是根据muduo写我的mongo</p>
+<p>第二次则是后来我又根据muduo写higan. <del>框架名字不是重点</del></p>
+<h1 id="症状描述"><a href="#症状描述" class="headerlink" title="症状描述"></a>症状描述</h1><ol>
+<li>最首先的症状就是使用ab压测的时候, 压测会在快结束的时候卡住 而且压测过程中也会出现卡顿<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">PS C:\Users\XXX&gt; ab -n 1000 -c 94 -k  http:&#x2F;&#x2F;10.4.160.96:1022&#x2F;hello</span><br><span class="line">This is ApacheBench, Version 2.3 &lt;$Revision: 1874286 $&gt;</span><br><span class="line">Copyright 1996 Adam Twiss, Zeus Technology Ltd, http:&#x2F;&#x2F;www.zeustech.net&#x2F;</span><br><span class="line">Licensed to The Apache Software Foundation, http:&#x2F;&#x2F;www.apache.org&#x2F;</span><br><span class="line"></span><br><span class="line">Benchmarking 10.4.160.96 (be patient)</span><br><span class="line">Completed 100 requests</span><br><span class="line">Completed 200 requests</span><br><span class="line">Completed 300 requests</span><br><span class="line">Completed 400 requests</span><br><span class="line">Completed 500 requests</span><br><span class="line">Completed 600 requests</span><br><span class="line">Completed 700 requests</span><br><span class="line">Completed 800 requests</span><br><span class="line">Completed 900 requests</span><br><span class="line">apr_pollset_poll: The timeout specified has expired (70007)</span><br><span class="line">Total of 996 requests completed</span><br></pre></td></tr></table></figure></li>
+<li>这时候已经建立的连接不受影响 却无法建立新的连接 debug的时候发现会出现建立已经关闭的连接</li>
+<li>上面的问题发生与不发生 跟我是否开多线程有关, 如果我不建立额外的EventLoopThread就不会出现这个问题</li>
+</ol>
+<h1 id="第一波排查-线程之间互相影响"><a href="#第一波排查-线程之间互相影响" class="headerlink" title="第一波排查 线程之间互相影响"></a>第一波排查 线程之间互相影响</h1><p>因为问题出现与否 与我是否设置多线程有关, 我就开始排查线程之间的影响.<br>重点放在了muduo的RunInLoop函数. 因为这个函数我一直不是明白怎么回事.<br>最终根据muduo的设计思想 一个EventLoop对应一个Thread.<br>结合RunInLoop就可以达到谁的事件谁处理的效果</p>
+<p>举个例子, 连接中断后, 子线程返回相应的事件 要去调用TcpServer的RemoveConnection将自己移除, 如果不使用RunInLoop<br>当有多个子线程 同时触发同样的事件 同时去对map进行删除操作 必然需要加锁. 况且连接连接的时候也要对map进行插入操作.<br>使用RunInLoop判断后得知是子线程在调用RunInLoop而非对应的线程, 就将任务存储到了相关的EventLoop中. 而EventLoop中存储的任务只有其所属的Thread才能处理.<br>所以实现了统一所有子线程的移除连接操作到了主线程中, 而连接的建立也是主线程操作, 最终避免了加锁.</p>
+<p>然后那个swap命令处理任务度列减少加锁的时间也很赞</p>
+<p>最终我加上了几处重要的RunInLoop, 不过并没有解决问题………….</p>
+<h1 id="第二波排查-到底返回了多少事件"><a href="#第二波排查-到底返回了多少事件" class="headerlink" title="第二波排查 到底返回了多少事件?"></a>第二波排查 到底返回了多少事件?</h1><p>我在Acceptor等多个可读事件回调的位置加了计数器, 这时候最先发现的就是连接建立数量不对.</p>
+<p>上边996个完成请求缺了4个, 并且正好连接建立了90个连接, 而非设置的并发94, 也是少了4个.</p>
+<p>我先怀疑是否是ab压测的处理, 我试了下muduo多线程下94个连接 higan单线程94连接,多线程90连接, 排除了ab的问题</p>
+<p>少的链接去了哪里? 我使用netstat命令发现 正好是四个CLOSE_WAIT 我去看了下ab的包正好是114字节 说明了少的四个链接的位置<br>而且这四个端口号正好是从本该是第91个连接的端口号开始的.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@fish ~]# netstat -an | grep 1022</span><br><span class="line">tcp        4      0 0.0.0.0:1022            0.0.0.0:*               LISTEN     </span><br><span class="line">tcp      114      0 10.4.160.96:1022        10.4.160.95:8785        CLOSE_WAIT </span><br><span class="line">tcp      114      0 10.4.160.96:1022        10.4.160.95:8787        CLOSE_WAIT </span><br><span class="line">tcp      114      0 10.4.160.96:1022        10.4.160.95:8786        CLOSE_WAIT </span><br><span class="line">tcp      114      0 10.4.160.96:1022        10.4.160.95:8784        CLOSE_WAIT</span><br></pre></td></tr></table></figure>
+<p>其实netstat不对劲早就发现了, 然而并不理解netstat命令 没有重视问题.</p>
+<p>使用Man命令察看了 第二列是Recv-Q 对于CLOSE_WAIT来说是未接收的字节数 对于LISTEN则是未接收的连接数</p>
+<h1 id="第三波排查-为什么这四个连接没有被接受"><a href="#第三波排查-为什么这四个连接没有被接受" class="headerlink" title="第三波排查 为什么这四个连接没有被接受"></a>第三波排查 为什么这四个连接没有被接受</h1><p>首先我发现了我这行代码写的有问题, 而我的epoll_events_是一个vector 后面的代码有扩容逻辑 难道是因为max_event太小导致的ET模式漏掉事件?<br>并不是, 未被返回的事件是不会被忽略的 只有你从内核中将事件接收出来, 下次才不会提醒</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 源代码为 int event_num = epoll_wait(epollfd_, &amp;*epoll_events_.begin(), 一个常数, timeout);</span></span><br><span class="line"><span class="comment">// 修改后为 int event_num = epoll_wait(epollfd_, &amp;*epoll_events_.begin(), static_cast&lt;int&gt;(epoll_events_.size()), timeout);</span></span><br></pre></td></tr></table></figure>
+
+<p>只能继续排查了, 因为知道了Recv-Q的存在 直接搜索几个关键字 找到了这个网页</p>
+<p><a href="https://www.cnblogs.com/cxt-janson/p/9273440.html" target="_blank" rel="noopener">https://www.cnblogs.com/cxt-janson/p/9273440.html</a></p>
+<p>最后我尝试将EPOLLET模式改为EPOLLLT正常了!!!!!!</p>
+<h1 id="仍存在的问题"><a href="#仍存在的问题" class="headerlink" title="仍存在的问题"></a>仍存在的问题</h1><p>为什么只有我在启用多线程的时候才会发生丢失连接的现象? 这个问题目前还没找到.</p>
+<h1 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h1><p>我最先排查的重点是线程之间的影响, 我对于muduo的多线程处理机制还是不熟悉, 自以为是了某些地方. </p>
+<p>连接建立的数量不对的时候虽然发现了Recv-Q以及CLOSE_WAIT 但由于对Tcp连接状态的理解以及netstat命令的不熟悉, 导致走了弯路.</p>
+]]></content>
+        
+        <categories>
+            
+            <category> 采坑记 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 采坑记 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
         <title><![CDATA[网络配置]]></title>
         <url>http://blog.lsmg.xyz/2020/07/Linux-%25E7%25BD%2591%25E7%25BB%259C%25E9%2585%258D%25E7%25BD%25AE/</url>
         <content type="html"><![CDATA[<h1 id="服务器双网卡配置"><a href="#服务器双网卡配置" class="headerlink" title="服务器双网卡配置"></a>服务器双网卡配置</h1><p>内网访问外网</p>
@@ -58,6 +106,73 @@
 <ul>
 <li>分治排序算法</li>
 </ul>
+<p>堆排序</p>
+<ul>
+<li>只能说妙啊.. 这本书先讲的优先队列如何实现, 然后紧接着就用sink方法完成了堆排序</li>
+</ul>
+<p><strong>稳定性</strong></p>
+<p>某地在某时下雨 时间和地点存在对应关系.<br>按照时间排序后, 再按照地点排序 单个地点的时间排序就很可能被打乱</p>
+<p>稳定, 则时间排序没有被打乱. 不稳定, 很可能时间排序被打乱</p>
+<table>
+<thead>
+<tr>
+<th>算法</th>
+<th>是否稳定</th>
+<th>是否为原地排序</th>
+<th>时间复杂度</th>
+<th>空间复杂度</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>选择排序</td>
+<td>否</td>
+<td>是</td>
+<td>N^2</td>
+<td>1</td>
+<td>最简单粗暴的方式, 交换次数最少</td>
+</tr>
+<tr>
+<td>插入排序</td>
+<td>是</td>
+<td>是</td>
+<td>介于N与N^2</td>
+<td>1</td>
+<td>很大程度取决输入元素的排列情况, 如果倒置元素很少则性能可能超过快排</td>
+</tr>
+<tr>
+<td>希尔排序</td>
+<td>否</td>
+<td>是</td>
+<td></td>
+<td>1</td>
+<td>插入排序的改良版, 改善了插入排序过于局限</td>
+</tr>
+<tr>
+<td>快速排序</td>
+<td>否</td>
+<td>是</td>
+<td>NlogN</td>
+<td>lgN</td>
+<td>分治, 运行效率由概率保证</td>
+</tr>
+<tr>
+<td>归并排序</td>
+<td>是</td>
+<td>否</td>
+<td>NlogN</td>
+<td>N</td>
+<td>自顶向下(递归 分治)和自底向上(从局部到整体) 两种方法</td>
+</tr>
+<tr>
+<td>堆排序</td>
+<td>否</td>
+<td>是</td>
+<td>NlogN</td>
+<td>1</td>
+<td>学完后突然想到了如果在很多的数字中找到最大的多少个数这种问题</td>
+</tr>
+</tbody></table>
 <p><strong>2.4 优先队列</strong></p>
 <p>需要支持两种操作, 删除最大元素和插入元素  - 优先级队列</p>
 <ol>
@@ -102,6 +217,20 @@
 </ol>
 <p>堆的有序状态因为 某个父节点比 他的两个子节点或其中之一子节点 小 被打破.</p>
 <p>将父节点与子节点中较大的一个进行交换直到它的子节点都比它小 获得到了底部</p>
+<h1 id="第三章-查找"><a href="#第三章-查找" class="headerlink" title="第三章 查找"></a>第三章 查找</h1><p>符号表: 一种存储键值对的数据结构, 支持两种操作. </p>
+<ul>
+<li>插入(PUT, 我还去查了下insert和put单词意思的差别…) 将一组新的键值对存入表中</li>
+<li>查找(get), 根据给定的键得到相应的值</li>
+</ul>
+<p>无序链表</p>
+<ul>
+<li>插入和查找效率低  与数据量成正比</li>
+<li>使用链表</li>
+</ul>
+<p>有序数组中的二分查找</p>
+<ul>
+<li>使用两个平行数组</li>
+</ul>
 ]]></content>
         
         <categories>
@@ -116,16 +245,17 @@
     <entry>
         <title><![CDATA[spf-13]]></title>
         <url>http://blog.lsmg.xyz/2020/07/Linux-VIM%25E6%258A%2598%25E8%2585%25BEspf13/</url>
-        <content type="html"><![CDATA[<h1 id="乱码解决"><a href="#乱码解决" class="headerlink" title="乱码解决"></a>乱码解决</h1><p>中文乱码</p>
+        <content type="html"><![CDATA[<p><a href="https://www.cnblogs.com/floatedclouds/archive/2011/11/10/2245008.html" target="_blank" rel="noopener">https://www.cnblogs.com/floatedclouds/archive/2011/11/10/2245008.html</a> vim分屏</p>
+<h1 id="乱码解决"><a href="#乱码解决" class="headerlink" title="乱码解决"></a>乱码解决</h1><p>中文乱码</p>
 <p>修改locale.conf确实解决了 但我想要的是阿里云那种显示英文中文却不是乱码</p>
 <p>最终<code>vim /etc/vconsole.conf</code>将cn改为us就解决了….</p>
 <p>中间也尝试安装语言包, 记得是已经安装 最终是修改上面那个之后就好了</p>
-<h1 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">R           进入替换模式</span><br><span class="line"></span><br><span class="line">e           光标后移一个单词 连续的符号也算一个单词 &lt;&lt;</span><br><span class="line">E           光标后移一个单词 无视符号</span><br><span class="line"></span><br><span class="line">b           光标前移一个单词 连续的符号也算一个单词 &lt;&lt;</span><br><span class="line">B           光标前移一个单词 无视符号</span><br><span class="line"></span><br><span class="line">yy或Y       复制整行          </span><br><span class="line">p           光标之后粘贴</span><br><span class="line">P大写           光标之前粘贴</span><br></pre></td></tr></table></figure>
+<h1 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">R           进入替换模式</span><br><span class="line"></span><br><span class="line">e           光标后移一个单词 连续的符号也算一个单词 &lt;&lt;</span><br><span class="line">E           光标后移一个单词 无视符号</span><br><span class="line"></span><br><span class="line">b           光标前移一个单词 连续的符号也算一个单词 &lt;&lt;</span><br><span class="line">B           光标前移一个单词 无视符号</span><br><span class="line"></span><br><span class="line">yy或Y       复制整行          </span><br><span class="line">p           光标之后粘贴</span><br><span class="line">P大写           光标之前粘贴</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 2020年7月30日10:14:18</span></span><br><span class="line">ctrl+r      重做撤销内容</span><br><span class="line">u           撤销</span><br><span class="line"></span><br><span class="line">^           本行第一个非空格字符</span><br><span class="line"><span class="meta">$</span><span class="bash">           本行最后一个非空格字符</span></span><br><span class="line">G           文件尾</span><br><span class="line">gg          文件头</span><br></pre></td></tr></table></figure>
 
 
 <h1 id="注释-NERDCommenter"><a href="#注释-NERDCommenter" class="headerlink" title="注释 NERDCommenter"></a>注释 NERDCommenter</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">,c&lt;space&gt;   当前行注释和切换注释</span><br><span class="line"></span><br><span class="line">,cs         块注释当前选中或当前行</span><br><span class="line">v           小写v进入多字符选择模式</span><br><span class="line">V           大写V进入多行选择</span><br></pre></td></tr></table></figure>
 
-<h1 id="文件导航工具-NERDTree"><a href="#文件导航工具-NERDTree" class="headerlink" title="文件导航工具 NERDTree"></a>文件导航工具 NERDTree</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ctrl + e    打开文件导航</span><br><span class="line">o           打开文件, 目录, 标签</span><br><span class="line">go          打开文件, 目录, 标签, 但光标仍位于导航栏</span><br><span class="line"></span><br><span class="line">R           刷新根目录下所有文件</span><br><span class="line">r           刷新当前目录下文件</span><br><span class="line"></span><br><span class="line">tab         补全菜单向下移动</span><br><span class="line">space       补全为当前单词 附带一个空格</span><br></pre></td></tr></table></figure>]]></content>
+<h1 id="文件导航工具-NERDTree"><a href="#文件导航工具-NERDTree" class="headerlink" title="文件导航工具 NERDTree"></a>文件导航工具 NERDTree</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">ctrl + e    打开文件导航</span><br><span class="line">o           打开文件, 目录, 标签</span><br><span class="line">go          打开文件, 目录, 标签, 但光标仍位于导航栏</span><br><span class="line"></span><br><span class="line">R           刷新根目录下所有文件</span><br><span class="line">r           刷新当前目录下文件</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 2020年7月30日16:22:01</span></span><br><span class="line">--------------------------------------</span><br><span class="line">t           在新tab中打开选中节点书签</span><br><span class="line">T           同上 但焦点仍在当前tab</span><br><span class="line"></span><br><span class="line">gt, gT      在tab之间切换</span><br><span class="line"></span><br><span class="line">:tabc       关闭当前tab</span><br><span class="line">:tabo       关闭其他tab</span><br><span class="line">:tabs       查看所有打开的tab</span><br><span class="line">-----------------------------------------</span><br><span class="line">i           在新的split中打开选择文件 两个部分水平切割</span><br><span class="line">gi          同上 焦点仍位于导航栏</span><br><span class="line">s           在新的split中打开选择文件 垂直切割</span><br><span class="line">gs          同上 焦点仍位于导航栏</span><br><span class="line"></span><br><span class="line">ctrl+w w    顺序切换, 两个窗口的时候非常方便</span><br><span class="line">ctrl+w hjkl 对应左 下 上 有</span><br><span class="line"></span><br><span class="line">ctrl+w c    关闭当前split</span><br><span class="line">ctrl+w o    关闭其他split</span><br><span class="line">-----------------------------------------</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">tab         补全菜单向下移动</span><br><span class="line">space       补全为当前单词 附带一个空格</span><br></pre></td></tr></table></figure>]]></content>
         
         <categories>
             
@@ -155,6 +285,10 @@
 <p>学习具体的时间安排.</p>
 <p><strong>2020年7月17日15:31:42</strong><br>激动人心的一刻!!! 留校申请过了, 感谢老师的帮助. 我还有什么理由不更好好利用暑假呢??</p>
 <p>算法最终选择了算法四教材</p>
+<h1 id="2020年7月27日-2020年8月2日"><a href="#2020年7月27日-2020年8月2日" class="headerlink" title="2020年7月27日 - 2020年8月2日"></a>2020年7月27日 - 2020年8月2日</h1><p><strong>2020年7月30日00:31:57</strong><br>没想到第一次记录都是这个时间点了…..<br>原因是使用了更高级的方式… 记录了自己每个时间段干了什么emm</p>
+<p>这里用来写总结吧, 最终每个星期插一张图片=, =</p>
+<p><strong>2020年7月30日10:11:52</strong></p>
+<p>详细了解并使用exec系列函数</p>
 ]]></content>
         
         <categories>
@@ -399,12 +533,13 @@
         <content type="html"><![CDATA[<h1 id="第一章-计算机系统漫游"><a href="#第一章-计算机系统漫游" class="headerlink" title="第一章 计算机系统漫游"></a>第一章 计算机系统漫游</h1><p><img src="http://lsmg-img.oss-cn-beijing.aliyuncs.com/csapp/1-3%E7%BC%96%E8%AF%91%E7%B3%BB%E7%BB%9F.png" alt=""></p>
 <p>预处理-&gt;编译-&gt;汇编-&gt;链接</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// hello.cpp</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PI 3.14</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 1111</span></span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%f\n"</span>, PI);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"hello, world!\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>预处理<br><code>g++ -E hello.cpp &gt; hello.i</code><br><code>tail -9 hello.i</code></p>
+
+<p>预处理<br>宏替换和注释消失 但是空行还在<br><code>g++ -E hello.cpp -o hello.i</code><br><code>tail -9 hello.i</code></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># <span class="number">5</span> <span class="string">"hello.cpp"</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%f\n"</span>, <span class="number">3.14</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"hello, world!\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>宏替换和注释消失 但是空行还在</p>
+
 <p>编译 生成汇编<br><code>g++ -S hello.i</code></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">        .file   &quot;hello.cpp&quot;</span><br><span class="line">        .text</span><br><span class="line">        .section        .rodata</span><br><span class="line">.LC1:</span><br><span class="line">        .string &quot;%f\n&quot;</span><br><span class="line">.LC2:</span><br><span class="line">        .string &quot;hello, world!&quot;</span><br><span class="line">        .text</span><br><span class="line">        .globl  main</span><br><span class="line">        .type   main, @function</span><br><span class="line">main:</span><br><span class="line">.LFB0:</span><br><span class="line">        .cfi_startproc</span><br><span class="line">        pushq   %rbp</span><br><span class="line">        .cfi_def_cfa_offset 16</span><br><span class="line">        .cfi_offset 6, -16</span><br><span class="line">        movq    %rsp, %rbp</span><br><span class="line">        .cfi_def_cfa_register 6</span><br><span class="line">        subq    $16, %rsp</span><br><span class="line">        movq    .LC0(%rip), %rax</span><br><span class="line">        movq    %rax, -8(%rbp)</span><br><span class="line">        movsd   -8(%rbp), %xmm0</span><br><span class="line">        leaq    .LC1(%rip), %rdi</span><br><span class="line">        movl    $1, %eax</span><br><span class="line">        call    printf@PLT</span><br><span class="line">        leaq    .LC2(%rip), %rdi</span><br><span class="line">        call    puts@PLT</span><br><span class="line">        movl    $0, %eax</span><br><span class="line">        leave</span><br><span class="line">        .cfi_def_cfa 7, 8</span><br><span class="line">        ret</span><br><span class="line">        .cfi_endproc</span><br><span class="line">.LFE0:</span><br><span class="line">        .size   main, .-main</span><br><span class="line">        .section        .rodata</span><br><span class="line">        .align 8</span><br><span class="line">.LC0:</span><br><span class="line">        .long   1374389535</span><br><span class="line">        .long   1074339512</span><br><span class="line">        .ident  &quot;GCC: (Ubuntu 7.5.0-3ubuntu1~18.04) 7.5.0&quot;</span><br><span class="line">        .section        .note.GNU-stack,&quot;&quot;,@progbits</span><br></pre></td></tr></table></figure>
-<p>汇编 生成 可重定位二进制目标程序<br><code>g++ -c hello.s</code></p>
+<p>汇编 生成 可重定位二进制目标程序<br>gcc编译器 -c参数 起到的作用是编译和汇编 -S参数 仅仅是编译<br><code>g++ -c hello.s</code></p>
 <p>链接 生成执行文件<br><code>g++ hello.o -o hello</code></p>
 <p>在不同进程间切换 交错执行的执行-上下文切换<br>操作系统保持进程运行所需的所有状态信息 这种状态-上下文</p>
 <p>线程共享代码和全局数据</p>
@@ -695,6 +830,26 @@
 <li><del>通用汽车公司做的分析发现 有五到八成的if语句都需要配有else语句</del></li>
 <li>确保考虑到所有的情况, 一串if elseif之后应该加上一个else检查其他情况, 防止有未考虑到的情况</li>
 </ul>
+<p>case语句</p>
+<ul>
+<li>default语句只用来检查真正的默认情况, 而不是用来处理你认为的最后一种情况. 否则<br>你将失去case语句的标号(label)所提供的自动说明功能, 也丧失了default子句检错的能力</li>
+<li>利用default语句来检错</li>
+<li>case语句后没有break应该注释说明</li>
+</ul>
+<h2 id="第十六章-控制循环"><a href="#第十六章-控制循环" class="headerlink" title="第十六章 控制循环"></a>第十六章 控制循环</h2><ul>
+<li>不要滥用循环下标<br>最好不要在循环体外 使用 依赖于循环下标最终取值的代码 可能会因为循环异常退出或者循环结束, 得到的下标并不是你想要的下标. 应该使用合适的变量用来标记在循环中是否遇到了你想要的情况</li>
+<li>考虑在while循环中使用break而不是布尔标记</li>
+<li>不要使用浮点数作为边界</li>
+<li>使用有意义的下标变量名, 防止下标串话.</li>
+<li>不要在循环中修改下标值</li>
+</ul>
+<p>下面的代码就是下标串话, 本来第二个循环应该使用j. 这种bug可能不是很容易排查出来, i和j乍一看很像.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>  i, j;</span><br><span class="line"><span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; xxx; ++i)</span><br><span class="line">&#123;</span><br><span class="line">  xxxx</span><br><span class="line">  <span class="keyword">for</span> (i = <span class="number">0</span>; j &lt;xxx; ++j)</span><br><span class="line">  &#123;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>低效的程序员会随意做一些试验, 直到他们找到了一种看上去能工作的组合. 如果某个循环没有按照想象工作,低效的程序员可能会把<code>&lt;</code>改为<code>&lt;=</code>. 如果还不行可能把下标<code>+1</code>或者<code>-1</code>. 这样最终可能碰出正确组合, 也有可能把原来的错误改成了另一个更微妙的错误. 即使这样随意的开发过程能够产生正确的程序, 这些程序员也不明白为什么这个程序是正确的.</p>
+<h2 id="第十七章-不常见的控制结构"><a href="#第十七章-不常见的控制结构" class="headerlink" title="第十七章 不常见的控制结构"></a>第十七章 不常见的控制结构</h2><p>递归前两天正好用过, 如果用的恰当的话 感觉很不错</p>
+<p>我也不想去用…… =, =</p>
 ]]></content>
         
         <categories>
@@ -821,6 +976,13 @@
 <p>起初我使用send发送全是 类似string的东西 char*保存, 单字节数据自然不会受字节序影响</p>
 <p>但是最近学习了moduo后发现了发送数字的实际应用<br>对于一个 <code>int32_t</code>类型的数字需要调用<code>htobe32()</code>转换成<code>大端序</code>然后<code>std::copy</code>到buffer中<br>接收端读取出四个字节 <code>std::copy</code>到<code>int32_t</code>中, 需要调用下<code>be32toh()</code>转换成<code>小端序</code> 这就涉及到了字节序转换</p>
 <p>总结下就是单字节数据比如发送一个字符串 是不会收到字节序影响<br>而如果你直接发送数字比如<code>int32_t</code> 就会受到影响</p>
+<h2 id="SIGPIPE信号触发原因和防治"><a href="#SIGPIPE信号触发原因和防治" class="headerlink" title="SIGPIPE信号触发原因和防治"></a>SIGPIPE信号触发原因和防治</h2><p>client与server建立连接后 在server发送信息给client的时候, 由于client已经退出,<br>client方会向server发送RST. 此时server向已经接收到RST的client的socket继续写入数据 会导致SIGPIPE信号</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;netinet/in.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;errno.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> listen_fd = socket(PF_INET, SOCK_STREAM, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span> <span class="title">listen_address</span>&#123;</span>&#125;;</span><br><span class="line">    listen_address.sin_family = AF_INET;</span><br><span class="line">    listen_address.sin_port = htons(<span class="number">9123</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> ret = bind(listen_fd, (struct sockaddr*)&amp;listen_address,</span><br><span class="line">            <span class="keyword">static_cast</span>&lt;<span class="keyword">socklen_t</span>&gt;(<span class="keyword">sizeof</span> listen_address));</span><br><span class="line">    <span class="keyword">if</span> (ret == <span class="number">-1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%s\n"</span>, strerror(errno));</span><br><span class="line">        <span class="built_in">exit</span>(ret);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ret = <span class="built_in">listen</span>(listen_fd, <span class="number">5</span>);</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span> <span class="title">client_address</span>&#123;</span>&#125;;</span><br><span class="line">    <span class="keyword">socklen_t</span> client_address_len = <span class="keyword">static_cast</span>&lt;<span class="keyword">socklen_t</span>&gt;(<span class="keyword">sizeof</span> client_address);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> client_fd = accept(listen_fd, (struct sockaddr*)&amp;client_address,</span><br><span class="line">            &amp;client_address_len);</span><br><span class="line"></span><br><span class="line">    sleep(<span class="number">5</span>);</span><br><span class="line">    <span class="keyword">char</span> msg_first[<span class="number">20</span>] = &#123;<span class="string">"first message\n"</span>&#125;;</span><br><span class="line">    send(client_fd, msg_first, <span class="built_in">strlen</span>(msg_first), <span class="number">0</span>);</span><br><span class="line">    <span class="comment">// 第一条信息发送后收到RST</span></span><br><span class="line"></span><br><span class="line">    sleep(<span class="number">2</span>);</span><br><span class="line">    <span class="keyword">char</span> msg_second[<span class="number">20</span>] = &#123;<span class="string">"second message\n"</span>&#125;;</span><br><span class="line">    send(client_fd, msg_second, <span class="built_in">strlen</span>(msg_second), <span class="number">0</span>);</span><br><span class="line">    <span class="comment">// 第二次信息发送后出现SIGPIPE</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试代码如上 运行nc 127.0.0.1 9123后立刻按下Ctrl+C杀死client  截获的所有数据包如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">[root@fish ~]# tcpdump -i lo -Xx tcp port 9123</span><br><span class="line">tcpdump: verbose output suppressed, use -v or -vv for full protocol decode</span><br><span class="line">listening on lo, link-type EN10MB (Ethernet), capture size 262144 bytes</span><br><span class="line">00:26:27.780746 IP localhost.40580 &gt; localhost.grcp: Flags [S], seq 2027132643, win 43690, options [mss 65495,sackOK,TS val 1567772563 ecr 0,nop,wscale 7], length 0</span><br><span class="line">	0x0000:  4500 003c db97 4000 4006 6122 7f00 0001  E..&lt;..@.@.a&quot;....</span><br><span class="line">	0x0010:  7f00 0001 9e84 23a3 78d3 96e3 0000 0000  ......#.x.......</span><br><span class="line">	0x0020:  a002 aaaa fe30 0000 0204 ffd7 0402 080a  .....0..........</span><br><span class="line">	0x0030:  5d72 4f93 0000 0000 0103 0307            ]rO.........</span><br><span class="line">00:26:27.780802 IP localhost.grcp &gt; localhost.40580: Flags [S.], seq 2570863062, ack 2027132644, win 43690, options [mss 65495,sackOK,TS val 1567772563 ecr 1567772563,nop,wscale 7], length 0</span><br><span class="line">	0x0000:  4500 003c 0000 4000 4006 3cba 7f00 0001  E..&lt;..@.@.&lt;.....</span><br><span class="line">	0x0010:  7f00 0001 23a3 9e84 993c 41d6 78d3 96e4  ....#....&lt;A.x...</span><br><span class="line">	0x0020:  a012 aaaa fe30 0000 0204 ffd7 0402 080a  .....0..........</span><br><span class="line">	0x0030:  5d72 4f93 5d72 4f93 0103 0307            ]rO.]rO.....</span><br><span class="line">00:26:27.780839 IP localhost.40580 &gt; localhost.grcp: Flags [.], ack 1, win 342, options [nop,nop,TS val 1567772563 ecr 1567772563], length 0</span><br><span class="line">	0x0000:  4500 0034 db98 4000 4006 6129 7f00 0001  E..4..@.@.a)....</span><br><span class="line">	0x0010:  7f00 0001 9e84 23a3 78d3 96e4 993c 41d7  ......#.x....&lt;A.</span><br><span class="line">	0x0020:  8010 0156 fe28 0000 0101 080a 5d72 4f93  ...V.(......]rO.</span><br><span class="line">	0x0030:  5d72 4f93                                ]rO.</span><br><span class="line"></span><br><span class="line">三次握手结束后 由于立刻按下了Ctrl+C 客户端连接异常结束 发送FIN</span><br><span class="line"></span><br><span class="line">00:26:27.969734 IP localhost.40580 &gt; localhost.grcp: Flags [F.], seq 1, ack 1, win 342, options [nop,nop,TS val 1567772752 ecr 1567772563], length 0</span><br><span class="line">	0x0000:  4500 0034 db99 4000 4006 6128 7f00 0001  E..4..@.@.a(....</span><br><span class="line">	0x0010:  7f00 0001 9e84 23a3 78d3 96e4 993c 41d7  ......#.x....&lt;A.</span><br><span class="line">	0x0020:  8011 0156 fe28 0000 0101 080a 5d72 5050  ...V.(......]rPP</span><br><span class="line">	0x0030:  5d72 4f93                                ]rO.</span><br><span class="line"></span><br><span class="line">服务端回复收到FIN</span><br><span class="line"></span><br><span class="line">00:26:27.970294 IP localhost.grcp &gt; localhost.40580: Flags [.], ack 2, win 342, options [nop,nop,TS val 1567772753 ecr 1567772752], length 0</span><br><span class="line">	0x0000:  4500 0034 8f0d 4000 4006 adb4 7f00 0001  E..4..@.@.......</span><br><span class="line">	0x0010:  7f00 0001 23a3 9e84 993c 41d7 78d3 96e5  ....#....&lt;A.x...</span><br><span class="line">	0x0020:  8010 0156 fe28 0000 0101 080a 5d72 5051  ...V.(......]rPQ</span><br><span class="line">	0x0030:  5d72 5050                                ]rPP</span><br><span class="line"></span><br><span class="line">第一次写入信息</span><br><span class="line"></span><br><span class="line">00:26:32.781104 IP localhost.grcp &gt; localhost.40580: Flags [P.], seq 1:15, ack 2, win 342, options [nop,nop,TS val 1567777564 ecr 1567772752], length 14</span><br><span class="line">	0x0000:  4500 0042 8f0e 4000 4006 ada5 7f00 0001  E..B..@.@.......</span><br><span class="line">	0x0010:  7f00 0001 23a3 9e84 993c 41d7 78d3 96e5  ....#....&lt;A.x...</span><br><span class="line">	0x0020:  8018 0156 fe36 0000 0101 080a 5d72 631c  ...V.6......]rc.</span><br><span class="line">	0x0030:  5d72 5050 6669 7273 7420 6d65 7373 6167  ]rPPfirst.messag</span><br><span class="line">	0x0040:  650a                                     e.</span><br><span class="line"></span><br><span class="line">收到客户端返回的复位RST</span><br><span class="line"></span><br><span class="line">00:26:32.781155 IP localhost.40580 &gt; localhost.grcp: Flags [R], seq 2027132645, win 0, length 0</span><br><span class="line">	0x0000:  4500 0028 0000 4000 4006 3cce 7f00 0001  E..(..@.@.&lt;.....</span><br><span class="line">	0x0010:  7f00 0001 9e84 23a3 78d3 96e5 0000 0000  ......#.x.......</span><br><span class="line">	0x0020:  5004 0000 dffd 0000                      P.......</span><br><span class="line"></span><br><span class="line">第二次写入信息触发 SIGPIPE</span><br></pre></td></tr></table></figure>
+
+<p>方式SIGPIPE中断进程使用<code>signal(SIGPIPE, SIG_IGN)</code>忽略这个信号, 这时send会返回-1并设置errno=EPIPE</p>
 ]]></content>
         
         <categories>
@@ -1836,19 +1998,21 @@
     <entry>
         <title><![CDATA[分支管理和实际应用]]></title>
         <url>http://blog.lsmg.xyz/2020/03/Git-%25E5%2588%2586%25E6%2594%25AF%25E7%25AE%25A1%25E7%2590%2586%25E5%2592%258C%25E5%25AE%259E%25E9%2599%2585%25E5%25BA%2594%25E7%2594%25A8/</url>
-        <content type="html"><![CDATA[<p>2020年3月12日15:42:41 更新 实操了一次hotfix 惊心动魄… 来更新下</p>
+        <content type="html"><![CDATA[<p>2020年3月12日15:42:41 更新 实操了一次hotfix 惊心动魄… 来更新下<br>2020年7月29日10:53:32 更新 删除一些无意义的话….</p>
 <h1 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h1><p><code>git checkout -b dev</code>相当于一下两条命令<br><code>git branch dev</code> 分支创建<br><code>git checkout dev</code> 分支切换</p>
 <p><code>git branch -d dev</code> 分支删除</p>
 <p><code>git branch</code> 查看当前所有分支</p>
 <p><code>git merge dev</code> 将制定的dev分支合并到当前的分支</p>
-<p><strong>冲突解决</strong><br><code>git merge dev</code> 将制定的dev分支合并到当前的分支</p>
+<p><strong>冲突解决</strong></p>
+<p><code>git merge dev</code> 将制定的dev分支合并到当前的分支</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1 111111111111111</span><br><span class="line">2 222222222222222</span><br><span class="line">3 333333333333333</span><br><span class="line">4 444444444444444</span><br><span class="line">5 &lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD  # 我在master分支下添加了6666666 并提交</span><br><span class="line">6 6666666</span><br><span class="line">7 &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">8 7777777</span><br><span class="line">9 &gt;&gt;&gt;&gt;&gt;&gt;&gt; deb # 我在deb分支下添加了7777777 并提交</span><br></pre></td></tr></table></figure>
 <p>最后需要我手动修改这个文件为自己需要的内容 然后提交即可</p>
-<p><strong>分支管理</strong><br>通常Git会使用<code>Fast forward</code>模式 这样删除分支后会丢失分支的信息<br>可以再merge的时候加入<code>--no-ff</code>这样就能解决问题<br><code>git merge --no-ff -m &quot;merge with no-ff&quot; dev</code><br>由于禁用<code>Fast forward</code>后<br>会生成新的commit所以需要加入<code>-m &quot;merge with no-ff&quot;</code></p>
-<p>git stash 可以储存当前的工作区 继续其他的工作<br>git stash list 查看储存的工作区列表<br>git stash apply stash@{0} 恢复指定的储存<br>git stash pop 恢复并drop最近的存储 慎用这个 建议使用上边的</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">$ cat test.txt # stash前</span><br><span class="line">111111</span><br><span class="line">$ vim test.txt </span><br><span class="line">$ cat test.txt # 进行了修改</span><br><span class="line">111111</span><br><span class="line">222222</span><br><span class="line">333333</span><br><span class="line">$ git status</span><br><span class="line">位于分支 master</span><br><span class="line">	修改：     test.txt</span><br><span class="line">$ git stash # stash</span><br><span class="line">保存工作目录和索引状态 WIP on master: 854b710 1</span><br><span class="line">$ cat test.txt </span><br><span class="line">111111</span><br><span class="line">$ git status</span><br><span class="line">位于分支 master</span><br><span class="line">无文件要提交，干净的工作区</span><br><span class="line">$ git stash pop</span><br><span class="line">位于分支 master</span><br><span class="line">	修改：     test.txt</span><br><span class="line">$ cat test.txt </span><br><span class="line">111111</span><br><span class="line">222222</span><br><span class="line">333333</span><br></pre></td></tr></table></figure>
-
-<h1 id="实际工作中分支的应用"><a href="#实际工作中分支的应用" class="headerlink" title="实际工作中分支的应用"></a>实际工作中分支的应用</h1><p><a href="https://zhuanlan.zhihu.com/p/38772378" target="_blank" rel="noopener">主要参考</a><br><strong>主分支</strong></p>
+<p><strong>分支管理</strong></p>
+<p>通常Git会使用<code>Fast forward</code>模式 这样删除分支后会丢失分支的信息<br>可以再merge的时候加入<code>--no-ff</code>这样就能解决问题<br><code>git merge --no-ff -m &quot;merge with no-ff&quot; dev</code><br>由于禁用<code>Fast forward</code>后<br>会生成新的commit所以需要加入<code>-m &quot;merge with no-ff&quot;</code></p>
+<p><strong>暂存代码</strong></p>
+<p>git stash 可以储存当前的工作区 恢复到上一次commit后<br>git stash list 查看储存的工作区列表<br>git stash apply stash@{0} 恢复指定的储存<br>git stash pop 恢复并drop最近的存储 慎用这个 建议使用上边的</p>
+<h1 id="实际工作中分支的应用"><a href="#实际工作中分支的应用" class="headerlink" title="实际工作中分支的应用"></a>实际工作中分支的应用</h1><p><a href="https://zhuanlan.zhihu.com/p/38772378" target="_blank" rel="noopener">主要参考</a></p>
+<p><strong>主分支</strong></p>
 <ul>
 <li><strong>master</strong>: 这个分支最稳定, 相当于放的可发布版本</li>
 <li><strong>develop</strong>: 开发分支, 平行于master分支, 负责合并各种<code>用于开发子功能</code>的分支</li>
@@ -1888,7 +2052,7 @@
     
     <entry>
         <title><![CDATA[循环判断中使用无符号类型]]></title>
-        <url>http://blog.lsmg.xyz/2020/03/CPP-CPP%25E9%2587%2587%25E5%259D%2591-%25E5%25BE%25AA%25E7%258E%25AF%25E5%2588%25A4%25E6%2596%25AD%25E4%25B9%258B%25E6%2597%25A0%25E7%25AC%25A6%25E5%258F%25B7%25E7%25B1%25BB%25E5%259E%258B/</url>
+        <url>http://blog.lsmg.xyz/2020/03/%25E9%2587%2587%25E5%259D%2591%25E8%25AE%25B0-%25E5%25BE%25AA%25E7%258E%25AF%25E5%2588%25A4%25E6%2596%25AD%25E4%25B9%258B%25E6%2597%25A0%25E7%25AC%25A6%25E5%258F%25B7%25E7%25B1%25BB%25E5%259E%258B/</url>
         <content type="html"><![CDATA[<p>下面的代码 会产生错误.</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; test;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; test.<span class="built_in">size</span>() - <span class="number">1</span>; ++i)</span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>无符号类型的数值和有符号类型的数值进行运算(包括算数逻辑运算等)会将有符号类型的数值转换成无符号类型的数值.</p>
@@ -1897,18 +2061,14 @@
         
         <categories>
             
-            <category> CPP </category>
-            
-            <category> CPP踩坑 </category>
+            <category> 采坑记 </category>
             
         </categories>
         
         
         <tags>
             
-            <tag> CPP踩坑记 </tag>
-            
-            <tag> CPP </tag>
+            <tag> 采坑记 </tag>
             
         </tags>
         
@@ -2854,7 +3014,7 @@
     
     <entry>
         <title><![CDATA[头文件互相引用]]></title>
-        <url>http://blog.lsmg.xyz/2020/02/CPP-CPP%25E9%2587%2587%25E5%259D%2591-%25E5%25A4%25B4%25E6%2596%2587%25E4%25BB%25B6%25E4%25BA%2592%25E7%259B%25B8%25E5%25BC%2595%25E7%2594%25A8/</url>
+        <url>http://blog.lsmg.xyz/2020/02/%25E9%2587%2587%25E5%259D%2591%25E8%25AE%25B0-%25E5%25A4%25B4%25E6%2596%2587%25E4%25BB%25B6%25E4%25BA%2592%25E7%259B%25B8%25E5%25BC%2595%25E7%2594%25A8/</url>
         <content type="html"><![CDATA[<p>写在前头 本文中的<strong>编译</strong>二字基本都带加粗, 因为目前为止我还没做学到过<strong>编译</strong>器相关的东西,<br>姑且将<code>那个执行过程</code>称为<strong>编译</strong>, 所以加粗</p>
 <h1 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h1><p>二月六号的时候 我在写那个小游戏, 写头文件<code>a.h</code>发现即使引用了一个头文件<code>b.h</code>, 也没有办法使用定义在那个头文件之中的结构体.</p>
 <p>其实有点我没在意: 当我在<code>a.h</code>文件中引用<code>b.h</code>的时候<code>b.h</code>会变成<code>invaild</code>, 这里其实就已经提示了</p>
@@ -2882,18 +3042,14 @@
         
         <categories>
             
-            <category> CPP </category>
-            
-            <category> CPP踩坑 </category>
+            <category> 采坑记 </category>
             
         </categories>
         
         
         <tags>
             
-            <tag> CPP踩坑记 </tag>
-            
-            <tag> CPP </tag>
+            <tag> 采坑记 </tag>
             
         </tags>
         
@@ -3892,61 +4048,14 @@
 <p><strong>对指针解引用</strong><br>第一印象是 解除引用, 然而并不是</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">"*"的作用是引用指针指向的变量值，引用其实就是引用该变量的地址，“解”就是把该地址对应的东西解开，解出来，就像打开一个包裹一样，那就是该变量的值了，所以称为“解引用”。也就是说，解引用是返回内存地址中保存的值。</span></span><br><span class="line"><span class="comment">比如int a=10; int *p=&amp;a;</span></span><br><span class="line"><span class="comment">cout&lt;&lt;*p&lt;&lt;endl; 输出a的值，就是解引用操作。</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
 
+
 <p><strong>宏 异常处理  函数相关</strong><br>| 定义 | 说明 |<br>| —– | —– |<br>| <code>__FILE__</code> | 存放文件名的字符串字面值 |<br>| <code>__LINE__</code> | 存放当前行号的整形字面值 |<br>| <code>__TIME__</code> | 存放文件编译时间的字符串字面量 |<br>| <code>__DATE__</code> | 存放文件编译日期的字符串字面值 |<br>| <code>__VA_ARGS__</code> | 用来接受函数参数中<code>...</code>, 类似printf函数, 这个宏只能在宏中使用 |</p>
-<p><strong>异常处理</strong><br>代码可以使用throw来抛出异常<br><em>大部分</em>可以指定msg来初始化异常<br>throw exception_type(“msg”)<br>表中exception不能指定msg, 来初始化, 除此外表中其他都需要msg初始</p>
-<table>
-<thead>
-<tr>
-<th>错误名称</th>
-<th>对应原因</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>exception</td>
-<td>最常见的问题</td>
-</tr>
-<tr>
-<td>runtime_error</td>
-<td>只有运行的时候才能查到错误</td>
-</tr>
-<tr>
-<td>range_error</td>
-<td>运行时错误: 超范围</td>
-</tr>
-<tr>
-<td>overflow_error</td>
-<td>运行时错误: 上溢</td>
-</tr>
-<tr>
-<td>underflow_error</td>
-<td>运行时错误: 下溢</td>
-</tr>
-<tr>
-<td>logic_error</td>
-<td>程序逻辑错误</td>
-</tr>
-<tr>
-<td>domain_error</td>
-<td>程序逻辑错误: 参数对应的结果不存在</td>
-</tr>
-<tr>
-<td>invalid_argument</td>
-<td>程序逻辑错误: 无效参数</td>
-</tr>
-<tr>
-<td>length_error</td>
-<td></td>
-</tr>
-<tr>
-<td>out_of_range</td>
-<td>程序逻辑错误: 超范围</td>
-</tr>
-</tbody></table>
 <h1 id="第一部分-基础知识"><a href="#第一部分-基础知识" class="headerlink" title="第一部分 基础知识"></a>第一部分 基础知识</h1><h2 id="第二章-变量和基本类型"><a href="#第二章-变量和基本类型" class="headerlink" title="第二章 变量和基本类型"></a>第二章 变量和基本类型</h2><h3 id="习题"><a href="#习题" class="headerlink" title="习题"></a>习题</h3><p><strong>2.2 与钱相关的数据存储 使用的类型</strong><br>银行相关钱相关的数据 保存 使用整形, 不太可能使用浮点数. 浮点数运算可能会出现误差<br>使用<code>1</code>代表<code>1RMB</code> 或者使用<code>1</code>代表<code>0.01RMB</code></p>
 <p><strong>2.9 解释下列定义 对于非法说出错在哪里</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">cin</span> &gt;&gt; <span class="keyword">int</span> input_value; <span class="comment">// error: expected primary-expression before ‘int’</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> i1 = &#123;<span class="number">3.14</span>&#125;;<span class="comment">// narrowing conversion of ‘3.1400000000000001e+0’ from ‘double’ to ‘int’ inside &#123; &#125; [-Wnarrowing]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">double</span> salary = wage = <span class="number">9999.99</span>;<span class="comment">// error: ‘wage’ was not declared in this scope 如果定义wage则语句不报错</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> i2 = <span class="number">3.14</span>;</span><br></pre></td></tr></table></figure>
 
-<p><strong>2.10 下列变量的初始值是什么</strong><br>内置类型变量未被显示初始化  函数体之外初始化为0  函数体内是未被定义的<br>类    一般都拥有默认的初始化方式</p>
+<p><strong>2.10 下列变量的初始值是什么</strong></p>
+<p>内置类型变量未被显示初始化  函数体之外初始化为0  函数体内是未被定义的<br>类    一般都拥有默认的初始化方式</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">string</span> g_str; <span class="comment">// 全局变量 且拥有默认初始化方式 为空字符串</span></span><br><span class="line"><span class="keyword">int</span> g_int; <span class="comment">// 	全局变量 初值为0</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> local_int; <span class="comment">// 局部变量 未定义</span></span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">string</span> local_str; <span class="comment">// 拥有默认初始化方式 空字符串</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><strong>2.14 下面代码输出什么</strong><br>起初一看 以为会是循环到溢出 直接就把代码码了下来运行 发现是正常的.<br>就算for中 <code>int i = 0</code>改为<code>i = 0</code>依然不会溢出<br>for的i覆盖了外面的i</p>
@@ -4031,6 +4140,83 @@
 <p>dynamic_cast<br>运行时转换, 如果转换失败返回null. type和expr必须同是类指针或者类引用<br>用于父类向子类的转换</p>
 <p>const_cast<br>增加或删除运算对象的底层const, 如果对象本身不是一个常量 获取写权限是合法的, 如果是常量则会产生未定义后果.</p>
 <p>reinterpret_cast<br>为运算对象的位模式提供较低层次上的重新解析<br><a href="https://zhuanlan.zhihu.com/p/33040213" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/33040213</a></p>
+<h2 id="第五章-语句"><a href="#第五章-语句" class="headerlink" title="第五章 语句"></a>第五章 语句</h2><p>即使不准备在default标签下做任何工作, 定义一个default标签也是有作用的. 可以告知读者,<br>我们已经考虑到了默认情况, 只是目前什么也没做</p>
+<p><strong>switch-case关于变量定义的问题</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">switch</span> (<span class="literal">true</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="literal">true</span>:</span><br><span class="line">            <span class="built_in">std</span>::<span class="built_in">string</span> v1;</span><br><span class="line">            <span class="built_in">std</span>::<span class="built_in">string</span> v2 &#123;&#125;;</span><br><span class="line">            <span class="keyword">int</span> v3 = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">int</span> v4;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">case</span> <span class="literal">false</span>:</span><br><span class="line">            <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; v1 &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">            <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; v2 &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">            <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; v3 &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">            <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; v4 &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 编译报错 注意没有   v4  控制流绕过了初始化变量的语句</span></span><br><span class="line"></span><br><span class="line">switch-case.cpp: In function ‘int main()’:</span><br><span class="line"><span class="keyword">switch</span>-<span class="keyword">case</span>.cpp:<span class="number">16</span>:<span class="number">14</span>: error: jump to <span class="keyword">case</span> label [-fpermissive]</span><br><span class="line">         <span class="keyword">case</span> <span class="literal">false</span>:</span><br><span class="line">              ^~~~~</span><br><span class="line"><span class="keyword">switch</span>-<span class="keyword">case</span>.cpp:<span class="number">12</span>:<span class="number">17</span>: note:   crosses initialization of ‘<span class="keyword">int</span> v3’</span><br><span class="line">             <span class="keyword">int</span> v3 = <span class="number">0</span>;</span><br><span class="line">                 ^~</span><br><span class="line"><span class="keyword">switch</span>-<span class="keyword">case</span>.cpp:<span class="number">11</span>:<span class="number">25</span>: note:   crosses initialization of ‘<span class="built_in">std</span>::__cxx11::<span class="built_in">string</span> v2’</span><br><span class="line">             <span class="built_in">std</span>::<span class="built_in">string</span> v2 &#123;&#125;;</span><br><span class="line">                         ^~</span><br><span class="line"><span class="keyword">switch</span>-<span class="keyword">case</span>.cpp:<span class="number">10</span>:<span class="number">25</span>: note:   crosses initialization of ‘<span class="built_in">std</span>::__cxx11::<span class="built_in">string</span> v1’</span><br><span class="line">             <span class="built_in">std</span>::<span class="built_in">string</span> v1;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 两个case语句加上括号后报错变为</span></span><br><span class="line">switch-case.cpp: In function ‘int main()’:</span><br><span class="line"><span class="keyword">switch</span>-<span class="keyword">case</span>.cpp:<span class="number">18</span>:<span class="number">26</span>: error: ‘v1’ was <span class="keyword">not</span> declared in <span class="keyword">this</span> scope</span><br><span class="line">             <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; v1 &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">                          ^~</span><br><span class="line"><span class="keyword">switch</span>-<span class="keyword">case</span>.cpp:<span class="number">19</span>:<span class="number">26</span>: error: ‘v2’ was <span class="keyword">not</span> declared in <span class="keyword">this</span> scope</span><br><span class="line">             <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; v2 &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">                          ^~</span><br><span class="line"><span class="keyword">switch</span>-<span class="keyword">case</span>.cpp:<span class="number">20</span>:<span class="number">26</span>: error: ‘v3’ was <span class="keyword">not</span> declared in <span class="keyword">this</span> scope</span><br><span class="line">             <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; v3 &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">                          ^~</span><br><span class="line"><span class="keyword">switch</span>-<span class="keyword">case</span>.cpp:<span class="number">21</span>:<span class="number">26</span>: error: ‘v4’ was <span class="keyword">not</span> declared in <span class="keyword">this</span> scope</span><br><span class="line">             <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; v4 &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
+
+
+<p>定义在while条件部分或者while循环体内的变量每次迭代都经历从创建到销毁的过程</p>
+<p>牢记for语句头中定义的对象只在for循环体内可见.<del>~</del></p>
+<p><strong>break continue</strong></p>
+<p>break负责终止离他最近的while, do while, for或者switch. 并从这些语句后的第一条开始继续执行</p>
+<p>continue语句终止最近的循环中当前迭代, 并立即开始下一次迭代</p>
+<p><strong>异常处理</strong><br>代码可以使用throw来抛出异常<br>大部分可以指定msg来初始化异常<br>throw exception_type(“msg”)<br>表中exception不能指定msg, 来初始化, 除此外表中其他都需要msg初始</p>
+<p>位于<code>stdexcept</code>头文件中</p>
+<table>
+<thead>
+<tr>
+<th>错误名称</th>
+<th>对应原因</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>exception</td>
+<td>最常见的问题</td>
+</tr>
+<tr>
+<td>runtime_error</td>
+<td>只有运行的时候才能查到错误</td>
+</tr>
+<tr>
+<td>range_error</td>
+<td>运行时错误: 超范围</td>
+</tr>
+<tr>
+<td>overflow_error</td>
+<td>运行时错误: 上溢</td>
+</tr>
+<tr>
+<td>underflow_error</td>
+<td>运行时错误: 下溢</td>
+</tr>
+<tr>
+<td>logic_error</td>
+<td>程序逻辑错误</td>
+</tr>
+<tr>
+<td>domain_error</td>
+<td>程序逻辑错误: 参数对应的结果不存在</td>
+</tr>
+<tr>
+<td>invalid_argument</td>
+<td>程序逻辑错误: 无效参数</td>
+</tr>
+<tr>
+<td>length_error</td>
+<td>程序逻辑错误: 试图创建一个超出该类型最大长度的对象  如vector::reserve</td>
+</tr>
+<tr>
+<td>out_of_range</td>
+<td>程序逻辑错误: 超范围</td>
+</tr>
+</tbody></table>
+<h2 id="第六章-函数"><a href="#第六章-函数" class="headerlink" title="第六章 函数"></a>第六章 函数</h2><p>形参名是可选的, 但是由于无法使用未命名的形参, 所以一般都有一个名字.</p>
+<p>自动对象: 只存在于块执行期间的对象<br>局部静态对象: 只在<code>第一次</code>经过对象语句时进行初始化, 直到程序终止才被销毁.</p>
+<p>数组引用形参</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">int</span> (&amp;arr)[<span class="number">10</span>])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> elem : arr)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; elem &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>函数返回引用得到左值<br>返回其他类型得到右值</p>
+<p>p205页 还真没见过 返回数组指针这种形式</p>
+<h2 id="第七章-类"><a href="#第七章-类" class="headerlink" title="第七章 类"></a>第七章 类</h2><p>默认构造函数, 会造成 内置类型和复合类型成员 默认初始化后 值未定义</p>
+<p>关于未定义这点我去写了小段程序看了下, 也搜了一下</p>
+<p><a href="https://stackoverflow.com/a/2218275/11581349" target="_blank" rel="noopener">https://stackoverflow.com/a/2218275/11581349</a></p>
+<ul>
+<li>it’s a class/struct instance in which the default constructor initializes all primitive types; like MyClass instance; 有默认构造函数类或者结构体, 并且默认构造函数初始化所有内置类型</li>
+<li>you use array initializer syntax, e.g. int a[10] = {} (all zeroed) or int a[10] = {1,2}; (all zeroed except the first two items: a[0] == 1 and a[1] == 2) 使用了大括号初始化</li>
+<li>same applies to non-aggregate classes/structs, e.g. MyClass instance = {}; (more information on this can be found here) 同大括号初始化</li>
+<li>it’s a global/extern variable 全局或者extern类型</li>
+<li>the variable is defined static (no matter if inside a function or in global/namespace scope) 变量被声明为static</li>
+</ul>
 <h1 id="第二部分-cpp标准库"><a href="#第二部分-cpp标准库" class="headerlink" title="第二部分 cpp标准库"></a>第二部分 cpp标准库</h1><p><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/CPPPrimer/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88.png" alt=""></p>
 <h2 id="第十二章-动态内存与智能指针"><a href="#第十二章-动态内存与智能指针" class="headerlink" title="第十二章 动态内存与智能指针"></a>第十二章 动态内存与智能指针</h2><p><strong>shared_ptr的拷贝和赋值</strong><br>当进行拷贝或者赋值操作时候 shared_ptr都会记录有多少个其他的shared_ptr<br>指向相同的对象</p>
 <p>引用计数增加的情况</p>
