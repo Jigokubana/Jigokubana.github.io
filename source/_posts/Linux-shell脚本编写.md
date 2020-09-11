@@ -35,7 +35,8 @@ xxx = "lsmg" # 错误
 xxx="Jigokubana" # 随意修改
 
 # 语句赋值
-for skill in Ada Coffe Action Java; do
+for skill in Ada Coffe Action Java
+do
     echo "I am good at ${skill}Script"
 done
 
@@ -110,4 +111,17 @@ echo ${name[@]}
 echo ${#name[@]}
 # 取得单个元素长度
 echo ${#name[1]}
+```
+
+参数
+```shell
+$0
+$1
+$2
+# .... 为具体某个参数
+
+$# # 参数个数 不包括$0
+$@ # 参数数组 解析为一个数组
+$* # 参数字符串 解析为一整个字符串
+
 ```

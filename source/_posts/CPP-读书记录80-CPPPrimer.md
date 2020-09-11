@@ -525,6 +525,12 @@ p205页 还真没见过 返回数组指针这种形式
 
 
 ## 第七章 类
+### 习题
+
+**7.25 Screen能安全的依赖于拷贝和赋值操作的默认版本吗**
+Screen中只有内置类型和string, 如果其含有动态管理的内存则不行
+当类需要分配类对象以外的资源时, 默认版本经常会失效
+
 
 默认构造函数, 会造成 内置类型和复合类型成员 默认初始化后 值未定义
 
@@ -532,6 +538,7 @@ p205页 还真没见过 返回数组指针这种形式
 
 https://stackoverflow.com/a/2218275/11581349
 
+It will be automatically initialized if
 - it's a class/struct instance in which the default constructor initializes all primitive types; like MyClass instance; 有默认构造函数类或者结构体, 并且默认构造函数初始化所有内置类型
 - you use array initializer syntax, e.g. int a[10] = {} (all zeroed) or int a[10] = {1,2}; (all zeroed except the first two items: a[0] == 1 and a[1] == 2) 使用了大括号初始化
 - same applies to non-aggregate classes/structs, e.g. MyClass instance = {}; (more information on this can be found here) 同大括号初始化
@@ -539,13 +546,187 @@ https://stackoverflow.com/a/2218275/11581349
 - the variable is defined static (no matter if inside a function or in global/namespace scope) 变量被声明为static
 
 
+默认初始化发生的情况
+
+- 不使用任何初始值定义一个非静态变量或者数组
+- 一个类本身含有类类型的成员且使用合成的默认构造函数
+- 类类型的成员没有在构造函数初始值列表中显示地初始化时
+
+值初始化
+
+- 数组初始化提供的初始值数量小于数组大小
+- 不使用初始值定义一个局部静态变量
+- 书写T()表达式 显示地请求值初始化
+
+mutable可变数据成员, 从远不会是const.  可以在const成员函数中对其进行修改
+
+类的GetBalance函数的函数体在整个Account类可见之后才被处理.
+
+编译器看到GetBalance的声明后 开始从类内(**类内会从使用Money前查找**)到类外寻找Money声明, 然后函数的返回值和bal成员变量的类型为double, 接着类可见之后处理函数体 函数会返回double类型的成员变量bal
+```c++
+typedef double Money;
+std::string balance = "string";
+class Account
+{
+public:
+    // typedef std::string Money; 这里则不会报错
+    Account() = default;
+    ~Account() = default;
+    Money GetBalance() const
+    { return balance;  }
+private:
+    // typedef std::string Money; 会报错 因为由于GetBalance函数已经使用了外部的Money
+    Money balance;
+};
+int main()
+{
+    Account account;
+    std::cout << account.GetBalance(); // $ 0
+    return 0;
+}
+```
+
+```c++
+class Foo
+{
+public:
+    Foo(int val):
+        bar1(val),
+        bar2(bar1){}
+
+private:
+    int bar1; // 更改两个顺序  将会导致先使用 bar1初始化bar2 然后使用val初始化bar1
+    int bar2;
+}
+```
+在我看了一些项目后使用的上面的写法, 然而这种写法却不合适 除非你严格按照变量顺序写.
+
+如果你将bar2和bar1的顺序不小心更换了, 难以排查的bug
+
+**使用默认构造函数声明对象 需要去掉对象名后的空括号对**
+```c++
+Foo foo(); // 错误
+Foo foo;
+```
+
+### 隐式的类类型转换
+
+如果构造函数只接受一个实参, 则它实际上定义了转换为此类类型的隐式转换机制 -- 称这种构造函数为**转换构造函数**
+
+Foo含有一个只有string类型的构造函数. 当一个函数的参数是Foo类型时. 你可以将string类型直接传递给这个函数. 会自动从string类型构造成Foo类型
+
+```c++
+// Value(string val); 可以加上explicit防止隐式类型转换
+// void Add(Value val);
+
+string val1 = "val1";
+foo.Add(val1); // 正确 隐式转换成Value
+foo.Add("val2"); // 错误 只能进行一步转换  需要从"val2"到string再到Value
+```
+
+
+### 聚合类 字面值常量类
+
+聚合类
+- 所有成员都是public
+- 没有定义任何构造函数
+- 没有类内初始值
+- 没有基类也没有virtual函数
+
+```c++
+class Foo
+{
+public:
+	std::string str;
+	int val;
+};
+int main()
+{
+	Foo foo = {"1", 1};
+}
+```
+
+字面值常量类
+- 数据成员都是字面值类型的聚合类
+
+如果一个类不是聚合类, 但是符合以下要求也是字面值类型常量类
+- 数据成员必须是字面值类型
+- 类必须含有一个constexpr构造函数
+- 如果一个数据成员含有类内初始值, 则初始值必须是一条常量表达式. 如果成员属于某种类类型, 则初始值必须使用成员自己的constexpr构造函数
+- 类必须使用默认析构函数
 
 # 第二部分 cpp标准库
 
-![](https://lsmg-img.oss-cn-beijing.aliyuncs.com/CPPPrimer/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88.png)
+## 第八章 IO库
+
+想到了遇到过的`while(std::cin >> xx)`究竟是如何判断的呢? `>>`返回的对象是`std::cin`如何将其转换为`bool`?
+
+重载运算符
+```c++
+explicit __CLR_OR_THIS_CALL operator bool() const {
+        return !fail();
+    }
+_NODISCARD bool __CLR_OR_THIS_CALL operator!() const {
+    return fail();
+}
+
+class Foo
+{
+public:
+	explicit operator bool()
+	{
+		std::cout << "operator *" << std::endl;
+		return true;
+	}
+	bool operator!()
+	{
+		std::cout << "operator !" << std::endl;
+		return true;
+	}
+};
+int main()
+{
+	Foo foo;
+	if (foo); // $ operator *
+	if (!foo);// $ operator !
+}
+```
+
+
+endl  换行 刷新缓冲区
+flush 刷新缓冲区
+ends  空字符 刷新缓冲区
+
+
+unitbuf 所有输出操作后都会立即刷新缓冲区
+nounitbuf 恢复正常的缓冲方式
+
+## 第九章 顺序容器
+
+### 习题
+**9.12 对于接受一个容器创建其拷贝的构造函数 和 接收两个迭代器创建拷贝的构造函数之间的不同**
+
+创建拷贝-要求容器类型和元素类型都相同
+接收两个迭代器-元素类型能够相互转化即可
+
+
+assign函数
+- 用指定元素的拷贝 替换左侧容器中的所有元素
+
+swap函数
+- 只会真正交换array的元素 与长度有关
+- 其他容器会交换内部的数据结构 常数时间完成
+
+
+关系运算符
+- 两个容器具有相同的大小 且所有元素两两对应相等 这两个容器相等 否则不等
+- 如果两个容器大小不同, 但较小的容器中每个元素都等于较大容器中对应元素 则较小容器 > 较大容器
+- 比较结果取决于第一个不相等的元素的比较结果 类似 compare
 
 
 ## 第十二章 动态内存与智能指针
+
+![](https://lsmg-img.oss-cn-beijing.aliyuncs.com/CPPPrimer/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88.png)
 
 **shared_ptr的拷贝和赋值**
 当进行拷贝或者赋值操作时候 shared_ptr都会记录有多少个其他的shared_ptr

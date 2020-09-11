@@ -80,3 +80,24 @@ set detach-on-fork [on|off]
 | set args [args]| 指定程序运行参数 |
 | show args| 查看程序参数 |
 | info program | 查看程序是否运行, 进程号, 被暂停原因 |
+
+
+# 安装DebugInfo
+```
+cat /etc/yum.repos.d/CentOS-Debug.repo
+
+[debug]
+name=CentOS-$releasever - DebugInfo
+baseurl=http://debuginfo.centos.org/$releasever/$basearch/
+gpgcheck=0
+enabled=1 # 重点是这个 
+protect=1
+priority=1
+
+
+安装 kernel-debuginfo
+yum --enablerepo=base-debug install -y kernel-debuginfo-$(uname -r)
+
+安装glibc, 提示缺少其他的也是如此安装
+debuginfo-install glibc
+```
