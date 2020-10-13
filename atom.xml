@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.lsmg.xyz/"/>
-  <updated>2020-08-03T15:55:56.702Z</updated>
+  <updated>2020-10-11T13:55:41.420Z</updated>
   <id>http://blog.lsmg.xyz/</id>
   
   <author>
@@ -15,6 +15,136 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>蓝图与C++交互</title>
+    <link href="http://blog.lsmg.xyz/2020/10/UE4-%E8%93%9D%E5%9B%BEC++%E4%BA%A4%E4%BA%92/"/>
+    <id>http://blog.lsmg.xyz/2020/10/UE4-%E8%93%9D%E5%9B%BEC++%E4%BA%A4%E4%BA%92/</id>
+    <published>2020-10-11T12:31:22.000Z</published>
+    <updated>2020-10-11T13:55:41.420Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="蓝图Widget与C-代码交互-反射"><a href="#蓝图Widget与C-代码交互-反射" class="headerlink" title="蓝图Widget与C++代码交互-反射"></a>蓝图Widget与C++代码交互-反射</h1><ol><li>创建UserWidget的C++子类 MyUserWidget<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 用于初始化</span></span><br><span class="line"><span class="function"><span class="keyword">virtual</span> <span class="keyword">bool</span> <span class="title">Initialize</span><span class="params">()</span> <span class="keyword">override</span></span>;</span><br><span class="line"><span class="comment">// 绑定到按钮的点击事件</span></span><br><span class="line">UFUNCTION() <span class="comment">// 必须加不然会导致无反应 日志报错</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ButtonLoginEvent</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过反射获取实例 需要名称保持一致</span></span><br><span class="line">UPROPERTY(Meta = (BindWidget))</span><br><span class="line">UButton* ButtonLogin;</span><br><span class="line">UPROPERTY(Meta = (BindWidget))</span><br><span class="line">UTextBlock* TextBlockUsername; <span class="comment">// 一个文本框</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">UMyUserWidget::Initialize</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!Super::Initialize()) <span class="comment">// 会报错提示不存在 无影响</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 进行点击函数绑定</span></span><br><span class="line">    ButtonLogin-&gt;OnClicked.__Internal_AddDynamic(<span class="keyword">this</span>, &amp;UMyUserWidget::ButtonLoginEvent, FName(<span class="string">"ButtonLoginEvent"</span>));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取并显示 文本框文字</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">UMyUserWidget::ButtonLoginEvent</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (GEngine)</span><br><span class="line">    &#123;</span><br><span class="line">        FString Username = TextBlockUsername-&gt;GetText().ToString();</span><br><span class="line"></span><br><span class="line">        GEngine-&gt;AddOnScreenDebugMessage(<span class="number">-1</span>, <span class="number">20</span>, FColor::Yellow, Username);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li>创建需要绑定的蓝图NewWidgetBlueprint</li><li>打开蓝图后点击File-&gt;Reparent Blueprint选择MyUserWidget作为父类</li><li>添加名为ButtonLogin的按钮和TextBlockUsername的文本框 用于反射</li><li>创建HUD的C++子类MyHud</li><li>创建MyHud的蓝图BP_MuHud</li><li>将MyHud的蓝图设置为 GameMode的HUDClass, 这样启动的时候就能创建MuHud蓝图的实例<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 从BP_MuHud中选择 NewWidgetBlueprint蓝图</span></span><br><span class="line">UPROPERTY(EditAnywhere, Category = <span class="string">"UserWidget"</span>)</span><br><span class="line">TSubclassOf&lt;<span class="class"><span class="keyword">class</span> <span class="title">UMUserWidget</span>&gt; <span class="title">WidgetClass</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 启动时创建蓝图实例并显示 设置输入方式</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">AMyHUD::BeginPlay</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Super::BeginPlay();</span><br><span class="line"></span><br><span class="line">    UUserWidget* Widget = CreateWidget&lt;UMyUserWidget&gt;(GetWorld(), WidgetClass);</span><br><span class="line">    <span class="keyword">if</span> (Widget != <span class="literal">nullptr</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        Widget-&gt;AddToViewport();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    APlayerController* MyPlayerController = Cast&lt;APlayerController&gt;(UGameplayStatics::GetPlayerController(GetWorld(), <span class="number">0</span>));</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 输入只对UI</span></span><br><span class="line">    <span class="keyword">if</span> (MyPlayerController != <span class="literal">nullptr</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        MyPlayerController-&gt;bShowMouseCursor = <span class="literal">true</span>;</span><br><span class="line">        FInputModeUIOnly InputMode;</span><br><span class="line">        MyPlayerController-&gt;SetInputMode(InputMode);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;蓝图Widget与C-代码交互-反射&quot;&gt;&lt;a href=&quot;#蓝图Widget与C-代码交互-反射&quot; class=&quot;headerlink&quot; title=&quot;蓝图Widget与C++代码交互-反射&quot;&gt;&lt;/a&gt;蓝图Widget与C++代码交互-反射&lt;/h1&gt;&lt;ol&gt;
+&lt;l
+      
+    
+    </summary>
+    
+    
+      <category term="UE4" scheme="http://blog.lsmg.xyz/categories/UE4/"/>
+    
+    
+      <category term="蓝图与C++交互" scheme="http://blog.lsmg.xyz/tags/%E8%93%9D%E5%9B%BE%E4%B8%8EC-%E4%BA%A4%E4%BA%92/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>UNP记录</title>
+    <link href="http://blog.lsmg.xyz/2020/10/CPP-%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95150-UNP/"/>
+    <id>http://blog.lsmg.xyz/2020/10/CPP-%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95150-UNP/</id>
+    <published>2020-10-06T04:17:39.000Z</published>
+    <updated>2020-10-08T14:50:33.909Z</updated>
+    
+    <content type="html"><![CDATA[<p>由于已经在Linux高性能服务器开发中详细说明过绝大部分系统函数 这里略去</p><h1 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h1><p>通过定义<code>包裹函数</code>可以缩短程序. 在muduo框架中就存在包裹函数 将系统函数进行包装</p><p>函数中进行错误处理, 这样外部使用<code>包裹函数</code>包装好的系统函数的时候可以简化错误处理</p><p><strong>daytimecpclient-domain.cpp</strong><br>第一个样例程序稍作修改 可以解析域名  inet_addr没有请求网络 速度快 而gethostbyname会请求域名<br>服务器速度可能慢</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">sockaddr_in server_addr&#123;&#125;;</span><br><span class="line"><span class="keyword">if</span> ((server_addr.sin_addr.s_addr = inet_addr(argv[<span class="number">1</span>])) == INADDR_NONE)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">hostent</span>* <span class="title">hostptr</span> = <span class="title">gethostbyname</span>(<span class="title">argv</span>[1]);</span></span><br><span class="line">    <span class="keyword">if</span> (!hostptr)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"invalid input %s\n"</span>, argv[<span class="number">1</span>]);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    server_addr.sin_addr.s_addr = *((<span class="keyword">unsigned</span> <span class="keyword">long</span>*)hostptr-&gt;h_addr);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>迭代服务器: 对于每个客户连接都执行迭代一次<br>并发服务器: 同时处理多个客户连接</p><h1 id="第二章-传输层"><a href="#第二章-传输层" class="headerlink" title="第二章 传输层"></a>第二章 传输层</h1><p>客户端 主动调用close之后 发送了FIN包</p><p>服务端 接收到FIN包后read返回0</p><p>服务器 read返回0之后调用close函数 发送FIN包</p><p>客户端 接收服务器的FIN包</p><p><strong>@@35 P TCP状态转换图@@</strong></p><p><strong>@@36 P TCP状态转换和Socket函数间的联系@@</strong></p><p>多宿主计算机  可能插有多块网卡</p><p>通过bind到INADDR_ANY来监听多个接口的同一个端口</p><h1 id="第三章-套接字编程简介"><a href="#第三章-套接字编程简介" class="headerlink" title="第三章 套接字编程简介"></a>第三章 套接字编程简介</h1><p>大多数套接字函数 都需要一个指向<code>套接字地址结构</code>的指针作为参数. 每个协议簇都定义了他自己的<code>套接字地址结构</code>. 这些结构的名字均<code>以sockaddr_开头</code></p><p><strong>@@61 P 不同套接字地址结构的比较@@</strong></p><h1 id="第四章-基本TCP套接字编程"><a href="#第四章-基本TCP套接字编程" class="headerlink" title="第四章 基本TCP套接字编程"></a>第四章 基本TCP套接字编程</h1><p><strong>connect函数</strong></p><p>ETIMEDOUT: 客户端没有收到SYN的回应 尝试几次后如果依然没有收到回应则返回错误</p><p>ECONNREFUSED: 服务器在指定端口上没有进程等待与之连接导致收到了RST回复  之后立即返回错误</p><p>connect失败之后 此套接字无法继续使用 需要close当前套接字后重新调用socket</p><p><strong>bind函数</strong></p><p>如果调用listen或者connect前没有调用bind则操作系统会分配一个临时端口. 对于客户端来说可以接受临时端口, 然而服务器一般都是需要指定端口 供外接连接. </p><p>如果指定的端口为0 则认为没有指定端口 会分配临时端口. 如果地址指定为0(INADDR_ANY) 则系统选择IP地址</p><p>RPC服务器可以使用临时端口, 但必须将临时端口注册到端口映射器, 这样客户端才能得到对应的临时端口, 之后进行连接</p><p>可以使用getsockname获取到系统临时分配的地址和端口</p><p><strong>listen函数</strong></p><p>socket函数创建的套接字默认被认为是主动套接字(准备调用connect) 使用listen函数将一个<code>未连接</code>的套接字转换成一个被动套接字</p><p>内核为一个监听的系统套接字维护两个队列</p><ul><li>未完成队列 已经收到了SYN但还未完成三次握手</li><li>已完成队列 已经进行了三次握手<code>等待accept从队列中取走</code> 已建立的连接 如果<code>此队列为空, accept阻塞</code></li></ul><p>未完成队列+已完成队列的总长度 即为listen函数的第二个参数backlog</p><p>connect函数调用 -&gt; 服务器收到了SYN包 -&gt; 在未完成队列创建相关内容 -&gt; 创建完毕后返回SYN和ACK -&gt; 客户端返回ACK -&gt; 从未完成队列移动到已完成队列队尾</p><p>看到这里后想到之前遇到的一个BUG, 注册入<code>epollfd</code>中的<code>listenfd</code>没有设置成<code>ENONBLOCK</code>, <code>epoll_wait不会返回, 进而去调用accept</code>, 然而客户端<code>connect</code>函数返回显示已经建立连接.  –也就是connect返回说明连接建立, 发生在accpet函数调用前.</p><p><strong>@@91 P exec函数之间的关系@@</strong></p><p><strong>accept函数</strong><br>accpet函数的第一个参数必须是 被动套接字 即调用过listen, 否则返回EINVAL错误</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;由于已经在Linux高性能服务器开发中详细说明过绝大部分系统函数 这里略去&lt;/p&gt;
+&lt;h1 id=&quot;第一章&quot;&gt;&lt;a href=&quot;#第一章&quot; class=&quot;headerlink&quot; title=&quot;第一章&quot;&gt;&lt;/a&gt;第一章&lt;/h1&gt;&lt;p&gt;通过定义&lt;code&gt;包裹函数&lt;/code&gt;
+      
+    
+    </summary>
+    
+    
+      <category term="CPP" scheme="http://blog.lsmg.xyz/categories/CPP/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>深度探索C++对象模型</title>
+    <link href="http://blog.lsmg.xyz/2020/09/CPP-%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95130-%E6%B7%B1%E5%BA%A6%E6%8E%A2%E7%B4%A2C++%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B/"/>
+    <id>http://blog.lsmg.xyz/2020/09/CPP-%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95130-%E6%B7%B1%E5%BA%A6%E6%8E%A2%E7%B4%A2C++%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B/</id>
+    <published>2020-09-15T07:17:39.000Z</published>
+    <updated>2020-09-15T07:54:42.795Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="第一章-关于对象"><a href="#第一章-关于对象" class="headerlink" title="第一章 关于对象"></a>第一章 关于对象</h1><p>加上封装之后的成本增加了吗?</p><p>并没有增加成本, C++在布局以及存取时间上主要的额外负担是由virtual引起的</p><ul><li>virtual func机制 用来支持一个有效率的执行期绑定</li><li>virtual base class 用来实现多次出现在继承体系中的base class, 有一个单一而被共享的实例</li></ul><p>C++ 有两种成员变量<code>static</code>和<code>nonstatic</code><br>三种成员函数<code>static</code>, <code>nonstatic</code>和<code>virtual</code></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;第一章-关于对象&quot;&gt;&lt;a href=&quot;#第一章-关于对象&quot; class=&quot;headerlink&quot; title=&quot;第一章 关于对象&quot;&gt;&lt;/a&gt;第一章 关于对象&lt;/h1&gt;&lt;p&gt;加上封装之后的成本增加了吗?&lt;/p&gt;
+&lt;p&gt;并没有增加成本, C++在布局以及存取时间上主要
+      
+    
+    </summary>
+    
+    
+      <category term="CPP" scheme="http://blog.lsmg.xyz/categories/CPP/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>CPP入门分享</title>
+    <link href="http://blog.lsmg.xyz/2020/09/%E5%88%86%E4%BA%AB%E5%AD%A6%E4%B9%A0%E4%BC%9A-%E6%8A%93%E5%8F%96%E6%8E%A5%E5%8F%A3/"/>
+    <id>http://blog.lsmg.xyz/2020/09/%E5%88%86%E4%BA%AB%E5%AD%A6%E4%B9%A0%E4%BC%9A-%E6%8A%93%E5%8F%96%E6%8E%A5%E5%8F%A3/</id>
+    <published>2020-09-09T02:40:39.000Z</published>
+    <updated>2020-09-09T09:21:06.365Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h1><p>Fiddler 截获HTTP请求包<br>Postman 测试接口与生成代码<br>Chrome+SwitchyOmega插件</p><p>安装见视频</p><h1 id="配置Fiddler"><a href="#配置Fiddler" class="headerlink" title="配置Fiddler"></a>配置Fiddler</h1><p>Tools-&gt;Options-&gt;HTTPS 勾选Decrypt HTTPS traffic 确认安装证书</p><p>Tools-&gt;Options-&gt;Connections 勾选Allow remote computer xxxx</p><p>记下 Connections中的端口号 默认为8888</p><h1 id="配置SwitchyOmega插件"><a href="#配置SwitchyOmega插件" class="headerlink" title="配置SwitchyOmega插件"></a>配置SwitchyOmega插件</h1><p>新增情景模式-&gt;选择代理服务器</p><p>代理协议HTTP 代理服务器 127.0.0.1 端口 8888</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;工具&quot;&gt;&lt;a href=&quot;#工具&quot; class=&quot;headerlink&quot; title=&quot;工具&quot;&gt;&lt;/a&gt;工具&lt;/h1&gt;&lt;p&gt;Fiddler 截获HTTP请求包&lt;br&gt;Postman 测试接口与生成代码&lt;br&gt;Chrome+SwitchyOmega插件&lt;/p&gt;
+&lt;p
+      
+    
+    </summary>
+    
+    
+      <category term="CPP" scheme="http://blog.lsmg.xyz/categories/CPP/"/>
+    
+      <category term="入门分享" scheme="http://blog.lsmg.xyz/categories/CPP/%E5%85%A5%E9%97%A8%E5%88%86%E4%BA%AB/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>CPP入门分享</title>
+    <link href="http://blog.lsmg.xyz/2020/08/%E5%88%86%E4%BA%AB%E5%AD%A6%E4%B9%A0%E4%BC%9A-cpp%E5%85%A5%E9%97%A8/"/>
+    <id>http://blog.lsmg.xyz/2020/08/%E5%88%86%E4%BA%AB%E5%AD%A6%E4%B9%A0%E4%BC%9A-cpp%E5%85%A5%E9%97%A8/</id>
+    <published>2020-08-28T02:40:39.000Z</published>
+    <updated>2020-09-09T09:00:00.209Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="第一次"><a href="#第一次" class="headerlink" title="第一次"></a>第一次</h1><h2 id="为什么选择的是CPP"><a href="#为什么选择的是CPP" class="headerlink" title="为什么选择的是CPP"></a>为什么选择的是CPP</h2><p>学校开设</p><ul><li>Python</li><li>CPP</li><li>xxx</li></ul><h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><p>课堂讲的肯定比我讲的要好 不过我打算侧重在更加详细的讲某些基础内容 然后主要的是每周的答疑maybe</p><h2 id="规划"><a href="#规划" class="headerlink" title="规划"></a>规划</h2><p>每周五六日中一天 以计算机专业的CPP课本进度 提前讲一部分下周的内容</p><p>下一周你遇到的问题的问题私聊我 下周五六日中一天直播的时候讲解</p><h2 id="独立解决问题的能力"><a href="#独立解决问题的能力" class="headerlink" title="独立解决问题的能力"></a>独立解决问题的能力</h2><p>善用搜索引擎<br><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/CPP%E5%88%86%E4%BA%AB%E5%AD%A6%E4%B9%A0%E4%BC%9A/%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98%E7%B4%A0%E8%B4%A8%E4%BA%94%E8%BF%9E.jpg" alt=""></p><p><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/CPP%E5%88%86%E4%BA%AB%E5%AD%A6%E4%B9%A0%E4%BC%9A/%E7%99%BE%E5%BA%A6Or%E9%97%AE%E4%BA%BA.jpg" alt=""></p><p>当然也不是 所有都要自己找 不去问别人</p><p>当你一个问题考虑很久的时候 xxx</p><h2 id="编程难在哪里"><a href="#编程难在哪里" class="headerlink" title="编程难在哪里?"></a>编程难在哪里?</h2><p>什么是关键字?</p><p><a href="https://www.runoob.com/w3cnote/cpp-keyword-intro.html" target="_blank" rel="noopener">https://www.runoob.com/w3cnote/cpp-keyword-intro.html</a></p><p><img src="https://www.runoob.com/wp-content/uploads/2018/06/20130806104900234.jpg" alt="C++关键字"></p><table><thead><tr><th></th><th></th><th></th><th></th><th></th><th></th></tr></thead><tbody><tr><td>if</td><td>else</td><td>while</td><td>for</td><td>switch</td><td>case</td></tr><tr><td>break</td><td>continue</td><td>return</td><td></td><td></td><td></td></tr><tr><td>int</td><td>short</td><td>char</td><td>double</td><td>long</td><td>float</td></tr><tr><td>const</td><td>static</td><td></td><td></td><td></td><td></td></tr><tr><td>delete</td><td>new</td><td></td><td></td><td></td><td></td></tr><tr><td>enum</td><td>struct</td><td></td><td></td><td></td><td></td></tr></tbody></table><p>思想</p><p>有限的关键字 “无穷” 的组合</p><h2 id="分享-gt-私人QQ群"><a href="#分享-gt-私人QQ群" class="headerlink" title="分享-&gt;私人QQ群"></a>分享-&gt;私人QQ群</h2>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;第一次&quot;&gt;&lt;a href=&quot;#第一次&quot; class=&quot;headerlink&quot; title=&quot;第一次&quot;&gt;&lt;/a&gt;第一次&lt;/h1&gt;&lt;h2 id=&quot;为什么选择的是CPP&quot;&gt;&lt;a href=&quot;#为什么选择的是CPP&quot; class=&quot;headerlink&quot; title=&quot;为
+      
+    
+    </summary>
+    
+    
+      <category term="CPP" scheme="http://blog.lsmg.xyz/categories/CPP/"/>
+    
+      <category term="入门分享" scheme="http://blog.lsmg.xyz/categories/CPP/%E5%85%A5%E9%97%A8%E5%88%86%E4%BA%AB/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>EPOLLET丢失新连接事件</title>
@@ -420,156 +550,6 @@
     
       <category term="Socket理论" scheme="http://blog.lsmg.xyz/categories/CPP/Socket%E7%90%86%E8%AE%BA/"/>
     
-    
-  </entry>
-  
-  <entry>
-    <title>TCP状态机</title>
-    <link href="http://blog.lsmg.xyz/2020/03/CPP-Socket%E7%90%86%E8%AE%BA-TCP%E7%8A%B6%E6%80%81%E6%9C%BA/"/>
-    <id>http://blog.lsmg.xyz/2020/03/CPP-Socket%E7%90%86%E8%AE%BA-TCP%E7%8A%B6%E6%80%81%E6%9C%BA/</id>
-    <published>2020-03-25T04:55:20.000Z</published>
-    <updated>2020-04-08T01:46:19.020Z</updated>
-    
-    <content type="html"><![CDATA[<ul><li>待补充 双向管道的建立和断开细节</li><li>异常三次握手</li><li>异常四次挥手</li></ul><p><a href="https://blog.csdn.net/q1007729991/article/details/69675752" target="_blank" rel="noopener">资料参考TCP 协议状态机</a></p><p><a href="https://blog.csdn.net/randyjiawenjie/article/details/6397477" target="_blank" rel="noopener">TCP有限状态机分析</a></p><p>Tcp状态图, 虚线代表客户端 实线代表服务器<br><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/CPP/Socket%E7%90%86%E8%AE%BA/TCP%E7%8A%B6%E6%80%81%E6%9C%BA.png" alt=""></p><p>正常的连接建立还是比较容易理解的</p><p>说一下从<code>CLOSE_WAIT</code>到<code>LAST_ACK</code><br>当被动关闭方<code>B</code>接收到<code>FIN</code>后知道对方<code>A</code>要关闭连接, <code>B</code>回复一个<code>ACK</code>给<code>A</code></p><ol><li>如果此时<code>B</code>没有额外要发送的数据就给<code>A</code>, 就发送<code>FIN</code>告知<code>A</code>自己也要关闭了, 然后<code>B</code>进入<code>LAST_ACK</code></li><li>如果此时<code>B</code>有额外信息要发送等发送完毕后. 这时<code>B</code>发送一个<code>FIN</code>告知<code>A</code>然后B进入<code>LAST_ACK</code></li></ol><p>再说一下从<code>FIN_WAIT_1</code>到<code>TIME_WAIT</code></p><ol><li>直接从<code>FIN_WAIT_1</code>到<code>TIME_WAIT</code>, 这个对应上面的第一种情况, 由于<code>B</code>没有额外信息发送直接发送了<code>FIN和ACK</code>, 这时<code>A</code>再发送一个<code>ACK</code>, 进入<code>TIME_WAIT</code></li><li>经过中转状态<code>FIN_WAIT2</code>对应上面第二种情况, 由于<code>B</code>有额外信息发送, 只发送了<code>ACK</code>, 这时<code>A</code>还可以接受数据, 直到<code>B</code>发来<code>FIN</code>然后<code>A</code>发送<code>ACK</code>进入<code>TIME_WAIT</code></li></ol><p>再说一下<code>TIME_WAIT</code>状态<br>主动关闭方<code>A</code>最后发送了<code>ACK</code>确认被动关闭方<code>B</code>的<code>FIN</code>.<br>但是如果这个<code>ACK</code>由于各种原因<code>B</code>没有收到, 所以<code>B</code>会再次发送<code>FIN</code>. 然后<code>A</code>会在<code>2MSL</code>时间内接受到这个<code>FYN</code>, 之后<code>A</code>再次回复一个<code>ACk</code>.计时器重置<code>2MSL</code>时间, 重复上面过程. 直到<code>2MSL</code>时间内<code>A</code>没有收到<code>FIN</code>,说明<code>B</code>已经收到了.则结束连接</p><p><code>2MSL</code>指的是两个<code>MSL</code>时间 单个指的是一个片段在网络中的最大存活时间,<br>A发送的<code>ACK</code>可能消耗一个, B重新发送的<code>FIN</code>可能也要消耗一个.最大两个</p><p>复位报文段</p><ul><li>客户端访问不存在的端口， 服务器会发送带RST标志的复位报文段</li><li>异常终止连接， 发送复位报文段</li><li>客户端或服务端向半打开状态(对方异常终止连接, 但是本方没有收到结束报文)的连接写入数据, 对方回复会一个复位报文段</li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;ul&gt;
-&lt;li&gt;待补充 双向管道的建立和断开细节&lt;/li&gt;
-&lt;li&gt;异常三次握手&lt;/li&gt;
-&lt;li&gt;异常四次挥手&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;a href=&quot;https://blog.csdn.net/q1007729991/article/details/69675752&quot;
-      
-    
-    </summary>
-    
-    
-      <category term="CPP" scheme="http://blog.lsmg.xyz/categories/CPP/"/>
-    
-      <category term="Socket理论" scheme="http://blog.lsmg.xyz/categories/CPP/Socket%E7%90%86%E8%AE%BA/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Send返回值引出的(非)阻塞IO</title>
-    <link href="http://blog.lsmg.xyz/2020/03/CPP-Socket%E7%90%86%E8%AE%BA-Send%E8%BF%94%E5%9B%9E%E5%80%BC%E6%8E%A2%E6%9E%90/"/>
-    <id>http://blog.lsmg.xyz/2020/03/CPP-Socket%E7%90%86%E8%AE%BA-Send%E8%BF%94%E5%9B%9E%E5%80%BC%E6%8E%A2%E6%9E%90/</id>
-    <published>2020-03-20T03:14:20.000Z</published>
-    <updated>2020-03-20T04:20:31.293Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="现存疑问"><a href="#现存疑问" class="headerlink" title="现存疑问"></a>现存疑问</h1><ol><li>WNOWAIT和O_NONBLOCK 的关系?</li><li>当非阻塞send时, 返回值与什么有关? 本地socket发送缓冲区空余还是对端空余?</li><li>对端接收缓冲区满了会发生什么?</li><li>暂且认为send返回值是拷贝到缓冲区中的字节数, 如果这些数据没有成功发送呢?</li><li>send函数发送的字节数 超出了recv端的接受能力 会发生什么?</li></ol><p>最近这两天在实战一个http服务器的编写.</p><p>遇到了一个问题: send的返回值小于传入的len, 因为我仅调用一次send函数 导致页面一直显示加载</p><p>然后找了下为什么? 什么时候? send返回值会小于len;</p><h1 id="send"><a href="#send" class="headerlink" title="send"></a>send</h1><p><a href="https://stackoverflow.com/questions/14700906/socket-programming-send-return-value" target="_blank" rel="noopener">https://stackoverflow.com/questions/14700906/socket-programming-send-return-value</a></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">In practice, send() in blocking mode sends all the data, regardless of what the documentation says, unless there was an error, in which case nothing is sent.</span><br><span class="line">实战中, send() 处于阻塞状态会发送所有的数据, 除非发生错误 但这会导致数据没有发送</span><br><span class="line"></span><br><span class="line">In non-blocking mode, it sends whatever will fit into the socket send buffer and returns that length if &gt; 0. If the socket send buffer is full, it returns -1 with errno &#x3D; EWOULDBLOCK&#x2F;EAGAIN.</span><br><span class="line">在非阻塞模式下, 只要能放入socket发送缓冲区 就返回放入的长度 如果缓冲区满了就返回-1 设置EWOULDBLOCK&#x2F;EAGAIN</span><br></pre></td></tr></table></figure><p><a href="https://mp.weixin.qq.com/s?__biz=MzU2MTkwMTE4Nw==&mid=2247486643&idx=1&sn=9db678398f390759ff81b354ef056000&chksm=fc70f75fcb077e49363b087ba45609fdfbcba286338e70c2d4c7092e83e2d3feac56455e02a2&scene=27#wechat_redirect" target="_blank" rel="noopener">非阻塞模式下 send 和 recv 函数的返回值</a></p><p>这篇博客里也说明了这个问题. 下面是原博客的代码稍作修改</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//推荐的方式二：在一个循环里面根据偏移量发送数据</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">SendData</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* buf , <span class="keyword">int</span> buf_length)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//已发送的字节数目</span></span><br><span class="line">    <span class="keyword">int</span> sent_bytes = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> ret = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        ret = send(fd, buf + sent_bytes, buf_length - sent_bytes, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">if</span> (ret == <span class="number">-1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (errno == EAGIN)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">//严谨的做法，这里如果发不出去，应该缓存尚未发出去的数据，后面介绍</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;             </span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (errno == EINTR)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (ret == <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//认为对端关闭了连接</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        sent_bytes += ret;</span><br><span class="line">        <span class="keyword">if</span> (sent_bytes == buf_length)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//稍稍降低 CPU 的使用率</span></span><br><span class="line">        usleep(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;现存疑问&quot;&gt;&lt;a href=&quot;#现存疑问&quot; class=&quot;headerlink&quot; title=&quot;现存疑问&quot;&gt;&lt;/a&gt;现存疑问&lt;/h1&gt;&lt;ol&gt;
-&lt;li&gt;WNOWAIT和O_NONBLOCK 的关系?&lt;/li&gt;
-&lt;li&gt;当非阻塞send时, 返回值与什么有关? 本地
-      
-    
-    </summary>
-    
-    
-      <category term="CPP" scheme="http://blog.lsmg.xyz/categories/CPP/"/>
-    
-      <category term="Socket理论" scheme="http://blog.lsmg.xyz/categories/CPP/Socket%E7%90%86%E8%AE%BA/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Linux的使用</title>
-    <link href="http://blog.lsmg.xyz/2020/03/Linux-Linux%E4%BD%BF%E7%94%A8/"/>
-    <id>http://blog.lsmg.xyz/2020/03/Linux-Linux%E4%BD%BF%E7%94%A8/</id>
-    <published>2020-03-17T04:29:20.000Z</published>
-    <updated>2020-08-09T15:30:45.477Z</updated>
-    
-    <content type="html"><![CDATA[<table><thead><tr><th>命令</th><th>功能</th></tr></thead><tbody><tr><td>cp -r</td><td>复制目录</td></tr><tr><td>cd -</td><td>切换到上一个工作目录</td></tr></tbody></table><table><thead><tr><th>查找</th><th>功能</th></tr></thead><tbody><tr><td>find ./ -name “core*”</td><td>xargs file</td></tr><tr><td>find ./ -name ‘*.o’</td><td>查找目标文件夹是否有obj文件</td></tr><tr><td>find ./ -name “*.o” | xargs rm -f</td><td>递归删除当前目录所有obj文件</td></tr></tbody></table><table><thead><tr><th>查看文件内容</th><th>功能</th><th>一般用法</th></tr></thead><tbody><tr><td>cat -n</td><td>显示的同时显示行号</td><td>使用管道 ls | cat -n</td></tr><tr><td>head -10 filename</td><td>查看前十行</td><td></td></tr><tr><td>tail -10 failname</td><td>查看后十行</td><td></td></tr><tr><td>diff file1 file2</td><td>查看文件差别</td><td></td></tr><tr><td>tail -f filename</td><td>动态显示文本的最新信息</td><td></td></tr></tbody></table><p>| 给文件增加别名 | 功能 |<br>| ln a b | 创建硬链接, 删除一个另一个仍能使用 |<br>| ln -s a b | 创建符号链接(软连接) 删除源后另一个无法使用 |</p><p>命令行快捷键<br>Ctl-U   删除光标到行首的所有字符 <code>$ 1111 222  --&gt; $</code><br>Ctl-W   删除光标到前边最近一个空格之间的字符 <code>$ 1111 222 --&gt; $ 1111</code></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;命令&lt;/th&gt;
-&lt;th&gt;功能&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;&lt;tr&gt;
-&lt;td&gt;cp -r&lt;/td&gt;
-&lt;td&gt;复制目录&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;cd -&lt;/td&gt;
-&lt;td&gt;切换到上一个工作目录
-      
-    
-    </summary>
-    
-    
-      <category term="Linux" scheme="http://blog.lsmg.xyz/categories/Linux/"/>
-    
-    
-      <category term="Linux" scheme="http://blog.lsmg.xyz/tags/Linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>UNP卷二读书记录</title>
-    <link href="http://blog.lsmg.xyz/2020/03/CPP-%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95115-UNP%E5%8D%B7%E4%BA%8C/"/>
-    <id>http://blog.lsmg.xyz/2020/03/CPP-%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95115-UNP%E5%8D%B7%E4%BA%8C/</id>
-    <published>2020-03-15T03:16:20.000Z</published>
-    <updated>2020-03-21T01:23:03.929Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="消息传递"><a href="#消息传递" class="headerlink" title="消息传递"></a>消息传递</h1><h2 id="管道和有名管道FIFO"><a href="#管道和有名管道FIFO" class="headerlink" title="管道和有名管道FIFO"></a>管道和有名管道FIFO</h2><p><strong>popen pclose</strong></p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="comment">// 成功返回文件指针, 出错为NULL</span></span><br><span class="line"><span class="function">FILE* <span class="title">popen</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *command, <span class="keyword">const</span> <span class="keyword">char</span> *type)</span></span>;</span><br><span class="line">FILE* fp = popen(command, <span class="string">"r"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 成功为shell终止状态, 出错则为 -1</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pclose</span><span class="params">(FILE *stream)</span></span>;</span><br><span class="line">pclose(fp);</span><br></pre></td></tr></table></figure><p>popen创建一个管道并启动另外一个进程 创建者要么从管道读出标准输入, 要么将标准输出写到管道<br>返回的文件指针作用<br>通过type参数控制<br>type = “r” 创建者 通过文件指针读入command命令产生的标准输出<br>type = “w” 创建者 通过文件指针为command命令提供标准输入</p><p>pclose 关闭这个标准IO流</p><p><strong>FIFO 先进先出(first in, first out)</strong></p><p>又称为有名管道(named pipe) 单向(半双工)数据流, 每个FIFO都有一个路径名与之对应.<br>从而允许无亲缘关系的进程访问同一个FIFO</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 成功返回 0 失败返回 -1</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">mkfifo</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">mode_t</span> mode)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span> FIFO1 = <span class="string">"/tmp/fifo.1"</span>;</span><br><span class="line">mkfifo(FIFO1, <span class="number">0666</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建之后需要打开来进行读或者写 可以使用open也可以使用其他标准IO打开函数</span></span><br><span class="line"><span class="keyword">int</span> writefd = <span class="built_in">open</span>(FIFO1, O_WRONLY, <span class="number">0</span>); <span class="comment">/* 在父进程中打开 父进程写 */</span></span><br><span class="line"><span class="keyword">int</span> readfd = <span class="built_in">open</span>(FIFO1, O_RDONLY, <span class="number">0</span>); <span class="comment">/* 在子进程中打开 子进程读 */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 只有调用unlink才能从文件系统删除文件名字</span></span><br><span class="line">unlink(FIFO1);</span><br></pre></td></tr></table></figure><p>mkfifo 隐含已经指定 O_CREAT | O_EXCL<br>要么不存在创建一个新的, 要么返回 errno=EEXIST(所指定名字的FIFO已经存在)</p><p>如果想要打开已经存在的FIFO可以使用open函数.<br>可以判断 如果返回-1 并且errno=EEXIST 就调用open函数打开</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 子进程</span></span><br><span class="line">readfd = <span class="built_in">open</span>(FIFO1, O_RDONLY, <span class="number">0</span>);</span><br><span class="line">writefd = <span class="built_in">open</span>(FIFO2, O_WRONLY, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 父进程</span></span><br><span class="line">writefd = <span class="built_in">open</span>(FIFO1, O_WRONLY, <span class="number">0</span>);</span><br><span class="line">readfd = <span class="built_in">open</span>(FIFO2, O_RDONLY, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 父进程 这样会阻塞</span></span><br><span class="line">readfd = <span class="built_in">open</span>(FIFO2, O_RDONLY, <span class="number">0</span>);</span><br><span class="line">writefd = <span class="built_in">open</span>(FIFO1, O_WRONLY, <span class="number">0</span>);</span><br></pre></td></tr></table></figure><p>如果调换父进程的两行代码 程序就会进入死锁<br>因为如果当前没有任何进程<code>打开某个FIFO来写</code>, 打开这个<code>FIFO来读</code>的进程将会<code>阻塞</code></p><p>当对一个管道或者FIFO的最终close发生的时候, 该管道或FIFO中的任何残余数据都将被丢弃</p><p>即使在A主机上能够访问到B主机的目录, 即使不同主机上的两个进程都能够通过NFS打开同一个FIFO<br>他们之间也不能通过FIFO从一个进程到另一个进程发送数据</p><p>拒绝服务型攻击Dos<br>如果是单进程可能会让服务器处于阻塞状态, 多进程也可能会由于一个恶意客户发送大量独立请求<br>导致服务器子进程数达到上限, 使得后续的fork失败</p><p><strong>其他</strong><br>从字节流中获取完整的单个信息</p><ul><li>带特殊终止序列<br>许多UNIX应用使用换行分割 因特尔应用程序使用回车符加上一个换行符</li><li>显式长度<br>将长度增加在请求中</li><li>每次连接一个记录<br>应用通过关闭对端连接指示一个记录结束. HTTP1.0使用的这一技术</li></ul><p>标准IO函数fdopen可以将标准IO流与pipe返回的文件描述符相关联’</p><p><strong>限制</strong><br>系统加在管道和FIFO的唯一限制是</p><ul><li>OPEN_MAX<br>一个进程在任意时刻打开的最大描述符数量 &gt;=16</li><li>PIPE_BUF<br>可以原子性的写入一个管道或FIFO的最大数据量 &gt;= 512</li></ul><p><strong>习题练习</strong></p><ol><li>父进程终止的时候, 如果子进程的fd[1]仍处于打开状态, 则子进程对fd[0]的read 不会返回文件结束符,<br>因为fd[1]虽然在父进程中关闭了, 但是在子进程中依然打开. 如果关闭子进程fd[1], 则父进程一旦关闭,<br>他的所有文件描述符即关闭, 子进程对fd[0]的read就会返回0.(想到了自己写的服务器, 客户端断开连接就会read出一个0长度的内容)</li><li>从 不存在即创建, 存在-&gt;打开 变成 存在-&gt;打开, 不存在即创建. 可能会在open打开失败后 创建fifo之前<br>被其他进程抢先创建fifo, 导致本进程的mkfifo调用失败</li><li>出错信息写到了标准错误输出</li><li>可以把第一个open调用设置成非阻塞, 但是为了避免readline返回错误, 标志必须在readline之前去除</li><li>死锁</li><li>读进程关闭管道或者FIFO后给写进程一个信号(往关闭的管道写会产生SIGPIPE信号),<br>写进程关闭管道或者FIFO后将文件结束符发送给读进程(读进程读到长度为0的文件结束符)</li></ol><h2 id="POSIX消息队列"><a href="#POSIX消息队列" class="headerlink" title="POSIX消息队列"></a>POSIX消息队列</h2><p><strong>mqueue创建和删除</strong></p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;mqueue.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// oflag O_RDONLY O_WRONLY O_RDWR 可以加上O_CREAT和O_EXCL或者O_NONBLOCK</span></span><br><span class="line"><span class="comment">// 创建一个新队列的时候(制定了O_CREAT且消息队列不存在)后两个参数都需要</span></span><br><span class="line"><span class="comment">// 权限位 和 指定某些属性 nullptr则使用默认属性</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 成功返回消息队列 fd 失败 -1</span></span><br><span class="line"><span class="function"><span class="keyword">mqd_t</span> <span class="title">mq_open</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *name, <span class="keyword">int</span> oflag,</span></span></span><br><span class="line"><span class="function"><span class="params"> <span class="comment">/*mode_t mode, struct mq_attr *attr*/</span>)</span></span>;</span><br></pre></td></tr></table></figure><p>注意<br>消息队列文件描述符不必是(而且很可能不是)像文件描述符或者socket文件描述符那样的短整数</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 关闭消息队列 引用计数 -1</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">mq_close</span><span class="params">(<span class="keyword">mqd_t</span> mqdes)</span></span>;</span><br></pre></td></tr></table></figure><p>类似close函数, 调用进程可以不再使用该文件描述符, 但是其消息队列并不会从系统中删除</p><p>当一个进程终止的时候, 所有打开着的消息队列都将关闭, 就像自动调用了mq_close</p><p>如果要从系统中删除<code>mq_open</code>第一个参数<code>name</code> 必须调用下面的函数</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引用计数 -1</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">mq_unlink</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *name)</span></span>;</span><br></pre></td></tr></table></figure><p>每个消息队列有一个保存着当前打开描述符数的引用计数器</p><p>当消息队列的引用计数仍大于0时, 其name就能删除<br>但是队列的析构会在<code>引用计数为0</code>的时候自动析构.</p><p>第一个demo敲完之后 一直是errno=13.<br>在<code>man mq_overview</code></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">On Linux, message queues are created in a virtual filesystem.   (Other  implementa‐</span><br><span class="line">tions may also provide such a feature, but the details are likely to differ.)  This</span><br><span class="line">filesystem can be mounted (by the superuser) using the following commands:</span><br><span class="line"></span><br><span class="line"># mkdir &#x2F;dev&#x2F;mqueue</span><br><span class="line"># mount -t mqueue none &#x2F;dev&#x2F;mqueue</span><br><span class="line"></span><br><span class="line">The sticky bit is automatically enabled on the mount directory.</span><br></pre></td></tr></table></figure><p>而且 name参数的格式是<code>/somename</code> 这个是相对挂载目录的</p><p><strong>属性设置</strong></p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">mq_attr</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">long</span> mq_flags; <span class="comment">/* 0, O_NONBLOCK */</span></span><br><span class="line">    <span class="keyword">long</span> mq_maxmsg; <span class="comment">/* max number */</span></span><br><span class="line">    <span class="keyword">long</span> mq_msgsize; <span class="comment">/* max size of a msg in bytes */</span></span><br><span class="line">    <span class="keyword">long</span> mq_curmsgs; <span class="comment">/* number of message currently on queue */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">mq_getattr</span><span class="params">(<span class="keyword">mqd_t</span> mqdes, struct mq_attr *attr)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// set 的时候 只有mq_attr中的mq_flags起作用 设置取消O_NONBLOCK</span></span><br><span class="line"><span class="comment">// 最大消息数和最大字节数 只能在创建队列的时候设置</span></span><br><span class="line"><span class="comment">// 队列中房钱消息数 只能获取不能设置</span></span><br><span class="line"><span class="comment">// 第三个参数 不为nullptr则返回之前的属性</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">mq_setattr</span><span class="params">(<span class="keyword">mqd_t</span> mqdes, <span class="keyword">const</span> struct mq_attr *attr, struct mq_attr *oattr)</span></span>;</span><br></pre></td></tr></table></figure><p><strong>发送接收信息</strong></p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// prio 优先级 必须 &lt;= MQ_PRIO_MAX</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">mq_send</span><span class="params">(<span class="keyword">mqd_t</span> mqdes, <span class="keyword">const</span> <span class="keyword">char</span> *ptr, <span class="keyword">size_t</span> len, <span class="keyword">unsigned</span> <span class="keyword">int</span> prio)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// len 必须 &gt;= mq_attr.mq_msgsize 如果小于则 errno = EMSGSIZE</span></span><br><span class="line"><span class="function"><span class="keyword">ssize_t</span> <span class="title">mq_receive</span><span class="params">(<span class="keyword">mqd_t</span> mqdes, <span class="keyword">const</span> <span class="keyword">char</span> *ptr, <span class="keyword">size_t</span> len, <span class="keyword">unsigned</span> <span class="keyword">int</span> *priop)</span></span>;</span><br></pre></td></tr></table></figure><p>如果不使用优先级 发送的时候可以将 mq_send的 prio 设置为0<br>接受的时候 mq_receive priop 设置为 nullptr</p><p><strong>消息队列的限制</strong></p><ul><li>mq_maxmsg 队列中最大消息数</li><li>mq_msgsize单个消息的最大字节</li><li>MQ_OPEN_MAX 一个进程同时打开消息队列的最大数目</li><li>MQ_PRIO_MAX 最大优先级+1</li></ul><p><strong>异步事件通知</strong></p><ul><li>产生信号</li><li>创建一个线程执行一个指定的函数</li></ul><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 为指定队列建立或者删除异步事件通知.</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 成功返回 0 失败返回 -1</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">mq_notify</span><span class="params">(<span class="keyword">mqd_t</span> mqdes, struct sigevent *nofification)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sigval</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> sival_int;</span><br><span class="line">    <span class="keyword">void</span> *sival_ptr;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sigevent</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> sigev_notify; <span class="comment">// SIGEV_NONE SIGEV_SIGNAL SIGEV_THREAD</span></span><br><span class="line">    <span class="keyword">int</span> sigev_signo; <span class="comment">// signal number if SIGEV_SIGNAL</span></span><br><span class="line">    <span class="keyword">union</span> sigval sigev_value; <span class="comment">// passed to signal handler pr thread</span></span><br><span class="line">    <span class="comment">// 下面两个用于 SIGEV_THREAD</span></span><br><span class="line">    <span class="keyword">void</span> (*sigev_notify_function)(<span class="keyword">union</span> sigval);</span><br><span class="line">    <span class="keyword">pthread_attr_t</span> *sigev_notify_attributes;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ol><li><p>如果 notification != nullptr<br>当前进程希望 在有一个消息 到达所指定的 先前为空的队列 时得到通知<br>我们说 该进程被注册为接收该队列的通知</p></li><li><p>如果 notification == nullptr<br>如果 该进程被注册为 接受所指定队列通知 则取消它</p></li><li><p>任何时刻只有一个进程可以被注册为 接收某个队列的通知</p></li><li><p>当一个消息到达某个空队列, 而且已经注册, 那么只有当<br>没有因为调用mq_reveive导致的阻塞 的时候才会发出通知</p></li><li><p>通知发出后 注册立即被撤销.. 需要重新注册???</p></li></ol><p>Unix信号产生后会复位成默认行为.<br>信号处理程序通常第一个调用signal函数, 用于重新建立处理程序<br>这时会产生一个空窗时期(信号产生 与 当前进程重建信号处理程序之间)<br>空窗时期再次产生同一信号 可能终止当前进程</p><p>初看起来, mq_notify可能也有这个问题.<br>不过在消息队列<code>为空前</code> <code>通知不会再次产生</code><br>所以不要在<code>读出消息后</code>重新注册<br>而应该在<code>读出消息前</code>重新注册</p><p><code>volatile sig_atomic_t mqflag = 0;</code><br>sig_atomic_t 即使缺少信号所做的异步中断，亦能作为原子实体访问的整数类型。<br>volatile 标记可能会随时改变</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;消息传递&quot;&gt;&lt;a href=&quot;#消息传递&quot; class=&quot;headerlink&quot; title=&quot;消息传递&quot;&gt;&lt;/a&gt;消息传递&lt;/h1&gt;&lt;h2 id=&quot;管道和有名管道FIFO&quot;&gt;&lt;a href=&quot;#管道和有名管道FIFO&quot; class=&quot;headerlink&quot; ti
-      
-    
-    </summary>
-    
-    
-      <category term="CPP" scheme="http://blog.lsmg.xyz/categories/CPP/"/>
-    
-      <category term="服务器编程-书籍记录" scheme="http://blog.lsmg.xyz/categories/CPP/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B-%E4%B9%A6%E7%B1%8D%E8%AE%B0%E5%BD%95/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>GDB调试</title>
-    <link href="http://blog.lsmg.xyz/2020/03/Linux-GDB%E8%B0%83%E8%AF%95/"/>
-    <id>http://blog.lsmg.xyz/2020/03/Linux-GDB%E8%B0%83%E8%AF%95/</id>
-    <published>2020-03-14T07:09:20.000Z</published>
-    <updated>2020-08-09T15:32:41.582Z</updated>
-    
-    <content type="html"><![CDATA[<p><a href="https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/gdb.html" target="_blank" rel="noopener">https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/gdb.html</a></p><p>对多线程的支持<br>set follow-fork-mode [parent|child]<br>set detach-on-fork [on|off]</p><table><thead><tr><th>follow-fork-mode</th><th>detach-on-fork</th><th>说明</th></tr></thead><tbody><tr><td>parent</td><td>on</td><td>只调试主进程</td></tr><tr><td>child</td><td>on</td><td>只调试子进程</td></tr><tr><td>parent</td><td>off</td><td>同时调试父子进程, gdb跟踪父进程, 子进程阻塞在fork位置</td></tr><tr><td>child</td><td>off</td><td>同上 gdb跟踪子进程, 父进程阻塞</td></tr></tbody></table><p>进程间切换<br>| 命令 | 功能 |<br>| — | — |<br>| info inferiors | 查询正在调试的进程 |<br>| inferior &lt;number&gt; | 切换进程 |</p><table><thead><tr><th>运行命令</th><th>缩写</th><th>功能</th></tr></thead><tbody><tr><td>run</td><td>r</td><td>运行程序</td></tr><tr><td>continue</td><td>c</td><td>继续执行到下有一个断点处</td></tr><tr><td>next</td><td>n</td><td>单步跟踪, 不进入函数</td></tr><tr><td>step</td><td>s</td><td>会进入函数</td></tr><tr><td>until</td><td></td><td>运行程序直到退出循环体</td></tr><tr><td>until + 行号</td><td></td><td>运行至某行</td></tr><tr><td>finish</td><td></td><td>运行程序, 直到当前函数完成返回, 并打印函数返回时的堆栈地址和返回以及参数等信息</td></tr><tr><td>call 函数(参数)</td><td></td><td>调试程序中的可见参数, 并传递参数</td></tr><tr><td>quit</td><td>q</td><td>退出</td></tr></tbody></table><table><thead><tr><th>设置断点</th><th>缩写</th><th>功能</th></tr></thead><tbody><tr><td>break n</td><td>b n</td><td>在第n行设置断点, b xx.cpp:500(xx.cpp文件第500行)</td></tr><tr><td>b fn if a&gt;b</td><td></td><td>在函数f 或者行号n 设置条件断点</td></tr><tr><td>break func</td><td>b func</td><td>在函数func()的入口处设置断点</td></tr><tr><td>delete 断点号n</td><td></td><td>删除第n个断点</td></tr><tr><td>disable 断点号n</td><td></td><td>暂停第n个断点</td></tr><tr><td>enable 断点号n</td><td></td><td>开始第n的断点</td></tr><tr><td>clear 行号n</td><td></td><td>清除第n行的断点</td></tr><tr><td>info b</td><td></td><td>显示断点设置情况</td></tr><tr><td>delete breakpoints</td><td></td><td>清除所有断点</td></tr></tbody></table><table><thead><tr><th>查看源代码</th><th>缩写</th><th>功能</th></tr></thead><tbody><tr><td>list</td><td>l</td><td>默认显示10行</td></tr><tr><td>list 行号</td><td></td><td>以行号为中心的前后十行代码</td></tr><tr><td>list 函数名</td><td></td><td>列出函数名所在函数的代码</td></tr><tr><td>list</td><td></td><td>不带参数, 接着上一次的list命令输出下边的内容</td></tr></tbody></table><table><thead><tr><th>打印表达式</th><th>功能</th></tr></thead><tbody><tr><td>print p</td><td></td></tr><tr><td>p a</td><td>显示a的值</td></tr><tr><td>p ++a</td><td>a的值</td></tr><tr><td>p func(22)</td><td>以整数22作为参数调用 后打印</td></tr><tr><td>p func(a)</td><td>将变量a作为参数</td></tr><tr><td>display 表达式</td><td>每次单步运行后就打印表达式的值</td></tr><tr><td>watch 表达式</td><td>设置检视点, 一旦被监视的表达式值改变就强行终止正在被调试的程序</td></tr><tr><td>whatis</td><td>查询变量或函数</td></tr><tr><td>info function</td><td>查询函数</td></tr><tr><td>info local</td><td>显示当前堆栈页的所有变量</td></tr></tbody></table><table><thead><tr><th>查询运行信息</th><th>功能</th></tr></thead><tbody><tr><td>where/bt</td><td>当前运行的堆栈列表</td></tr><tr><td>bt backtrace</td><td>显示当前的调用堆栈</td></tr><tr><td>up/down</td><td>改变堆栈的显示深度</td></tr><tr><td>set args [args]</td><td>指定程序运行参数</td></tr><tr><td>show args</td><td>查看程序参数</td></tr><tr><td>info program</td><td>查看程序是否运行, 进程号, 被暂停原因</td></tr></tbody></table><h1 id="安装DebugInfo"><a href="#安装DebugInfo" class="headerlink" title="安装DebugInfo"></a>安装DebugInfo</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">cat &#x2F;etc&#x2F;yum.repos.d&#x2F;CentOS-Debug.repo</span><br><span class="line"></span><br><span class="line">[debug]</span><br><span class="line">name&#x3D;CentOS-$releasever - DebugInfo</span><br><span class="line">baseurl&#x3D;http:&#x2F;&#x2F;debuginfo.centos.org&#x2F;$releasever&#x2F;$basearch&#x2F;</span><br><span class="line">gpgcheck&#x3D;0</span><br><span class="line">enabled&#x3D;1 # 重点是这个 </span><br><span class="line">protect&#x3D;1</span><br><span class="line">priority&#x3D;1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">安装 kernel-debuginfo</span><br><span class="line">yum --enablerepo&#x3D;base-debug install -y kernel-debuginfo-$(uname -r)</span><br><span class="line"></span><br><span class="line">安装glibc, 提示缺少其他的也是如此安装</span><br><span class="line">debuginfo-install glibc</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;&lt;a href=&quot;https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/gdb.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://linuxtools-rst.readthed
-      
-    
-    </summary>
-    
-    
-      <category term="Linux" scheme="http://blog.lsmg.xyz/categories/Linux/"/>
-    
-    
-      <category term="GDB调试" scheme="http://blog.lsmg.xyz/tags/GDB%E8%B0%83%E8%AF%95/"/>
     
   </entry>
   

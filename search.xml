@@ -3,6 +3,225 @@
     
     
     <entry>
+        <title><![CDATA[蓝图与C++交互]]></title>
+        <url>http://blog.lsmg.xyz/2020/10/UE4-%25E8%2593%259D%25E5%259B%25BEC++%25E4%25BA%25A4%25E4%25BA%2592/</url>
+        <content type="html"><![CDATA[<h1 id="蓝图Widget与C-代码交互-反射"><a href="#蓝图Widget与C-代码交互-反射" class="headerlink" title="蓝图Widget与C++代码交互-反射"></a>蓝图Widget与C++代码交互-反射</h1><ol>
+<li>创建UserWidget的C++子类 MyUserWidget<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 用于初始化</span></span><br><span class="line"><span class="function"><span class="keyword">virtual</span> <span class="keyword">bool</span> <span class="title">Initialize</span><span class="params">()</span> <span class="keyword">override</span></span>;</span><br><span class="line"><span class="comment">// 绑定到按钮的点击事件</span></span><br><span class="line">UFUNCTION() <span class="comment">// 必须加不然会导致无反应 日志报错</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ButtonLoginEvent</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过反射获取实例 需要名称保持一致</span></span><br><span class="line">UPROPERTY(Meta = (BindWidget))</span><br><span class="line">UButton* ButtonLogin;</span><br><span class="line">UPROPERTY(Meta = (BindWidget))</span><br><span class="line">UTextBlock* TextBlockUsername; <span class="comment">// 一个文本框</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">UMyUserWidget::Initialize</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!Super::Initialize()) <span class="comment">// 会报错提示不存在 无影响</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 进行点击函数绑定</span></span><br><span class="line">    ButtonLogin-&gt;OnClicked.__Internal_AddDynamic(<span class="keyword">this</span>, &amp;UMyUserWidget::ButtonLoginEvent, FName(<span class="string">"ButtonLoginEvent"</span>));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取并显示 文本框文字</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">UMyUserWidget::ButtonLoginEvent</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (GEngine)</span><br><span class="line">    &#123;</span><br><span class="line">        FString Username = TextBlockUsername-&gt;GetText().ToString();</span><br><span class="line"></span><br><span class="line">        GEngine-&gt;AddOnScreenDebugMessage(<span class="number">-1</span>, <span class="number">20</span>, FColor::Yellow, Username);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>创建需要绑定的蓝图NewWidgetBlueprint</li>
+<li>打开蓝图后点击File-&gt;Reparent Blueprint选择MyUserWidget作为父类</li>
+<li>添加名为ButtonLogin的按钮和TextBlockUsername的文本框 用于反射</li>
+<li>创建HUD的C++子类MyHud</li>
+<li>创建MyHud的蓝图BP_MuHud</li>
+<li>将MyHud的蓝图设置为 GameMode的HUDClass, 这样启动的时候就能创建MuHud蓝图的实例<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 从BP_MuHud中选择 NewWidgetBlueprint蓝图</span></span><br><span class="line">UPROPERTY(EditAnywhere, Category = <span class="string">"UserWidget"</span>)</span><br><span class="line">TSubclassOf&lt;<span class="class"><span class="keyword">class</span> <span class="title">UMUserWidget</span>&gt; <span class="title">WidgetClass</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 启动时创建蓝图实例并显示 设置输入方式</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">AMyHUD::BeginPlay</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Super::BeginPlay();</span><br><span class="line"></span><br><span class="line">    UUserWidget* Widget = CreateWidget&lt;UMyUserWidget&gt;(GetWorld(), WidgetClass);</span><br><span class="line">    <span class="keyword">if</span> (Widget != <span class="literal">nullptr</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        Widget-&gt;AddToViewport();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    APlayerController* MyPlayerController = Cast&lt;APlayerController&gt;(UGameplayStatics::GetPlayerController(GetWorld(), <span class="number">0</span>));</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 输入只对UI</span></span><br><span class="line">    <span class="keyword">if</span> (MyPlayerController != <span class="literal">nullptr</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        MyPlayerController-&gt;bShowMouseCursor = <span class="literal">true</span>;</span><br><span class="line">        FInputModeUIOnly InputMode;</span><br><span class="line">        MyPlayerController-&gt;SetInputMode(InputMode);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+]]></content>
+        
+        <categories>
+            
+            <category> UE4 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 蓝图与C++交互 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+        <title><![CDATA[UNP记录]]></title>
+        <url>http://blog.lsmg.xyz/2020/10/CPP-%25E8%25AF%25BB%25E4%25B9%25A6%25E8%25AE%25B0%25E5%25BD%2595150-UNP/</url>
+        <content type="html"><![CDATA[<p>由于已经在Linux高性能服务器开发中详细说明过绝大部分系统函数 这里略去</p>
+<h1 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h1><p>通过定义<code>包裹函数</code>可以缩短程序. 在muduo框架中就存在包裹函数 将系统函数进行包装</p>
+<p>函数中进行错误处理, 这样外部使用<code>包裹函数</code>包装好的系统函数的时候可以简化错误处理</p>
+<p><strong>daytimecpclient-domain.cpp</strong><br>第一个样例程序稍作修改 可以解析域名  inet_addr没有请求网络 速度快 而gethostbyname会请求域名<br>服务器速度可能慢</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">sockaddr_in server_addr&#123;&#125;;</span><br><span class="line"><span class="keyword">if</span> ((server_addr.sin_addr.s_addr = inet_addr(argv[<span class="number">1</span>])) == INADDR_NONE)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">hostent</span>* <span class="title">hostptr</span> = <span class="title">gethostbyname</span>(<span class="title">argv</span>[1]);</span></span><br><span class="line">    <span class="keyword">if</span> (!hostptr)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"invalid input %s\n"</span>, argv[<span class="number">1</span>]);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    server_addr.sin_addr.s_addr = *((<span class="keyword">unsigned</span> <span class="keyword">long</span>*)hostptr-&gt;h_addr);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>迭代服务器: 对于每个客户连接都执行迭代一次<br>并发服务器: 同时处理多个客户连接</p>
+<h1 id="第二章-传输层"><a href="#第二章-传输层" class="headerlink" title="第二章 传输层"></a>第二章 传输层</h1><p>客户端 主动调用close之后 发送了FIN包</p>
+<p>服务端 接收到FIN包后read返回0</p>
+<p>服务器 read返回0之后调用close函数 发送FIN包</p>
+<p>客户端 接收服务器的FIN包</p>
+<p><strong>@@35 P TCP状态转换图@@</strong></p>
+<p><strong>@@36 P TCP状态转换和Socket函数间的联系@@</strong></p>
+<p>多宿主计算机  可能插有多块网卡</p>
+<p>通过bind到INADDR_ANY来监听多个接口的同一个端口</p>
+<h1 id="第三章-套接字编程简介"><a href="#第三章-套接字编程简介" class="headerlink" title="第三章 套接字编程简介"></a>第三章 套接字编程简介</h1><p>大多数套接字函数 都需要一个指向<code>套接字地址结构</code>的指针作为参数. 每个协议簇都定义了他自己的<code>套接字地址结构</code>. 这些结构的名字均<code>以sockaddr_开头</code></p>
+<p><strong>@@61 P 不同套接字地址结构的比较@@</strong></p>
+<h1 id="第四章-基本TCP套接字编程"><a href="#第四章-基本TCP套接字编程" class="headerlink" title="第四章 基本TCP套接字编程"></a>第四章 基本TCP套接字编程</h1><p><strong>connect函数</strong></p>
+<p>ETIMEDOUT: 客户端没有收到SYN的回应 尝试几次后如果依然没有收到回应则返回错误</p>
+<p>ECONNREFUSED: 服务器在指定端口上没有进程等待与之连接导致收到了RST回复  之后立即返回错误</p>
+<p>connect失败之后 此套接字无法继续使用 需要close当前套接字后重新调用socket</p>
+<p><strong>bind函数</strong></p>
+<p>如果调用listen或者connect前没有调用bind则操作系统会分配一个临时端口. 对于客户端来说可以接受临时端口, 然而服务器一般都是需要指定端口 供外接连接. </p>
+<p>如果指定的端口为0 则认为没有指定端口 会分配临时端口. 如果地址指定为0(INADDR_ANY) 则系统选择IP地址</p>
+<p>RPC服务器可以使用临时端口, 但必须将临时端口注册到端口映射器, 这样客户端才能得到对应的临时端口, 之后进行连接</p>
+<p>可以使用getsockname获取到系统临时分配的地址和端口</p>
+<p><strong>listen函数</strong></p>
+<p>socket函数创建的套接字默认被认为是主动套接字(准备调用connect) 使用listen函数将一个<code>未连接</code>的套接字转换成一个被动套接字</p>
+<p>内核为一个监听的系统套接字维护两个队列</p>
+<ul>
+<li>未完成队列 已经收到了SYN但还未完成三次握手</li>
+<li>已完成队列 已经进行了三次握手<code>等待accept从队列中取走</code> 已建立的连接 如果<code>此队列为空, accept阻塞</code></li>
+</ul>
+<p>未完成队列+已完成队列的总长度 即为listen函数的第二个参数backlog</p>
+<p>connect函数调用 -&gt; 服务器收到了SYN包 -&gt; 在未完成队列创建相关内容 -&gt; 创建完毕后返回SYN和ACK -&gt; 客户端返回ACK -&gt; 从未完成队列移动到已完成队列队尾</p>
+<p>看到这里后想到之前遇到的一个BUG, 注册入<code>epollfd</code>中的<code>listenfd</code>没有设置成<code>ENONBLOCK</code>, <code>epoll_wait不会返回, 进而去调用accept</code>, 然而客户端<code>connect</code>函数返回显示已经建立连接.  –也就是connect返回说明连接建立, 发生在accpet函数调用前.</p>
+<p><strong>@@91 P exec函数之间的关系@@</strong></p>
+<p><strong>accept函数</strong><br>accpet函数的第一个参数必须是 被动套接字 即调用过listen, 否则返回EINVAL错误</p>
+]]></content>
+        
+        <categories>
+            
+            <category> CPP </category>
+            
+        </categories>
+        
+        
+    </entry>
+    
+    <entry>
+        <title><![CDATA[深度探索C++对象模型]]></title>
+        <url>http://blog.lsmg.xyz/2020/09/CPP-%25E8%25AF%25BB%25E4%25B9%25A6%25E8%25AE%25B0%25E5%25BD%2595130-%25E6%25B7%25B1%25E5%25BA%25A6%25E6%258E%25A2%25E7%25B4%25A2C++%25E5%25AF%25B9%25E8%25B1%25A1%25E6%25A8%25A1%25E5%259E%258B/</url>
+        <content type="html"><![CDATA[<h1 id="第一章-关于对象"><a href="#第一章-关于对象" class="headerlink" title="第一章 关于对象"></a>第一章 关于对象</h1><p>加上封装之后的成本增加了吗?</p>
+<p>并没有增加成本, C++在布局以及存取时间上主要的额外负担是由virtual引起的</p>
+<ul>
+<li>virtual func机制 用来支持一个有效率的执行期绑定</li>
+<li>virtual base class 用来实现多次出现在继承体系中的base class, 有一个单一而被共享的实例</li>
+</ul>
+<p>C++ 有两种成员变量<code>static</code>和<code>nonstatic</code><br>三种成员函数<code>static</code>, <code>nonstatic</code>和<code>virtual</code></p>
+]]></content>
+        
+        <categories>
+            
+            <category> CPP </category>
+            
+        </categories>
+        
+        
+    </entry>
+    
+    <entry>
+        <title><![CDATA[CPP入门分享]]></title>
+        <url>http://blog.lsmg.xyz/2020/09/%25E5%2588%2586%25E4%25BA%25AB%25E5%25AD%25A6%25E4%25B9%25A0%25E4%25BC%259A-%25E6%258A%2593%25E5%258F%2596%25E6%258E%25A5%25E5%258F%25A3/</url>
+        <content type="html"><![CDATA[<h1 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h1><p>Fiddler 截获HTTP请求包<br>Postman 测试接口与生成代码<br>Chrome+SwitchyOmega插件</p>
+<p>安装见视频</p>
+<h1 id="配置Fiddler"><a href="#配置Fiddler" class="headerlink" title="配置Fiddler"></a>配置Fiddler</h1><p>Tools-&gt;Options-&gt;HTTPS 勾选Decrypt HTTPS traffic 确认安装证书</p>
+<p>Tools-&gt;Options-&gt;Connections 勾选Allow remote computer xxxx</p>
+<p>记下 Connections中的端口号 默认为8888</p>
+<h1 id="配置SwitchyOmega插件"><a href="#配置SwitchyOmega插件" class="headerlink" title="配置SwitchyOmega插件"></a>配置SwitchyOmega插件</h1><p>新增情景模式-&gt;选择代理服务器</p>
+<p>代理协议HTTP 代理服务器 127.0.0.1 端口 8888</p>
+]]></content>
+        
+        <categories>
+            
+            <category> CPP </category>
+            
+            <category> 入门分享 </category>
+            
+        </categories>
+        
+        
+    </entry>
+    
+    <entry>
+        <title><![CDATA[CPP入门分享]]></title>
+        <url>http://blog.lsmg.xyz/2020/08/%25E5%2588%2586%25E4%25BA%25AB%25E5%25AD%25A6%25E4%25B9%25A0%25E4%25BC%259A-cpp%25E5%2585%25A5%25E9%2597%25A8/</url>
+        <content type="html"><![CDATA[<h1 id="第一次"><a href="#第一次" class="headerlink" title="第一次"></a>第一次</h1><h2 id="为什么选择的是CPP"><a href="#为什么选择的是CPP" class="headerlink" title="为什么选择的是CPP"></a>为什么选择的是CPP</h2><p>学校开设</p>
+<ul>
+<li>Python</li>
+<li>CPP</li>
+<li>xxx</li>
+</ul>
+<h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><p>课堂讲的肯定比我讲的要好 不过我打算侧重在更加详细的讲某些基础内容 然后主要的是每周的答疑maybe</p>
+<h2 id="规划"><a href="#规划" class="headerlink" title="规划"></a>规划</h2><p>每周五六日中一天 以计算机专业的CPP课本进度 提前讲一部分下周的内容</p>
+<p>下一周你遇到的问题的问题私聊我 下周五六日中一天直播的时候讲解</p>
+<h2 id="独立解决问题的能力"><a href="#独立解决问题的能力" class="headerlink" title="独立解决问题的能力"></a>独立解决问题的能力</h2><p>善用搜索引擎<br><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/CPP%E5%88%86%E4%BA%AB%E5%AD%A6%E4%B9%A0%E4%BC%9A/%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98%E7%B4%A0%E8%B4%A8%E4%BA%94%E8%BF%9E.jpg" alt=""></p>
+<p><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/CPP%E5%88%86%E4%BA%AB%E5%AD%A6%E4%B9%A0%E4%BC%9A/%E7%99%BE%E5%BA%A6Or%E9%97%AE%E4%BA%BA.jpg" alt=""></p>
+<p>当然也不是 所有都要自己找 不去问别人</p>
+<p>当你一个问题考虑很久的时候 xxx</p>
+<h2 id="编程难在哪里"><a href="#编程难在哪里" class="headerlink" title="编程难在哪里?"></a>编程难在哪里?</h2><p>什么是关键字?</p>
+<p><a href="https://www.runoob.com/w3cnote/cpp-keyword-intro.html" target="_blank" rel="noopener">https://www.runoob.com/w3cnote/cpp-keyword-intro.html</a></p>
+<p><img src="https://www.runoob.com/wp-content/uploads/2018/06/20130806104900234.jpg" alt="C++关键字"></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>if</td>
+<td>else</td>
+<td>while</td>
+<td>for</td>
+<td>switch</td>
+<td>case</td>
+</tr>
+<tr>
+<td>break</td>
+<td>continue</td>
+<td>return</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>int</td>
+<td>short</td>
+<td>char</td>
+<td>double</td>
+<td>long</td>
+<td>float</td>
+</tr>
+<tr>
+<td>const</td>
+<td>static</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>delete</td>
+<td>new</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>enum</td>
+<td>struct</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>思想</p>
+<p>有限的关键字 “无穷” 的组合</p>
+<h2 id="分享-gt-私人QQ群"><a href="#分享-gt-私人QQ群" class="headerlink" title="分享-&gt;私人QQ群"></a>分享-&gt;私人QQ群</h2>]]></content>
+        
+        <categories>
+            
+            <category> CPP </category>
+            
+            <category> 入门分享 </category>
+            
+        </categories>
+        
+        
+    </entry>
+    
+    <entry>
         <title><![CDATA[EPOLLET丢失新连接事件]]></title>
         <url>http://blog.lsmg.xyz/2020/08/%25E9%2587%2587%25E5%259D%2591%25E8%25AE%25B0-EPOLLET%25E4%25B8%25A2%25E5%25A4%25B1%25E6%2596%25B0%25E8%25BF%259E%25E6%258E%25A5%25E4%25BA%258B%25E4%25BB%25B6/</url>
         <content type="html"><![CDATA[<p>谨以此文献给我, 两次踩坑.</p>
@@ -2142,20 +2361,6 @@
     </entry>
     
     <entry>
-        <title><![CDATA[算法题目记录]]></title>
-        <url>http://blog.lsmg.xyz/2020/03/%25E7%25AE%2597%25E6%25B3%259591-%25E7%25AE%2597%25E6%25B3%2595%25E9%25A2%2598%25E7%259B%25AE%25E8%25AE%25B0%25E5%25BD%2595/</url>
-        <content type="html"></content>
-        
-        <categories>
-            
-            <category> 算法 </category>
-            
-        </categories>
-        
-        
-    </entry>
-    
-    <entry>
         <title><![CDATA[数据结构和STL]]></title>
         <url>http://blog.lsmg.xyz/2020/03/%25E7%25AE%2597%25E6%25B3%259590-%25E6%2595%25B0%25E6%258D%25AE%25E7%25BB%2593%25E6%259E%2584%25E7%25AE%2580%25E5%258D%2595%25E5%25BA%2594%25E7%2594%25A8/</url>
         <content type="html"><![CDATA[<p><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/STL/api.png" alt=""></p>
@@ -2258,6 +2463,20 @@
 </tr>
 </tbody></table>
 <h1 id="Sequence-containers-顺序容器"><a href="#Sequence-containers-顺序容器" class="headerlink" title="Sequence containers 顺序容器"></a>Sequence containers 顺序容器</h1><h2 id="array"><a href="#array" class="headerlink" title="array"></a>array</h2><h2 id="vector"><a href="#vector" class="headerlink" title="vector"></a>vector</h2><h2 id="deque"><a href="#deque" class="headerlink" title="deque"></a>deque</h2><h2 id="forward-list"><a href="#forward-list" class="headerlink" title="forward_list"></a>forward_list</h2><h2 id="list"><a href="#list" class="headerlink" title="list"></a>list</h2><h1 id="Associative-containers-关联容器"><a href="#Associative-containers-关联容器" class="headerlink" title="Associative containers 关联容器"></a>Associative containers 关联容器</h1><h2 id="set"><a href="#set" class="headerlink" title="set"></a>set</h2><h2 id="map"><a href="#map" class="headerlink" title="map"></a>map</h2><h2 id="multiset"><a href="#multiset" class="headerlink" title="multiset"></a>multiset</h2><h2 id="multimap"><a href="#multimap" class="headerlink" title="multimap"></a>multimap</h2><h1 id="Unordered-associative-containers-无序关联容器"><a href="#Unordered-associative-containers-无序关联容器" class="headerlink" title="Unordered associative containers 无序关联容器"></a>Unordered associative containers 无序关联容器</h1><h2 id="unordered-set"><a href="#unordered-set" class="headerlink" title="unordered_set"></a>unordered_set</h2><h2 id="unordered-map"><a href="#unordered-map" class="headerlink" title="unordered_map"></a>unordered_map</h2><h2 id="unordered-multiset"><a href="#unordered-multiset" class="headerlink" title="unordered_multiset"></a>unordered_multiset</h2><h2 id="unordered-multimap"><a href="#unordered-multimap" class="headerlink" title="unordered_multimap"></a>unordered_multimap</h2><h1 id="Container-adaptors-容器适配器"><a href="#Container-adaptors-容器适配器" class="headerlink" title="Container adaptors 容器适配器"></a>Container adaptors 容器适配器</h1><h2 id="stack"><a href="#stack" class="headerlink" title="stack"></a>stack</h2><h2 id="queue"><a href="#queue" class="headerlink" title="queue"></a>queue</h2><h2 id="priority-queue"><a href="#priority-queue" class="headerlink" title="priority_queue"></a>priority_queue</h2>]]></content>
+        
+        <categories>
+            
+            <category> 算法 </category>
+            
+        </categories>
+        
+        
+    </entry>
+    
+    <entry>
+        <title><![CDATA[算法题目记录]]></title>
+        <url>http://blog.lsmg.xyz/2020/03/%25E7%25AE%2597%25E6%25B3%259591-%25E7%25AE%2597%25E6%25B3%2595%25E9%25A2%2598%25E7%259B%25AE%25E8%25AE%25B0%25E5%25BD%2595/</url>
+        <content type="html"></content>
         
         <categories>
             
@@ -2490,7 +2709,9 @@
 <li>增加一个新的成员函数<code>DoD()</code>内部调用三个函数</li>
 <li>增加一个普通函数, 增加<code>A&amp; a</code>参数调用内部的三个函数</li>
 </ol>
-]]></content>
+<h1 id="绪论"><a href="#绪论" class="headerlink" title="绪论"></a>绪论</h1><h1 id="型别推导"><a href="#型别推导" class="headerlink" title="型别推导"></a>型别推导</h1><p>一个对象如果是右值则可以实施移动语义, 左值则不然</p>
+<p>如果能取得表达式的地址 - 断定表达式是左值<br>如果不可以通常是右值</p>
+<h2 id="条款1-理解模板型别推导"><a href="#条款1-理解模板型别推导" class="headerlink" title="条款1: 理解模板型别推导"></a>条款1: 理解模板型别推导</h2>]]></content>
         
         <categories>
             
@@ -3427,6 +3648,31 @@
     </entry>
     
     <entry>
+        <title><![CDATA[游戏知识-腾讯游戏学院-如何进入游戏开发行业]]></title>
+        <url>http://blog.lsmg.xyz/2019/12/%25E6%25B8%25B8%25E6%2588%258F%25E7%259F%25A5%25E8%25AF%2586-%25E8%2585%25BE%25E8%25AE%25AF%25E6%25B8%25B8%25E6%2588%258F%25E5%25AD%25A6%25E9%2599%25A2-%25E5%25A6%2582%25E4%25BD%2595%25E8%25BF%259B%25E5%2585%25A5%25E6%25B8%25B8%25E6%2588%258F%25E5%25BC%2580%25E5%258F%2591%25E8%25A1%258C%25E4%25B8%259A/</url>
+        <content type="html"><![CDATA[<p>由于自己了解的实在是不足, 所以来腾讯游戏课堂来学习一些架构之类的东西 来完善自己的知识面<br><a href="https://gameinstitute.qq.com/course/detail/10156" target="_blank" rel="noopener">想做游戏吗？如何开始我的游戏开发职业生涯</a></p>
+<a id="more"></a>
+<p>做游戏不会重复做同样的工作, 项目不同</p>
+]]></content>
+        
+        <categories>
+            
+            <category> 游戏知识 </category>
+            
+            <category> 腾讯游戏学院 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 腾讯游戏学院 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
         <title><![CDATA[游戏知识-服务器-服务器通信]]></title>
         <url>http://blog.lsmg.xyz/2019/12/%25E6%25B8%25B8%25E6%2588%258F%25E7%259F%25A5%25E8%25AF%2586-%25E6%259C%258D%25E5%258A%25A1%25E5%2599%25A8-%25E6%259C%258D%25E5%258A%25A1%25E5%2599%25A8%25E9%2580%259A%25E4%25BF%25A1/</url>
         <content type="html"><![CDATA[<p>由于自己了解的实在是不足, 所以来腾讯游戏课堂来学习一些架构之类的东西 来完善自己的知识面<br><a href="https://gameinstitute.qq.com/course/detail/10096" target="_blank" rel="noopener">服务器通信</a></p>
@@ -3456,31 +3702,6 @@
             <category> 游戏知识 </category>
             
             <category> 服务器 </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> 腾讯游戏学院 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-        <title><![CDATA[游戏知识-腾讯游戏学院-如何进入游戏开发行业]]></title>
-        <url>http://blog.lsmg.xyz/2019/12/%25E6%25B8%25B8%25E6%2588%258F%25E7%259F%25A5%25E8%25AF%2586-%25E8%2585%25BE%25E8%25AE%25AF%25E6%25B8%25B8%25E6%2588%258F%25E5%25AD%25A6%25E9%2599%25A2-%25E5%25A6%2582%25E4%25BD%2595%25E8%25BF%259B%25E5%2585%25A5%25E6%25B8%25B8%25E6%2588%258F%25E5%25BC%2580%25E5%258F%2591%25E8%25A1%258C%25E4%25B8%259A/</url>
-        <content type="html"><![CDATA[<p>由于自己了解的实在是不足, 所以来腾讯游戏课堂来学习一些架构之类的东西 来完善自己的知识面<br><a href="https://gameinstitute.qq.com/course/detail/10156" target="_blank" rel="noopener">想做游戏吗？如何开始我的游戏开发职业生涯</a></p>
-<a id="more"></a>
-<p>做游戏不会重复做同样的工作, 项目不同</p>
-]]></content>
-        
-        <categories>
-            
-            <category> 游戏知识 </category>
-            
-            <category> 腾讯游戏学院 </category>
             
         </categories>
         
@@ -3833,11 +4054,12 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;netinet/in.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">int</span> <span class="title">htonl</span> <span class="params">(<span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">int</span> hostlong)</span></span>; <span class="comment">// host to network long</span></span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> short <span class="keyword">int</span> <span class="title">htons</span> <span class="params">(<span class="keyword">unsigned</span> short <span class="keyword">int</span> hostlong)</span></span>; <span class="comment">// host to network short</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">int</span> <span class="title">ntohl</span> <span class="params">(<span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">int</span> netlong)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> short <span class="keyword">int</span> <span class="title">ntohs</span> <span class="params">(<span class="keyword">unsigned</span> short <span class="keyword">int</span> netlong)</span></span>;</span><br></pre></td></tr></table></figure>
 
 <p>点分十进制地址和网络地址转换<br>程序需要使用网络地址 给人察看需要使用点分十进制 灵活转换</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;arpa/inet.h&gt;</span></span></span><br><span class="line"><span class="comment">// 将点分十进制字符串的IPv4地址, 转换为网络字节序整数表示的IPv4地址. 失败返回INADDR_NONE</span></span><br><span class="line"><span class="function"><span class="keyword">in_addr_t</span>  <span class="title">inet_addr</span><span class="params">( <span class="keyword">const</span> <span class="keyword">char</span>* strptr)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 功能相同不过转换结果存在 inp指向的结构体中. 成功返回1 反之返回0</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">inet_aton</span><span class="params">( <span class="keyword">const</span> <span class="keyword">char</span>* cp, struct in_addr* inp)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 函数返回一个静态变量地址值, 所以多次调用会导致覆盖</span></span><br><span class="line"><span class="function"><span class="keyword">char</span>* <span class="title">inet_ntoa</span><span class="params">(struct in_addr in)</span></span>; </span><br><span class="line"></span><br><span class="line"><span class="comment">// src为 点分十进制字符串的IPv4地址 或 十六进制字符串表示的IPv6地址 存入dst的内存中 af指定地址族</span></span><br><span class="line"><span class="comment">// 可以为 AF_INET AF_INET6 成功返回1 失败返回-1</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">inet_pton</span><span class="params">(<span class="keyword">int</span> af, <span class="keyword">const</span> <span class="keyword">char</span> * src, <span class="keyword">void</span>* dst)</span></span>;</span><br><span class="line"><span class="comment">// 协议名, 需要转换的ip, 存储地址, 长度(有两个常量 INET_ADDRSTRLEN, INET6_ADDRSTRLEN)</span></span><br><span class="line"><span class="function"><span class="keyword">const</span> <span class="keyword">char</span>* <span class="title">inet_ntop</span><span class="params">(<span class="keyword">int</span> af, <span class="keyword">const</span> <span class="keyword">void</span>*  src, <span class="keyword">char</span>* dst, <span class="keyword">socklen_t</span> cnt)</span></span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;arpa/inet.h&gt;</span></span></span><br><span class="line"><span class="comment">// 将点分十进制字符串的IPv4地址, 转换为网络字节序整数表示的IPv4地址. 失败返回INADDR_NONE</span></span><br><span class="line"><span class="function"><span class="keyword">in_addr_t</span>  <span class="title">inet_addr</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* strptr)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 功能相同不过转换结果存在 inp指向的结构体中. 成功返回1 反之返回0</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">inet_aton</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* cp, struct in_addr* inp)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 函数返回一个静态变量地址值, 所以多次调用会导致覆盖</span></span><br><span class="line"><span class="function"><span class="keyword">char</span>* <span class="title">inet_ntoa</span><span class="params">(struct in_addr in)</span></span>; </span><br><span class="line"></span><br><span class="line"><span class="comment">// src为 点分十进制字符串的IPv4地址 或 十六进制字符串表示的IPv6地址 存入dst的内存中 af指定地址族</span></span><br><span class="line"><span class="comment">// 可以为 AF_INET AF_INET6 成功返回1 失败返回-1</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">inet_pton</span><span class="params">(<span class="keyword">int</span> af, <span class="keyword">const</span> <span class="keyword">char</span> * src, <span class="keyword">void</span>* dst)</span></span>;</span><br><span class="line"><span class="comment">// 协议名, 需要转换的ip, 存储地址, 长度(有两个常量 INET_ADDRSTRLEN, INET6_ADDRSTRLEN)</span></span><br><span class="line"><span class="function"><span class="keyword">const</span> <span class="keyword">char</span>* <span class="title">inet_ntop</span><span class="params">(<span class="keyword">int</span> af, <span class="keyword">const</span> <span class="keyword">void</span>*  src, <span class="keyword">char</span>* dst, <span class="keyword">socklen_t</span> cnt)</span></span>;</span><br></pre></td></tr></table></figure>
 
 <p>socket 三部曲</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建 命名 监听 socket</span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"><span class="comment">// domain指定使用那个协议族 PF_INET PF_INET6</span></span><br><span class="line"><span class="comment">// type指定服务类型 SOCK_STREAM (TCP协议) SOCK_DGRAM(UDP协议)</span></span><br><span class="line"><span class="comment">// 有两个使用较多的选项SOCK_NONBLOCK 设置非阻塞</span></span><br><span class="line"><span class="comment">// SOCK_CLOEXEC 使用fork创建子进程的时候在子进程中关闭该socket</span></span><br><span class="line"><span class="comment">// protocol设置为默认的0</span></span><br><span class="line"><span class="comment">// 成功返回socket文件描述符(linux一切皆文件), 失败返回-1</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">socket</span><span class="params">(<span class="keyword">int</span> domain, <span class="keyword">int</span> type, <span class="keyword">int</span> protocol)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// socket为socket文件描述符</span></span><br><span class="line"><span class="comment">// my_addr 为地址信息</span></span><br><span class="line"><span class="comment">// addrlen为socket地址长度</span></span><br><span class="line"><span class="comment">// 成功返回0 失败返回 -1</span></span><br><span class="line"><span class="comment">// 这里细说还有个EADDRINUSE(被绑定的地址正在使用如TIME_WAIT状态)</span></span><br><span class="line"><span class="comment">// 与之搭配的解决方式 是使用setsockopt设置SO_REUSEADDR为true</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bind</span><span class="params">(<span class="keyword">int</span> socket, <span class="keyword">const</span> struct sockaddr* my_addr, <span class="keyword">socklen_t</span> addrlen)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// backlog表示队列最大的长度</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">listen</span><span class="params">(<span class="keyword">int</span> socket, <span class="keyword">int</span> backlog)</span></span>;</span><br></pre></td></tr></table></figure>
-<p>2020年7月16日13:25:12待补充 上面三个函数与TCP协议之间的对应关系</p>
+
+
 <p>服务器</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 接受连接 失败返回-1 成功时返回socket</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">accept</span><span class="params">(<span class="keyword">int</span> sockfd, struct sockaddr* addr, <span class="keyword">socklen_t</span>* addrlen)</span></span></span><br></pre></td></tr></table></figure>
 
@@ -4060,7 +4282,7 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">"*"的作用是引用指针指向的变量值，引用其实就是引用该变量的地址，“解”就是把该地址对应的东西解开，解出来，就像打开一个包裹一样，那就是该变量的值了，所以称为“解引用”。也就是说，解引用是返回内存地址中保存的值。</span></span><br><span class="line"><span class="comment">比如int a=10; int *p=&amp;a;</span></span><br><span class="line"><span class="comment">cout&lt;&lt;*p&lt;&lt;endl; 输出a的值，就是解引用操作。</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
 
 
-<p><strong>宏 异常处理  函数相关</strong><br>| 定义 | 说明 |<br>| —– | —– |<br>| <code>__FILE__</code> | 存放文件名的字符串字面值 |<br>| <code>__LINE__</code> | 存放当前行号的整形字面值 |<br>| <code>__TIME__</code> | 存放文件编译时间的字符串字面量 |<br>| <code>__DATE__</code> | 存放文件编译日期的字符串字面值 |<br>| <code>__VA_ARGS__</code> | 用来接受函数参数中<code>...</code>, 类似printf函数, 这个宏只能在宏中使用 |</p>
+<p><strong>常用 宏</strong><br>| 定义 | 说明 |<br>| —– | —– |<br>| <code>__FILE__</code> | 存放文件名的字符串字面值 |<br>| <code>__LINE__</code> | 存放当前行号的整形字面值 |<br>| <code>__TIME__</code> | 存放文件编译时间的字符串字面量 |<br>| <code>__DATE__</code> | 存放文件编译日期的字符串字面值 |<br>| <code>__VA_ARGS__</code> | 用来接受函数参数中<code>...</code>, 类似printf函数, 这个宏只能在宏中使用 |</p>
 <h1 id="第一部分-基础知识"><a href="#第一部分-基础知识" class="headerlink" title="第一部分 基础知识"></a>第一部分 基础知识</h1><h2 id="第二章-变量和基本类型"><a href="#第二章-变量和基本类型" class="headerlink" title="第二章 变量和基本类型"></a>第二章 变量和基本类型</h2><h3 id="习题"><a href="#习题" class="headerlink" title="习题"></a>习题</h3><p><strong>2.2 与钱相关的数据存储 使用的类型</strong><br>银行相关钱相关的数据 保存 使用整形, 不太可能使用浮点数. 浮点数运算可能会出现误差<br>使用<code>1</code>代表<code>1RMB</code> 或者使用<code>1</code>代表<code>0.01RMB</code></p>
 <p><strong>2.9 解释下列定义 对于非法说出错在哪里</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">cin</span> &gt;&gt; <span class="keyword">int</span> input_value; <span class="comment">// error: expected primary-expression before ‘int’</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> i1 = &#123;<span class="number">3.14</span>&#125;;<span class="comment">// narrowing conversion of ‘3.1400000000000001e+0’ from ‘double’ to ‘int’ inside &#123; &#125; [-Wnarrowing]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">double</span> salary = wage = <span class="number">9999.99</span>;<span class="comment">// error: ‘wage’ was not declared in this scope 如果定义wage则语句不报错</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> i2 = <span class="number">3.14</span>;</span><br></pre></td></tr></table></figure>
@@ -4222,6 +4444,7 @@
 <p>默认构造函数, 会造成 内置类型和复合类型成员 默认初始化后 值未定义</p>
 <p>关于未定义这点我去写了小段程序看了下, 也搜了一下</p>
 <p><a href="https://stackoverflow.com/a/2218275/11581349" target="_blank" rel="noopener">https://stackoverflow.com/a/2218275/11581349</a></p>
+<p>It will be automatically initialized if</p>
 <ul>
 <li>it’s a class/struct instance in which the default constructor initializes all primitive types; like MyClass instance; 有默认构造函数类或者结构体, 并且默认构造函数初始化所有内置类型</li>
 <li>you use array initializer syntax, e.g. int a[10] = {} (all zeroed) or int a[10] = {1,2}; (all zeroed except the first two items: a[0] == 1 and a[1] == 2) 使用了大括号初始化</li>
@@ -4229,13 +4452,102 @@
 <li>it’s a global/extern variable 全局或者extern类型</li>
 <li>the variable is defined static (no matter if inside a function or in global/namespace scope) 变量被声明为static</li>
 </ul>
+<p>默认初始化发生的情况</p>
+<ul>
+<li>不使用任何初始值定义一个非静态变量或者数组</li>
+<li>一个类本身含有类类型的成员且使用合成的默认构造函数</li>
+<li>类类型的成员没有在构造函数初始值列表中显示地初始化时</li>
+</ul>
+<p>值初始化</p>
+<ul>
+<li>数组初始化提供的初始值数量小于数组大小</li>
+<li>不使用初始值定义一个局部静态变量</li>
+<li>书写T()表达式 显示地请求值初始化</li>
+</ul>
 <p>mutable可变数据成员, 从远不会是const.  可以在const成员函数中对其进行修改</p>
-<p>类的balance函数的函数体在整个Account类可见之后才被处理.<br>编译器看到balance的声明后 开始从类内(<strong>类内会从使用Money前查找</strong>)到类外寻找Money声明, 然后函数的返回值和bal成员变量的类型为double, 接着类可见之后处理函数体 函数会返回double类型的成员变量bal</p>
+<p>类的GetBalance函数的函数体在整个Account类可见之后才被处理.</p>
+<p>编译器看到GetBalance的声明后 开始从类内(<strong>类内会从使用Money前查找</strong>)到类外寻找Money声明, 然后函数的返回值和bal成员变量的类型为double, 接着类可见之后处理函数体 函数会返回double类型的成员变量bal</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">double</span> Money;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">string</span> balance = <span class="string">"string"</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Account</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// typedef std::string Money; 这里则不会报错</span></span><br><span class="line">    Account() = <span class="keyword">default</span>;</span><br><span class="line">    ~Account() = <span class="keyword">default</span>;</span><br><span class="line">    <span class="function">Money <span class="title">GetBalance</span><span class="params">()</span> <span class="keyword">const</span></span></span><br><span class="line"><span class="function">    </span>&#123; <span class="keyword">return</span> balance;  &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="comment">// typedef std::string Money; 会报错 因为由于GetBalance函数已经使用了外部的Money</span></span><br><span class="line">    Money balance;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Account account;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; account.GetBalance(); <span class="comment">// $ 0</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Foo(<span class="keyword">int</span> val):</span><br><span class="line">        bar1(val),</span><br><span class="line">        bar2(bar1)&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> bar1; <span class="comment">// 更改两个顺序  将会导致先使用 bar1初始化bar2 然后使用val初始化bar1</span></span><br><span class="line">    <span class="keyword">int</span> bar2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在我看了一些项目后使用的上面的写法, 然而这种写法却不合适 除非你严格按照变量顺序写.</p>
+<p>如果你将bar2和bar1的顺序不小心更换了, 难以排查的bug</p>
+<p><strong>使用默认构造函数声明对象 需要去掉对象名后的空括号对</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Foo <span class="title">foo</span><span class="params">()</span></span>; <span class="comment">// 错误</span></span><br><span class="line">Foo foo;</span><br></pre></td></tr></table></figure>
 
-<h1 id="第二部分-cpp标准库"><a href="#第二部分-cpp标准库" class="headerlink" title="第二部分 cpp标准库"></a>第二部分 cpp标准库</h1><p><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/CPPPrimer/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88.png" alt=""></p>
-<h2 id="第十二章-动态内存与智能指针"><a href="#第十二章-动态内存与智能指针" class="headerlink" title="第十二章 动态内存与智能指针"></a>第十二章 动态内存与智能指针</h2><p><strong>shared_ptr的拷贝和赋值</strong><br>当进行拷贝或者赋值操作时候 shared_ptr都会记录有多少个其他的shared_ptr<br>指向相同的对象</p>
+<h3 id="隐式的类类型转换"><a href="#隐式的类类型转换" class="headerlink" title="隐式的类类型转换"></a>隐式的类类型转换</h3><p>如果构造函数只接受一个实参, 则它实际上定义了转换为此类类型的隐式转换机制 – 称这种构造函数为<strong>转换构造函数</strong></p>
+<p>Foo含有一个只有string类型的构造函数. 当一个函数的参数是Foo类型时. 你可以将string类型直接传递给这个函数. 会自动从string类型构造成Foo类型</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Value(string val); 可以加上explicit防止隐式类型转换</span></span><br><span class="line"><span class="comment">// void Add(Value val);</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">string</span> val1 = <span class="string">"val1"</span>;</span><br><span class="line">foo.Add(val1); <span class="comment">// 正确 隐式转换成Value</span></span><br><span class="line">foo.Add(<span class="string">"val2"</span>); <span class="comment">// 错误 只能进行一步转换  需要从"val2"到string再到Value</span></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="聚合类-字面值常量类"><a href="#聚合类-字面值常量类" class="headerlink" title="聚合类 字面值常量类"></a>聚合类 字面值常量类</h3><p>聚合类</p>
+<ul>
+<li>所有成员都是public</li>
+<li>没有定义任何构造函数</li>
+<li>没有类内初始值</li>
+<li>没有基类也没有virtual函数</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">string</span> str;</span><br><span class="line">	<span class="keyword">int</span> val;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Foo foo = &#123;<span class="string">"1"</span>, <span class="number">1</span>&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>字面值常量类</p>
+<ul>
+<li>数据成员都是字面值类型的聚合类</li>
+</ul>
+<p>如果一个类不是聚合类, 但是符合以下要求也是字面值类型常量类</p>
+<ul>
+<li>数据成员必须是字面值类型</li>
+<li>类必须含有一个constexpr构造函数</li>
+<li>如果一个数据成员含有类内初始值, 则初始值必须是一条常量表达式. 如果成员属于某种类类型, 则初始值必须使用成员自己的constexpr构造函数</li>
+<li>类必须使用默认析构函数</li>
+</ul>
+<h1 id="第二部分-cpp标准库"><a href="#第二部分-cpp标准库" class="headerlink" title="第二部分 cpp标准库"></a>第二部分 cpp标准库</h1><h2 id="第八章-IO库"><a href="#第八章-IO库" class="headerlink" title="第八章 IO库"></a>第八章 IO库</h2><p>想到了遇到过的<code>while(std::cin &gt;&gt; xx)</code>究竟是如何判断的呢? <code>&gt;&gt;</code>返回的对象是<code>std::cin</code>如何将其转换为<code>bool</code>?</p>
+<p>重载运算符</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">explicit</span> __CLR_OR_THIS_CALL <span class="keyword">operator</span> <span class="title">bool</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> !fail();</span><br><span class="line">    &#125;</span><br><span class="line">_NODISCARD <span class="keyword">bool</span> __CLR_OR_THIS_CALL <span class="keyword">operator</span>!() <span class="keyword">const</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> fail();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">explicit</span> <span class="keyword">operator</span> <span class="title">bool</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"operator *"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">bool</span> <span class="keyword">operator</span>!()</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"operator !"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Foo foo;</span><br><span class="line">	<span class="keyword">if</span> (foo); <span class="comment">// $ operator *</span></span><br><span class="line">	<span class="keyword">if</span> (!foo);<span class="comment">// $ operator !</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>endl  换行 刷新缓冲区<br>flush 刷新缓冲区<br>ends  空字符 刷新缓冲区</p>
+<p>unitbuf 所有输出操作后都会立即刷新缓冲区<br>nounitbuf 恢复正常的缓冲方式</p>
+<h2 id="第九章-顺序容器"><a href="#第九章-顺序容器" class="headerlink" title="第九章 顺序容器"></a>第九章 顺序容器</h2><h3 id="习题-3"><a href="#习题-3" class="headerlink" title="习题"></a>习题</h3><p><strong>9.6 下面的程序有何错误 你应该如何修改它?</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">list</span>&lt;<span class="keyword">int</span>&gt; lst1;</span><br><span class="line"><span class="built_in">list</span>&lt;<span class="keyword">int</span>&gt;::iterator iter1 = lst1.<span class="built_in">begin</span>(),</span><br><span class="line">iter2 = lst1.<span class="built_in">end</span>();</span><br><span class="line"><span class="keyword">while</span> (iter1 &lt; iter2)</span><br></pre></td></tr></table></figure>
+<p>将<code>while (iter1 &lt; iter2)</code> 改成<code>while(iter1 != iter2)</code><br>迭代器是指向元素的指针, 对于list来说比较元素指针大小无法判断<br>@@@@</p>
+<p><strong>9.12 对于接受一个容器创建其拷贝的构造函数 和 接收两个迭代器创建拷贝的构造函数之间的不同</strong></p>
+<p><strong>创建拷贝</strong>-要求容器类型和元素类型都相同<br><strong>接收两个迭代器</strong>-元素类型能够相互转化即可</p>
+<h3 id="函数说明"><a href="#函数说明" class="headerlink" title="函数说明"></a>函数说明</h3><p>assign函数 仅顺序容器</p>
+<ul>
+<li>用指定元素的拷贝 替换左侧容器中的所有元素</li>
+</ul>
+<p>swap函数</p>
+<ul>
+<li>只会真正交换array的元素 与长度有关</li>
+<li>其他容器会交换内部的数据结构 常数时间完成</li>
+</ul>
+<p>除了string指向容器的迭代器 引用和指针在swap操作之后都不会失效 仍指向swap操作前的元素,<br>但是这些元素已经属于不同的容器了</p>
+<p>关系运算符</p>
+<ul>
+<li>两个容器具有相同的大小 且所有元素两两对应相等 这两个容器相等 否则不等</li>
+<li>如果两个容器大小不同, 但较小的容器中每个元素都等于较大容器中对应元素 则较小容器 &gt; 较大容器</li>
+<li>比较结果取决于第一个不相等的元素的比较结果 类似 compare</li>
+</ul>
+<p>容器的运算符 非迭代器<br>== != 运算符 所有容器都支持<br>&lt; &lt;= &gt; &gt;= 运算符 无序关联容器不支持</p>
+<p>size_type 无符号整数 足够保存此种容器类型最大可能容器的大小<br>difference_type 带符号整数类型 足够保存两个迭代器之间的距离<br>value_type 元素类型</p>
+<p>除了array之外其他容器的默认构造函数会创建一个指定类型的<code>空容器</code></p>
+<p>只有<code>顺序容器</code>的<code>构造函数</code>才接<code>受大小参数</code> 关联容器并不支持</p>
+<p>如果元素类型是内置类型或者具有默认的构造函数的类类型,可以只为构造函数提供一个容器大小的参数<br>如果元素类型没有默认构造函数 除了容器大小参数 还必须指定一个显示的元素初始值</p>
+<p>只有支持随机访问容器的迭代器才支持<code>operator&lt;</code>, list只能使用<code>=</code>来判断迭代器</p>
+<p>成员访问函数<code>front</code>,<code>back</code>,<code>下标</code>,<code>at</code>访问返回的都是引用. 如果容器是一个const对象 则返回值是const的引用 </p>
+<p>大多数会使迭代器失效的函数如erase<code>会在调用后返回删除的后一个元素位置的迭代器</code>, 使用返回值替换原来的迭代器可以在删除元素的情况下遍历所有元素</p>
+<p>向容器中添加元素</p>
+<ul>
+<li>目标是vector或string 且存储空间被重新分配, 则指向容器的迭代器指针引用都会失效. 如果存储空间没有被重新分配, 则插入位置后的三者都会失效</li>
+<li>目标是deque 插入到除首尾之外的任何位置都会使三者失效 首尾添加元素则迭代器失效 但是指向存在元素的引用和指针不会失效</li>
+<li>对于list和forward_list 三者仍然有效</li>
+<li>从容器中删除元素</li>
+<li>vector和string 被删元素之前的三者仍有效</li>
+<li>list和forward_list 三者仍有效</li>
+<li>deque 首尾之外的任何位置删除元素 指向被删除元素外<code>其他任何元素</code>的三者也会失效 如果删除尾元素则<code>尾后迭代器</code>失效 其他迭代器和指针不受影响</li>
+</ul>
+<h2 id="第十二章-动态内存与智能指针"><a href="#第十二章-动态内存与智能指针" class="headerlink" title="第十二章 动态内存与智能指针"></a>第十二章 动态内存与智能指针</h2><p><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/CPPPrimer/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88.png" alt=""></p>
+<p><strong>shared_ptr的拷贝和赋值</strong><br>当进行拷贝或者赋值操作时候 shared_ptr都会记录有多少个其他的shared_ptr<br>指向相同的对象</p>
 <p>引用计数增加的情况</p>
 <ul>
 <li>拷贝shared_ptr </li>
