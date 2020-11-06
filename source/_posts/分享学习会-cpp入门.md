@@ -3,8 +3,7 @@ title: CPP入门分享
 tags:
   - null
 categories:
-  - CPP
-  - 入门分享
+  - 分享会
 date: 2020-08-28 10:40:39
 img: https://lsmg-img.oss-cn-beijing.aliyuncs.com/CPP%E5%88%86%E4%BA%AB%E5%AD%A6%E4%B9%A0%E4%BC%9A/ico.png
 ---
