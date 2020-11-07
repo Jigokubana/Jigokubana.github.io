@@ -1,0 +1,405 @@
+<!doctype html>
+<html>
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable"  content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no">
+    
+    
+    <!--Simple SEO-->
+
+
+<meta name="robots" content=all />
+<meta name="google" content=all />
+<meta name="googlebot" content=all />
+<meta name="verify" content=all />
+    <!--Title-->
+
+<title>HTTP框架底层原理实现 | Lsmg的大学之路</title>
+
+<link rel="alternate" href="/atom.xml" title="Lsmg的大学之路" type="application/atom+xml">
+
+
+<link rel="icon" href="/favicon.ico">
+
+    
+
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/pages/post.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/thirdParty/highlight/github.css">
+<link rel="stylesheet" href="/.css">
+
+
+    <!--script-->
+
+
+
+
+
+    
+    
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body id="normal">
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<style>
+    header{ top: 71px; position: absolute!important;}
+    #container{padding-top: 151px!important;}
+</style>
+<div style="position:fixed;z-index:9999;left:0;top:0;width:100%;height:70px;background-color:#e0e0e0;color:#396CA5;border-bottom:1px solid #cecece;text-align:center;line-height:70px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<div id="wrap">
+    <header  style="position: absolute;" >
+    <div id="site-meta">
+        <a href="/" id="logo">
+            <h1 class="title">Lsmg的大学之路</h1>
+        </a>
+        
+    </div>
+    <ul id="nav">
+        
+            <li><a href="/"><i class="fa fa-home"></i>Home</a></li>
+        
+            <li><a href="/atom.xml"><i class="fa fa-rss"></i>RSS</a></li>
+        
+        <li id="search"><a href="javascript:void(0)"><i class="fa fa-search"></i>Search</a></li>
+    </ul>
+</header>
+
+    <div id="container">
+        
+<ul id="sidebar">
+    
+    
+<li class="widget notification">
+    <i class="fa fa-bell-o"></i>
+    <div>
+        
+<p>TCP LINK START</p>
+    </div>
+</li>
+
+    
+    
+<li class="widget widget-normal category">
+    <h3 class="fa fa-th widget-title">Categories</h3>
+    <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/3DMAX/"><i class="fa" aria-hidden="true">3DMAX</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CPP/"><i class="fa" aria-hidden="true">CPP</i></a><span class="category-list-count">24</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/CPP/CPP%E5%9F%BA%E7%A1%80/"><i class="fa" aria-hidden="true">CPP基础</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CPP/CPP%E9%87%8D%E7%82%B9/"><i class="fa" aria-hidden="true">CPP重点</i></a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CPP/Socket%E7%90%86%E8%AE%BA/"><i class="fa" aria-hidden="true">Socket理论</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CPP/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B-%E4%B9%A6%E7%B1%8D%E8%AE%B0%E5%BD%95/"><i class="fa" aria-hidden="true">服务器编程-书籍记录</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CPP/%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/"><i class="fa" aria-hidden="true">源码学习</i></a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/"><i class="fa" aria-hidden="true">Linux</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/UE4/"><i class="fa" aria-hidden="true">UE4</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link current" href="/categories/%E5%88%86%E4%BA%AB%E4%BC%9A/"><i class="fa" aria-hidden="true">分享会</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"><i class="fa" aria-hidden="true">学习记录</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BF%85%E5%A4%87%E6%8A%80%E8%83%BD/"><i class="fa" aria-hidden="true">必备技能</i></a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BF%85%E5%A4%87%E6%8A%80%E8%83%BD/Git%E6%93%8D%E4%BD%9C/"><i class="fa" aria-hidden="true">Git操作</i></a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"><i class="fa" aria-hidden="true">数据库</i></a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/MongoDB/"><i class="fa" aria-hidden="true">MongoDB</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/Mysql/"><i class="fa" aria-hidden="true">Mysql</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F%E5%88%B6%E4%BD%9C/"><i class="fa" aria-hidden="true">游戏制作</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F%E7%9F%A5%E8%AF%86/"><i class="fa" aria-hidden="true">游戏知识</i></a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F%E7%9F%A5%E8%AF%86/%E6%9C%8D%E5%8A%A1%E5%99%A8/"><i class="fa" aria-hidden="true">服务器</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F%E7%9F%A5%E8%AF%86/%E8%85%BE%E8%AE%AF%E6%B8%B8%E6%88%8F%E5%AD%A6%E9%99%A2/"><i class="fa" aria-hidden="true">腾讯游戏学院</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/"><i class="fa" aria-hidden="true">算法</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"><i class="fa" aria-hidden="true">计算机网络</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/"><i class="fa" aria-hidden="true">软件开发</i></a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95/"><i class="fa" aria-hidden="true">读书记录</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%87%87%E5%9D%91%E8%AE%B0/"><i class="fa" aria-hidden="true">采坑记</i></a><span class="category-list-count">3</span></li></ul>
+</li>
+
+
+    
+    
+<li class="widget widget-normal archive">
+  <h3 class="fa fa-archive widget-title">Archives</h3>
+    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/"><i class="fa" aria-hidden="true">十一月 2020</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/"><i class="fa" aria-hidden="true">十月 2020</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/"><i class="fa" aria-hidden="true">九月 2020</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/"><i class="fa" aria-hidden="true">八月 2020</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/"><i class="fa" aria-hidden="true">七月 2020</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/"><i class="fa" aria-hidden="true">六月 2020</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/"><i class="fa" aria-hidden="true">五月 2020</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/"><i class="fa" aria-hidden="true">四月 2020</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/"><i class="fa" aria-hidden="true">三月 2020</i></a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/"><i class="fa" aria-hidden="true">二月 2020</i></a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/"><i class="fa" aria-hidden="true">十二月 2019</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/"><i class="fa" aria-hidden="true">十一月 2019</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/"><i class="fa" aria-hidden="true">十月 2019</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/"><i class="fa" aria-hidden="true">八月 2019</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/"><i class="fa" aria-hidden="true">七月 2019</i></a><span class="archive-list-count">1</span></li></ul>
+</li>
+
+
+    
+    
+    
+    
+<li class="widget widget-normal tags">
+  <h3 class="fa fa-tags widget-title">Tag Cloud</h3>
+  <div class="tagcloud-content">
+    
+      <a href="/tags/3DMAX/" style="font-size: 0.14rem; color: #69c">3DMAX</a> <a href="/tags/Git%E6%93%8D%E4%BD%9C/" style="font-size: 0.2rem; color: #0a407c">Git操作</a> <a href="/tags/GDB%E8%B0%83%E8%AF%95/" style="font-size: 0.14rem; color: #69c">GDB调试</a> <a href="/tags/Linux/" style="font-size: 0.14rem; color: #69c">Linux</a> <a href="/tags/spf-13/" style="font-size: 0.14rem; color: #69c">spf-13</a> <a href="/tags/Shell/" style="font-size: 0.14rem; color: #69c">Shell</a> <a href="/tags/csapp/" style="font-size: 0.14rem; color: #69c">csapp</a> <a href="/tags/%E8%93%9D%E5%9B%BE%E4%B8%8EC-%E4%BA%A4%E4%BA%92/" style="font-size: 0.14rem; color: #69c">蓝图与C++交互</a> <a href="/tags/%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/" style="font-size: 0.14rem; color: #69c">权限管理</a> <a href="/tags/%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/" style="font-size: 0.14rem; color: #69c">网络配置</a> <a href="/tags/%E8%82%89%E7%96%BC/" style="font-size: 0.14rem; color: #69c">肉疼</a> <a href="/tags/%E5%B0%8F%E6%96%B9%E8%AF%B4/" style="font-size: 0.14rem; color: #69c">小方说</a> <a href="/tags/%E9%99%80%E8%9E%BA%E7%90%83/" style="font-size: 0.14rem; color: #69c">陀螺球</a> <a href="/tags/%E8%85%BE%E8%AE%AF%E6%B8%B8%E6%88%8F%E5%AD%A6%E9%99%A2/" style="font-size: 0.2rem; color: #0a407c">腾讯游戏学院</a> <a href="/tags/Mysql/" style="font-size: 0.14rem; color: #69c">Mysql</a> <a href="/tags/MongoDB/" style="font-size: 0.14rem; color: #69c">MongoDB</a> <a href="/tags/%E8%87%AA%E5%BA%95%E5%90%91%E4%B8%8A/" style="font-size: 0.14rem; color: #69c">自底向上?</a> <a href="/tags/%E9%87%87%E5%9D%91%E8%AE%B0/" style="font-size: 0.2rem; color: #0a407c">采坑记</a>
+  </div>
+</li>
+
+
+    
+    
+<li class="widget widget-normal friends-link">
+    <h3 class="fa fa-globe widget-title">Friends</h3><br/>
+
+    
+        <a href="https://geekaholiclin.github.io" class="fa" target="_blank">主题作者</a>
+
+    
+
+</li>
+
+    
+</ul>
+
+
+        <div id="main">
+    <article id="post">
+        <div id="post-header">
+
+            <h1 id="HTTP框架底层原理实现">
+                
+                HTTP框架底层原理实现
+                
+            </h1>
+            <div class="article-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+            <i class="fa fa-folder-open-o"></i>
+        <span>分享会</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+         <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            null
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta ">2020/11/01</span>
+    </span>
+    
+    
+    
+</div>
+
+            
+            
+        </div>
+        
+        <div id="post-body">
+            <h1 id="框架"><a href="#框架" class="headerlink" title="框架"></a>框架</h1><p>后端组使用各种框架</p>
+<ul>
+<li>Java的Springboot</li>
+<li>Python的Django</li>
+</ul>
+<p>框架的底层原理是什么? 当然涉及原理性的东西太多了, 我这里指的是为什么客户端的几次简单点击 最终会转化成了后端的函数调用?</p>
+<p>Springboot针对某一个URL能Get Post等等设置对应的方法. 还能得到指定的参数?</p>
+<p>客户端的几下简单的点击就能够将数据传送到后端 从后端拿回数据然后进行显示</p>
+<p>后端也只要在相关的函数后处理接收到的数据</p>
+<h1 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h1><p>要解释上面的问题需要用到计算机学院几门专业课的只是 &lt;操作系统&gt; &lt;计算机组成原理 跳过&gt; &lt;计算机网络&gt;</p>
+<p>基础知识我要不要学? HTTP协议? DNS怎么发挥的作用?</p>
+<p>GET POST 有什么区别? 为什么GET有参数长度限制(自己本以为是RFC规定 然而是浏览器规定的而且是URL长度限制而不是参数限制) 而POST没有参数长度限制<br>新了解到了</p>
+<p>无法访问网页怎么办? 可以根据浏览器访问流程进行排查</p>
+<p>校园网断网跳转怎么实现的? DNS污染又是什么? <em>返回错误的IP</em></p>
+<p>favicon? 如何实现的自动加载 <em>GET /favicon.ico HTTP/1.1</em></p>
+<p>抓包的原理</p>
+<h1 id="浏览器访问流程"><a href="#浏览器访问流程" class="headerlink" title="浏览器访问流程"></a>浏览器访问流程</h1><p>当你输入一个网址, 按下回车后 首先会向DNS服务器发送DNS请求将域名转换成IP. <em>DNS污染</em></p>
+<p>然后向 IP+端口号 <strong>建立连接 强调!</strong> 发送HTTP请求 (HTTP默认是80端口) 接收HTTP回应 进行解析HTML 然后请求相关的JS文件等</p>
+<p>然而收发HTTP并不是 操作系统提供的基础API的功能 那是怎么来的?</p>
+<h1 id="HTTP协议"><a href="#HTTP协议" class="headerlink" title="HTTP协议"></a>HTTP协议</h1><p>协议是什么?</p>
+<p>文本协议</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">GET  HTTP&#x2F;1.1</span><br><span class="line">Host: 10.2.5.251</span><br><span class="line">Connection: keep-alive</span><br><span class="line">DNT: 1</span><br><span class="line">Upgrade-Insecure-Requests: 1</span><br><span class="line">User-Agent: Mozilla&#x2F;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit&#x2F;537.36 (KHTML, like Gecko) Chrome&#x2F;86.0.4240.183 Safari&#x2F;537.36</span><br><span class="line">Accept: text&#x2F;html,application&#x2F;xhtml+xml,application&#x2F;xml;q&#x3D;0.9,image&#x2F;avif,image&#x2F;webp,image&#x2F;apng,*&#x2F;*;q&#x3D;0.8,application&#x2F;signed-exchange;v&#x3D;b3;q&#x3D;0.9</span><br><span class="line">Accept-Encoding: gzip, deflate</span><br><span class="line">Accept-Language: zh-CN,zh;q&#x3D;0.9,ja;q&#x3D;0.8</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">GET &#x2F; HTTP&#x2F;1.1</span><br><span class="line">Host: www.baidu.com</span><br><span class="line">Connection: keep-alive</span><br><span class="line">DNT: 1</span><br><span class="line">Upgrade-Insecure-Requests: 1</span><br><span class="line">User-Agent: Mozilla&#x2F;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit&#x2F;537.36 (KHTML, like Gecko) Chrome&#x2F;86.0.4240.183 Safari&#x2F;537.36</span><br><span class="line">Accept: text&#x2F;html,application&#x2F;xhtml+xml,application&#x2F;xml;q&#x3D;0.9,image&#x2F;avif,image&#x2F;webp,image&#x2F;apng,*&#x2F;*;q&#x3D;0.8,application&#x2F;signed-exchange;v&#x3D;b3;q&#x3D;0.9</span><br><span class="line">Sec-Fetch-Site: none</span><br><span class="line">Sec-Fetch-Mode: navigate</span><br><span class="line">Sec-Fetch-User: ?1</span><br><span class="line">Sec-Fetch-Dest: document</span><br><span class="line">Accept-Encoding: gzip, deflate, br</span><br><span class="line">Accept-Language: zh-CN,zh;q&#x3D;0.9,ja;q&#x3D;0.8</span><br><span class="line">Cookie: BIDUPSID&#x3D;275AD930CBDC20F9C9E074230710B72E; PSTM&#x3D;1602485007; BAIDUID&#x3D;93E8E77E51A5F22CA01131559BA8666A:FG&#x3D;1; BD_UPN&#x3D;12314753; BDUSS&#x3D;BjRVJYdFQ5TEJKWWNPck1ZcWdOVklMT0JHMHhQMUx3UGxDZjhNMVVhRmdqcXRmSVFBQUFBJCQAAAAAAAAAAAEAAADZQdlRcmpkNjc0NDEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGABhF9gAYRfM3; BDUSS_BFESS&#x3D;BjRVJYdFQ5TEJKWWNPck1ZcWdOVklMT0JHMHhQMUx3UGxDZjhNMVVhRmdqcXRmSVFBQUFBJCQAAAAAAAAAAAEAAADZQdlRcmpkNjc0NDEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGABhF9gAYRfM3; BAIDUID_BFESS&#x3D;F500721F63FBCA4EDC7DA170AE314FEE:FG&#x3D;1; BDORZ&#x3D;B490B5EBF6F3CD402E515D22BCDA1598; COOKIE_SESSION&#x3D;332523_0_8_0_3_6_1_0_7_4_42_0_332523_0_6_0_1604291277_0_1604291271%7C8%230_0_1604291271%7C1; sug&#x3D;3; sugstore&#x3D;0; ORIGIN&#x3D;0; bdime&#x3D;0; ZD_ENTRY&#x3D;google</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">POST http:&#x2F;&#x2F;202.119.196.6:8080&#x2F;Self&#x2F;login&#x2F;verify HTTP&#x2F;1.1</span><br><span class="line">Connection: keep-alive</span><br><span class="line">Cache-Control: max-age&#x3D;0</span><br><span class="line">Origin: http:&#x2F;&#x2F;202.119.196.6:8080</span><br><span class="line">Upgrade-Insecure-Requests: 1</span><br><span class="line">DNT: 1</span><br><span class="line">Content-Type: application&#x2F;x-www-form-urlencoded</span><br><span class="line">User-Agent: Mozilla&#x2F;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit&#x2F;537.36 (KHTML, like Gecko) Chrome&#x2F;86.0.4240.111 Safari&#x2F;537.36</span><br><span class="line">Accept: text&#x2F;html,application&#x2F;xhtml+xml,application&#x2F;xml;q&#x3D;0.9,image&#x2F;avif,image&#x2F;webp,image&#x2F;apng,*&#x2F;*;q&#x3D;0.8,application&#x2F;signed-exchange;v&#x3D;b3;q&#x3D;0.9</span><br><span class="line">Referer: http:&#x2F;&#x2F;202.119.196.6:8080&#x2F;Self&#x2F;login&#x2F;?302&#x3D;LI</span><br><span class="line">Accept-Language: zh-CN,zh;q&#x3D;0.9,ja;q&#x3D;0.8</span><br><span class="line">Host: 202.119.196.6:8080</span><br><span class="line">Accept-Encoding: gzip, deflate, br</span><br><span class="line">Content-Length: 60</span><br><span class="line">Cookie: JSESSIONID&#x3D;E56420ED06E0ABE922C5A904DBB9C944</span><br><span class="line"></span><br><span class="line">foo&#x3D;&amp;bar&#x3D;&amp;checkcode&#x3D;1234&amp;account&#x3D;08180000&amp;password&#x3D;md5&amp;code&#x3D;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">HTTP&#x2F;1.1 200 OK</span><br><span class="line">Date: Sat, 31 Dec 2005 23:59:59 GMT</span><br><span class="line">Content-Type: text&#x2F;html;charset&#x3D;ISO-8859-1</span><br><span class="line">Content-Length: 122</span><br><span class="line"></span><br><span class="line">＜html＞</span><br><span class="line">＜head＞</span><br><span class="line">＜title＞Wrox Homepage＜&#x2F;title＞</span><br><span class="line">＜&#x2F;head＞</span><br><span class="line">＜body＞</span><br><span class="line">＜!-- body goes here --＞</span><br><span class="line">＜&#x2F;body＞</span><br><span class="line">＜&#x2F;html＞</span><br></pre></td></tr></table></figure>
+
+<p>根据这个格式<em>描述一下格式</em> 请求方法 请求路径 HTTP版本</p>
+<p>HEADER部分 需要什么HEADER加入什么</p>
+<p>BODY部分 放入数据</p>
+<p>所根据的这个格式 这个规定就叫做协议 HTTP的规定就是HTTP协议</p>
+<p>所以说你在手机上查询电费也好 电脑上浏览网页也罢 前端调用后端也是如此 只要是HTTP的API 都会将数据按照这个格式进行打包</p>
+<ol>
+<li><strong>建立连接后</strong>   Fiddler监听拦截的数据, 你知道了这个包的数据都有什么 然后自己建立连接发送同样的包 效果是一样的</li>
+<li>发送打包的数据 </li>
+<li>接收服务器返回的结果</li>
+<li>所以可以抓包后模拟请求这就这么来的</li>
+</ol>
+<h1 id="从TCP看HTTP"><a href="#从TCP看HTTP" class="headerlink" title="从TCP看HTTP"></a>从TCP看HTTP</h1><p><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/CPP%E5%88%86%E4%BA%AB%E5%AD%A6%E4%B9%A0%E4%BC%9A/%E4%B8%83%E5%B1%82%E5%92%8C%E5%9B%9B%E5%B1%82%E5%8D%8F%E8%AE%AE.png" alt=""></p>
+<p><em>将根据这张图说一说, 经常让了解的 七层和四层协议.  (网络访问(链接)层)</em></p>
+<p>上边面说的建立连接建立的实际是TCP连接</p>
+<p>TCP连接是通过 IP和端口号建立的 正好使用的上面的IP和端口号</p>
+<p>TCP连接干什么?  连接就是传输数据 这就涉及到了读写操作  全双工</p>
+<p>两个套接字之间的通信 客户端持有一个套接字 服务器持有一个套接字 然后客户端的数据发送和服务器端的数据接收就是转化为了针对套接字的读写</p>
+<p>套接字你可以理解为 两个电话互相通话</p>
+<p>套接字的建立和管理都比较复杂, 但是流程极为固定 干脆将这些代码包装起来 对外界提供一个简单的函数即可 内部帮你管理建立TCP连接</p>
+<p>客户端指的就是你的浏览器也好, 你的应用也好 套接字这个核心的东西被包装了起来</p>
+<p>所以输入网址也好, 使用form标签也罢. 最终都是根据HTTP协议包装你想要发送或者接受的数据. 建立TCP连接 然后将包装好的数据发送到套接字 对方从套接字接受 (流, 流水 按顺序流入)</p>
+<p><em>nc 命令 演示演示?</em></p>
+<p>所以你可以没有域名 照样可以使用HTTP协议 照样访问网页.</p>
+<p>因为HTTP交互的核心就是 根据HTTP协议包装数据 经由TCP连接收发数据 TCP连接使用的是 IP和端口号 而非域名</p>
+<p>域名就没有用了吗? 除了便于记忆? <em>域名 区分作用</em></p>
+<h1 id="HTTP框架"><a href="#HTTP框架" class="headerlink" title="HTTP框架"></a>HTTP框架</h1><p>上面说了HTTP交互细节. 本质就是的收发</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">GET &#x2F;api?a&#x3D;1&amp;b&#x3D;2 HTTP&#x2F;1.1</span><br><span class="line">Host: 10.2.5.251</span><br><span class="line">Connection: keep-alive</span><br><span class="line">DNT: 1</span><br><span class="line">Upgrade-Insecure-Requests: 1</span><br><span class="line">User-Agent: Mozilla&#x2F;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit&#x2F;537.36 (KHTML, like Gecko) Chrome&#x2F;86.0.4240.183 Safari&#x2F;537.36</span><br><span class="line">Accept: text&#x2F;html,application&#x2F;xhtml+xml,application&#x2F;xml;q&#x3D;0.9,image&#x2F;avif,image&#x2F;webp,image&#x2F;apng,*&#x2F;*;q&#x3D;0.8,application&#x2F;signed-exchange;v&#x3D;b3;q&#x3D;0.9</span><br><span class="line">Accept-Encoding: gzip, deflate</span><br><span class="line">Accept-Language: zh-CN,zh;q&#x3D;0.9,ja;q&#x3D;0.8</span><br><span class="line"></span><br><span class="line">HTTP&#x2F;1.1 200 OK</span><br><span class="line">Date: Sat, 31 Dec 2005 23:59:59 GMT</span><br><span class="line">Content-Type: text&#x2F;html;charset&#x3D;ISO-8859-1</span><br><span class="line">Content-Length: 122</span><br><span class="line"></span><br><span class="line">＜html＞</span><br><span class="line">＜head＞</span><br><span class="line">＜title＞Wrox Homepage＜&#x2F;title＞</span><br><span class="line">＜&#x2F;head＞</span><br><span class="line">＜body＞</span><br><span class="line">＜!-- body goes here --＞</span><br><span class="line">＜&#x2F;body＞</span><br><span class="line">＜&#x2F;html＞</span><br></pre></td></tr></table></figure>
+<p>服务器端从套接字 接收到数据后 大家没有见过上面的东西吧</p>
+<p>那就是框架接受之后 把它们作为字符串存了起来 然后按照HTTP的固定协议格式 将内容解析</p>
+<p>必须解析的一般有 Get /api?a=1&amp;b=2  然后得知了这是一个GET请求 请求的URL是 /api 有两个参数 叫什么 值是多少</p>
+<p>然后根据你服务器代码设定的找到一个对应的函数, 框架调用这个函数 传入参数 你就可以处理相应的逻辑了.</p>
+<h1 id="库和框架"><a href="#库和框架" class="headerlink" title="库和框架?"></a>库和框架?</h1><p>库是帮你提供某些功能的包装, 单个库一般并不能开发完整的应用, 只是作为一部分功能函数. curl库 线程库</p>
+<p>框架可以理解为库的升级版, 你使用一个框架提供的函数 就能开发完整的应用, 大多数框架还能方便的引入其他的库来供自己使用.</p>
+<h1 id="nginx"><a href="#nginx" class="headerlink" title="nginx?"></a>nginx?</h1><p>nginx大家用过没有?</p>
+<p>一般逻辑都是设置一个域名 然后指向一个端口 是不是?</p>
+<p>域名这个东西就藏在了HTTPRequest的 header里 他同样从TCP连接接收数据 解析 便知道了域名 然后根据配置转发即可</p>
+<h1 id="要不要学基础知识"><a href="#要不要学基础知识" class="headerlink" title="要不要学基础知识?"></a>要不要学基础知识?</h1><p>端口 计算机网络 组装nas计网</p>
+<p>网线到内核 操作系统和计算机组成原理</p>
+<h1 id="自学能力"><a href="#自学能力" class="headerlink" title="自学能力"></a>自学能力</h1><p>我大一来的工作室 来的时候是远爷带我学的JavaWeb. </p>
+<p>随便找了本Java书给划一下看哪里</p>
+<p>给我指明了一个框架, 然后呢? 去学呗</p>
+<p>百度-&gt;谷歌中文-&gt;谷歌英文 <a href="https://translate.google.cn/" target="_blank" rel="noopener">https://translate.google.cn/</a></p>
+<p>知乎 百度 谷歌 Github StackOverflow 等等</p>
+<p>遇到问题先百度</p>
+<ul>
+<li>视频?</li>
+<li>看书?</li>
+<li>文档?</li>
+</ul>
+<p>大二转LinuxC++ 全部都是从零开始 没有人带我</p>
+<h1 id="大学生"><a href="#大学生" class="headerlink" title="大学生"></a>大学生</h1><p>垃圾xxxA4 我就是不想学.</p>
+<p>写博客?</p>
+<p>人外有人天外有天</p>
+<p>让自己一天比一天更加优秀 提升自己</p>
+<p>平衡自己时间  爆肝程序<br>社交 我用大二上的社交换到了Linux入门 我退出了xxxx</p>
+<p>大三上减肥(身高), 参加活动, 锻炼身体, 找对象? 规律作息</p>
+<p>穿搭</p>
+<p>多多质疑 乳酸菌饮料?</p>
+<p>不要被轻易带节奏 12:55秒 <a href="https://www.bilibili.com/video/BV1jV411o7VV" target="_blank" rel="noopener">https://www.bilibili.com/video/BV1jV411o7VV</a></p>
+
+        </div>
+        <div id="post-footer">
+            <div class="avatar" style="padding-bottom: 0.2rem"
+                    >
+                <img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/%E5%8D%9A%E5%AE%A2%E5%B0%81%E9%9D%A2/2676.png" alt="avatar"/>
+                
+                
+            </div>
+            <ul class="author-profile-section">
+                <li>
+                  
+                  Author:
+                  
+                    
+                    <a href="/about.html">Lsmg</a>
+                </li>
+                
+                <li>Published Date: <span>2020-11-01  22:45:39</span></li>
+                
+                <li>Updated Date: <span>2020-11-06  16:45:27</span></li>
+                
+                <li class="post-category">
+                    Categories:
+                    
+                    <a href="/categories/%E5%88%86%E4%BA%AB%E4%BC%9A/">分享会</a>
+                    
+                </li>
+                <li class="post-tags">
+                    Tags:
+                    
+                </li>
+                
+                <li> License: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+知识共享署名-非商业性使用-禁止演绎 3.0 未本地化版本许可协议（CC BY-NC-ND 3.0）
+</a></li>
+                
+            </ul>
+        </div>
+    </article>
+    <div class="article-nav">
+        
+        
+        <a href="/2020/10/%E5%88%86%E4%BA%AB%E5%AD%A6%E4%B9%A0%E4%BC%9A-%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5%E5%AE%BF%E8%88%8D%E7%94%B5%E8%84%91/" class="next-post fa">远程连接宿舍电脑</a>
+        
+    </div>
+    
+    <div id="comments">
+        
+
+<script>
+  gitalk.render("comments");
+</script>
+
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+    <footer id="footer">
+    
+    <div class="social">
+        
+        <a href="https://github.com/Jigokubana" class="fa fa-github" target="_blank" title="GitHub"></a>
+        
+    </div>
+    
+    <div>
+        
+        <a href="/" class="copyright-links">Lsmg</a>&copy;2015 - 2020.All Rights
+        Reserved.
+    </div>
+    <p>Powered by <a href="https://hexo.io" class="copyright-links" target="_blank">Hexo</a> | Theme by <a
+                href="https://github.com/GeekaholicLin" class="copyright-links" target="_blank">GeekaholicLin</a>
+    </p>
+    
+</footer>
+
+</div>
+    <ul id="tools">
+    <li class="totop-btn fa fa-angle-up"></li>
+    <li class="exchange-btn fa fa-exchange"></li>
+  
+    <li class="toc-btn fa fa-list-ul"></li>
+    
+    
+
+    
+</ul>
+<p id="process"></p>
+<div id="search-overlay">
+    <div class="search-area-wrap">
+        <div id="search-area">
+            <div class="input-wrap focus">
+                <i class="fa fa-search" aria-hidden="true"></i>
+                <input id="search-input" autofocus autocomplete="off" type="text"
+                       placeholder="search this website..."/>
+            </div>
+            <ul id="search-result">
+                <li class="load-first"><i class="fa fa-spinner fa-pulse"></i></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#框架"><span class="toc-number">1.</span> <span class="toc-text">框架</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#基础"><span class="toc-number">2.</span> <span class="toc-text">基础</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#浏览器访问流程"><span class="toc-number">3.</span> <span class="toc-text">浏览器访问流程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTP协议"><span class="toc-number">4.</span> <span class="toc-text">HTTP协议</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#从TCP看HTTP"><span class="toc-number">5.</span> <span class="toc-text">从TCP看HTTP</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTP框架"><span class="toc-number">6.</span> <span class="toc-text">HTTP框架</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#库和框架"><span class="toc-number">7.</span> <span class="toc-text">库和框架?</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#nginx"><span class="toc-number">8.</span> <span class="toc-text">nginx?</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#要不要学基础知识"><span class="toc-number">9.</span> <span class="toc-text">要不要学基础知识?</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#自学能力"><span class="toc-number">10.</span> <span class="toc-text">自学能力</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#大学生"><span class="toc-number">11.</span> <span class="toc-text">大学生</span></a></li></ol>
+
+
+
+
+
+<script src="/js/search.js"></script>
+
+<script type="text/javascript">
+    //theme config datas
+    var copyrightObj = {};
+    copyrightObj.enable = 'false';
+    copyrightObj.triggerCopyLength = '200';
+    copyrightObj.appendText = '商业转载请联系作者获得授权,非商业转载请注明出处 © example';
+    var leancloudObj = {};
+    leancloudObj.enable = 'false';
+    leancloudObj.className = 'BlogCounter';
+    leancloudObj.limits = '10';
+</script>
+<script type="text/javascript">
+    var search = {};
+    var search_path = "search.xml";
+    if (!search_path) {
+        search_path = "search.xml";
+    }
+    search.path = "/" + search_path;
+    search.func =  _ajax.init();
+</script>
+
+<script src="/js/app.js"></script>
+
+
+
+</body>
+</html>
