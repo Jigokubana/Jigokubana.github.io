@@ -3,6 +3,46 @@
     
     
     <entry>
+        <title><![CDATA[力扣每日一题-3.无重复字符的最长子串]]></title>
+        <url>http://blog.lsmg.xyz/2020/11/%25E5%258A%259B%25E6%2589%25A3%25E6%25AF%258F%25E6%2597%25A5%25E4%25B8%2580%25E9%25A2%2598-3.%25E6%2597%25A0%25E9%2587%258D%25E5%25A4%258D%25E5%25AD%2597%25E7%25AC%25A6%25E7%259A%2584%25E6%259C%2580%25E9%2595%25BF%25E5%25AD%2590%25E4%25B8%25B2/</url>
+        <content type="html"><![CDATA[<p>给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。</p>
+<p>示例 1:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;abcabcbb&quot;</span><br><span class="line">输出: 3 </span><br><span class="line">解释: 因为无重复字符的最长子串是 &quot;abc&quot;，所以其长度为 3。</span><br></pre></td></tr></table></figure>
+<p>示例 2:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;bbbbb&quot;</span><br><span class="line">输出: 1</span><br><span class="line">解释: 因为无重复字符的最长子串是 &quot;b&quot;，所以其长度为 1。</span><br></pre></td></tr></table></figure>
+<p>示例 3:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;pwwkew&quot;</span><br><span class="line">输出: 3</span><br><span class="line">解释: 因为无重复字符的最长子串是 &quot;wke&quot;，所以其长度为 3。</span><br><span class="line">     请注意，你的答案必须是 子串 的长度，&quot;pwke&quot; 是一个子序列，不是子串。</span><br></pre></td></tr></table></figure>
+<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/longest-substring-without-repeating-characters" target="_blank" rel="noopener">https://leetcode-cn.com/problems/longest-substring-without-repeating-characters</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<h1 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(<span class="built_in">string</span> s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">bool</span> char_flag[<span class="number">128</span>]; <span class="comment">// 记录字符是否出现过</span></span><br><span class="line">    <span class="keyword">int</span> char_sub[<span class="number">128</span>]; <span class="comment">// 记录字符下标</span></span><br><span class="line">    <span class="built_in">memset</span>(char_flag, <span class="literal">false</span>, <span class="keyword">sizeof</span> char_flag);</span><br><span class="line">    <span class="keyword">int</span> max_result = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> begin_sub = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> sub = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (sub &lt; s.length())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">char</span> current_char = s[sub];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (char_flag[current_char])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (sub - begin_sub &gt; max_result)</span><br><span class="line">            &#123;</span><br><span class="line">                max_result = sub - begin_sub;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = begin_sub; i &lt; char_sub[current_char]; ++i)</span><br><span class="line">            &#123;</span><br><span class="line">                char_flag[s[i]] = <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            begin_sub = char_sub[current_char] + <span class="number">1</span>;</span><br><span class="line">            char_sub[current_char] = sub;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            char_sub[current_char] = sub;</span><br><span class="line">            char_flag[current_char] = <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        sub++;</span><br><span class="line">        <span class="keyword">if</span> (sub == s.length())</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (sub - begin_sub &gt; max_result)</span><br><span class="line">            &#123;</span><br><span class="line">                max_result = sub - begin_sub;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> max_result;</span><br><span class="line">&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>思路是按顺序读取char, 如果没有出现过则标记出现记录下标.</p>
+<p>如果出现了则用当前下标减去开始下标判断是否更长来记录, 同时更新开始下标为重复字符的下标后一个字符下标.</p>
+<p>移动开始下标后 需要取消 新开始标记和旧开始标记之前的char标记</p>
+<h1 id="样例代码"><a href="#样例代码" class="headerlink" title="样例代码"></a>样例代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(<span class="built_in">string</span> s)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> heap[<span class="number">128</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>; j &lt; s.<span class="built_in">size</span>(); ++j)</span><br><span class="line">        &#123;</span><br><span class="line">            heap[s[j]]++; <span class="comment">// 标记字符出现</span></span><br><span class="line">            <span class="keyword">while</span>(heap[s[j]] &gt; <span class="number">1</span>) <span class="comment">// 再次出现</span></span><br><span class="line">            &#123;</span><br><span class="line">              <span class="comment">/*</span></span><br><span class="line"><span class="comment">              开始符号标记下标 向前滑动 1 将开始下标的字符滑动出去</span></span><br><span class="line"><span class="comment">              如果滑出去的字符是本次遇到的重复字符 则继续 否则一直滑动到重复字符位置</span></span><br><span class="line"><span class="comment">              */</span></span><br><span class="line">                heap[s[i]]--;</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">            res = <span class="built_in">max</span>(res, j - i + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>首先看上去 代码就非常的短 我的写了40行而这个仅有10行</p>
+<h1 id="改进"><a href="#改进" class="headerlink" title="改进"></a>改进</h1><p>我的虽然不是一次滑动一个字符 而是滑动一步到位. 但是仍需要一个for循环来去掉滑出的字符. 所以同样例代码思想.</p>
+<p>所以没有必要一次滑动到位, 反正for循环需要执行就在for之中慢慢滑动. <code>这样可以省去记录字符出现的下标</code></p>
+<p>我字符出现记录使用的bool数组然而使用<code>int数组却能包含更多的信息</code>.</p>
+<p>我原版代码需要额外判定一次是否到了尾部, 当最后一个字符没有重复的时候 循环就结束了.</p>
+]]></content>
+        
+        <categories>
+            
+            <category> 力扣每日一题 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 力扣每日一题 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
         <title><![CDATA[P2P直播平台]]></title>
         <url>http://blog.lsmg.xyz/2020/11/%25E9%25A1%25B9%25E7%259B%25AE%25E5%2588%25B6%25E4%25BD%259C-P2P%25E7%259B%25B4%25E6%2592%25AD%25E5%25B9%25B3%25E5%258F%25B0/</url>
         <content type="html"><![CDATA[<p>当前进度 <code>服务器端</code>解析Rtmp推流保存并为可以播放的Flv文件 (初版完成)</p>
@@ -2662,6 +2702,20 @@
     </entry>
     
     <entry>
+        <title><![CDATA[算法题目记录]]></title>
+        <url>http://blog.lsmg.xyz/2020/03/%25E7%25AE%2597%25E6%25B3%259591-%25E7%25AE%2597%25E6%25B3%2595%25E9%25A2%2598%25E7%259B%25AE%25E8%25AE%25B0%25E5%25BD%2595/</url>
+        <content type="html"></content>
+        
+        <categories>
+            
+            <category> 算法 </category>
+            
+        </categories>
+        
+        
+    </entry>
+    
+    <entry>
         <title><![CDATA[数据结构和STL]]></title>
         <url>http://blog.lsmg.xyz/2020/03/%25E7%25AE%2597%25E6%25B3%259590-%25E6%2595%25B0%25E6%258D%25AE%25E7%25BB%2593%25E6%259E%2584%25E7%25AE%2580%25E5%258D%2595%25E5%25BA%2594%25E7%2594%25A8/</url>
         <content type="html"><![CDATA[<p><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/STL/api.png" alt=""></p>
@@ -2764,20 +2818,6 @@
 </tr>
 </tbody></table>
 <h1 id="Sequence-containers-顺序容器"><a href="#Sequence-containers-顺序容器" class="headerlink" title="Sequence containers 顺序容器"></a>Sequence containers 顺序容器</h1><h2 id="array"><a href="#array" class="headerlink" title="array"></a>array</h2><h2 id="vector"><a href="#vector" class="headerlink" title="vector"></a>vector</h2><h2 id="deque"><a href="#deque" class="headerlink" title="deque"></a>deque</h2><h2 id="forward-list"><a href="#forward-list" class="headerlink" title="forward_list"></a>forward_list</h2><h2 id="list"><a href="#list" class="headerlink" title="list"></a>list</h2><h1 id="Associative-containers-关联容器"><a href="#Associative-containers-关联容器" class="headerlink" title="Associative containers 关联容器"></a>Associative containers 关联容器</h1><h2 id="set"><a href="#set" class="headerlink" title="set"></a>set</h2><h2 id="map"><a href="#map" class="headerlink" title="map"></a>map</h2><h2 id="multiset"><a href="#multiset" class="headerlink" title="multiset"></a>multiset</h2><h2 id="multimap"><a href="#multimap" class="headerlink" title="multimap"></a>multimap</h2><h1 id="Unordered-associative-containers-无序关联容器"><a href="#Unordered-associative-containers-无序关联容器" class="headerlink" title="Unordered associative containers 无序关联容器"></a>Unordered associative containers 无序关联容器</h1><h2 id="unordered-set"><a href="#unordered-set" class="headerlink" title="unordered_set"></a>unordered_set</h2><h2 id="unordered-map"><a href="#unordered-map" class="headerlink" title="unordered_map"></a>unordered_map</h2><h2 id="unordered-multiset"><a href="#unordered-multiset" class="headerlink" title="unordered_multiset"></a>unordered_multiset</h2><h2 id="unordered-multimap"><a href="#unordered-multimap" class="headerlink" title="unordered_multimap"></a>unordered_multimap</h2><h1 id="Container-adaptors-容器适配器"><a href="#Container-adaptors-容器适配器" class="headerlink" title="Container adaptors 容器适配器"></a>Container adaptors 容器适配器</h1><h2 id="stack"><a href="#stack" class="headerlink" title="stack"></a>stack</h2><h2 id="queue"><a href="#queue" class="headerlink" title="queue"></a>queue</h2><h2 id="priority-queue"><a href="#priority-queue" class="headerlink" title="priority_queue"></a>priority_queue</h2>]]></content>
-        
-        <categories>
-            
-            <category> 算法 </category>
-            
-        </categories>
-        
-        
-    </entry>
-    
-    <entry>
-        <title><![CDATA[算法题目记录]]></title>
-        <url>http://blog.lsmg.xyz/2020/03/%25E7%25AE%2597%25E6%25B3%259591-%25E7%25AE%2597%25E6%25B3%2595%25E9%25A2%2598%25E7%259B%25AE%25E8%25AE%25B0%25E5%25BD%2595/</url>
-        <content type="html"></content>
         
         <categories>
             
@@ -3949,6 +3989,31 @@
     </entry>
     
     <entry>
+        <title><![CDATA[游戏知识-腾讯游戏学院-如何进入游戏开发行业]]></title>
+        <url>http://blog.lsmg.xyz/2019/12/%25E6%25B8%25B8%25E6%2588%258F%25E7%259F%25A5%25E8%25AF%2586-%25E8%2585%25BE%25E8%25AE%25AF%25E6%25B8%25B8%25E6%2588%258F%25E5%25AD%25A6%25E9%2599%25A2-%25E5%25A6%2582%25E4%25BD%2595%25E8%25BF%259B%25E5%2585%25A5%25E6%25B8%25B8%25E6%2588%258F%25E5%25BC%2580%25E5%258F%2591%25E8%25A1%258C%25E4%25B8%259A/</url>
+        <content type="html"><![CDATA[<p>由于自己了解的实在是不足, 所以来腾讯游戏课堂来学习一些架构之类的东西 来完善自己的知识面<br><a href="https://gameinstitute.qq.com/course/detail/10156" target="_blank" rel="noopener">想做游戏吗？如何开始我的游戏开发职业生涯</a></p>
+<a id="more"></a>
+<p>做游戏不会重复做同样的工作, 项目不同</p>
+]]></content>
+        
+        <categories>
+            
+            <category> 游戏知识 </category>
+            
+            <category> 腾讯游戏学院 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 腾讯游戏学院 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
         <title><![CDATA[游戏知识-服务器-服务器通信]]></title>
         <url>http://blog.lsmg.xyz/2019/12/%25E6%25B8%25B8%25E6%2588%258F%25E7%259F%25A5%25E8%25AF%2586-%25E6%259C%258D%25E5%258A%25A1%25E5%2599%25A8-%25E6%259C%258D%25E5%258A%25A1%25E5%2599%25A8%25E9%2580%259A%25E4%25BF%25A1/</url>
         <content type="html"><![CDATA[<p>由于自己了解的实在是不足, 所以来腾讯游戏课堂来学习一些架构之类的东西 来完善自己的知识面<br><a href="https://gameinstitute.qq.com/course/detail/10096" target="_blank" rel="noopener">服务器通信</a></p>
@@ -3978,31 +4043,6 @@
             <category> 游戏知识 </category>
             
             <category> 服务器 </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> 腾讯游戏学院 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-        <title><![CDATA[游戏知识-腾讯游戏学院-如何进入游戏开发行业]]></title>
-        <url>http://blog.lsmg.xyz/2019/12/%25E6%25B8%25B8%25E6%2588%258F%25E7%259F%25A5%25E8%25AF%2586-%25E8%2585%25BE%25E8%25AE%25AF%25E6%25B8%25B8%25E6%2588%258F%25E5%25AD%25A6%25E9%2599%25A2-%25E5%25A6%2582%25E4%25BD%2595%25E8%25BF%259B%25E5%2585%25A5%25E6%25B8%25B8%25E6%2588%258F%25E5%25BC%2580%25E5%258F%2591%25E8%25A1%258C%25E4%25B8%259A/</url>
-        <content type="html"><![CDATA[<p>由于自己了解的实在是不足, 所以来腾讯游戏课堂来学习一些架构之类的东西 来完善自己的知识面<br><a href="https://gameinstitute.qq.com/course/detail/10156" target="_blank" rel="noopener">想做游戏吗？如何开始我的游戏开发职业生涯</a></p>
-<a id="more"></a>
-<p>做游戏不会重复做同样的工作, 项目不同</p>
-]]></content>
-        
-        <categories>
-            
-            <category> 游戏知识 </category>
-            
-            <category> 腾讯游戏学院 </category>
             
         </categories>
         

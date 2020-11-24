@@ -20,7 +20,7 @@
 <meta name="verify" content=all />
     <!--Title-->
 
-<title>算法四 | Lsmg的大学之路</title>
+<title>力扣每日一题-3.无重复字符的最长子串 | Lsmg的大学之路</title>
 
 <link rel="alternate" href="/atom.xml" title="Lsmg的大学之路" type="application/atom+xml">
 
@@ -140,9 +140,9 @@
     <article id="post">
         <div id="post-header">
 
-            <h1 id="算法四">
+            <h1 id="力扣每日一题-3.无重复字符的最长子串">
                 
-                算法四
+                力扣每日一题-3.无重复字符的最长子串
                 
             </h1>
             <div class="article-meta">
@@ -150,7 +150,7 @@
     
     <span class="categories-meta fa-wrap">
             <i class="fa fa-folder-open-o"></i>
-        <span>算法</span>
+        <span>力扣每日一题</span>
     </span>
     
     
@@ -158,7 +158,7 @@
          <i class="fa fa-tags"></i>
         <span class="tags-meta">
             
-            null
+            力扣每日一题
             
         </span>
     </span>
@@ -166,7 +166,7 @@
     
     <span class="fa-wrap">
         <i class="fa fa-clock-o"></i>
-        <span class="date-meta ">2020/07/17</span>
+        <span class="date-meta ">2020/11/24</span>
     </span>
     
     
@@ -178,185 +178,26 @@
         </div>
         
         <div id="post-body">
-            <p>来之不易的暑期留校, 一半献给算法.</p>
-<h1 id="第二章-排序"><a href="#第二章-排序" class="headerlink" title="第二章 排序"></a>第二章 排序</h1><p>选择排序</p>
-<ul>
-<li>运行时间和输入的数据无关, 仅和数量有关.<br>不会利用输入的初始状态</li>
-<li>数据移动是最少的<br>我们将研究的其他任何算法 都不具备这个特性…..</li>
-</ul>
-<p>插入排序</p>
-<ul>
-<li>适合小规模数组</li>
-<li>对于部分有序的数组, 处理起来很有效</li>
-<li>倒置的数量很少时, 插入排序很可能比其他算法还要快</li>
-</ul>
-<p>希尔排序</p>
-<ul>
-<li>插入排序对于大规模乱序数组很慢, 因为它只会交换相邻元素, 因此为了改进插入排序的局部性,提出了希尔排序</li>
-<li>希尔排序交换不相邻的元素以对数组的局部性进行排序, 最终用插入排序调整局部有序的数组</li>
-</ul>
-<p>归并排序</p>
-<ul>
-<li>原地归并排序</li>
-<li>自顶向下 递归实现 分治思想</li>
-<li>自底向上 从归并微型数组到整体归并</li>
-</ul>
-<p>快速排序</p>
-<ul>
-<li>分治排序算法</li>
-</ul>
-<p>堆排序</p>
-<ul>
-<li>只能说妙啊.. 这本书先讲的优先队列如何实现, 然后紧接着就用sink方法完成了堆排序</li>
-</ul>
-<p><strong>稳定性</strong></p>
-<p>某地在某时下雨 时间和地点存在对应关系.<br>按照时间排序后, 再按照地点排序 单个地点的时间排序就很可能被打乱</p>
-<p>稳定, 则时间排序没有被打乱. 不稳定, 很可能时间排序被打乱</p>
-<table>
-<thead>
-<tr>
-<th>算法</th>
-<th>是否稳定</th>
-<th>是否为原地排序</th>
-<th>时间复杂度</th>
-<th>空间复杂度</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>选择排序</td>
-<td>否</td>
-<td>是</td>
-<td>N^2</td>
-<td>1</td>
-<td>最简单粗暴的方式, 交换次数最少</td>
-</tr>
-<tr>
-<td>插入排序</td>
-<td>是</td>
-<td>是</td>
-<td>介于N与N^2</td>
-<td>1</td>
-<td>很大程度取决输入元素的排列情况, 如果倒置元素很少则性能可能超过快排</td>
-</tr>
-<tr>
-<td>希尔排序</td>
-<td>否</td>
-<td>是</td>
-<td></td>
-<td>1</td>
-<td>插入排序的改良版, 改善了插入排序过于局限</td>
-</tr>
-<tr>
-<td>快速排序</td>
-<td>否</td>
-<td>是</td>
-<td>NlogN</td>
-<td>lgN</td>
-<td>分治, 运行效率由概率保证</td>
-</tr>
-<tr>
-<td>归并排序</td>
-<td>是</td>
-<td>否</td>
-<td>NlogN</td>
-<td>N</td>
-<td>自顶向下(递归 分治)和自底向上(从局部到整体) 两种方法</td>
-</tr>
-<tr>
-<td>堆排序</td>
-<td>否</td>
-<td>是</td>
-<td>NlogN</td>
-<td>1</td>
-<td>学完后突然想到了如果在很多的数字中找到最大的多少个数这种问题</td>
-</tr>
-</tbody></table>
-<p><strong>2.4 优先队列</strong></p>
-<p>需要支持两种操作, 删除最大元素和插入元素  - 优先级队列</p>
-<ol>
-<li>数组实现(无序) - 插入快 删除慢</li>
-</ol>
-<p>Insert方法 直接将元素插入尾部, 类似栈的push方法</p>
-<p>DelMax方法 使用一个内部循环找出最大的元素和边界元素交换 然后删除边界元素, 删除的时候类似pop方法</p>
-<ol start="2">
-<li>数组实现(有序) - 插入慢 删除快</li>
-</ol>
-<p>Insert方法 中进行排序, 插入新的元素的时候将较大元素向右移动一格位置, 然后插入新的元素</p>
-<p>DelMax方法 直接删除右侧元素, 类似栈的pop方法</p>
-<ol start="3">
-<li>链表表示法</li>
-</ol>
-<p>无序序列是解决问题的惰性方法, 仅在必要的时候才会采取行动 找出最大元素</p>
-<p>有序序列是解决问题的积极方法, 尽可能的未雨绸缪, 使得找出最大元素高效</p>
-<ol start="4">
-<li><code>二叉堆</code>表示法 - 插入和删除都为线性对数级别</li>
-</ol>
-<p>Insert方法 将新元素添加到数组末端, 增加了堆的大小 将新元素<code>上浮</code>到合适的位置</p>
-<p>DelMax方法 删除顶部元素 将数组的最后一个元素放到顶部 将其<code>下沉</code>到合适的位置 减小了堆的大小 将</p>
-<p><strong>堆</strong></p>
-<p>二叉堆: 每个元素都要保证小于等于(大于等于)另外两个特定位置的元素. 其根节点是最小(最大)元素</p>
-<ol>
-<li>二叉堆的指针表示法</li>
-</ol>
-<p>需要使用三个指针, 指向父节点和两个子节点</p>
-<ol start="2">
-<li>使用数组</li>
-</ol>
-<p>完全二叉树可以使用数组表示 不使用数组的0位置元素 从1开始 k的子节点分别在2k和2k+1</p>
-<p><strong>堆的有序化</strong></p>
-<p>以最大堆为例</p>
-<ol>
-<li>由下至上的堆有序化 <code>上浮</code></li>
-</ol>
-<p>堆的有序状态因为 某个节点比他的父节点更大 被打破.</p>
-<p>需要与父节点交换, 不断向上直到遇到一个更大的父节点 或者到了顶部</p>
-<ol start="2">
-<li>由上至下的堆有序化 <code>下浮</code></li>
-</ol>
-<p>堆的有序状态因为 某个父节点比 他的两个子节点或其中之一子节点 小 被打破.</p>
-<p>将父节点与子节点中较大的一个进行交换直到它的子节点都比它小 获得到了底部</p>
-<h1 id="第三章-查找"><a href="#第三章-查找" class="headerlink" title="第三章 查找"></a>第三章 查找</h1><p>符号表: 最主要的目的是是将<code>one key</code>和<code>one value</code>联系起来, 是一种存储键值对的数据结构, 支持插入和查找</p>
-<table>
-<thead>
-<tr>
-<th>使用的数据结构</th>
-<th>实现</th>
-<th>优点</th>
-<th>缺点</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>链表(顺序查找)</td>
-<td>SequentialSearchST</td>
-<td>适用于小型问题</td>
-<td>对于大型表很慢</td>
-</tr>
-<tr>
-<td>有序数组(二分)</td>
-<td>BinarySearchST</td>
-<td>最优的查找和空间需求, 能够进行有序性相关的操作</td>
-<td>插入操作很慢</td>
-</tr>
-<tr>
-<td>二叉查找树</td>
-<td>BST</td>
-<td>实现简单, 能够进行有序性相关的操作</td>
-<td>没有性能上界的保证, 链接需要额外的空间</td>
-</tr>
-<tr>
-<td>平衡二叉树</td>
-<td>RedBlackBST</td>
-<td>最优的查找和插入效率, 能够进行有序性相关的操作</td>
-<td>链接需要额外的空间</td>
-</tr>
-<tr>
-<td>散列表</td>
-<td>SeparateChainHashST LinearProbingHashST</td>
-<td>能够快速的查找和插入常见的数据类型</td>
-<td>需要计算散列, 无法进行有序性相关操作, 链接和空节点需要额外的空间</td>
-</tr>
-</tbody></table>
+            <p>给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。</p>
+<p>示例 1:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;abcabcbb&quot;</span><br><span class="line">输出: 3 </span><br><span class="line">解释: 因为无重复字符的最长子串是 &quot;abc&quot;，所以其长度为 3。</span><br></pre></td></tr></table></figure>
+<p>示例 2:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;bbbbb&quot;</span><br><span class="line">输出: 1</span><br><span class="line">解释: 因为无重复字符的最长子串是 &quot;b&quot;，所以其长度为 1。</span><br></pre></td></tr></table></figure>
+<p>示例 3:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;pwwkew&quot;</span><br><span class="line">输出: 3</span><br><span class="line">解释: 因为无重复字符的最长子串是 &quot;wke&quot;，所以其长度为 3。</span><br><span class="line">     请注意，你的答案必须是 子串 的长度，&quot;pwke&quot; 是一个子序列，不是子串。</span><br></pre></td></tr></table></figure>
+<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/longest-substring-without-repeating-characters" target="_blank" rel="noopener">https://leetcode-cn.com/problems/longest-substring-without-repeating-characters</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<h1 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(<span class="built_in">string</span> s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">bool</span> char_flag[<span class="number">128</span>]; <span class="comment">// 记录字符是否出现过</span></span><br><span class="line">    <span class="keyword">int</span> char_sub[<span class="number">128</span>]; <span class="comment">// 记录字符下标</span></span><br><span class="line">    <span class="built_in">memset</span>(char_flag, <span class="literal">false</span>, <span class="keyword">sizeof</span> char_flag);</span><br><span class="line">    <span class="keyword">int</span> max_result = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> begin_sub = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> sub = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (sub &lt; s.length())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">char</span> current_char = s[sub];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (char_flag[current_char])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (sub - begin_sub &gt; max_result)</span><br><span class="line">            &#123;</span><br><span class="line">                max_result = sub - begin_sub;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = begin_sub; i &lt; char_sub[current_char]; ++i)</span><br><span class="line">            &#123;</span><br><span class="line">                char_flag[s[i]] = <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            begin_sub = char_sub[current_char] + <span class="number">1</span>;</span><br><span class="line">            char_sub[current_char] = sub;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            char_sub[current_char] = sub;</span><br><span class="line">            char_flag[current_char] = <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        sub++;</span><br><span class="line">        <span class="keyword">if</span> (sub == s.length())</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (sub - begin_sub &gt; max_result)</span><br><span class="line">            &#123;</span><br><span class="line">                max_result = sub - begin_sub;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> max_result;</span><br><span class="line">&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>思路是按顺序读取char, 如果没有出现过则标记出现记录下标.</p>
+<p>如果出现了则用当前下标减去开始下标判断是否更长来记录, 同时更新开始下标为重复字符的下标后一个字符下标.</p>
+<p>移动开始下标后 需要取消 新开始标记和旧开始标记之前的char标记</p>
+<h1 id="样例代码"><a href="#样例代码" class="headerlink" title="样例代码"></a>样例代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(<span class="built_in">string</span> s)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> heap[<span class="number">128</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>; j &lt; s.<span class="built_in">size</span>(); ++j)</span><br><span class="line">        &#123;</span><br><span class="line">            heap[s[j]]++; <span class="comment">// 标记字符出现</span></span><br><span class="line">            <span class="keyword">while</span>(heap[s[j]] &gt; <span class="number">1</span>) <span class="comment">// 再次出现</span></span><br><span class="line">            &#123;</span><br><span class="line">              <span class="comment">/*</span></span><br><span class="line"><span class="comment">              开始符号标记下标 向前滑动 1 将开始下标的字符滑动出去</span></span><br><span class="line"><span class="comment">              如果滑出去的字符是本次遇到的重复字符 则继续 否则一直滑动到重复字符位置</span></span><br><span class="line"><span class="comment">              */</span></span><br><span class="line">                heap[s[i]]--;</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">            res = <span class="built_in">max</span>(res, j - i + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>首先看上去 代码就非常的短 我的写了40行而这个仅有10行</p>
+<h1 id="改进"><a href="#改进" class="headerlink" title="改进"></a>改进</h1><p>我的虽然不是一次滑动一个字符 而是滑动一步到位. 但是仍需要一个for循环来去掉滑出的字符. 所以同样例代码思想.</p>
+<p>所以没有必要一次滑动到位, 反正for循环需要执行就在for之中慢慢滑动. <code>这样可以省去记录字符出现的下标</code></p>
+<p>我字符出现记录使用的bool数组然而使用<code>int数组却能包含更多的信息</code>.</p>
+<p>我原版代码需要额外判定一次是否到了尾部, 当最后一个字符没有重复的时候 循环就结束了.</p>
 
         </div>
         <div id="post-footer">
@@ -375,18 +216,20 @@
                     <a href="/about.html">Lsmg</a>
                 </li>
                 
-                <li>Published Date: <span>2020-07-17  15:51:28</span></li>
+                <li>Published Date: <span>2020-11-24  18:50:02</span></li>
                 
-                <li>Updated Date: <span>2020-11-04  22:30:35</span></li>
+                <li>Updated Date: <span>2020-11-24  19:43:32</span></li>
                 
                 <li class="post-category">
                     Categories:
                     
-                    <a href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+                    <a href="/categories/%E5%8A%9B%E6%89%A3%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/">力扣每日一题</a>
                     
                 </li>
                 <li class="post-tags">
                     Tags:
+                    
+                    <a href="/tags/%E5%8A%9B%E6%89%A3%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/">力扣每日一题</a>
                     
                 </li>
                 
@@ -399,10 +242,8 @@
     </article>
     <div class="article-nav">
         
-        <a href="/2020/07/Linux-%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/" class="pre-post fa fa-caret-left">网络配置</a>
         
-        
-        <a href="/2020/07/Linux-VIM%E6%8A%98%E8%85%BEspf13/" class="next-post fa">VIM(spf-13)使用</a>
+        <a href="/2020/11/%E9%A1%B9%E7%9B%AE%E5%88%B6%E4%BD%9C-P2P%E7%9B%B4%E6%92%AD%E5%B9%B3%E5%8F%B0/" class="next-post fa">P2P直播平台</a>
         
     </div>
     
@@ -467,7 +308,7 @@
     </div>
 </div>
 
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#第二章-排序"><span class="toc-number">1.</span> <span class="toc-text">第二章 排序</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第三章-查找"><span class="toc-number">2.</span> <span class="toc-text">第三章 查找</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#代码1"><span class="toc-number">1.</span> <span class="toc-text">代码1</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#样例代码"><span class="toc-number">2.</span> <span class="toc-text">样例代码</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#改进"><span class="toc-number">3.</span> <span class="toc-text">改进</span></a></li></ol>
 
 
 

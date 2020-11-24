@@ -20,7 +20,7 @@
 <meta name="verify" content=all />
     <!--Title-->
 
-<title>算法四 | Lsmg的大学之路</title>
+<title>Tag: 力扣每日一题 | Lsmg的大学之路</title>
 
 <link rel="alternate" href="/atom.xml" title="Lsmg的大学之路" type="application/atom+xml">
 
@@ -30,10 +30,9 @@
     
 
 <link rel="stylesheet" href="/css/base.css">
-<link rel="stylesheet" href="/css/pages/post.css">
+<link rel="stylesheet" href="/css/pages/archive.css">
 <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="/css/thirdParty/highlight/github.css">
-<link rel="stylesheet" href="/.css">
 
 
     <!--script-->
@@ -137,287 +136,39 @@
 
 
         <div id="main">
-    <article id="post">
-        <div id="post-header">
-
-            <h1 id="算法四">
+    <div id="post-list">
+        <ul class="archives-post-list">
+            
+            <li class="post-items" _href="/2020/11/%E5%8A%9B%E6%89%A3%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-3.%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/">
                 
-                算法四
-                
-            </h1>
-            <div class="article-meta">
+                <p class="info">力扣每日一题</p>
+                <h2 class="post-item-title">力扣每日一题-3.无重复字符的最长子串</h2>
+                <div class="article-meta">
     
     
     <span class="categories-meta fa-wrap">
             <i class="fa fa-folder-open-o"></i>
-        <span>算法</span>
+        <span>力扣每日一题</span>
     </span>
     
-    
-    <span class="fa-wrap">
-         <i class="fa fa-tags"></i>
-        <span class="tags-meta">
-            
-            null
-            
-        </span>
-    </span>
     
     
     <span class="fa-wrap">
         <i class="fa fa-clock-o"></i>
-        <span class="date-meta ">2020/07/17</span>
+        <span class="date-meta ">2020/11/24</span>
     </span>
     
     
     
 </div>
 
+            </li>
             
-            
-        </div>
-        
-        <div id="post-body">
-            <p>来之不易的暑期留校, 一半献给算法.</p>
-<h1 id="第二章-排序"><a href="#第二章-排序" class="headerlink" title="第二章 排序"></a>第二章 排序</h1><p>选择排序</p>
-<ul>
-<li>运行时间和输入的数据无关, 仅和数量有关.<br>不会利用输入的初始状态</li>
-<li>数据移动是最少的<br>我们将研究的其他任何算法 都不具备这个特性…..</li>
-</ul>
-<p>插入排序</p>
-<ul>
-<li>适合小规模数组</li>
-<li>对于部分有序的数组, 处理起来很有效</li>
-<li>倒置的数量很少时, 插入排序很可能比其他算法还要快</li>
-</ul>
-<p>希尔排序</p>
-<ul>
-<li>插入排序对于大规模乱序数组很慢, 因为它只会交换相邻元素, 因此为了改进插入排序的局部性,提出了希尔排序</li>
-<li>希尔排序交换不相邻的元素以对数组的局部性进行排序, 最终用插入排序调整局部有序的数组</li>
-</ul>
-<p>归并排序</p>
-<ul>
-<li>原地归并排序</li>
-<li>自顶向下 递归实现 分治思想</li>
-<li>自底向上 从归并微型数组到整体归并</li>
-</ul>
-<p>快速排序</p>
-<ul>
-<li>分治排序算法</li>
-</ul>
-<p>堆排序</p>
-<ul>
-<li>只能说妙啊.. 这本书先讲的优先队列如何实现, 然后紧接着就用sink方法完成了堆排序</li>
-</ul>
-<p><strong>稳定性</strong></p>
-<p>某地在某时下雨 时间和地点存在对应关系.<br>按照时间排序后, 再按照地点排序 单个地点的时间排序就很可能被打乱</p>
-<p>稳定, 则时间排序没有被打乱. 不稳定, 很可能时间排序被打乱</p>
-<table>
-<thead>
-<tr>
-<th>算法</th>
-<th>是否稳定</th>
-<th>是否为原地排序</th>
-<th>时间复杂度</th>
-<th>空间复杂度</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>选择排序</td>
-<td>否</td>
-<td>是</td>
-<td>N^2</td>
-<td>1</td>
-<td>最简单粗暴的方式, 交换次数最少</td>
-</tr>
-<tr>
-<td>插入排序</td>
-<td>是</td>
-<td>是</td>
-<td>介于N与N^2</td>
-<td>1</td>
-<td>很大程度取决输入元素的排列情况, 如果倒置元素很少则性能可能超过快排</td>
-</tr>
-<tr>
-<td>希尔排序</td>
-<td>否</td>
-<td>是</td>
-<td></td>
-<td>1</td>
-<td>插入排序的改良版, 改善了插入排序过于局限</td>
-</tr>
-<tr>
-<td>快速排序</td>
-<td>否</td>
-<td>是</td>
-<td>NlogN</td>
-<td>lgN</td>
-<td>分治, 运行效率由概率保证</td>
-</tr>
-<tr>
-<td>归并排序</td>
-<td>是</td>
-<td>否</td>
-<td>NlogN</td>
-<td>N</td>
-<td>自顶向下(递归 分治)和自底向上(从局部到整体) 两种方法</td>
-</tr>
-<tr>
-<td>堆排序</td>
-<td>否</td>
-<td>是</td>
-<td>NlogN</td>
-<td>1</td>
-<td>学完后突然想到了如果在很多的数字中找到最大的多少个数这种问题</td>
-</tr>
-</tbody></table>
-<p><strong>2.4 优先队列</strong></p>
-<p>需要支持两种操作, 删除最大元素和插入元素  - 优先级队列</p>
-<ol>
-<li>数组实现(无序) - 插入快 删除慢</li>
-</ol>
-<p>Insert方法 直接将元素插入尾部, 类似栈的push方法</p>
-<p>DelMax方法 使用一个内部循环找出最大的元素和边界元素交换 然后删除边界元素, 删除的时候类似pop方法</p>
-<ol start="2">
-<li>数组实现(有序) - 插入慢 删除快</li>
-</ol>
-<p>Insert方法 中进行排序, 插入新的元素的时候将较大元素向右移动一格位置, 然后插入新的元素</p>
-<p>DelMax方法 直接删除右侧元素, 类似栈的pop方法</p>
-<ol start="3">
-<li>链表表示法</li>
-</ol>
-<p>无序序列是解决问题的惰性方法, 仅在必要的时候才会采取行动 找出最大元素</p>
-<p>有序序列是解决问题的积极方法, 尽可能的未雨绸缪, 使得找出最大元素高效</p>
-<ol start="4">
-<li><code>二叉堆</code>表示法 - 插入和删除都为线性对数级别</li>
-</ol>
-<p>Insert方法 将新元素添加到数组末端, 增加了堆的大小 将新元素<code>上浮</code>到合适的位置</p>
-<p>DelMax方法 删除顶部元素 将数组的最后一个元素放到顶部 将其<code>下沉</code>到合适的位置 减小了堆的大小 将</p>
-<p><strong>堆</strong></p>
-<p>二叉堆: 每个元素都要保证小于等于(大于等于)另外两个特定位置的元素. 其根节点是最小(最大)元素</p>
-<ol>
-<li>二叉堆的指针表示法</li>
-</ol>
-<p>需要使用三个指针, 指向父节点和两个子节点</p>
-<ol start="2">
-<li>使用数组</li>
-</ol>
-<p>完全二叉树可以使用数组表示 不使用数组的0位置元素 从1开始 k的子节点分别在2k和2k+1</p>
-<p><strong>堆的有序化</strong></p>
-<p>以最大堆为例</p>
-<ol>
-<li>由下至上的堆有序化 <code>上浮</code></li>
-</ol>
-<p>堆的有序状态因为 某个节点比他的父节点更大 被打破.</p>
-<p>需要与父节点交换, 不断向上直到遇到一个更大的父节点 或者到了顶部</p>
-<ol start="2">
-<li>由上至下的堆有序化 <code>下浮</code></li>
-</ol>
-<p>堆的有序状态因为 某个父节点比 他的两个子节点或其中之一子节点 小 被打破.</p>
-<p>将父节点与子节点中较大的一个进行交换直到它的子节点都比它小 获得到了底部</p>
-<h1 id="第三章-查找"><a href="#第三章-查找" class="headerlink" title="第三章 查找"></a>第三章 查找</h1><p>符号表: 最主要的目的是是将<code>one key</code>和<code>one value</code>联系起来, 是一种存储键值对的数据结构, 支持插入和查找</p>
-<table>
-<thead>
-<tr>
-<th>使用的数据结构</th>
-<th>实现</th>
-<th>优点</th>
-<th>缺点</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>链表(顺序查找)</td>
-<td>SequentialSearchST</td>
-<td>适用于小型问题</td>
-<td>对于大型表很慢</td>
-</tr>
-<tr>
-<td>有序数组(二分)</td>
-<td>BinarySearchST</td>
-<td>最优的查找和空间需求, 能够进行有序性相关的操作</td>
-<td>插入操作很慢</td>
-</tr>
-<tr>
-<td>二叉查找树</td>
-<td>BST</td>
-<td>实现简单, 能够进行有序性相关的操作</td>
-<td>没有性能上界的保证, 链接需要额外的空间</td>
-</tr>
-<tr>
-<td>平衡二叉树</td>
-<td>RedBlackBST</td>
-<td>最优的查找和插入效率, 能够进行有序性相关的操作</td>
-<td>链接需要额外的空间</td>
-</tr>
-<tr>
-<td>散列表</td>
-<td>SeparateChainHashST LinearProbingHashST</td>
-<td>能够快速的查找和插入常见的数据类型</td>
-<td>需要计算散列, 无法进行有序性相关操作, 链接和空节点需要额外的空间</td>
-</tr>
-</tbody></table>
-
-        </div>
-        <div id="post-footer">
-            <div class="avatar" style="padding-bottom: 0.2rem"
-                    >
-                <img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/%E5%8D%9A%E5%AE%A2%E5%B0%81%E9%9D%A2/2676.png" alt="avatar"/>
-                
-                
-            </div>
-            <ul class="author-profile-section">
-                <li>
-                  
-                  Author:
-                  
-                    
-                    <a href="/about.html">Lsmg</a>
-                </li>
-                
-                <li>Published Date: <span>2020-07-17  15:51:28</span></li>
-                
-                <li>Updated Date: <span>2020-11-04  22:30:35</span></li>
-                
-                <li class="post-category">
-                    Categories:
-                    
-                    <a href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
-                    
-                </li>
-                <li class="post-tags">
-                    Tags:
-                    
-                </li>
-                
-                <li> License: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
-知识共享署名-非商业性使用-禁止演绎 3.0 未本地化版本许可协议（CC BY-NC-ND 3.0）
-</a></li>
-                
-            </ul>
-        </div>
-    </article>
-    <div class="article-nav">
-        
-        <a href="/2020/07/Linux-%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/" class="pre-post fa fa-caret-left">网络配置</a>
-        
-        
-        <a href="/2020/07/Linux-VIM%E6%8A%98%E8%85%BEspf13/" class="next-post fa">VIM(spf-13)使用</a>
-        
+        </ul>
     </div>
-    
-    <div id="comments">
-        
-
-<script>
-  gitalk.render("comments");
-</script>
-
-
-
-    </div>
-    
 </div>
+
+
 
 
     </div>
@@ -445,8 +196,6 @@
     <li class="totop-btn fa fa-angle-up"></li>
     <li class="exchange-btn fa fa-exchange"></li>
   
-    <li class="toc-btn fa fa-list-ul"></li>
-    
     
 
     
@@ -466,8 +215,6 @@
         </div>
     </div>
 </div>
-
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#第二章-排序"><span class="toc-number">1.</span> <span class="toc-text">第二章 排序</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第三章-查找"><span class="toc-number">2.</span> <span class="toc-text">第三章 查找</span></a></li></ol>
 
 
 
