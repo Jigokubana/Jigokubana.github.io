@@ -20,7 +20,7 @@
 <meta name="verify" content=all />
     <!--Title-->
 
-<title>Mysql基本使用 | Lsmg的大学之路</title>
+<title>由muduo tie引出的 delete this | Lsmg的大学之路</title>
 
 <link rel="alternate" href="/atom.xml" title="Lsmg的大学之路" type="application/atom+xml">
 
@@ -140,9 +140,9 @@
     <article id="post">
         <div id="post-header">
 
-            <h1 id="Mysql基本使用">
+            <h1 id="由muduo tie引出的 delete this">
                 
-                Mysql基本使用
+                由muduo tie引出的 delete this
                 
             </h1>
             <div class="article-meta">
@@ -150,7 +150,7 @@
     
     <span class="categories-meta fa-wrap">
             <i class="fa fa-folder-open-o"></i>
-        <span>Mysql</span>
+        <span>采坑记</span>
     </span>
     
     
@@ -158,7 +158,7 @@
          <i class="fa fa-tags"></i>
         <span class="tags-meta">
             
-            Mysql
+            采坑记
             
         </span>
     </span>
@@ -166,7 +166,7 @@
     
     <span class="fa-wrap">
         <i class="fa fa-clock-o"></i>
-        <span class="date-meta ">2020/03/06</span>
+        <span class="date-meta ">2020/11/26</span>
     </span>
     
     
@@ -178,11 +178,25 @@
         </div>
         
         <div id="post-body">
-            <h1 id="安装和配置"><a href="#安装和配置" class="headerlink" title="安装和配置"></a>安装和配置</h1><p>Ubuntu18.04 安装 mysql5.7</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt-get install mysql-server</span><br></pre></td></tr></table></figure>
+            <p>在半个多月以前 看完了深度探索C++对象模型, 然而只是粗略的过了一遍. 并没有结合具体的例子去深刻的理解下</p>
+<p>如果delete this 不会遇到 那这样呢?</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Delete</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"></span><br><span class="line">    Foo()</span><br><span class="line">    &#123;</span><br><span class="line">        bar_ = <span class="number">111111</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    ~Foo()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"~Foo()\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Bar1</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Bar1()\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Bar</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        Delete();</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"bar: %d\n"</span>, bar_);</span><br><span class="line">        Bar1();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> bar_;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Foo* foo = <span class="literal">nullptr</span>;</span><br><span class="line"><span class="keyword">bool</span> del = <span class="literal">false</span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Delete</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!del)</span><br><span class="line">    &#123;</span><br><span class="line">        del = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">delete</span> foo;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    foo = <span class="keyword">new</span> Foo;</span><br><span class="line">    foo-&gt;Bar();</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">    foo-&gt;Bar();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>安装完毕后</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 打开shell管理程序</span></span><br><span class="line">sudo mysql</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 123456 换成你自己的密码</span></span><br><span class="line">ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '123456';</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 刷新一下</span></span><br><span class="line">FLUSH PRIVILEGES;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 退出</span></span><br><span class="line">exit</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 登录测试</span></span><br><span class="line">mysql -uroot -p # 回车 后输入自己的密码再次回车</span><br></pre></td></tr></table></figure>
+<p>程序安然的结束了, 但是发现 成员变量bar的值已经被初始化了, 由于delete释放了内存.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">~Foo()</span><br><span class="line">bar: 0</span><br><span class="line">Bar1()</span><br><span class="line"></span><br><span class="line">bar: 0</span><br><span class="line">Bar1()</span><br></pre></td></tr></table></figure>
+
+<p>同时delete是两步操作</p>
+<ol>
+<li>调用对象的析构函数 (析构函数中调用 会导致递归)</li>
+<li>释放相关空间</li>
+</ol>
+<p><a href="https://isocpp.org/wiki/faq/freestore-mgmt#delete-this" target="_blank" rel="noopener">官方解释</a></p>
+<p><strong>成员变量指针类型</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;functional&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Bar1</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (bar_)</span><br><span class="line">        &#123;</span><br><span class="line">            bar_();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Bar2</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        bar_();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">std</span>::function&lt;<span class="keyword">void</span>()&gt; bar_;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Foo* foo = <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">PrintfBar</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Bar\n"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    foo = <span class="keyword">new</span> Foo;</span><br><span class="line">    foo-&gt;bar_ = PrintfBar;</span><br><span class="line"></span><br><span class="line">    foo-&gt;Bar1(); <span class="comment">// Bar</span></span><br><span class="line">    foo-&gt;Bar2(); <span class="comment">// Bar</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">delete</span> foo;</span><br><span class="line"></span><br><span class="line">    foo-&gt;Bar1(); <span class="comment">// Segmentation fault (core dumped)</span></span><br><span class="line"></span><br><span class="line">    foo-&gt;Bar2();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试后所有对指针型成员变量的 解引用操作都会导致<code>Segmentation fault (core dumped)</code> 所以下面的代码也有了解释</p>
+<p>一个困扰我很久的BUG 即为程序会在HandleEvent触发<code>Segmentation fault (core dumped)</code>的原因找到了</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Channel::HandleEvent</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * lock增加TcpConnectionPtr的引用计数 防止从TcpServer中erase后 直接销毁TcpConnection</span></span><br><span class="line"><span class="comment">	 *</span></span><br><span class="line"><span class="comment">	 * 否则如果不增加引用计数 当TcpConnection被销毁后, 所管理的Channel也将会被销毁</span></span><br><span class="line"><span class="comment">	 * 在这之后 不能再使用TcpConnection和Channel的任何 成员函数和成员变量</span></span><br><span class="line"><span class="comment">	 *</span></span><br><span class="line"><span class="comment">	 * 有点类似于在一个 new出来的对象的成员函数中 delete自己</span></span><br><span class="line"><span class="comment">	 * 详见 https://stackoverflow.com/questions/7039597/what-will-happen-if-you-do-delete-this-in-a-member-function</span></span><br><span class="line"><span class="comment">	 *</span></span><br><span class="line"><span class="comment">	 * 经过查阅后自己对深度探索C++对象模型 有了更深得理解</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">void</span>&gt; guard = tie_.lock();</span><br><span class="line">	<span class="keyword">if</span> (!guard)</span><br><span class="line">	&#123;</span><br><span class="line">		LOG_WARN(<span class="string">"connection: %s is closed"</span>, connection_name.c_str());</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (event_ &amp; XEPOLLIN)</span><br><span class="line">	&#123;</span><br><span class="line">        <span class="keyword">if</span> (readable_callback_)</span><br><span class="line">        &#123;</span><br><span class="line">            readable_callback_();</span><br><span class="line">        &#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
         </div>
         <div id="post-footer">
             <div class="avatar" style="padding-bottom: 0.2rem"
@@ -200,22 +214,20 @@
                     <a href="/about.html">Lsmg</a>
                 </li>
                 
-                <li>Published Date: <span>2020-03-06  15:25:28</span></li>
+                <li>Published Date: <span>2020-11-26  17:37:08</span></li>
                 
-                <li>Updated Date: <span>2020-03-06  15:59:36</span></li>
+                <li>Updated Date: <span>2020-11-26  19:23:57</span></li>
                 
                 <li class="post-category">
                     Categories:
                     
-                    <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
-                    
-                    <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/Mysql/">Mysql</a>
+                    <a href="/categories/%E9%87%87%E5%9D%91%E8%AE%B0/">采坑记</a>
                     
                 </li>
                 <li class="post-tags">
                     Tags:
                     
-                    <a href="/tags/Mysql/">Mysql</a>
+                    <a href="/tags/%E9%87%87%E5%9D%91%E8%AE%B0/">采坑记</a>
                     
                 </li>
                 
@@ -228,10 +240,8 @@
     </article>
     <div class="article-nav">
         
-        <a href="/2020/03/%E9%87%87%E5%9D%91%E8%AE%B0-%E5%BE%AA%E7%8E%AF%E5%88%A4%E6%96%AD%E4%B9%8B%E6%97%A0%E7%AC%A6%E5%8F%B7%E7%B1%BB%E5%9E%8B/" class="pre-post fa fa-caret-left">循环判断中使用无符号类型</a>
         
-        
-        <a href="/2020/03/%E6%B8%B8%E6%88%8F%E7%9F%A5%E8%AF%86-%E8%85%BE%E8%AE%AF%E6%B8%B8%E6%88%8F%E5%AD%A6%E9%99%A2-%E7%90%83%E7%90%83/" class="next-post fa">球球</a>
+        <a href="/2020/11/%E5%8A%9B%E6%89%A311.26-H23.%E5%90%88%E5%B9%B6K%E4%B8%AA%E5%8D%87%E5%BA%8F%E9%93%BE%E8%A1%A8/" class="next-post fa">力扣11.26-H23.合并K个升序链表</a>
         
     </div>
     
@@ -296,7 +306,7 @@
     </div>
 </div>
 
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#安装和配置"><span class="toc-number">1.</span> <span class="toc-text">安装和配置</span></a></li></ol>
+    
 
 
 
