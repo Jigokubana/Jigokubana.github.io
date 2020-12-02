@@ -20,7 +20,7 @@
 <meta name="verify" content=all />
     <!--Title-->
 
-<title>Tag: 小方说 | Lsmg的大学之路</title>
+<title>力扣12.1-N5.最长回文子串 | Lsmg的大学之路</title>
 
 <link rel="alternate" href="/atom.xml" title="Lsmg的大学之路" type="application/atom+xml">
 
@@ -30,9 +30,10 @@
     
 
 <link rel="stylesheet" href="/css/base.css">
-<link rel="stylesheet" href="/css/pages/archive.css">
+<link rel="stylesheet" href="/css/pages/post.css">
 <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="/css/thirdParty/highlight/github.css">
+<link rel="stylesheet" href="/.css">
 
 
     <!--script-->
@@ -136,39 +137,122 @@
 
 
         <div id="main">
-    <div id="post-list">
-        <ul class="archives-post-list">
-            
-            <li class="post-items" _href="/2020/06/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-%E5%B0%8F%E6%96%B9%E8%AF%B4%E7%9F%A5%E8%AF%86%E6%98%9F%E7%90%83/">
+    <article id="post">
+        <div id="post-header">
+
+            <h1 id="力扣12.1-N5.最长回文子串">
                 
-                <p class="info">小方说</p>
-                <h2 class="post-item-title">小方说知识星球</h2>
-                <div class="article-meta">
+                力扣12.1-N5.最长回文子串
+                
+            </h1>
+            <div class="article-meta">
     
     
     <span class="categories-meta fa-wrap">
             <i class="fa fa-folder-open-o"></i>
-        <span>学习记录</span>
+        <span>力扣每日一题</span>
     </span>
     
+    
+    <span class="fa-wrap">
+         <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            中心扩散-动态规划
+            
+        </span>
+    </span>
     
     
     <span class="fa-wrap">
         <i class="fa fa-clock-o"></i>
-        <span class="date-meta ">2020/06/16</span>
+        <span class="date-meta ">2020/11/26</span>
     </span>
     
     
     
 </div>
 
-            </li>
             
-        </ul>
+            
+        </div>
+        
+        <div id="post-body">
+            <h1 id="最长回文子串"><a href="#最长回文子串" class="headerlink" title="最长回文子串"></a>最长回文子串</h1><p>给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为 1000。</p>
+<p>示例 1：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;babad&quot;</span><br><span class="line">输出: &quot;bab&quot;</span><br><span class="line">注意: &quot;aba&quot; 也是一个有效答案。</span><br></pre></td></tr></table></figure>
+<p>示例 2：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;cbbd&quot;</span><br><span class="line">输出: &quot;bb&quot;</span><br></pre></td></tr></table></figure>
+<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/longest-palindromic-substring" target="_blank" rel="noopener">https://leetcode-cn.com/problems/longest-palindromic-substring</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<h2 id="代码1-中心扩散法"><a href="#代码1-中心扩散法" class="headerlink" title="代码1 - 中心扩散法"></a>代码1 - 中心扩散法</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">longestPalindrome</span><span class="params">(<span class="built_in">string</span> s)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">/* 开头老套路 先处理了最简单的输入*/</span></span><br><span class="line">        <span class="keyword">if</span> (s.length() &lt;= <span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> s;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/* 记录最大长度*/</span></span><br><span class="line">        <span class="keyword">int</span> max_len = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/* 记录最大长度子串的开始下标 用于return时的substr 解决拷贝问题*/</span></span><br><span class="line">        <span class="keyword">int</span> result_begin_sub = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (i &lt; s.length())</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> l_begin = i, r_begin = i;</span><br><span class="line">            </span><br><span class="line">            <span class="comment">/* 从当前下标开始 找到最长的相同字符子串*/</span></span><br><span class="line">            <span class="comment">/* lbegin指向此子串的开始字符 rbegin指向结尾字符*/</span></span><br><span class="line">            <span class="keyword">while</span> (r_begin &lt; s.length() - <span class="number">1</span> &amp;&amp; s[r_begin + <span class="number">1</span>] == s[i])</span><br><span class="line">            &#123;</span><br><span class="line">                r_begin++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">/* 更新下标 减少循环次数*/</span></span><br><span class="line">            i = r_begin + <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">            <span class="comment">/* 向左右两侧遍历 相同字符则 向左移动lbegin 向右移动rbegin*/</span></span><br><span class="line">            <span class="keyword">do</span></span><br><span class="line">            &#123;</span><br><span class="line">                l_begin--;</span><br><span class="line">                r_begin++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">while</span> (l_begin &gt;=<span class="number">0</span> &amp;&amp; r_begin &lt; s.length() &amp;&amp; s[l_begin] == s[r_begin]);</span><br><span class="line">            </span><br><span class="line">            <span class="comment">/* 更新最大长度*/</span></span><br><span class="line">            <span class="keyword">int</span> len = r_begin - l_begin - <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span> (len &gt; max_len)</span><br><span class="line">            &#123;</span><br><span class="line">                max_len = len;</span><br><span class="line">                result_begin_sub = l_begin + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> s.substr(result_begin_sub, max_len);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>遍历字符串 从当前循环开始下标找到最长的相同字符子串 如a 或 bb 或 ccc</p>
+<p>然后向左右两侧遍历 如果左右字符相同 继续遍历 最终得到两个下标</p>
+<p>左下标指向当前最大回文子串的左边一个字符 右下标指向右边一个字符</p>
+<p>这样就得到了子串的开始下标和长度 更新最大长度 继续遍历</p>
+
+        </div>
+        <div id="post-footer">
+            <div class="avatar" style="padding-bottom: 0.2rem"
+                    >
+                <img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/%E5%8D%9A%E5%AE%A2%E5%B0%81%E9%9D%A2/2676.png" alt="avatar"/>
+                
+                
+            </div>
+            <ul class="author-profile-section">
+                <li>
+                  
+                  Author:
+                  
+                    
+                    <a href="/about.html">Lsmg</a>
+                </li>
+                
+                <li>Published Date: <span>2020-11-26  16:25:02</span></li>
+                
+                <li>Updated Date: <span>2020-12-01  21:40:24</span></li>
+                
+                <li class="post-category">
+                    Categories:
+                    
+                    <a href="/categories/%E5%8A%9B%E6%89%A3%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/">力扣每日一题</a>
+                    
+                </li>
+                <li class="post-tags">
+                    Tags:
+                    
+                    <a href="/tags/%E4%B8%AD%E5%BF%83%E6%89%A9%E6%95%A3-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">中心扩散-动态规划</a>
+                    
+                </li>
+                
+                <li> License: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+知识共享署名-非商业性使用-禁止演绎 3.0 未本地化版本许可协议（CC BY-NC-ND 3.0）
+</a></li>
+                
+            </ul>
+        </div>
+    </article>
+    <div class="article-nav">
+        
+        <a href="/2020/11/%E5%8A%9B%E6%89%A311.26-H23.%E5%90%88%E5%B9%B6K%E4%B8%AA%E5%8D%87%E5%BA%8F%E9%93%BE%E8%A1%A8/" class="pre-post fa fa-caret-left">力扣11.26-H23.合并K个升序链表</a>
+        
+        
+        <a href="/2020/11/%E5%8A%9B%E6%89%A311.25-N34.%E5%9C%A8%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E6%9F%A5%E6%89%BE%E5%85%83%E7%B4%A0%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%92%8C%E6%9C%80%E5%90%8E%E4%B8%80%E4%B8%AA%E4%BD%8D%E7%BD%AE/" class="next-post fa">力扣11.25-N34.在排序数组中查找元素的第一个和最后一个位置</a>
+        
     </div>
+    
+    <div id="comments">
+        
+
+<script>
+  gitalk.render("comments");
+</script>
+
+
+
+    </div>
+    
 </div>
-
-
 
 
     </div>
@@ -196,6 +280,8 @@
     <li class="totop-btn fa fa-angle-up"></li>
     <li class="exchange-btn fa fa-exchange"></li>
   
+    <li class="toc-btn fa fa-list-ul"></li>
+    
     
 
     
@@ -215,6 +301,8 @@
         </div>
     </div>
 </div>
+
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#最长回文子串"><span class="toc-number">1.</span> <span class="toc-text">最长回文子串</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#代码1-中心扩散法"><span class="toc-number">1.1.</span> <span class="toc-text">代码1 - 中心扩散法</span></a></li></ol></li></ol>
 
 
 
