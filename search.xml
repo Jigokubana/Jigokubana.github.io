@@ -3,6 +3,63 @@
     
     
     <entry>
+        <title><![CDATA[力扣12.3-N1143.最长公共子序列]]></title>
+        <url>http://blog.lsmg.xyz/2020/12/%25E5%258A%259B%25E6%2589%25A312.3-N1143.%25E6%259C%2580%25E9%2595%25BF%25E5%2585%25AC%25E5%2585%25B1%25E5%25AD%2590%25E5%25BA%258F%25E5%2588%2597/</url>
+        <content type="html"><![CDATA[<h1 id="最长公共子序列"><a href="#最长公共子序列" class="headerlink" title="最长公共子序列"></a>最长公共子序列</h1><p>给定两个字符串 text1 和 text2，返回这两个字符串的最长公共子序列的长度。</p>
+<p>一个字符串的 子序列 是指这样一个新的字符串：它是由原字符串在不改变字符的相对顺序的情况下删除某些字符（也可以不删除任何字符）后组成的新字符串。<br>例如，”ace” 是 “abcde” 的子序列，但 “aec” 不是 “abcde” 的子序列。两个字符串的「公共子序列」是这两个字符串所共同拥有的子序列。</p>
+<p>若这两个字符串没有公共子序列，则返回 0。</p>
+<p>示例 1:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：text1 &#x3D; &quot;abcde&quot;, text2 &#x3D; &quot;ace&quot; </span><br><span class="line">输出：3  </span><br><span class="line">解释：最长公共子序列是 &quot;ace&quot;，它的长度为 3。</span><br></pre></td></tr></table></figure>
+<p>示例 2:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：text1 &#x3D; &quot;abc&quot;, text2 &#x3D; &quot;abc&quot;</span><br><span class="line">输出：3</span><br><span class="line">解释：最长公共子序列是 &quot;abc&quot;，它的长度为 3。</span><br></pre></td></tr></table></figure>
+<p>示例 3:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：text1 &#x3D; &quot;abc&quot;, text2 &#x3D; &quot;def&quot;</span><br><span class="line">输出：0</span><br><span class="line">解释：两个字符串没有公共子序列，返回 0。</span><br></pre></td></tr></table></figure>
+
+<p>提示:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1 &lt;&#x3D; text1.length &lt;&#x3D; 1000</span><br><span class="line">1 &lt;&#x3D; text2.length &lt;&#x3D; 1000</span><br><span class="line">输入的字符串只含有小写英文字符。</span><br></pre></td></tr></table></figure>
+
+<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/longest-common-subsequence" target="_blank" rel="noopener">https://leetcode-cn.com/problems/longest-common-subsequence</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<h2 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">longest</span><span class="params">(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span>&amp; text1, <span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span>&amp; text2, </span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">int</span> text1_sub, <span class="keyword">int</span> text2_sub)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (text1_sub &gt;= text1.length() || text2_sub &gt;= text2.length())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (text1[text1_sub] == text2[text2_sub])</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span> + longest(text1, text2, text1_sub + <span class="number">1</span>, text2_sub + <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">max</span>(longest(text1, text2, text1_sub + <span class="number">1</span>, text2_sub), </span><br><span class="line">                    longest(text1, text2, text1_sub, text2_sub + <span class="number">1</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">longestCommonSubsequence</span><span class="params">(<span class="built_in">string</span> text1, <span class="built_in">string</span> text2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> longest(text1, text2, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最简单的思路 然而会超时</p>
+<h2 id="代码2-动态规划"><a href="#代码2-动态规划" class="headerlink" title="代码2 动态规划"></a>代码2 动态规划</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">longestCommonSubsequence</span><span class="params">(<span class="built_in">string</span> text1, <span class="built_in">string</span> text2)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> result[<span class="number">1005</span>][<span class="number">1005</span>]&#123;&#125;;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i1 = <span class="number">0</span>; i1 &lt; text1.length(); ++i1)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i2 = <span class="number">0</span>; i2 &lt; text2.length(); ++i2)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (text1[i1] == text2[i2])</span><br><span class="line">                &#123;</span><br><span class="line">                    result[i1 + <span class="number">1</span>][i2 + <span class="number">1</span>] = result[i1][i2] + <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                    result[i1 + <span class="number">1</span>][i2 + <span class="number">1</span>] = <span class="built_in">max</span>(result[i1][i2 + <span class="number">1</span>], result[i1 + <span class="number">1</span>][i2]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result[text1.length()][text2.length()];</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>设text1和text2的解是T</p>
+<ul>
+<li>如果text1和text2的最后两个字符相等, 则T的最后一个字符也是这个字符</li>
+</ul>
+<p>这样 text1和text2分别去掉最后一个字符后, T去掉最后一个字符后的T1 是前面两个新字符串的最长公共子序列</p>
+<ul>
+<li>如果最后两个字符不同, 则T可能是text1去掉最后一个字符后和text2的最长公共子序列 也可能是text2去掉最后一个字符后和text1的最长公共子序列</li>
+</ul>
+<p>这个可以循环下去, 直到最后两个字符相等 转入上方过程</p>
+<p>由于存在多种可能便需要设置result数组存储中间结果<code>result[i][j]</code>是text1前i个字符和text2前j个字符的最长公共子序列长度</p>
+<p>数组填充方式 为上方描述的逆过程. </p>
+<ul>
+<li><p>如果i1 i2所指字符相同 <code>result[i][j]</code>结果是<code>result[i - 1][j - 1] + 1</code><br>表示的是text1前i-1字符和text2前j-1字符最长公共子序列 加上 这个相同的字符 得到前i和前j的最长公共子序列</p>
+</li>
+<li><p>如果所指字符不同则<code>result[i][j]</code>可能是<code>result[i][j - 1]</code> 也可能是<code>result[i][j - 1]</code>取最大值<br>表示的是前ij的最长公共子序列是 text1前i字符和text2前j-1字符最长公共子序列 或者是 前i-1和前j的最长公共子序列</p>
+</li>
+</ul>
+<p>最终得到结果<code>result[text1.length()][text2.length()]</code> 表示前length1和前length2的最长公共子序列</p>
+]]></content>
+        
+        <categories>
+            
+            <category> 力扣每日一题 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 动态规划 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
         <title><![CDATA[P2P直播平台]]></title>
         <url>http://blog.lsmg.xyz/2020/12/%25E9%25A1%25B9%25E7%259B%25AE%25E5%2588%25B6%25E4%25BD%259C-P2P%25E7%259B%25B4%25E6%2592%25AD%25E5%25B9%25B3%25E5%258F%25B0/</url>
         <content type="html"><![CDATA[<h1 id="项目说明"><a href="#项目说明" class="headerlink" title="项目说明"></a>项目说明</h1><p><strong>当前进度 支持多个RTMP推流者推流 支持多个HTTP-FLV拉流者拉取对应的流观看</strong></p>
@@ -117,63 +174,6 @@
         <tags>
             
             <tag> 中心扩散 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-        <title><![CDATA[力扣12.3-N1143.最长公共子序列]]></title>
-        <url>http://blog.lsmg.xyz/2020/12/%25E5%258A%259B%25E6%2589%25A312.3-N1143.%25E6%259C%2580%25E9%2595%25BF%25E5%2585%25AC%25E5%2585%25B1%25E5%25AD%2590%25E5%25BA%258F%25E5%2588%2597/</url>
-        <content type="html"><![CDATA[<h1 id="最长公共子序列"><a href="#最长公共子序列" class="headerlink" title="最长公共子序列"></a>最长公共子序列</h1><p>给定两个字符串 text1 和 text2，返回这两个字符串的最长公共子序列的长度。</p>
-<p>一个字符串的 子序列 是指这样一个新的字符串：它是由原字符串在不改变字符的相对顺序的情况下删除某些字符（也可以不删除任何字符）后组成的新字符串。<br>例如，”ace” 是 “abcde” 的子序列，但 “aec” 不是 “abcde” 的子序列。两个字符串的「公共子序列」是这两个字符串所共同拥有的子序列。</p>
-<p>若这两个字符串没有公共子序列，则返回 0。</p>
-<p>示例 1:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：text1 &#x3D; &quot;abcde&quot;, text2 &#x3D; &quot;ace&quot; </span><br><span class="line">输出：3  </span><br><span class="line">解释：最长公共子序列是 &quot;ace&quot;，它的长度为 3。</span><br></pre></td></tr></table></figure>
-<p>示例 2:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：text1 &#x3D; &quot;abc&quot;, text2 &#x3D; &quot;abc&quot;</span><br><span class="line">输出：3</span><br><span class="line">解释：最长公共子序列是 &quot;abc&quot;，它的长度为 3。</span><br></pre></td></tr></table></figure>
-<p>示例 3:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：text1 &#x3D; &quot;abc&quot;, text2 &#x3D; &quot;def&quot;</span><br><span class="line">输出：0</span><br><span class="line">解释：两个字符串没有公共子序列，返回 0。</span><br></pre></td></tr></table></figure>
-
-<p>提示:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1 &lt;&#x3D; text1.length &lt;&#x3D; 1000</span><br><span class="line">1 &lt;&#x3D; text2.length &lt;&#x3D; 1000</span><br><span class="line">输入的字符串只含有小写英文字符。</span><br></pre></td></tr></table></figure>
-
-<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/longest-common-subsequence" target="_blank" rel="noopener">https://leetcode-cn.com/problems/longest-common-subsequence</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
-<h2 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">longest</span><span class="params">(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span>&amp; text1, <span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span>&amp; text2, </span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">int</span> text1_sub, <span class="keyword">int</span> text2_sub)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (text1_sub &gt;= text1.length() || text2_sub &gt;= text2.length())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (text1[text1_sub] == text2[text2_sub])</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span> + longest(text1, text2, text1_sub + <span class="number">1</span>, text2_sub + <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">max</span>(longest(text1, text2, text1_sub + <span class="number">1</span>, text2_sub), </span><br><span class="line">                    longest(text1, text2, text1_sub, text2_sub + <span class="number">1</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">longestCommonSubsequence</span><span class="params">(<span class="built_in">string</span> text1, <span class="built_in">string</span> text2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> longest(text1, text2, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>最简单的思路 然而会超时</p>
-<h2 id="代码2-动态规划"><a href="#代码2-动态规划" class="headerlink" title="代码2 动态规划"></a>代码2 动态规划</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">longestCommonSubsequence</span><span class="params">(<span class="built_in">string</span> text1, <span class="built_in">string</span> text2)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> result[<span class="number">1005</span>][<span class="number">1005</span>]&#123;&#125;;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i1 = <span class="number">0</span>; i1 &lt; text1.length(); ++i1)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i2 = <span class="number">0</span>; i2 &lt; text2.length(); ++i2)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (text1[i1] == text2[i2])</span><br><span class="line">                &#123;</span><br><span class="line">                    result[i1 + <span class="number">1</span>][i2 + <span class="number">1</span>] = result[i1][i2] + <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                    result[i1 + <span class="number">1</span>][i2 + <span class="number">1</span>] = <span class="built_in">max</span>(result[i1][i2 + <span class="number">1</span>], result[i1 + <span class="number">1</span>][i2]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result[text1.length()][text2.length()];</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p>设text1和text2的解是T</p>
-<ul>
-<li>如果text1和text2的最后两个字符相等, 则T的最后一个字符也是这个字符</li>
-</ul>
-<p>这样 text1和text2分别去掉最后一个字符后, T去掉最后一个字符后的T1 是前面两个新字符串的最长公共子序列</p>
-<ul>
-<li>如果最后两个字符不同, 则T可能是text1去掉最后一个字符后和text2的最长公共子序列 也可能是text2去掉最后一个字符后和text1的最长公共子序列</li>
-</ul>
-<p>这个可以循环下去, 直到最后两个字符相等 转入上方过程</p>
-<p>由于存在多种可能便需要设置result数组存储中间结果<code>result[i][j]</code>是text1前i个字符和text2前j个字符的最长公共子序列长度</p>
-<p>数组填充方式 为上方描述的逆过程. </p>
-<ul>
-<li><p>如果i1 i2所指字符相同 <code>result[i][j]</code>结果是<code>result[i - 1][j - 1] + 1</code><br>表示的是text1前i-1字符和text2前j-1字符最长公共子序列 加上 这个相同的字符 得到前i和前j的最长公共子序列</p>
-</li>
-<li><p>如果所指字符不同则<code>result[i][j]</code>可能是<code>result[i][j - 1]</code> 也可能是<code>result[i][j - 1]</code>取最大值<br>表示的是前ij的最长公共子序列是 text1前i字符和text2前j-1字符最长公共子序列 或者是 前i-1和前j的最长公共子序列</p>
-</li>
-</ul>
-<p>最终得到结果<code>result[text1.length()][text2.length()]</code> 表示前length1和前length2的最长公共子序列</p>
-]]></content>
-        
-        <categories>
-            
-            <category> 力扣每日一题 </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> 动态规划 </tag>
             
         </tags>
         
@@ -2398,60 +2398,6 @@
     </entry>
     
     <entry>
-        <title><![CDATA[权限管理]]></title>
-        <url>http://blog.lsmg.xyz/2020/03/Linux-%25E6%259D%2583%25E9%2599%2590%25E7%259B%25B8%25E5%2585%25B3/</url>
-        <content type="html"><![CDATA[<p><code>drwxr-xr-x | 3 | root | root | 4096 | Mar  2 20:26 | .vs</code><br>档案权限类型<br>连接数<br>档案拥有者<br>档案所属群组<br>档案容量<br>档案最后被修改时间<br>档名</p>
-<p>文件类型和权限<br><code>drwxr-xr-x</code></p>
-<p>第一位 d 表明档案类型是 目录</p>
-<table>
-<thead>
-<tr>
-<th>字符</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>d</td>
-<td>目录</td>
-</tr>
-<tr>
-<td>-</td>
-<td>文件</td>
-</tr>
-<tr>
-<td>|</td>
-<td>链接文件</td>
-</tr>
-<tr>
-<td>b</td>
-<td>设备文件中可供存储的周边设备, 可随机读取设备</td>
-</tr>
-<tr>
-<td>c</td>
-<td>序列号设备, 如键盘鼠标, 一次性读取设备</td>
-</tr>
-</tbody></table>
-<p>后面每三位一组 为<code>rwx</code>的组合 分别代表 <code>读</code>, <code>写</code>, <code>执行</code><br>三组 第一组<code>文件拥有者权限</code> 第二组<code>群组中账号权限</code> 第三组<code>非本人且没有加入本群组的其他账号权限</code></p>
-<p>第三部分表示这个文件的<code>拥有者账号</code><br>第四部分表示这个文件<code>所属群组</code></p>
-<p>相关命令<br>-chgrp 改变文件所属群组<br>-chown 改变文件拥有者<br>-chmod 改变文件权限</p>
-]]></content>
-        
-        <categories>
-            
-            <category> Linux </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> 权限管理 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
         <title><![CDATA[GDB调试]]></title>
         <url>http://blog.lsmg.xyz/2020/03/Linux-GDB%25E8%25B0%2583%25E8%25AF%2595/</url>
         <content type="html"><![CDATA[<p><a href="https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/gdb.html" target="_blank" rel="noopener">https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/gdb.html</a></p>
@@ -2721,6 +2667,60 @@
     </entry>
     
     <entry>
+        <title><![CDATA[权限管理]]></title>
+        <url>http://blog.lsmg.xyz/2020/03/Linux-%25E6%259D%2583%25E9%2599%2590%25E7%259B%25B8%25E5%2585%25B3/</url>
+        <content type="html"><![CDATA[<p><code>drwxr-xr-x | 3 | root | root | 4096 | Mar  2 20:26 | .vs</code><br>档案权限类型<br>连接数<br>档案拥有者<br>档案所属群组<br>档案容量<br>档案最后被修改时间<br>档名</p>
+<p>文件类型和权限<br><code>drwxr-xr-x</code></p>
+<p>第一位 d 表明档案类型是 目录</p>
+<table>
+<thead>
+<tr>
+<th>字符</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>d</td>
+<td>目录</td>
+</tr>
+<tr>
+<td>-</td>
+<td>文件</td>
+</tr>
+<tr>
+<td>|</td>
+<td>链接文件</td>
+</tr>
+<tr>
+<td>b</td>
+<td>设备文件中可供存储的周边设备, 可随机读取设备</td>
+</tr>
+<tr>
+<td>c</td>
+<td>序列号设备, 如键盘鼠标, 一次性读取设备</td>
+</tr>
+</tbody></table>
+<p>后面每三位一组 为<code>rwx</code>的组合 分别代表 <code>读</code>, <code>写</code>, <code>执行</code><br>三组 第一组<code>文件拥有者权限</code> 第二组<code>群组中账号权限</code> 第三组<code>非本人且没有加入本群组的其他账号权限</code></p>
+<p>第三部分表示这个文件的<code>拥有者账号</code><br>第四部分表示这个文件<code>所属群组</code></p>
+<p>相关命令<br>-chgrp 改变文件所属群组<br>-chown 改变文件拥有者<br>-chmod 改变文件权限</p>
+]]></content>
+        
+        <categories>
+            
+            <category> Linux </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 权限管理 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
         <title><![CDATA[Linux高性能服务器-理论部分]]></title>
         <url>http://blog.lsmg.xyz/2020/03/CPP-%25E8%25AF%25BB%25E4%25B9%25A6%25E8%25AE%25B0%25E5%25BD%259599-%25E9%25AB%2598%25E6%2580%25A7%25E8%2583%25BD%25E6%259C%258D%25E5%258A%25A1%25E5%2599%25A8%25E7%25BC%2596%25E7%25A8%258B%25E8%25AF%25BB%25E4%25B9%25A6%25E8%25AE%25B0%25E5%25BD%2595%25E7%2590%2586%25E8%25AE%25BA%25E9%2583%25A8%25E5%2588%2586/</url>
         <content type="html"><![CDATA[<p>距离我开始读这本书已经过去了半年了, 真是时光飞逝. 当初跳过了前四章.<br>半年后开始准备补上这四章</p>
@@ -2947,20 +2947,6 @@
     </entry>
     
     <entry>
-        <title><![CDATA[算法题目记录]]></title>
-        <url>http://blog.lsmg.xyz/2020/03/%25E7%25AE%2597%25E6%25B3%259591-%25E7%25AE%2597%25E6%25B3%2595%25E9%25A2%2598%25E7%259B%25AE%25E8%25AE%25B0%25E5%25BD%2595/</url>
-        <content type="html"></content>
-        
-        <categories>
-            
-            <category> 算法 </category>
-            
-        </categories>
-        
-        
-    </entry>
-    
-    <entry>
         <title><![CDATA[数据结构和STL]]></title>
         <url>http://blog.lsmg.xyz/2020/03/%25E7%25AE%2597%25E6%25B3%259590-%25E6%2595%25B0%25E6%258D%25AE%25E7%25BB%2593%25E6%259E%2584%25E7%25AE%2580%25E5%258D%2595%25E5%25BA%2594%25E7%2594%25A8/</url>
         <content type="html"><![CDATA[<p><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/STL/api.png" alt=""></p>
@@ -3063,6 +3049,20 @@
 </tr>
 </tbody></table>
 <h1 id="Sequence-containers-顺序容器"><a href="#Sequence-containers-顺序容器" class="headerlink" title="Sequence containers 顺序容器"></a>Sequence containers 顺序容器</h1><h2 id="array"><a href="#array" class="headerlink" title="array"></a>array</h2><h2 id="vector"><a href="#vector" class="headerlink" title="vector"></a>vector</h2><h2 id="deque"><a href="#deque" class="headerlink" title="deque"></a>deque</h2><h2 id="forward-list"><a href="#forward-list" class="headerlink" title="forward_list"></a>forward_list</h2><h2 id="list"><a href="#list" class="headerlink" title="list"></a>list</h2><h1 id="Associative-containers-关联容器"><a href="#Associative-containers-关联容器" class="headerlink" title="Associative containers 关联容器"></a>Associative containers 关联容器</h1><h2 id="set"><a href="#set" class="headerlink" title="set"></a>set</h2><h2 id="map"><a href="#map" class="headerlink" title="map"></a>map</h2><h2 id="multiset"><a href="#multiset" class="headerlink" title="multiset"></a>multiset</h2><h2 id="multimap"><a href="#multimap" class="headerlink" title="multimap"></a>multimap</h2><h1 id="Unordered-associative-containers-无序关联容器"><a href="#Unordered-associative-containers-无序关联容器" class="headerlink" title="Unordered associative containers 无序关联容器"></a>Unordered associative containers 无序关联容器</h1><h2 id="unordered-set"><a href="#unordered-set" class="headerlink" title="unordered_set"></a>unordered_set</h2><h2 id="unordered-map"><a href="#unordered-map" class="headerlink" title="unordered_map"></a>unordered_map</h2><h2 id="unordered-multiset"><a href="#unordered-multiset" class="headerlink" title="unordered_multiset"></a>unordered_multiset</h2><h2 id="unordered-multimap"><a href="#unordered-multimap" class="headerlink" title="unordered_multimap"></a>unordered_multimap</h2><h1 id="Container-adaptors-容器适配器"><a href="#Container-adaptors-容器适配器" class="headerlink" title="Container adaptors 容器适配器"></a>Container adaptors 容器适配器</h1><h2 id="stack"><a href="#stack" class="headerlink" title="stack"></a>stack</h2><h2 id="queue"><a href="#queue" class="headerlink" title="queue"></a>queue</h2><h2 id="priority-queue"><a href="#priority-queue" class="headerlink" title="priority_queue"></a>priority_queue</h2>]]></content>
+        
+        <categories>
+            
+            <category> 算法 </category>
+            
+        </categories>
+        
+        
+    </entry>
+    
+    <entry>
+        <title><![CDATA[算法题目记录]]></title>
+        <url>http://blog.lsmg.xyz/2020/03/%25E7%25AE%2597%25E6%25B3%259591-%25E7%25AE%2597%25E6%25B3%2595%25E9%25A2%2598%25E7%259B%25AE%25E8%25AE%25B0%25E5%25BD%2595/</url>
+        <content type="html"></content>
         
         <categories>
             
