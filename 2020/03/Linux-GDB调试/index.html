@@ -321,10 +321,6 @@
 <h1 id="安装DebugInfo"><a href="#安装DebugInfo" class="headerlink" title="安装DebugInfo"></a>安装DebugInfo</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">cat &#x2F;etc&#x2F;yum.repos.d&#x2F;CentOS-Debug.repo</span><br><span class="line"></span><br><span class="line">[debug]</span><br><span class="line">name&#x3D;CentOS-$releasever - DebugInfo</span><br><span class="line">baseurl&#x3D;http:&#x2F;&#x2F;debuginfo.centos.org&#x2F;$releasever&#x2F;$basearch&#x2F;</span><br><span class="line">gpgcheck&#x3D;0</span><br><span class="line">enabled&#x3D;1 # 重点是这个 </span><br><span class="line">protect&#x3D;1</span><br><span class="line">priority&#x3D;1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">安装 kernel-debuginfo</span><br><span class="line">yum --enablerepo&#x3D;base-debug install -y kernel-debuginfo-$(uname -r)</span><br><span class="line"></span><br><span class="line">安装glibc, 提示缺少其他的也是如此安装</span><br><span class="line">debuginfo-install glibc</span><br></pre></td></tr></table></figure>
       </div>
         <div class="support-author">
-          <p>感谢您的阅读。 🙏
-          <a href="https://blog.lsmg.xyz/index.html" target="_blank">关于转载请看这里</a>
-            <!--<a class="btn-pay"  href="#pay-modal">¥ 打赏支持</a>-->
-          </p>
         </div>
         <!--
             <div class="like ">

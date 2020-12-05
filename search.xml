@@ -725,31 +725,6 @@
     
     
     <entry>
-      <title>权限管理</title>
-      <link href="/2020/03/Linux-%E6%9D%83%E9%99%90%E7%9B%B8%E5%85%B3/"/>
-      <url>/2020/03/Linux-%E6%9D%83%E9%99%90%E7%9B%B8%E5%85%B3/</url>
-      
-        <content type="html"><![CDATA[<p><code>drwxr-xr-x | 3 | root | root | 4096 | Mar  2 20:26 | .vs</code><br>档案权限类型<br>连接数<br>档案拥有者<br>档案所属群组<br>档案容量<br>档案最后被修改时间<br>档名</p><p>文件类型和权限<br><code>drwxr-xr-x</code></p><p>第一位 d 表明档案类型是 目录</p><table><thead><tr><th>字符</th><th>含义</th></tr></thead><tbody><tr><td>d</td><td>目录</td></tr><tr><td>-</td><td>文件</td></tr><tr><td>|</td><td>链接文件</td></tr><tr><td>b</td><td>设备文件中可供存储的周边设备, 可随机读取设备</td></tr><tr><td>c</td><td>序列号设备, 如键盘鼠标, 一次性读取设备</td></tr></tbody></table><p>后面每三位一组 为<code>rwx</code>的组合 分别代表 <code>读</code>, <code>写</code>, <code>执行</code><br>三组 第一组<code>文件拥有者权限</code> 第二组<code>群组中账号权限</code> 第三组<code>非本人且没有加入本群组的其他账号权限</code></p><p>第三部分表示这个文件的<code>拥有者账号</code><br>第四部分表示这个文件<code>所属群组</code></p><p>相关命令<br>-chgrp 改变文件所属群组<br>-chown 改变文件拥有者<br>-chmod 改变文件权限</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> Linux </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 权限管理 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>GDB调试</title>
       <link href="/2020/03/Linux-GDB%E8%B0%83%E8%AF%95/"/>
       <url>/2020/03/Linux-GDB%E8%B0%83%E8%AF%95/</url>
@@ -767,6 +742,31 @@
         <tags>
             
             <tag> GDB调试 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>权限管理</title>
+      <link href="/2020/03/Linux-%E6%9D%83%E9%99%90%E7%9B%B8%E5%85%B3/"/>
+      <url>/2020/03/Linux-%E6%9D%83%E9%99%90%E7%9B%B8%E5%85%B3/</url>
+      
+        <content type="html"><![CDATA[<p><code>drwxr-xr-x | 3 | root | root | 4096 | Mar  2 20:26 | .vs</code><br>档案权限类型<br>连接数<br>档案拥有者<br>档案所属群组<br>档案容量<br>档案最后被修改时间<br>档名</p><p>文件类型和权限<br><code>drwxr-xr-x</code></p><p>第一位 d 表明档案类型是 目录</p><table><thead><tr><th>字符</th><th>含义</th></tr></thead><tbody><tr><td>d</td><td>目录</td></tr><tr><td>-</td><td>文件</td></tr><tr><td>|</td><td>链接文件</td></tr><tr><td>b</td><td>设备文件中可供存储的周边设备, 可随机读取设备</td></tr><tr><td>c</td><td>序列号设备, 如键盘鼠标, 一次性读取设备</td></tr></tbody></table><p>后面每三位一组 为<code>rwx</code>的组合 分别代表 <code>读</code>, <code>写</code>, <code>执行</code><br>三组 第一组<code>文件拥有者权限</code> 第二组<code>群组中账号权限</code> 第三组<code>非本人且没有加入本群组的其他账号权限</code></p><p>第三部分表示这个文件的<code>拥有者账号</code><br>第四部分表示这个文件<code>所属群组</code></p><p>相关命令<br>-chgrp 改变文件所属群组<br>-chown 改变文件拥有者<br>-chmod 改变文件权限</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 权限管理 </tag>
             
         </tags>
       
@@ -1166,18 +1166,18 @@
     
     
     <entry>
-      <title>游戏知识-服务器-服务器通信</title>
-      <link href="/2019/12/%E6%B8%B8%E6%88%8F%E7%9F%A5%E8%AF%86-%E6%9C%8D%E5%8A%A1%E5%99%A8-%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%80%9A%E4%BF%A1/"/>
-      <url>/2019/12/%E6%B8%B8%E6%88%8F%E7%9F%A5%E8%AF%86-%E6%9C%8D%E5%8A%A1%E5%99%A8-%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%80%9A%E4%BF%A1/</url>
+      <title>游戏知识-腾讯游戏学院-如何进入游戏开发行业</title>
+      <link href="/2019/12/%E6%B8%B8%E6%88%8F%E7%9F%A5%E8%AF%86-%E8%85%BE%E8%AE%AF%E6%B8%B8%E6%88%8F%E5%AD%A6%E9%99%A2-%E5%A6%82%E4%BD%95%E8%BF%9B%E5%85%A5%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E8%A1%8C%E4%B8%9A/"/>
+      <url>/2019/12/%E6%B8%B8%E6%88%8F%E7%9F%A5%E8%AF%86-%E8%85%BE%E8%AE%AF%E6%B8%B8%E6%88%8F%E5%AD%A6%E9%99%A2-%E5%A6%82%E4%BD%95%E8%BF%9B%E5%85%A5%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E8%A1%8C%E4%B8%9A/</url>
       
-        <content type="html"><![CDATA[<p>由于自己了解的实在是不足, 所以来腾讯游戏课堂来学习一些架构之类的东西 来完善自己的知识面<br><a href="https://gameinstitute.qq.com/course/detail/10096" target="_blank" rel="noopener">服务器通信</a></p><a id="more"></a><h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>作业型-单纯多个client对一个server .. 比如我开始写过的聊天室程序</p><h1 id="CS通信"><a href="#CS通信" class="headerlink" title="CS通信"></a>CS通信</h1><p>DNS协议-基于UDP协议</p><p>TCP<br>面向连接的可靠的有时序性的-流式协议<br>窗口管理<br>流量控制<br>数据确认<br>UDP<br>无连接不保证可靠性的无法保证时序-报文协议</p><p>QQ-CS<br>网络状况较好-UDP????-好吧还是处理了<br>网络状况差-TCP<br>大文件-TCP-TCP适合大文件交互, 因为他保持连接流式协议~</p><p>微信-CS<br>前台运行-TCP长连接<br>后台运行-TCP短连接<br>查看文章-HTTP(TCP短连接)</p><p>QQ-早期产品, 花最少的前~榨干性能<br>微信-腾讯后期产品</p><hr><p>字符串<br>自定义<br>Protobuf</p><p>序列化反序列化.</p><p>UDP协议-不要让单个包的数据量超过1K, 否则会由于分片等 导致一个大包一旦一个分片失败就都失败</p><p>存在的问题</p><ol><li>客户端和服务端数据一直对不上<br>可能是字节序的问题 - 字节序转换(网络字节数传送)</li><li>服务器发送的数据延迟-小包<br>NAGLE算法-小包并不是立即发送-等存多了在一起发送-可以禁用掉~~</li><li>数据较大或者网络波动<br>发送缓冲区慢了.. 适当加大发送缓冲区</li></ol><p>非阻塞IO<br>O_NONBLOCK<br>多路复用<br>select<br>poll<br>epoll</p><h1 id="SS通信"><a href="#SS通信" class="headerlink" title="SS通信"></a>SS通信</h1><p>TCP-最常用<br>UDP-非关键数据-日志服务-内网通信网络状况好可以超过MTU<br>非SOCKET通信-进程间通信?-管道-信号-共享内存-信息队列-文件..</p>]]></content>
+        <content type="html"><![CDATA[<p>由于自己了解的实在是不足, 所以来腾讯游戏课堂来学习一些架构之类的东西 来完善自己的知识面<br><a href="https://gameinstitute.qq.com/course/detail/10156" target="_blank" rel="noopener">想做游戏吗？如何开始我的游戏开发职业生涯</a></p><a id="more"></a><p>做游戏不会重复做同样的工作, 项目不同</p>]]></content>
       
       
       <categories>
           
           <category> 游戏知识 </category>
           
-          <category> 服务器 </category>
+          <category> 腾讯游戏学院 </category>
           
       </categories>
       
@@ -1193,18 +1193,18 @@
     
     
     <entry>
-      <title>游戏知识-腾讯游戏学院-如何进入游戏开发行业</title>
-      <link href="/2019/12/%E6%B8%B8%E6%88%8F%E7%9F%A5%E8%AF%86-%E8%85%BE%E8%AE%AF%E6%B8%B8%E6%88%8F%E5%AD%A6%E9%99%A2-%E5%A6%82%E4%BD%95%E8%BF%9B%E5%85%A5%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E8%A1%8C%E4%B8%9A/"/>
-      <url>/2019/12/%E6%B8%B8%E6%88%8F%E7%9F%A5%E8%AF%86-%E8%85%BE%E8%AE%AF%E6%B8%B8%E6%88%8F%E5%AD%A6%E9%99%A2-%E5%A6%82%E4%BD%95%E8%BF%9B%E5%85%A5%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E8%A1%8C%E4%B8%9A/</url>
+      <title>游戏知识-服务器-服务器通信</title>
+      <link href="/2019/12/%E6%B8%B8%E6%88%8F%E7%9F%A5%E8%AF%86-%E6%9C%8D%E5%8A%A1%E5%99%A8-%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%80%9A%E4%BF%A1/"/>
+      <url>/2019/12/%E6%B8%B8%E6%88%8F%E7%9F%A5%E8%AF%86-%E6%9C%8D%E5%8A%A1%E5%99%A8-%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%80%9A%E4%BF%A1/</url>
       
-        <content type="html"><![CDATA[<p>由于自己了解的实在是不足, 所以来腾讯游戏课堂来学习一些架构之类的东西 来完善自己的知识面<br><a href="https://gameinstitute.qq.com/course/detail/10156" target="_blank" rel="noopener">想做游戏吗？如何开始我的游戏开发职业生涯</a></p><a id="more"></a><p>做游戏不会重复做同样的工作, 项目不同</p>]]></content>
+        <content type="html"><![CDATA[<p>由于自己了解的实在是不足, 所以来腾讯游戏课堂来学习一些架构之类的东西 来完善自己的知识面<br><a href="https://gameinstitute.qq.com/course/detail/10096" target="_blank" rel="noopener">服务器通信</a></p><a id="more"></a><h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>作业型-单纯多个client对一个server .. 比如我开始写过的聊天室程序</p><h1 id="CS通信"><a href="#CS通信" class="headerlink" title="CS通信"></a>CS通信</h1><p>DNS协议-基于UDP协议</p><p>TCP<br>面向连接的可靠的有时序性的-流式协议<br>窗口管理<br>流量控制<br>数据确认<br>UDP<br>无连接不保证可靠性的无法保证时序-报文协议</p><p>QQ-CS<br>网络状况较好-UDP????-好吧还是处理了<br>网络状况差-TCP<br>大文件-TCP-TCP适合大文件交互, 因为他保持连接流式协议~</p><p>微信-CS<br>前台运行-TCP长连接<br>后台运行-TCP短连接<br>查看文章-HTTP(TCP短连接)</p><p>QQ-早期产品, 花最少的前~榨干性能<br>微信-腾讯后期产品</p><hr><p>字符串<br>自定义<br>Protobuf</p><p>序列化反序列化.</p><p>UDP协议-不要让单个包的数据量超过1K, 否则会由于分片等 导致一个大包一旦一个分片失败就都失败</p><p>存在的问题</p><ol><li>客户端和服务端数据一直对不上<br>可能是字节序的问题 - 字节序转换(网络字节数传送)</li><li>服务器发送的数据延迟-小包<br>NAGLE算法-小包并不是立即发送-等存多了在一起发送-可以禁用掉~~</li><li>数据较大或者网络波动<br>发送缓冲区慢了.. 适当加大发送缓冲区</li></ol><p>非阻塞IO<br>O_NONBLOCK<br>多路复用<br>select<br>poll<br>epoll</p><h1 id="SS通信"><a href="#SS通信" class="headerlink" title="SS通信"></a>SS通信</h1><p>TCP-最常用<br>UDP-非关键数据-日志服务-内网通信网络状况好可以超过MTU<br>非SOCKET通信-进程间通信?-管道-信号-共享内存-信息队列-文件..</p>]]></content>
       
       
       <categories>
           
           <category> 游戏知识 </category>
           
-          <category> 腾讯游戏学院 </category>
+          <category> 服务器 </category>
           
       </categories>
       
