@@ -3,6 +3,42 @@
     
     
     <entry>
+        <title><![CDATA[力扣12.7-H51&H52N皇后]]></title>
+        <url>http://blog.lsmg.xyz/2020/12/%25E5%258A%259B%25E6%2589%25A312.7-H51&amp;H52N%25E7%259A%2587%25E5%2590%258E/</url>
+        <content type="html"><![CDATA[<h1 id="N皇后"><a href="#N皇后" class="headerlink" title="N皇后"></a>N皇后</h1><p>n 皇后问题研究的是如何将 n 个皇后放置在 n×n 的棋盘上，并且使皇后彼此之间不能相互攻击。</p>
+<p><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/10/12/8-queens.png" alt=""></p>
+<p>上图为 8 皇后问题的一种解法。</p>
+<p>给定一个整数 n，返回所有不同的 n 皇后问题的解决方案。</p>
+<p>每一种解法包含一个明确的 n 皇后问题的棋子放置方案，该方案中 ‘Q’ 和 ‘.’ 分别代表了皇后和空位。</p>
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">输入：4</span><br><span class="line">输出：[</span><br><span class="line"> [&quot;.Q..&quot;,  &#x2F;&#x2F; 解法 1</span><br><span class="line">  &quot;...Q&quot;,</span><br><span class="line">  &quot;Q...&quot;,</span><br><span class="line">  &quot;..Q.&quot;],</span><br><span class="line"></span><br><span class="line"> [&quot;..Q.&quot;,  &#x2F;&#x2F; 解法 2</span><br><span class="line">  &quot;Q...&quot;,</span><br><span class="line">  &quot;...Q&quot;,</span><br><span class="line">  &quot;.Q..&quot;]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>解释: 4 皇后问题存在两个不同的解法。</p>
+<p>提示：</p>
+<ul>
+<li>皇后彼此不能相互攻击，也就是说：任何两个皇后都不能处于同一条横行、纵行或斜线上。</li>
+</ul>
+<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/n-queens" target="_blank" rel="noopener">https://leetcode-cn.com/problems/n-queens</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<h1 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">Check</span><span class="params">(<span class="keyword">int</span> n, <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; temp, <span class="keyword">int</span> row, <span class="keyword">int</span> column)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> c = <span class="number">0</span>; c &lt; column; ++c)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (temp[row][c] == <span class="string">'Q'</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> r = row - <span class="number">1</span>, c = column - <span class="number">1</span> ; r &gt;= <span class="number">0</span> &amp;&amp; c &gt;= <span class="number">0</span>; --r, --c)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (temp[r][c] == <span class="string">'Q'</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> r = row + <span class="number">1</span>, c = column - <span class="number">1</span> ; r &lt; n &amp;&amp; c &gt;= <span class="number">0</span>; ++r, --c)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (temp[r][c] == <span class="string">'Q'</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">Solve</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> column, <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; temp, <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&gt;&amp; result)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (column &gt;= n)</span><br><span class="line">		&#123;</span><br><span class="line">			result.push_back(temp);</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">		&#123;</span><br><span class="line">			temp[i][column] = <span class="string">'Q'</span>;</span><br><span class="line">			<span class="keyword">if</span> (Check(n, temp, i, column))</span><br><span class="line">			&#123;</span><br><span class="line">				Solve(n, column + <span class="number">1</span>, temp, result);</span><br><span class="line">			&#125;</span><br><span class="line">			temp[i][column] = <span class="string">'.'</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&gt; <span class="title">solveNQueens</span><span class="params">(<span class="keyword">int</span> n)</span> <span class="comment">// H51 N皇后</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&gt; result;</span><br><span class="line">		<span class="function"><span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; <span class="title">temp</span><span class="params">(n, <span class="built_in">string</span>(n, <span class="string">'.'</span>))</span></span>;</span><br><span class="line">		Solve(n, <span class="number">0</span>, temp, result);</span><br><span class="line">		<span class="keyword">return</span> result;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">totalNQueens</span><span class="params">(<span class="keyword">int</span> n)</span> <span class="comment">// H52 N皇后</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> solveNQueens(n).<span class="built_in">size</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>不知道第几次做了.. 思路很清晰</p>
+]]></content>
+        
+        <categories>
+            
+            <category> 力扣每日一题 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 回溯法 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
         <title><![CDATA[力扣12.7-N55跳跃游戏]]></title>
         <url>http://blog.lsmg.xyz/2020/12/%25E5%258A%259B%25E6%2589%25A312.7-N55%25E8%25B7%25B3%25E8%25B7%2583%25E6%25B8%25B8%25E6%2588%258F/</url>
         <content type="html"><![CDATA[<h1 id="最大子序和"><a href="#最大子序和" class="headerlink" title="最大子序和"></a>最大子序和</h1><p>给定一个非负整数数组，你最初位于数组的第一个位置。</p>
@@ -2441,60 +2477,6 @@
     </entry>
     
     <entry>
-        <title><![CDATA[权限管理]]></title>
-        <url>http://blog.lsmg.xyz/2020/03/Linux-%25E6%259D%2583%25E9%2599%2590%25E7%259B%25B8%25E5%2585%25B3/</url>
-        <content type="html"><![CDATA[<p><code>drwxr-xr-x | 3 | root | root | 4096 | Mar  2 20:26 | .vs</code><br>档案权限类型<br>连接数<br>档案拥有者<br>档案所属群组<br>档案容量<br>档案最后被修改时间<br>档名</p>
-<p>文件类型和权限<br><code>drwxr-xr-x</code></p>
-<p>第一位 d 表明档案类型是 目录</p>
-<table>
-<thead>
-<tr>
-<th>字符</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>d</td>
-<td>目录</td>
-</tr>
-<tr>
-<td>-</td>
-<td>文件</td>
-</tr>
-<tr>
-<td>|</td>
-<td>链接文件</td>
-</tr>
-<tr>
-<td>b</td>
-<td>设备文件中可供存储的周边设备, 可随机读取设备</td>
-</tr>
-<tr>
-<td>c</td>
-<td>序列号设备, 如键盘鼠标, 一次性读取设备</td>
-</tr>
-</tbody></table>
-<p>后面每三位一组 为<code>rwx</code>的组合 分别代表 <code>读</code>, <code>写</code>, <code>执行</code><br>三组 第一组<code>文件拥有者权限</code> 第二组<code>群组中账号权限</code> 第三组<code>非本人且没有加入本群组的其他账号权限</code></p>
-<p>第三部分表示这个文件的<code>拥有者账号</code><br>第四部分表示这个文件<code>所属群组</code></p>
-<p>相关命令<br>-chgrp 改变文件所属群组<br>-chown 改变文件拥有者<br>-chmod 改变文件权限</p>
-]]></content>
-        
-        <categories>
-            
-            <category> Linux </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> 权限管理 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
         <title><![CDATA[GDB调试]]></title>
         <url>http://blog.lsmg.xyz/2020/03/Linux-GDB%25E8%25B0%2583%25E8%25AF%2595/</url>
         <content type="html"><![CDATA[<p><a href="https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/gdb.html" target="_blank" rel="noopener">https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/gdb.html</a></p>
@@ -2764,6 +2746,60 @@
     </entry>
     
     <entry>
+        <title><![CDATA[权限管理]]></title>
+        <url>http://blog.lsmg.xyz/2020/03/Linux-%25E6%259D%2583%25E9%2599%2590%25E7%259B%25B8%25E5%2585%25B3/</url>
+        <content type="html"><![CDATA[<p><code>drwxr-xr-x | 3 | root | root | 4096 | Mar  2 20:26 | .vs</code><br>档案权限类型<br>连接数<br>档案拥有者<br>档案所属群组<br>档案容量<br>档案最后被修改时间<br>档名</p>
+<p>文件类型和权限<br><code>drwxr-xr-x</code></p>
+<p>第一位 d 表明档案类型是 目录</p>
+<table>
+<thead>
+<tr>
+<th>字符</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>d</td>
+<td>目录</td>
+</tr>
+<tr>
+<td>-</td>
+<td>文件</td>
+</tr>
+<tr>
+<td>|</td>
+<td>链接文件</td>
+</tr>
+<tr>
+<td>b</td>
+<td>设备文件中可供存储的周边设备, 可随机读取设备</td>
+</tr>
+<tr>
+<td>c</td>
+<td>序列号设备, 如键盘鼠标, 一次性读取设备</td>
+</tr>
+</tbody></table>
+<p>后面每三位一组 为<code>rwx</code>的组合 分别代表 <code>读</code>, <code>写</code>, <code>执行</code><br>三组 第一组<code>文件拥有者权限</code> 第二组<code>群组中账号权限</code> 第三组<code>非本人且没有加入本群组的其他账号权限</code></p>
+<p>第三部分表示这个文件的<code>拥有者账号</code><br>第四部分表示这个文件<code>所属群组</code></p>
+<p>相关命令<br>-chgrp 改变文件所属群组<br>-chown 改变文件拥有者<br>-chmod 改变文件权限</p>
+]]></content>
+        
+        <categories>
+            
+            <category> Linux </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 权限管理 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
         <title><![CDATA[Linux高性能服务器-理论部分]]></title>
         <url>http://blog.lsmg.xyz/2020/03/%25E8%25AF%25BB%25E4%25B9%25A6%25E8%25AE%25B0%25E5%25BD%259599-%25E9%25AB%2598%25E6%2580%25A7%25E8%2583%25BD%25E6%259C%258D%25E5%258A%25A1%25E5%2599%25A8%25E7%25BC%2596%25E7%25A8%258B%25E8%25AF%25BB%25E4%25B9%25A6%25E8%25AE%25B0%25E5%25BD%2595%25E7%2590%2586%25E8%25AE%25BA%25E9%2583%25A8%25E5%2588%2586/</url>
         <content type="html"><![CDATA[<p>距离我开始读这本书已经过去了半年了, 真是时光飞逝. 当初跳过了前四章.<br>半年后开始准备补上这四章</p>
@@ -2960,20 +2996,6 @@
     </entry>
     
     <entry>
-        <title><![CDATA[算法题目记录]]></title>
-        <url>http://blog.lsmg.xyz/2020/03/%25E7%25AE%2597%25E6%25B3%259591-%25E7%25AE%2597%25E6%25B3%2595%25E9%25A2%2598%25E7%259B%25AE%25E8%25AE%25B0%25E5%25BD%2595/</url>
-        <content type="html"></content>
-        
-        <categories>
-            
-            <category> 算法 </category>
-            
-        </categories>
-        
-        
-    </entry>
-    
-    <entry>
         <title><![CDATA[数据结构和STL]]></title>
         <url>http://blog.lsmg.xyz/2020/03/%25E7%25AE%2597%25E6%25B3%259590-%25E6%2595%25B0%25E6%258D%25AE%25E7%25BB%2593%25E6%259E%2584%25E7%25AE%2580%25E5%258D%2595%25E5%25BA%2594%25E7%2594%25A8/</url>
         <content type="html"><![CDATA[<p><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/STL/api.png" alt=""></p>
@@ -3076,6 +3098,20 @@
 </tr>
 </tbody></table>
 <h1 id="Sequence-containers-顺序容器"><a href="#Sequence-containers-顺序容器" class="headerlink" title="Sequence containers 顺序容器"></a>Sequence containers 顺序容器</h1><h2 id="array"><a href="#array" class="headerlink" title="array"></a>array</h2><h2 id="vector"><a href="#vector" class="headerlink" title="vector"></a>vector</h2><h2 id="deque"><a href="#deque" class="headerlink" title="deque"></a>deque</h2><h2 id="forward-list"><a href="#forward-list" class="headerlink" title="forward_list"></a>forward_list</h2><h2 id="list"><a href="#list" class="headerlink" title="list"></a>list</h2><h1 id="Associative-containers-关联容器"><a href="#Associative-containers-关联容器" class="headerlink" title="Associative containers 关联容器"></a>Associative containers 关联容器</h1><h2 id="set"><a href="#set" class="headerlink" title="set"></a>set</h2><h2 id="map"><a href="#map" class="headerlink" title="map"></a>map</h2><h2 id="multiset"><a href="#multiset" class="headerlink" title="multiset"></a>multiset</h2><h2 id="multimap"><a href="#multimap" class="headerlink" title="multimap"></a>multimap</h2><h1 id="Unordered-associative-containers-无序关联容器"><a href="#Unordered-associative-containers-无序关联容器" class="headerlink" title="Unordered associative containers 无序关联容器"></a>Unordered associative containers 无序关联容器</h1><h2 id="unordered-set"><a href="#unordered-set" class="headerlink" title="unordered_set"></a>unordered_set</h2><h2 id="unordered-map"><a href="#unordered-map" class="headerlink" title="unordered_map"></a>unordered_map</h2><h2 id="unordered-multiset"><a href="#unordered-multiset" class="headerlink" title="unordered_multiset"></a>unordered_multiset</h2><h2 id="unordered-multimap"><a href="#unordered-multimap" class="headerlink" title="unordered_multimap"></a>unordered_multimap</h2><h1 id="Container-adaptors-容器适配器"><a href="#Container-adaptors-容器适配器" class="headerlink" title="Container adaptors 容器适配器"></a>Container adaptors 容器适配器</h1><h2 id="stack"><a href="#stack" class="headerlink" title="stack"></a>stack</h2><h2 id="queue"><a href="#queue" class="headerlink" title="queue"></a>queue</h2><h2 id="priority-queue"><a href="#priority-queue" class="headerlink" title="priority_queue"></a>priority_queue</h2>]]></content>
+        
+        <categories>
+            
+            <category> 算法 </category>
+            
+        </categories>
+        
+        
+    </entry>
+    
+    <entry>
+        <title><![CDATA[算法题目记录]]></title>
+        <url>http://blog.lsmg.xyz/2020/03/%25E7%25AE%2597%25E6%25B3%259591-%25E7%25AE%2597%25E6%25B3%2595%25E9%25A2%2598%25E7%259B%25AE%25E8%25AE%25B0%25E5%25BD%2595/</url>
+        <content type="html"></content>
         
         <categories>
             
