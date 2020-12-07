@@ -71,7 +71,7 @@ stick: true
 ## social config
 ## 社交功能设置 {@social:[url:地址,title:a标签的title,icon:显示图标],[]}
 social:
-- url: https://github.com/Jigokubana
+- url: https://github.com/HiganFish
   title: GitHub
   icon: fa-github
 
@@ -114,7 +114,7 @@ whichCategory: 0
 ### post footer
 ### 作者信息部分设置
 high_song: ''  ### 歌曲显示文字，若不需要该功能，则留空或移除
-author_img: https://lsmg-img.oss-cn-beijing.aliyuncs.com/%E5%8D%9A%E5%AE%A2%E5%B0%81%E9%9D%A2/2676.png
+author_img: https://lsmg-img.oss-cn-beijing.aliyuncs.com/theme/tx.jpg
 author_profile_page: /about.html
 
 

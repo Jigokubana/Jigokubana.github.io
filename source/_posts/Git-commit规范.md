@@ -2,10 +2,8 @@
 title: commit规范
 date: 2020-02-22 12:22:02
 categories: 
-- 必备技能
 - Git操作
 tags:
-- Git操作
 ---
 # commit 规范
 [阮一峰 Commit message 和 Change log 编写指南](https://www.ruanyifeng.com/blog/2016/01/commit_message_change_log.html)

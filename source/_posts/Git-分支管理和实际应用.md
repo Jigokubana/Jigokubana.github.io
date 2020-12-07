@@ -2,7 +2,6 @@
 title: 分支管理和实际应用
 date: 2020-03-06 19:34:25
 categories: 
-- 必备技能
 - Git操作
 tags:
 - Git操作
