@@ -3,6 +3,62 @@
     
     
     <entry>
+        <title><![CDATA[class struct typename]]></title>
+        <url>http://blog.lsmg.xyz/2020/12/CPP-class%2520struct%2520typename/</url>
+        <content type="html"><![CDATA[<h1 id="class-和-struct的区别"><a href="#class-和-struct的区别" class="headerlink" title="class 和 struct的区别"></a>class 和 struct的区别</h1>]]></content>
+        
+        <categories>
+            
+            <category> CPP </category>
+            
+        </categories>
+        
+        
+    </entry>
+    
+    <entry>
+        <title><![CDATA[力扣12.8-E7整数反转&汉诺塔]]></title>
+        <url>http://blog.lsmg.xyz/2020/12/%25E5%258A%259B%25E6%2589%25A312.8-E7%25E6%2595%25B4%25E6%2595%25B0%25E5%258F%258D%25E8%25BD%25AC&amp;%25E6%25B1%2589%25E8%25AF%25BA%25E5%25A1%2594/</url>
+        <content type="html"><![CDATA[<h1 id="整数反转"><a href="#整数反转" class="headerlink" title="整数反转"></a>整数反转</h1><p>给出一个 32 位的有符号整数，你需要将这个整数中每位上的数字进行反转。</p>
+<p>示例 1:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: 123</span><br><span class="line">输出: 321</span><br></pre></td></tr></table></figure>
+<p> 示例 2:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: -123</span><br><span class="line">输出: -321</span><br></pre></td></tr></table></figure>
+<p>示例 3:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: 120</span><br><span class="line">输出: 21</span><br></pre></td></tr></table></figure>
+<p>注意:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">假设我们的环境只能存储得下 32 位的有符号整数，则其数值范围为 [−231,  231 − 1]。请根据这个假设，如果反转后整数溢出那么就返回 0。</span><br></pre></td></tr></table></figure>
+<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/reverse-integer" target="_blank" rel="noopener">https://leetcode-cn.com/problems/reverse-integer</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<h2 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">reverse</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (x != <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> pop = x % <span class="number">10</span>;</span><br><span class="line">            x /= <span class="number">10</span>;</span><br><span class="line">            <span class="keyword">if</span> (result &gt; INT_MAX / <span class="number">10</span> || (result == INT_MAX / <span class="number">10</span> &amp;&amp; pop &gt; <span class="number">7</span>)) <span class="keyword">return</span> <span class="number">0</span>; <span class="comment">// 2^31 - 1 = 2147483647</span></span><br><span class="line">            <span class="keyword">if</span> (result &lt; INT_MIN / <span class="number">10</span> || (result == INT_MIN / <span class="number">10</span> &amp;&amp; pop &lt; <span class="number">-8</span>)) <span class="keyword">return</span> <span class="number">0</span>; <span class="comment">// -2^31 = -2147483648</span></span><br><span class="line">            result = result * <span class="number">10</span> + pop;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h1 id="汉诺塔"><a href="#汉诺塔" class="headerlink" title="汉诺塔"></a>汉诺塔</h1><p>在经典汉诺塔问题中，有 3 根柱子及 N 个不同大小的穿孔圆盘，盘子可以滑入任意一根柱子。一开始，所有盘子自上而下按升序依次套在第一根柱子上(即每一个盘子只能放在更大的盘子上面)。移动圆盘时受到以下限制:<br>(1) 每次只能移动一个盘子;<br>(2) 盘子只能从柱子顶端滑出移到下一根柱子;<br>(3) 盘子只能叠在比它大的盘子上。</p>
+<p>请编写程序，用栈将所有盘子从第一根柱子移到最后一根柱子。</p>
+<p>你需要原地修改栈。</p>
+<p>示例1:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：A &#x3D; [2, 1, 0], B &#x3D; [], C &#x3D; []</span><br><span class="line">输出：C &#x3D; [2, 1, 0]</span><br></pre></td></tr></table></figure>
+<p>示例2:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：A &#x3D; [1, 0], B &#x3D; [], C &#x3D; []</span><br><span class="line">输出：C &#x3D; [1, 0]</span><br></pre></td></tr></table></figure>
+<p>提示:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A中盘子的数目不大于14个。</span><br></pre></td></tr></table></figure>
+<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/hanota-lcci" target="_blank" rel="noopener">https://leetcode-cn.com/problems/hanota-lcci</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<h2 id="代码1-1"><a href="#代码1-1" class="headerlink" title="代码1"></a>代码1</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">hanota</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; A, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; B, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; C)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = A.<span class="built_in">size</span>();</span><br><span class="line">        <span class="built_in">move</span>(n, A, B, C);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">move</span><span class="params">(<span class="keyword">int</span> n, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; A, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; B, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; C)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            C.push_back(A.back());</span><br><span class="line">            A.pop_back();</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">move</span>(n<span class="number">-1</span>, A, C, B);    <span class="comment">// 将A上面n-1个通过C移到B</span></span><br><span class="line">        C.push_back(A.back());  <span class="comment">// 将A最后一个移到C</span></span><br><span class="line">        A.pop_back();          <span class="comment">// 这时，A空了</span></span><br><span class="line">        <span class="built_in">move</span>(n<span class="number">-1</span>, B, A, C);     <span class="comment">// 将B上面n-1个通过空的A移到C</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+        
+        <categories>
+            
+            <category> 力扣每日一题 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 数学 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
         <title><![CDATA[力扣12.7-H51&H52N皇后]]></title>
         <url>http://blog.lsmg.xyz/2020/12/%25E5%258A%259B%25E6%2589%25A312.7-H51&amp;H52N%25E7%259A%2587%25E5%2590%258E/</url>
         <content type="html"><![CDATA[<h1 id="N皇后"><a href="#N皇后" class="headerlink" title="N皇后"></a>N皇后</h1><p>n 皇后问题研究的是如何将 n 个皇后放置在 n×n 的棋盘上，并且使皇后彼此之间不能相互攻击。</p>
@@ -18,7 +74,7 @@
 <li>皇后彼此不能相互攻击，也就是说：任何两个皇后都不能处于同一条横行、纵行或斜线上。</li>
 </ul>
 <p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/n-queens" target="_blank" rel="noopener">https://leetcode-cn.com/problems/n-queens</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
-<h1 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">Check</span><span class="params">(<span class="keyword">int</span> n, <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; temp, <span class="keyword">int</span> row, <span class="keyword">int</span> column)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> c = <span class="number">0</span>; c &lt; column; ++c)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (temp[row][c] == <span class="string">'Q'</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> r = row - <span class="number">1</span>, c = column - <span class="number">1</span> ; r &gt;= <span class="number">0</span> &amp;&amp; c &gt;= <span class="number">0</span>; --r, --c)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (temp[r][c] == <span class="string">'Q'</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> r = row + <span class="number">1</span>, c = column - <span class="number">1</span> ; r &lt; n &amp;&amp; c &gt;= <span class="number">0</span>; ++r, --c)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (temp[r][c] == <span class="string">'Q'</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">Solve</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> column, <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; temp, <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&gt;&amp; result)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (column &gt;= n)</span><br><span class="line">		&#123;</span><br><span class="line">			result.push_back(temp);</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">		&#123;</span><br><span class="line">			temp[i][column] = <span class="string">'Q'</span>;</span><br><span class="line">			<span class="keyword">if</span> (Check(n, temp, i, column))</span><br><span class="line">			&#123;</span><br><span class="line">				Solve(n, column + <span class="number">1</span>, temp, result);</span><br><span class="line">			&#125;</span><br><span class="line">			temp[i][column] = <span class="string">'.'</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&gt; <span class="title">solveNQueens</span><span class="params">(<span class="keyword">int</span> n)</span> <span class="comment">// H51 N皇后</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&gt; result;</span><br><span class="line">		<span class="function"><span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; <span class="title">temp</span><span class="params">(n, <span class="built_in">string</span>(n, <span class="string">'.'</span>))</span></span>;</span><br><span class="line">		Solve(n, <span class="number">0</span>, temp, result);</span><br><span class="line">		<span class="keyword">return</span> result;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">totalNQueens</span><span class="params">(<span class="keyword">int</span> n)</span> <span class="comment">// H52 N皇后</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> solveNQueens(n).<span class="built_in">size</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">Check</span><span class="params">(<span class="keyword">int</span> n, <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; temp, <span class="keyword">int</span> row, <span class="keyword">int</span> column)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> c = <span class="number">0</span>; c &lt; column; ++c)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (temp[row][c] == <span class="string">'Q'</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> r = row - <span class="number">1</span>, c = column - <span class="number">1</span> ; r &gt;= <span class="number">0</span> &amp;&amp; c &gt;= <span class="number">0</span>; --r, --c)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (temp[r][c] == <span class="string">'Q'</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> r = row + <span class="number">1</span>, c = column - <span class="number">1</span> ; r &lt; n &amp;&amp; c &gt;= <span class="number">0</span>; ++r, --c)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (temp[r][c] == <span class="string">'Q'</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Solve</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> column, <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; temp, <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&gt;&amp; result)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (column &gt;= n)</span><br><span class="line">        &#123;</span><br><span class="line">            result.push_back(temp);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            temp[i][column] = <span class="string">'Q'</span>;</span><br><span class="line">            <span class="keyword">if</span> (Check(n, temp, i, column))</span><br><span class="line">            &#123;</span><br><span class="line">                Solve(n, column + <span class="number">1</span>, temp, result);</span><br><span class="line">            &#125;</span><br><span class="line">            temp[i][column] = <span class="string">'.'</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&gt; <span class="title">solveNQueens</span><span class="params">(<span class="keyword">int</span> n)</span> <span class="comment">// H51 N皇后</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&gt; result;</span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; <span class="title">temp</span><span class="params">(n, <span class="built_in">string</span>(n, <span class="string">'.'</span>))</span></span>;</span><br><span class="line">        Solve(n, <span class="number">0</span>, temp, result);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">totalNQueens</span><span class="params">(<span class="keyword">int</span> n)</span> <span class="comment">// H52 N皇后</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> solveNQueens(n).<span class="built_in">size</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 <p>不知道第几次做了.. 思路很清晰</p>
 ]]></content>
@@ -690,7 +746,7 @@
 <li>close会将引用计数-1 等到为0时才关闭套接字. shutdown则可以无视此, 激发TCP的正常连接终止序列</li>
 <li>close会终止读和写两个方向的数据传送, 但由于TCP全双工有时需要告知对方我方发送已经完毕</li>
 </ol>
-]]></content>
+<h1 id="第七章-套接字选项"><a href="#第七章-套接字选项" class="headerlink" title="第七章 套接字选项"></a>第七章 套接字选项</h1><h1 id="第八章-基本UDP套接字编程-未看"><a href="#第八章-基本UDP套接字编程-未看" class="headerlink" title="第八章 基本UDP套接字编程 (未看)"></a>第八章 基本UDP套接字编程 (未看)</h1><h1 id="第十一章-名字和地址转换"><a href="#第十一章-名字和地址转换" class="headerlink" title="第十一章 名字和地址转换"></a>第十一章 名字和地址转换</h1><h1 id=""><a href="#" class="headerlink" title=""></a></h1>]]></content>
         
         <categories>
             
@@ -2477,6 +2533,60 @@
     </entry>
     
     <entry>
+        <title><![CDATA[权限管理]]></title>
+        <url>http://blog.lsmg.xyz/2020/03/Linux-%25E6%259D%2583%25E9%2599%2590%25E7%259B%25B8%25E5%2585%25B3/</url>
+        <content type="html"><![CDATA[<p><code>drwxr-xr-x | 3 | root | root | 4096 | Mar  2 20:26 | .vs</code><br>档案权限类型<br>连接数<br>档案拥有者<br>档案所属群组<br>档案容量<br>档案最后被修改时间<br>档名</p>
+<p>文件类型和权限<br><code>drwxr-xr-x</code></p>
+<p>第一位 d 表明档案类型是 目录</p>
+<table>
+<thead>
+<tr>
+<th>字符</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>d</td>
+<td>目录</td>
+</tr>
+<tr>
+<td>-</td>
+<td>文件</td>
+</tr>
+<tr>
+<td>|</td>
+<td>链接文件</td>
+</tr>
+<tr>
+<td>b</td>
+<td>设备文件中可供存储的周边设备, 可随机读取设备</td>
+</tr>
+<tr>
+<td>c</td>
+<td>序列号设备, 如键盘鼠标, 一次性读取设备</td>
+</tr>
+</tbody></table>
+<p>后面每三位一组 为<code>rwx</code>的组合 分别代表 <code>读</code>, <code>写</code>, <code>执行</code><br>三组 第一组<code>文件拥有者权限</code> 第二组<code>群组中账号权限</code> 第三组<code>非本人且没有加入本群组的其他账号权限</code></p>
+<p>第三部分表示这个文件的<code>拥有者账号</code><br>第四部分表示这个文件<code>所属群组</code></p>
+<p>相关命令<br>-chgrp 改变文件所属群组<br>-chown 改变文件拥有者<br>-chmod 改变文件权限</p>
+]]></content>
+        
+        <categories>
+            
+            <category> Linux </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 权限管理 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
         <title><![CDATA[GDB调试]]></title>
         <url>http://blog.lsmg.xyz/2020/03/Linux-GDB%25E8%25B0%2583%25E8%25AF%2595/</url>
         <content type="html"><![CDATA[<p><a href="https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/gdb.html" target="_blank" rel="noopener">https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/gdb.html</a></p>
@@ -2740,60 +2850,6 @@
         <tags>
             
             <tag> GDB调试 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-        <title><![CDATA[权限管理]]></title>
-        <url>http://blog.lsmg.xyz/2020/03/Linux-%25E6%259D%2583%25E9%2599%2590%25E7%259B%25B8%25E5%2585%25B3/</url>
-        <content type="html"><![CDATA[<p><code>drwxr-xr-x | 3 | root | root | 4096 | Mar  2 20:26 | .vs</code><br>档案权限类型<br>连接数<br>档案拥有者<br>档案所属群组<br>档案容量<br>档案最后被修改时间<br>档名</p>
-<p>文件类型和权限<br><code>drwxr-xr-x</code></p>
-<p>第一位 d 表明档案类型是 目录</p>
-<table>
-<thead>
-<tr>
-<th>字符</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>d</td>
-<td>目录</td>
-</tr>
-<tr>
-<td>-</td>
-<td>文件</td>
-</tr>
-<tr>
-<td>|</td>
-<td>链接文件</td>
-</tr>
-<tr>
-<td>b</td>
-<td>设备文件中可供存储的周边设备, 可随机读取设备</td>
-</tr>
-<tr>
-<td>c</td>
-<td>序列号设备, 如键盘鼠标, 一次性读取设备</td>
-</tr>
-</tbody></table>
-<p>后面每三位一组 为<code>rwx</code>的组合 分别代表 <code>读</code>, <code>写</code>, <code>执行</code><br>三组 第一组<code>文件拥有者权限</code> 第二组<code>群组中账号权限</code> 第三组<code>非本人且没有加入本群组的其他账号权限</code></p>
-<p>第三部分表示这个文件的<code>拥有者账号</code><br>第四部分表示这个文件<code>所属群组</code></p>
-<p>相关命令<br>-chgrp 改变文件所属群组<br>-chown 改变文件拥有者<br>-chmod 改变文件权限</p>
-]]></content>
-        
-        <categories>
-            
-            <category> Linux </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> 权限管理 </tag>
             
         </tags>
         
@@ -3916,16 +3972,18 @@
     <entry>
         <title><![CDATA[字节对齐]]></title>
         <url>http://blog.lsmg.xyz/2020/02/CPP-%25E5%25AD%2597%25E8%258A%2582%25E5%25AF%25B9%25E9%25BD%2590/</url>
-        <content type="html"><![CDATA[<p>以前在牛客碰到不少字节对齐的题目, 当时只是为了记住而记住 今天我在学习自定义TCP二进制数据包<br>的时候 遇到了必须考虑下字节对齐的情景.</p>
-<p><strong>解释</strong><br>现代计算机中内存空间都是按照byte划分的，从理论上讲似乎对任何类型的变量的访问可以从任何地址开始，但实际情况是在访问特定类型变量的时候经常在特 定的内存地址访问，这就需要各种类型数据按照一定的规则在空间上排列，而不是顺序的一个接一个的排放，这就是对齐。–百度百科</p>
+        <content type="html"><![CDATA[<p><strong>解释</strong><br>现代计算机中内存空间都是按照byte划分的，从理论上讲似乎对任何类型的变量的访问可以从任何地址开始，但实际情况是在访问特定类型变量的时候经常在特 定的内存地址访问，这就需要各种类型数据按照一定的规则在空间上排列，而不是顺序的一个接一个的排放，这就是对齐。–百度百科</p>
 <p><strong>原因</strong><br>各个硬件平台对存储空间的处理上有很大的不同。一些平台对某些特定类型的数据只能从某些特定地址开始存取。比如有些架构的CPU在访问 一个没有进行对齐的变量的时候会发生错误，那么在这种架构下编程必须保证字节对齐.其他平台可能没有这种情况<br>但是最常见的是如果不按照适合其平台要求对 数据存放进行对齐，会在存取效率上带来损失。比如有些平台每次读都是从偶地址开始，如果一个int型（假设为32位系统）如果存放在偶地址开始的地方，那么一个读周期就可以读出这32bit，而如果存放在奇地址开始的地方，就需要2个读周期，并对两次读出的结果的高低字节进行拼凑才能得到该32bit数据。–百度百科</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Foo</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">char</span> foo1;</span><br><span class="line">    <span class="keyword">int</span> foo2;</span><br><span class="line">    short foo3;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">sizeof</span>(Foo) = <span class="number">12</span></span><br><span class="line"><span class="keyword">sizeof</span>(<span class="keyword">char</span>) + <span class="keyword">sizeof</span>(<span class="keyword">int</span>) + <span class="keyword">sizeof</span>(short) = <span class="number">7</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Foo</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">char</span> foo1;</span><br><span class="line">    <span class="keyword">int</span> foo2;</span><br><span class="line">    short foo3;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">sizeof</span>(Foo) = <span class="number">12</span></span><br><span class="line"><span class="keyword">sizeof</span>(<span class="keyword">char</span>) + <span class="keyword">sizeof</span>(<span class="keyword">int</span>) + <span class="keyword">sizeof</span>(short) = <span class="number">7</span></span><br></pre></td></tr></table></figure>
 <p>说明内存中并不是连续存储的这三个变量;</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Foo foo1&#123;<span class="string">'1'</span>, <span class="number">2</span>, <span class="number">3</span>&#125;;</span><br><span class="line"><span class="built_in">write</span>(fd, &amp;foo1, <span class="keyword">sizeof</span>(foo1));</span><br></pre></td></tr></table></figure>
 <p>// hexdump 查看<br>0000000 5631 0000 0002 0000 0003 0000<br>对应图示如下<br><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/%E6%9D%82%E9%A1%B9/%E5%AD%97%E8%8A%82%E5%AF%B9%E9%BD%90.png" alt=""></p>
-<p>第一字节 0x31 正好是 ‘1’ <em>蓝色区域</em><br>二三四字节 为填充 <em>红色区域</em><br>因为sizeof(int)=4所以foo2的偏移量是四的倍数 , 故需要填充三个字节 3+1 = 4</p>
-<p>第五六七八字节 0x02对应2 <em>灰色区域</em><br>这里没有填充是因为sizeof(short)=2所以foo3的偏移量是2的倍数 由于偏移量是8 所以不需要填充</p>
-<p>第九十字节 0x03 对应3<br>第十一十二字节填充<em>黑色区域</em><br>因为此结构中最大的sizeof()=4所以需要将字节数对齐到4的倍数 目前10字节 所以需要填充2字节到<br>12字节满足四的倍数</p>
+<p>第一字节 0x31 正好是 ‘1’ <em>蓝色区域</em></p>
+<p>第二三四字节 为填充 <em>红色区域</em><br>因为sizeof(int)=4所以foo2的偏移量是四的倍数 , 故需要填充三个字节 3+1 = 4</p>
+<p>第五六七八字节 0x02对应2 <em>灰色区域</em></p>
+<p>没有填充是因为sizeof(short)=2所以foo3的偏移量是2的倍数 由于偏移量是8 所以不需要填充</p>
+<p>第九十字节 0x03 对应3</p>
+<p>第十一十二字节填充<em>黑色区域</em><br>因为此结构中最大的sizeof()=4所以需要将字节数对齐到4的倍数 目前10字节 所以需要填充2字节到<br>12字节满足四的倍数</p>
 ]]></content>
         
         <categories>
@@ -4342,7 +4400,7 @@
     
     <entry>
         <title><![CDATA[C++薄书整理]]></title>
-        <url>http://blog.lsmg.xyz/2019/10/CPP-2/</url>
+        <url>http://blog.lsmg.xyz/2019/10/%25E8%25AF%25BB%25E4%25B9%25A6%25E8%25AE%25B0%25E5%25BD%2595-2/</url>
         <content type="html"><![CDATA[<h1 id="定义新量"><a href="#定义新量" class="headerlink" title="定义新量"></a>定义新量</h1><p>auto 自动根据初始值的类型进行自动类型推导.<br>decltype 根据表达式的类型定义对象</p>
 <p>右值引用, 操纵右值对象<br><code>std::move()</code>, 可以将一个</p>
 <p><strong>枚举</strong><br>不限定作用域的定义<br>enum color {red, green, blue};<br>限定在类型内部的作用域<br>enum class color {red, green, blue};<br><code>color a = color::red</code></p>
@@ -4400,39 +4458,7 @@
         
         <categories>
             
-            <category> CPP </category>
-            
-        </categories>
-        
-        
-    </entry>
-    
-    <entry>
-        <title><![CDATA[牛客整理]]></title>
-        <url>http://blog.lsmg.xyz/2019/10/CPP-%25E7%2589%259B%25E5%25AE%25A2/</url>
-        <content type="html"><![CDATA[<h1 id="运算出结果类"><a href="#运算出结果类" class="headerlink" title="运算出结果类"></a>运算出结果类</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> a=<span class="number">101</span>;</span><br><span class="line"><span class="keyword">int</span> sum=<span class="number">200</span>;</span><br><span class="line">a+=<span class="number">27</span>;sum+=a;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d\n"</span>,sum);</span><br></pre></td></tr></table></figure>
-<p>a为 -128~127<br> 127  = 0111 1111<br>“128”= 1000 0000 (-128的补码)</p>
-<p>关于1000 0000代表-128 我偶然发现一个博客有种恍然大悟的感觉<br><a href="https://blog.csdn.net/daiyutage/article/details/8575248" target="_blank" rel="noopener">浅析为什么char类型的范围是 —128~+127</a><br>这个博客实在是写的太好了</p>
-<hr>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> a,b,c,d;</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">"%c,%c,%d,%d"</span>,&amp;a,&amp;b,&amp;c,&amp;d);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%c,%c,%c,%c"</span>,a,b,c,d);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>%c进行输入会进行转化后存入<br>输入 1 即认为输入 ‘1’ 转换成49存入</p>
-<hr>
-<h1 id="类相关"><a href="#类相关" class="headerlink" title="类相关"></a>类相关</h1><h2 id="虚函数"><a href="#虚函数" class="headerlink" title="虚函数"></a>虚函数</h2><p>纯虚函数可以让类先具有一个操作名称，而没有操作内容，让派生类在继承时再去具体地给出定义。<br>凡是含有纯虚函数的类叫做 抽象类 。这种类不能声明对象，只是作为基类为派生类服务.<br>除非在派生类中完全实现基类中所有的的纯虚函数，否则，派生类也变成了抽象类，不能实例化对象。</p>
-<h2 id="静态"><a href="#静态" class="headerlink" title="静态"></a>静态</h2><p>静态成员可以作为默认实参</p>
-<h1 id="定义类"><a href="#定义类" class="headerlink" title="定义类"></a>定义类</h1><h1 id="基础中的基础"><a href="#基础中的基础" class="headerlink" title="基础中的基础"></a>基础中的基础</h1><p>这部分有些只保留题目, 不做解析 便于自己想象</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> k = <span class="number">20</span>;</span><br><span class="line"><span class="keyword">while</span> (k &gt;= <span class="number">0</span>)</span><br><span class="line">&#123;</span><br><span class="line">	--k;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>下面三个函数全部错误</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">void test1()</span><br><span class="line">&#123;</span><br><span class="line">    unsigned char array[MAX_CHAR+1],i; &#x2F;&#x2F; 这个函数在于MAX_CHAR可能会大于255导致i永远无法达到</span><br><span class="line">    for(i&#x3D;0;i&lt;&#x3D;MAX_CHAR;i++)&#123;</span><br><span class="line">        array[i]&#x3D;i;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">char*test2()</span><br><span class="line">&#123;</span><br><span class="line">    char p[] &#x3D; &quot;hello world&quot;;</span><br><span class="line">    return p;</span><br><span class="line">&#125;</span><br><span class="line">char *p &#x3D;test2();</span><br><span class="line">void test3()&#123;</span><br><span class="line">    char str[10];</span><br><span class="line">    str++;</span><br><span class="line">    *str&#x3D;&#39;0&#39;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-<h1 id="基础中的Api"><a href="#基础中的Api" class="headerlink" title="基础中的Api"></a>基础中的Api</h1><p>虽然自己还没用过, 但还是要积累</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(i=<span class="number">4</span>;i&gt;<span class="number">1</span>;i--)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;i;j++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">putchar</span>(<span class="string">'#'</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>开始看到这个题目, 为putchar是放到缓冲区中, 结果就是正常的输出</p>
-]]></content>
-        
-        <categories>
-            
-            <category> CPP </category>
+            <category> 读书记录 </category>
             
         </categories>
         

@@ -20,7 +20,7 @@
 <meta name="verify" content=all />
     <!--Title-->
 
-<title>csapp笔记 | Lsmg的大学之路</title>
+<title>Tag: 数学 | Lsmg的大学之路</title>
 
 <link rel="alternate" href="/atom.xml" title="Lsmg的大学之路" type="application/atom+xml">
 
@@ -30,10 +30,9 @@
     
 
 <link rel="stylesheet" href="/css/base.css">
-<link rel="stylesheet" href="/css/pages/post.css">
+<link rel="stylesheet" href="/css/pages/archive.css">
 <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="/css/thirdParty/highlight/github.css">
-<link rel="stylesheet" href="/.css">
 
 
     <!--script-->
@@ -137,130 +136,39 @@
 
 
         <div id="main">
-    <article id="post">
-        <div id="post-header">
-
-            <h1 id="csapp笔记">
+    <div id="post-list">
+        <ul class="archives-post-list">
+            
+            <li class="post-items" _href="/2020/12/%E5%8A%9B%E6%89%A312.8-E7%E6%95%B4%E6%95%B0%E5%8F%8D%E8%BD%AC&%E6%B1%89%E8%AF%BA%E5%A1%94/">
                 
-                csapp笔记
-                
-            </h1>
-            <div class="article-meta">
+                <p class="info">数学</p>
+                <h2 class="post-item-title">力扣12.8-E7整数反转&amp;汉诺塔</h2>
+                <div class="article-meta">
     
     
     <span class="categories-meta fa-wrap">
             <i class="fa fa-folder-open-o"></i>
-        <span>读书记录</span>
+        <span>力扣每日一题</span>
     </span>
     
-    
-    <span class="fa-wrap">
-         <i class="fa fa-tags"></i>
-        <span class="tags-meta">
-            
-            null
-            
-        </span>
-    </span>
     
     
     <span class="fa-wrap">
         <i class="fa fa-clock-o"></i>
-        <span class="date-meta ">2020/06/07</span>
+        <span class="date-meta ">2020/12/08</span>
     </span>
     
     
     
 </div>
 
+            </li>
             
-            
-        </div>
-        
-        <div id="post-body">
-            <h1 id="第一章-计算机系统漫游"><a href="#第一章-计算机系统漫游" class="headerlink" title="第一章 计算机系统漫游"></a>第一章 计算机系统漫游</h1><p><img src="http://lsmg-img.oss-cn-beijing.aliyuncs.com/csapp/1-3%E7%BC%96%E8%AF%91%E7%B3%BB%E7%BB%9F.png" alt=""></p>
-<p>预处理-&gt;编译-&gt;汇编-&gt;链接</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// hello.cpp</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PI 3.14</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 1111</span></span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%f\n"</span>, PI);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"hello, world!\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>预处理<br>宏替换和注释消失 但是空行还在<br><code>g++ -E hello.cpp -o hello.i</code><br><code>tail -9 hello.i</code></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># <span class="number">5</span> <span class="string">"hello.cpp"</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%f\n"</span>, <span class="number">3.14</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"hello, world!\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>编译 生成汇编<br><code>g++ -S hello.i</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">        .file   &quot;hello.cpp&quot;</span><br><span class="line">        .text</span><br><span class="line">        .section        .rodata</span><br><span class="line">.LC1:</span><br><span class="line">        .string &quot;%f\n&quot;</span><br><span class="line">.LC2:</span><br><span class="line">        .string &quot;hello, world!&quot;</span><br><span class="line">        .text</span><br><span class="line">        .globl  main</span><br><span class="line">        .type   main, @function</span><br><span class="line">main:</span><br><span class="line">.LFB0:</span><br><span class="line">        .cfi_startproc</span><br><span class="line">        pushq   %rbp</span><br><span class="line">        .cfi_def_cfa_offset 16</span><br><span class="line">        .cfi_offset 6, -16</span><br><span class="line">        movq    %rsp, %rbp</span><br><span class="line">        .cfi_def_cfa_register 6</span><br><span class="line">        subq    $16, %rsp</span><br><span class="line">        movq    .LC0(%rip), %rax</span><br><span class="line">        movq    %rax, -8(%rbp)</span><br><span class="line">        movsd   -8(%rbp), %xmm0</span><br><span class="line">        leaq    .LC1(%rip), %rdi</span><br><span class="line">        movl    $1, %eax</span><br><span class="line">        call    printf@PLT</span><br><span class="line">        leaq    .LC2(%rip), %rdi</span><br><span class="line">        call    puts@PLT</span><br><span class="line">        movl    $0, %eax</span><br><span class="line">        leave</span><br><span class="line">        .cfi_def_cfa 7, 8</span><br><span class="line">        ret</span><br><span class="line">        .cfi_endproc</span><br><span class="line">.LFE0:</span><br><span class="line">        .size   main, .-main</span><br><span class="line">        .section        .rodata</span><br><span class="line">        .align 8</span><br><span class="line">.LC0:</span><br><span class="line">        .long   1374389535</span><br><span class="line">        .long   1074339512</span><br><span class="line">        .ident  &quot;GCC: (Ubuntu 7.5.0-3ubuntu1~18.04) 7.5.0&quot;</span><br><span class="line">        .section        .note.GNU-stack,&quot;&quot;,@progbits</span><br></pre></td></tr></table></figure>
-<p>汇编 生成 可重定位二进制目标程序<br>gcc编译器 -c参数 起到的作用是编译和汇编 -S参数 仅仅是编译<br><code>g++ -c hello.s</code></p>
-<p>链接 生成执行文件<br><code>g++ hello.o -o hello</code></p>
-<p>在不同进程间切换 交错执行的执行-上下文切换<br>操作系统保持进程运行所需的所有状态信息 这种状态-上下文</p>
-<p>线程共享代码和全局数据</p>
-<h1 id="第一部分-程序结构和执行"><a href="#第一部分-程序结构和执行" class="headerlink" title="第一部分 程序结构和执行"></a>第一部分 程序结构和执行</h1><h2 id="第二章-信息存储"><a href="#第二章-信息存储" class="headerlink" title="第二章 信息存储"></a>第二章 信息存储</h2><p>孤立地讲,单个位不是非常有用. 然而, 当把位组合在一起, 再加上某种解释,即赋予不同可能位组合不同的含义, 我们就能表示任何有限集合的元素.</p>
-<h1 id="第三章-程序的机器级表示"><a href="#第三章-程序的机器级表示" class="headerlink" title="第三章 程序的机器级表示"></a>第三章 程序的机器级表示</h1><h2 id="第五章-优化程序性能"><a href="#第五章-优化程序性能" class="headerlink" title="第五章 优化程序性能"></a>第五章 优化程序性能</h2><p>编写高效的程序</p>
-<ul>
-<li>选择一组适当的算法和数据结构</li>
-<li>编写出编译器能够有效优化以转变为高效的可执行程序的源代码</li>
-<li>大项目的并行计算</li>
-</ul>
-<p>整数运算使用乘法的结合律和交换律, 当溢出的时候, 结果依然是一致的.<br>但是浮点数使用结合律和交换律的时候, 在溢出时, 结果却不是一致的.</p>
-<p>整数的表示虽然只能编码一个相对较小的数值范围, 但是这种标识是精确地<br>浮点数能编码一个较大的数值范围, 但是这种表示只是近似的.</p>
-<h2 id="第六章-存储器层次结构"><a href="#第六章-存储器层次结构" class="headerlink" title="第六章 存储器层次结构"></a>第六章 存储器层次结构</h2>
-        </div>
-        <div id="post-footer">
-            <div class="avatar" style="padding-bottom: 0.2rem"
-                    >
-                <img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/theme/tx.jpg" alt="avatar"/>
-                
-                
-            </div>
-            <ul class="author-profile-section">
-                <li>
-                  
-                  Author:
-                  
-                    
-                    <a href="/about.html">Lsmg</a>
-                </li>
-                
-                <li>Published Date: <span>2020-06-07  09:09:20</span></li>
-                
-                <li>Updated Date: <span>2020-12-05  10:31:35</span></li>
-                
-                <li class="post-category">
-                    Categories:
-                    
-                    <a href="/categories/%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95/">读书记录</a>
-                    
-                </li>
-                <li class="post-tags">
-                    Tags:
-                    
-                </li>
-                
-                <li> License: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
-知识共享署名-非商业性使用-禁止演绎 3.0 未本地化版本许可协议（CC BY-NC-ND 3.0）
-</a></li>
-                
-            </ul>
-        </div>
-    </article>
-    <div class="article-nav">
-        
-        <a href="/2020/06/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%94%E8%AE%B0%E6%95%B4%E7%90%86/" class="pre-post fa fa-caret-left">计算机网络笔记</a>
-        
-        
-        <a href="/2020/06/%E9%A1%B9%E7%9B%AE%E5%88%B6%E4%BD%9C-%E9%99%80%E8%9E%BA%E7%90%83/" class="next-post fa">陀螺球(废弃)</a>
-        
+        </ul>
     </div>
-    
-    <div id="comments">
-        
-
-<script>
-  gitalk.render("comments");
-</script>
-
-
-
-    </div>
-    
 </div>
+
+
 
 
     </div>
@@ -288,8 +196,6 @@
     <li class="totop-btn fa fa-angle-up"></li>
     <li class="exchange-btn fa fa-exchange"></li>
   
-    <li class="toc-btn fa fa-list-ul"></li>
-    
     
 
     
@@ -309,8 +215,6 @@
         </div>
     </div>
 </div>
-
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#第一章-计算机系统漫游"><span class="toc-number">1.</span> <span class="toc-text">第一章 计算机系统漫游</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第一部分-程序结构和执行"><span class="toc-number">2.</span> <span class="toc-text">第一部分 程序结构和执行</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#第二章-信息存储"><span class="toc-number">2.1.</span> <span class="toc-text">第二章 信息存储</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第三章-程序的机器级表示"><span class="toc-number">3.</span> <span class="toc-text">第三章 程序的机器级表示</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#第五章-优化程序性能"><span class="toc-number">3.1.</span> <span class="toc-text">第五章 优化程序性能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第六章-存储器层次结构"><span class="toc-number">3.2.</span> <span class="toc-text">第六章 存储器层次结构</span></a></li></ol></li></ol>
 
 
 
