@@ -2709,60 +2709,6 @@
     </entry>
     
     <entry>
-        <title><![CDATA[权限管理]]></title>
-        <url>http://blog.lsmg.xyz/2020/03/Linux-%25E6%259D%2583%25E9%2599%2590%25E7%259B%25B8%25E5%2585%25B3/</url>
-        <content type="html"><![CDATA[<p><code>drwxr-xr-x | 3 | root | root | 4096 | Mar  2 20:26 | .vs</code><br>档案权限类型<br>连接数<br>档案拥有者<br>档案所属群组<br>档案容量<br>档案最后被修改时间<br>档名</p>
-<p>文件类型和权限<br><code>drwxr-xr-x</code></p>
-<p>第一位 d 表明档案类型是 目录</p>
-<table>
-<thead>
-<tr>
-<th>字符</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>d</td>
-<td>目录</td>
-</tr>
-<tr>
-<td>-</td>
-<td>文件</td>
-</tr>
-<tr>
-<td>|</td>
-<td>链接文件</td>
-</tr>
-<tr>
-<td>b</td>
-<td>设备文件中可供存储的周边设备, 可随机读取设备</td>
-</tr>
-<tr>
-<td>c</td>
-<td>序列号设备, 如键盘鼠标, 一次性读取设备</td>
-</tr>
-</tbody></table>
-<p>后面每三位一组 为<code>rwx</code>的组合 分别代表 <code>读</code>, <code>写</code>, <code>执行</code><br>三组 第一组<code>文件拥有者权限</code> 第二组<code>群组中账号权限</code> 第三组<code>非本人且没有加入本群组的其他账号权限</code></p>
-<p>第三部分表示这个文件的<code>拥有者账号</code><br>第四部分表示这个文件<code>所属群组</code></p>
-<p>相关命令<br>-chgrp 改变文件所属群组<br>-chown 改变文件拥有者<br>-chmod 改变文件权限</p>
-]]></content>
-        
-        <categories>
-            
-            <category> Linux </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> 权限管理 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
         <title><![CDATA[GDB调试]]></title>
         <url>http://blog.lsmg.xyz/2020/03/Linux-GDB%25E8%25B0%2583%25E8%25AF%2595/</url>
         <content type="html"><![CDATA[<p><a href="https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/gdb.html" target="_blank" rel="noopener">https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/gdb.html</a></p>
@@ -3026,6 +2972,60 @@
         <tags>
             
             <tag> GDB调试 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+        <title><![CDATA[权限管理]]></title>
+        <url>http://blog.lsmg.xyz/2020/03/Linux-%25E6%259D%2583%25E9%2599%2590%25E7%259B%25B8%25E5%2585%25B3/</url>
+        <content type="html"><![CDATA[<p><code>drwxr-xr-x | 3 | root | root | 4096 | Mar  2 20:26 | .vs</code><br>档案权限类型<br>连接数<br>档案拥有者<br>档案所属群组<br>档案容量<br>档案最后被修改时间<br>档名</p>
+<p>文件类型和权限<br><code>drwxr-xr-x</code></p>
+<p>第一位 d 表明档案类型是 目录</p>
+<table>
+<thead>
+<tr>
+<th>字符</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>d</td>
+<td>目录</td>
+</tr>
+<tr>
+<td>-</td>
+<td>文件</td>
+</tr>
+<tr>
+<td>|</td>
+<td>链接文件</td>
+</tr>
+<tr>
+<td>b</td>
+<td>设备文件中可供存储的周边设备, 可随机读取设备</td>
+</tr>
+<tr>
+<td>c</td>
+<td>序列号设备, 如键盘鼠标, 一次性读取设备</td>
+</tr>
+</tbody></table>
+<p>后面每三位一组 为<code>rwx</code>的组合 分别代表 <code>读</code>, <code>写</code>, <code>执行</code><br>三组 第一组<code>文件拥有者权限</code> 第二组<code>群组中账号权限</code> 第三组<code>非本人且没有加入本群组的其他账号权限</code></p>
+<p>第三部分表示这个文件的<code>拥有者账号</code><br>第四部分表示这个文件<code>所属群组</code></p>
+<p>相关命令<br>-chgrp 改变文件所属群组<br>-chown 改变文件拥有者<br>-chmod 改变文件权限</p>
+]]></content>
+        
+        <categories>
+            
+            <category> Linux </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 权限管理 </tag>
             
         </tags>
         
