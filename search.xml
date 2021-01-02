@@ -3,6 +3,167 @@
     
     
     <entry>
+        <title><![CDATA[Shell脚本编写]]></title>
+        <url>http://blog.lsmg.xyz/2021/01/Linux-shell%25E8%2584%259A%25E6%259C%25AC%25E7%25BC%2596%25E5%2586%2599/</url>
+        <content type="html"><![CDATA[<h1 id="第一行-解释器"><a href="#第一行-解释器" class="headerlink" title="第一行 - 解释器"></a>第一行 - 解释器</h1><ol>
+<li><code>#!/bin/bash</code> 这个通常见于脚本的第一行, <code>#!</code>算是个约定了 说明脚本需要什么解释器</li>
+<li><code>/bin/sh xx.sh</code> 这种是执行的时候指定, 脚本第一行的那个就失效了</li>
+</ol>
+<h1 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h1><p>规范</p>
+<ul>
+<li>命名只能使用英文字母，数字和下划线，首个字符不能以数字开头。</li>
+<li>中间不能有空格，可以使用下划线（_）。</li>
+<li>不能使用标点符号。</li>
+<li>不能使用bash里的关键字（可用help命令查看保留关键字）。</li>
+</ul>
+<p>shell变量类型</p>
+<ul>
+<li>局部变量</li>
+<li>环境变量</li>
+<li>shell变量-shell内置特殊变量</li>
+</ul>
+<p>变量定义 注意 不能随便加空格 下面的等号两侧不能加空格</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 直接赋值</span></span><br><span class="line">xxx="lsmg"</span><br><span class="line">xxx = "lsmg" # 错误</span><br><span class="line">xxx="Jigokubana" # 随意修改</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 语句赋值</span></span><br><span class="line">for skill in Ada Coffe Action Java</span><br><span class="line">do</span><br><span class="line">    echo "I am good at $&#123;skill&#125;Script"</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 使用变量</span></span><br><span class="line">echo $xxx</span><br><span class="line">echo $&#123;xxx&#125; # &#123;&#125; 用于标记边界</span><br><span class="line">echo "my name is $&#123;xxx&#125;"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> const</span></span><br><span class="line">readonly xxx="lsmg" </span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 删除变量</span></span><br><span class="line">unset xxx; 不能用于删除只读变量</span><br></pre></td></tr></table></figure>
+
+<h1 id="单引号-双引号-反引号"><a href="#单引号-双引号-反引号" class="headerlink" title="单引号 双引号 反引号"></a>单引号 双引号 反引号</h1><p>单引号将剥夺其中的所有字符的特殊含义</p>
+<p>双引号中的<code>$</code>（参数替换）和`（命令替换）有特殊含义</p>
+<p>反引号与$()功能相同会执行其中的命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">aaa="aaa"</span><br><span class="line"></span><br><span class="line">b1="$aaa"</span><br><span class="line">b2=`$aaa` # 会先进行取变量值 $aaa -&gt; aaa</span><br><span class="line">b3='$aaa'</span><br><span class="line"></span><br><span class="line">echo $b1 # aaa</span><br><span class="line">echo $b2 # aaa: command not found </span><br><span class="line">echo $b3 # $aaa</span><br></pre></td></tr></table></figure>]]></content>
+        
+        <categories>
+            
+            <category> Linux </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Shell </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+        <title><![CDATA[力扣1.2-N654.最大二叉树]]></title>
+        <url>http://blog.lsmg.xyz/2021/01/%25E5%258A%259B%25E6%2589%25A31.2-N654.%25E6%259C%2580%25E5%25A4%25A7%25E4%25BA%258C%25E5%258F%2589%25E6%25A0%2591/</url>
+        <content type="html"><![CDATA[<h1 id="654-最大二叉树"><a href="#654-最大二叉树" class="headerlink" title="654. 最大二叉树"></a><a href="https://leetcode-cn.com/problems/maximum-binary-tree/" target="_blank" rel="noopener">654. 最大二叉树</a></h1><p>Difficulty: <strong>中等</strong></p>
+<p>给定一个不含重复元素的整数数组。一个以此数组构建的最大二叉树定义如下：</p>
+<ol>
+<li>二叉树的根是数组中的最大元素。</li>
+<li>左子树是通过数组中最大值左边部分构造出的最大二叉树。</li>
+<li>右子树是通过数组中最大值右边部分构造出的最大二叉树。</li>
+</ol>
+<p>通过给定的数组构建最大二叉树，并且输出这个树的根节点。</p>
+<p><strong>示例 ：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">输入：[3,2,1,6,0,5]</span><br><span class="line">输出：返回下面这棵树的根节点：</span><br><span class="line"></span><br><span class="line">      6</span><br><span class="line">    &#x2F;   \</span><br><span class="line">   3     5</span><br><span class="line">    \    &#x2F; </span><br><span class="line">     2  0   </span><br><span class="line">       \</span><br><span class="line">        1</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ol>
+<li>给定的数组的大小在 [1, 1000] 之间。</li>
+</ol>
+<h2 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">GetMaxSub</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> result = left;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = left + <span class="number">1</span>; i &lt; right; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (nums[i] &gt; nums[result])</span><br><span class="line">            &#123;</span><br><span class="line">                result = i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">TreeNode* <span class="title">constructMaximumBinaryTree</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> max_sub = GetMaxSub(nums, <span class="number">0</span>, nums.<span class="built_in">size</span>());</span><br><span class="line"></span><br><span class="line">        TreeNode* root = <span class="keyword">new</span> TreeNode(nums[max_sub]);</span><br><span class="line"></span><br><span class="line">        ConstructMaximumBinaryTree(nums, <span class="number">0</span>, max_sub, nums.<span class="built_in">size</span>(), root);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">ConstructMaximumBinaryTree</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> left, <span class="keyword">int</span> mid, <span class="keyword">int</span> right, TreeNode* root)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (left &lt; mid)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> l_max = GetMaxSub(nums, left, mid);</span><br><span class="line">            root-&gt;left = <span class="keyword">new</span> TreeNode(nums[l_max]);</span><br><span class="line">            ConstructMaximumBinaryTree(nums, left, l_max, mid, root-&gt;left);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (mid + <span class="number">1</span> &lt; right)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> r_max = GetMaxSub(nums, mid + <span class="number">1</span>, right);</span><br><span class="line">            root-&gt;right = <span class="keyword">new</span> TreeNode(nums[r_max]);</span><br><span class="line">            ConstructMaximumBinaryTree(nums, mid + <span class="number">1</span>, r_max, right, root-&gt;right);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>自己的第一个思路就是通过ConstructMaximumBinaryTree给传入的root节点构造左子树和右子树</p>
+<p>然后递归的给root的左子树和右子树构造子树</p>
+<p>每次传入left mid right将数组切分为两段 左段构造root的左子树 右段构造root的右子树</p>
+<h2 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">constructMaximumBinaryTree</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> constructMaximumBinaryTree(nums, <span class="number">0</span>, nums.<span class="built_in">size</span>());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">TreeNode* <span class="title">constructMaximumBinaryTree</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (left + <span class="number">1</span> &gt; right)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> max_sub = left;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = left + <span class="number">1</span>; i &lt; right; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (nums[i] &gt; nums[max_sub])</span><br><span class="line">            &#123;</span><br><span class="line">                max_sub = i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        TreeNode* node = <span class="keyword">new</span> TreeNode(nums[max_sub]);</span><br><span class="line">        node-&gt;left = constructMaximumBinaryTree(nums, left, max_sub);</span><br><span class="line">        node-&gt;right = constructMaximumBinaryTree(nums, max_sub + <span class="number">1</span>, right);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> node;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>题解的答案更加的简洁每次的constructMaximumBinaryTree仅负责构造一个节点返回回去成为左节点或者右节点</p>
+<p>同时给构造出的节点赋值左节点和右节点.</p>
+<p>相对我的代码构造左节点和右节点 这里淡化了左右节点的区别. 通过传入的参数即可知道是左右节点然后赋值给left right</p>
+]]></content>
+        
+        <categories>
+            
+            <category> 力扣每日一题 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 二叉树 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+        <title><![CDATA[力扣1.1-N6Z字形变换&E13罗马数字转整数]]></title>
+        <url>http://blog.lsmg.xyz/2021/01/%25E5%258A%259B%25E6%2589%25A31.1-N6&amp;E13/</url>
+        <content type="html"><![CDATA[<h1 id="13-罗马数字转整数"><a href="#13-罗马数字转整数" class="headerlink" title="13. 罗马数字转整数"></a><a href="https://leetcode-cn.com/problems/roman-to-integer/" target="_blank" rel="noopener">13. 罗马数字转整数</a></h1><p>Difficulty: <strong>简单</strong></p>
+<p>罗马数字包含以下七种字符: <code>I</code>， <code>V</code>， <code>X</code>， <code>L</code>，<code>C</code>，<code>D</code> 和 <code>M</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">字符          数值</span><br><span class="line">I             1</span><br><span class="line">V             5</span><br><span class="line">X             10</span><br><span class="line">L             50</span><br><span class="line">C             100</span><br><span class="line">D             500</span><br><span class="line">M             1000</span><br></pre></td></tr></table></figure>
+
+<p>例如， 罗马数字 2 写做 <code>II</code> ，即为两个并列的 1。12 写做 <code>XII</code> ，即为 <code>X</code> + <code>II</code> 。 27 写做  <code>XXVII</code>, 即为 <code>XX</code> + <code>V</code> + <code>II</code> 。</p>
+<p>通常情况下，罗马数字中小的数字在大的数字的右边。但也存在特例，例如 4 不写做 <code>IIII</code>，而是 <code>IV</code>。数字 1 在数字 5 的左边，所表示的数等于大数 5 减小数 1 得到的数值 4 。同样地，数字 9 表示为 <code>IX</code>。这个特殊的规则只适用于以下六种情况：</p>
+<ul>
+<li><code>I</code> 可以放在 <code>V</code> (5) 和 <code>X</code> (10) 的左边，来表示 4 和 9。</li>
+<li><code>X</code> 可以放在 <code>L</code> (50) 和 <code>C</code> (100) 的左边，来表示 40 和 90。 </li>
+<li><code>C</code> 可以放在 <code>D</code> (500) 和 <code>M</code> (1000) 的左边，来表示 400 和 900。</li>
+</ul>
+<p>给定一个罗马数字，将其转换成整数。输入确保在 1 到 3999 的范围内。</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;III&quot;</span><br><span class="line">输出: 3</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;IV&quot;</span><br><span class="line">输出: 4</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;IX&quot;</span><br><span class="line">输出: 9</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 4:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;LVIII&quot;</span><br><span class="line">输出: 58</span><br><span class="line">解释: L &#x3D; 50, V&#x3D; 5, III &#x3D; 3.</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 5:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;MCMXCIV&quot;</span><br><span class="line">输出: 1994</span><br><span class="line">解释: M &#x3D; 1000, CM &#x3D; 900, XC &#x3D; 90, IV &#x3D; 4.</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li>题目所给测试用例皆符合罗马数字书写规则，不会出现跨位等情况。</li>
+<li>IC 和 IM 这样的例子并不符合题目要求，49 应该写作 XLIX，999 应该写作 CMXCIX 。</li>
+<li>关于罗马数字的详尽书写规则，可以参考 。</li>
+</ul>
+<h2 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">romanToInt</span><span class="params">(<span class="built_in">string</span> s)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">string</span> k[] = &#123;<span class="string">"M"</span>, <span class="string">"CM"</span>, <span class="string">"D"</span>, <span class="string">"CD"</span>, <span class="string">"C"</span>, <span class="string">"XC"</span>, <span class="string">"L"</span>, <span class="string">"XL"</span>, <span class="string">"X"</span>, <span class="string">"IX"</span>, <span class="string">"V"</span>, <span class="string">"IV"</span>, <span class="string">"I"</span>&#125;;</span><br><span class="line">        <span class="keyword">int</span> v[] = &#123;<span class="number">1000</span>, <span class="number">900</span>, <span class="number">500</span>, <span class="number">400</span>, <span class="number">100</span>, <span class="number">90</span>, <span class="number">50</span>, <span class="number">40</span>, <span class="number">10</span>, <span class="number">9</span>, <span class="number">5</span>, <span class="number">4</span> ,<span class="number">1</span>&#125;;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> s_sub = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> k_sub = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">bool</span> flag = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (s_sub &lt; s.length())</span><br><span class="line">        &#123;</span><br><span class="line">            flag = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (;i &lt; k[k_sub].length(); ++i)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (s[s_sub + i] != k[k_sub][i])</span><br><span class="line">                &#123;</span><br><span class="line">                    k_sub++;</span><br><span class="line">                    flag = <span class="literal">false</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (flag)</span><br><span class="line">            &#123;</span><br><span class="line">                s_sub += i;</span><br><span class="line">                result += v[k_sub];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>第一次写出的代码没有通过是因为使用了Map存储的kv然后使用iterator++遍历, 然而iterator遍历并不是按照初始化的顺序而是按照k的大小</p>
+<h2 id="代码2-样例"><a href="#代码2-样例" class="headerlink" title="代码2 - 样例"></a>代码2 - 样例</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">romanToInt</span><span class="params">(<span class="built_in">string</span> s)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> m[<span class="number">256</span>];</span><br><span class="line">        m[<span class="string">'I'</span>] = <span class="number">1</span>;</span><br><span class="line">        m[<span class="string">'V'</span>] = <span class="number">5</span>;</span><br><span class="line">        m[<span class="string">'X'</span>] = <span class="number">10</span>;</span><br><span class="line">        m[<span class="string">'L'</span>] = <span class="number">50</span>;</span><br><span class="line">        m[<span class="string">'C'</span>] = <span class="number">100</span>;</span><br><span class="line">        m[<span class="string">'D'</span>] = <span class="number">500</span>;</span><br><span class="line">        m[<span class="string">'M'</span>] = <span class="number">1000</span>;</span><br><span class="line">        <span class="keyword">int</span> result=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.<span class="built_in">size</span>(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(m[s[i]]&gt;=m[s[i+<span class="number">1</span>]])</span><br><span class="line">            &#123;</span><br><span class="line">                result+=m[s[i]];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                result-=m[s[i]];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>根据的原理是 把一个小值放在大值的左边，就是做减法，否则为加法。</p>
+<p>此外样例中的m数组设计的也是很巧妙, 只初始化自己要使用的部分, <strong>打破了我数组需要连续使用的思维定式</strong></p>
+<h1 id="6-Z-字形变换"><a href="#6-Z-字形变换" class="headerlink" title="6. Z 字形变换"></a><a href="https://leetcode-cn.com/problems/zigzag-conversion/" target="_blank" rel="noopener">6. Z 字形变换</a></h1><p>Difficulty: <strong>中等</strong></p>
+<p>将一个给定字符串根据给定的行数，以从上往下、从左到右进行 Z 字形排列。</p>
+<p>比如输入字符串为 <code>&quot;LEETCODEISHIRING&quot;</code> 行数为 3 时，排列如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">L   C   I   R</span><br><span class="line">E T O E S I I G</span><br><span class="line">E   D   H   N</span><br></pre></td></tr></table></figure>
+
+<p>之后，你的输出需要从左往右逐行读取，产生出一个新的字符串，比如：<code>&quot;LCIRETOESIIGEDHN&quot;</code>。</p>
+<p>请你实现这个将字符串进行指定行数变换的函数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">string convert(string s, int numRows);</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: s &#x3D; &quot;LEETCODEISHIRING&quot;, numRows &#x3D; 3</span><br><span class="line">输出: &quot;LCIRETOESIIGEDHN&quot;</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">输入: s &#x3D; &quot;LEETCODEISHIRING&quot;, numRows &#x3D; 4</span><br><span class="line">输出: &quot;LDREOEIIECIHNTSG&quot;</span><br><span class="line">解释:</span><br><span class="line"></span><br><span class="line">L     D     R</span><br><span class="line">E   O E   I I</span><br><span class="line">E C   I H   N</span><br><span class="line">T     S     G</span><br></pre></td></tr></table></figure>
+
+<h2 id="代码1-1"><a href="#代码1-1" class="headerlink" title="代码1"></a>代码1</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">convert</span><span class="params">(<span class="built_in">string</span> s, <span class="keyword">int</span> numRows)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">char</span>&gt;&gt; <span class="title">vec</span><span class="params">(numRows, <span class="built_in">vector</span>&lt;<span class="keyword">char</span>&gt;(s.length(), <span class="string">' '</span>))</span></span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> column = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> ss = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (ss &lt; s.length())</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; ss &lt; s.length() &amp;&amp; i &lt; numRows; ++i)</span><br><span class="line">            &#123;</span><br><span class="line">                vec[i][column] = s[ss++];</span><br><span class="line">            &#125;</span><br><span class="line">            column++;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = numRows - <span class="number">2</span>; ss &lt; s.length() &amp;&amp; i &gt;= <span class="number">1</span>; --i)</span><br><span class="line">            &#123;</span><br><span class="line">                vec[i][column] = s[ss++];</span><br><span class="line">                column++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">string</span> result;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; numRows; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; s.length(); ++j)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (vec[i][j] != <span class="string">' '</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    result += vec[i][j];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+        
+        <categories>
+            
+            <category> 力扣每日一题 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 数组 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
         <title><![CDATA[力扣12.16-N450&N701&E700&H98]]></title>
         <url>http://blog.lsmg.xyz/2020/12/%25E5%258A%259B%25E6%2589%25A312.16-N450&amp;N701&E700&N98/</url>
         <content type="html"><![CDATA[<h1 id="450-删除二叉搜索树中的节点"><a href="#450-删除二叉搜索树中的节点" class="headerlink" title="450. 删除二叉搜索树中的节点"></a><a href="https://leetcode-cn.com/problems/delete-node-in-a-bst/" target="_blank" rel="noopener">450. 删除二叉搜索树中的节点</a></h1><p>Difficulty: <strong>中等</strong></p>
@@ -66,79 +227,6 @@
 <p><strong>示例 2:</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">输入:</span><br><span class="line">    5</span><br><span class="line">   &#x2F; \</span><br><span class="line">  1   4</span><br><span class="line">     &#x2F; \</span><br><span class="line">    3   6</span><br><span class="line">输出: false</span><br><span class="line">解释: 输入为: [5,1,4,null,null,3,6]。</span><br><span class="line">     根节点的值为 5 ，但是其右子节点值为 4 。</span><br></pre></td></tr></table></figure>
 <h2 id="代码1-3"><a href="#代码1-3" class="headerlink" title="代码1"></a>代码1</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isValidBST</span><span class="params">(TreeNode* root, TreeNode* <span class="built_in">min</span>, TreeNode* <span class="built_in">max</span>)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!root)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">min</span> &amp;&amp; root-&gt;val &lt;= <span class="built_in">min</span>-&gt;val)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">max</span> &amp;&amp; root-&gt;val &gt;= <span class="built_in">max</span>-&gt;val)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> isValidBST(root-&gt;left, <span class="built_in">min</span>, root) &amp;&amp;</span><br><span class="line">                isValidBST(root-&gt;right, root, <span class="built_in">max</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isValidBST</span><span class="params">(TreeNode* root)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> isValidBST(root, <span class="literal">nullptr</span>, <span class="literal">nullptr</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
-        
-        <categories>
-            
-            <category> 力扣每日一题 </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> 二叉树 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-        <title><![CDATA[力扣1.1-N6Z字形变换&E13罗马数字转整数]]></title>
-        <url>http://blog.lsmg.xyz/2020/12/%25E5%258A%259B%25E6%2589%25A31.1-N6&amp;E13/</url>
-        <content type="html"><![CDATA[<h1 id="13-罗马数字转整数"><a href="#13-罗马数字转整数" class="headerlink" title="13. 罗马数字转整数"></a><a href="https://leetcode-cn.com/problems/roman-to-integer/" target="_blank" rel="noopener">13. 罗马数字转整数</a></h1><p>Difficulty: <strong>简单</strong></p>
-<p>罗马数字包含以下七种字符: <code>I</code>， <code>V</code>， <code>X</code>， <code>L</code>，<code>C</code>，<code>D</code> 和 <code>M</code>。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">字符          数值</span><br><span class="line">I             1</span><br><span class="line">V             5</span><br><span class="line">X             10</span><br><span class="line">L             50</span><br><span class="line">C             100</span><br><span class="line">D             500</span><br><span class="line">M             1000</span><br></pre></td></tr></table></figure>
-
-<p>例如， 罗马数字 2 写做 <code>II</code> ，即为两个并列的 1。12 写做 <code>XII</code> ，即为 <code>X</code> + <code>II</code> 。 27 写做  <code>XXVII</code>, 即为 <code>XX</code> + <code>V</code> + <code>II</code> 。</p>
-<p>通常情况下，罗马数字中小的数字在大的数字的右边。但也存在特例，例如 4 不写做 <code>IIII</code>，而是 <code>IV</code>。数字 1 在数字 5 的左边，所表示的数等于大数 5 减小数 1 得到的数值 4 。同样地，数字 9 表示为 <code>IX</code>。这个特殊的规则只适用于以下六种情况：</p>
-<ul>
-<li><code>I</code> 可以放在 <code>V</code> (5) 和 <code>X</code> (10) 的左边，来表示 4 和 9。</li>
-<li><code>X</code> 可以放在 <code>L</code> (50) 和 <code>C</code> (100) 的左边，来表示 40 和 90。 </li>
-<li><code>C</code> 可以放在 <code>D</code> (500) 和 <code>M</code> (1000) 的左边，来表示 400 和 900。</li>
-</ul>
-<p>给定一个罗马数字，将其转换成整数。输入确保在 1 到 3999 的范围内。</p>
-<p><strong>示例 1:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;III&quot;</span><br><span class="line">输出: 3</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;IV&quot;</span><br><span class="line">输出: 4</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 3:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;IX&quot;</span><br><span class="line">输出: 9</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 4:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;LVIII&quot;</span><br><span class="line">输出: 58</span><br><span class="line">解释: L &#x3D; 50, V&#x3D; 5, III &#x3D; 3.</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 5:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;MCMXCIV&quot;</span><br><span class="line">输出: 1994</span><br><span class="line">解释: M &#x3D; 1000, CM &#x3D; 900, XC &#x3D; 90, IV &#x3D; 4.</span><br></pre></td></tr></table></figure>
-
-<p><strong>提示：</strong></p>
-<ul>
-<li>题目所给测试用例皆符合罗马数字书写规则，不会出现跨位等情况。</li>
-<li>IC 和 IM 这样的例子并不符合题目要求，49 应该写作 XLIX，999 应该写作 CMXCIX 。</li>
-<li>关于罗马数字的详尽书写规则，可以参考 。</li>
-</ul>
-<h2 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">romanToInt</span><span class="params">(<span class="built_in">string</span> s)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">string</span> k[] = &#123;<span class="string">"M"</span>, <span class="string">"CM"</span>, <span class="string">"D"</span>, <span class="string">"CD"</span>, <span class="string">"C"</span>, <span class="string">"XC"</span>, <span class="string">"L"</span>, <span class="string">"XL"</span>, <span class="string">"X"</span>, <span class="string">"IX"</span>, <span class="string">"V"</span>, <span class="string">"IV"</span>, <span class="string">"I"</span>&#125;;</span><br><span class="line">        <span class="keyword">int</span> v[] = &#123;<span class="number">1000</span>, <span class="number">900</span>, <span class="number">500</span>, <span class="number">400</span>, <span class="number">100</span>, <span class="number">90</span>, <span class="number">50</span>, <span class="number">40</span>, <span class="number">10</span>, <span class="number">9</span>, <span class="number">5</span>, <span class="number">4</span> ,<span class="number">1</span>&#125;;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> s_sub = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> k_sub = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">bool</span> flag = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (s_sub &lt; s.length())</span><br><span class="line">        &#123;</span><br><span class="line">            flag = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (;i &lt; k[k_sub].length(); ++i)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (s[s_sub + i] != k[k_sub][i])</span><br><span class="line">                &#123;</span><br><span class="line">                    k_sub++;</span><br><span class="line">                    flag = <span class="literal">false</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (flag)</span><br><span class="line">            &#123;</span><br><span class="line">                s_sub += i;</span><br><span class="line">                result += v[k_sub];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>第一次写出的代码没有通过是因为使用了Map存储的kv然后使用iterator++遍历, 然而iterator遍历并不是按照初始化的顺序而是按照k的大小</p>
-<h2 id="代码2-样例"><a href="#代码2-样例" class="headerlink" title="代码2 - 样例"></a>代码2 - 样例</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">romanToInt</span><span class="params">(<span class="built_in">string</span> s)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> m[<span class="number">256</span>];</span><br><span class="line">        m[<span class="string">'I'</span>] = <span class="number">1</span>;</span><br><span class="line">        m[<span class="string">'V'</span>] = <span class="number">5</span>;</span><br><span class="line">        m[<span class="string">'X'</span>] = <span class="number">10</span>;</span><br><span class="line">        m[<span class="string">'L'</span>] = <span class="number">50</span>;</span><br><span class="line">        m[<span class="string">'C'</span>] = <span class="number">100</span>;</span><br><span class="line">        m[<span class="string">'D'</span>] = <span class="number">500</span>;</span><br><span class="line">        m[<span class="string">'M'</span>] = <span class="number">1000</span>;</span><br><span class="line">        <span class="keyword">int</span> result=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.<span class="built_in">size</span>(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(m[s[i]]&gt;=m[s[i+<span class="number">1</span>]])</span><br><span class="line">            &#123;</span><br><span class="line">                result+=m[s[i]];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                result-=m[s[i]];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>根据的原理是 把一个小值放在大值的左边，就是做减法，否则为加法。</p>
-<p>此外样例中的m数组设计的也是很巧妙, 只初始化自己要使用的部分, <strong>打破了我数组需要连续使用的思维定式</strong></p>
-<h1 id="6-Z-字形变换"><a href="#6-Z-字形变换" class="headerlink" title="6. Z 字形变换"></a><a href="https://leetcode-cn.com/problems/zigzag-conversion/" target="_blank" rel="noopener">6. Z 字形变换</a></h1><p>Difficulty: <strong>中等</strong></p>
-<p>将一个给定字符串根据给定的行数，以从上往下、从左到右进行 Z 字形排列。</p>
-<p>比如输入字符串为 <code>&quot;LEETCODEISHIRING&quot;</code> 行数为 3 时，排列如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">L   C   I   R</span><br><span class="line">E T O E S I I G</span><br><span class="line">E   D   H   N</span><br></pre></td></tr></table></figure>
-
-<p>之后，你的输出需要从左往右逐行读取，产生出一个新的字符串，比如：<code>&quot;LCIRETOESIIGEDHN&quot;</code>。</p>
-<p>请你实现这个将字符串进行指定行数变换的函数：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">string convert(string s, int numRows);</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 1:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: s &#x3D; &quot;LEETCODEISHIRING&quot;, numRows &#x3D; 3</span><br><span class="line">输出: &quot;LCIRETOESIIGEDHN&quot;</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">输入: s &#x3D; &quot;LEETCODEISHIRING&quot;, numRows &#x3D; 4</span><br><span class="line">输出: &quot;LDREOEIIECIHNTSG&quot;</span><br><span class="line">解释:</span><br><span class="line"></span><br><span class="line">L     D     R</span><br><span class="line">E   O E   I I</span><br><span class="line">E C   I H   N</span><br><span class="line">T     S     G</span><br></pre></td></tr></table></figure>
-
-<h2 id="代码1-1"><a href="#代码1-1" class="headerlink" title="代码1"></a>代码1</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">convert</span><span class="params">(<span class="built_in">string</span> s, <span class="keyword">int</span> numRows)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">char</span>&gt;&gt; <span class="title">vec</span><span class="params">(numRows, <span class="built_in">vector</span>&lt;<span class="keyword">char</span>&gt;(s.length(), <span class="string">' '</span>))</span></span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> column = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> ss = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (ss &lt; s.length())</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; ss &lt; s.length() &amp;&amp; i &lt; numRows; ++i)</span><br><span class="line">            &#123;</span><br><span class="line">                vec[i][column] = s[ss++];</span><br><span class="line">            &#125;</span><br><span class="line">            column++;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = numRows - <span class="number">2</span>; ss &lt; s.length() &amp;&amp; i &gt;= <span class="number">1</span>; --i)</span><br><span class="line">            &#123;</span><br><span class="line">                vec[i][column] = s[ss++];</span><br><span class="line">                column++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">string</span> result;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; numRows; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; s.length(); ++j)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (vec[i][j] != <span class="string">' '</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    result += vec[i][j];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
         
         <categories>
             
@@ -338,35 +426,6 @@
     </entry>
     
     <entry>
-        <title><![CDATA[力扣12.7-E53.最大子序和]]></title>
-        <url>http://blog.lsmg.xyz/2020/12/%25E5%258A%259B%25E6%2589%25A312.6-E53.%25E6%259C%2580%25E5%25A4%25A7%25E5%25AD%2590%25E5%25BA%258F%25E5%2592%258C/</url>
-        <content type="html"><![CDATA[<h1 id="最大子序和"><a href="#最大子序和" class="headerlink" title="最大子序和"></a>最大子序和</h1><p>给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。</p>
-<p>示例:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [-2,1,-3,4,-1,2,1,-5,4]</span><br><span class="line">输出: 6</span><br></pre></td></tr></table></figure>
-<p>解释: 连续子数组 [4,-1,2,1] 的和最大，为 6。</p>
-<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/maximum-subarray" target="_blank" rel="noopener">https://leetcode-cn.com/problems/maximum-subarray</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
-<h2 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxSubArray</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">b</span><span class="params">(nums.<span class="built_in">size</span>())</span></span>;</span><br><span class="line">        b[<span class="number">0</span>] = nums[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; nums.<span class="built_in">size</span>(); ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (b[i - <span class="number">1</span>] &gt; <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                b[i] = b[i - <span class="number">1</span>] + nums[i];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                b[i] = nums[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> result = b[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; b.<span class="built_in">size</span>(); ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (b[i] &gt; result)</span><br><span class="line">            &#123;</span><br><span class="line">                result = b[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h2 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxSubArray</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> numss = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">int</span> temp = nums[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">int</span> result = nums[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; numss; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            temp = temp &gt; <span class="number">0</span> ? temp + nums[i] : nums[i];</span><br><span class="line">            result = result &gt; temp ? result : temp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>省去了一个vector 代码看起来也简洁不少</p>
-]]></content>
-        
-        <categories>
-            
-            <category> 力扣每日一题 </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> 动态规划 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
         <title><![CDATA[力扣12.11-N12.整数转罗马数字]]></title>
         <url>http://blog.lsmg.xyz/2020/12/%25E5%258A%259B%25E6%2589%25A312.11-N12.%25E6%2595%25B4%25E6%2595%25B0%25E8%25BD%25AC%25E7%25BD%2597%25E9%25A9%25AC%25E6%2595%25B0%25E5%25AD%2597/</url>
         <content type="html"><![CDATA[<h1 id="整数转罗马数字"><a href="#整数转罗马数字" class="headerlink" title="整数转罗马数字"></a>整数转罗马数字</h1><p>罗马数字包含以下七种字符： I， V， X， L，C，D 和 M。</p>
@@ -389,6 +448,35 @@
 <p>一堆if else 当时看到后第一时间想到的便是这个做法 然而代码太长了. 然而程序中都是重复的逻辑, 看一下样例答案</p>
 <h2 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">intToRoman</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> values[]=&#123;<span class="number">1000</span>,<span class="number">900</span>,<span class="number">500</span>,<span class="number">400</span>,<span class="number">100</span>,<span class="number">90</span>,<span class="number">50</span>,<span class="number">40</span>,<span class="number">10</span>,<span class="number">9</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">1</span>&#125;;</span><br><span class="line">        <span class="built_in">string</span> reps[]=&#123;<span class="string">"M"</span>,<span class="string">"CM"</span>,<span class="string">"D"</span>,<span class="string">"CD"</span>,<span class="string">"C"</span>,<span class="string">"XC"</span>,<span class="string">"L"</span>,<span class="string">"XL"</span>,<span class="string">"X"</span>,<span class="string">"IX"</span>,<span class="string">"V"</span>,<span class="string">"IV"</span>,<span class="string">"I"</span>&#125;;</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">string</span> res;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="number">13</span>; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">while</span> (num&gt;=values[i])</span><br><span class="line">            &#123;</span><br><span class="line">                num -= values[i];</span><br><span class="line">                res += reps[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>同样的逻辑 样例代码却能够使用两个数组来打成….. 太妙了 而且修改起来也比较方便</p>
+]]></content>
+        
+        <categories>
+            
+            <category> 力扣每日一题 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 动态规划 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+        <title><![CDATA[力扣12.7-E53.最大子序和]]></title>
+        <url>http://blog.lsmg.xyz/2020/12/%25E5%258A%259B%25E6%2589%25A312.6-E53.%25E6%259C%2580%25E5%25A4%25A7%25E5%25AD%2590%25E5%25BA%258F%25E5%2592%258C/</url>
+        <content type="html"><![CDATA[<h1 id="最大子序和"><a href="#最大子序和" class="headerlink" title="最大子序和"></a>最大子序和</h1><p>给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。</p>
+<p>示例:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [-2,1,-3,4,-1,2,1,-5,4]</span><br><span class="line">输出: 6</span><br></pre></td></tr></table></figure>
+<p>解释: 连续子数组 [4,-1,2,1] 的和最大，为 6。</p>
+<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/maximum-subarray" target="_blank" rel="noopener">https://leetcode-cn.com/problems/maximum-subarray</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<h2 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxSubArray</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">b</span><span class="params">(nums.<span class="built_in">size</span>())</span></span>;</span><br><span class="line">        b[<span class="number">0</span>] = nums[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; nums.<span class="built_in">size</span>(); ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (b[i - <span class="number">1</span>] &gt; <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                b[i] = b[i - <span class="number">1</span>] + nums[i];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                b[i] = nums[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> result = b[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; b.<span class="built_in">size</span>(); ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (b[i] &gt; result)</span><br><span class="line">            &#123;</span><br><span class="line">                result = b[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxSubArray</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> numss = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">int</span> temp = nums[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">int</span> result = nums[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; numss; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            temp = temp &gt; <span class="number">0</span> ? temp + nums[i] : nums[i];</span><br><span class="line">            result = result &gt; temp ? result : temp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>省去了一个vector 代码看起来也简洁不少</p>
 ]]></content>
         
         <categories>
@@ -2499,59 +2587,6 @@
     </entry>
     
     <entry>
-        <title><![CDATA[Shell脚本编写]]></title>
-        <url>http://blog.lsmg.xyz/2020/03/Linux-shell%25E8%2584%259A%25E6%259C%25AC%25E7%25BC%2596%25E5%2586%2599/</url>
-        <content type="html"><![CDATA[<p>由于阿里云服务器github速度异常缓慢, 自己想把一个shell, 改成本地版本发现不是很容易.<br>所以咕咕咕很久的shell脚本, 算是开始学了. 感觉入门应该不会太难把</p>
-<p>我先来我最喜欢的入门网站 菜鸟教程!</p>
-<p>既然写的是脚本就需要解释器了</p>
-<ol>
-<li><code>#!/bin/bash</code> 这个通常见于脚本的第一行, <code>#!</code>算是个约定了 说明脚本需要什么解释器</li>
-<li><code>/bin/sh xx.sh</code> 这种是执行的时候指定, 脚本第一行的那个就失效了</li>
-</ol>
-<p><strong>shell变量-挺正常的规定</strong></p>
-<ul>
-<li>命名只能使用英文字母，数字和下划线，首个字符不能以数字开头。</li>
-<li>中间不能有空格，可以使用下划线（_）。</li>
-<li>不能使用标点符号。</li>
-<li>不能使用bash里的关键字（可用help命令查看保留关键字）。</li>
-</ul>
-<p>shell变量类型</p>
-<ul>
-<li>局部变量</li>
-<li>环境变量</li>
-<li>shell变量-shell内置特殊变量</li>
-</ul>
-<p>变量定义 <em>注意 不能随便加空格 下面的等号两侧不能加空格</em></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 直接赋值</span></span><br><span class="line">xxx="lsmg"</span><br><span class="line">xxx = "lsmg" # 错误</span><br><span class="line">xxx="Jigokubana" # 随意修改</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 语句赋值</span></span><br><span class="line">for skill in Ada Coffe Action Java</span><br><span class="line">do</span><br><span class="line">    echo "I am good at $&#123;skill&#125;Script"</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 使用变量</span></span><br><span class="line">echo $xxx</span><br><span class="line">echo $&#123;xxx&#125; # &#123;&#125; 用于标记边界</span><br><span class="line">echo "my name is $&#123;xxx&#125;"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> const</span></span><br><span class="line">readonly xxx="lsmg" </span><br><span class="line"></span><br><span class="line"><span class="meta"> #</span><span class="bash"> 删除变量</span></span><br><span class="line">unset xxx; 不能用于删除只读变量</span><br></pre></td></tr></table></figure>
-
-<p>单双引号字符串</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> shell 双引号字符串</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="comment"># 可以含有转义字符 和变量</span></span></span><br><span class="line">xxx1="\"lsmg\""</span><br><span class="line">echo xxx1 # $ "lsmg"</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> shell单引号字符串</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="comment"># 会原样输出, 无视变量. 即使转义也不能出现单一的单引号 但可以成对出现 用于拼接字符串</span></span></span><br><span class="line">xxx2='lsmg' </span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 拼接双引号变量双引号输出 单引号变量单引号输出</span></span><br><span class="line">your_name="runoob"</span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="comment"># 使用双引号拼接</span></span></span><br><span class="line">greeting="hello, "$your_name" !"</span><br><span class="line">greeting_1="hello, $&#123;your_name&#125; !"</span><br><span class="line">echo $greeting  $greeting_1 # hello, runoob ! hello, runoob !</span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="comment"># 使用单引号拼接</span></span></span><br><span class="line">greeting_2='hello, '$your_name' !'</span><br><span class="line">greeting_3='hello, $&#123;your_name&#125; !'</span><br><span class="line">echo $greeting_2  $greeting_3 # hello, runoob ! hello, $&#123;your_name&#125; !</span><br></pre></td></tr></table></figure>
-
-<p>字符串操作</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">url="https://blog.lsmg.xyz"</span><br><span class="line"></span><br><span class="line">echo $&#123;#url&#125; # 输出长度 21</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 注意单引号</span></span><br><span class="line">echo `expr index "$url" go` # 输出 字符 g o的位置 哪个先出现就输出哪个</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 字符串截取</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="comment"># 范围截取</span></span></span><br><span class="line">echo #&#123;url:0:5&#125; # 输出 https 第二个数字代表字符个数 不是范围</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="comment"># #截取删除左边字符, 保留右侧字符</span></span></span><br><span class="line">echo #&#123;url#*//&#125; # blog.lsmg.xyz</span><br></pre></td></tr></table></figure>
-
-<p>数组</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 空格分隔</span></span><br><span class="line">name=(lsmg Lsmg Jigokubana);</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 你甚至可以 不连续定义</span></span><br><span class="line">nickname[0]=lsmg</span><br><span class="line">nickname[2]=Lsmg</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 读取</span></span><br><span class="line">echo $&#123;nickname[0] nickname[1] nickname[2]&#125;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 输出所有</span></span><br><span class="line">echo $&#123;name[@]&#125;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 取得数组元素个数</span></span><br><span class="line">echo $&#123;#name[@]&#125;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 取得单个元素长度</span></span><br><span class="line">echo $&#123;#name[1]&#125;</span><br></pre></td></tr></table></figure>
-
-<p>参数</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">0</span></span><br><span class="line"><span class="meta">$</span><span class="bash">1</span></span><br><span class="line"><span class="meta">$</span><span class="bash">2</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> .... 为具体某个参数</span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"><span class="comment"># # 参数个数 不包括$0</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash">@ <span class="comment"># 参数数组 解析为一个数组</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash">* <span class="comment"># 参数字符串 解析为一整个字符串</span></span></span><br></pre></td></tr></table></figure>]]></content>
-        
-        <categories>
-            
-            <category> Linux </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Shell </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
         <title><![CDATA[EPOLL本质]]></title>
         <url>http://blog.lsmg.xyz/2020/03/%25E7%25BD%2591%25E7%25BB%259C%25E7%25BC%2596%25E7%25A8%258B-Socket%25E7%2590%2586%25E8%25AE%25BA-EPOLL%25E6%259C%25AC%25E8%25B4%25A8/</url>
         <content type="html"><![CDATA[<p>EPOLL本质是什么?  <del>本质当然是复读机</del></p>
@@ -2847,60 +2882,6 @@
     </entry>
     
     <entry>
-        <title><![CDATA[权限管理]]></title>
-        <url>http://blog.lsmg.xyz/2020/03/Linux-%25E6%259D%2583%25E9%2599%2590%25E7%259B%25B8%25E5%2585%25B3/</url>
-        <content type="html"><![CDATA[<p><code>drwxr-xr-x | 3 | root | root | 4096 | Mar  2 20:26 | .vs</code><br>档案权限类型<br>连接数<br>档案拥有者<br>档案所属群组<br>档案容量<br>档案最后被修改时间<br>档名</p>
-<p>文件类型和权限<br><code>drwxr-xr-x</code></p>
-<p>第一位 d 表明档案类型是 目录</p>
-<table>
-<thead>
-<tr>
-<th>字符</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>d</td>
-<td>目录</td>
-</tr>
-<tr>
-<td>-</td>
-<td>文件</td>
-</tr>
-<tr>
-<td>|</td>
-<td>链接文件</td>
-</tr>
-<tr>
-<td>b</td>
-<td>设备文件中可供存储的周边设备, 可随机读取设备</td>
-</tr>
-<tr>
-<td>c</td>
-<td>序列号设备, 如键盘鼠标, 一次性读取设备</td>
-</tr>
-</tbody></table>
-<p>后面每三位一组 为<code>rwx</code>的组合 分别代表 <code>读</code>, <code>写</code>, <code>执行</code><br>三组 第一组<code>文件拥有者权限</code> 第二组<code>群组中账号权限</code> 第三组<code>非本人且没有加入本群组的其他账号权限</code></p>
-<p>第三部分表示这个文件的<code>拥有者账号</code><br>第四部分表示这个文件<code>所属群组</code></p>
-<p>相关命令<br>-chgrp 改变文件所属群组<br>-chown 改变文件拥有者<br>-chmod 改变文件权限</p>
-]]></content>
-        
-        <categories>
-            
-            <category> Linux </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> 权限管理 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
         <title><![CDATA[GDB调试]]></title>
         <url>http://blog.lsmg.xyz/2020/03/Linux-GDB%25E8%25B0%2583%25E8%25AF%2595/</url>
         <content type="html"><![CDATA[<p><a href="https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/gdb.html" target="_blank" rel="noopener">https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/gdb.html</a></p>
@@ -3180,6 +3161,60 @@
         <tags>
             
             <tag> GDB调试 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+        <title><![CDATA[权限管理]]></title>
+        <url>http://blog.lsmg.xyz/2020/03/Linux-%25E6%259D%2583%25E9%2599%2590%25E7%259B%25B8%25E5%2585%25B3/</url>
+        <content type="html"><![CDATA[<p><code>drwxr-xr-x | 3 | root | root | 4096 | Mar  2 20:26 | .vs</code><br>档案权限类型<br>连接数<br>档案拥有者<br>档案所属群组<br>档案容量<br>档案最后被修改时间<br>档名</p>
+<p>文件类型和权限<br><code>drwxr-xr-x</code></p>
+<p>第一位 d 表明档案类型是 目录</p>
+<table>
+<thead>
+<tr>
+<th>字符</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>d</td>
+<td>目录</td>
+</tr>
+<tr>
+<td>-</td>
+<td>文件</td>
+</tr>
+<tr>
+<td>|</td>
+<td>链接文件</td>
+</tr>
+<tr>
+<td>b</td>
+<td>设备文件中可供存储的周边设备, 可随机读取设备</td>
+</tr>
+<tr>
+<td>c</td>
+<td>序列号设备, 如键盘鼠标, 一次性读取设备</td>
+</tr>
+</tbody></table>
+<p>后面每三位一组 为<code>rwx</code>的组合 分别代表 <code>读</code>, <code>写</code>, <code>执行</code><br>三组 第一组<code>文件拥有者权限</code> 第二组<code>群组中账号权限</code> 第三组<code>非本人且没有加入本群组的其他账号权限</code></p>
+<p>第三部分表示这个文件的<code>拥有者账号</code><br>第四部分表示这个文件<code>所属群组</code></p>
+<p>相关命令<br>-chgrp 改变文件所属群组<br>-chown 改变文件拥有者<br>-chmod 改变文件权限</p>
+]]></content>
+        
+        <categories>
+            
+            <category> Linux </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 权限管理 </tag>
             
         </tags>
         
@@ -4637,31 +4672,6 @@
     </entry>
     
     <entry>
-        <title><![CDATA[游戏知识-腾讯游戏学院-如何进入游戏开发行业]]></title>
-        <url>http://blog.lsmg.xyz/2019/12/%25E6%25B8%25B8%25E6%2588%258F%25E7%259F%25A5%25E8%25AF%2586-%25E8%2585%25BE%25E8%25AE%25AF%25E6%25B8%25B8%25E6%2588%258F%25E5%25AD%25A6%25E9%2599%25A2-%25E5%25A6%2582%25E4%25BD%2595%25E8%25BF%259B%25E5%2585%25A5%25E6%25B8%25B8%25E6%2588%258F%25E5%25BC%2580%25E5%258F%2591%25E8%25A1%258C%25E4%25B8%259A/</url>
-        <content type="html"><![CDATA[<p>由于自己了解的实在是不足, 所以来腾讯游戏课堂来学习一些架构之类的东西 来完善自己的知识面<br><a href="https://gameinstitute.qq.com/course/detail/10156" target="_blank" rel="noopener">想做游戏吗？如何开始我的游戏开发职业生涯</a></p>
-<a id="more"></a>
-<p>做游戏不会重复做同样的工作, 项目不同</p>
-]]></content>
-        
-        <categories>
-            
-            <category> 游戏知识 </category>
-            
-            <category> 腾讯游戏学院 </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> 腾讯游戏学院 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
         <title><![CDATA[游戏知识-服务器-服务器通信]]></title>
         <url>http://blog.lsmg.xyz/2019/12/%25E6%25B8%25B8%25E6%2588%258F%25E7%259F%25A5%25E8%25AF%2586-%25E6%259C%258D%25E5%258A%25A1%25E5%2599%25A8-%25E6%259C%258D%25E5%258A%25A1%25E5%2599%25A8%25E9%2580%259A%25E4%25BF%25A1/</url>
         <content type="html"><![CDATA[<p>由于自己了解的实在是不足, 所以来腾讯游戏课堂来学习一些架构之类的东西 来完善自己的知识面<br><a href="https://gameinstitute.qq.com/course/detail/10096" target="_blank" rel="noopener">服务器通信</a></p>
@@ -4691,6 +4701,31 @@
             <category> 游戏知识 </category>
             
             <category> 服务器 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 腾讯游戏学院 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+        <title><![CDATA[游戏知识-腾讯游戏学院-如何进入游戏开发行业]]></title>
+        <url>http://blog.lsmg.xyz/2019/12/%25E6%25B8%25B8%25E6%2588%258F%25E7%259F%25A5%25E8%25AF%2586-%25E8%2585%25BE%25E8%25AE%25AF%25E6%25B8%25B8%25E6%2588%258F%25E5%25AD%25A6%25E9%2599%25A2-%25E5%25A6%2582%25E4%25BD%2595%25E8%25BF%259B%25E5%2585%25A5%25E6%25B8%25B8%25E6%2588%258F%25E5%25BC%2580%25E5%258F%2591%25E8%25A1%258C%25E4%25B8%259A/</url>
+        <content type="html"><![CDATA[<p>由于自己了解的实在是不足, 所以来腾讯游戏课堂来学习一些架构之类的东西 来完善自己的知识面<br><a href="https://gameinstitute.qq.com/course/detail/10156" target="_blank" rel="noopener">想做游戏吗？如何开始我的游戏开发职业生涯</a></p>
+<a id="more"></a>
+<p>做游戏不会重复做同样的工作, 项目不同</p>
+]]></content>
+        
+        <categories>
+            
+            <category> 游戏知识 </category>
+            
+            <category> 腾讯游戏学院 </category>
             
         </categories>
         
