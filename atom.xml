@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.lsmg.xyz/"/>
-  <updated>2021-01-03T03:29:37.744Z</updated>
+  <updated>2021-01-04T03:19:54.817Z</updated>
   <id>http://blog.lsmg.xyz/</id>
   
   <author>
@@ -21,15 +21,15 @@
     <link href="http://blog.lsmg.xyz/2021/01/CPP-Linux&amp;Cpp%E7%BA%BF%E7%A8%8B/"/>
     <id>http://blog.lsmg.xyz/2021/01/CPP-Linux&amp;Cpp%E7%BA%BF%E7%A8%8B/</id>
     <published>2021-01-03T03:27:27.000Z</published>
-    <updated>2021-01-03T03:29:37.744Z</updated>
+    <updated>2021-01-04T03:19:54.817Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="线程创建"><a href="#线程创建" class="headerlink" title="线程创建"></a>线程创建</h1><h2 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<h1 id="线程创建"><a href="#线程创建" class="headerlink" title="线程创建"></a>线程创建</h1><h2 id="pthread"><a href="#pthread" class="headerlink" title="pthread"></a>pthread</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span>* <span class="title">FuncLinux</span><span class="params">(<span class="keyword">void</span>* arg)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">PthreadLinux</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">pthread_t</span> thread1; <span class="comment">// 存储线程标识</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">pthread_attr_t</span> thread1_attr;</span><br><span class="line">pthread_attr_init(&amp;thread1_attr);</span><br><span class="line"></span><br><span class="line">pthread_create(&amp;thread1, &amp;thread1_attr, FuncLinux, <span class="literal">nullptr</span>); <span class="comment">// 使用指定属性初始化线程</span></span><br><span class="line">    <span class="comment">// pthread_create(&amp;thread1, nullptr, FuncLinux, nullptr); 使用默认属性初始化线程</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"thread1-%d\n"</span>, thread1); <span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line">pthread_join(<span class="number">1</span>, <span class="literal">nullptr</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="thread"><a href="#thread" class="headerlink" title="thread"></a>thread</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;h1 id=&quot;线程创建&quot;&gt;&lt;a href=&quot;#线程创建&quot; class=&quot;headerlink&quot; title=&quot;线程创建&quot;&gt;&lt;/a&gt;线程创建&lt;/h1&gt;&lt;h2 id=&quot;Linux&quot;&gt;&lt;a href=&quot;#Linux&quot; class=&quot;headerlink&quot; title=&quot;Linux&quot;&gt;
+        &lt;h1 id=&quot;线程创建&quot;&gt;&lt;a href=&quot;#线程创建&quot; class=&quot;headerlink&quot; title=&quot;线程创建&quot;&gt;&lt;/a&gt;线程创建&lt;/h1&gt;&lt;h2 id=&quot;pthread&quot;&gt;&lt;a href=&quot;#pthread&quot; class=&quot;headerlink&quot; title=&quot;pth
       
     
     </summary>
