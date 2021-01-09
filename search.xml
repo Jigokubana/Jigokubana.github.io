@@ -3,6 +3,77 @@
     
     
     <entry>
+        <title><![CDATA[Linux-IO状态相关命令]]></title>
+        <url>http://blog.lsmg.xyz/2021/01/Linux-IO%25E7%258A%25B6%25E6%2580%2581%25E7%259B%25B8%25E5%2585%25B3%25E5%2591%25BD%25E4%25BB%25A4/</url>
+        <content type="html"><![CDATA[<h1 id="iostat"><a href="#iostat" class="headerlink" title="iostat"></a>iostat</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">yum install sysstat -y</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@fish ~]# iostat</span><br><span class="line">Linux 4.18.0-193.6.3.el8_2.x86_64	01&#x2F;09&#x2F;2021 	_x86_64_	(4 CPU)</span><br><span class="line"></span><br><span class="line">avg-cpu:  %user   %nice %system %iowait  %steal   %idle</span><br><span class="line">           0.06    0.02    0.08    0.01    0.00   99.84</span><br><span class="line"></span><br><span class="line">Device             tps    kB_read&#x2F;s    kB_wrtn&#x2F;s    kB_read    kB_wrtn</span><br><span class="line">sda               0.00         1.68         0.00    3520393       3015</span><br><span class="line">sdb               0.16         0.81         2.68    1702968    5612922</span><br><span class="line">dm-0              0.17         0.79         2.78    1656682    5811573</span><br><span class="line">dm-1              0.00         0.00         0.01       4404      10828</span><br><span class="line">dm-2              0.00         0.00         0.00       1193       2209</span><br></pre></td></tr></table></figure>
+
+<h1 id="df"><a href="#df" class="headerlink" title="df"></a>df</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@fish ~]# df -h</span><br><span class="line">Filesystem           Size  Used Avail Use% Mounted on</span><br><span class="line">devtmpfs             1.8G     0  1.8G   0% &#x2F;dev</span><br><span class="line">tmpfs                1.8G   84K  1.8G   1% &#x2F;dev&#x2F;shm</span><br><span class="line">tmpfs                1.8G   40M  1.8G   3% &#x2F;run</span><br><span class="line">tmpfs                1.8G     0  1.8G   0% &#x2F;sys&#x2F;fs&#x2F;cgroup</span><br><span class="line">&#x2F;dev&#x2F;mapper&#x2F;cl-root   19G   13G  6.5G  67% &#x2F;</span><br><span class="line">&#x2F;dev&#x2F;sda             112G   34G   79G  30% &#x2F;nas1</span><br><span class="line">&#x2F;dev&#x2F;mapper&#x2F;cl-home  4.0G   61M  4.0G   2% &#x2F;home</span><br><span class="line">&#x2F;dev&#x2F;sdb1            2.0G  211M  1.6G  12% &#x2F;boot</span><br><span class="line">tmpfs                368M     0  368M   0% &#x2F;run&#x2F;user&#x2F;0</span><br></pre></td></tr></table></figure>
+
+<h1 id="du"><a href="#du" class="headerlink" title="du"></a>du</h1><p>estimate file space usage</p>
+<p>估计文件空间使用量 默认察看当前目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">[root@fish ~]# du -h</span><br><span class="line">8.0K	.&#x2F;book</span><br><span class="line">244K	.&#x2F;.halo&#x2F;logs</span><br><span class="line">72K	.&#x2F;.halo&#x2F;db</span><br><span class="line">36K	.&#x2F;.halo&#x2F;templates&#x2F;themes&#x2F;anatole&#x2F;source&#x2F;plugins&#x2F;prism&#x2F;css</span><br><span class="line">152K	.&#x2F;.halo&#x2F;templates&#x2F;themes&#x2F;anatole&#x2F;source&#x2F;plugins&#x2F;prism&#x2F;js</span><br><span class="line">188K	.&#x2F;.halo&#x2F;templates&#x2F;themes&#x2F;anatole&#x2F;source&#x2F;plugins&#x2F;prism</span><br><span class="line">900K	.&#x2F;.halo&#x2F;templates&#x2F;themes&#x2F;anatole&#x2F;source&#x2F;plugins&#x2F;gallery&#x2F;fonts</span><br><span class="line">32K	.&#x2F;.halo&#x2F;templates&#x2F;themes&#x2F;anatole&#x2F;source&#x2F;plugins&#x2F;gallery&#x2F;css&#x2F;images</span><br><span class="line">104K	.&#x2F;.halo&#x2F;templates&#x2F;themes&#x2F;anatole&#x2F;source&#x2F;plugins&#x2F;gallery&#x2F;css</span><br><span class="line">56K	.&#x2F;.halo&#x2F;templates&#x2F;themes&#x2F;anatole&#x2F;source&#x2F;plugins&#x2F;gallery&#x2F;js&#x2F;ie</span><br><span class="line">180K	.&#x2F;.halo&#x2F;templates&#x2F;themes&#x2F;anatole&#x2F;source&#x2F;plugins&#x2F;gallery&#x2F;js</span><br><span class="line">1.2M	.&#x2F;.halo&#x2F;templates&#x2F;themes&#x2F;anatole&#x2F;source&#x2F;plugins&#x2F;gallery</span><br><span class="line">1.4M	.&#x2F;.halo&#x2F;templates&#x2F;themes&#x2F;anatole&#x2F;source&#x2F;plugins</span><br><span class="line">72K	.&#x2F;.halo&#x2F;templates&#x2F;themes&#x2F;anatole&#x2F;source&#x2F;images</span><br><span class="line">1.1M	.&#x2F;.halo&#x2F;templates&#x2F;themes&#x2F;anatole&#x2F;source&#x2F;fonts</span><br><span class="line">80K	.&#x2F;.halo&#x2F;templates&#x2F;themes&#x2F;anatole&#x2F;source&#x2F;css</span><br><span class="line">356K	.&#x2F;.halo&#x2F;templates&#x2F;themes&#x2F;anatole&#x2F;source&#x2F;js</span><br><span class="line">2.9M	.&#x2F;.halo&#x2F;templates&#x2F;themes&#x2F;anatole&#x2F;source</span><br><span class="line">24K	.&#x2F;.halo&#x2F;templates&#x2F;themes&#x2F;anatole&#x2F;module</span><br><span class="line">3.1M	.&#x2F;.halo&#x2F;templates&#x2F;themes&#x2F;anatole</span><br></pre></td></tr></table></figure>]]></content>
+        
+        <categories>
+            
+            <category> Linux </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> iostat </tag>
+            
+            <tag> df </tag>
+            
+            <tag> du </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+        <title><![CDATA[Linux-进程线程状态相关命令]]></title>
+        <url>http://blog.lsmg.xyz/2021/01/Linux-%25E8%25BF%259B%25E7%25A8%258B%25E7%25BA%25BF%25E7%25A8%258B%25E7%258A%25B6%25E6%2580%2581%25E7%259B%25B8%25E5%2585%25B3%25E5%2591%25BD%25E4%25BB%25A4/</url>
+        <content type="html"><![CDATA[<h1 id="top"><a href="#top" class="headerlink" title="top"></a>top</h1><p>Linux下的任务管理器</p>
+<p><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/Linux/top.png" alt=""></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1 察看多核心CPU各个核心的情况</span><br><span class="line"></span><br><span class="line">P 按照CPU使用率排行</span><br><span class="line">T 按照CPU使用时间排行</span><br><span class="line">M 按照物理内存使用率排行</span><br><span class="line"></span><br><span class="line">top -p xx 察看指定pid的信息</span><br></pre></td></tr></table></figure>
+
+<h1 id="htop"><a href="#htop" class="headerlink" title="htop"></a>htop</h1><p>更加现代的top 有颜色 支持鼠标 杀进程极其方便</p>
+<p><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/Linux/htop.png" alt=""></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install epel-release</span><br><span class="line"></span><br><span class="line">sudo yum install htop</span><br></pre></td></tr></table></figure>
+
+<h1 id="strace"><a href="#strace" class="headerlink" title="strace"></a>strace</h1><p>跟踪进程运行时使用的系统调用和信号</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">-t          每行前加上输出信息</span><br><span class="line"></span><br><span class="line">-tt         the time printed will include the microseconds.</span><br><span class="line"></span><br><span class="line">-ttt        开头部分将打印为自该纪元以来的秒数。 the time printed will include the microseconds</span><br><span class="line"></span><br><span class="line">-T          显示系统调用所需时间</span><br><span class="line"></span><br><span class="line">-o          输出文件</span><br><span class="line"></span><br><span class="line">-p          指定pid</span><br><span class="line"></span><br><span class="line">-f -F       跟踪fork和vfork</span><br></pre></td></tr></table></figure>
+
+
+<p>strace -T -tt -p $(lsof -i tcp:4000 -t) -o /root/live.log</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">17:27:51.212449 accept(5, &#123;sa_family&#x3D;AF_INET6, sin6_port&#x3D;htons(1596), inet_pton(AF_INET6, &quot;::ffff:10.4.168.250&quot;, &amp;sin6_addr), sin6_flowinfo&#x3D;htonl(0), sin6_scope_id&#x3D;0&#125;, [46-&gt;28]) &#x3D; 7 &lt;0.000046&gt;</span><br><span class="line">17:27:51.212686 write(1, &quot;[INFO ][ TcpServer.cpp:56 ]: cre&quot;..., 95) &#x3D; 95 &lt;0.000048&gt;</span><br><span class="line">17:27:51.212842 epoll_ctl(3, EPOLL_CTL_ADD, 7, &#123;EPOLLIN, &#123;u32&#x3D;17383160, u64&#x3D;17383160&#125;&#125;) &#x3D; 0 &lt;0.000058&gt;</span><br><span class="line">17:27:51.213006 epoll_wait(3, [&#123;EPOLLIN, &#123;u32&#x3D;17383160, u64&#x3D;17383160&#125;&#125;], 50, 20) &#x3D; 1 &lt;0.000028&gt;</span><br><span class="line">17:27:51.213131 recvfrom(7, &quot;GET &#x2F;lsmg HTTP&#x2F;1.1\r\nHost: live.l&quot;..., 4096, 0, NULL, NULL) &#x3D; 358 &lt;0.000031&gt;</span><br><span class="line">17:27:51.213295 write(1, &quot;[INFO ][ main.cpp:67 ]: connecti&quot;..., 105) &#x3D; 105 &lt;0.000038&gt;</span><br><span class="line">17:27:51.213461 write(1, &quot;[INFO ][ RtmpServerConnection.cp&quot;..., 144) &#x3D; 144 &lt;0.000040&gt;</span><br><span class="line">17:27:51.213648 sendto(7, &quot;HTTP&#x2F;1.1 200 OK\r\nServer: FISH_LI&quot;..., 703, 0, NULL, 0) &#x3D; 703 &lt;0.000091&gt;</span><br><span class="line">17:27:51.213886 sendto(7, &quot;35d\r\n\0\0\0&lt;\10\0\3N\1-!\0\0\0\0\257\1!\fT-\3754\21\10\35\343&quot;..., 868, 0, NULL, 0) &#x3D; 868 &lt;0.000030&gt;</span><br><span class="line">17:27:51.214032 epoll_wait(3, [&#123;EPOLLIN, &#123;u32&#x3D;17360872, u64&#x3D;17360872&#125;&#125;], 50, 20) &#x3D; 1 &lt;0.005512&gt;</span><br><span class="line">17:27:51.219659 recvfrom(6, &quot;D\0\0\n\0&#125;\354\t&#39;\1\0\0S\0\0&#125;\343A\232\3534LG\377\363 \0\0\3\0\1,&quot;..., 4096, 0, NULL, NULL) &#x3D; 4096 &lt;0.000057&gt;</span><br><span class="line">17:27:51.219857 epoll_wait(3, [&#123;EPOLLIN, &#123;u32&#x3D;17360872, u64&#x3D;17360872&#125;&#125;], 50, 20) &#x3D; 1 &lt;0.000028&gt;</span><br><span class="line">17:27:51.219978 recvfrom(6, &quot;\266S\231C\363J\342(\304\274]\3361\354:~\37r\363\332&#39;\366\30\276\261\344\1\312\242\230R\t&quot;..., 4096, 0, NULL, NULL) &#x3D; 4096 &lt;0.000029&gt;</span><br><span class="line">17:27:51.220117 epoll_wait(3, [&#123;EPOLLIN, &#123;u32&#x3D;17360872, u64&#x3D;17360872&#125;&#125;], 50, 20) &#x3D; 1 &lt;0.000026&gt;</span><br><span class="line">17:27:51.220237 recvfrom(6, &quot;\0014O2hll\300&quot;, 8, 0, NULL, NULL) &#x3D; 8 &lt;0.000026&gt;</span><br><span class="line">17:27:51.220371 epoll_wait(3, [&#123;EPOLLIN, &#123;u32&#x3D;17360872, u64&#x3D;17360872&#125;&#125;], 50, 20) &#x3D; 1 &lt;0.000025&gt;</span><br><span class="line">17:27:51.220504 recvfrom(6, &quot;h\304\23\227&#39;c\341\355\263\330n\245\0021\3048\\\331n\226y\313\370Bu\371\242&#x3D;\233\250\316\226&quot;..., 4096, 0, NULL, NULL) &#x3D; 4096 &lt;0.000029&gt;</span><br><span class="line">17:27:51.220641 epoll_wait(3, [&#123;EPOLLIN, &#123;u32&#x3D;17360872, u64&#x3D;17360872&#125;&#125;], 50, 20) &#x3D; 1 &lt;0.000025&gt;</span><br><span class="line">17:27:51.220762 recvfrom(6, &quot;\207&quot;, 1, 0, NULL, NULL) &#x3D; 1 &lt;0.000026&gt;</span><br><span class="line">17:27:51.220895 epoll_wait(3, [&#123;EPOLLIN, &#123;u32&#x3D;17360872, u64&#x3D;17360872&#125;&#125;], 50, 20) &#x3D; 1 &lt;0.000025&gt;</span><br><span class="line">17:27:51.221010 recvfrom(6, &quot;\324\304\260-\337\316\3261\311\260F\256\233\377\302\327\236\366\2249\3\361\273\r0H|\3415C]I&quot;..., 4096, 0, NULL, NULL) &#x3D; 4096 &lt;0.000027&gt;</span><br></pre></td></tr></table></figure>
+
+<h1 id="pstack"><a href="#pstack" class="headerlink" title="pstack"></a>pstack</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@fish ~]# pstack $(lsof -i tcp:4000 -t)</span><br><span class="line">#0  0x00007f8b40e5b17b in epoll_wait (epfd&#x3D;3, events&#x3D;0x108dfb0, maxevents&#x3D;50, timeout&#x3D;20) at ..&#x2F;sysdeps&#x2F;unix&#x2F;sysv&#x2F;linux&#x2F;epoll_wait.c:30</span><br><span class="line">#1  0x0000000000446668 in Epoll::LoopOnce (this&#x3D;0x108df80, timeout&#x3D;20, active_channels&#x3D;0x7ffcbd1242f8) at &#x2F;tmp&#x2F;tmp.p1UxXqj1vP&#x2F;network&#x2F;multiplexing&#x2F;Epoll.cpp:18</span><br><span class="line">#2  0x0000000000443d9c in EventLoop::Loop (this&#x3D;0x7ffcbd1242f0) at &#x2F;tmp&#x2F;tmp.p1UxXqj1vP&#x2F;network&#x2F;EventLoop.cpp:31</span><br><span class="line">#3  0x0000000000438d48 in main (argc&#x3D;3, argv&#x3D;0x7ffcbd1244d8) at &#x2F;tmp&#x2F;tmp.p1UxXqj1vP&#x2F;main.cpp:106</span><br></pre></td></tr></table></figure>]]></content>
+        
+        <categories>
+            
+            <category> Linux </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> top </tag>
+            
+            <tag> htop </tag>
+            
+            <tag> strace </tag>
+            
+            <tag> pstack </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
         <title><![CDATA[力扣1.9-N105&N106]]></title>
         <url>http://blog.lsmg.xyz/2021/01/%25E5%258A%259B%25E6%2589%25A31.9-N105&amp;N106/</url>
         <content type="html"><![CDATA[<h1 id="105-从前序与中序遍历序列构造二叉树"><a href="#105-从前序与中序遍历序列构造二叉树" class="headerlink" title="105. 从前序与中序遍历序列构造二叉树"></a><a href="https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/" target="_blank" rel="noopener">105. 从前序与中序遍历序列构造二叉树</a></h1><p>Difficulty: <strong>中等</strong></p>
@@ -1168,6 +1239,71 @@
     </entry>
     
     <entry>
+        <title><![CDATA[池内春秋]]></title>
+        <url>http://blog.lsmg.xyz/2020/10/%25E8%25AF%25BB%25E4%25B9%25A6%25E8%25AE%25B0%25E5%25BD%2595-%25E6%25B1%25A0%25E5%2586%2585%25E6%2598%25A5%25E7%25A7%258B/</url>
+        <content type="html"><![CDATA[<p><a href="https://docs.google.com/viewer?a=v&pid=forums&srcid=MTc2ODU2ODcyNjk2NTM2NDM0NzcBMDk3MzkxODQwNzQ0NDE2OTE1NjcBQ2dMdWoyeWxLWU1KATAuMQEBdjI" target="_blank" rel="noopener">google 图书 - 内存池设计哲学</a></p>
+<p>C++平台提供的内存配置工具</p>
+<table>
+<thead>
+<tr>
+<th>配置</th>
+<th>释放</th>
+<th>归属</th>
+<th>可重载</th>
+<th>标记</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>malloc</td>
+<td>free</td>
+<td>C标准式子</td>
+<td>否</td>
+<td>#1</td>
+</tr>
+<tr>
+<td>new</td>
+<td>delete</td>
+<td>C++表达式</td>
+<td>否</td>
+<td>#2</td>
+</tr>
+<tr>
+<td>::operator new</td>
+<td>::operator delete</td>
+<td>C++运算符</td>
+<td>可</td>
+<td>#3</td>
+</tr>
+<tr>
+<td>alloc::allocate</td>
+<td>alloc::deallocate</td>
+<td>C++标准库</td>
+<td>编译器厂商设计</td>
+<td>#4</td>
+</tr>
+</tbody></table>
+<ol>
+<li>#2会调用 #3来实现功能一部分</li>
+<li>#1和#3功能相同</li>
+<li>#4相当于#1或者#3</li>
+<li>#2会在 使用#3分配内存后调用对应的构造函数(调用#3释放内存前调用对应的析构函数)</li>
+</ol>
+<p>#1 #2 #3 在释放的时候不需要传入大小是因为 在配置的内存前方存在8字节的配置信息 可能直接是大小也可能是其他相关内容其中包含大小</p>
+<p>#4 则需要在释放的时候传入大小 因为分配的内存中不包含大小</p>
+<p>使用方式</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;memory&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SIZE 512</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">void</span>* ptr1 = <span class="built_in">malloc</span>(SIZE);</span><br><span class="line">    <span class="built_in">free</span>(ptr1);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">char</span>* ptr2 = <span class="keyword">new</span> <span class="keyword">char</span>[SIZE];</span><br><span class="line">    <span class="keyword">delete</span>[] ptr2;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">void</span>* ptr3 = ::<span class="keyword">operator</span> <span class="keyword">new</span>(SIZE);</span><br><span class="line">    ::<span class="function"><span class="keyword">operator</span> <span class="title">delete</span><span class="params">(ptr3)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">std</span>::allocator&lt;<span class="keyword">char</span>&gt; alloc;</span><br><span class="line">    <span class="keyword">char</span>* ptr4 = alloc.allocate(SIZE);</span><br><span class="line">    alloc.deallocate(ptr4, SIZE);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+        
+        <categories>
+            
+            <category> 读书记录 </category>
+            
+        </categories>
+        
+        
+    </entry>
+    
+    <entry>
         <title><![CDATA[UNP记录]]></title>
         <url>http://blog.lsmg.xyz/2020/10/%25E8%25AF%25BB%25E4%25B9%25A6%25E8%25AE%25B0%25E5%25BD%2595150-UNP/</url>
         <content type="html"><![CDATA[<p>由于已经在Linux高性能服务器开发中详细说明过绝大部分系统函数</p>
@@ -1264,71 +1400,6 @@
 <li>close会终止读和写两个方向的数据传送, 但由于TCP全双工有时需要告知对方我方发送已经完毕</li>
 </ol>
 <h1 id="第七章-套接字选项"><a href="#第七章-套接字选项" class="headerlink" title="第七章 套接字选项"></a>第七章 套接字选项</h1><h1 id="第八章-基本UDP套接字编程-未看"><a href="#第八章-基本UDP套接字编程-未看" class="headerlink" title="第八章 基本UDP套接字编程 (未看)"></a>第八章 基本UDP套接字编程 (未看)</h1><h1 id="第十一章-名字和地址转换"><a href="#第十一章-名字和地址转换" class="headerlink" title="第十一章 名字和地址转换"></a>第十一章 名字和地址转换</h1><h1 id=""><a href="#" class="headerlink" title=""></a></h1>]]></content>
-        
-        <categories>
-            
-            <category> 读书记录 </category>
-            
-        </categories>
-        
-        
-    </entry>
-    
-    <entry>
-        <title><![CDATA[池内春秋]]></title>
-        <url>http://blog.lsmg.xyz/2020/10/%25E8%25AF%25BB%25E4%25B9%25A6%25E8%25AE%25B0%25E5%25BD%2595-%25E6%25B1%25A0%25E5%2586%2585%25E6%2598%25A5%25E7%25A7%258B/</url>
-        <content type="html"><![CDATA[<p><a href="https://docs.google.com/viewer?a=v&pid=forums&srcid=MTc2ODU2ODcyNjk2NTM2NDM0NzcBMDk3MzkxODQwNzQ0NDE2OTE1NjcBQ2dMdWoyeWxLWU1KATAuMQEBdjI" target="_blank" rel="noopener">google 图书 - 内存池设计哲学</a></p>
-<p>C++平台提供的内存配置工具</p>
-<table>
-<thead>
-<tr>
-<th>配置</th>
-<th>释放</th>
-<th>归属</th>
-<th>可重载</th>
-<th>标记</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>malloc</td>
-<td>free</td>
-<td>C标准式子</td>
-<td>否</td>
-<td>#1</td>
-</tr>
-<tr>
-<td>new</td>
-<td>delete</td>
-<td>C++表达式</td>
-<td>否</td>
-<td>#2</td>
-</tr>
-<tr>
-<td>::operator new</td>
-<td>::operator delete</td>
-<td>C++运算符</td>
-<td>可</td>
-<td>#3</td>
-</tr>
-<tr>
-<td>alloc::allocate</td>
-<td>alloc::deallocate</td>
-<td>C++标准库</td>
-<td>编译器厂商设计</td>
-<td>#4</td>
-</tr>
-</tbody></table>
-<ol>
-<li>#2会调用 #3来实现功能一部分</li>
-<li>#1和#3功能相同</li>
-<li>#4相当于#1或者#3</li>
-<li>#2会在 使用#3分配内存后调用对应的构造函数(调用#3释放内存前调用对应的析构函数)</li>
-</ol>
-<p>#1 #2 #3 在释放的时候不需要传入大小是因为 在配置的内存前方存在8字节的配置信息 可能直接是大小也可能是其他相关内容其中包含大小</p>
-<p>#4 则需要在释放的时候传入大小 因为分配的内存中不包含大小</p>
-<p>使用方式</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;memory&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SIZE 512</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">void</span>* ptr1 = <span class="built_in">malloc</span>(SIZE);</span><br><span class="line">    <span class="built_in">free</span>(ptr1);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">char</span>* ptr2 = <span class="keyword">new</span> <span class="keyword">char</span>[SIZE];</span><br><span class="line">    <span class="keyword">delete</span>[] ptr2;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">void</span>* ptr3 = ::<span class="keyword">operator</span> <span class="keyword">new</span>(SIZE);</span><br><span class="line">    ::<span class="function"><span class="keyword">operator</span> <span class="title">delete</span><span class="params">(ptr3)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">std</span>::allocator&lt;<span class="keyword">char</span>&gt; alloc;</span><br><span class="line">    <span class="keyword">char</span>* ptr4 = alloc.allocate(SIZE);</span><br><span class="line">    alloc.deallocate(ptr4, SIZE);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
         
         <categories>
             
@@ -1779,19 +1850,19 @@
     </entry>
     
     <entry>
-        <title><![CDATA[VIM(spf-13)使用]]></title>
-        <url>http://blog.lsmg.xyz/2020/07/Linux-VIM%25E6%258A%2598%25E8%2585%25BEspf13/</url>
-        <content type="html"><![CDATA[<p><a href="https://www.cnblogs.com/floatedclouds/archive/2011/11/10/2245008.html" target="_blank" rel="noopener">https://www.cnblogs.com/floatedclouds/archive/2011/11/10/2245008.html</a> vim分屏</p>
-<h1 id="乱码解决"><a href="#乱码解决" class="headerlink" title="乱码解决"></a>乱码解决</h1><p>中文乱码</p>
+        <title><![CDATA[VIM使用]]></title>
+        <url>http://blog.lsmg.xyz/2020/07/Linux-VIM/</url>
+        <content type="html"><![CDATA[<h1 id="原版"><a href="#原版" class="headerlink" title="原版"></a>原版</h1><h1 id="spf13"><a href="#spf13" class="headerlink" title="spf13"></a>spf13</h1><p><a href="https://www.cnblogs.com/floatedclouds/archive/2011/11/10/2245008.html" target="_blank" rel="noopener">https://www.cnblogs.com/floatedclouds/archive/2011/11/10/2245008.html</a> vim分屏</p>
+<h2 id="乱码解决"><a href="#乱码解决" class="headerlink" title="乱码解决"></a>乱码解决</h2><p>中文乱码</p>
 <p>修改locale.conf确实解决了 但我想要的是阿里云那种显示英文中文却不是乱码</p>
 <p>最终<code>vim /etc/vconsole.conf</code>将cn改为us就解决了….</p>
 <p>中间也尝试安装语言包, 记得是已经安装 最终是修改上面那个之后就好了</p>
-<h1 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">R           进入替换模式</span><br><span class="line"></span><br><span class="line">e           光标后移一个单词 连续的符号也算一个单词 &lt;&lt;</span><br><span class="line">E           光标后移一个单词 无视符号</span><br><span class="line"></span><br><span class="line">b           光标前移一个单词 连续的符号也算一个单词 &lt;&lt;</span><br><span class="line">B           光标前移一个单词 无视符号</span><br><span class="line"></span><br><span class="line">yy或Y       复制整行          </span><br><span class="line">p           光标之后粘贴</span><br><span class="line">P大写           光标之前粘贴</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 2020年7月30日10:14:18</span></span><br><span class="line">ctrl+r      重做撤销内容</span><br><span class="line">u           撤销</span><br><span class="line"></span><br><span class="line">^           本行第一个非空格字符</span><br><span class="line"><span class="meta">$</span><span class="bash">           本行最后一个非空格字符</span></span><br><span class="line">G           文件尾</span><br><span class="line">gg          文件头</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 2020年10月27日08:51:36</span></span><br><span class="line">V选中行后</span><br><span class="line">SHIFT + . 缩进</span><br><span class="line">SHIFT + , 取消缩进</span><br><span class="line"></span><br><span class="line">:1,10&gt; 1~10行缩进</span><br><span class="line">:1,10&lt; 1~10行取消缩进</span><br></pre></td></tr></table></figure>
+<h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">R           进入替换模式</span><br><span class="line"></span><br><span class="line">e           光标后移一个单词 连续的符号也算一个单词 &lt;&lt;</span><br><span class="line">E           光标后移一个单词 无视符号</span><br><span class="line"></span><br><span class="line">b           光标前移一个单词 连续的符号也算一个单词 &lt;&lt;</span><br><span class="line">B           光标前移一个单词 无视符号</span><br><span class="line"></span><br><span class="line">yy或Y       复制整行          </span><br><span class="line">p           光标之后粘贴</span><br><span class="line">P大写           光标之前粘贴</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 2020年7月30日10:14:18</span></span></span><br><span class="line">ctrl+r      重做撤销内容</span><br><span class="line">u           撤销</span><br><span class="line"></span><br><span class="line">^           本行第一个非空格字符</span><br><span class="line"><span class="meta">$</span><span class="bash">           本行最后一个非空格字符</span></span><br><span class="line">G           文件尾</span><br><span class="line">gg          文件头</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 2020年10月27日08:51:36</span></span></span><br><span class="line">V选中行后</span><br><span class="line">SHIFT + . 缩进</span><br><span class="line">SHIFT + , 取消缩进</span><br><span class="line"></span><br><span class="line">:1,10&gt; 1~10行缩进</span><br><span class="line">:1,10&lt; 1~10行取消缩进</span><br></pre></td></tr></table></figure>
 
 
-<h1 id="注释-NERDCommenter"><a href="#注释-NERDCommenter" class="headerlink" title="注释 NERDCommenter"></a>注释 NERDCommenter</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">,c&lt;space&gt;   当前行注释和切换注释</span><br><span class="line"></span><br><span class="line">,cs         块注释当前选中或当前行</span><br><span class="line">v           小写v进入多字符选择模式</span><br><span class="line">V           大写V进入多行选择</span><br></pre></td></tr></table></figure>
+<h2 id="注释-NERDCommenter"><a href="#注释-NERDCommenter" class="headerlink" title="注释 NERDCommenter"></a>注释 NERDCommenter</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">,c&lt;space&gt;   当前行注释和切换注释</span><br><span class="line"></span><br><span class="line">,cs         块注释当前选中或当前行</span><br><span class="line">v           小写v进入多字符选择模式</span><br><span class="line">V           大写V进入多行选择</span><br></pre></td></tr></table></figure>
 
-<h1 id="文件导航工具-NERDTree"><a href="#文件导航工具-NERDTree" class="headerlink" title="文件导航工具 NERDTree"></a>文件导航工具 NERDTree</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">ctrl + e    打开文件导航</span><br><span class="line">o           打开文件, 目录, 标签</span><br><span class="line">go          打开文件, 目录, 标签, 但光标仍位于导航栏</span><br><span class="line"></span><br><span class="line">R           刷新根目录下所有文件</span><br><span class="line">r           刷新当前目录下文件</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 2020年7月30日16:22:01</span></span><br><span class="line">--------------------------------------</span><br><span class="line">t           在新tab中打开选中节点书签</span><br><span class="line">T           同上 但焦点仍在当前tab</span><br><span class="line"></span><br><span class="line">gt, gT      在tab之间切换</span><br><span class="line"></span><br><span class="line">:tabc       关闭当前tab</span><br><span class="line">:tabo       关闭其他tab</span><br><span class="line">:tabs       查看所有打开的tab</span><br><span class="line">-----------------------------------------</span><br><span class="line">i           在新的split中打开选择文件 两个部分水平切割</span><br><span class="line">gi          同上 焦点仍位于导航栏</span><br><span class="line">s           在新的split中打开选择文件 垂直切割</span><br><span class="line">gs          同上 焦点仍位于导航栏</span><br><span class="line"></span><br><span class="line">ctrl+w w    顺序切换, 两个窗口的时候非常方便</span><br><span class="line">ctrl+w hjkl 对应左 下 上 有</span><br><span class="line"></span><br><span class="line">ctrl+w c    关闭当前split</span><br><span class="line">ctrl+w o    关闭其他split</span><br><span class="line">-----------------------------------------</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">tab         补全菜单向下移动</span><br><span class="line">space       补全为当前单词 附带一个空格</span><br></pre></td></tr></table></figure>]]></content>
+<h2 id="文件导航工具-NERDTree"><a href="#文件导航工具-NERDTree" class="headerlink" title="文件导航工具 NERDTree"></a>文件导航工具 NERDTree</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">ctrl + e    打开文件导航</span><br><span class="line">o           打开文件, 目录, 标签</span><br><span class="line">go          打开文件, 目录, 标签, 但光标仍位于导航栏</span><br><span class="line"></span><br><span class="line">R           刷新根目录下所有文件</span><br><span class="line">r           刷新当前目录下文件</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 2020年7月30日16:22:01</span></span></span><br><span class="line">--------------------------------------</span><br><span class="line">t           在新tab中打开选中节点书签</span><br><span class="line">T           同上 但焦点仍在当前tab</span><br><span class="line"></span><br><span class="line">gt, gT      在tab之间切换</span><br><span class="line"></span><br><span class="line">:tabc       关闭当前tab</span><br><span class="line">:tabo       关闭其他tab</span><br><span class="line">:tabs       查看所有打开的tab</span><br><span class="line">-----------------------------------------</span><br><span class="line">i           在新的split中打开选择文件 两个部分水平切割</span><br><span class="line">gi          同上 焦点仍位于导航栏</span><br><span class="line">s           在新的split中打开选择文件 垂直切割</span><br><span class="line">gs          同上 焦点仍位于导航栏</span><br><span class="line"></span><br><span class="line">ctrl+w w    顺序切换, 两个窗口的时候非常方便</span><br><span class="line">ctrl+w hjkl 对应左 下 上 有</span><br><span class="line"></span><br><span class="line">ctrl+w c    关闭当前split</span><br><span class="line">ctrl+w o    关闭其他split</span><br><span class="line">-----------------------------------------</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">tab         补全菜单向下移动</span><br><span class="line">space       补全为当前单词 附带一个空格</span><br></pre></td></tr></table></figure>]]></content>
         
         <categories>
             
@@ -4852,31 +4923,6 @@
     </entry>
     
     <entry>
-        <title><![CDATA[游戏知识-腾讯游戏学院-如何进入游戏开发行业]]></title>
-        <url>http://blog.lsmg.xyz/2019/12/%25E6%25B8%25B8%25E6%2588%258F%25E7%259F%25A5%25E8%25AF%2586-%25E8%2585%25BE%25E8%25AE%25AF%25E6%25B8%25B8%25E6%2588%258F%25E5%25AD%25A6%25E9%2599%25A2-%25E5%25A6%2582%25E4%25BD%2595%25E8%25BF%259B%25E5%2585%25A5%25E6%25B8%25B8%25E6%2588%258F%25E5%25BC%2580%25E5%258F%2591%25E8%25A1%258C%25E4%25B8%259A/</url>
-        <content type="html"><![CDATA[<p>由于自己了解的实在是不足, 所以来腾讯游戏课堂来学习一些架构之类的东西 来完善自己的知识面<br><a href="https://gameinstitute.qq.com/course/detail/10156" target="_blank" rel="noopener">想做游戏吗？如何开始我的游戏开发职业生涯</a></p>
-<a id="more"></a>
-<p>做游戏不会重复做同样的工作, 项目不同</p>
-]]></content>
-        
-        <categories>
-            
-            <category> 游戏知识 </category>
-            
-            <category> 腾讯游戏学院 </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> 腾讯游戏学院 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
         <title><![CDATA[游戏知识-服务器-服务器通信]]></title>
         <url>http://blog.lsmg.xyz/2019/12/%25E6%25B8%25B8%25E6%2588%258F%25E7%259F%25A5%25E8%25AF%2586-%25E6%259C%258D%25E5%258A%25A1%25E5%2599%25A8-%25E6%259C%258D%25E5%258A%25A1%25E5%2599%25A8%25E9%2580%259A%25E4%25BF%25A1/</url>
         <content type="html"><![CDATA[<p>由于自己了解的实在是不足, 所以来腾讯游戏课堂来学习一些架构之类的东西 来完善自己的知识面<br><a href="https://gameinstitute.qq.com/course/detail/10096" target="_blank" rel="noopener">服务器通信</a></p>
@@ -4906,6 +4952,31 @@
             <category> 游戏知识 </category>
             
             <category> 服务器 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 腾讯游戏学院 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+        <title><![CDATA[游戏知识-腾讯游戏学院-如何进入游戏开发行业]]></title>
+        <url>http://blog.lsmg.xyz/2019/12/%25E6%25B8%25B8%25E6%2588%258F%25E7%259F%25A5%25E8%25AF%2586-%25E8%2585%25BE%25E8%25AE%25AF%25E6%25B8%25B8%25E6%2588%258F%25E5%25AD%25A6%25E9%2599%25A2-%25E5%25A6%2582%25E4%25BD%2595%25E8%25BF%259B%25E5%2585%25A5%25E6%25B8%25B8%25E6%2588%258F%25E5%25BC%2580%25E5%258F%2591%25E8%25A1%258C%25E4%25B8%259A/</url>
+        <content type="html"><![CDATA[<p>由于自己了解的实在是不足, 所以来腾讯游戏课堂来学习一些架构之类的东西 来完善自己的知识面<br><a href="https://gameinstitute.qq.com/course/detail/10156" target="_blank" rel="noopener">想做游戏吗？如何开始我的游戏开发职业生涯</a></p>
+<a id="more"></a>
+<p>做游戏不会重复做同样的工作, 项目不同</p>
+]]></content>
+        
+        <categories>
+            
+            <category> 游戏知识 </category>
+            
+            <category> 腾讯游戏学院 </category>
             
         </categories>
         
