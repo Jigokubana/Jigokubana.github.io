@@ -3,6 +3,50 @@
     
     
     <entry>
+        <title><![CDATA[力扣1.12-N322. 零钱兑换]]></title>
+        <url>http://blog.lsmg.xyz/2021/01/%25E5%258A%259B%25E6%2589%25A31.12-N322.%2520%25E9%259B%25B6%25E9%2592%25B1%25E5%2585%2591%25E6%258D%25A2/</url>
+        <content type="html"><![CDATA[<h1 id="322-零钱兑换"><a href="#322-零钱兑换" class="headerlink" title="322. 零钱兑换"></a><a href="https://leetcode-cn.com/problems/coin-change/" target="_blank" rel="noopener">322. 零钱兑换</a></h1><p>Difficulty: <strong>中等</strong></p>
+<p>给定不同面额的硬币 <code>coins</code> 和一个总金额 <code>amount</code>。编写一个函数来计算可以凑成总金额所需的最少的硬币个数。如果没有任何一种硬币组合能组成总金额，返回 <code>-1</code>。</p>
+<p>你可以认为每种硬币的数量是无限的。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：coins &#x3D; [1, 2, 5], amount &#x3D; 11</span><br><span class="line">输出：3 </span><br><span class="line">解释：11 &#x3D; 5 + 5 + 1</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：coins &#x3D; [2], amount &#x3D; 3</span><br><span class="line">输出：-1</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：coins &#x3D; [1], amount &#x3D; 0</span><br><span class="line">输出：0</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 4：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：coins &#x3D; [1], amount &#x3D; 1</span><br><span class="line">输出：1</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 5：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：coins &#x3D; [1], amount &#x3D; 2</span><br><span class="line">输出：2</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= coins.length &lt;= 12</code></li>
+<li><code>1 &lt;= coins[i] &lt;= 2&lt;sup&gt;31&lt;/sup&gt; - 1</code></li>
+<li><code>0 &lt;= amount &lt;= 10&lt;sup&gt;4&lt;/sup&gt;</code></li>
+</ul>
+<h2 id="Solution-dp自顶向下"><a href="#Solution-dp自顶向下" class="headerlink" title="Solution - dp自顶向下"></a>Solution - dp自顶向下</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">​<span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"></span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; table;</span><br><span class="line">    <span class="comment">// map&lt;int, int&gt; table;</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">dp</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; coins, <span class="keyword">int</span> amount)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (amount == <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (amount &lt; <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (table[amount] != <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> table[amount];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> result = INT_MAX;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; coins.<span class="built_in">size</span>(); ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> temp = dp(coins, amount - coins[i]);</span><br><span class="line">            <span class="keyword">if</span> (temp &lt; <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            result = <span class="built_in">min</span>(temp + <span class="number">1</span>, result);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        result = (result == INT_MAX ? <span class="number">-1</span> : result);</span><br><span class="line">        table[amount] = result;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">coinChange</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; coins, <span class="keyword">int</span> amount)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (amount &lt; <span class="number">1</span>) </span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        table.resize(amount + <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span> dp(coins, amount);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+        
+        <categories>
+            
+            <category> 力扣每日一题 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 动态规划 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
         <title><![CDATA[力扣1.10-N652. 寻找重复的子树]]></title>
         <url>http://blog.lsmg.xyz/2021/01/%25E5%258A%259B%25E6%2589%25A31.10-N652.%2520%25E5%25AF%25BB%25E6%2589%25BE%25E9%2587%258D%25E5%25A4%258D%25E7%259A%2584%25E5%25AD%2590%25E6%25A0%2591/</url>
         <content type="html"><![CDATA[<h1 id="652-寻找重复的子树"><a href="#652-寻找重复的子树" class="headerlink" title="652. 寻找重复的子树"></a><a href="https://leetcode-cn.com/problems/find-duplicate-subtrees/" target="_blank" rel="noopener">652. 寻找重复的子树</a></h1><p>Difficulty: <strong>中等</strong></p>
@@ -3166,60 +3210,6 @@
     </entry>
     
     <entry>
-        <title><![CDATA[权限管理]]></title>
-        <url>http://blog.lsmg.xyz/2020/03/Linux-%25E6%259D%2583%25E9%2599%2590%25E7%259B%25B8%25E5%2585%25B3/</url>
-        <content type="html"><![CDATA[<p><code>drwxr-xr-x | 3 | root | root | 4096 | Mar  2 20:26 | .vs</code><br>档案权限类型<br>连接数<br>档案拥有者<br>档案所属群组<br>档案容量<br>档案最后被修改时间<br>档名</p>
-<p>文件类型和权限<br><code>drwxr-xr-x</code></p>
-<p>第一位 d 表明档案类型是 目录</p>
-<table>
-<thead>
-<tr>
-<th>字符</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>d</td>
-<td>目录</td>
-</tr>
-<tr>
-<td>-</td>
-<td>文件</td>
-</tr>
-<tr>
-<td>|</td>
-<td>链接文件</td>
-</tr>
-<tr>
-<td>b</td>
-<td>设备文件中可供存储的周边设备, 可随机读取设备</td>
-</tr>
-<tr>
-<td>c</td>
-<td>序列号设备, 如键盘鼠标, 一次性读取设备</td>
-</tr>
-</tbody></table>
-<p>后面每三位一组 为<code>rwx</code>的组合 分别代表 <code>读</code>, <code>写</code>, <code>执行</code><br>三组 第一组<code>文件拥有者权限</code> 第二组<code>群组中账号权限</code> 第三组<code>非本人且没有加入本群组的其他账号权限</code></p>
-<p>第三部分表示这个文件的<code>拥有者账号</code><br>第四部分表示这个文件<code>所属群组</code></p>
-<p>相关命令<br>-chgrp 改变文件所属群组<br>-chown 改变文件拥有者<br>-chmod 改变文件权限</p>
-]]></content>
-        
-        <categories>
-            
-            <category> Linux </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> 权限管理 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
         <title><![CDATA[GDB调试]]></title>
         <url>http://blog.lsmg.xyz/2020/03/Linux-GDB%25E8%25B0%2583%25E8%25AF%2595/</url>
         <content type="html"><![CDATA[<p><a href="https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/gdb.html" target="_blank" rel="noopener">https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/gdb.html</a></p>
@@ -3505,6 +3495,60 @@
     </entry>
     
     <entry>
+        <title><![CDATA[权限管理]]></title>
+        <url>http://blog.lsmg.xyz/2020/03/Linux-%25E6%259D%2583%25E9%2599%2590%25E7%259B%25B8%25E5%2585%25B3/</url>
+        <content type="html"><![CDATA[<p><code>drwxr-xr-x | 3 | root | root | 4096 | Mar  2 20:26 | .vs</code><br>档案权限类型<br>连接数<br>档案拥有者<br>档案所属群组<br>档案容量<br>档案最后被修改时间<br>档名</p>
+<p>文件类型和权限<br><code>drwxr-xr-x</code></p>
+<p>第一位 d 表明档案类型是 目录</p>
+<table>
+<thead>
+<tr>
+<th>字符</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>d</td>
+<td>目录</td>
+</tr>
+<tr>
+<td>-</td>
+<td>文件</td>
+</tr>
+<tr>
+<td>|</td>
+<td>链接文件</td>
+</tr>
+<tr>
+<td>b</td>
+<td>设备文件中可供存储的周边设备, 可随机读取设备</td>
+</tr>
+<tr>
+<td>c</td>
+<td>序列号设备, 如键盘鼠标, 一次性读取设备</td>
+</tr>
+</tbody></table>
+<p>后面每三位一组 为<code>rwx</code>的组合 分别代表 <code>读</code>, <code>写</code>, <code>执行</code><br>三组 第一组<code>文件拥有者权限</code> 第二组<code>群组中账号权限</code> 第三组<code>非本人且没有加入本群组的其他账号权限</code></p>
+<p>第三部分表示这个文件的<code>拥有者账号</code><br>第四部分表示这个文件<code>所属群组</code></p>
+<p>相关命令<br>-chgrp 改变文件所属群组<br>-chown 改变文件拥有者<br>-chmod 改变文件权限</p>
+]]></content>
+        
+        <categories>
+            
+            <category> Linux </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 权限管理 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
         <title><![CDATA[Linux高性能服务器-理论部分]]></title>
         <url>http://blog.lsmg.xyz/2020/03/%25E8%25AF%25BB%25E4%25B9%25A6%25E8%25AE%25B0%25E5%25BD%259599-%25E9%25AB%2598%25E6%2580%25A7%25E8%2583%25BD%25E6%259C%258D%25E5%258A%25A1%25E5%2599%25A8%25E7%25BC%2596%25E7%25A8%258B%25E8%25AF%25BB%25E4%25B9%25A6%25E8%25AE%25B0%25E5%25BD%2595%25E7%2590%2586%25E8%25AE%25BA%25E9%2583%25A8%25E5%2588%2586/</url>
         <content type="html"><![CDATA[<p>距离我开始读这本书已经过去了半年了, 真是时光飞逝. 当初跳过了前四章.<br>半年后开始准备补上这四章</p>
@@ -3701,6 +3745,20 @@
     </entry>
     
     <entry>
+        <title><![CDATA[算法题目记录]]></title>
+        <url>http://blog.lsmg.xyz/2020/03/%25E7%25AE%2597%25E6%25B3%259591-%25E7%25AE%2597%25E6%25B3%2595%25E9%25A2%2598%25E7%259B%25AE%25E8%25AE%25B0%25E5%25BD%2595/</url>
+        <content type="html"></content>
+        
+        <categories>
+            
+            <category> 算法 </category>
+            
+        </categories>
+        
+        
+    </entry>
+    
+    <entry>
         <title><![CDATA[数据结构和STL]]></title>
         <url>http://blog.lsmg.xyz/2020/03/%25E7%25AE%2597%25E6%25B3%259590-%25E6%2595%25B0%25E6%258D%25AE%25E7%25BB%2593%25E6%259E%2584%25E7%25AE%2580%25E5%258D%2595%25E5%25BA%2594%25E7%2594%25A8/</url>
         <content type="html"><![CDATA[<p><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/STL/api.png" alt=""></p>
@@ -3803,20 +3861,6 @@
 </tr>
 </tbody></table>
 <h1 id="Sequence-containers-顺序容器"><a href="#Sequence-containers-顺序容器" class="headerlink" title="Sequence containers 顺序容器"></a>Sequence containers 顺序容器</h1><h2 id="array"><a href="#array" class="headerlink" title="array"></a>array</h2><h2 id="vector"><a href="#vector" class="headerlink" title="vector"></a>vector</h2><h2 id="deque"><a href="#deque" class="headerlink" title="deque"></a>deque</h2><h2 id="forward-list"><a href="#forward-list" class="headerlink" title="forward_list"></a>forward_list</h2><h2 id="list"><a href="#list" class="headerlink" title="list"></a>list</h2><h1 id="Associative-containers-关联容器"><a href="#Associative-containers-关联容器" class="headerlink" title="Associative containers 关联容器"></a>Associative containers 关联容器</h1><h2 id="set"><a href="#set" class="headerlink" title="set"></a>set</h2><h2 id="map"><a href="#map" class="headerlink" title="map"></a>map</h2><h2 id="multiset"><a href="#multiset" class="headerlink" title="multiset"></a>multiset</h2><h2 id="multimap"><a href="#multimap" class="headerlink" title="multimap"></a>multimap</h2><h1 id="Unordered-associative-containers-无序关联容器"><a href="#Unordered-associative-containers-无序关联容器" class="headerlink" title="Unordered associative containers 无序关联容器"></a>Unordered associative containers 无序关联容器</h1><h2 id="unordered-set"><a href="#unordered-set" class="headerlink" title="unordered_set"></a>unordered_set</h2><h2 id="unordered-map"><a href="#unordered-map" class="headerlink" title="unordered_map"></a>unordered_map</h2><h2 id="unordered-multiset"><a href="#unordered-multiset" class="headerlink" title="unordered_multiset"></a>unordered_multiset</h2><h2 id="unordered-multimap"><a href="#unordered-multimap" class="headerlink" title="unordered_multimap"></a>unordered_multimap</h2><h1 id="Container-adaptors-容器适配器"><a href="#Container-adaptors-容器适配器" class="headerlink" title="Container adaptors 容器适配器"></a>Container adaptors 容器适配器</h1><h2 id="stack"><a href="#stack" class="headerlink" title="stack"></a>stack</h2><h2 id="queue"><a href="#queue" class="headerlink" title="queue"></a>queue</h2><h2 id="priority-queue"><a href="#priority-queue" class="headerlink" title="priority_queue"></a>priority_queue</h2>]]></content>
-        
-        <categories>
-            
-            <category> 算法 </category>
-            
-        </categories>
-        
-        
-    </entry>
-    
-    <entry>
-        <title><![CDATA[算法题目记录]]></title>
-        <url>http://blog.lsmg.xyz/2020/03/%25E7%25AE%2597%25E6%25B3%259591-%25E7%25AE%2597%25E6%25B3%2595%25E9%25A2%2598%25E7%259B%25AE%25E8%25AE%25B0%25E5%25BD%2595/</url>
-        <content type="html"></content>
         
         <categories>
             
@@ -4956,6 +5000,31 @@
     </entry>
     
     <entry>
+        <title><![CDATA[游戏知识-腾讯游戏学院-如何进入游戏开发行业]]></title>
+        <url>http://blog.lsmg.xyz/2019/12/%25E6%25B8%25B8%25E6%2588%258F%25E7%259F%25A5%25E8%25AF%2586-%25E8%2585%25BE%25E8%25AE%25AF%25E6%25B8%25B8%25E6%2588%258F%25E5%25AD%25A6%25E9%2599%25A2-%25E5%25A6%2582%25E4%25BD%2595%25E8%25BF%259B%25E5%2585%25A5%25E6%25B8%25B8%25E6%2588%258F%25E5%25BC%2580%25E5%258F%2591%25E8%25A1%258C%25E4%25B8%259A/</url>
+        <content type="html"><![CDATA[<p>由于自己了解的实在是不足, 所以来腾讯游戏课堂来学习一些架构之类的东西 来完善自己的知识面<br><a href="https://gameinstitute.qq.com/course/detail/10156" target="_blank" rel="noopener">想做游戏吗？如何开始我的游戏开发职业生涯</a></p>
+<a id="more"></a>
+<p>做游戏不会重复做同样的工作, 项目不同</p>
+]]></content>
+        
+        <categories>
+            
+            <category> 游戏知识 </category>
+            
+            <category> 腾讯游戏学院 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 腾讯游戏学院 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
         <title><![CDATA[游戏知识-服务器-服务器通信]]></title>
         <url>http://blog.lsmg.xyz/2019/12/%25E6%25B8%25B8%25E6%2588%258F%25E7%259F%25A5%25E8%25AF%2586-%25E6%259C%258D%25E5%258A%25A1%25E5%2599%25A8-%25E6%259C%258D%25E5%258A%25A1%25E5%2599%25A8%25E9%2580%259A%25E4%25BF%25A1/</url>
         <content type="html"><![CDATA[<p>由于自己了解的实在是不足, 所以来腾讯游戏课堂来学习一些架构之类的东西 来完善自己的知识面<br><a href="https://gameinstitute.qq.com/course/detail/10096" target="_blank" rel="noopener">服务器通信</a></p>
@@ -4985,31 +5054,6 @@
             <category> 游戏知识 </category>
             
             <category> 服务器 </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> 腾讯游戏学院 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-        <title><![CDATA[游戏知识-腾讯游戏学院-如何进入游戏开发行业]]></title>
-        <url>http://blog.lsmg.xyz/2019/12/%25E6%25B8%25B8%25E6%2588%258F%25E7%259F%25A5%25E8%25AF%2586-%25E8%2585%25BE%25E8%25AE%25AF%25E6%25B8%25B8%25E6%2588%258F%25E5%25AD%25A6%25E9%2599%25A2-%25E5%25A6%2582%25E4%25BD%2595%25E8%25BF%259B%25E5%2585%25A5%25E6%25B8%25B8%25E6%2588%258F%25E5%25BC%2580%25E5%258F%2591%25E8%25A1%258C%25E4%25B8%259A/</url>
-        <content type="html"><![CDATA[<p>由于自己了解的实在是不足, 所以来腾讯游戏课堂来学习一些架构之类的东西 来完善自己的知识面<br><a href="https://gameinstitute.qq.com/course/detail/10156" target="_blank" rel="noopener">想做游戏吗？如何开始我的游戏开发职业生涯</a></p>
-<a id="more"></a>
-<p>做游戏不会重复做同样的工作, 项目不同</p>
-]]></content>
-        
-        <categories>
-            
-            <category> 游戏知识 </category>
-            
-            <category> 腾讯游戏学院 </category>
             
         </categories>
         
