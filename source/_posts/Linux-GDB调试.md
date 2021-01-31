@@ -21,10 +21,11 @@ set detach-on-fork [on|off]
 | child | off | 同上 gdb跟踪子进程, 父进程阻塞 |
 
 进程间切换
+
 | 命令 | 功能 |
 | --- | --- |
 | info inferiors | 查询正在调试的进程 |
-| inferior \<number> | 切换进程 |
+| inferior `<number>` | 切换进程 |
 
 
 | 运行命令 | 缩写 | 功能 |
