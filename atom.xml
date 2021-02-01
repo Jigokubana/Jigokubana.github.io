@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.lsmg.xyz/"/>
-  <updated>2021-01-31T16:39:49.073Z</updated>
+  <updated>2021-02-01T09:59:38.370Z</updated>
   <id>http://blog.lsmg.xyz/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>浏览器访问URL到显示</title>
+    <link href="http://blog.lsmg.xyz/2021/02/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86-%E6%B5%8F%E8%A7%88%E5%99%A8%E8%AE%BF%E9%97%AEURL%E5%88%B0%E6%98%BE%E7%A4%BA/"/>
+    <id>http://blog.lsmg.xyz/2021/02/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86-%E6%B5%8F%E8%A7%88%E5%99%A8%E8%AE%BF%E9%97%AEURL%E5%88%B0%E6%98%BE%E7%A4%BA/</id>
+    <published>2021-02-01T08:55:22.000Z</published>
+    <updated>2021-02-01T09:59:38.370Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="http"><a href="#http" class="headerlink" title="http"></a>http</h1><p><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/base/ip-wireshark.png" alt=""></p><p>浏览器访问虚拟机创建的nginx默认网页</p><p>浏览器根据输入的URL中的IP 进行三次握手建立TCP连接 然后浏览器发送GET请求 服务器回复GET请求 获取各种文件</p><p>一般服务器对<code>GET /</code>默认返回index.html页面 <code>https://www.baidu.com/index.html</code>自己加上index后同样可以访问 但是<code>https://www.qq.com/index.html</code>却不行 所以还是跟服务器处理逻辑有关</p><p>返回了html页面后浏览器解析其中的内容, 请求css, js, 图片资源等文件 然后进行渲染显示出网页</p><p>文件传输完毕后TCP四次挥手关闭连接</p><p>如果使用的是域名访问, 则需要访问DNS服务器解析域名获得IP地址, 这样HTTP请求头部还会包含一些特殊的头部如HOST等</p><p>HTTP访问的默认端口均为80端口</p><h1 id="https"><a href="#https" class="headerlink" title="https"></a>https</h1><p>https进行域名解析后, ip+443端口连接服务器</p><p>测试时访问的连接为<code>https://m.baidu.com/?pu=sz%401321_480</code> 百度精简版页面, 修改了host防止负载均衡等策略ip不对应</p><p><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/base/https-wireshark.png" alt=""></p><p>504 505 506 三个包进行TCP三次握手与<code>110.242.68.9:443</code>建立连接</p><p>507 客户端发送Client Hello 发送随机的key1和自己支持的加密方法</p><p>508 ACK应答</p><p>509 510 511 服务端发送Server Hello 发送随机的key2和选定的加密方法</p><p>512 服务端发送证书</p><p>513 ACK应答</p><p>514 服务器发送Server Key Exchange</p><p>515 服务器发送Server Hello Done</p><p>516 ACK应答</p><p>518 客户端发送Client Key Exchange, Change Clipher Spec, Finished</p><p>519 客户端发送经过加密的GET请求(Wireshark进行了解密)</p><p>520 521 进行ACK应答</p><p>522 523 524 服务端发送New Session Ticket, Change Clipher Spec, Finished</p><p>556 服务器回复GET请求</p><p>客户端向服务器发送请求(随机数key1 和支持的加密算法)</p><p>服务器回复数字证书(随机数key2 选择的双方支持算法 证书)</p><p>客户端验证数字证书可靠性, 使用CA的公钥解密加密后的证书. 验证证书的合法性</p><p>客户端生成随机数key3, 根据key1, key2, key3生成会话秘钥, 用服务器发送的证书加密key3发送给服务器</p><p>服务器解密key3同样根据key1, key2, key3生成会话秘钥</p><p>后续就通过会话密钥进行加密数据和解密数据</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;http&quot;&gt;&lt;a href=&quot;#http&quot; class=&quot;headerlink&quot; title=&quot;http&quot;&gt;&lt;/a&gt;http&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;https://lsmg-img.oss-cn-beijing.aliyuncs.com/base/ip
+      
+    
+    </summary>
+    
+    
+      <category term="基础知识" scheme="http://blog.lsmg.xyz/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>Docker使用</title>
@@ -509,33 +533,6 @@
     
     
       <category term="回溯法" scheme="http://blog.lsmg.xyz/tags/%E5%9B%9E%E6%BA%AF%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>力扣12.7-N55跳跃游戏</title>
-    <link href="http://blog.lsmg.xyz/2020/12/%E5%8A%9B%E6%89%A312.7-N55%E8%B7%B3%E8%B7%83%E6%B8%B8%E6%88%8F/"/>
-    <id>http://blog.lsmg.xyz/2020/12/%E5%8A%9B%E6%89%A312.7-N55%E8%B7%B3%E8%B7%83%E6%B8%B8%E6%88%8F/</id>
-    <published>2020-12-07T01:06:02.000Z</published>
-    <updated>2020-12-07T05:19:28.967Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="最大子序和"><a href="#最大子序和" class="headerlink" title="最大子序和"></a>最大子序和</h1><p>给定一个非负整数数组，你最初位于数组的第一个位置。</p><p>数组中的每个元素代表你在该位置可以跳跃的最大长度。</p><p>判断你是否能够到达最后一个位置。</p><p>示例 1:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: [2,3,1,1,4]</span><br><span class="line">输出: true</span><br><span class="line">解释: 我们可以先跳 1 步，从位置 0 到达 位置 1, 然后再从位置 1 跳 3 步到达最后一个位置。</span><br></pre></td></tr></table></figure><p>示例 2:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [3,2,1,0,4]</span><br><span class="line">输出: false</span><br></pre></td></tr></table></figure><p>解释: 无论怎样，你总会到达索引为 3 的位置。但该位置的最大跳跃长度是 0 ， 所以你永远不可能到达最后一个位置。</p><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/jump-game" target="_blank" rel="noopener">https://leetcode-cn.com/problems/jump-game</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p><h2 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">canJump</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> level = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> numss = nums.<span class="built_in">size</span>();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (level &lt; numss)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (nums[level] == <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">int</span> back_level = level - <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">while</span> (back_level &gt;= <span class="number">0</span> &amp;&amp; back_level + nums[back_level] &lt;= level)</span><br><span class="line">                &#123;</span><br><span class="line">                    back_level--;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (back_level &lt; <span class="number">0</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                level = back_level + nums[back_level];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                level += nums[level];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> level + <span class="number">1</span> &gt;= numss;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p>能跳则跳最大长度, 不能跳则每一回退一个台阶 回退后的台阶必须能够跳到原台阶的后面位置</p><p>如果跳到numss上或者外说明能到, 如果因为回退回到了起点则不能跳过</p><h2 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">canJump</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> numss = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">int</span> max_level = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; numss; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (i &lt;= max_level)</span><br><span class="line">            &#123;</span><br><span class="line">                max_level = <span class="built_in">max</span>(max_level, i + nums[i]);</span><br><span class="line">                <span class="keyword">if</span> (max_level &gt;= numss - <span class="number">1</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p>然而真的需要回退吗? 可以遍历nums直接算能到的最大长度. 就算有0存在也不影响最远长度 能跳过0去在遍历到0前 max_level就已经跳过去了</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;最大子序和&quot;&gt;&lt;a href=&quot;#最大子序和&quot; class=&quot;headerlink&quot; title=&quot;最大子序和&quot;&gt;&lt;/a&gt;最大子序和&lt;/h1&gt;&lt;p&gt;给定一个非负整数数组，你最初位于数组的第一个位置。&lt;/p&gt;
-&lt;p&gt;数组中的每个元素代表你在该位置可以跳跃的最大长度。
-      
-    
-    </summary>
-    
-    
-      <category term="力扣每日一题" scheme="http://blog.lsmg.xyz/categories/%E5%8A%9B%E6%89%A3%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/"/>
-    
-    
-      <category term="贪心算法" scheme="http://blog.lsmg.xyz/tags/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/"/>
     
   </entry>
   
