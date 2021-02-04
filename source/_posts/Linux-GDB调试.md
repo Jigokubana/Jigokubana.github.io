@@ -28,6 +28,18 @@ set detach-on-fork [on|off]
 | inferior `<number>` | 切换进程 |
 
 
+栈相关
+
+| 命令 | 功能 |
+| --- | --- |
+| up/down | 改变堆栈的显示深度 |
+| info stack | 查看所有栈的信息|
+| backtrace | 缩写bt 同上 |
+| info frame |  显示当前栈的详细信息|
+| frame | 缩写是f  显示当前栈的简单信息 |
+| frame n | 切换到 第n层栈 |
+
+
 | 运行命令 | 缩写 | 功能 |
 | --- | --- | --- |
 | run | r | 运行程序 |
@@ -43,7 +55,8 @@ set detach-on-fork [on|off]
 | 设置断点 | 缩写 | 功能 |
 | --- | --- |--- |
 | break n | b n | 在第n行设置断点, b xx.cpp:500(xx.cpp文件第500行) |
-| b fn if a>b | | 在函数f 或者行号n 设置条件断点 |
+| b f if a>b | | 在函数f 设置条件断点 |
+| b n if a>b | | 在行号n 设置条件断点 |
 | break func | b func | 在函数func()的入口处设置断点 |
 | delete 断点号n | | 删除第n个断点 |
 | disable 断点号n | | 暂停第n个断点 |
@@ -77,7 +90,6 @@ set detach-on-fork [on|off]
 | --- | --- |
 | where/bt | 当前运行的堆栈列表 |
 | bt backtrace | 显示当前的调用堆栈 |
-| up/down | 改变堆栈的显示深度 |
 | set args [args]| 指定程序运行参数 |
 | show args| 查看程序参数 |
 | info program | 查看程序是否运行, 进程号, 被暂停原因 |
