@@ -3,6 +3,72 @@
     
     
     <entry>
+        <title><![CDATA[小方说知识星球]]></title>
+        <url>http://blog.lsmg.xyz/2021/02/%25E5%259F%25BA%25E7%25A1%2580%25E7%259F%25A5%25E8%25AF%2586%25E6%259D%2582%25E7%2583%25A9-%25E5%25B0%258F%25E6%2596%25B9%25E8%25AF%25B4%25E7%259F%25A5%25E8%25AF%2586%25E6%2598%259F%25E7%2590%2583/</url>
+        <content type="html"><![CDATA[<p>这里并不做过多的记录, 记录一些tips吧</p>
+<p>lsof 能用做文件删除恢复. 仅限于文件虽然被删除但依然被某个进程打开.</p>
+<p>bind函数<br>地址可以指定 INADDR_ANY<br>那么端口呢?  测试了下如果端口为0确实是 bind到了随机端口</p>
+<p>bind到一个已经bind的端口会出错. 然而如果端口为0 随机的端口则没有被bind过</p>
+<p>客户端connect前调用bind能够以指定端口号连接, 这个在高性能服务器见过 不过一直没有用过</p>
+<p>异步connect? 非阻塞connect</p>
+<p>connect尝试次数? 尝试间隔? </p>
+<table>
+<thead>
+<tr>
+<th>函数名称</th>
+<th>返回值</th>
+<th>阻塞</th>
+<th>非阻塞</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>recv</td>
+<td>-1</td>
+<td>出错</td>
+<td>判断是否为EWOULDBLOCK(数据已经收完, ET模式收完数据的标志) 或者 EINTR(信号中断)</td>
+</tr>
+<tr>
+<td>recv</td>
+<td>0</td>
+<td>对端关闭</td>
+<td>对端关闭</td>
+</tr>
+<tr>
+<td>send</td>
+<td>-1</td>
+<td>出错</td>
+<td>EWOULDBLOCK(数据无法继续发出) EAGAIN</td>
+</tr>
+</tbody></table>
+<p>LT 想收多少收多少 收不完就提醒<br>ET 爱收不收 过了这村没这店</p>
+<p>老大让你开发一个邮件服务器, 大多数人像Springboot使用者. 第一时间就会去找库<br>然而大多数HTTP协议实现都比较简单, 在自己公司所用框架的网络基础上, 很简单就能写出.8</p>
+<p>2020年7月17日20:30:06<br>理论-&gt;常用Api-&gt;知晓如何组织底层Api<br>网络编程重难点解析直播录像及课件, 终于看完了.</p>
+]]></content>
+        
+        <categories>
+            
+            <category> 基础知识杂烩 </category>
+            
+        </categories>
+        
+        
+    </entry>
+    
+    <entry>
+        <title><![CDATA[大三寒假学习记录]]></title>
+        <url>http://blog.lsmg.xyz/2021/02/%25E5%2581%2587%25E6%259C%259F%25E5%25AD%25A6%25E4%25B9%25A0%25E8%25AE%25B0%25E5%25BD%2595-%25E5%25A4%25A7%25E4%25B8%2589%25E5%25AF%2592%25E5%2581%2587/</url>
+        <content type="html"></content>
+        
+        <categories>
+            
+            <category> 假期学习记录 </category>
+            
+        </categories>
+        
+        
+    </entry>
+    
+    <entry>
         <title><![CDATA[3-数组中重复的数字]]></title>
         <url>http://blog.lsmg.xyz/2021/02/%25E5%2589%2591%25E6%258C%2587Offer-/</url>
         <content type="html"></content>
@@ -173,7 +239,7 @@
     
     <entry>
         <title><![CDATA[浏览器访问URL到显示]]></title>
-        <url>http://blog.lsmg.xyz/2021/02/%25E5%259F%25BA%25E7%25A1%2580%25E7%259F%25A5%25E8%25AF%2586-%25E6%25B5%258F%25E8%25A7%2588%25E5%2599%25A8%25E8%25AE%25BF%25E9%2597%25AEURL%25E5%2588%25B0%25E6%2598%25BE%25E7%25A4%25BA/</url>
+        <url>http://blog.lsmg.xyz/2021/02/%25E5%259F%25BA%25E7%25A1%2580%25E7%259F%25A5%25E8%25AF%2586%25E6%259D%2582%25E7%2583%25A9-%25E6%25B5%258F%25E8%25A7%2588%25E5%2599%25A8%25E8%25AE%25BF%25E9%2597%25AEURL%25E5%2588%25B0%25E6%2598%25BE%25E7%25A4%25BA/</url>
         <content type="html"><![CDATA[<h1 id="http"><a href="#http" class="headerlink" title="http"></a>http</h1><p><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/base/ip-wireshark.png" alt=""></p>
 <p>浏览器访问虚拟机创建的nginx默认网页</p>
 <p>浏览器根据输入的URL中的IP 进行三次握手建立TCP连接 然后浏览器发送GET请求 服务器回复GET请求 获取各种文件</p>
@@ -209,7 +275,7 @@
         
         <categories>
             
-            <category> 基础知识 </category>
+            <category> 基础知识杂烩 </category>
             
         </categories>
         
@@ -1070,6 +1136,37 @@
     </entry>
     
     <entry>
+        <title><![CDATA[力扣12.7-E53.最大子序和]]></title>
+        <url>http://blog.lsmg.xyz/2020/12/%25E5%258A%259B%25E6%2589%25A312.6-E53.%25E6%259C%2580%25E5%25A4%25A7%25E5%25AD%2590%25E5%25BA%258F%25E5%2592%258C/</url>
+        <content type="html"><![CDATA[<h1 id="最大子序和"><a href="#最大子序和" class="headerlink" title="最大子序和"></a>最大子序和</h1><p>给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。</p>
+<p>示例:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [-2,1,-3,4,-1,2,1,-5,4]</span><br><span class="line">输出: 6</span><br></pre></td></tr></table></figure>
+<p>解释: 连续子数组 [4,-1,2,1] 的和最大，为 6。</p>
+<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/maximum-subarray" target="_blank" rel="noopener">https://leetcode-cn.com/problems/maximum-subarray</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<h2 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxSubArray</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">b</span><span class="params">(nums.<span class="built_in">size</span>())</span></span>;</span><br><span class="line">        b[<span class="number">0</span>] = nums[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; nums.<span class="built_in">size</span>(); ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (b[i - <span class="number">1</span>] &gt; <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                b[i] = b[i - <span class="number">1</span>] + nums[i];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                b[i] = nums[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> result = b[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; b.<span class="built_in">size</span>(); ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (b[i] &gt; result)</span><br><span class="line">            &#123;</span><br><span class="line">                result = b[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxSubArray</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> numss = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">int</span> temp = nums[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">int</span> result = nums[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; numss; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            temp = temp &gt; <span class="number">0</span> ? temp + nums[i] : nums[i];</span><br><span class="line">            result = result &gt; temp ? result : temp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>省去了一个vector 代码看起来也简洁不少</p>
+]]></content>
+        
+        <categories>
+            
+            <category> 算法 </category>
+            
+            <category> 力扣每日一题 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 动态规划 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
         <title><![CDATA[力扣12.11-N12.整数转罗马数字]]></title>
         <url>http://blog.lsmg.xyz/2020/12/%25E5%258A%259B%25E6%2589%25A312.11-N12.%25E6%2595%25B4%25E6%2595%25B0%25E8%25BD%25AC%25E7%25BD%2597%25E9%25A9%25AC%25E6%2595%25B0%25E5%25AD%2597/</url>
         <content type="html"><![CDATA[<h1 id="整数转罗马数字"><a href="#整数转罗马数字" class="headerlink" title="整数转罗马数字"></a>整数转罗马数字</h1><p>罗马数字包含以下七种字符： I， V， X， L，C，D 和 M。</p>
@@ -1092,37 +1189,6 @@
 <p>一堆if else 当时看到后第一时间想到的便是这个做法 然而代码太长了. 然而程序中都是重复的逻辑, 看一下样例答案</p>
 <h2 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">intToRoman</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> values[]=&#123;<span class="number">1000</span>,<span class="number">900</span>,<span class="number">500</span>,<span class="number">400</span>,<span class="number">100</span>,<span class="number">90</span>,<span class="number">50</span>,<span class="number">40</span>,<span class="number">10</span>,<span class="number">9</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">1</span>&#125;;</span><br><span class="line">        <span class="built_in">string</span> reps[]=&#123;<span class="string">"M"</span>,<span class="string">"CM"</span>,<span class="string">"D"</span>,<span class="string">"CD"</span>,<span class="string">"C"</span>,<span class="string">"XC"</span>,<span class="string">"L"</span>,<span class="string">"XL"</span>,<span class="string">"X"</span>,<span class="string">"IX"</span>,<span class="string">"V"</span>,<span class="string">"IV"</span>,<span class="string">"I"</span>&#125;;</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">string</span> res;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="number">13</span>; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">while</span> (num&gt;=values[i])</span><br><span class="line">            &#123;</span><br><span class="line">                num -= values[i];</span><br><span class="line">                res += reps[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>同样的逻辑 样例代码却能够使用两个数组来打成….. 太妙了 而且修改起来也比较方便</p>
-]]></content>
-        
-        <categories>
-            
-            <category> 算法 </category>
-            
-            <category> 力扣每日一题 </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> 动态规划 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-        <title><![CDATA[力扣12.7-E53.最大子序和]]></title>
-        <url>http://blog.lsmg.xyz/2020/12/%25E5%258A%259B%25E6%2589%25A312.6-E53.%25E6%259C%2580%25E5%25A4%25A7%25E5%25AD%2590%25E5%25BA%258F%25E5%2592%258C/</url>
-        <content type="html"><![CDATA[<h1 id="最大子序和"><a href="#最大子序和" class="headerlink" title="最大子序和"></a>最大子序和</h1><p>给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。</p>
-<p>示例:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [-2,1,-3,4,-1,2,1,-5,4]</span><br><span class="line">输出: 6</span><br></pre></td></tr></table></figure>
-<p>解释: 连续子数组 [4,-1,2,1] 的和最大，为 6。</p>
-<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/maximum-subarray" target="_blank" rel="noopener">https://leetcode-cn.com/problems/maximum-subarray</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
-<h2 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxSubArray</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">b</span><span class="params">(nums.<span class="built_in">size</span>())</span></span>;</span><br><span class="line">        b[<span class="number">0</span>] = nums[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; nums.<span class="built_in">size</span>(); ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (b[i - <span class="number">1</span>] &gt; <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                b[i] = b[i - <span class="number">1</span>] + nums[i];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                b[i] = nums[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> result = b[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; b.<span class="built_in">size</span>(); ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (b[i] &gt; result)</span><br><span class="line">            &#123;</span><br><span class="line">                result = b[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h2 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxSubArray</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> numss = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">int</span> temp = nums[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">int</span> result = nums[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; numss; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            temp = temp &gt; <span class="number">0</span> ? temp + nums[i] : nums[i];</span><br><span class="line">            result = result &gt; temp ? result : temp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>省去了一个vector 代码看起来也简洁不少</p>
 ]]></content>
         
         <categories>
@@ -2292,7 +2358,7 @@
     </entry>
     
     <entry>
-        <title><![CDATA[大二暑假学习规划与记录]]></title>
+        <title><![CDATA[大二暑假学习记录]]></title>
         <url>http://blog.lsmg.xyz/2020/07/%25E5%2581%2587%25E6%259C%259F%25E5%25AD%25A6%25E4%25B9%25A0%25E8%25AE%25B0%25E5%25BD%2595-%25E5%25A4%25A7%25E4%25BA%258C%25E6%259A%2591%25E5%2581%2587/</url>
         <content type="html"><![CDATA[<h1 id="规划"><a href="#规划" class="headerlink" title="规划"></a>规划</h1><p><strong>2020年7月4日22:09:19</strong><br>C++Primer从头到尾看一遍 做习题.  16章+3章.<br>两天一章, 力求看透, 看足.  整理笔记.</p>
 <p><strong>2020年7月4日22:11:54</strong><br>微信公众号运营, 整理自己发过的博客.</p>
@@ -2316,66 +2382,6 @@
             
         </categories>
         
-        
-    </entry>
-    
-    <entry>
-        <title><![CDATA[小方说知识星球]]></title>
-        <url>http://blog.lsmg.xyz/2020/06/%25E5%2581%2587%25E6%259C%259F%25E5%25AD%25A6%25E4%25B9%25A0%25E8%25AE%25B0%25E5%25BD%2595-%25E5%25B0%258F%25E6%2596%25B9%25E8%25AF%25B4%25E7%259F%25A5%25E8%25AF%2586%25E6%2598%259F%25E7%2590%2583/</url>
-        <content type="html"><![CDATA[<p>这里并不做过多的记录, 记录一些tips吧</p>
-<p>lsof 能用做文件删除恢复. 仅限于文件虽然被删除但依然被某个进程打开.</p>
-<p>bind函数<br>地址可以指定 INADDR_ANY<br>那么端口呢?  测试了下如果端口为0确实是 bind到了随机端口</p>
-<p>bind到一个已经bind的端口会出错. 然而如果端口为0 随机的端口则没有被bind过</p>
-<p>客户端connect前调用bind能够以指定端口号连接, 这个在高性能服务器见过 不过一直没有用过</p>
-<p>异步connect? 非阻塞connect</p>
-<p>connect尝试次数? 尝试间隔? </p>
-<table>
-<thead>
-<tr>
-<th>函数名称</th>
-<th>返回值</th>
-<th>阻塞</th>
-<th>非阻塞</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>recv</td>
-<td>-1</td>
-<td>出错</td>
-<td>判断是否为EWOULDBLOCK(数据已经收完, ET模式收完数据的标志) 或者 EINTR(信号中断)</td>
-</tr>
-<tr>
-<td>recv</td>
-<td>0</td>
-<td>对端关闭</td>
-<td>对端关闭</td>
-</tr>
-<tr>
-<td>send</td>
-<td>-1</td>
-<td>出错</td>
-<td>EWOULDBLOCK(数据无法继续发出) EAGAIN</td>
-</tr>
-</tbody></table>
-<p>LT 想收多少收多少 收不完就提醒<br>ET 爱收不收 过了这村没这店</p>
-<p>老大让你开发一个邮件服务器, 大多数人像Springboot使用者. 第一时间就会去找库<br>然而大多数HTTP协议实现都比较简单, 在自己公司所用框架的网络基础上, 很简单就能写出.8</p>
-<p>2020年7月17日20:30:06<br>理论-&gt;常用Api-&gt;知晓如何组织底层Api<br>网络编程重难点解析直播录像及课件, 终于看完了.</p>
-]]></content>
-        
-        <categories>
-            
-            <category> 假期学习记录 </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> 肉疼 </tag>
-            
-            <tag> 小方说 </tag>
-            
-        </tags>
         
     </entry>
     
@@ -4114,6 +4120,20 @@
     </entry>
     
     <entry>
+        <title><![CDATA[算法题目记录]]></title>
+        <url>http://blog.lsmg.xyz/2020/03/%25E7%25AE%2597%25E6%25B3%259591-%25E7%25AE%2597%25E6%25B3%2595%25E9%25A2%2598%25E7%259B%25AE%25E8%25AE%25B0%25E5%25BD%2595/</url>
+        <content type="html"></content>
+        
+        <categories>
+            
+            <category> 算法 </category>
+            
+        </categories>
+        
+        
+    </entry>
+    
+    <entry>
         <title><![CDATA[数据结构和STL]]></title>
         <url>http://blog.lsmg.xyz/2020/03/%25E7%25AE%2597%25E6%25B3%259590-%25E6%2595%25B0%25E6%258D%25AE%25E7%25BB%2593%25E6%259E%2584%25E7%25AE%2580%25E5%258D%2595%25E5%25BA%2594%25E7%2594%25A8/</url>
         <content type="html"><![CDATA[<p><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/STL/api.png" alt=""></p>
@@ -4216,20 +4236,6 @@
 </tr>
 </tbody></table>
 <h1 id="Sequence-containers-顺序容器"><a href="#Sequence-containers-顺序容器" class="headerlink" title="Sequence containers 顺序容器"></a>Sequence containers 顺序容器</h1><h2 id="array"><a href="#array" class="headerlink" title="array"></a>array</h2><h2 id="vector"><a href="#vector" class="headerlink" title="vector"></a>vector</h2><h2 id="deque"><a href="#deque" class="headerlink" title="deque"></a>deque</h2><h2 id="forward-list"><a href="#forward-list" class="headerlink" title="forward_list"></a>forward_list</h2><h2 id="list"><a href="#list" class="headerlink" title="list"></a>list</h2><h1 id="Associative-containers-关联容器"><a href="#Associative-containers-关联容器" class="headerlink" title="Associative containers 关联容器"></a>Associative containers 关联容器</h1><h2 id="set"><a href="#set" class="headerlink" title="set"></a>set</h2><h2 id="map"><a href="#map" class="headerlink" title="map"></a>map</h2><h2 id="multiset"><a href="#multiset" class="headerlink" title="multiset"></a>multiset</h2><h2 id="multimap"><a href="#multimap" class="headerlink" title="multimap"></a>multimap</h2><h1 id="Unordered-associative-containers-无序关联容器"><a href="#Unordered-associative-containers-无序关联容器" class="headerlink" title="Unordered associative containers 无序关联容器"></a>Unordered associative containers 无序关联容器</h1><h2 id="unordered-set"><a href="#unordered-set" class="headerlink" title="unordered_set"></a>unordered_set</h2><h2 id="unordered-map"><a href="#unordered-map" class="headerlink" title="unordered_map"></a>unordered_map</h2><h2 id="unordered-multiset"><a href="#unordered-multiset" class="headerlink" title="unordered_multiset"></a>unordered_multiset</h2><h2 id="unordered-multimap"><a href="#unordered-multimap" class="headerlink" title="unordered_multimap"></a>unordered_multimap</h2><h1 id="Container-adaptors-容器适配器"><a href="#Container-adaptors-容器适配器" class="headerlink" title="Container adaptors 容器适配器"></a>Container adaptors 容器适配器</h1><h2 id="stack"><a href="#stack" class="headerlink" title="stack"></a>stack</h2><h2 id="queue"><a href="#queue" class="headerlink" title="queue"></a>queue</h2><h2 id="priority-queue"><a href="#priority-queue" class="headerlink" title="priority_queue"></a>priority_queue</h2>]]></content>
-        
-        <categories>
-            
-            <category> 算法 </category>
-            
-        </categories>
-        
-        
-    </entry>
-    
-    <entry>
-        <title><![CDATA[算法题目记录]]></title>
-        <url>http://blog.lsmg.xyz/2020/03/%25E7%25AE%2597%25E6%25B3%259591-%25E7%25AE%2597%25E6%25B3%2595%25E9%25A2%2598%25E7%259B%25AE%25E8%25AE%25B0%25E5%25BD%2595/</url>
-        <content type="html"></content>
         
         <categories>
             
@@ -5369,31 +5375,6 @@
     </entry>
     
     <entry>
-        <title><![CDATA[游戏知识-腾讯游戏学院-如何进入游戏开发行业]]></title>
-        <url>http://blog.lsmg.xyz/2019/12/%25E6%25B8%25B8%25E6%2588%258F%25E7%259F%25A5%25E8%25AF%2586-%25E8%2585%25BE%25E8%25AE%25AF%25E6%25B8%25B8%25E6%2588%258F%25E5%25AD%25A6%25E9%2599%25A2-%25E5%25A6%2582%25E4%25BD%2595%25E8%25BF%259B%25E5%2585%25A5%25E6%25B8%25B8%25E6%2588%258F%25E5%25BC%2580%25E5%258F%2591%25E8%25A1%258C%25E4%25B8%259A/</url>
-        <content type="html"><![CDATA[<p>由于自己了解的实在是不足, 所以来腾讯游戏课堂来学习一些架构之类的东西 来完善自己的知识面<br><a href="https://gameinstitute.qq.com/course/detail/10156" target="_blank" rel="noopener">想做游戏吗？如何开始我的游戏开发职业生涯</a></p>
-<a id="more"></a>
-<p>做游戏不会重复做同样的工作, 项目不同</p>
-]]></content>
-        
-        <categories>
-            
-            <category> 游戏知识 </category>
-            
-            <category> 腾讯游戏学院 </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> 腾讯游戏学院 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
         <title><![CDATA[游戏知识-服务器-服务器通信]]></title>
         <url>http://blog.lsmg.xyz/2019/12/%25E6%25B8%25B8%25E6%2588%258F%25E7%259F%25A5%25E8%25AF%2586-%25E6%259C%258D%25E5%258A%25A1%25E5%2599%25A8-%25E6%259C%258D%25E5%258A%25A1%25E5%2599%25A8%25E9%2580%259A%25E4%25BF%25A1/</url>
         <content type="html"><![CDATA[<p>由于自己了解的实在是不足, 所以来腾讯游戏课堂来学习一些架构之类的东西 来完善自己的知识面<br><a href="https://gameinstitute.qq.com/course/detail/10096" target="_blank" rel="noopener">服务器通信</a></p>
@@ -5423,6 +5404,31 @@
             <category> 游戏知识 </category>
             
             <category> 服务器 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 腾讯游戏学院 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+        <title><![CDATA[游戏知识-腾讯游戏学院-如何进入游戏开发行业]]></title>
+        <url>http://blog.lsmg.xyz/2019/12/%25E6%25B8%25B8%25E6%2588%258F%25E7%259F%25A5%25E8%25AF%2586-%25E8%2585%25BE%25E8%25AE%25AF%25E6%25B8%25B8%25E6%2588%258F%25E5%25AD%25A6%25E9%2599%25A2-%25E5%25A6%2582%25E4%25BD%2595%25E8%25BF%259B%25E5%2585%25A5%25E6%25B8%25B8%25E6%2588%258F%25E5%25BC%2580%25E5%258F%2591%25E8%25A1%258C%25E4%25B8%259A/</url>
+        <content type="html"><![CDATA[<p>由于自己了解的实在是不足, 所以来腾讯游戏课堂来学习一些架构之类的东西 来完善自己的知识面<br><a href="https://gameinstitute.qq.com/course/detail/10156" target="_blank" rel="noopener">想做游戏吗？如何开始我的游戏开发职业生涯</a></p>
+<a id="more"></a>
+<p>做游戏不会重复做同样的工作, 项目不同</p>
+]]></content>
+        
+        <categories>
+            
+            <category> 游戏知识 </category>
+            
+            <category> 腾讯游戏学院 </category>
             
         </categories>
         
@@ -6313,7 +6319,7 @@
     </entry>
     
     <entry>
-        <title><![CDATA[暑假学习记录与总结]]></title>
+        <title><![CDATA[大一暑假学习记录]]></title>
         <url>http://blog.lsmg.xyz/2019/07/%25E5%2581%2587%25E6%259C%259F%25E5%25AD%25A6%25E4%25B9%25A0%25E8%25AE%25B0%25E5%25BD%2595-%25E5%25A4%25A7%25E4%25B8%2580%25E6%259A%2591%25E5%2581%2587/</url>
         <content type="html"><![CDATA[<div class="alert-red">では、ゲームを始(はじ)めましょう</div>
 
