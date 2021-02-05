@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.lsmg.xyz/"/>
-  <updated>2021-02-04T14:45:22.221Z</updated>
+  <updated>2021-02-05T04:29:25.974Z</updated>
   <id>http://blog.lsmg.xyz/</id>
   
   <author>
@@ -15,6 +15,85 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>剑指3-数组中重复的数字</title>
+    <link href="http://blog.lsmg.xyz/2021/02/%E5%89%91%E6%8C%87Offer-/"/>
+    <id>http://blog.lsmg.xyz/2021/02/%E5%89%91%E6%8C%87Offer-/</id>
+    <published>2021-02-05T14:37:28.000Z</published>
+    <updated>2021-02-05T04:29:25.974Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="剑指-Offer-03-数组中重复的数字"><a href="#剑指-Offer-03-数组中重复的数字" class="headerlink" title="剑指 Offer 03. 数组中重复的数字"></a><a href="https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/" target="_blank" rel="noopener">剑指 Offer 03. 数组中重复的数字</a></h3><p>Difficulty: <strong>简单</strong></p><p>找出数组中重复的数字。</p><p>在一个长度为 n 的数组 nums 里的所有数字都在 0～n-1 的范围内。数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次。请找出数组中任意一个重复的数字。</p><p><strong>示例 1：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：</span><br><span class="line">[2, 3, 1, 0, 2, 5, 3]</span><br><span class="line">输出：2 或 3</span><br></pre></td></tr></table></figure><p><strong>限制：</strong></p><p><code>2 &lt;= n &lt;= 100000</code></p><h4 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h4><p>Language: ****</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">​</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;剑指-Offer-03-数组中重复的数字&quot;&gt;&lt;a href=&quot;#剑指-Offer-03-数组中重复的数字&quot; class=&quot;headerlink&quot; title=&quot;剑指 Offer 03. 数组中重复的数字&quot;&gt;&lt;/a&gt;&lt;a href=&quot;https://leetcode
+      
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="http://blog.lsmg.xyz/categories/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="剑指Offer" scheme="http://blog.lsmg.xyz/categories/%E7%AE%97%E6%B3%95/%E5%89%91%E6%8C%87Offer/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>力扣2.5-N583&amp;N712</title>
+    <link href="http://blog.lsmg.xyz/2021/02/%E5%8A%9B%E6%89%A32.5-N516%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/"/>
+    <id>http://blog.lsmg.xyz/2021/02/%E5%8A%9B%E6%89%A32.5-N516%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/</id>
+    <published>2021-02-05T04:10:02.000Z</published>
+    <updated>2021-02-05T04:20:49.995Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="516-最长回文子序列"><a href="#516-最长回文子序列" class="headerlink" title="516. 最长回文子序列"></a><a href="https://leetcode-cn.com/problems/longest-palindromic-subsequence/" target="_blank" rel="noopener">516. 最长回文子序列</a></h3><p>Difficulty: <strong>中等</strong></p><p>给定一个字符串 <code>s</code> ，找到其中最长的回文子序列，并返回该序列的长度。可以假设 <code>s</code> 的最大长度为 <code>1000</code> 。</p><p><strong>示例 1:</strong><br>输入:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;bbbab&quot;</span><br></pre></td></tr></table></figure><p>输出:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4</span><br></pre></td></tr></table></figure><p>一个可能的最长回文子序列为 “bbbb”。</p><p><strong>示例 2:</strong><br>输入:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;cbbd&quot;</span><br></pre></td></tr></table></figure><p>输出:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2</span><br></pre></td></tr></table></figure><p>一个可能的最长回文子序列为 “bb”。</p><p><strong>提示：</strong></p><ul><li><code>1 &lt;= s.length &lt;= 1000</code></li><li><code>s</code> 只包含小写英文字母</li></ul><h4 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">longestPalindromeSubseq</span><span class="params">(<span class="built_in">string</span> s)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> ws = s.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">int</span> dp[ws][ws];</span><br><span class="line">        <span class="built_in">memset</span>(dp, <span class="number">0</span>, <span class="keyword">sizeof</span> dp);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; ws; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            dp[i][i] = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; ws; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; ws - i; j += <span class="number">1</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (s[j] == s[j + i])</span><br><span class="line">                &#123;</span><br><span class="line">                    dp[j][j + i] = dp[j + <span class="number">1</span>][j + i - <span class="number">1</span>] + <span class="number">2</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                    dp[j][j + i] = <span class="built_in">max</span>(</span><br><span class="line">                        dp[j + <span class="number">1</span>][j + i],</span><br><span class="line">                        dp[j][j + i - <span class="number">1</span>]</span><br><span class="line">                    );</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> dp[<span class="number">0</span>][ws - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;516-最长回文子序列&quot;&gt;&lt;a href=&quot;#516-最长回文子序列&quot; class=&quot;headerlink&quot; title=&quot;516. 最长回文子序列&quot;&gt;&lt;/a&gt;&lt;a href=&quot;https://leetcode-cn.com/problems/longest-pa
+      
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="http://blog.lsmg.xyz/categories/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="力扣每日一题" scheme="http://blog.lsmg.xyz/categories/%E7%AE%97%E6%B3%95/%E5%8A%9B%E6%89%A3%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/"/>
+    
+    
+      <category term="动态规划" scheme="http://blog.lsmg.xyz/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数据结构和STL</title>
+    <link href="http://blog.lsmg.xyz/2021/02/%E7%AE%97%E6%B3%9590-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    <id>http://blog.lsmg.xyz/2021/02/%E7%AE%97%E6%B3%9590-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</id>
+    <published>2021-02-05T02:38:28.000Z</published>
+    <updated>2021-02-05T05:02:15.249Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/STL/api.png" alt=""></p><p>对stl库string等定义的变量 使用sizeof并不会得到真实的大小, sizeof只会返回相关类中成员的大小</p><p>stl等库中使用指针指向真实的数据, sizeof的时候只记录了指针的大小 并不记录指针指向空间的大小</p><table><thead><tr><th>顺序容器</th><th>按序访问</th></tr></thead><tbody><tr><td>array</td><td>静态的连续数组</td></tr><tr><td>vector</td><td>动态的连续数组</td></tr><tr><td>deque</td><td>双端队列</td></tr><tr><td>forward_list</td><td>单链表</td></tr><tr><td>list</td><td>双链表</td></tr></tbody></table><table><thead><tr><th>关联容器</th><th>能实现快速查找O(logn)</th></tr></thead><tbody><tr><td>set</td><td>唯一key的集合, 按照key排序</td></tr><tr><td>map</td><td>k v集合, 按照k排序, k是唯一的</td></tr><tr><td>multiset</td><td>key的集合 按照key排序</td></tr><tr><td>multimap</td><td>k v的集合, 按照key排序</td></tr></tbody></table><table><thead><tr><th>无序关联容器</th><th>快速查找均摊O(1)最坏O(n)的无序(哈希)数据结构</th></tr></thead><tbody><tr><td>unordered_set</td><td>唯一key的集合, 按照key生成散列</td></tr><tr><td>unordered_map</td><td>唯一key, k v的集合, 按照key生成散列</td></tr><tr><td>unordered_multiset</td><td>key的集合, 按照key生成散列</td></tr><tr><td>unordered_multimap</td><td>k v的集合, 按照key生成散列</td></tr></tbody></table><table><thead><tr><th>容器适配器</th><th>提供顺序容器的不同接口</th></tr></thead><tbody><tr><td>stack</td><td>适配一个容器提供栈 vector deque list满足要求 默认是deque</td></tr><tr><td>queue</td><td>适配一个容器提供队列 deque list 默认是deque</td></tr><tr><td>priority_queue</td><td>适配一个容器提供优先级队列 vector deque 默认是 vector</td></tr></tbody></table><h1 id="Sequence-containers-顺序容器"><a href="#Sequence-containers-顺序容器" class="headerlink" title="Sequence containers 顺序容器"></a>Sequence containers 顺序容器</h1><h2 id="array"><a href="#array" class="headerlink" title="array"></a>array</h2><h2 id="vector"><a href="#vector" class="headerlink" title="vector"></a>vector</h2><h2 id="deque"><a href="#deque" class="headerlink" title="deque"></a>deque</h2><h2 id="forward-list"><a href="#forward-list" class="headerlink" title="forward_list"></a>forward_list</h2><h2 id="list"><a href="#list" class="headerlink" title="list"></a>list</h2><h1 id="Associative-containers-关联容器"><a href="#Associative-containers-关联容器" class="headerlink" title="Associative containers 关联容器"></a>Associative containers 关联容器</h1><p>内部会自动进行排序 底层红黑树 key不允许重复</p><h2 id="set"><a href="#set" class="headerlink" title="set"></a>set</h2><p>值就是key 值就是元素</p><p>不能通过迭代器修改set的值, 修改set的值会导致删除和新建 指针会失效</p><h2 id="map"><a href="#map" class="headerlink" title="map"></a>map</h2><p>key和value分开 key+value作为一个元素</p><h2 id="multiset"><a href="#multiset" class="headerlink" title="multiset"></a>multiset</h2><h2 id="multimap"><a href="#multimap" class="headerlink" title="multimap"></a>multimap</h2><h1 id="Unordered-associative-containers-无序关联容器"><a href="#Unordered-associative-containers-无序关联容器" class="headerlink" title="Unordered associative containers 无序关联容器"></a>Unordered associative containers 无序关联容器</h1><p>内部会自动进行排序 底层散列表</p><h2 id="unordered-set"><a href="#unordered-set" class="headerlink" title="unordered_set"></a>unordered_set</h2><h2 id="unordered-map"><a href="#unordered-map" class="headerlink" title="unordered_map"></a>unordered_map</h2><h2 id="unordered-multiset"><a href="#unordered-multiset" class="headerlink" title="unordered_multiset"></a>unordered_multiset</h2><h2 id="unordered-multimap"><a href="#unordered-multimap" class="headerlink" title="unordered_multimap"></a>unordered_multimap</h2><h1 id="Container-adaptors-容器适配器"><a href="#Container-adaptors-容器适配器" class="headerlink" title="Container adaptors 容器适配器"></a>Container adaptors 容器适配器</h1><h2 id="stack"><a href="#stack" class="headerlink" title="stack"></a>stack</h2><h2 id="queue"><a href="#queue" class="headerlink" title="queue"></a>queue</h2><h2 id="priority-queue"><a href="#priority-queue" class="headerlink" title="priority_queue"></a>priority_queue</h2>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;img src=&quot;https://lsmg-img.oss-cn-beijing.aliyuncs.com/STL/api.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;对stl库string等定义的变量 使用sizeof并不会得到真实的大小, sizeof只会返回相关类中成员
+      
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="http://blog.lsmg.xyz/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>小方说知识星球</title>
@@ -47,40 +126,22 @@
     <link href="http://blog.lsmg.xyz/2021/02/%E5%81%87%E6%9C%9F%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-%E5%A4%A7%E4%B8%89%E5%AF%92%E5%81%87/"/>
     <id>http://blog.lsmg.xyz/2021/02/%E5%81%87%E6%9C%9F%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-%E5%A4%A7%E4%B8%89%E5%AF%92%E5%81%87/</id>
     <published>2021-02-04T14:43:32.000Z</published>
-    <updated>2021-02-04T14:48:14.927Z</updated>
+    <updated>2021-02-05T04:24:49.637Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="2021年2月4日22-46-59"><a href="#2021年2月4日22-46-59" class="headerlink" title="2021年2月4日22:46:59"></a>2021年2月4日22:46:59</h1><p>今天把博客整理了下分类</p><p>继续学习的动态规划算法两道题目 <a href="https://leetcode-cn.com/problems/delete-operation-for-two-strings/" target="_blank" rel="noopener">583. 两个字符串的删除操作</a> <a href="https://leetcode-cn.com/problems/minimum-ascii-delete-sum-for-two-strings/" target="_blank" rel="noopener">712. 两个字符串的最小ASCII删除和</a></p>]]></content>
+    <content type="html"><![CDATA[<h1 id="2021年2月1日-3日"><a href="#2021年2月1日-3日" class="headerlink" title="2021年2月1日-3日"></a>2021年2月1日-3日</h1><p><strong>动态规划问题</strong></p><p>编辑距离</p><p>最长递增子序列</p><p>俄罗斯套娃信封</p><p>最大子序和</p><p>最长公共子序列</p><h1 id="2021年2月4日22-46-59"><a href="#2021年2月4日22-46-59" class="headerlink" title="2021年2月4日22:46:59"></a>2021年2月4日22:46:59</h1><p>今天把博客整理了下分类</p><p>继续学习的动态规划算法两道题目 </p><p><a href="https://leetcode-cn.com/problems/delete-operation-for-two-strings/" target="_blank" rel="noopener">583. 两个字符串的删除操作</a> </p><p><a href="https://leetcode-cn.com/problems/minimum-ascii-delete-sum-for-two-strings/" target="_blank" rel="noopener">712. 两个字符串的最小ASCII删除和</a></p><p>2021年2月4日23:26:37 <a href="https://learngitbranching.js.org/?locale=zh_CN" target="_blank" rel="noopener">https://learngitbranching.js.org/?locale=zh_CN</a> 学习Git的挺不错的网站 练习一遍</p><h1 id="2021年2月5日11-18-56"><a href="#2021年2月5日11-18-56" class="headerlink" title="2021年2月5日11:18:56"></a>2021年2月5日11:18:56</h1><p>上次改了改项目的BUG, 发布了1.1 release版本</p><p>继续算法</p><p><a href="https://leetcode-cn.com/problems/longest-palindromic-subsequence/" target="_blank" rel="noopener">516. 最长回文子序列</a></p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;h1 id=&quot;2021年2月4日22-46-59&quot;&gt;&lt;a href=&quot;#2021年2月4日22-46-59&quot; class=&quot;headerlink&quot; title=&quot;2021年2月4日22:46:59&quot;&gt;&lt;/a&gt;2021年2月4日22:46:59&lt;/h1&gt;&lt;p&gt;今天把博客整理了下分
+        &lt;h1 id=&quot;2021年2月1日-3日&quot;&gt;&lt;a href=&quot;#2021年2月1日-3日&quot; class=&quot;headerlink&quot; title=&quot;2021年2月1日-3日&quot;&gt;&lt;/a&gt;2021年2月1日-3日&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;动态规划问题&lt;/strong&gt;&lt;/p&gt;
+&lt;p
       
     
     </summary>
     
     
       <category term="假期学习记录" scheme="http://blog.lsmg.xyz/categories/%E5%81%87%E6%9C%9F%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>3-数组中重复的数字</title>
-    <link href="http://blog.lsmg.xyz/2021/02/%E5%89%91%E6%8C%87Offer-/"/>
-    <id>http://blog.lsmg.xyz/2021/02/%E5%89%91%E6%8C%87Offer-/</id>
-    <published>2021-02-04T14:37:28.000Z</published>
-    <updated>2021-02-04T14:37:49.443Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-    
-      <category term="算法" scheme="http://blog.lsmg.xyz/categories/%E7%AE%97%E6%B3%95/"/>
-    
-      <category term="剑指Offer" scheme="http://blog.lsmg.xyz/categories/%E7%AE%97%E6%B3%95/%E5%89%91%E6%8C%87Offer/"/>
     
     
   </entry>
@@ -485,61 +546,6 @@
     
       <category term="CPP" scheme="http://blog.lsmg.xyz/categories/CPP/"/>
     
-    
-  </entry>
-  
-  <entry>
-    <title>Shell脚本编写</title>
-    <link href="http://blog.lsmg.xyz/2021/01/Linux-shell%E8%84%9A%E6%9C%AC%E7%BC%96%E5%86%99/"/>
-    <id>http://blog.lsmg.xyz/2021/01/Linux-shell%E8%84%9A%E6%9C%AC%E7%BC%96%E5%86%99/</id>
-    <published>2021-01-02T14:00:22.000Z</published>
-    <updated>2021-01-02T14:39:15.024Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="第一行-解释器"><a href="#第一行-解释器" class="headerlink" title="第一行 - 解释器"></a>第一行 - 解释器</h1><ol><li><code>#!/bin/bash</code> 这个通常见于脚本的第一行, <code>#!</code>算是个约定了 说明脚本需要什么解释器</li><li><code>/bin/sh xx.sh</code> 这种是执行的时候指定, 脚本第一行的那个就失效了</li></ol><h1 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h1><p>规范</p><ul><li>命名只能使用英文字母，数字和下划线，首个字符不能以数字开头。</li><li>中间不能有空格，可以使用下划线（_）。</li><li>不能使用标点符号。</li><li>不能使用bash里的关键字（可用help命令查看保留关键字）。</li></ul><p>shell变量类型</p><ul><li>局部变量</li><li>环境变量</li><li>shell变量-shell内置特殊变量</li></ul><p>变量定义 注意 不能随便加空格 下面的等号两侧不能加空格</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 直接赋值</span></span><br><span class="line">xxx="lsmg"</span><br><span class="line">xxx = "lsmg" # 错误</span><br><span class="line">xxx="Jigokubana" # 随意修改</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 语句赋值</span></span><br><span class="line">for skill in Ada Coffe Action Java</span><br><span class="line">do</span><br><span class="line">    echo "I am good at $&#123;skill&#125;Script"</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 使用变量</span></span><br><span class="line">echo $xxx</span><br><span class="line">echo $&#123;xxx&#125; # &#123;&#125; 用于标记边界</span><br><span class="line">echo "my name is $&#123;xxx&#125;"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> const</span></span><br><span class="line">readonly xxx="lsmg" </span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 删除变量</span></span><br><span class="line">unset xxx; 不能用于删除只读变量</span><br></pre></td></tr></table></figure><h1 id="单引号-双引号-反引号"><a href="#单引号-双引号-反引号" class="headerlink" title="单引号 双引号 反引号"></a>单引号 双引号 反引号</h1><p>单引号将剥夺其中的所有字符的特殊含义</p><p>双引号中的<code>$</code>（参数替换）和`（命令替换）有特殊含义</p><p>反引号与$()功能相同会执行其中的命令</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">aaa="aaa"</span><br><span class="line"></span><br><span class="line">b1="$aaa"</span><br><span class="line">b2=`$aaa` # 会先进行取变量值 $aaa -&gt; aaa</span><br><span class="line">b3='$aaa'</span><br><span class="line"></span><br><span class="line">echo $b1 # aaa</span><br><span class="line">echo $b2 # aaa: command not found </span><br><span class="line">echo $b3 # $aaa</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;第一行-解释器&quot;&gt;&lt;a href=&quot;#第一行-解释器&quot; class=&quot;headerlink&quot; title=&quot;第一行 - 解释器&quot;&gt;&lt;/a&gt;第一行 - 解释器&lt;/h1&gt;&lt;ol&gt;
-&lt;li&gt;&lt;code&gt;#!/bin/bash&lt;/code&gt; 这个通常见于脚本的第一行, &lt;
-      
-    
-    </summary>
-    
-    
-      <category term="Linux" scheme="http://blog.lsmg.xyz/categories/Linux/"/>
-    
-    
-      <category term="Shell" scheme="http://blog.lsmg.xyz/tags/Shell/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>力扣1.2-N654.最大二叉树</title>
-    <link href="http://blog.lsmg.xyz/2021/01/%E5%8A%9B%E6%89%A31.2-N654.%E6%9C%80%E5%A4%A7%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
-    <id>http://blog.lsmg.xyz/2021/01/%E5%8A%9B%E6%89%A31.2-N654.%E6%9C%80%E5%A4%A7%E4%BA%8C%E5%8F%89%E6%A0%91/</id>
-    <published>2021-01-02T08:21:02.000Z</published>
-    <updated>2021-02-04T14:34:18.163Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="654-最大二叉树"><a href="#654-最大二叉树" class="headerlink" title="654. 最大二叉树"></a><a href="https://leetcode-cn.com/problems/maximum-binary-tree/" target="_blank" rel="noopener">654. 最大二叉树</a></h1><p>Difficulty: <strong>中等</strong></p><p>给定一个不含重复元素的整数数组。一个以此数组构建的最大二叉树定义如下：</p><ol><li>二叉树的根是数组中的最大元素。</li><li>左子树是通过数组中最大值左边部分构造出的最大二叉树。</li><li>右子树是通过数组中最大值右边部分构造出的最大二叉树。</li></ol><p>通过给定的数组构建最大二叉树，并且输出这个树的根节点。</p><p><strong>示例 ：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">输入：[3,2,1,6,0,5]</span><br><span class="line">输出：返回下面这棵树的根节点：</span><br><span class="line"></span><br><span class="line">      6</span><br><span class="line">    &#x2F;   \</span><br><span class="line">   3     5</span><br><span class="line">    \    &#x2F; </span><br><span class="line">     2  0   </span><br><span class="line">       \</span><br><span class="line">        1</span><br></pre></td></tr></table></figure><p><strong>提示：</strong></p><ol><li>给定的数组的大小在 [1, 1000] 之间。</li></ol><h2 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">GetMaxSub</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> result = left;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = left + <span class="number">1</span>; i &lt; right; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (nums[i] &gt; nums[result])</span><br><span class="line">            &#123;</span><br><span class="line">                result = i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">TreeNode* <span class="title">constructMaximumBinaryTree</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> max_sub = GetMaxSub(nums, <span class="number">0</span>, nums.<span class="built_in">size</span>());</span><br><span class="line"></span><br><span class="line">        TreeNode* root = <span class="keyword">new</span> TreeNode(nums[max_sub]);</span><br><span class="line"></span><br><span class="line">        ConstructMaximumBinaryTree(nums, <span class="number">0</span>, max_sub, nums.<span class="built_in">size</span>(), root);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">ConstructMaximumBinaryTree</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> left, <span class="keyword">int</span> mid, <span class="keyword">int</span> right, TreeNode* root)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (left &lt; mid)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> l_max = GetMaxSub(nums, left, mid);</span><br><span class="line">            root-&gt;left = <span class="keyword">new</span> TreeNode(nums[l_max]);</span><br><span class="line">            ConstructMaximumBinaryTree(nums, left, l_max, mid, root-&gt;left);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (mid + <span class="number">1</span> &lt; right)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> r_max = GetMaxSub(nums, mid + <span class="number">1</span>, right);</span><br><span class="line">            root-&gt;right = <span class="keyword">new</span> TreeNode(nums[r_max]);</span><br><span class="line">            ConstructMaximumBinaryTree(nums, mid + <span class="number">1</span>, r_max, right, root-&gt;right);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p>自己的第一个思路就是通过ConstructMaximumBinaryTree给传入的root节点构造左子树和右子树</p><p>然后递归的给root的左子树和右子树构造子树</p><p>每次传入left mid right将数组切分为两段 左段构造root的左子树 右段构造root的右子树</p><h2 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">constructMaximumBinaryTree</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> constructMaximumBinaryTree(nums, <span class="number">0</span>, nums.<span class="built_in">size</span>());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">TreeNode* <span class="title">constructMaximumBinaryTree</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (left + <span class="number">1</span> &gt; right)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> max_sub = left;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = left + <span class="number">1</span>; i &lt; right; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (nums[i] &gt; nums[max_sub])</span><br><span class="line">            &#123;</span><br><span class="line">                max_sub = i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        TreeNode* node = <span class="keyword">new</span> TreeNode(nums[max_sub]);</span><br><span class="line">        node-&gt;left = constructMaximumBinaryTree(nums, left, max_sub);</span><br><span class="line">        node-&gt;right = constructMaximumBinaryTree(nums, max_sub + <span class="number">1</span>, right);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> node;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p>题解的答案更加的简洁每次的constructMaximumBinaryTree仅负责构造一个节点返回回去成为左节点或者右节点</p><p>同时给构造出的节点赋值左节点和右节点.</p><p>相对我的代码构造左节点和右节点 这里淡化了左右节点的区别. 通过传入的参数即可知道是左右节点然后赋值给left right</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;654-最大二叉树&quot;&gt;&lt;a href=&quot;#654-最大二叉树&quot; class=&quot;headerlink&quot; title=&quot;654. 最大二叉树&quot;&gt;&lt;/a&gt;&lt;a href=&quot;https://leetcode-cn.com/problems/maximum-binary-t
-      
-    
-    </summary>
-    
-    
-      <category term="算法" scheme="http://blog.lsmg.xyz/categories/%E7%AE%97%E6%B3%95/"/>
-    
-      <category term="力扣每日一题" scheme="http://blog.lsmg.xyz/categories/%E7%AE%97%E6%B3%95/%E5%8A%9B%E6%89%A3%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/"/>
-    
-    
-      <category term="二叉树" scheme="http://blog.lsmg.xyz/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
     
   </entry>
   
