@@ -20,7 +20,7 @@
 <meta name="verify" content=all />
     <!--Title-->
 
-<title>Tag: 陀螺球 | Lsmg的大学之路</title>
+<title>void*|function|any|optional, How when and why | Lsmg的大学之路</title>
 
 <link rel="alternate" href="/atom.xml" title="Lsmg的大学之路" type="application/atom+xml">
 
@@ -30,9 +30,10 @@
     
 
 <link rel="stylesheet" href="/css/base.css">
-<link rel="stylesheet" href="/css/pages/archive.css">
+<link rel="stylesheet" href="/css/pages/post.css">
 <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="/css/thirdParty/highlight/github.css">
+<link rel="stylesheet" href="/.css">
 
 
     <!--script-->
@@ -136,39 +137,120 @@
 
 
         <div id="main">
-    <div id="post-list">
-        <ul class="archives-post-list">
-            
-            <li class="post-items" _href="/2020/06/%E9%A1%B9%E7%9B%AE%E5%88%B6%E4%BD%9C-%E9%99%80%E8%9E%BA%E7%90%83/">
+    <article id="post">
+        <div id="post-header">
+
+            <h1 id="void*|function|any|optional, How when and why">
                 
-                <p class="info">陀螺球</p>
-                <h2 class="post-item-title">陀螺球(废弃)</h2>
-                <div class="article-meta">
+                void*|function|any|optional, How when and why
+                
+            </h1>
+            <div class="article-meta">
     
     
     <span class="categories-meta fa-wrap">
             <i class="fa fa-folder-open-o"></i>
-        <span>项目制作</span>
+        <span>CPP</span>
     </span>
     
+    
+    <span class="fa-wrap">
+         <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            null
+            
+        </span>
+    </span>
     
     
     <span class="fa-wrap">
         <i class="fa fa-clock-o"></i>
-        <span class="date-meta ">2020/06/02</span>
+        <span class="date-meta ">2021/02/06</span>
     </span>
     
     
     
 </div>
 
-            </li>
             
-        </ul>
+            
+        </div>
+        
+        <div id="post-body">
+            <p>C++17引入的<code>std::any</code>挺想用的, 毕竟要学会使用modern c++.</p>
+<p>之前都是通过<code>void*</code>来实现相关的功能, 这次看看<code>std::any</code>的怎么使用何时使用和为何使用</p>
+<p>参考文章 <a href="https://devblogs.microsoft.com/cppblog/stdany-how-when-and-why/" target="_blank" rel="noopener">std::any: How, when, and why</a></p>
+<h1 id="void"><a href="#void" class="headerlink" title="void*"></a>void*</h1><p>从C而来的<code>void*</code>可以用来存储任意参数的地址, 在Linux的系统Api上有相当部分的Api使用了<code>void*</code>参数. </p>
+<p>常用之一就是<code>pthread_create</code>.</p>
+<ol>
+<li>将<code>void*</code>转换回原来的类型会由于缺少类型信息来提供安全机制, 一旦转换成了错误的类型 极可能程序直接崩溃</li>
+<li>需要自己管理生命周期 (可以通过智能指针解决这个问题)</li>
+<li>无法进行高效的拷贝, 你需要将其转换为原始类型才能进行深拷贝 否则只能简单的拷贝下指针的地址 因为你不知道指针指向内存块的长度</li>
+</ol>
+<h1 id="any"><a href="#any" class="headerlink" title="any"></a>any</h1><p>相对于void* 解决了其三个缺点. 当然对于将会绑定的类型不确定的话使用any更好,这点消耗是值得的. 如果对于确定类型使用则可能会造成不必要的消耗</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cassert&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;any&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::any a;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">std</span>::any b = <span class="number">648</span>;</span><br><span class="line"></span><br><span class="line">    assert(!a.has_value());</span><br><span class="line">    assert(b.type() == <span class="keyword">typeid</span>(<span class="keyword">int</span>));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">std</span>::any_cast&lt;<span class="keyword">float</span>&gt;(b);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span>(<span class="keyword">const</span> <span class="built_in">std</span>::exception&amp; ex)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; ex.what(); <span class="comment">// bad any_cast</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">auto</span> ptra = <span class="built_in">std</span>::any_cast&lt;<span class="keyword">int</span>&gt;(&amp;a); <span class="comment">// 为空或者类型不匹配返回nullptr</span></span><br><span class="line">    assert(!ptra);</span><br><span class="line">    <span class="keyword">auto</span> ptrb = <span class="built_in">std</span>::any_cast&lt;<span class="keyword">int</span>&gt;(&amp;b);</span><br><span class="line">    assert(ptrb);</span><br><span class="line">    *ptrb = <span class="number">328</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="function"><a href="#function" class="headerlink" title="function"></a>function</h1><p>可用于存储函数, 相对于使用函数指针 function调用成员函数更加方便</p>
+<h1 id="optional"><a href="#optional" class="headerlink" title="optional"></a>optional</h1>
+        </div>
+        <div id="post-footer">
+            <div class="avatar" style="padding-bottom: 0.2rem"
+                    >
+                <img src="https://lsmg-img.oss-cn-beijing.aliyuncs.com/theme/tx.jpg" alt="avatar"/>
+                
+                
+            </div>
+            <ul class="author-profile-section">
+                <li>
+                  
+                  Author:
+                  
+                    
+                    <a href="/about.html">Lsmg</a>
+                </li>
+                
+                <li>Published Date: <span>2021-02-06  18:56:27</span></li>
+                
+                <li>Updated Date: <span>2021-02-06  22:08:52</span></li>
+                
+                <li class="post-category">
+                    Categories:
+                    
+                    <a href="/categories/CPP/">CPP</a>
+                    
+                </li>
+                <li class="post-tags">
+                    Tags:
+                    
+                </li>
+                
+                <li> License: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+知识共享署名-非商业性使用-禁止演绎 3.0 未本地化版本许可协议（CC BY-NC-ND 3.0）
+</a></li>
+                
+            </ul>
+        </div>
+    </article>
+    <div class="article-nav">
+        
+        
+        <a href="/2021/02/%E5%89%91%E6%8C%87Offer-/" class="next-post fa">剑指3-数组中重复的数字</a>
+        
     </div>
+    
+    <div id="comments">
+        
+
+<script>
+  gitalk.render("comments");
+</script>
+
+
+
+    </div>
+    
 </div>
-
-
 
 
     </div>
@@ -196,6 +278,8 @@
     <li class="totop-btn fa fa-angle-up"></li>
     <li class="exchange-btn fa fa-exchange"></li>
   
+    <li class="toc-btn fa fa-list-ul"></li>
+    
     
 
     
@@ -215,6 +299,8 @@
         </div>
     </div>
 </div>
+
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#void"><span class="toc-number">1.</span> <span class="toc-text">void*</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#any"><span class="toc-number">2.</span> <span class="toc-text">any</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#function"><span class="toc-number">3.</span> <span class="toc-text">function</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#optional"><span class="toc-number">4.</span> <span class="toc-text">optional</span></a></li></ol>
 
 
 
