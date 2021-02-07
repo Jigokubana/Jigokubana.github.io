@@ -20,7 +20,7 @@
 <meta name="verify" content=all />
     <!--Title-->
 
-<title>左值引用和右值引用 | Lsmg的大学之路</title>
+<title>剑指Offer(年轻人你渴望力量吗) | Lsmg的大学之路</title>
 
 <link rel="alternate" href="/atom.xml" title="Lsmg的大学之路" type="application/atom+xml">
 
@@ -140,9 +140,9 @@
     <article id="post">
         <div id="post-header">
 
-            <h1 id="左值引用和右值引用">
+            <h1 id="剑指Offer(年轻人你渴望力量吗)">
                 
-                左值引用和右值引用
+                剑指Offer(年轻人你渴望力量吗)
                 
             </h1>
             <div class="article-meta">
@@ -150,7 +150,7 @@
     
     <span class="categories-meta fa-wrap">
             <i class="fa fa-folder-open-o"></i>
-        <span>CPP</span>
+        <span>算法</span>
     </span>
     
     
@@ -166,7 +166,7 @@
     
     <span class="fa-wrap">
         <i class="fa fa-clock-o"></i>
-        <span class="date-meta ">2021/01/15</span>
+        <span class="date-meta ">2021/02/05</span>
     </span>
     
     
@@ -178,7 +178,36 @@
         </div>
         
         <div id="post-body">
-            
+            <h3 id="剑指-Offer-03-数组中重复的数字"><a href="#剑指-Offer-03-数组中重复的数字" class="headerlink" title="剑指 Offer 03. 数组中重复的数字"></a><a href="https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/" target="_blank" rel="noopener">剑指 Offer 03. 数组中重复的数字</a></h3><p>Difficulty: <strong>简单</strong></p>
+<p>找出数组中重复的数字。</p>
+<p>在一个长度为 n 的数组 nums 里的所有数字都在 0～n-1 的范围内。数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次。请找出数组中任意一个重复的数字。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：</span><br><span class="line">[2, 3, 1, 0, 2, 5, 3]</span><br><span class="line">输出：2 或 3</span><br></pre></td></tr></table></figure>
+
+<p><strong>限制：</strong></p>
+<p><code>2 &lt;= n &lt;= 100000</code></p>
+<h4 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h4><p>Language: ****</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">​</span><br></pre></td></tr></table></figure>
+
+<h3 id="剑指-Offer-04-二维数组中的查找"><a href="#剑指-Offer-04-二维数组中的查找" class="headerlink" title="剑指 Offer 04. 二维数组中的查找"></a><a href="https://leetcode-cn.com/problems/er-wei-shu-zu-zhong-de-cha-zhao-lcof/" target="_blank" rel="noopener">剑指 Offer 04. 二维数组中的查找</a></h3><p>Difficulty: <strong>中等</strong></p>
+<p>在一个 n * m 的二维数组中，每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个高效的函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。</p>
+<p><strong>示例:</strong></p>
+<p>现有矩阵 matrix 如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  [1,   4,  7, 11, 15],</span><br><span class="line">  [2,   5,  8, 12, 19],</span><br><span class="line">  [3,   6,  9, 16, 22],</span><br><span class="line">  [10, 13, 14, 17, 24],</span><br><span class="line">  [18, 21, 23, 26, 30]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>给定 target = <code>5</code>，返回 <code>true</code>。</p>
+<p>给定 target = <code>20</code>，返回 <code>false</code>。</p>
+<p><strong>限制：</strong></p>
+<p><code>0 &lt;= n &lt;= 1000</code></p>
+<p><code>0 &lt;= m &lt;= 1000</code></p>
+<p><strong>注意：</strong>本题与主站 240 题相同：</p>
+<h4 id="菜鸡第一印象-暴力法"><a href="#菜鸡第一印象-暴力法" class="headerlink" title="菜鸡第一印象-暴力法"></a>菜鸡第一印象-暴力法</h4><p>O(nm)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">​<span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">findNumberIn2DArray</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; matrix, <span class="keyword">int</span> target)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (matrix.empty() || matrix[<span class="number">0</span>].empty())</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; vec : matrix)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (vec[<span class="number">0</span>] &gt; target)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; num : vec)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (num == target)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (num &gt; target)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="大神点拨-站在右上角看-这个矩阵其实就像是一个BST"><a href="#大神点拨-站在右上角看-这个矩阵其实就像是一个BST" class="headerlink" title="大神点拨-站在右上角看,这个矩阵其实就像是一个BST"></a>大神点拨-站在右上角看,这个矩阵其实就像是一个BST</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">findNumberIn2DArray</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; matrix, <span class="keyword">int</span> target)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (matrix.empty() || matrix[<span class="number">0</span>].empty())</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> row_max = matrix.<span class="built_in">size</span>();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> column = matrix[<span class="number">0</span>].<span class="built_in">size</span>() - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> row = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (row &lt; row_max &amp;&amp; column &gt;= <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (matrix[row][column] == target)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (matrix[row][column] &gt; target)</span><br><span class="line">            &#123;</span><br><span class="line">                column--;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                row++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>初看题目, 还是没有详细审题漏掉了<code>每一列都按照从上到下递增的顺序排序</code>. 然后按照暴力法做了出来, 看了眼评论第一上面那句话让我翻回去看了下绝了.</p>
+
         </div>
         <div id="post-footer">
             <div class="avatar" style="padding-bottom: 0.2rem"
@@ -196,14 +225,14 @@
                     <a href="/about.html">Lsmg</a>
                 </li>
                 
-                <li>Published Date: <span>2021-01-15  17:27:27</span></li>
+                <li>Published Date: <span>2021-02-05  22:37:28</span></li>
                 
-                <li>Updated Date: <span>2021-01-15  17:27:21</span></li>
+                <li>Updated Date: <span>2021-02-07  22:34:47</span></li>
                 
                 <li class="post-category">
                     Categories:
                     
-                    <a href="/categories/CPP/">CPP</a>
+                    <a href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
                     
                 </li>
                 <li class="post-tags">
@@ -220,10 +249,10 @@
     </article>
     <div class="article-nav">
         
-        <a href="/2021/01/Linux-docker/" class="pre-post fa fa-caret-left">Docker使用</a>
+        <a href="/2021/02/CPP-stdany,%20How%20when%20and%20why/" class="pre-post fa fa-caret-left">void*|function|any|optional|variant, How when and why</a>
         
         
-        <a href="/2021/01/CPP-cast/" class="next-post fa">.*_case</a>
+        <a href="/2021/02/%E5%8A%9B%E6%89%A32.5-N516%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/" class="next-post fa">力扣2.5-N583&amp;N712</a>
         
     </div>
     
@@ -288,7 +317,7 @@
     </div>
 </div>
 
-    
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#剑指-Offer-03-数组中重复的数字"><span class="toc-number">1.</span> <span class="toc-text">剑指 Offer 03. 数组中重复的数字</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Solution"><span class="toc-number">1.1.</span> <span class="toc-text">Solution</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#剑指-Offer-04-二维数组中的查找"><span class="toc-number">2.</span> <span class="toc-text">剑指 Offer 04. 二维数组中的查找</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#菜鸡第一印象-暴力法"><span class="toc-number">2.1.</span> <span class="toc-text">菜鸡第一印象-暴力法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#大神点拨-站在右上角看-这个矩阵其实就像是一个BST"><span class="toc-number">2.2.</span> <span class="toc-text">大神点拨-站在右上角看,这个矩阵其实就像是一个BST</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#总结"><span class="toc-number">2.3.</span> <span class="toc-text">总结</span></a></li></ol></li></ol>
 
 
 
