@@ -3,186 +3,6 @@
     
     
     <entry>
-        <title><![CDATA[class struct typename]]></title>
-        <url>http://blog.lsmg.xyz/2021/02/CPP-class%2520struct%2520typename/</url>
-        <content type="html"><![CDATA[<h1 id="class-和-struct的区别"><a href="#class-和-struct的区别" class="headerlink" title="class 和 struct的区别"></a>class 和 struct的区别</h1><ol>
-<li>class默认访问权限是private, struct默认访问权限是public</li>
-<li>class默认private继承, struct默认public继承</li>
-<li>struct在没有构造函数, 可以使用大括号初始化. class则要求全部public下才能大括号初始化</li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Foo1</span> &#123;</span>&#125; foo1;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo2</span> &#123;</span>&#125; foo2;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Foo3</span> &#123;</span><span class="keyword">int</span> a; <span class="keyword">int</span> b;&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo4</span>&#123;</span><span class="keyword">int</span> a; <span class="keyword">int</span> b;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo44</span>&#123;</span><span class="keyword">public</span>: <span class="keyword">int</span> a; <span class="keyword">int</span> b;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"sizeof struct-Foo1: %zu\n"</span>, <span class="keyword">sizeof</span> foo1); <span class="comment">// 1</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"sizeof class-Foo2: %zu\n"</span>, <span class="keyword">sizeof</span> foo2); <span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line">    Foo3 foo3 = &#123;<span class="number">1</span>, <span class="number">2</span>&#125;;</span><br><span class="line">    <span class="comment">// Foo4 foo4 = &#123;1, 2&#125;; error: could not convert ‘&#123;1, 2&#125;’ from ‘&lt;brace-enclosed initializer list&gt;’ to ‘Foo4’</span></span><br><span class="line">    Foo44 foo44 = &#123;<span class="number">1</span>, <span class="number">2</span>&#125;;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="typename-class"><a href="#typename-class" class="headerlink" title="typename class"></a>typename class</h1><p><a href="https://stackoverflow.com/questions/2023977/difference-of-keywords-typename-and-class-in-templates" target="_blank" rel="noopener">https://stackoverflow.com/questions/2023977/difference-of-keywords-typename-and-class-in-templates</a></p>
-]]></content>
-        
-        <categories>
-            
-            <category> CPP </category>
-            
-        </categories>
-        
-        
-    </entry>
-    
-    <entry>
-        <title><![CDATA[大三寒假学习记录]]></title>
-        <url>http://blog.lsmg.xyz/2021/02/%25E5%2581%2587%25E6%259C%259F%25E5%25AD%25A6%25E4%25B9%25A0%25E8%25AE%25B0%25E5%25BD%2595-%25E5%25A4%25A7%25E4%25B8%2589%25E5%25AF%2592%25E5%2581%2587/</url>
-        <content type="html"><![CDATA[<h1 id="2021年2月1日-3日"><a href="#2021年2月1日-3日" class="headerlink" title="2021年2月1日-3日"></a>2021年2月1日-3日</h1><p><strong>动态规划问题</strong></p>
-<p>编辑距离</p>
-<p>最长递增子序列</p>
-<p>俄罗斯套娃信封</p>
-<p>最大子序和</p>
-<p>最长公共子序列</p>
-<h1 id="2021年2月4日22-46-59"><a href="#2021年2月4日22-46-59" class="headerlink" title="2021年2月4日22:46:59"></a>2021年2月4日22:46:59</h1><p>今天把博客整理了下分类</p>
-<p>继续学习的动态规划算法两道题目 </p>
-<p><a href="https://leetcode-cn.com/problems/delete-operation-for-two-strings/" target="_blank" rel="noopener">583. 两个字符串的删除操作</a> </p>
-<p><a href="https://leetcode-cn.com/problems/minimum-ascii-delete-sum-for-two-strings/" target="_blank" rel="noopener">712. 两个字符串的最小ASCII删除和</a></p>
-<p>2021年2月4日23:26:37 <a href="https://learngitbranching.js.org/?locale=zh_CN" target="_blank" rel="noopener">https://learngitbranching.js.org/?locale=zh_CN</a> 学习Git的挺不错的网站 练习一遍</p>
-<h1 id="2021年2月5日11-18-56"><a href="#2021年2月5日11-18-56" class="headerlink" title="2021年2月5日11:18:56"></a>2021年2月5日11:18:56</h1><p>上次改了改项目的BUG, 发布了1.1 release版本</p>
-<p>继续算法</p>
-<p><a href="https://leetcode-cn.com/problems/longest-palindromic-subsequence/" target="_blank" rel="noopener">516. 最长回文子序列</a></p>
-<p>整了一大下午 没想到是memcpy 的问题总算解决了虚拟机代码无法运行的问题</p>
-<h1 id="2021年2月20日"><a href="#2021年2月20日" class="headerlink" title="2021年2月20日"></a>2021年2月20日</h1><p>C++ 拷贝构造函数和赋值运算符 <a href="https://www.cnblogs.com/wangguchangqing/p/6141743.html" target="_blank" rel="noopener">https://www.cnblogs.com/wangguchangqing/p/6141743.html</a></p>
-<p>allocate deallocate<br>malloc free<br>new delete</p>
-<p>STL allocate deallocate constructor deconstructor<br>std allocate</p>
-<p>我理解的右值引用、移动语义和完美转发 <a href="https://www.jianshu.com/p/d19fc8447eaa" target="_blank" rel="noopener">https://www.jianshu.com/p/d19fc8447eaa</a></p>
-<p><img src="https://uploadfiles.nowcoder.com/images/20190313/311436_1552467921124_13956548C4BB199139A2744C39350272" alt="内存布局"><span class="img-alt">内存布局</span></p>
-<p>异步回调 sync</p>
-<p>聊聊同步、异步、阻塞与非阻塞 <a href="https://my.oschina.net/xianggao/blog/661085" target="_blank" rel="noopener">https://my.oschina.net/xianggao/blog/661085</a></p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>多线程</th>
-<th>多进程</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>同步</td>
-<td>mutex线程锁, 条件变量, 信号量(生产者消费者)</td>
-<td>PV操作</td>
-</tr>
-<tr>
-<td>数据共享</td>
-<td></td>
-<td>共享内存, 消息队列, 管道,</td>
-</tr>
-</tbody></table>
-<p>信号量可以设置多个初始资源 等多个初始资源消耗完毕后才会sleep</p>
-<p>条件变量则是直接sleep等待一个个或者全部唤醒</p>
-<p><a href="https://blog.csdn.net/linraise/article/details/12979473" target="_blank" rel="noopener">https://blog.csdn.net/linraise/article/details/12979473</a></p>
-<h1 id="2021年2月22日-AC5"><a href="#2021年2月22日-AC5" class="headerlink" title="2021年2月22日 - AC5"></a>2021年2月22日 - AC5</h1><p>更加的透彻 <a href="https://codinfox.github.io/dev/2014/06/03/move-semantic-perfect-forward/" target="_blank" rel="noopener">https://codinfox.github.io/dev/2014/06/03/move-semantic-perfect-forward/</a></p>
-<h2 id="移动语义和完美转发"><a href="#移动语义和完美转发" class="headerlink" title="移动语义和完美转发"></a>移动语义和完美转发</h2><p><strong>移动构造函数</strong><br>可以将源对象中的高消耗资源 转移到 新的对象中</p>
-<p>而使用拷贝构造函数会导致生成两份高消耗资源 造成浪费</p>
-<p><strong>左值 右值</strong><br>能够取到地址的为左值 否则是右值</p>
-<p><strong>std::move std::forward</strong><br>move将一个左值T转换为右值 以此来调用对象的移动构造函数 转移内部资源, 否则由于T是左值将会调用拷贝构造函数 生成新的资源 浪费旧的资源</p>
-<p>forward左值依然为左值 右值转换为右值. 当一个参数传入右值形参的时候 函数的实参实际为左值 使用forward可以将函数实参转换原本的右值</p>
-<p>而当传入左值的时候forward转换后依旧是左值</p>
-<p><strong>void Foo(const int&amp;)</strong><br>在没有其他重载的情况下, <code>const int&amp;</code>可以接收左值也可以接收右值  如果去掉<code>const</code>则只能接收右值</p>
-<p>每个线程都是如何启动的, 各个线程的作用. 线程间的数据交互方式</p>
-<p>unique_lock  lock_guard scope_lock lock 等的作用</p>
-<p>条件变量虚假唤醒</p>
-<p>整理了jsoncpp的代码明天看</p>
-<h1 id="2021年2月23日-AC5"><a href="#2021年2月23日-AC5" class="headerlink" title="2021年2月23日 - AC5"></a>2021年2月23日 - AC5</h1><p><a href="https://github.com/HiganFish/jsoncpp1.9.4-learn" target="_blank" rel="noopener">https://github.com/HiganFish/jsoncpp1.9.4-learn</a> jsoncpp代码阅读</p>
-<h2 id="lower-bound-insert-比-find-insert-要高性能"><a href="#lower-bound-insert-比-find-insert-要高性能" class="headerlink" title="lower_bound + insert 比 find + insert 要高性能"></a>lower_bound + insert 比 find + insert 要高性能</h2><p>insert会利用lower_bound的返回值</p>
-<p>而find则没有此效果 总是需要进行O(log N)的查找位置</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">EventLoop* <span class="title">EventLoopThread::Start</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	thread_.Start();</span><br><span class="line"></span><br><span class="line">	EventLoop* loop = <span class="literal">nullptr</span>;</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function">MutexGuardLock <span class="title">guard</span><span class="params">(mutex_)</span></span>;</span><br><span class="line">		<span class="keyword">while</span> (loop_ == <span class="literal">nullptr</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			cond_.Wait();</span><br><span class="line">		&#125;</span><br><span class="line">		loop = loop_;  <span class="comment">// TODO 为什么不直接在 创建成员变量 EventLoop loop_; ??  为了等线程创建完毕后 才返回? 否则这个函数只有第一句 可能线程未创建完毕就返回了?</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> loop;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">EventLoopThread::ThreadFunc</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	EventLoop loop;</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function">MutexGuardLock <span class="title">guard</span><span class="params">(mutex_)</span></span>;</span><br><span class="line">		loop_ = &amp;loop;</span><br><span class="line">		cond_.WakeUpOne();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这段代码的原因 ?</p>
-<h1 id="2021年2月24日"><a href="#2021年2月24日" class="headerlink" title="2021年2月24日"></a>2021年2月24日</h1><h2 id="typename-and-class-in-template"><a href="#typename-and-class-in-template" class="headerlink" title="typename and class in template"></a>typename and class in template</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="keyword">typedef</span> <span class="keyword">int</span> INT;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt; // <span class="title">mingw</span>中和 <span class="title">template</span> &lt;typename T&gt; 完全等效 必须在 <span class="title">T</span>:</span>:INT 前加<span class="keyword">typename</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">D1</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	T::INT i1; <span class="comment">// error: need 'typename' before 'T::INT' because 'T' is a dependent scope</span></span><br><span class="line">	<span class="keyword">typename</span> T::INT i2; <span class="comment">// true</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	D1&lt;D&gt; d_1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>额外发现</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">A</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	T t_;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">A1</span> :</span> <span class="keyword">public</span> A&lt;T&gt;</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	A1()</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// t_ = 1;</span></span><br><span class="line">		<span class="keyword">this</span>-&gt;t_ = <span class="number">1</span>; <span class="comment">// 这里需要使用this指针访问</span></span><br><span class="line">		A&lt;T&gt;::t_ = <span class="number">1</span>; <span class="comment">// 可读性更好</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h2 id="二段名字查找"><a href="#二段名字查找" class="headerlink" title="二段名字查找"></a>二段名字查找</h2><ol>
-<li>第一段: 模板定义阶段  在被定义时 只在模板中有独立的名字(和模板参数无关) 参与查找</li>
-<li>第二段: 模板类实例化  非独立的名字参与查找</li>
-</ol>
-<p><strong>以成员变量为例 成员函数同理</strong></p>
-<ol>
-<li><p>在第一阶段, 首先处理A1遇到了<code>class A1 : public A&lt;T&gt;</code>. 此时父类<code>A&lt;T&gt;</code>依赖于模板参数 属于非独立 不参与查找</p>
-</li>
-<li><p>在之后遇到了<code>t_</code>这个变量, 由于没有查找基类 这里便认为<code>t_</code>是一个非成员变量</p>
-</li>
-<li><p>第二阶段这时候才处理<code>A&lt;T&gt;</code> 虽然这时已经<code>可以知道t_是一个成员变量</code>但是第一阶段编译器已经认定了<code>t_</code>是一个非成员变量</p>
-</li>
-<li><p>而对于一个非成员变量 编译器认为不需要去基类中查找, 所以就报错无法找到</p>
-</li>
-<li><p>使用this之后在第一阶段, 编译器就被明确的告知<code>t_</code>是一个成员变量</p>
-</li>
-<li><p>然后第二阶段, 编译器就会去基类中查找这个成员变量. </p>
-</li>
-</ol>
-<p><a href="https://www.cnblogs.com/onepixel/articles/7674659.html" target="_blank" rel="noopener">https://www.cnblogs.com/onepixel/articles/7674659.html</a></p>
-]]></content>
-        
-        <categories>
-            
-            <category> 假期学习记录 </category>
-            
-        </categories>
-        
-        
-    </entry>
-    
-    <entry>
-        <title><![CDATA[小方说知识星球]]></title>
-        <url>http://blog.lsmg.xyz/2021/02/%25E5%259F%25BA%25E7%25A1%2580%25E7%259F%25A5%25E8%25AF%2586%25E6%259D%2582%25E7%2583%25A9-%25E5%25B0%258F%25E6%2596%25B9%25E8%25AF%25B4%25E7%259F%25A5%25E8%25AF%2586%25E6%2598%259F%25E7%2590%2583/</url>
-        <content type="html"><![CDATA[<h1 id="网络编程"><a href="#网络编程" class="headerlink" title="网络编程"></a>网络编程</h1><p>这里并不做过多的记录, 记录一些tips吧</p>
-<p>lsof 能用做文件删除恢复. 仅限于文件虽然被删除但依然被某个进程打开.</p>
-<p>bind函数<br>地址可以指定 INADDR_ANY<br>那么端口呢?  测试了下如果端口为0确实是 bind到了随机端口</p>
-<p>bind到一个已经bind的端口会出错. 然而如果端口为0 随机的端口则没有被bind过</p>
-<p>客户端connect前调用bind能够以指定端口号连接, 这个在高性能服务器见过 不过一直没有用过</p>
-<p>异步connect? 非阻塞connect</p>
-<p>connect尝试次数? 尝试间隔? </p>
-<table>
-<thead>
-<tr>
-<th>函数名称</th>
-<th>返回值</th>
-<th>阻塞</th>
-<th>非阻塞</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>recv</td>
-<td>-1</td>
-<td>出错</td>
-<td>判断是否为EWOULDBLOCK(数据已经收完, ET模式收完数据的标志) 或者 EINTR(信号中断)</td>
-</tr>
-<tr>
-<td>recv</td>
-<td>0</td>
-<td>对端关闭</td>
-<td>对端关闭</td>
-</tr>
-<tr>
-<td>send</td>
-<td>-1</td>
-<td>出错</td>
-<td>EWOULDBLOCK(数据无法继续发出) EAGAIN</td>
-</tr>
-</tbody></table>
-<p>LT 想收多少收多少 收不完就提醒<br>ET 爱收不收 过了这村没这店</p>
-<h1 id="并发编程"><a href="#并发编程" class="headerlink" title="并发编程"></a>并发编程</h1><p>条件变量虚假唤醒</p>
-<p>协程操作系统自带还是语言实现的</p>
-<p>单机服务做好 找到单机的瓶颈 上并发</p>
-<p>每个线程都是如何启动的, 各个线程的作用. 线程间的数据交互方式</p>
-<p>unique_lock  lock_guard scope_lock lock 等的作用</p>
-]]></content>
-        
-        <categories>
-            
-            <category> 基础知识杂烩 </category>
-            
-        </categories>
-        
-        
-    </entry>
-    
-    <entry>
         <title><![CDATA[剑指Offer(年轻人你渴望力量吗)]]></title>
         <url>http://blog.lsmg.xyz/2021/02/%25E5%2589%2591%25E6%258C%2587Offer/</url>
         <content type="html"><![CDATA[<h3 id="剑指-Offer-03-数组中重复的数字"><a href="#剑指-Offer-03-数组中重复的数字" class="headerlink" title="剑指 Offer 03. 数组中重复的数字"></a><a href="https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/" target="_blank" rel="noopener">剑指 Offer 03. 数组中重复的数字</a></h3><p>Difficulty: <strong>简单</strong></p>
@@ -611,11 +431,296 @@
 <p>如果两者相等则后移</p>
 <p>如果两者不相等则入栈当前元素.</p>
 <p><em>实际上这里就可以直接入栈元素然后再判断,如果相等了就出栈 如果不相等也恰好入栈了</em></p>
-]]></content>
+<h3 id="剑指-Offer-32-I-从上到下打印二叉树"><a href="#剑指-Offer-32-I-从上到下打印二叉树" class="headerlink" title="剑指 Offer 32 - I. 从上到下打印二叉树"></a><a href="https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-lcof/" target="_blank" rel="noopener">剑指 Offer 32 - I. 从上到下打印二叉树</a></h3><p>Difficulty: <strong>中等</strong></p>
+<p>从上到下打印出二叉树的每个节点，同一层的节点按照从左到右的顺序打印。</p>
+<p>例如:<br>给定二叉树: <code>[3,9,20,null,null,15,7]</code>,</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  3</span><br><span class="line"> &#x2F; \</span><br><span class="line">9  20</span><br><span class="line">  &#x2F;  \</span><br><span class="line"> 15   7</span><br></pre></td></tr></table></figure>
+
+<p>返回：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[3,9,20,15,7]</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ol>
+<li><code>节点总数 &lt;= 1000</code></li>
+</ol>
+<h4 id="Solution-deque"><a href="#Solution-deque" class="headerlink" title="Solution - deque"></a>Solution - deque</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">​<span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">levelOrder</span><span class="params">(TreeNode* root)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!root)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">deque</span>&lt;TreeNode*&gt; nodes;</span><br><span class="line"></span><br><span class="line">        nodes.push_back(root);</span><br><span class="line"></span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; result;</span><br><span class="line">        <span class="keyword">while</span> (!nodes.empty())</span><br><span class="line">        &#123;</span><br><span class="line">            TreeNode* node = nodes.front();</span><br><span class="line">            nodes.pop_front();</span><br><span class="line"></span><br><span class="line">            result.push_back(node-&gt;val);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (node-&gt;left)</span><br><span class="line">            &#123;</span><br><span class="line">                nodes.push_back(node-&gt;left);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (node-&gt;right)</span><br><span class="line">            &#123;</span><br><span class="line">                nodes.push_back(node-&gt;right);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="剑指-Offer-32-II-从上到下打印二叉树-II"><a href="#剑指-Offer-32-II-从上到下打印二叉树-II" class="headerlink" title="剑指 Offer 32 - II. 从上到下打印二叉树 II"></a><a href="https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-ii-lcof/" target="_blank" rel="noopener">剑指 Offer 32 - II. 从上到下打印二叉树 II</a></h3><p>Difficulty: <strong>简单</strong></p>
+<p>从上到下按层打印二叉树，同一层的节点按从左到右的顺序打印，每一层打印到一行。</p>
+<p>例如:<br>给定二叉树: <code>[3,9,20,null,null,15,7]</code>,</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  3</span><br><span class="line"> &#x2F; \</span><br><span class="line">9  20</span><br><span class="line">  &#x2F;  \</span><br><span class="line"> 15   7</span><br></pre></td></tr></table></figure>
+
+<p>返回其层次遍历结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  [3],</span><br><span class="line">  [9,20],</span><br><span class="line">  [15,7]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ol>
+<li><code>节点总数 &lt;= 1000</code></li>
+</ol>
+<p>注意：本题与主站 102 题相同：</p>
+<h4 id="Solution-使用nullptr标记"><a href="#Solution-使用nullptr标记" class="headerlink" title="Solution - 使用nullptr标记"></a>Solution - 使用nullptr标记</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; <span class="title">levelOrder</span><span class="params">(TreeNode* root)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!root)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">deque</span>&lt;TreeNode*&gt; nodes;</span><br><span class="line"></span><br><span class="line">        nodes.push_back(root);</span><br><span class="line">        nodes.push_back(<span class="literal">nullptr</span>);</span><br><span class="line"></span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; result;</span><br><span class="line">        result.push_back(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;());</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (!nodes.empty())</span><br><span class="line">        &#123;</span><br><span class="line">            TreeNode* node = nodes.front();</span><br><span class="line">            nodes.pop_front();</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (node)</span><br><span class="line">            &#123;</span><br><span class="line">                result.back().push_back(node-&gt;val);</span><br><span class="line">                <span class="keyword">if</span> (node-&gt;left)</span><br><span class="line">                &#123;</span><br><span class="line">                    nodes.push_back(node-&gt;left);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (node-&gt;right)</span><br><span class="line">                &#123;</span><br><span class="line">                    nodes.push_back(node-&gt;right);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (!nodes.empty())</span><br><span class="line">                &#123;</span><br><span class="line">                    result.push_back(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;());</span><br><span class="line">                    nodes.push_back(<span class="literal">nullptr</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>首先想出的就是这个方法</p>
+<h4 id="使用for循环-提前保存变量解决size会改变的问题"><a href="#使用for循环-提前保存变量解决size会改变的问题" class="headerlink" title="- 使用for循环 提前保存变量解决size会改变的问题"></a>- 使用for循环 提前保存变量解决size会改变的问题</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; <span class="title">levelOrder</span><span class="params">(TreeNode* root)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!root)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">deque</span>&lt;TreeNode*&gt; nodes;</span><br><span class="line"></span><br><span class="line">        nodes.push_back(root);</span><br><span class="line"></span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; result;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (!nodes.empty())</span><br><span class="line">        &#123;</span><br><span class="line">            result.push_back(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;());</span><br><span class="line"></span><br><span class="line">            <span class="keyword">int</span> ss = nodes.<span class="built_in">size</span>();</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; ss; ++i)</span><br><span class="line">            &#123;</span><br><span class="line">                TreeNode* node = nodes.front();</span><br><span class="line">                nodes.pop_front();</span><br><span class="line"></span><br><span class="line">                result.back().push_back(node-&gt;val);</span><br><span class="line">                <span class="keyword">if</span> (node-&gt;left)</span><br><span class="line">                &#123;</span><br><span class="line">                    nodes.push_back(node-&gt;left);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (node-&gt;right)</span><br><span class="line">                &#123;</span><br><span class="line">                    nodes.push_back(node-&gt;right);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>写完S1就去看了看题解 没想到还有这种方法, 妙蛙种子在米奇妙妙屋吃妙脆角</p>
+<h3 id="剑指-Offer-32-III-从上到下打印二叉树-III"><a href="#剑指-Offer-32-III-从上到下打印二叉树-III" class="headerlink" title="剑指 Offer 32 - III. 从上到下打印二叉树 III"></a><a href="https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-iii-lcof/" target="_blank" rel="noopener">剑指 Offer 32 - III. 从上到下打印二叉树 III</a></h3><p>Difficulty: <strong>中等</strong></p>
+<p>请实现一个函数按照之字形顺序打印二叉树，即第一行按照从左到右的顺序打印，第二层按照从右到左的顺序打印，第三行再按照从左到右的顺序打印，其他行以此类推。</p>
+<p>例如:<br>给定二叉树: <code>[3,9,20,null,null,15,7]</code>,</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  3</span><br><span class="line"> &#x2F; \</span><br><span class="line">9  20</span><br><span class="line">  &#x2F;  \</span><br><span class="line"> 15   7</span><br></pre></td></tr></table></figure>
+
+<p>返回其层次遍历结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  [3],</span><br><span class="line">  [20,9],</span><br><span class="line">  [15,7]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ol>
+<li><code>节点总数 &lt;= 1000</code></li>
+</ol>
+<h4 id="Solution-设置标志位"><a href="#Solution-设置标志位" class="headerlink" title="Solution - 设置标志位"></a>Solution - 设置标志位</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; <span class="title">levelOrder</span><span class="params">(TreeNode* root)</span> </span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!root)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">deque</span>&lt;TreeNode*&gt; nodes;</span><br><span class="line">        nodes.push_back(root);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">bool</span> right = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; result;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (!nodes.empty())</span><br><span class="line">        &#123;</span><br><span class="line">            result.emplace_back();</span><br><span class="line"></span><br><span class="line">            <span class="keyword">int</span> SS = nodes.<span class="built_in">size</span>();</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (right)</span><br><span class="line">            &#123;</span><br><span class="line">                right = <span class="literal">false</span>;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; SS; ++i)</span><br><span class="line">                &#123;</span><br><span class="line">                    TreeNode* node = nodes.front();</span><br><span class="line">                    nodes.pop_front();</span><br><span class="line">                    result.back().push_back(node-&gt;val);</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">if</span> (node-&gt;left)</span><br><span class="line">                    &#123;</span><br><span class="line">                        nodes.push_back(node-&gt;left);</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">if</span> (node-&gt;right)</span><br><span class="line">                    &#123;</span><br><span class="line">                        nodes.push_back(node-&gt;right);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                right = <span class="literal">true</span>;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = SS - <span class="number">1</span>; i &gt;= <span class="number">0</span>; --i)</span><br><span class="line">                &#123;</span><br><span class="line">                    TreeNode* node = nodes.back();</span><br><span class="line">                    nodes.pop_back();</span><br><span class="line">                    result.back().push_back(node-&gt;val);</span><br><span class="line">                    </span><br><span class="line">                    <span class="keyword">if</span> (node-&gt;right)</span><br><span class="line">                    &#123;</span><br><span class="line">                        nodes.push_front(node-&gt;right);</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">if</span> (node-&gt;left)</span><br><span class="line">                    &#123;</span><br><span class="line">                        nodes.push_front(node-&gt;left);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;​</span><br></pre></td></tr></table></figure>
+
+<h4 id="Solution-使用reverse"><a href="#Solution-使用reverse" class="headerlink" title="Solution - 使用reverse"></a>Solution - 使用reverse</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; <span class="title">levelOrder</span><span class="params">(TreeNode* root)</span> </span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!root)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">deque</span>&lt;TreeNode*&gt; nodes;</span><br><span class="line">        nodes.push_back(root);</span><br><span class="line"></span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; result;</span><br><span class="line">        <span class="keyword">bool</span> even = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (!nodes.empty())</span><br><span class="line">        &#123;</span><br><span class="line">            result.emplace_back();</span><br><span class="line"></span><br><span class="line">            <span class="keyword">int</span> SS = nodes.<span class="built_in">size</span>();</span><br><span class="line"></span><br><span class="line">            <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; tmp = result.back();</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; SS; ++i)</span><br><span class="line">            &#123;</span><br><span class="line">                TreeNode* node = nodes.front();</span><br><span class="line">                nodes.pop_front();</span><br><span class="line">                tmp.push_back(node-&gt;val);</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (node-&gt;left)</span><br><span class="line">                &#123;</span><br><span class="line">                    nodes.push_back(node-&gt;left);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (node-&gt;right)</span><br><span class="line">                &#123;</span><br><span class="line">                    nodes.push_back(node-&gt;right);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (even)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">std</span>::reverse(tmp.<span class="built_in">begin</span>(), tmp.<span class="built_in">end</span>());</span><br><span class="line">            &#125;</span><br><span class="line">            even = !even;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="剑指-Offer-33-二叉搜索树的后序遍历序列"><a href="#剑指-Offer-33-二叉搜索树的后序遍历序列" class="headerlink" title="剑指 Offer 33. 二叉搜索树的后序遍历序列"></a><a href="https://leetcode-cn.com/problems/er-cha-sou-suo-shu-de-hou-xu-bian-li-xu-lie-lcof/" target="_blank" rel="noopener">剑指 Offer 33. 二叉搜索树的后序遍历序列</a></h3><p>Difficulty: <strong>中等</strong></p>
+<p>输入一个整数数组，判断该数组是不是某二叉搜索树的后序遍历结果。如果是则返回 <code>true</code>，否则返回 <code>false</code>。假设输入的数组的任意两个数字都互不相同。</p>
+<p>参考以下这颗二叉搜索树：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">    5</span><br><span class="line">   &#x2F; \</span><br><span class="line">  2   6</span><br><span class="line"> &#x2F; \</span><br><span class="line">1   3</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [1,6,3,2,5]</span><br><span class="line">输出: false</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [1,3,2,6,5]</span><br><span class="line">输出: true</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ol>
+<li><code>数组长度 &lt;= 1000</code></li>
+</ol>
+<h4 id="Solution-递归-3"><a href="#Solution-递归-3" class="headerlink" title="Solution - 递归"></a>Solution - 递归</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">​<span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">verifyPostorder</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; postorder)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> verifyPostorder(postorder, <span class="number">0</span>, postorder.<span class="built_in">size</span>());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">verifyPostorder</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; postorder, <span class="keyword">int</span> <span class="built_in">begin</span>, <span class="keyword">int</span> <span class="built_in">end</span>)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">end</span> - <span class="built_in">begin</span> &lt;= <span class="number">2</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> root_sub = <span class="built_in">end</span> - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> r_begin = <span class="built_in">begin</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="built_in">begin</span>; i &lt; root_sub; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (postorder[i] &lt; postorder[root_sub])</span><br><span class="line">            &#123;</span><br><span class="line">                r_begin++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = r_begin; i &lt; root_sub; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (postorder[i] &lt; postorder[root_sub])</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> verifyPostorder(postorder, <span class="built_in">begin</span>, r_begin) &amp;&amp; </span><br><span class="line">            verifyPostorder(postorder, r_begin, root_sub);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>睡前来一道, 这是我第一次 一次通过的剑指里面的中等题目-_- 睡了睡了</p>
+<h4 id="Solution-迭代-栈"><a href="#Solution-迭代-栈" class="headerlink" title="Solution - 迭代 栈"></a>Solution - 迭代 栈</h4><h3 id="剑指-Offer-34-二叉树中和为某一值的路径"><a href="#剑指-Offer-34-二叉树中和为某一值的路径" class="headerlink" title="剑指 Offer 34. 二叉树中和为某一值的路径"></a><a href="https://leetcode-cn.com/problems/er-cha-shu-zhong-he-wei-mou-yi-zhi-de-lu-jing-lcof/" target="_blank" rel="noopener">剑指 Offer 34. 二叉树中和为某一值的路径</a></h3><p>Difficulty: <strong>中等</strong></p>
+<p>输入一棵二叉树和一个整数，打印出二叉树中节点值的和为输入整数的所有路径。从树的根节点开始往下一直到叶节点所经过的节点形成一条路径。</p>
+<p><strong>示例:</strong><br>给定如下二叉树，以及目标和 <code>sum = 22</code>，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">      5</span><br><span class="line">     &#x2F; \</span><br><span class="line">    4   8</span><br><span class="line">   &#x2F;   &#x2F; \</span><br><span class="line">  11  13  4</span><br><span class="line"> &#x2F;  \    &#x2F; \</span><br><span class="line">7    2  5   1</span><br></pre></td></tr></table></figure>
+
+<p>返回:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">   [5,4,11,2],</span><br><span class="line">   [5,8,4,5]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ol>
+<li><code>节点总数 &lt;= 10000</code></li>
+</ol>
+<p>注意：本题与主站 113 题相同：</p>
+<h4 id="Solution-回溯法"><a href="#Solution-回溯法" class="headerlink" title="Solution - 回溯法"></a>Solution - 回溯法</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">​<span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"></span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; path;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; result;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; <span class="title">pathSum</span><span class="params">(TreeNode* root, <span class="keyword">int</span> sum)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        dfs(root, sum);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> result; </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(TreeNode* root, <span class="keyword">int</span> sum)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!root)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        path.push_back(root-&gt;val);</span><br><span class="line">        <span class="keyword">if</span> (sum == root-&gt;val &amp;&amp; !root-&gt;left &amp;&amp; !root-&gt;right)</span><br><span class="line">        &#123;</span><br><span class="line">            result.push_back(path);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            dfs(root-&gt;left, sum - root-&gt;val);</span><br><span class="line">            dfs(root-&gt;right, sum - root-&gt;val);</span><br><span class="line">        &#125;</span><br><span class="line">        path.pop_back();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="剑指-Offer-37-序列化二叉树"><a href="#剑指-Offer-37-序列化二叉树" class="headerlink" title="剑指 Offer 37. 序列化二叉树"></a><a href="https://leetcode-cn.com/problems/xu-lie-hua-er-cha-shu-lcof/" target="_blank" rel="noopener">剑指 Offer 37. 序列化二叉树</a></h3><p>Difficulty: <strong>困难</strong></p>
+<p>请实现两个函数，分别用来序列化和反序列化二叉树。</p>
+<p>*<em>示例: *</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">你可以将以下二叉树：</span><br><span class="line"></span><br><span class="line">    1</span><br><span class="line">   &#x2F; \</span><br><span class="line">  2   3</span><br><span class="line">     &#x2F; \</span><br><span class="line">    4   5</span><br><span class="line"></span><br><span class="line">序列化为 &quot;[1,2,3,null,null,4,5]&quot;</span><br></pre></td></tr></table></figure>
+
+<p>注意：本题与主站 297 题相同：</p>
+<h4 id="Solution-4"><a href="#Solution-4" class="headerlink" title="Solution"></a>Solution</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Codec</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Encodes a tree to a single string.</span></span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">serialize</span><span class="params">(TreeNode* root)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!root)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"[null]"</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">deque</span>&lt;TreeNode*&gt; nodes;</span><br><span class="line">        nodes.push_back(root);</span><br><span class="line"></span><br><span class="line">        <span class="built_in">string</span> result;</span><br><span class="line">        <span class="keyword">while</span> (!nodes.empty())</span><br><span class="line">        &#123;</span><br><span class="line">            TreeNode* node = nodes.front();</span><br><span class="line">            nodes.pop_front();</span><br><span class="line">            <span class="keyword">if</span> (node)</span><br><span class="line">            &#123;</span><br><span class="line">                result += <span class="string">","</span> + to_string(node-&gt;val);</span><br><span class="line">                nodes.push_back(node-&gt;left);</span><br><span class="line">                nodes.push_back(node-&gt;right);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                result += <span class="string">",null"</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        result[<span class="number">0</span>] = <span class="string">'['</span>;</span><br><span class="line">        result += <span class="string">']'</span>;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Decodes your encoded data to tree.</span></span><br><span class="line">    <span class="function">TreeNode* <span class="title">deserialize</span><span class="params">(<span class="built_in">string</span> data)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="built_in">deque</span>&lt;TreeNode*&gt; nodes;</span><br><span class="line">        ParseData(data, nodes);</span><br><span class="line"></span><br><span class="line">        TreeNode* ret = nodes.front();</span><br><span class="line">        nodes.pop_front();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (nodes.<span class="built_in">size</span>() == <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> ret;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">deque</span>&lt;TreeNode*&gt; temp_nodes;</span><br><span class="line">        temp_nodes.push_back(ret);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (!temp_nodes.empty())</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">const</span> <span class="keyword">int</span> SS = temp_nodes.<span class="built_in">size</span>();</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (nodes.<span class="built_in">size</span>() &lt; SS * <span class="number">2</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; SS; ++i)</span><br><span class="line">            &#123;</span><br><span class="line">                TreeNode* node = temp_nodes.front();</span><br><span class="line">                temp_nodes.pop_front();</span><br><span class="line"></span><br><span class="line">                node-&gt;left = nodes.front();</span><br><span class="line">                nodes.pop_front();</span><br><span class="line">                node-&gt;right = nodes.front();</span><br><span class="line">                nodes.pop_front();</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (node-&gt;left)</span><br><span class="line">                &#123;</span><br><span class="line">                    temp_nodes.push_back(node-&gt;left);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (node-&gt;right)</span><br><span class="line">                &#123;</span><br><span class="line">                    temp_nodes.push_back(node-&gt;right);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">ParseData</span><span class="params">(<span class="keyword">const</span> <span class="built_in">string</span>&amp; data, <span class="built_in">deque</span>&lt;TreeNode*&gt;&amp; nodes)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> num = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">bool</span> empty = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">int</span> flag = <span class="number">1</span>; <span class="comment">// -</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (i &lt; data.<span class="built_in">size</span>())</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">char</span> c = data[i++];</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (c &gt;= <span class="string">'0'</span> &amp;&amp; c &lt;= <span class="string">'9'</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                num = num * <span class="number">10</span> + c - <span class="string">'0'</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (c == <span class="string">','</span> || c == <span class="string">']'</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (empty)</span><br><span class="line">                &#123;</span><br><span class="line">                    nodes.push_back(<span class="literal">nullptr</span>);</span><br><span class="line">                    empty = <span class="literal">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                    nodes.push_back(<span class="keyword">new</span> TreeNode(num * flag));</span><br><span class="line">                    num = <span class="number">0</span>;</span><br><span class="line">                    flag = <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (c == <span class="string">'n'</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                empty = <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (c == <span class="string">'-'</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                flag = <span class="number">-1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;​</span><br></pre></td></tr></table></figure>]]></content>
         
         <categories>
             
             <category> 算法 </category>
+            
+        </categories>
+        
+        
+    </entry>
+    
+    <entry>
+        <title><![CDATA[class struct typename]]></title>
+        <url>http://blog.lsmg.xyz/2021/02/CPP-class%2520struct%2520typename/</url>
+        <content type="html"><![CDATA[<h1 id="class-和-struct的区别"><a href="#class-和-struct的区别" class="headerlink" title="class 和 struct的区别"></a>class 和 struct的区别</h1><ol>
+<li>class默认访问权限是private, struct默认访问权限是public</li>
+<li>class默认private继承, struct默认public继承</li>
+<li>struct在没有构造函数, 可以使用大括号初始化. class则要求全部public下才能大括号初始化</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Foo1</span> &#123;</span>&#125; foo1;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo2</span> &#123;</span>&#125; foo2;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Foo3</span> &#123;</span><span class="keyword">int</span> a; <span class="keyword">int</span> b;&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo4</span>&#123;</span><span class="keyword">int</span> a; <span class="keyword">int</span> b;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo44</span>&#123;</span><span class="keyword">public</span>: <span class="keyword">int</span> a; <span class="keyword">int</span> b;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"sizeof struct-Foo1: %zu\n"</span>, <span class="keyword">sizeof</span> foo1); <span class="comment">// 1</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"sizeof class-Foo2: %zu\n"</span>, <span class="keyword">sizeof</span> foo2); <span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line">    Foo3 foo3 = &#123;<span class="number">1</span>, <span class="number">2</span>&#125;;</span><br><span class="line">    <span class="comment">// Foo4 foo4 = &#123;1, 2&#125;; error: could not convert ‘&#123;1, 2&#125;’ from ‘&lt;brace-enclosed initializer list&gt;’ to ‘Foo4’</span></span><br><span class="line">    Foo44 foo44 = &#123;<span class="number">1</span>, <span class="number">2</span>&#125;;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="typename-class"><a href="#typename-class" class="headerlink" title="typename class"></a>typename class</h1><p><a href="https://stackoverflow.com/questions/2023977/difference-of-keywords-typename-and-class-in-templates" target="_blank" rel="noopener">https://stackoverflow.com/questions/2023977/difference-of-keywords-typename-and-class-in-templates</a></p>
+]]></content>
+        
+        <categories>
+            
+            <category> CPP </category>
+            
+        </categories>
+        
+        
+    </entry>
+    
+    <entry>
+        <title><![CDATA[大三寒假学习记录]]></title>
+        <url>http://blog.lsmg.xyz/2021/02/%25E5%2581%2587%25E6%259C%259F%25E5%25AD%25A6%25E4%25B9%25A0%25E8%25AE%25B0%25E5%25BD%2595-%25E5%25A4%25A7%25E4%25B8%2589%25E5%25AF%2592%25E5%2581%2587/</url>
+        <content type="html"><![CDATA[<h1 id="2021年2月1日-3日"><a href="#2021年2月1日-3日" class="headerlink" title="2021年2月1日-3日"></a>2021年2月1日-3日</h1><p><strong>动态规划问题</strong></p>
+<p>编辑距离</p>
+<p>最长递增子序列</p>
+<p>俄罗斯套娃信封</p>
+<p>最大子序和</p>
+<p>最长公共子序列</p>
+<h1 id="2021年2月4日22-46-59"><a href="#2021年2月4日22-46-59" class="headerlink" title="2021年2月4日22:46:59"></a>2021年2月4日22:46:59</h1><p>今天把博客整理了下分类</p>
+<p>继续学习的动态规划算法两道题目 </p>
+<p><a href="https://leetcode-cn.com/problems/delete-operation-for-two-strings/" target="_blank" rel="noopener">583. 两个字符串的删除操作</a> </p>
+<p><a href="https://leetcode-cn.com/problems/minimum-ascii-delete-sum-for-two-strings/" target="_blank" rel="noopener">712. 两个字符串的最小ASCII删除和</a></p>
+<p>2021年2月4日23:26:37 <a href="https://learngitbranching.js.org/?locale=zh_CN" target="_blank" rel="noopener">https://learngitbranching.js.org/?locale=zh_CN</a> 学习Git的挺不错的网站 练习一遍</p>
+<h1 id="2021年2月5日11-18-56"><a href="#2021年2月5日11-18-56" class="headerlink" title="2021年2月5日11:18:56"></a>2021年2月5日11:18:56</h1><p>上次改了改项目的BUG, 发布了1.1 release版本</p>
+<p>继续算法</p>
+<p><a href="https://leetcode-cn.com/problems/longest-palindromic-subsequence/" target="_blank" rel="noopener">516. 最长回文子序列</a></p>
+<p>整了一大下午 没想到是memcpy 的问题总算解决了虚拟机代码无法运行的问题</p>
+<h1 id="2021年2月20日"><a href="#2021年2月20日" class="headerlink" title="2021年2月20日"></a>2021年2月20日</h1><p>C++ 拷贝构造函数和赋值运算符 <a href="https://www.cnblogs.com/wangguchangqing/p/6141743.html" target="_blank" rel="noopener">https://www.cnblogs.com/wangguchangqing/p/6141743.html</a></p>
+<p>allocate deallocate<br>malloc free<br>new delete</p>
+<p>STL allocate deallocate constructor deconstructor<br>std allocate</p>
+<p>我理解的右值引用、移动语义和完美转发 <a href="https://www.jianshu.com/p/d19fc8447eaa" target="_blank" rel="noopener">https://www.jianshu.com/p/d19fc8447eaa</a></p>
+<p><img src="https://uploadfiles.nowcoder.com/images/20190313/311436_1552467921124_13956548C4BB199139A2744C39350272" alt="内存布局"><span class="img-alt">内存布局</span></p>
+<p>异步回调 sync</p>
+<p>聊聊同步、异步、阻塞与非阻塞 <a href="https://my.oschina.net/xianggao/blog/661085" target="_blank" rel="noopener">https://my.oschina.net/xianggao/blog/661085</a></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>多线程</th>
+<th>多进程</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>同步</td>
+<td>mutex线程锁, 条件变量, 信号量(生产者消费者)</td>
+<td>PV操作</td>
+</tr>
+<tr>
+<td>数据共享</td>
+<td></td>
+<td>共享内存, 消息队列, 管道,</td>
+</tr>
+</tbody></table>
+<p>信号量可以设置多个初始资源 等多个初始资源消耗完毕后才会sleep</p>
+<p>条件变量则是直接sleep等待一个个或者全部唤醒</p>
+<p><a href="https://blog.csdn.net/linraise/article/details/12979473" target="_blank" rel="noopener">https://blog.csdn.net/linraise/article/details/12979473</a></p>
+<h1 id="2021年2月22日-AC5"><a href="#2021年2月22日-AC5" class="headerlink" title="2021年2月22日 - AC5"></a>2021年2月22日 - AC5</h1><p>更加的透彻 <a href="https://codinfox.github.io/dev/2014/06/03/move-semantic-perfect-forward/" target="_blank" rel="noopener">https://codinfox.github.io/dev/2014/06/03/move-semantic-perfect-forward/</a></p>
+<h2 id="移动语义和完美转发"><a href="#移动语义和完美转发" class="headerlink" title="移动语义和完美转发"></a>移动语义和完美转发</h2><p><strong>移动构造函数</strong><br>可以将源对象中的高消耗资源 转移到 新的对象中</p>
+<p>而使用拷贝构造函数会导致生成两份高消耗资源 造成浪费</p>
+<p><strong>左值 右值</strong><br>能够取到地址的为左值 否则是右值</p>
+<p><strong>std::move std::forward</strong><br>move将一个左值T转换为右值 以此来调用对象的移动构造函数 转移内部资源, 否则由于T是左值将会调用拷贝构造函数 生成新的资源 浪费旧的资源</p>
+<p>forward左值依然为左值 右值转换为右值. 当一个参数传入右值形参的时候 函数的实参实际为左值 使用forward可以将函数实参转换原本的右值</p>
+<p>而当传入左值的时候forward转换后依旧是左值</p>
+<p><strong>void Foo(const int&amp;)</strong><br>在没有其他重载的情况下, <code>const int&amp;</code>可以接收左值也可以接收右值  如果去掉<code>const</code>则只能接收右值</p>
+<p>每个线程都是如何启动的, 各个线程的作用. 线程间的数据交互方式</p>
+<p>unique_lock  lock_guard scope_lock lock 等的作用</p>
+<p>条件变量虚假唤醒</p>
+<p>整理了jsoncpp的代码明天看</p>
+<h1 id="2021年2月23日-AC5"><a href="#2021年2月23日-AC5" class="headerlink" title="2021年2月23日 - AC5"></a>2021年2月23日 - AC5</h1><p><a href="https://github.com/HiganFish/jsoncpp1.9.4-learn" target="_blank" rel="noopener">https://github.com/HiganFish/jsoncpp1.9.4-learn</a> jsoncpp代码阅读</p>
+<h2 id="lower-bound-insert-比-find-insert-要高性能"><a href="#lower-bound-insert-比-find-insert-要高性能" class="headerlink" title="lower_bound + insert 比 find + insert 要高性能"></a>lower_bound + insert 比 find + insert 要高性能</h2><p>insert会利用lower_bound的返回值</p>
+<p>而find则没有此效果 总是需要进行O(log N)的查找位置</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">EventLoop* <span class="title">EventLoopThread::Start</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	thread_.Start();</span><br><span class="line"></span><br><span class="line">	EventLoop* loop = <span class="literal">nullptr</span>;</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function">MutexGuardLock <span class="title">guard</span><span class="params">(mutex_)</span></span>;</span><br><span class="line">		<span class="keyword">while</span> (loop_ == <span class="literal">nullptr</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			cond_.Wait();</span><br><span class="line">		&#125;</span><br><span class="line">		loop = loop_;  <span class="comment">// TODO 为什么不直接在 创建成员变量 EventLoop loop_; ??  为了等线程创建完毕后 才返回? 否则这个函数只有第一句 可能线程未创建完毕就返回了?</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> loop;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">EventLoopThread::ThreadFunc</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	EventLoop loop;</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function">MutexGuardLock <span class="title">guard</span><span class="params">(mutex_)</span></span>;</span><br><span class="line">		loop_ = &amp;loop;</span><br><span class="line">		cond_.WakeUpOne();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这段代码的原因 ?</p>
+<h1 id="2021年2月24日"><a href="#2021年2月24日" class="headerlink" title="2021年2月24日"></a>2021年2月24日</h1><h2 id="typename-and-class-in-template"><a href="#typename-and-class-in-template" class="headerlink" title="typename and class in template"></a>typename and class in template</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="keyword">typedef</span> <span class="keyword">int</span> INT;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt; // <span class="title">mingw</span>中和 <span class="title">template</span> &lt;typename T&gt; 完全等效 必须在 <span class="title">T</span>:</span>:INT 前加<span class="keyword">typename</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">D1</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	T::INT i1; <span class="comment">// error: need 'typename' before 'T::INT' because 'T' is a dependent scope</span></span><br><span class="line">	<span class="keyword">typename</span> T::INT i2; <span class="comment">// true</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	D1&lt;D&gt; d_1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>额外发现</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">A</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	T t_;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">A1</span> :</span> <span class="keyword">public</span> A&lt;T&gt;</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	A1()</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// t_ = 1;</span></span><br><span class="line">		<span class="keyword">this</span>-&gt;t_ = <span class="number">1</span>; <span class="comment">// 这里需要使用this指针访问</span></span><br><span class="line">		A&lt;T&gt;::t_ = <span class="number">1</span>; <span class="comment">// 可读性更好</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="二段名字查找"><a href="#二段名字查找" class="headerlink" title="二段名字查找"></a>二段名字查找</h2><ol>
+<li>第一段: 模板定义阶段  在被定义时 只在模板中有独立的名字(和模板参数无关) 参与查找</li>
+<li>第二段: 模板类实例化  非独立的名字参与查找</li>
+</ol>
+<p><strong>以成员变量为例 成员函数同理</strong></p>
+<ol>
+<li><p>在第一阶段, 首先处理A1遇到了<code>class A1 : public A&lt;T&gt;</code>. 此时父类<code>A&lt;T&gt;</code>依赖于模板参数 属于非独立 不参与查找</p>
+</li>
+<li><p>在之后遇到了<code>t_</code>这个变量, 由于没有查找基类 这里便认为<code>t_</code>是一个非成员变量</p>
+</li>
+<li><p>第二阶段这时候才处理<code>A&lt;T&gt;</code> 虽然这时已经<code>可以知道t_是一个成员变量</code>但是第一阶段编译器已经认定了<code>t_</code>是一个非成员变量</p>
+</li>
+<li><p>而对于一个非成员变量 编译器认为不需要去基类中查找, 所以就报错无法找到</p>
+</li>
+<li><p>使用this之后在第一阶段, 编译器就被明确的告知<code>t_</code>是一个成员变量</p>
+</li>
+<li><p>然后第二阶段, 编译器就会去基类中查找这个成员变量. </p>
+</li>
+</ol>
+<p><a href="https://www.cnblogs.com/onepixel/articles/7674659.html" target="_blank" rel="noopener">https://www.cnblogs.com/onepixel/articles/7674659.html</a></p>
+<h1 id="2021年2月25日-AC1"><a href="#2021年2月25日-AC1" class="headerlink" title="2021年2月25日 - AC1"></a>2021年2月25日 - AC1</h1><p>开学了坐了一天车</p>
+<p>A了一道题-_-</p>
+<h1 id="2021年2月26日-AC6"><a href="#2021年2月26日-AC6" class="headerlink" title="2021年2月26日 - AC6"></a>2021年2月26日 - AC6</h1><p>偶然看到了一道面试题, 问的是如何从2.5亿数字中找到重复的数字</p>
+<p><a href="https://leetcode-cn.com/circle/discuss/6TtGra/" target="_blank" rel="noopener">https://leetcode-cn.com/circle/discuss/6TtGra/</a></p>
+<p>大佬云集..</p>
+<p>TODO likely宏和__builtin_expect编译器函数性能评测</p>
+<p>TODO string_view <a href="https://cloud.tencent.com/developer/article/1479005" target="_blank" rel="noopener">https://cloud.tencent.com/developer/article/1479005</a></p>
+<p>TODO</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> (TcpConnection::*fp)(<span class="keyword">const</span> <span class="built_in">std</span>::string_view&amp;) = &amp;TcpConnection::SendInLoop;</span><br><span class="line">			loop_-&gt;RunInLoop(<span class="built_in">std</span>::bind(fp, </span><br><span class="line">					<span class="keyword">this</span>,</span><br><span class="line">					<span class="built_in">std</span>::<span class="built_in">string</span>(data, length))); <span class="comment">// OK</span></span><br><span class="line"></span><br><span class="line">TcpConnection::SendInLoop;</span><br><span class="line">			loop_-&gt;RunInLoop(<span class="built_in">std</span>::bind(&amp;TcpConnection::SendInLoop, </span><br><span class="line">					<span class="keyword">this</span>,</span><br><span class="line">					<span class="built_in">std</span>::<span class="built_in">string</span>(data, length))); <span class="comment">// ERROR ???</span></span><br><span class="line"></span><br><span class="line">loop_-&gt;RunInLoop([<span class="keyword">this</span>, str = <span class="built_in">std</span>::<span class="built_in">string</span>(data, length)]()</span><br><span class="line">			&#123;</span><br><span class="line">				RunInLoop(str);</span><br><span class="line">			&#125;); <span class="comment">// HOW TO FIX ERROR ???</span></span><br></pre></td></tr></table></figure>
+
+<p>TODO make_unique make_shared</p>
+<p>Warning: File “xxx” has modification time yyy s in the future</p>
+<p>mutable</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;EventLoopFunction&gt; pending_func;</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">		* 减少锁持有的时间</span></span><br><span class="line"><span class="comment">		*/</span></span><br><span class="line">	<span class="function">MutexLockGuard <span class="title">guard</span><span class="params">(pending_func_mutex_)</span></span>;</span><br><span class="line">	pending_func.swap(pending_func_);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="Linux下查看进程线程数"><a href="#Linux下查看进程线程数" class="headerlink" title="Linux下查看进程线程数"></a>Linux下查看进程线程数</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">lsof -Ptn -i tcp:4100 # -P 不解析port -n 不解析主机名 会解决lsof卡gethostbyaddr -t 只显示pid</span><br><span class="line"></span><br><span class="line">pid=$(lsof -Pnt -i tcp:4100)</span><br><span class="line"></span><br><span class="line">cat /proc/$pid/status | grep Threads</span><br><span class="line">	Threads:	5</span><br><span class="line"></span><br><span class="line">top -Hp $pid</span><br><span class="line">	107344 root      20   0  334464   6780   5192 S   0.0   0.2   0:00.74 LiveBroadcastSe                                         </span><br><span class="line">	107361 root      20   0  334464   6780   5192 S   0.0   0.2   0:23.11 LiveBroadcastSe                                         </span><br><span class="line">	107362 root      20   0  334464   6780   5192 S   0.0   0.2   0:00.70 LiveBroadcastSe                                         </span><br><span class="line">	107363 root      20   0  334464   6780   5192 S   0.0   0.2   0:04.76 LiveBroadcastSe                                         </span><br><span class="line">	107364 root      20   0  334464   6780   5192 S   0.0   0.2   0:04.79 LiveBroadcastS</span><br><span class="line"></span><br><span class="line">pstree -p $pid</span><br><span class="line">	LiveBroadcastSe(107344)─┬─&#123;LiveBroadcastSe&#125;(107361)</span><br><span class="line">							├─&#123;LiveBroadcastSe&#125;(107362)</span><br><span class="line">							├─&#123;LiveBroadcastSe&#125;(107363)</span><br><span class="line">							└─&#123;LiveBroadcastSe&#125;(107364)</span><br></pre></td></tr></table></figure>]]></content>
+        
+        <categories>
+            
+            <category> 假期学习记录 </category>
+            
+        </categories>
+        
+        
+    </entry>
+    
+    <entry>
+        <title><![CDATA[小方说知识星球]]></title>
+        <url>http://blog.lsmg.xyz/2021/02/%25E5%259F%25BA%25E7%25A1%2580%25E7%259F%25A5%25E8%25AF%2586%25E6%259D%2582%25E7%2583%25A9-%25E5%25B0%258F%25E6%2596%25B9%25E8%25AF%25B4%25E7%259F%25A5%25E8%25AF%2586%25E6%2598%259F%25E7%2590%2583/</url>
+        <content type="html"><![CDATA[<h1 id="网络编程"><a href="#网络编程" class="headerlink" title="网络编程"></a>网络编程</h1><p>这里并不做过多的记录, 记录一些tips吧</p>
+<p>lsof 能用做文件删除恢复. 仅限于文件虽然被删除但依然被某个进程打开.</p>
+<p>bind函数<br>地址可以指定 INADDR_ANY<br>那么端口呢?  测试了下如果端口为0确实是 bind到了随机端口</p>
+<p>bind到一个已经bind的端口会出错. 然而如果端口为0 随机的端口则没有被bind过</p>
+<p>客户端connect前调用bind能够以指定端口号连接, 这个在高性能服务器见过 不过一直没有用过</p>
+<p>异步connect? 非阻塞connect</p>
+<p>connect尝试次数? 尝试间隔? </p>
+<table>
+<thead>
+<tr>
+<th>函数名称</th>
+<th>返回值</th>
+<th>阻塞</th>
+<th>非阻塞</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>recv</td>
+<td>-1</td>
+<td>出错</td>
+<td>判断是否为EWOULDBLOCK(数据已经收完, ET模式收完数据的标志) 或者 EINTR(信号中断)</td>
+</tr>
+<tr>
+<td>recv</td>
+<td>0</td>
+<td>对端关闭</td>
+<td>对端关闭</td>
+</tr>
+<tr>
+<td>send</td>
+<td>-1</td>
+<td>出错</td>
+<td>EWOULDBLOCK(数据无法继续发出) EAGAIN</td>
+</tr>
+</tbody></table>
+<p>LT 想收多少收多少 收不完就提醒<br>ET 爱收不收 过了这村没这店</p>
+<h1 id="并发编程"><a href="#并发编程" class="headerlink" title="并发编程"></a>并发编程</h1><p>条件变量虚假唤醒</p>
+<p>协程操作系统自带还是语言实现的</p>
+<p>单机服务做好 找到单机的瓶颈 上并发</p>
+<p>每个线程都是如何启动的, 各个线程的作用. 线程间的数据交互方式</p>
+<p>unique_lock  lock_guard scope_lock lock 等的作用</p>
+]]></content>
+        
+        <categories>
+            
+            <category> 基础知识杂烩 </category>
             
         </categories>
         
@@ -2431,71 +2536,6 @@
     </entry>
     
     <entry>
-        <title><![CDATA[池内春秋]]></title>
-        <url>http://blog.lsmg.xyz/2020/10/%25E8%25AF%25BB%25E4%25B9%25A6%25E8%25AE%25B0%25E5%25BD%2595-%25E6%25B1%25A0%25E5%2586%2585%25E6%2598%25A5%25E7%25A7%258B/</url>
-        <content type="html"><![CDATA[<p><a href="https://docs.google.com/viewer?a=v&pid=forums&srcid=MTc2ODU2ODcyNjk2NTM2NDM0NzcBMDk3MzkxODQwNzQ0NDE2OTE1NjcBQ2dMdWoyeWxLWU1KATAuMQEBdjI" target="_blank" rel="noopener">google 图书 - 内存池设计哲学</a></p>
-<p>C++平台提供的内存配置工具</p>
-<table>
-<thead>
-<tr>
-<th>配置</th>
-<th>释放</th>
-<th>归属</th>
-<th>可重载</th>
-<th>标记</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>malloc</td>
-<td>free</td>
-<td>C标准式子</td>
-<td>否</td>
-<td>#1</td>
-</tr>
-<tr>
-<td>new</td>
-<td>delete</td>
-<td>C++表达式</td>
-<td>否</td>
-<td>#2</td>
-</tr>
-<tr>
-<td>::operator new</td>
-<td>::operator delete</td>
-<td>C++运算符</td>
-<td>可</td>
-<td>#3</td>
-</tr>
-<tr>
-<td>alloc::allocate</td>
-<td>alloc::deallocate</td>
-<td>C++标准库</td>
-<td>编译器厂商设计</td>
-<td>#4</td>
-</tr>
-</tbody></table>
-<ol>
-<li>#2会调用 #3来实现功能一部分</li>
-<li>#1和#3功能相同</li>
-<li>#4相当于#1或者#3</li>
-<li>#2会在 使用#3分配内存后调用对应的构造函数(调用#3释放内存前调用对应的析构函数)</li>
-</ol>
-<p>#1 #2 #3 在释放的时候不需要传入大小是因为 在配置的内存前方存在8字节的配置信息 可能直接是大小也可能是其他相关内容其中包含大小</p>
-<p>#4 则需要在释放的时候传入大小 因为分配的内存中不包含大小</p>
-<p>使用方式</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;memory&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SIZE 512</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">void</span>* ptr1 = <span class="built_in">malloc</span>(SIZE);</span><br><span class="line">    <span class="built_in">free</span>(ptr1);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">char</span>* ptr2 = <span class="keyword">new</span> <span class="keyword">char</span>[SIZE];</span><br><span class="line">    <span class="keyword">delete</span>[] ptr2;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">void</span>* ptr3 = ::<span class="keyword">operator</span> <span class="keyword">new</span>(SIZE);</span><br><span class="line">    ::<span class="function"><span class="keyword">operator</span> <span class="title">delete</span><span class="params">(ptr3)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">std</span>::allocator&lt;<span class="keyword">char</span>&gt; alloc;</span><br><span class="line">    <span class="keyword">char</span>* ptr4 = alloc.allocate(SIZE);</span><br><span class="line">    alloc.deallocate(ptr4, SIZE);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-        
-        <categories>
-            
-            <category> 读书记录 </category>
-            
-        </categories>
-        
-        
-    </entry>
-    
-    <entry>
         <title><![CDATA[UNP记录]]></title>
         <url>http://blog.lsmg.xyz/2020/10/%25E8%25AF%25BB%25E4%25B9%25A6%25E8%25AE%25B0%25E5%25BD%2595150-UNP/</url>
         <content type="html"><![CDATA[<p>由于已经在Linux高性能服务器开发中详细说明过绝大部分系统函数</p>
@@ -2592,6 +2632,71 @@
 <li>close会终止读和写两个方向的数据传送, 但由于TCP全双工有时需要告知对方我方发送已经完毕</li>
 </ol>
 <h1 id="第七章-套接字选项"><a href="#第七章-套接字选项" class="headerlink" title="第七章 套接字选项"></a>第七章 套接字选项</h1><h1 id="第八章-基本UDP套接字编程-未看"><a href="#第八章-基本UDP套接字编程-未看" class="headerlink" title="第八章 基本UDP套接字编程 (未看)"></a>第八章 基本UDP套接字编程 (未看)</h1><h1 id="第十一章-名字和地址转换"><a href="#第十一章-名字和地址转换" class="headerlink" title="第十一章 名字和地址转换"></a>第十一章 名字和地址转换</h1><h1 id=""><a href="#" class="headerlink" title=""></a></h1>]]></content>
+        
+        <categories>
+            
+            <category> 读书记录 </category>
+            
+        </categories>
+        
+        
+    </entry>
+    
+    <entry>
+        <title><![CDATA[池内春秋]]></title>
+        <url>http://blog.lsmg.xyz/2020/10/%25E8%25AF%25BB%25E4%25B9%25A6%25E8%25AE%25B0%25E5%25BD%2595-%25E6%25B1%25A0%25E5%2586%2585%25E6%2598%25A5%25E7%25A7%258B/</url>
+        <content type="html"><![CDATA[<p><a href="https://docs.google.com/viewer?a=v&pid=forums&srcid=MTc2ODU2ODcyNjk2NTM2NDM0NzcBMDk3MzkxODQwNzQ0NDE2OTE1NjcBQ2dMdWoyeWxLWU1KATAuMQEBdjI" target="_blank" rel="noopener">google 图书 - 内存池设计哲学</a></p>
+<p>C++平台提供的内存配置工具</p>
+<table>
+<thead>
+<tr>
+<th>配置</th>
+<th>释放</th>
+<th>归属</th>
+<th>可重载</th>
+<th>标记</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>malloc</td>
+<td>free</td>
+<td>C标准式子</td>
+<td>否</td>
+<td>#1</td>
+</tr>
+<tr>
+<td>new</td>
+<td>delete</td>
+<td>C++表达式</td>
+<td>否</td>
+<td>#2</td>
+</tr>
+<tr>
+<td>::operator new</td>
+<td>::operator delete</td>
+<td>C++运算符</td>
+<td>可</td>
+<td>#3</td>
+</tr>
+<tr>
+<td>alloc::allocate</td>
+<td>alloc::deallocate</td>
+<td>C++标准库</td>
+<td>编译器厂商设计</td>
+<td>#4</td>
+</tr>
+</tbody></table>
+<ol>
+<li>#2会调用 #3来实现功能一部分</li>
+<li>#1和#3功能相同</li>
+<li>#4相当于#1或者#3</li>
+<li>#2会在 使用#3分配内存后调用对应的构造函数(调用#3释放内存前调用对应的析构函数)</li>
+</ol>
+<p>#1 #2 #3 在释放的时候不需要传入大小是因为 在配置的内存前方存在8字节的配置信息 可能直接是大小也可能是其他相关内容其中包含大小</p>
+<p>#4 则需要在释放的时候传入大小 因为分配的内存中不包含大小</p>
+<p>使用方式</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;memory&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SIZE 512</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">void</span>* ptr1 = <span class="built_in">malloc</span>(SIZE);</span><br><span class="line">    <span class="built_in">free</span>(ptr1);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">char</span>* ptr2 = <span class="keyword">new</span> <span class="keyword">char</span>[SIZE];</span><br><span class="line">    <span class="keyword">delete</span>[] ptr2;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">void</span>* ptr3 = ::<span class="keyword">operator</span> <span class="keyword">new</span>(SIZE);</span><br><span class="line">    ::<span class="function"><span class="keyword">operator</span> <span class="title">delete</span><span class="params">(ptr3)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">std</span>::allocator&lt;<span class="keyword">char</span>&gt; alloc;</span><br><span class="line">    <span class="keyword">char</span>* ptr4 = alloc.allocate(SIZE);</span><br><span class="line">    alloc.deallocate(ptr4, SIZE);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
         
         <categories>
             
@@ -4270,60 +4375,6 @@
     </entry>
     
     <entry>
-        <title><![CDATA[权限管理]]></title>
-        <url>http://blog.lsmg.xyz/2020/03/Linux-%25E6%259D%2583%25E9%2599%2590%25E7%259B%25B8%25E5%2585%25B3/</url>
-        <content type="html"><![CDATA[<p><code>drwxr-xr-x | 3 | root | root | 4096 | Mar  2 20:26 | .vs</code><br>档案权限类型<br>连接数<br>档案拥有者<br>档案所属群组<br>档案容量<br>档案最后被修改时间<br>档名</p>
-<p>文件类型和权限<br><code>drwxr-xr-x</code></p>
-<p>第一位 d 表明档案类型是 目录</p>
-<table>
-<thead>
-<tr>
-<th>字符</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>d</td>
-<td>目录</td>
-</tr>
-<tr>
-<td>-</td>
-<td>文件</td>
-</tr>
-<tr>
-<td>|</td>
-<td>链接文件</td>
-</tr>
-<tr>
-<td>b</td>
-<td>设备文件中可供存储的周边设备, 可随机读取设备</td>
-</tr>
-<tr>
-<td>c</td>
-<td>序列号设备, 如键盘鼠标, 一次性读取设备</td>
-</tr>
-</tbody></table>
-<p>后面每三位一组 为<code>rwx</code>的组合 分别代表 <code>读</code>, <code>写</code>, <code>执行</code><br>三组 第一组<code>文件拥有者权限</code> 第二组<code>群组中账号权限</code> 第三组<code>非本人且没有加入本群组的其他账号权限</code></p>
-<p>第三部分表示这个文件的<code>拥有者账号</code><br>第四部分表示这个文件<code>所属群组</code></p>
-<p>相关命令<br>-chgrp 改变文件所属群组<br>-chown 改变文件拥有者<br>-chmod 改变文件权限</p>
-]]></content>
-        
-        <categories>
-            
-            <category> Linux </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> 权限管理 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
         <title><![CDATA[GDB调试]]></title>
         <url>http://blog.lsmg.xyz/2020/03/Linux-GDB%25E8%25B0%2583%25E8%25AF%2595/</url>
         <content type="html"><![CDATA[<p><a href="https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/gdb.html" target="_blank" rel="noopener">https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/gdb.html</a></p>
@@ -4637,6 +4688,60 @@
         <tags>
             
             <tag> GDB调试 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+        <title><![CDATA[权限管理]]></title>
+        <url>http://blog.lsmg.xyz/2020/03/Linux-%25E6%259D%2583%25E9%2599%2590%25E7%259B%25B8%25E5%2585%25B3/</url>
+        <content type="html"><![CDATA[<p><code>drwxr-xr-x | 3 | root | root | 4096 | Mar  2 20:26 | .vs</code><br>档案权限类型<br>连接数<br>档案拥有者<br>档案所属群组<br>档案容量<br>档案最后被修改时间<br>档名</p>
+<p>文件类型和权限<br><code>drwxr-xr-x</code></p>
+<p>第一位 d 表明档案类型是 目录</p>
+<table>
+<thead>
+<tr>
+<th>字符</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>d</td>
+<td>目录</td>
+</tr>
+<tr>
+<td>-</td>
+<td>文件</td>
+</tr>
+<tr>
+<td>|</td>
+<td>链接文件</td>
+</tr>
+<tr>
+<td>b</td>
+<td>设备文件中可供存储的周边设备, 可随机读取设备</td>
+</tr>
+<tr>
+<td>c</td>
+<td>序列号设备, 如键盘鼠标, 一次性读取设备</td>
+</tr>
+</tbody></table>
+<p>后面每三位一组 为<code>rwx</code>的组合 分别代表 <code>读</code>, <code>写</code>, <code>执行</code><br>三组 第一组<code>文件拥有者权限</code> 第二组<code>群组中账号权限</code> 第三组<code>非本人且没有加入本群组的其他账号权限</code></p>
+<p>第三部分表示这个文件的<code>拥有者账号</code><br>第四部分表示这个文件<code>所属群组</code></p>
+<p>相关命令<br>-chgrp 改变文件所属群组<br>-chown 改变文件拥有者<br>-chmod 改变文件权限</p>
+]]></content>
+        
+        <categories>
+            
+            <category> Linux </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 权限管理 </tag>
             
         </tags>
         
@@ -5316,7 +5421,7 @@
     
     <entry>
         <title><![CDATA[CPP11及以后的常用特性]]></title>
-        <url>http://blog.lsmg.xyz/2020/02/CPP-CPP11%25E7%2589%25B9%25E6%2580%25A7/</url>
+        <url>http://blog.lsmg.xyz/2020/02/CPP-CPP%25E6%2596%25B0%25E7%2589%25B9%25E6%2580%25A7/</url>
         <content type="html"><![CDATA[<h1 id="C-11"><a href="#C-11" class="headerlink" title="C++11"></a>C++11</h1><h2 id="mutex-condition"><a href="#mutex-condition" class="headerlink" title="mutex condition"></a>mutex condition</h2><h2 id="Lambda"><a href="#Lambda" class="headerlink" title="Lambda"></a>Lambda</h2><p>参考资料<br><a href="https://zh.cppreference.com/w/cpp/language/lambda" target="_blank" rel="noopener">https://zh.cppreference.com/w/cpp/language/lambda</a><br><a href="https://blog.csdn.net/qq_34199383/article/details/80469780" target="_blank" rel="noopener">https://blog.csdn.net/qq_34199383/article/details/80469780</a></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[ 捕获 ] ( 形参 ) -&gt; ret &#123; 函数体 &#125;</span><br><span class="line">[ 捕获 ] ( 形参 ) &#123; 函数体 &#125;</span><br><span class="line">[ 捕获 ] &#123; 函数体 &#125;</span><br><span class="line"></span><br><span class="line">&amp; 以引用隐式捕获被使用的自动变量</span><br><span class="line">= 以复制隐式捕获被使用的自动变量</span><br><span class="line"></span><br><span class="line">[&amp;]&#123;&#125;;          <span class="comment">// OK：默认以引用捕获</span></span><br><span class="line">[&amp;, i]&#123;&#125;;       <span class="comment">// OK：以引用捕获，但 i 以值捕获</span></span><br><span class="line"></span><br><span class="line">[=]&#123;&#125;;          <span class="comment">// OK：默认以复制捕获</span></span><br><span class="line">[=, &amp;i]&#123;&#125;;      <span class="comment">// OK：以复制捕获，但 i 以引用捕获</span></span><br><span class="line"></span><br><span class="line">[<span class="keyword">this</span>]&#123;&#125;; <span class="comment">// 获取this指针, 如果使用了&amp;和=则会默认包括this</span></span><br></pre></td></tr></table></figure>
 <p><strong>使用场景一</strong><br>以sort为代表的函数 需要传入函数的函数</p>
@@ -5337,7 +5442,7 @@
 <p>tuple是固定大小的异类值(啥是异类值??)汇集</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">std::tuple&lt;int, double &gt; GetInfoById(int id)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (id == <span class="number">0</span>) <span class="keyword">return</span> <span class="built_in">std</span>::make_tuple(<span class="number">1</span>, <span class="number">1.1</span>);</span><br><span class="line">    <span class="keyword">if</span> (id == <span class="number">1</span>) <span class="keyword">return</span> <span class="built_in">std</span>::make_tuple(<span class="number">2</span>, <span class="number">2.2</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">throw</span> <span class="built_in">std</span>::invalid_argument(<span class="string">"id"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">auto</span> info = GetInfoById(<span class="number">0</span>);</span><br><span class="line">	<span class="comment">// 获取指定位置</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"1:"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">get</span>&lt;<span class="number">0</span>&gt;(info)</span><br><span class="line">            &lt;&lt; <span class="string">" 2:"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">get</span>&lt;<span class="number">1</span>&gt;(info) &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> val1;</span><br><span class="line">    <span class="keyword">double</span> val2;</span><br><span class="line">	<span class="comment">// 直接创建引用的tuple</span></span><br><span class="line">    <span class="built_in">std</span>::tie(val1, val2) = GetInfoById(<span class="number">1</span>);</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"1:"</span> &lt;&lt; val1</span><br><span class="line">              &lt;&lt; <span class="string">" 2:"</span> &lt;&lt; val2 &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">			  </span><br><span class="line">$ <span class="number">1</span>:<span class="number">1</span> <span class="number">2</span>:<span class="number">1.1</span></span><br><span class="line">$ <span class="number">1</span>:<span class="number">2</span> <span class="number">2</span>:<span class="number">2.2</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="auto-static-assert-指定类型枚举"><a href="#auto-static-assert-指定类型枚举" class="headerlink" title="auto static_assert 指定类型枚举"></a>auto static_assert 指定类型枚举</h2><h2 id="async"><a href="#async" class="headerlink" title="async"></a>async</h2><h1 id="C-14"><a href="#C-14" class="headerlink" title="C++14"></a>C++14</h1><h2 id="0b010101-二进制表达"><a href="#0b010101-二进制表达" class="headerlink" title="0b010101 二进制表达"></a>0b010101 二进制表达</h2><h1 id="C-17"><a href="#C-17" class="headerlink" title="C++17"></a>C++17</h1><h2 id="结构化绑定"><a href="#结构化绑定" class="headerlink" title="结构化绑定"></a>结构化绑定</h2><h1 id="C-20"><a href="#C-20" class="headerlink" title="C++20"></a>C++20</h1><h2 id="携程库-import"><a href="#携程库-import" class="headerlink" title="携程库 import"></a>携程库 import</h2>]]></content>
+<h2 id="auto-static-assert-指定类型枚举"><a href="#auto-static-assert-指定类型枚举" class="headerlink" title="auto static_assert 指定类型枚举"></a>auto static_assert 指定类型枚举</h2><h2 id="async"><a href="#async" class="headerlink" title="async"></a>async</h2><h1 id="C-14"><a href="#C-14" class="headerlink" title="C++14"></a>C++14</h1><h2 id="0b010101-二进制表达"><a href="#0b010101-二进制表达" class="headerlink" title="0b010101 二进制表达"></a>0b010101 二进制表达</h2><h1 id="C-17"><a href="#C-17" class="headerlink" title="C++17"></a>C++17</h1><h2 id="结构化绑定"><a href="#结构化绑定" class="headerlink" title="结构化绑定"></a>结构化绑定</h2><h1 id="C-20"><a href="#C-20" class="headerlink" title="C++20"></a>C++20</h1><h2 id="携程库-import"><a href="#携程库-import" class="headerlink" title="携程库 import"></a>携程库 import</h2><h2 id="likely宏和unlikely宏"><a href="#likely宏和unlikely宏" class="headerlink" title="likely宏和unlikely宏"></a>likely宏和unlikely宏</h2>]]></content>
         
         <categories>
             
