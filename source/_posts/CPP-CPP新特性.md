@@ -1,0 +1,199 @@
+---
+title: CPP11及以后的常用特性
+date: 2020-02-19 17:41:27
+tags:
+categories:
+ - CPP
+---
+
+# C++11
+
+## mutex condition
+
+## Lambda
+参考资料
+https://zh.cppreference.com/w/cpp/language/lambda
+https://blog.csdn.net/qq_34199383/article/details/80469780
+
+```c++
+[ 捕获 ] ( 形参 ) -> ret { 函数体 }
+[ 捕获 ] ( 形参 ) { 函数体 }
+[ 捕获 ] { 函数体 }
+
+& 以引用隐式捕获被使用的自动变量
+= 以复制隐式捕获被使用的自动变量
+
+[&]{};          // OK：默认以引用捕获
+[&, i]{};       // OK：以引用捕获，但 i 以值捕获
+
+[=]{};          // OK：默认以复制捕获
+[=, &i]{};      // OK：以复制捕获，但 i 以引用捕获
+
+[this]{}; // 获取this指针, 如果使用了&和=则会默认包括this
+```
+**使用场景一**
+以sort为代表的函数 需要传入函数的函数
+```c++
+// 原版
+bool compare(int &a, int &b)
+{
+	return a > b;
+}
+
+xxx(compare);
+
+// 新版
+xxx([](int a, int b){return a > b;});
+```
+**使用场景二**
+```c++
+auto add = [](int a, int b){return a + b;};
+int bar = add(1, 2);
+```
+
+## 花括号初始
+
+## 函数对象
+
+### std::function  functional
+```c++
+##include <functional>
+##include <iostream>
+
+void PrintA()
+{
+    std::cout << "A" << std::endl;
+}
+void PrintB(int bar)
+{
+    std::cout << "B" << std::endl;
+}
+int main()
+{
+    std::function<void()> FPrintA = PrintA;
+    FPrintA();
+
+    std::function<void(int)> FPrintB = PrintB;
+    FPrintB(1);
+
+// 感觉配合Lambad 挺不错, 在一个函数中经常使用的功能可以这样定义
+    std::function<void()> FLambad = [](){std::cout << "Lambad" << std::endl;};
+    FLambad();
+	
+	// 不过使用auto貌似更简单
+	auto ALambad = [](){std::cout << "Lambad" << std::endl;};
+    ALambad();
+}
+
+$ A
+$ B
+$ Lambad
+```
+
+### std::bind std::ref std::cref
+今天在学习
+https://github.com/baloonwj/flamingo
+的时候, 从中发现的这个函数. 这个函数跟std::function 一起使用.
+竟然实现了回调函数调用类的成员函数!!!!
+
+https://zh.cppreference.com/w/cpp/utility/functional/bind
+
+```c++
+##include <functional>
+##include <cstdio>
+
+void f(int n1, int n2, int n3, int n4)
+{
+    printf("f function-->n1: %d, n2: %d, n3: %d, n4: %d\n", n1, n2, n3, n4);
+}
+
+void ff(int &n1, int& n2, const int& n3)
+{
+    printf("before ff function-->n1: %d, n2: %d, n3: %d\n", n1, n2, n3);
+    n1 = 11;
+    n2 = 22;
+    // n3 = 33; 编译错误
+    printf("after ff function-->n1: %d, n2: %d, n3: %d\n", n1, n2, n3);
+}
+
+int main()
+{
+    auto f1 = std::bind(f, std::placeholders::_2, std::placeholders::_3, 666, std::placeholders::_1);
+
+    f1(1, 2, 3, 4, 5);
+    // infunction-->n1: 2, n2: 3, n3: 666, n4: 1
+    // 1 绑定_1  2绑定_2  3绑定_3   // 4 5被忽略
+    // 按照 f1的顺序传入参数
+    // 所以调用为 f(2, 3, 666, 1);
+
+    int n1 = 1, n2 = 2, n3 = 3;
+    auto ff1 = std::bind(ff, n1, std::ref(n2), std::cref(n3));
+    n1 = -1;
+    n2 = -2;
+    n3 = -3;
+    printf("before ff1 function-->n1: %d, n2: %d, n3: %d\n", n1, n2, n3);
+    ff1(n1, n2, n3);
+    printf("after ff1 function-->n1: %d, n2: %d, n3: %d\n", n1, n2, n3);
+    // before ff1 function-->n1: -1, n2: -2, n3: -3
+    // before ff function-- > n1: 1, n2 : -2, n3 : -3 // 这里说明了值传递 参数是绑定时就决定好了 引用参数还是可以改变的
+    // after ff function-- > n1: 11, n2 : 22, n3 : -3
+    // after ff1 function-- > n1: -1, n2 : 22, n3 : -3 // 引用传入成功改变, 值传入和const引用传入未变
+
+    // std::ref 按引用传入参数 std::cref按const引用传入参数
+}
+```
+
+
+
+## std::pair utility std::tuple tuple
+
+https://zh.cppreference.com/w/cpp/utility/tuple
+
+pair是 结构体模板, 可在一个单元中存储两个相异对象. pair是tuple拥有两个元素的特殊情况
+
+tuple是固定大小的异类值(啥是异类值??)汇集
+```c++
+std::tuple<int, double > GetInfoById(int id)
+{
+    if (id == 0) return std::make_tuple(1, 1.1);
+    if (id == 1) return std::make_tuple(2, 2.2);
+
+    throw std::invalid_argument("id");
+}
+
+int main()
+{
+    auto info = GetInfoById(0);
+	// 获取指定位置
+    std::cout << "1:" << std::get<0>(info)
+            << " 2:" << std::get<1>(info) << std::endl;
+
+    int val1;
+    double val2;
+	// 直接创建引用的tuple
+    std::tie(val1, val2) = GetInfoById(1);
+    std::cout << "1:" << val1
+              << " 2:" << val2 << std::endl;
+			  
+$ 1:1 2:1.1
+$ 1:2 2:2.2
+}
+```
+
+## auto static_assert 指定类型枚举
+
+## async
+
+# C++14
+
+## 0b010101 二进制表达
+
+# C++17
+
+## 结构化绑定
+
+# C++20
+
+## 携程库 import
+
+## likely宏和unlikely宏

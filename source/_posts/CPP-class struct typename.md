@@ -1,6 +1,6 @@
 ---
 title: class struct typename
-date: 2020-12-08 19:08:08
+date: 2021-2-24 10:54:08
 tags:
 categories:
  - CPP
@@ -10,8 +10,7 @@ categories:
 
 1. class默认访问权限是private, struct默认访问权限是public
 2. class默认private继承, struct默认public继承
-3. class可以使用模板, struct不能使用模板
-4. struct在没有构造函数, 可以使用大括号初始化. class则要求全部public下才能大括号初始化
+3. struct在没有构造函数, 可以使用大括号初始化. class则要求全部public下才能大括号初始化
 
 ```c++
 #include <cstdio>

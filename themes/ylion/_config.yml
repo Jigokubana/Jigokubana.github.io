@@ -29,7 +29,7 @@ widgets:
 ### notification config --网站公告设置。支持 html 和 纯文本
 notification: |-
 
-            <p>TCP LINK START</p>
+            <p><br>blog1.lsmg.xyz(Coding, 备用每天同步)<br>blog.lsmg.xyz(GitPage, 主站实时同步)</p>
 
 ### categories-list config --文章分类设置{@cate_config:{@show_count:是否显示数字，@show_current: 是否高亮当前category}}
 cate_config:

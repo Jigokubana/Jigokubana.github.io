@@ -8,11 +8,11 @@ date: 2020-12-02 12:50:02
 
 # 项目说明
 
-**当前进度 支持多个RTMP推流者推流 支持多个HTTP-FLV拉流者拉取对应的流观看**
+**使用C++20标准 Windows和Centos平台均使用gcc10.1编译通过正常使用**
 
-**使用C++17标准 Windows和Centos平台均使用gcc编译通过正常使用**
+**最新代码暂未适配Windows v1.0.0 版本支持Windows**
 
-**运行后在两个推流者四个观看者情况下 Linux占用内存6MB Windows占用内存1MB CPU使用极低**
+**运行后在两个推流者四个观看者情况下 占用内存6Mb CPU使用极低**
 
 **支持IPV4和IPV6**
 
@@ -30,37 +30,52 @@ HTTP包装 RTMP解析 FLV解析 参考自网络相关文档
 
 # 项目规划
 
-开发轻量级跨Windows和Linux的可用于P2P直播的`服务器端`和`观看客户端`
+开发轻量级跨Windows和Linux的支持Rtmp推流HttpFlv拉流的服务端
 
-项目不打算开发UI方面的功能, 视频将使用第三方的支持HttpFlv拉流的播放器来播放(如PotPlayer)
+项目不打算开发UI方面的功能, 视频将使用第三方的支持HttpFlv拉流的播放器来播放(如PotPlayer, flv.js)
 
 ## 开发进度
+
+### 服务器端
 
 支持多个RTMP推流者推流(已完成)
 
 支持多个HTTP-FLV拉流者拉取对应的流观看(已完成)
 
-开发`观看客户端`主要用于从`服务器端`接收FLV数据 本地转化成HttpFlv格式 供`HttpFlv拉流软件本地拉取` (未开发)
+推流者身份鉴定 Mysql查询账号密码(已完成)
 
-`观看者客户端`可以从`服务器端`获取数据也可以通过P2P技术与其他`观看者客户端`进行共享 (未开发)
+多线程支持(开发完成)
 
-## 初版
-
-主播使用`RTMP推流软件(如Obs)`将RTMP流发送到`服务器端` `服务器端`将Rtmp流解析生成FLV数据包装在HTTP中推送给观看者
-
-观看者直接使用`服务器端`生成的HTTPFLV地址 拉流观看
-
-
-## P2P版本 (未开发)
+完善的日志库(待开发)
 
 # 使用说明
 
+**安装Mysql库**
+
+```shell
+yum install mysql-devel
+```
+
+**配置main.cpp文件**
+
+```c++
+// 修改数据库配置 main.cpp
+if (!user_mapper_.Initialize(
+			"127.0.0.1", "lsmg", "123456789", "live"))
+{
+    exit(-1);
+}
+
+// 可将main.cpp user_mapper_相关代码注释 修改OnAuthenticate函数 不使用Mysql配置
+```
+
 **编译执行文件**
 下载源代码后在Windows平台或者Linux平台编译
+
 ```shell
 git clone https://github.com/HiganFish/LiveBroadcast.git
 
-cd LiveBroadcast/LiveBroadcastServer/
+cd LiveBroadcast/
 
 mkdir build && cd build
 
@@ -159,7 +174,7 @@ connect
 建立流
 ```
 -->
-releaseStream
+releaseStream 此包中包含Obs设置的推流密钥 可用于获取后身份鉴定
 FCPublish
 createStream
 <-- _result()
@@ -242,30 +257,47 @@ Obs发送`Video Data`其中Data为sps_pps_tag的data部分  视频数据包
 
 之后便是正常画面声音的Flv数据发送.
 
-# 文件介绍
+# 文件说明
+
 ```
 ├── CMakeLists.txt
 ├── main.cpp
-├── network # 网络部分学习自muduo
+├── mapper 包装mysql 提供用户验证
+│   ├── UserMapper.cpp
+│   └── UserMapper.h
+├── mysql   包装基础mysql api
+│   ├── DbMysql.cpp
+│   ├── DbMysql.h
+│   ├── Field.cpp
+│   ├── Field.h
+│   ├── QueryResult.cpp
+│   └── QueryResult.h
+├── network 网络相关
 │   ├── Acceptor.cpp
 │   ├── Acceptor.h
 │   ├── Callback.h
 │   ├── Channel.cpp
 │   ├── Channel.h
+│   ├── Connector.cpp
+│   ├── Connector.h
 │   ├── EventLoop.cpp
 │   ├── EventLoop.h
+│   ├── EventLoopThread.cpp
+│   ├── EventLoopThread.h
+│   ├── EventLoopThreadPool.cpp
+│   ├── EventLoopThreadPool.h
 │   ├── InetAddress.cpp
 │   ├── InetAddress.h
-│   ├── multiplexing
+│   ├── multiplexing 多路复用
 │   │   ├── Epoll.cpp
 │   │   ├── Epoll.h
 │   │   ├── MultiplexingBase.cpp
 │   │   ├── MultiplexingBase.h
 │   │   ├── Select.cpp
 │   │   └── Select.h
-│   ├── PlatformNetwork.cpp # 网络跨平台相关学习自flamingo
-│   ├── PlatformNetwork.h # 网络跨平台相关学习自flamingo
-│   ├── protocol # 将Rtmp推流者和HTTPFlv拉流者的TCP连接包装
+│   ├── PlatformNetwork.cpp 跨平台相关
+│   ├── PlatformNetwork.h
+│   ├── protocol Rtmp和HttpFlv连接管理
 │   │   ├── RtmpClientConnection.cpp
 │   │   ├── RtmpClientConnection.h
 │   │   ├── RtmpServerConnection.cpp
@@ -274,39 +306,67 @@ Obs发送`Video Data`其中Data为sps_pps_tag的data部分  视频数据包
 │   ├── Socket.h
 │   ├── SocketOps.cpp
 │   ├── SocketOps.h
+│   ├── TcpClient.cpp
+│   ├── TcpClient.h
 │   ├── TcpConnection.cpp
 │   ├── TcpConnection.h
 │   ├── TcpServer.cpp
-│   ├── TcpServer.h
-│   └── test
-│       └── TcpServerTest.cpp
+│   └── TcpServer.h
+├── README.md
+├── test 测试文件
+│   ├── CMakeLists.txt
+│   ├── Connector
+│   │   └── ConnectorTest.cpp
+│   ├── DbMysql
+│   │   └── DbMysqlTest.cpp
+│   ├── EventLoopThread
+│   │   └── EventLoopThreadTest.cpp
+│   ├── Logger
+│   │   └── LoggerTest.cpp
+│   ├── Main
+│   │   ├── 2.data.back
+│   │   └── MainTest.cpp
+│   ├── TcpServer
+│   │   └── TcpServerTest.cpp
+│   ├── Thread
+│   │   └── ThreadTest.cpp
+│   └── UserMapper
+│       ├── live_user.sql
+│       └── UserMapperTest.cpp
+├── thread 线程库包装
+│   ├── Condition.cpp
+│   ├── Condition.h
+│   ├── CurrentThread.cpp
+│   ├── CurrentThread.h
+│   ├── Mutex.cpp
+│   ├── Mutex.h
+│   ├── Thread.cpp
+│   ├── Thread.h
+│   ├── ThreadPool.cpp
+│   └── ThreadPool.h
 └── utils
-    ├── Buffer.cpp
-    ├── Buffer.h
-    ├── codec
-    │   ├── FlvCodec.cpp # FLV解析
-    │   ├── FlvCodec.h
-    │   ├── FlvManager.cpp # 管理FLV的解析 保存重要的几个Tag
-    │   ├── FlvManager.h
-    │   ├── RtmpCodec.cpp # Rtmp解析
-    │   ├── RtmpCodec.h
-    │   ├── RtmpManager.cpp # 管理Rtmp解析 将Rtmp数据部分转换成FlvTag
-    │   ├── RtmpManager.h
-    │   └── test
-    │       ├── FlvManagerTest.cpp
-    │       └── RtmpManagerTest.cpp
-    ├── File.cpp # 文件读写工具类
-    ├── File.h
-    ├── Format.cpp # 字符串格式化
-    ├── Format.h
-    ├── Logger.cpp # 简易低性能日志
-    ├── Logger.h
-    ├── PlatformBase.cpp # 基础部分跨平台代码
-    ├── PlatformBase.h
-    ├── test
-    │   └── LoggerTest.cpp
-    ├── Timestamp.cpp
-    └── Timestamp.h
-
-8 directories, 55 files
+├── Buffer.cpp
+├── Buffer.h
+├── codec Rtmp和Flv的编解码器
+│   ├── FlvCodec.cpp
+│   ├── FlvCodec.h
+│   ├── FlvManager.cpp
+│   ├── FlvManager.h
+│   ├── RtmpCodec.cpp
+│   ├── RtmpCodec.h
+│   ├── RtmpManager.cpp
+│   ├── RtmpManager.h
+│   └── test
+│       ├── FlvManagerTest.cpp
+│       └── RtmpManagerTest.cpp
+├── File.cpp
+├── File.h
+├── Format.cpp
+├── Format.h
+├── Logger.cpp
+├── Logger.h
+├── PlatformBase.cpp 基础跨平台相关
+├── PlatformBase.h 基础跨平台相关
+├── Timestamp.cpp
+└── Timestamp.h
 ```
