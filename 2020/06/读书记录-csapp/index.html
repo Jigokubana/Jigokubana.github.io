@@ -115,7 +115,7 @@
   <h3 class="fa fa-tags widget-title">Tag Cloud</h3>
   <div class="tagcloud-content">
     
-      <a href="/tags/%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/" style="font-size: 0.14rem; color: #69c">权限管理</a> <a href="/tags/Git%E6%93%8D%E4%BD%9C/" style="font-size: 0.14rem; color: #69c">Git操作</a> <a href="/tags/spf-13/" style="font-size: 0.14rem; color: #69c">spf-13</a> <a href="/tags/iostat/" style="font-size: 0.14rem; color: #69c">iostat</a> <a href="/tags/df/" style="font-size: 0.14rem; color: #69c">df</a> <a href="/tags/du/" style="font-size: 0.14rem; color: #69c">du</a> <a href="/tags/Linux/" style="font-size: 0.14rem; color: #69c">Linux</a> <a href="/tags/docker/" style="font-size: 0.14rem; color: #69c">docker</a> <a href="/tags/Shell/" style="font-size: 0.14rem; color: #69c">Shell</a> <a href="/tags/%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/" style="font-size: 0.14rem; color: #69c">网络配置</a> <a href="/tags/GDB%E8%B0%83%E8%AF%95/" style="font-size: 0.14rem; color: #69c">GDB调试</a> <a href="/tags/top/" style="font-size: 0.14rem; color: #69c">top</a> <a href="/tags/htop/" style="font-size: 0.14rem; color: #69c">htop</a> <a href="/tags/strace/" style="font-size: 0.14rem; color: #69c">strace</a> <a href="/tags/pstack/" style="font-size: 0.14rem; color: #69c">pstack</a> <a href="/tags/%E8%85%BE%E8%AE%AF%E6%B8%B8%E6%88%8F%E5%AD%A6%E9%99%A2/" style="font-size: 0.17rem; color: #386da4">腾讯游戏学院</a> <a href="/tags/HTTPS/" style="font-size: 0.14rem; color: #69c">HTTPS</a> <a href="/tags/%E8%87%AA%E5%BA%95%E5%90%91%E4%B8%8A/" style="font-size: 0.14rem; color: #69c">自底向上?</a> <a href="/tags/%E9%87%87%E5%9D%91%E8%AE%B0/" style="font-size: 0.2rem; color: #0a407c">采坑记</a> <a href="/tags/%E9%99%80%E8%9E%BA%E7%90%83/" style="font-size: 0.14rem; color: #69c">陀螺球</a>
+      <a href="/tags/htop/" style="font-size: 0.14rem; color: #69c">htop</a> <a href="/tags/Git%E6%93%8D%E4%BD%9C/" style="font-size: 0.14rem; color: #69c">Git操作</a> <a href="/tags/iostat/" style="font-size: 0.14rem; color: #69c">iostat</a> <a href="/tags/df/" style="font-size: 0.14rem; color: #69c">df</a> <a href="/tags/du/" style="font-size: 0.14rem; color: #69c">du</a> <a href="/tags/docker/" style="font-size: 0.14rem; color: #69c">docker</a> <a href="/tags/Linux/" style="font-size: 0.14rem; color: #69c">Linux</a> <a href="/tags/spf-13/" style="font-size: 0.14rem; color: #69c">spf-13</a> <a href="/tags/Shell/" style="font-size: 0.14rem; color: #69c">Shell</a> <a href="/tags/top/" style="font-size: 0.14rem; color: #69c">top</a> <a href="/tags/GDB%E8%B0%83%E8%AF%95/" style="font-size: 0.14rem; color: #69c">GDB调试</a> <a href="/tags/strace/" style="font-size: 0.14rem; color: #69c">strace</a> <a href="/tags/pstack/" style="font-size: 0.14rem; color: #69c">pstack</a> <a href="/tags/%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/" style="font-size: 0.14rem; color: #69c">权限管理</a> <a href="/tags/%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/" style="font-size: 0.14rem; color: #69c">网络配置</a> <a href="/tags/%E8%85%BE%E8%AE%AF%E6%B8%B8%E6%88%8F%E5%AD%A6%E9%99%A2/" style="font-size: 0.17rem; color: #386da4">腾讯游戏学院</a> <a href="/tags/HTTPS/" style="font-size: 0.14rem; color: #69c">HTTPS</a> <a href="/tags/%E8%87%AA%E5%BA%95%E5%90%91%E4%B8%8A/" style="font-size: 0.14rem; color: #69c">自底向上?</a> <a href="/tags/%E9%87%87%E5%9D%91%E8%AE%B0/" style="font-size: 0.2rem; color: #0a407c">采坑记</a> <a href="/tags/%E9%99%80%E8%9E%BA%E7%90%83/" style="font-size: 0.14rem; color: #69c">陀螺球</a>
   </div>
 </li>
 
@@ -223,7 +223,20 @@
 <li>I/O多路复用</li>
 </ol>
 <p>每个线程有自己的线程上下文, 线程id 栈 栈指针 程序计数器(存放下一条指令) 通用目的寄存器和条件码(CPU根据运算结果由硬件设置, 标识正负或者溢出等)</p>
-<p>pthread_join只能等待一个指定的线程终止, 没有办法让其等待任意一个线程终止</p>
+<p>在任何一个时间点上线城是可结合的(joinable)或者是可分离的(detached). 必须二选一来收回线程资源<br>前者可以能够被其他线程收回和杀死, 后者则不可被其他线程回收或杀死, 它占用的资源在其终止时由系统自动释放</p>
+<p>pthread_detach 分离线程, 可以通过pthread_self来分离自己</p>
+<p>pthread_join 结合线程 只能等待一个指定的线程终止, 没有办法让其等待任意一个线程终止</p>
+<p>为了理解程序中一个变量是否是共享的有一些基本问题要解答</p>
+<ol>
+<li>线程的基础内存模型是什么</li>
+<li>根据这个模型, <code>变量实例</code>如何映射到内存的</li>
+<li>有多少线程引用这些<code>实例</code></li>
+</ol>
+<h3 id="线程内存模型"><a href="#线程内存模型" class="headerlink" title="线程内存模型"></a>线程内存模型</h3><p>每个线程有自己独立的线程上下文包括线程id, 栈, 栈指针, 程序计数器, 通用目的寄存器和条件码</p>
+<p>线程之间共享剩余部分, 包括整个用户虚拟地址空间(由只读文本(代码), 读/写数据(全局变量, 本地静态变量), 堆, 共享库代码和数据区域)</p>
+<p>共享相同的打开文件集合</p>
+<p>线程之间栈相互独立, 基本自己访问自己的栈. 然而如果一个线程得到了另一个线程的栈指针 就可以读写这个栈的任何部分</p>
+<p><strong>进度图</strong></p>
 
         </div>
         <div id="post-footer">
@@ -244,7 +257,7 @@
                 
                 <li>Published Date: <span>2020-06-07  09:09:20</span></li>
                 
-                <li>Updated Date: <span>2021-03-03  22:53:34</span></li>
+                <li>Updated Date: <span>2021-03-03  23:35:55</span></li>
                 
                 <li class="post-category">
                     Categories:
@@ -334,7 +347,7 @@
     </div>
 </div>
 
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#第一章-计算机系统漫游"><span class="toc-number">1.</span> <span class="toc-text">第一章 计算机系统漫游</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第一部分-程序结构和执行"><span class="toc-number">2.</span> <span class="toc-text">第一部分 程序结构和执行</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#第二章-信息存储"><span class="toc-number">2.1.</span> <span class="toc-text">第二章 信息存储</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第五章-优化程序性能"><span class="toc-number">2.2.</span> <span class="toc-text">第五章 优化程序性能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第十一章-网络编程"><span class="toc-number">2.3.</span> <span class="toc-text">第十一章 网络编程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第十二章-并发编程"><span class="toc-number">2.4.</span> <span class="toc-text">第十二章 并发编程</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#第一章-计算机系统漫游"><span class="toc-number">1.</span> <span class="toc-text">第一章 计算机系统漫游</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第一部分-程序结构和执行"><span class="toc-number">2.</span> <span class="toc-text">第一部分 程序结构和执行</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#第二章-信息存储"><span class="toc-number">2.1.</span> <span class="toc-text">第二章 信息存储</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第五章-优化程序性能"><span class="toc-number">2.2.</span> <span class="toc-text">第五章 优化程序性能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第十一章-网络编程"><span class="toc-number">2.3.</span> <span class="toc-text">第十一章 网络编程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第十二章-并发编程"><span class="toc-number">2.4.</span> <span class="toc-text">第十二章 并发编程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#线程内存模型"><span class="toc-number">2.4.1.</span> <span class="toc-text">线程内存模型</span></a></li></ol></li></ol></li></ol>
 
 
 
