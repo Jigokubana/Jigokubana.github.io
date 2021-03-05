@@ -3,54 +3,6 @@
     
     
     <entry>
-        <title><![CDATA[Android开发]]></title>
-        <url>http://blog.lsmg.xyz/2021/03/%25E7%25AC%2594%25E8%25AE%25B0-android/</url>
-        <content type="html"><![CDATA[<h1 id="2021年3月3日"><a href="#2021年3月3日" class="headerlink" title="2021年3月3日"></a>2021年3月3日</h1><h2 id="长度单位"><a href="#长度单位" class="headerlink" title="长度单位"></a>长度单位</h2><p>px 像素, 1px是一个像素点</p>
-<p>dp 独立像素 160dpi的屏幕 1dp=1px 自适应屏幕dpi</p>
-<p>sp 比例像素 除了跟dp一样适应屏幕大小 还会根据系统字体变化 如果不想随其变化用dp</p>
-]]></content>
-        
-        <categories>
-            
-            <category> 笔记 </category>
-            
-        </categories>
-        
-        
-    </entry>
-    
-    <entry>
-        <title><![CDATA[系统软件开发实践]]></title>
-        <url>http://blog.lsmg.xyz/2021/03/%25E7%25AC%2594%25E8%25AE%25B0-flex/</url>
-        <content type="html"><![CDATA[<p>lex1.l  lex2.l 两个对应的C代码</p>
-<p>lex1和lex2的运行截图提交到SPOC</p>
-]]></content>
-        
-        <categories>
-            
-            <category> 笔记 </category>
-            
-        </categories>
-        
-        
-    </entry>
-    
-    <entry>
-        <title><![CDATA[Linux操作系统]]></title>
-        <url>http://blog.lsmg.xyz/2021/03/%25E7%25AC%2594%25E8%25AE%25B0-linux/</url>
-        <content type="html"><![CDATA[<h1 id="Linux操作系统课程"><a href="#Linux操作系统课程" class="headerlink" title="Linux操作系统课程"></a>Linux操作系统课程</h1><p>进程管理 内存管理 外设管理</p>
-]]></content>
-        
-        <categories>
-            
-            <category> 笔记 </category>
-            
-        </categories>
-        
-        
-    </entry>
-    
-    <entry>
         <title><![CDATA[HTTPS的基本流程和原理]]></title>
         <url>http://blog.lsmg.xyz/2021/03/%25E8%25AE%25A1%25E7%25AE%2597%25E6%259C%25BA%25E7%25BD%2591%25E7%25BB%259C-HTTPS/</url>
         <content type="html"><![CDATA[<h1 id="对称加密-or-非对称加密"><a href="#对称加密-or-非对称加密" class="headerlink" title="对称加密 or 非对称加密"></a>对称加密 or 非对称加密</h1><p>加密分为对称加密和非对称加密, 对称加密速度快但是涉及到了key的明文传输 非对称加密速度慢但是可以加密内容</p>
@@ -85,7 +37,256 @@
     </entry>
     
     <entry>
-        <title><![CDATA[剑指Offer(年轻人你渴望力量吗)]]></title>
+        <title><![CDATA[class struct typename]]></title>
+        <url>http://blog.lsmg.xyz/2021/02/CPP-class%2520struct%2520typename/</url>
+        <content type="html"><![CDATA[<h1 id="class-和-struct的区别"><a href="#class-和-struct的区别" class="headerlink" title="class 和 struct的区别"></a>class 和 struct的区别</h1><ol>
+<li>class默认访问权限是private, struct默认访问权限是public</li>
+<li>class默认private继承, struct默认public继承</li>
+<li>struct在没有构造函数, 可以使用大括号初始化. class则要求全部public下才能大括号初始化</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Foo1</span> &#123;</span>&#125; foo1;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo2</span> &#123;</span>&#125; foo2;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Foo3</span> &#123;</span><span class="keyword">int</span> a; <span class="keyword">int</span> b;&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo4</span>&#123;</span><span class="keyword">int</span> a; <span class="keyword">int</span> b;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo44</span>&#123;</span><span class="keyword">public</span>: <span class="keyword">int</span> a; <span class="keyword">int</span> b;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"sizeof struct-Foo1: %zu\n"</span>, <span class="keyword">sizeof</span> foo1); <span class="comment">// 1</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"sizeof class-Foo2: %zu\n"</span>, <span class="keyword">sizeof</span> foo2); <span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line">    Foo3 foo3 = &#123;<span class="number">1</span>, <span class="number">2</span>&#125;;</span><br><span class="line">    <span class="comment">// Foo4 foo4 = &#123;1, 2&#125;; error: could not convert ‘&#123;1, 2&#125;’ from ‘&lt;brace-enclosed initializer list&gt;’ to ‘Foo4’</span></span><br><span class="line">    Foo44 foo44 = &#123;<span class="number">1</span>, <span class="number">2</span>&#125;;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="typename-class"><a href="#typename-class" class="headerlink" title="typename class"></a>typename class</h1><p><a href="https://stackoverflow.com/questions/2023977/difference-of-keywords-typename-and-class-in-templates" target="_blank" rel="noopener">https://stackoverflow.com/questions/2023977/difference-of-keywords-typename-and-class-in-templates</a></p>
+]]></content>
+        
+        <categories>
+            
+            <category> CPP </category>
+            
+        </categories>
+        
+        
+    </entry>
+    
+    <entry>
+        <title><![CDATA[大三寒假学习记录]]></title>
+        <url>http://blog.lsmg.xyz/2021/02/%25E5%2581%2587%25E6%259C%259F%25E5%25AD%25A6%25E4%25B9%25A0%25E8%25AE%25B0%25E5%25BD%2595-%25E5%25A4%25A7%25E4%25B8%2589%25E5%25AF%2592%25E5%2581%2587/</url>
+        <content type="html"><![CDATA[<h1 id="2021年2月1日-3日"><a href="#2021年2月1日-3日" class="headerlink" title="2021年2月1日-3日"></a>2021年2月1日-3日</h1><p><strong>动态规划问题</strong></p>
+<p>编辑距离</p>
+<p>最长递增子序列</p>
+<p>俄罗斯套娃信封</p>
+<p>最大子序和</p>
+<p>最长公共子序列</p>
+<h1 id="2021年2月4日22-46-59"><a href="#2021年2月4日22-46-59" class="headerlink" title="2021年2月4日22:46:59"></a>2021年2月4日22:46:59</h1><p>今天把博客整理了下分类</p>
+<p>继续学习的动态规划算法两道题目 </p>
+<p><a href="https://leetcode-cn.com/problems/delete-operation-for-two-strings/" target="_blank" rel="noopener">583. 两个字符串的删除操作</a> </p>
+<p><a href="https://leetcode-cn.com/problems/minimum-ascii-delete-sum-for-two-strings/" target="_blank" rel="noopener">712. 两个字符串的最小ASCII删除和</a></p>
+<p>2021年2月4日23:26:37 <a href="https://learngitbranching.js.org/?locale=zh_CN" target="_blank" rel="noopener">https://learngitbranching.js.org/?locale=zh_CN</a> 学习Git的挺不错的网站 练习一遍</p>
+<h1 id="2021年2月5日11-18-56"><a href="#2021年2月5日11-18-56" class="headerlink" title="2021年2月5日11:18:56"></a>2021年2月5日11:18:56</h1><p>上次改了改项目的BUG, 发布了1.1 release版本</p>
+<p>继续算法</p>
+<p><a href="https://leetcode-cn.com/problems/longest-palindromic-subsequence/" target="_blank" rel="noopener">516. 最长回文子序列</a></p>
+<p>整了一大下午 没想到是memcpy 的问题总算解决了虚拟机代码无法运行的问题</p>
+<h1 id="2021年2月20日"><a href="#2021年2月20日" class="headerlink" title="2021年2月20日"></a>2021年2月20日</h1><p>C++ 拷贝构造函数和赋值运算符 <a href="https://www.cnblogs.com/wangguchangqing/p/6141743.html" target="_blank" rel="noopener">https://www.cnblogs.com/wangguchangqing/p/6141743.html</a></p>
+<p>allocate deallocate<br>malloc free<br>new delete</p>
+<p>STL allocate deallocate constructor deconstructor<br>std allocate</p>
+<p>我理解的右值引用、移动语义和完美转发 <a href="https://www.jianshu.com/p/d19fc8447eaa" target="_blank" rel="noopener">https://www.jianshu.com/p/d19fc8447eaa</a></p>
+<p><img src="https://uploadfiles.nowcoder.com/images/20190313/311436_1552467921124_13956548C4BB199139A2744C39350272" alt="内存布局"><span class="img-alt">内存布局</span></p>
+<p>TODO 异步回调 sync</p>
+<p>TODO 聊聊同步、异步、阻塞与非阻塞 <a href="https://my.oschina.net/xianggao/blog/661085" target="_blank" rel="noopener">https://my.oschina.net/xianggao/blog/661085</a></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>多线程</th>
+<th>多进程</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>同步</td>
+<td>mutex线程锁, 条件变量, 信号量(生产者消费者)</td>
+<td>PV操作</td>
+</tr>
+<tr>
+<td>数据共享</td>
+<td></td>
+<td>共享内存, 消息队列, 管道,</td>
+</tr>
+</tbody></table>
+<p>信号量可以设置多个初始资源 等多个初始资源消耗完毕后才会sleep</p>
+<p>条件变量则是直接sleep等待一个个或者全部唤醒</p>
+<p><a href="https://blog.csdn.net/linraise/article/details/12979473" target="_blank" rel="noopener">https://blog.csdn.net/linraise/article/details/12979473</a></p>
+<h1 id="2021年2月22日-AC5"><a href="#2021年2月22日-AC5" class="headerlink" title="2021年2月22日 - AC5"></a>2021年2月22日 - AC5</h1><p>更加的透彻 <a href="https://codinfox.github.io/dev/2014/06/03/move-semantic-perfect-forward/" target="_blank" rel="noopener">https://codinfox.github.io/dev/2014/06/03/move-semantic-perfect-forward/</a></p>
+<h2 id="移动语义和完美转发"><a href="#移动语义和完美转发" class="headerlink" title="移动语义和完美转发"></a>移动语义和完美转发</h2><p><strong>移动构造函数</strong><br>可以将源对象中的高消耗资源 转移到 新的对象中</p>
+<p>而使用拷贝构造函数会导致生成两份高消耗资源 造成浪费</p>
+<p><strong>左值 右值</strong><br>能够取到地址的为左值 否则是右值</p>
+<p><strong>std::move std::forward</strong><br>move将一个左值T转换为右值 以此来调用对象的移动构造函数 转移内部资源, 否则由于T是左值将会调用拷贝构造函数 生成新的资源 浪费旧的资源</p>
+<p>forward左值依然为左值 右值转换为右值. 当一个参数传入右值形参的时候 函数的实参实际为左值 使用forward可以将函数实参转换原本的右值</p>
+<p>而当传入左值的时候forward转换后依旧是左值</p>
+<p><strong>void Foo(const int&amp;)</strong><br>在没有其他重载的情况下, <code>const int&amp;</code>可以接收左值也可以接收右值  如果去掉<code>const</code>则只能接收右值</p>
+<p>每个线程都是如何启动的, 各个线程的作用. 线程间的数据交互方式</p>
+<p>TODO unique_lock  lock_guard scope_lock lock 等的作用</p>
+<p>条件变量虚假唤醒</p>
+<p>整理了jsoncpp的代码明天看</p>
+<h1 id="2021年2月23日-AC5"><a href="#2021年2月23日-AC5" class="headerlink" title="2021年2月23日 - AC5"></a>2021年2月23日 - AC5</h1><p><a href="https://github.com/HiganFish/jsoncpp1.9.4-learn" target="_blank" rel="noopener">https://github.com/HiganFish/jsoncpp1.9.4-learn</a> jsoncpp代码阅读</p>
+<h2 id="lower-bound-insert-比-find-insert-要高性能"><a href="#lower-bound-insert-比-find-insert-要高性能" class="headerlink" title="lower_bound + insert 比 find + insert 要高性能"></a>lower_bound + insert 比 find + insert 要高性能</h2><p>insert会利用lower_bound的返回值</p>
+<p>而find则没有此效果 总是需要进行O(log N)的查找位置</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">EventLoop* <span class="title">EventLoopThread::Start</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	thread_.Start();</span><br><span class="line"></span><br><span class="line">	EventLoop* loop = <span class="literal">nullptr</span>;</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function">MutexGuardLock <span class="title">guard</span><span class="params">(mutex_)</span></span>;</span><br><span class="line">		<span class="keyword">while</span> (loop_ == <span class="literal">nullptr</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			cond_.Wait();</span><br><span class="line">		&#125;</span><br><span class="line">		loop = loop_;  <span class="comment">// 为了等线程创建完毕后 才返回 否则这个函数只有第一句 线程未创建完毕就返回了</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> loop;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">EventLoopThread::ThreadFunc</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	EventLoop loop;</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function">MutexGuardLock <span class="title">guard</span><span class="params">(mutex_)</span></span>;</span><br><span class="line">		loop_ = &amp;loop;</span><br><span class="line">		cond_.WakeUpOne();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="2021年2月24日"><a href="#2021年2月24日" class="headerlink" title="2021年2月24日"></a>2021年2月24日</h1><h2 id="typename-and-class-in-template"><a href="#typename-and-class-in-template" class="headerlink" title="typename and class in template"></a>typename and class in template</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="keyword">typedef</span> <span class="keyword">int</span> INT;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt; // <span class="title">mingw</span>中和 <span class="title">template</span> &lt;typename T&gt; 完全等效 必须在 <span class="title">T</span>:</span>:INT 前加<span class="keyword">typename</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">D1</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	T::INT i1; <span class="comment">// error: need 'typename' before 'T::INT' because 'T' is a dependent scope</span></span><br><span class="line">	<span class="keyword">typename</span> T::INT i2; <span class="comment">// true</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	D1&lt;D&gt; d_1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>额外发现</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">A</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	T t_;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">A1</span> :</span> <span class="keyword">public</span> A&lt;T&gt;</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	A1()</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// t_ = 1;</span></span><br><span class="line">		<span class="keyword">this</span>-&gt;t_ = <span class="number">1</span>; <span class="comment">// 这里需要使用this指针访问</span></span><br><span class="line">		A&lt;T&gt;::t_ = <span class="number">1</span>; <span class="comment">// 可读性更好</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="二段名字查找"><a href="#二段名字查找" class="headerlink" title="二段名字查找"></a>二段名字查找</h2><ol>
+<li>第一段: 模板定义阶段  在被定义时 只在模板中有独立的名字(和模板参数无关) 参与查找</li>
+<li>第二段: 模板类实例化  非独立的名字参与查找</li>
+</ol>
+<p><strong>以成员变量为例 成员函数同理</strong></p>
+<ol>
+<li><p>在第一阶段, 首先处理A1遇到了<code>class A1 : public A&lt;T&gt;</code>. 此时父类<code>A&lt;T&gt;</code>依赖于模板参数 属于非独立 不参与查找</p>
+</li>
+<li><p>在之后遇到了<code>t_</code>这个变量, 由于没有查找基类 这里便认为<code>t_</code>是一个非成员变量</p>
+</li>
+<li><p>第二阶段这时候才处理<code>A&lt;T&gt;</code> 虽然这时已经<code>可以知道t_是一个成员变量</code>但是第一阶段编译器已经认定了<code>t_</code>是一个非成员变量</p>
+</li>
+<li><p>而对于一个非成员变量 编译器认为不需要去基类中查找, 所以就报错无法找到</p>
+</li>
+<li><p>使用this之后在第一阶段, 编译器就被明确的告知<code>t_</code>是一个成员变量</p>
+</li>
+<li><p>然后第二阶段, 编译器就会去基类中查找这个成员变量. </p>
+</li>
+</ol>
+<p><a href="https://www.cnblogs.com/onepixel/articles/7674659.html" target="_blank" rel="noopener">https://www.cnblogs.com/onepixel/articles/7674659.html</a></p>
+<h1 id="2021年2月25日-AC1"><a href="#2021年2月25日-AC1" class="headerlink" title="2021年2月25日 - AC1"></a>2021年2月25日 - AC1</h1><p>开学了坐了一天车</p>
+<p>A了一道题-_-</p>
+<h1 id="2021年2月26日-AC6"><a href="#2021年2月26日-AC6" class="headerlink" title="2021年2月26日 - AC6"></a>2021年2月26日 - AC6</h1><p>偶然看到了一道面试题, 问的是如何从2.5亿数字中找到重复的数字</p>
+<p><a href="https://leetcode-cn.com/circle/discuss/6TtGra/" target="_blank" rel="noopener">https://leetcode-cn.com/circle/discuss/6TtGra/</a></p>
+<p>大佬云集..</p>
+<p>TODO likely宏和__builtin_expect编译器函数性能评测</p>
+<p>TODO string_view <a href="https://cloud.tencent.com/developer/article/1479005" target="_blank" rel="noopener">https://cloud.tencent.com/developer/article/1479005</a></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> (TcpConnection::*fp)(<span class="keyword">const</span> <span class="built_in">std</span>::string_view&amp;) = &amp;TcpConnection::SendInLoop;</span><br><span class="line">			loop_-&gt;RunInLoop(<span class="built_in">std</span>::bind(fp, </span><br><span class="line">					<span class="keyword">this</span>,</span><br><span class="line">					<span class="built_in">std</span>::<span class="built_in">string</span>(data, length))); <span class="comment">// OK</span></span><br><span class="line"></span><br><span class="line">TcpConnection::SendInLoop;</span><br><span class="line">			loop_-&gt;RunInLoop(<span class="built_in">std</span>::bind(&amp;TcpConnection::SendInLoop, </span><br><span class="line">					<span class="keyword">this</span>,</span><br><span class="line">					<span class="built_in">std</span>::<span class="built_in">string</span>(data, length)));</span><br><span class="line"></span><br><span class="line">loop_-&gt;RunInLoop([<span class="keyword">this</span>, str = <span class="built_in">std</span>::<span class="built_in">string</span>(data, length)]()</span><br><span class="line">			&#123;</span><br><span class="line">				RunInLoop(str);</span><br><span class="line">			&#125;); <span class="comment">// HOW TO FIX ERROR ???</span></span><br></pre></td></tr></table></figure>
+<p>看到C++ Primer中一句话终于知道为什么第二种是错误的了, 因为存在函数重载, 所以必须显示的声明使用的是哪个函数</p>
+<p><strong>make_unique make_shared</strong><br>使得对象空间和unique_ptr或者shared_ptr的控制块是连续的</p>
+<p>TODO Warning: File “xxx” has modification time yyy s in the future</p>
+<p>mutable</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;EventLoopFunction&gt; pending_func;</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">		* 减少锁持有的时间</span></span><br><span class="line"><span class="comment">		*/</span></span><br><span class="line">	<span class="function">MutexLockGuard <span class="title">guard</span><span class="params">(pending_func_mutex_)</span></span>;</span><br><span class="line">	pending_func.swap(pending_func_);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="Linux下查看进程线程数"><a href="#Linux下查看进程线程数" class="headerlink" title="Linux下查看进程线程数"></a>Linux下查看进程线程数</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">lsof -Ptn -i tcp:4100 # -P 不解析port -n 不解析主机名 会解决lsof卡gethostbyaddr -t 只显示pid</span><br><span class="line"></span><br><span class="line">pid=$(lsof -Pnt -i tcp:4100)</span><br><span class="line"></span><br><span class="line">cat /proc/$pid/status | grep Threads</span><br><span class="line">	Threads:	5</span><br><span class="line"></span><br><span class="line">top -Hp $pid</span><br><span class="line">	107344 root      20   0  334464   6780   5192 S   0.0   0.2   0:00.74 LiveBroadcastSe                                         </span><br><span class="line">	107361 root      20   0  334464   6780   5192 S   0.0   0.2   0:23.11 LiveBroadcastSe                                         </span><br><span class="line">	107362 root      20   0  334464   6780   5192 S   0.0   0.2   0:00.70 LiveBroadcastSe                                         </span><br><span class="line">	107363 root      20   0  334464   6780   5192 S   0.0   0.2   0:04.76 LiveBroadcastSe                                         </span><br><span class="line">	107364 root      20   0  334464   6780   5192 S   0.0   0.2   0:04.79 LiveBroadcastS</span><br><span class="line"></span><br><span class="line">pstree -p $pid</span><br><span class="line">	LiveBroadcastSe(107344)─┬─&#123;LiveBroadcastSe&#125;(107361)</span><br><span class="line">							├─&#123;LiveBroadcastSe&#125;(107362)</span><br><span class="line">							├─&#123;LiveBroadcastSe&#125;(107363)</span><br><span class="line">							└─&#123;LiveBroadcastSe&#125;(107364)</span><br></pre></td></tr></table></figure>
+
+<h1 id="2021年2月27日-AC5"><a href="#2021年2月27日-AC5" class="headerlink" title="2021年2月27日 - AC5"></a>2021年2月27日 - AC5</h1><p>TODO 手写最小堆</p>
+<p>刚才看堆的用法的时候嫖到了一眼可以用最大堆+最小堆求中位数 没想到下道题就用到了…</p>
+<p>连着两道算法做的头皮发麻, 写会项目</p>
+<p>日志库写完了</p>
+<p>/var/lib/systemd/coredump coredump默认目录</p>
+<h1 id="2021年2月28日-AC5"><a href="#2021年2月28日-AC5" class="headerlink" title="2021年2月28日 - AC5"></a>2021年2月28日 - AC5</h1><p>TODO 自我介绍</p>
+<p>把项目换成了新的日志库</p>
+<p>TODO getaddrinfo</p>
+<h1 id="2021年3月1日-AC2"><a href="#2021年3月1日-AC2" class="headerlink" title="2021年3月1日 - AC2"></a>2021年3月1日 - AC2</h1><h2 id="HTTPS流程和基本原理"><a href="#HTTPS流程和基本原理" class="headerlink" title="HTTPS流程和基本原理"></a>HTTPS流程和基本原理</h2><p>HTTPS <a href="https://segmentfault.com/a/1190000021494676" target="_blank" rel="noopener">https://segmentfault.com/a/1190000021494676</a></p>
+<p>如果使用对称加密, 虽然传输过程中数据不会被解密 但是双方在交换密钥的时候 是明文进行交换的</p>
+<p>所以使用非对称加密来保护<code>对称加密的key</code> 后续再使用对称加密进行通信 这样兼顾安全性和效率</p>
+<p><img src="https://segmentfault.com/img/bVbClUl" alt=""></p>
+<p>HTTP的默认端口从80改到了443端口</p>
+<p>客户端首先生成随机串CLIENT1, 服务器接收到后回复证书和SERVER1, 客户端验证证书后生成随机串CLIENT2并使用公钥加密, 服务器收到后解密出CLENT2</p>
+<p>然后客户端和服务器根据上面的三个随机串使用相同的算法生成最终的对称加密密钥</p>
+<p><strong>对于证书合法性校验, 存在中间人攻击 如何解决的?</strong> <a href="https://zhuanlan.zhihu.com/p/43789231" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/43789231</a></p>
+<p>服务器向CA申请证书后 得到了一份<code>证书</code>以及CA在hash证书后使用私钥对其加密的<code>数字签名</code>两个东西组成<code>数字证书</code></p>
+<p>当浏览器得到<code>数字证书</code>后可以从中得到<code>证书</code>和<code>数字签名</code> 使用CA的公钥对数字签名解密得到<code>T1</code>. 然后使用证书中的算法对<code>证书</code>hash得到<code>T2</code> 比较<code>T1</code>和<code>T2</code></p>
+<p>二者相等说明证书可信.</p>
+<p>如果有人篡改了<code>证书</code>, 但是由于没有CA的私钥无法生成加密后的<code>数字签名</code>, 所以浏览器比较的时候<code>T1和T2</code>不相等</p>
+<p>如果掉包整个<code>证书</code>, 由于<code>证书</code>中包含了域名, 直接比对域名就知道有没有被掉包了</p>
+<p>五大I/O模型比较</p>
+<p>同步IO</p>
+<ul>
+<li>阻塞IO:  数据就绪和数据拷贝均阻塞</li>
+<li>非阻塞IO: 数据就绪不阻塞 数组拷贝阻塞 内核仅通知数据就绪(非就绪需要一直轮询)</li>
+<li>IO复用: 数据就绪不阻塞 数据拷贝阻塞 内核仅通知数据就绪</li>
+<li>信号驱动IO 数据就绪不阻塞 数据拷贝阻塞 内核仅通知数据就绪</li>
+</ul>
+<p>异步IO</p>
+<ul>
+<li>异步IO: 数据就绪 和 数据拷贝 均不阻塞 内核通知数据拷贝完毕</li>
+</ul>
+<p>poll相对select 增加了文件描述符的复用率和监听数量 需要每次奖所有描述符从进程复制到内核</p>
+<p>epoll 则不在需要在每次调用epoll_wait时将所有描述符从进程复制到内核</p>
+<p>epoll支持LT模式(通知直到数据被处理 水平模式) ET模式(仅通知一次 边缘模式)</p>
+<p>select的精度高 可移植性好</p>
+<p>poll同样可以执行好 相对select解决了一些问题</p>
+<p>epoll 只能在Linux下使用, 如果连接数较少或者都是短连接 会使用epoll_ctl导致性能降低 epoll更加适用于长连接的管理</p>
+<h1 id="2021年3月2日-AC2"><a href="#2021年3月2日-AC2" class="headerlink" title="2021年3月2日 - AC2"></a>2021年3月2日 - AC2</h1><p><code>dup2(fd, STDOUT_FILENO)</code> 在exel系列函数执行前 执行这条语句可以将输出直接重定向到fd</p>
+<p><a href="https://github.com/HiganFish/Notes-CSAPP" target="_blank" rel="noopener">https://github.com/HiganFish/Notes-CSAPP</a> csapp TinyWebServer 总算写完了 format库用起来非常舒服  也练了练string中的CApi</p>
+<p>C++协程库 (2021年3月3日15:46:37)</p>
+<p>智能指针的实现 (2021年3月3日15:46:41)</p>
+<h1 id="2021年3月3日1-AC2"><a href="#2021年3月3日1-AC2" class="headerlink" title="2021年3月3日1 - AC2"></a>2021年3月3日1 - AC2</h1><p>尝试试用了下协程库</p>
+<p>简单实现了下 智能指针150行不到的代码</p>
+<h1 id="2021年3月4日-AC2"><a href="#2021年3月4日-AC2" class="headerlink" title="2021年3月4日 - AC2"></a>2021年3月4日 - AC2</h1><p>Protobuf相关原理</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">syntax &#x3D; &quot;proto2&quot;;</span><br><span class="line"></span><br><span class="line">package tutorial;</span><br><span class="line"></span><br><span class="line">message Person &#123;</span><br><span class="line">  optional string name &#x3D; 1;</span><br><span class="line">  optional int32 id &#x3D; 2;</span><br><span class="line">  optional string email &#x3D; 3;</span><br><span class="line"></span><br><span class="line">  enum PhoneType &#123;</span><br><span class="line">    MOBILE &#x3D; 0;</span><br><span class="line">    HOME &#x3D; 1;</span><br><span class="line">    WORK &#x3D; 2;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  message PhoneNumber &#123;</span><br><span class="line">    optional string number &#x3D; 1;</span><br><span class="line">    optional PhoneType type &#x3D; 2 [default &#x3D; HOME];</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  repeated PhoneNumber phones &#x3D; 4;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">message AddressBook &#123;</span><br><span class="line">  repeated Person people &#x3D; 1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>protobuf编码数据后会生成字节流 组成方式为<code>[key1][value1][key2][value2][key3][value3]....</code> </p>
+<p>如果需要了无法解析的kv就跳过, 所以旧版本代码依然能解析新版的字节流</p>
+<p><code>key1=(key &lt;&lt; 3) | type</code> 这个type是proto中各种类型的代号. 这样就能通过增加有限的二进制位同时存储代号和类型 存储在一起也方便解析</p>
+<p><code>value1</code>则会根据不同的value类型进行对应形式的压缩. 对于变长类型会压缩其二进制位 比如<code>int32 为 1</code>的时候仅需要一个字节就好 字节之间通过首字节判断是否相连如果每个字节的</p>
+<p>首二进制位是1说明后续依然有数据 直到首二进制位为0说明数据结束 这样就获取到了数字信息. 对于string类型则采用了<code>length + char流</code>没有对char流进行压缩</p>
+]]></content>
+        
+        <categories>
+            
+            <category> 假期学习记录 </category>
+            
+        </categories>
+        
+        
+    </entry>
+    
+    <entry>
+        <title><![CDATA[小方说知识星球]]></title>
+        <url>http://blog.lsmg.xyz/2021/02/%25E5%259F%25BA%25E7%25A1%2580%25E7%259F%25A5%25E8%25AF%2586%25E6%259D%2582%25E7%2583%25A9-%25E5%25B0%258F%25E6%2596%25B9%25E8%25AF%25B4%25E7%259F%25A5%25E8%25AF%2586%25E6%2598%259F%25E7%2590%2583/</url>
+        <content type="html"><![CDATA[<h1 id="网络编程"><a href="#网络编程" class="headerlink" title="网络编程"></a>网络编程</h1><p>这里并不做过多的记录, 记录一些tips吧</p>
+<p>lsof 能用做文件删除恢复. 仅限于文件虽然被删除但依然被某个进程打开.</p>
+<p>bind函数<br>地址可以指定 INADDR_ANY<br>那么端口呢?  测试了下如果端口为0确实是 bind到了随机端口</p>
+<p>bind到一个已经bind的端口会出错. 然而如果端口为0 随机的端口则没有被bind过</p>
+<p>客户端connect前调用bind能够以指定端口号连接, 这个在高性能服务器见过 不过一直没有用过</p>
+<p>异步connect? 非阻塞connect</p>
+<p>connect尝试次数? 尝试间隔? </p>
+<table>
+<thead>
+<tr>
+<th>函数名称</th>
+<th>返回值</th>
+<th>阻塞</th>
+<th>非阻塞</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>recv</td>
+<td>-1</td>
+<td>出错</td>
+<td>判断是否为EWOULDBLOCK(数据已经收完, ET模式收完数据的标志) 或者 EINTR(信号中断)</td>
+</tr>
+<tr>
+<td>recv</td>
+<td>0</td>
+<td>对端关闭</td>
+<td>对端关闭</td>
+</tr>
+<tr>
+<td>send</td>
+<td>-1</td>
+<td>出错</td>
+<td>EWOULDBLOCK(数据无法继续发出) EAGAIN</td>
+</tr>
+</tbody></table>
+<p>LT 想收多少收多少 收不完就提醒<br>ET 爱收不收 过了这村没这店</p>
+<h1 id="并发编程"><a href="#并发编程" class="headerlink" title="并发编程"></a>并发编程</h1><p>条件变量虚假唤醒</p>
+<p>协程操作系统自带还是语言实现的</p>
+<p>单机服务做好 找到单机的瓶颈 上并发</p>
+<p>每个线程都是如何启动的, 各个线程的作用. 线程间的数据交互方式</p>
+<p>unique_lock  lock_guard scope_lock lock 等的作用</p>
+]]></content>
+        
+        <categories>
+            
+            <category> 基础知识杂烩 </category>
+            
+        </categories>
+        
+        
+    </entry>
+    
+    <entry>
+        <title><![CDATA[剑指Offer]]></title>
         <url>http://blog.lsmg.xyz/2021/02/%25E5%2589%2591%25E6%258C%2587Offer/</url>
         <content type="html"><![CDATA[<h3 id="剑指-Offer-03-数组中重复的数字"><a href="#剑指-Offer-03-数组中重复的数字" class="headerlink" title="剑指 Offer 03. 数组中重复的数字"></a><a href="https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/" target="_blank" rel="noopener">剑指 Offer 03. 数组中重复的数字</a></h3><p>Difficulty: <strong>简单</strong></p>
 <p>找出数组中重复的数字。</p>
@@ -283,10 +484,13 @@
 <li>输入必须是长度为 <code>32</code> 的 <strong>二进制串</strong> 。</li>
 </ul>
 <p>注意：本题与主站 191 题相同：</p>
-<h4 id="Solution-右移运算符-循环M次-M为二进制位数和"><a href="#Solution-右移运算符-循环M次-M为二进制位数和" class="headerlink" title="Solution - 右移运算符 循环M次 M为二进制位数和"></a>Solution - 右移运算符 循环M次 M为二进制位数和</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">​<span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">hammingWeight</span><span class="params">(<span class="keyword">uint32_t</span> n)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (n != <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            result += n &amp; <span class="number">1</span>;</span><br><span class="line">            n = n &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="Solution-右移运算符-循环M次-M为二进制位数和-负数会出错导致死循环"><a href="#Solution-右移运算符-循环M次-M为二进制位数和-负数会出错导致死循环" class="headerlink" title="Solution - 右移运算符 循环M次 M为二进制位数和 负数会出错导致死循环"></a>Solution - 右移运算符 循环M次 M为二进制位数和 负数会出错导致死循环</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">​<span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">hammingWeight</span><span class="params">(<span class="keyword">uint32_t</span> n)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (n != <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            result += n &amp; <span class="number">1</span>;</span><br><span class="line">            n = n &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Solution-解决负数的一种方法"><a href="#Solution-解决负数的一种方法" class="headerlink" title="Solution - 解决负数的一种方法"></a>Solution - 解决负数的一种方法</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">hammingWeight</span><span class="params">(<span class="keyword">uint32_t</span> n)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h4 id="Solution-更加高效的-循环M次-M为二进制1的位数"><a href="#Solution-更加高效的-循环M次-M为二进制1的位数" class="headerlink" title="Solution - 更加高效的 循环M次 M为二进制1的位数"></a>Solution - 更加高效的 循环M次 M为二进制1的位数</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">hammingWeight</span><span class="params">(<span class="keyword">uint32_t</span> n)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (n != <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            result++;</span><br><span class="line">            n &amp;= n - <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
+<p>把一个整数减去1之后再和原来的整数作<code>&amp;</code>运算, 得到的结果相当于将二进制表示中的最右边一个1变成0</p>
 <h3 id="剑指-Offer-16-数值的整数次方"><a href="#剑指-Offer-16-数值的整数次方" class="headerlink" title="剑指 Offer 16. 数值的整数次方"></a><a href="https://leetcode-cn.com/problems/shu-zhi-de-zheng-shu-ci-fang-lcof/" target="_blank" rel="noopener">剑指 Offer 16. 数值的整数次方</a></h3><p>Difficulty: <strong>中等</strong></p>
 <p>实现函数double Power(double base, int exponent)，求base的exponent次方。不得使用库函数，同时不需要考虑大数问题。</p>
 <p><strong>示例 1:</strong></p>
@@ -1013,247 +1217,6 @@
         <categories>
             
             <category> 算法 </category>
-            
-        </categories>
-        
-        
-    </entry>
-    
-    <entry>
-        <title><![CDATA[class struct typename]]></title>
-        <url>http://blog.lsmg.xyz/2021/02/CPP-class%2520struct%2520typename/</url>
-        <content type="html"><![CDATA[<h1 id="class-和-struct的区别"><a href="#class-和-struct的区别" class="headerlink" title="class 和 struct的区别"></a>class 和 struct的区别</h1><ol>
-<li>class默认访问权限是private, struct默认访问权限是public</li>
-<li>class默认private继承, struct默认public继承</li>
-<li>struct在没有构造函数, 可以使用大括号初始化. class则要求全部public下才能大括号初始化</li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Foo1</span> &#123;</span>&#125; foo1;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo2</span> &#123;</span>&#125; foo2;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Foo3</span> &#123;</span><span class="keyword">int</span> a; <span class="keyword">int</span> b;&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo4</span>&#123;</span><span class="keyword">int</span> a; <span class="keyword">int</span> b;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo44</span>&#123;</span><span class="keyword">public</span>: <span class="keyword">int</span> a; <span class="keyword">int</span> b;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"sizeof struct-Foo1: %zu\n"</span>, <span class="keyword">sizeof</span> foo1); <span class="comment">// 1</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"sizeof class-Foo2: %zu\n"</span>, <span class="keyword">sizeof</span> foo2); <span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line">    Foo3 foo3 = &#123;<span class="number">1</span>, <span class="number">2</span>&#125;;</span><br><span class="line">    <span class="comment">// Foo4 foo4 = &#123;1, 2&#125;; error: could not convert ‘&#123;1, 2&#125;’ from ‘&lt;brace-enclosed initializer list&gt;’ to ‘Foo4’</span></span><br><span class="line">    Foo44 foo44 = &#123;<span class="number">1</span>, <span class="number">2</span>&#125;;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="typename-class"><a href="#typename-class" class="headerlink" title="typename class"></a>typename class</h1><p><a href="https://stackoverflow.com/questions/2023977/difference-of-keywords-typename-and-class-in-templates" target="_blank" rel="noopener">https://stackoverflow.com/questions/2023977/difference-of-keywords-typename-and-class-in-templates</a></p>
-]]></content>
-        
-        <categories>
-            
-            <category> CPP </category>
-            
-        </categories>
-        
-        
-    </entry>
-    
-    <entry>
-        <title><![CDATA[大三寒假学习记录]]></title>
-        <url>http://blog.lsmg.xyz/2021/02/%25E5%2581%2587%25E6%259C%259F%25E5%25AD%25A6%25E4%25B9%25A0%25E8%25AE%25B0%25E5%25BD%2595-%25E5%25A4%25A7%25E4%25B8%2589%25E5%25AF%2592%25E5%2581%2587/</url>
-        <content type="html"><![CDATA[<h1 id="2021年2月1日-3日"><a href="#2021年2月1日-3日" class="headerlink" title="2021年2月1日-3日"></a>2021年2月1日-3日</h1><p><strong>动态规划问题</strong></p>
-<p>编辑距离</p>
-<p>最长递增子序列</p>
-<p>俄罗斯套娃信封</p>
-<p>最大子序和</p>
-<p>最长公共子序列</p>
-<h1 id="2021年2月4日22-46-59"><a href="#2021年2月4日22-46-59" class="headerlink" title="2021年2月4日22:46:59"></a>2021年2月4日22:46:59</h1><p>今天把博客整理了下分类</p>
-<p>继续学习的动态规划算法两道题目 </p>
-<p><a href="https://leetcode-cn.com/problems/delete-operation-for-two-strings/" target="_blank" rel="noopener">583. 两个字符串的删除操作</a> </p>
-<p><a href="https://leetcode-cn.com/problems/minimum-ascii-delete-sum-for-two-strings/" target="_blank" rel="noopener">712. 两个字符串的最小ASCII删除和</a></p>
-<p>2021年2月4日23:26:37 <a href="https://learngitbranching.js.org/?locale=zh_CN" target="_blank" rel="noopener">https://learngitbranching.js.org/?locale=zh_CN</a> 学习Git的挺不错的网站 练习一遍</p>
-<h1 id="2021年2月5日11-18-56"><a href="#2021年2月5日11-18-56" class="headerlink" title="2021年2月5日11:18:56"></a>2021年2月5日11:18:56</h1><p>上次改了改项目的BUG, 发布了1.1 release版本</p>
-<p>继续算法</p>
-<p><a href="https://leetcode-cn.com/problems/longest-palindromic-subsequence/" target="_blank" rel="noopener">516. 最长回文子序列</a></p>
-<p>整了一大下午 没想到是memcpy 的问题总算解决了虚拟机代码无法运行的问题</p>
-<h1 id="2021年2月20日"><a href="#2021年2月20日" class="headerlink" title="2021年2月20日"></a>2021年2月20日</h1><p>C++ 拷贝构造函数和赋值运算符 <a href="https://www.cnblogs.com/wangguchangqing/p/6141743.html" target="_blank" rel="noopener">https://www.cnblogs.com/wangguchangqing/p/6141743.html</a></p>
-<p>allocate deallocate<br>malloc free<br>new delete</p>
-<p>STL allocate deallocate constructor deconstructor<br>std allocate</p>
-<p>我理解的右值引用、移动语义和完美转发 <a href="https://www.jianshu.com/p/d19fc8447eaa" target="_blank" rel="noopener">https://www.jianshu.com/p/d19fc8447eaa</a></p>
-<p><img src="https://uploadfiles.nowcoder.com/images/20190313/311436_1552467921124_13956548C4BB199139A2744C39350272" alt="内存布局"><span class="img-alt">内存布局</span></p>
-<p>TODO 异步回调 sync</p>
-<p>TODO 聊聊同步、异步、阻塞与非阻塞 <a href="https://my.oschina.net/xianggao/blog/661085" target="_blank" rel="noopener">https://my.oschina.net/xianggao/blog/661085</a></p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>多线程</th>
-<th>多进程</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>同步</td>
-<td>mutex线程锁, 条件变量, 信号量(生产者消费者)</td>
-<td>PV操作</td>
-</tr>
-<tr>
-<td>数据共享</td>
-<td></td>
-<td>共享内存, 消息队列, 管道,</td>
-</tr>
-</tbody></table>
-<p>信号量可以设置多个初始资源 等多个初始资源消耗完毕后才会sleep</p>
-<p>条件变量则是直接sleep等待一个个或者全部唤醒</p>
-<p><a href="https://blog.csdn.net/linraise/article/details/12979473" target="_blank" rel="noopener">https://blog.csdn.net/linraise/article/details/12979473</a></p>
-<h1 id="2021年2月22日-AC5"><a href="#2021年2月22日-AC5" class="headerlink" title="2021年2月22日 - AC5"></a>2021年2月22日 - AC5</h1><p>更加的透彻 <a href="https://codinfox.github.io/dev/2014/06/03/move-semantic-perfect-forward/" target="_blank" rel="noopener">https://codinfox.github.io/dev/2014/06/03/move-semantic-perfect-forward/</a></p>
-<h2 id="移动语义和完美转发"><a href="#移动语义和完美转发" class="headerlink" title="移动语义和完美转发"></a>移动语义和完美转发</h2><p><strong>移动构造函数</strong><br>可以将源对象中的高消耗资源 转移到 新的对象中</p>
-<p>而使用拷贝构造函数会导致生成两份高消耗资源 造成浪费</p>
-<p><strong>左值 右值</strong><br>能够取到地址的为左值 否则是右值</p>
-<p><strong>std::move std::forward</strong><br>move将一个左值T转换为右值 以此来调用对象的移动构造函数 转移内部资源, 否则由于T是左值将会调用拷贝构造函数 生成新的资源 浪费旧的资源</p>
-<p>forward左值依然为左值 右值转换为右值. 当一个参数传入右值形参的时候 函数的实参实际为左值 使用forward可以将函数实参转换原本的右值</p>
-<p>而当传入左值的时候forward转换后依旧是左值</p>
-<p><strong>void Foo(const int&amp;)</strong><br>在没有其他重载的情况下, <code>const int&amp;</code>可以接收左值也可以接收右值  如果去掉<code>const</code>则只能接收右值</p>
-<p>每个线程都是如何启动的, 各个线程的作用. 线程间的数据交互方式</p>
-<p>TODO unique_lock  lock_guard scope_lock lock 等的作用</p>
-<p>条件变量虚假唤醒</p>
-<p>整理了jsoncpp的代码明天看</p>
-<h1 id="2021年2月23日-AC5"><a href="#2021年2月23日-AC5" class="headerlink" title="2021年2月23日 - AC5"></a>2021年2月23日 - AC5</h1><p><a href="https://github.com/HiganFish/jsoncpp1.9.4-learn" target="_blank" rel="noopener">https://github.com/HiganFish/jsoncpp1.9.4-learn</a> jsoncpp代码阅读</p>
-<h2 id="lower-bound-insert-比-find-insert-要高性能"><a href="#lower-bound-insert-比-find-insert-要高性能" class="headerlink" title="lower_bound + insert 比 find + insert 要高性能"></a>lower_bound + insert 比 find + insert 要高性能</h2><p>insert会利用lower_bound的返回值</p>
-<p>而find则没有此效果 总是需要进行O(log N)的查找位置</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">EventLoop* <span class="title">EventLoopThread::Start</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	thread_.Start();</span><br><span class="line"></span><br><span class="line">	EventLoop* loop = <span class="literal">nullptr</span>;</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function">MutexGuardLock <span class="title">guard</span><span class="params">(mutex_)</span></span>;</span><br><span class="line">		<span class="keyword">while</span> (loop_ == <span class="literal">nullptr</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			cond_.Wait();</span><br><span class="line">		&#125;</span><br><span class="line">		loop = loop_;  <span class="comment">// 为了等线程创建完毕后 才返回 否则这个函数只有第一句 线程未创建完毕就返回了</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> loop;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">EventLoopThread::ThreadFunc</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	EventLoop loop;</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function">MutexGuardLock <span class="title">guard</span><span class="params">(mutex_)</span></span>;</span><br><span class="line">		loop_ = &amp;loop;</span><br><span class="line">		cond_.WakeUpOne();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="2021年2月24日"><a href="#2021年2月24日" class="headerlink" title="2021年2月24日"></a>2021年2月24日</h1><h2 id="typename-and-class-in-template"><a href="#typename-and-class-in-template" class="headerlink" title="typename and class in template"></a>typename and class in template</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="keyword">typedef</span> <span class="keyword">int</span> INT;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt; // <span class="title">mingw</span>中和 <span class="title">template</span> &lt;typename T&gt; 完全等效 必须在 <span class="title">T</span>:</span>:INT 前加<span class="keyword">typename</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">D1</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	T::INT i1; <span class="comment">// error: need 'typename' before 'T::INT' because 'T' is a dependent scope</span></span><br><span class="line">	<span class="keyword">typename</span> T::INT i2; <span class="comment">// true</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	D1&lt;D&gt; d_1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>额外发现</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">A</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	T t_;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">A1</span> :</span> <span class="keyword">public</span> A&lt;T&gt;</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	A1()</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// t_ = 1;</span></span><br><span class="line">		<span class="keyword">this</span>-&gt;t_ = <span class="number">1</span>; <span class="comment">// 这里需要使用this指针访问</span></span><br><span class="line">		A&lt;T&gt;::t_ = <span class="number">1</span>; <span class="comment">// 可读性更好</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h2 id="二段名字查找"><a href="#二段名字查找" class="headerlink" title="二段名字查找"></a>二段名字查找</h2><ol>
-<li>第一段: 模板定义阶段  在被定义时 只在模板中有独立的名字(和模板参数无关) 参与查找</li>
-<li>第二段: 模板类实例化  非独立的名字参与查找</li>
-</ol>
-<p><strong>以成员变量为例 成员函数同理</strong></p>
-<ol>
-<li><p>在第一阶段, 首先处理A1遇到了<code>class A1 : public A&lt;T&gt;</code>. 此时父类<code>A&lt;T&gt;</code>依赖于模板参数 属于非独立 不参与查找</p>
-</li>
-<li><p>在之后遇到了<code>t_</code>这个变量, 由于没有查找基类 这里便认为<code>t_</code>是一个非成员变量</p>
-</li>
-<li><p>第二阶段这时候才处理<code>A&lt;T&gt;</code> 虽然这时已经<code>可以知道t_是一个成员变量</code>但是第一阶段编译器已经认定了<code>t_</code>是一个非成员变量</p>
-</li>
-<li><p>而对于一个非成员变量 编译器认为不需要去基类中查找, 所以就报错无法找到</p>
-</li>
-<li><p>使用this之后在第一阶段, 编译器就被明确的告知<code>t_</code>是一个成员变量</p>
-</li>
-<li><p>然后第二阶段, 编译器就会去基类中查找这个成员变量. </p>
-</li>
-</ol>
-<p><a href="https://www.cnblogs.com/onepixel/articles/7674659.html" target="_blank" rel="noopener">https://www.cnblogs.com/onepixel/articles/7674659.html</a></p>
-<h1 id="2021年2月25日-AC1"><a href="#2021年2月25日-AC1" class="headerlink" title="2021年2月25日 - AC1"></a>2021年2月25日 - AC1</h1><p>开学了坐了一天车</p>
-<p>A了一道题-_-</p>
-<h1 id="2021年2月26日-AC6"><a href="#2021年2月26日-AC6" class="headerlink" title="2021年2月26日 - AC6"></a>2021年2月26日 - AC6</h1><p>偶然看到了一道面试题, 问的是如何从2.5亿数字中找到重复的数字</p>
-<p><a href="https://leetcode-cn.com/circle/discuss/6TtGra/" target="_blank" rel="noopener">https://leetcode-cn.com/circle/discuss/6TtGra/</a></p>
-<p>大佬云集..</p>
-<p>TODO likely宏和__builtin_expect编译器函数性能评测</p>
-<p>TODO string_view <a href="https://cloud.tencent.com/developer/article/1479005" target="_blank" rel="noopener">https://cloud.tencent.com/developer/article/1479005</a></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> (TcpConnection::*fp)(<span class="keyword">const</span> <span class="built_in">std</span>::string_view&amp;) = &amp;TcpConnection::SendInLoop;</span><br><span class="line">			loop_-&gt;RunInLoop(<span class="built_in">std</span>::bind(fp, </span><br><span class="line">					<span class="keyword">this</span>,</span><br><span class="line">					<span class="built_in">std</span>::<span class="built_in">string</span>(data, length))); <span class="comment">// OK</span></span><br><span class="line"></span><br><span class="line">TcpConnection::SendInLoop;</span><br><span class="line">			loop_-&gt;RunInLoop(<span class="built_in">std</span>::bind(&amp;TcpConnection::SendInLoop, </span><br><span class="line">					<span class="keyword">this</span>,</span><br><span class="line">					<span class="built_in">std</span>::<span class="built_in">string</span>(data, length)));</span><br><span class="line"></span><br><span class="line">loop_-&gt;RunInLoop([<span class="keyword">this</span>, str = <span class="built_in">std</span>::<span class="built_in">string</span>(data, length)]()</span><br><span class="line">			&#123;</span><br><span class="line">				RunInLoop(str);</span><br><span class="line">			&#125;); <span class="comment">// HOW TO FIX ERROR ???</span></span><br></pre></td></tr></table></figure>
-<p>看到C++ Primer中一句话终于知道为什么第二种是错误的了, 因为存在函数重载, 所以必须显示的声明使用的是哪个函数</p>
-<p><strong>make_unique make_shared</strong><br>使得对象空间和unique_ptr或者shared_ptr的控制块是连续的</p>
-<p>TODO Warning: File “xxx” has modification time yyy s in the future</p>
-<p>mutable</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;EventLoopFunction&gt; pending_func;</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">		* 减少锁持有的时间</span></span><br><span class="line"><span class="comment">		*/</span></span><br><span class="line">	<span class="function">MutexLockGuard <span class="title">guard</span><span class="params">(pending_func_mutex_)</span></span>;</span><br><span class="line">	pending_func.swap(pending_func_);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="Linux下查看进程线程数"><a href="#Linux下查看进程线程数" class="headerlink" title="Linux下查看进程线程数"></a>Linux下查看进程线程数</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">lsof -Ptn -i tcp:4100 # -P 不解析port -n 不解析主机名 会解决lsof卡gethostbyaddr -t 只显示pid</span><br><span class="line"></span><br><span class="line">pid=$(lsof -Pnt -i tcp:4100)</span><br><span class="line"></span><br><span class="line">cat /proc/$pid/status | grep Threads</span><br><span class="line">	Threads:	5</span><br><span class="line"></span><br><span class="line">top -Hp $pid</span><br><span class="line">	107344 root      20   0  334464   6780   5192 S   0.0   0.2   0:00.74 LiveBroadcastSe                                         </span><br><span class="line">	107361 root      20   0  334464   6780   5192 S   0.0   0.2   0:23.11 LiveBroadcastSe                                         </span><br><span class="line">	107362 root      20   0  334464   6780   5192 S   0.0   0.2   0:00.70 LiveBroadcastSe                                         </span><br><span class="line">	107363 root      20   0  334464   6780   5192 S   0.0   0.2   0:04.76 LiveBroadcastSe                                         </span><br><span class="line">	107364 root      20   0  334464   6780   5192 S   0.0   0.2   0:04.79 LiveBroadcastS</span><br><span class="line"></span><br><span class="line">pstree -p $pid</span><br><span class="line">	LiveBroadcastSe(107344)─┬─&#123;LiveBroadcastSe&#125;(107361)</span><br><span class="line">							├─&#123;LiveBroadcastSe&#125;(107362)</span><br><span class="line">							├─&#123;LiveBroadcastSe&#125;(107363)</span><br><span class="line">							└─&#123;LiveBroadcastSe&#125;(107364)</span><br></pre></td></tr></table></figure>
-
-<h1 id="2021年2月27日-AC5"><a href="#2021年2月27日-AC5" class="headerlink" title="2021年2月27日 - AC5"></a>2021年2月27日 - AC5</h1><p>TODO 手写最小堆</p>
-<p>刚才看堆的用法的时候嫖到了一眼可以用最大堆+最小堆求中位数 没想到下道题就用到了…</p>
-<p>连着两道算法做的头皮发麻, 写会项目</p>
-<p>日志库写完了</p>
-<p>/var/lib/systemd/coredump coredump默认目录</p>
-<h1 id="2021年2月28日-AC5"><a href="#2021年2月28日-AC5" class="headerlink" title="2021年2月28日 - AC5"></a>2021年2月28日 - AC5</h1><p>TODO 自我介绍</p>
-<p>把项目换成了新的日志库</p>
-<p>TODO getaddrinfo</p>
-<h1 id="2021年3月1日-AC2"><a href="#2021年3月1日-AC2" class="headerlink" title="2021年3月1日 - AC2"></a>2021年3月1日 - AC2</h1><h2 id="HTTPS流程和基本原理"><a href="#HTTPS流程和基本原理" class="headerlink" title="HTTPS流程和基本原理"></a>HTTPS流程和基本原理</h2><p>HTTPS <a href="https://segmentfault.com/a/1190000021494676" target="_blank" rel="noopener">https://segmentfault.com/a/1190000021494676</a></p>
-<p>如果使用对称加密, 虽然传输过程中数据不会被解密 但是双方在交换密钥的时候 是明文进行交换的</p>
-<p>所以使用非对称加密来保护<code>对称加密的key</code> 后续再使用对称加密进行通信 这样兼顾安全性和效率</p>
-<p><img src="https://segmentfault.com/img/bVbClUl" alt=""></p>
-<p>HTTP的默认端口从80改到了443端口</p>
-<p>客户端首先生成随机串CLIENT1, 服务器接收到后回复证书和SERVER1, 客户端验证证书后生成随机串CLIENT2并使用公钥加密, 服务器收到后解密出CLENT2</p>
-<p>然后客户端和服务器根据上面的三个随机串使用相同的算法生成最终的对称加密密钥</p>
-<p><strong>对于证书合法性校验, 存在中间人攻击 如何解决的?</strong> <a href="https://zhuanlan.zhihu.com/p/43789231" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/43789231</a></p>
-<p>服务器向CA申请证书后 得到了一份<code>证书</code>以及CA在hash证书后使用私钥对其加密的<code>数字签名</code>两个东西组成<code>数字证书</code></p>
-<p>当浏览器得到<code>数字证书</code>后可以从中得到<code>证书</code>和<code>数字签名</code> 使用CA的公钥对数字签名解密得到<code>T1</code>. 然后使用证书中的算法对<code>证书</code>hash得到<code>T2</code> 比较<code>T1</code>和<code>T2</code></p>
-<p>二者相等说明证书可信.</p>
-<p>如果有人篡改了<code>证书</code>, 但是由于没有CA的私钥无法生成加密后的<code>数字签名</code>, 所以浏览器比较的时候<code>T1和T2</code>不相等</p>
-<p>如果掉包整个<code>证书</code>, 由于<code>证书</code>中包含了域名, 直接比对域名就知道有没有被掉包了</p>
-<p>五大I/O模型比较</p>
-<p>同步IO</p>
-<ul>
-<li>阻塞IO:  数据就绪和数据拷贝均阻塞</li>
-<li>非阻塞IO: 数据就绪不阻塞 数组拷贝阻塞 内核仅通知数据就绪(非就绪需要一直轮询)</li>
-<li>IO复用: 数据就绪不阻塞 数据拷贝阻塞 内核仅通知数据就绪</li>
-<li>信号驱动IO 数据就绪不阻塞 数据拷贝阻塞 内核仅通知数据就绪</li>
-</ul>
-<p>异步IO</p>
-<ul>
-<li>异步IO: 数据就绪 和 数据拷贝 均不阻塞 内核通知数据拷贝完毕</li>
-</ul>
-<p>poll相对select 增加了文件描述符的复用率和监听数量 需要每次奖所有描述符从进程复制到内核</p>
-<p>epoll 则不在需要在每次调用epoll_wait时将所有描述符从进程复制到内核</p>
-<p>epoll支持LT模式(通知直到数据被处理 水平模式) ET模式(仅通知一次 边缘模式)</p>
-<p>select的精度高 可移植性好</p>
-<p>poll同样可以执行好 相对select解决了一些问题</p>
-<p>epoll 只能在Linux下使用, 如果连接数较少或者都是短连接 会使用epoll_ctl导致性能降低 epoll更加适用于长连接的管理</p>
-<h1 id="2021年3月2日-AC2"><a href="#2021年3月2日-AC2" class="headerlink" title="2021年3月2日 - AC2"></a>2021年3月2日 - AC2</h1><p><code>dup2(fd, STDOUT_FILENO)</code> 在exel系列函数执行前 执行这条语句可以将输出直接重定向到fd</p>
-<p><a href="https://github.com/HiganFish/Notes-CSAPP" target="_blank" rel="noopener">https://github.com/HiganFish/Notes-CSAPP</a> csapp TinyWebServer 总算写完了 format库用起来非常舒服  也练了练string中的CApi</p>
-<p>C++协程库 (2021年3月3日15:46:37)</p>
-<p>智能指针的实现 (2021年3月3日15:46:41)</p>
-<h1 id="2021年3月3日1-AC2"><a href="#2021年3月3日1-AC2" class="headerlink" title="2021年3月3日1 - AC2"></a>2021年3月3日1 - AC2</h1><p>尝试试用了下协程库</p>
-<p>简单实现了下 智能指针150行不到的代码</p>
-]]></content>
-        
-        <categories>
-            
-            <category> 假期学习记录 </category>
-            
-        </categories>
-        
-        
-    </entry>
-    
-    <entry>
-        <title><![CDATA[小方说知识星球]]></title>
-        <url>http://blog.lsmg.xyz/2021/02/%25E5%259F%25BA%25E7%25A1%2580%25E7%259F%25A5%25E8%25AF%2586%25E6%259D%2582%25E7%2583%25A9-%25E5%25B0%258F%25E6%2596%25B9%25E8%25AF%25B4%25E7%259F%25A5%25E8%25AF%2586%25E6%2598%259F%25E7%2590%2583/</url>
-        <content type="html"><![CDATA[<h1 id="网络编程"><a href="#网络编程" class="headerlink" title="网络编程"></a>网络编程</h1><p>这里并不做过多的记录, 记录一些tips吧</p>
-<p>lsof 能用做文件删除恢复. 仅限于文件虽然被删除但依然被某个进程打开.</p>
-<p>bind函数<br>地址可以指定 INADDR_ANY<br>那么端口呢?  测试了下如果端口为0确实是 bind到了随机端口</p>
-<p>bind到一个已经bind的端口会出错. 然而如果端口为0 随机的端口则没有被bind过</p>
-<p>客户端connect前调用bind能够以指定端口号连接, 这个在高性能服务器见过 不过一直没有用过</p>
-<p>异步connect? 非阻塞connect</p>
-<p>connect尝试次数? 尝试间隔? </p>
-<table>
-<thead>
-<tr>
-<th>函数名称</th>
-<th>返回值</th>
-<th>阻塞</th>
-<th>非阻塞</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>recv</td>
-<td>-1</td>
-<td>出错</td>
-<td>判断是否为EWOULDBLOCK(数据已经收完, ET模式收完数据的标志) 或者 EINTR(信号中断)</td>
-</tr>
-<tr>
-<td>recv</td>
-<td>0</td>
-<td>对端关闭</td>
-<td>对端关闭</td>
-</tr>
-<tr>
-<td>send</td>
-<td>-1</td>
-<td>出错</td>
-<td>EWOULDBLOCK(数据无法继续发出) EAGAIN</td>
-</tr>
-</tbody></table>
-<p>LT 想收多少收多少 收不完就提醒<br>ET 爱收不收 过了这村没这店</p>
-<h1 id="并发编程"><a href="#并发编程" class="headerlink" title="并发编程"></a>并发编程</h1><p>条件变量虚假唤醒</p>
-<p>协程操作系统自带还是语言实现的</p>
-<p>单机服务做好 找到单机的瓶颈 上并发</p>
-<p>每个线程都是如何启动的, 各个线程的作用. 线程间的数据交互方式</p>
-<p>unique_lock  lock_guard scope_lock lock 等的作用</p>
-]]></content>
-        
-        <categories>
-            
-            <category> 基础知识杂烩 </category>
             
         </categories>
         
@@ -6135,6 +6098,31 @@
     </entry>
     
     <entry>
+        <title><![CDATA[游戏知识-腾讯游戏学院-如何进入游戏开发行业]]></title>
+        <url>http://blog.lsmg.xyz/2019/12/%25E6%25B8%25B8%25E6%2588%258F%25E7%259F%25A5%25E8%25AF%2586-%25E8%2585%25BE%25E8%25AE%25AF%25E6%25B8%25B8%25E6%2588%258F%25E5%25AD%25A6%25E9%2599%25A2-%25E5%25A6%2582%25E4%25BD%2595%25E8%25BF%259B%25E5%2585%25A5%25E6%25B8%25B8%25E6%2588%258F%25E5%25BC%2580%25E5%258F%2591%25E8%25A1%258C%25E4%25B8%259A/</url>
+        <content type="html"><![CDATA[<p>由于自己了解的实在是不足, 所以来腾讯游戏课堂来学习一些架构之类的东西 来完善自己的知识面<br><a href="https://gameinstitute.qq.com/course/detail/10156" target="_blank" rel="noopener">想做游戏吗？如何开始我的游戏开发职业生涯</a></p>
+<a id="more"></a>
+<p>做游戏不会重复做同样的工作, 项目不同</p>
+]]></content>
+        
+        <categories>
+            
+            <category> 游戏知识 </category>
+            
+            <category> 腾讯游戏学院 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 腾讯游戏学院 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
         <title><![CDATA[游戏知识-服务器-服务器通信]]></title>
         <url>http://blog.lsmg.xyz/2019/12/%25E6%25B8%25B8%25E6%2588%258F%25E7%259F%25A5%25E8%25AF%2586-%25E6%259C%258D%25E5%258A%25A1%25E5%2599%25A8-%25E6%259C%258D%25E5%258A%25A1%25E5%2599%25A8%25E9%2580%259A%25E4%25BF%25A1/</url>
         <content type="html"><![CDATA[<p>由于自己了解的实在是不足, 所以来腾讯游戏课堂来学习一些架构之类的东西 来完善自己的知识面<br><a href="https://gameinstitute.qq.com/course/detail/10096" target="_blank" rel="noopener">服务器通信</a></p>
@@ -6164,31 +6152,6 @@
             <category> 游戏知识 </category>
             
             <category> 服务器 </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> 腾讯游戏学院 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-        <title><![CDATA[游戏知识-腾讯游戏学院-如何进入游戏开发行业]]></title>
-        <url>http://blog.lsmg.xyz/2019/12/%25E6%25B8%25B8%25E6%2588%258F%25E7%259F%25A5%25E8%25AF%2586-%25E8%2585%25BE%25E8%25AE%25AF%25E6%25B8%25B8%25E6%2588%258F%25E5%25AD%25A6%25E9%2599%25A2-%25E5%25A6%2582%25E4%25BD%2595%25E8%25BF%259B%25E5%2585%25A5%25E6%25B8%25B8%25E6%2588%258F%25E5%25BC%2580%25E5%258F%2591%25E8%25A1%258C%25E4%25B8%259A/</url>
-        <content type="html"><![CDATA[<p>由于自己了解的实在是不足, 所以来腾讯游戏课堂来学习一些架构之类的东西 来完善自己的知识面<br><a href="https://gameinstitute.qq.com/course/detail/10156" target="_blank" rel="noopener">想做游戏吗？如何开始我的游戏开发职业生涯</a></p>
-<a id="more"></a>
-<p>做游戏不会重复做同样的工作, 项目不同</p>
-]]></content>
-        
-        <categories>
-            
-            <category> 游戏知识 </category>
-            
-            <category> 腾讯游戏学院 </category>
             
         </categories>
         
@@ -7108,7 +7071,7 @@
 <p>线程和进程</p>
 <ol>
 <li>一个线程只能属于一个进程, 一个进程可以有多个线程.</li>
-<li>一个线程挂掉会影响本进程中其他线程, 进程之间互不影响</li>
+<li>一个线程挂掉很可能会影响本进程中其他线程, 进程之间互不影响</li>
 <li>进程拥有独立的内存单元, 多个线程共享进程的内存</li>
 <li>创建切换进程的开销大于线程</li>
 <li>线程之间通信简单, 同步较复杂. 进程之间几乎不需要同步通信复杂</li>
