@@ -4126,7 +4126,7 @@
     
     <entry>
         <title><![CDATA[TCP状态机]]></title>
-        <url>http://blog.lsmg.xyz/2020/03/%25E7%25BD%2591%25E7%25BB%259C%25E7%25BC%2596%25E7%25A8%258B-TCP%25E7%258A%25B6%25E6%2580%2581%25E6%259C%25BA/</url>
+        <url>http://blog.lsmg.xyz/2020/03/%25E8%25AE%25A1%25E7%25AE%2597%25E6%259C%25BA%25E7%25BD%2591%25E7%25BB%259C-TCP%25E7%258A%25B6%25E6%2580%2581%25E6%259C%25BA/</url>
         <content type="html"><![CDATA[<ul>
 <li>待补充 双向管道的建立和断开细节</li>
 <li>异常三次握手</li>
@@ -4158,9 +4158,7 @@
         
         <categories>
             
-            <category> 网络编程 </category>
-            
-            <category> Socket理论 </category>
+            <category> 计算机网络 </category>
             
         </categories>
         
@@ -7037,54 +7035,6 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> (TcpConnection::*fp)(<span class="keyword">const</span> <span class="built_in">std</span>::string_view&amp;) = &amp;TcpConnection::SendInLoop;</span><br><span class="line">			loop_-&gt;RunInLoop(<span class="built_in">std</span>::bind(fp, </span><br><span class="line">					<span class="keyword">this</span>,</span><br><span class="line">					<span class="built_in">std</span>::<span class="built_in">string</span>(data, length))); <span class="comment">// OK</span></span><br><span class="line"></span><br><span class="line">TcpConnection::SendInLoop;</span><br><span class="line">			loop_-&gt;RunInLoop(<span class="built_in">std</span>::bind(&amp;TcpConnection::SendInLoop, </span><br><span class="line">					<span class="keyword">this</span>,</span><br><span class="line">					<span class="built_in">std</span>::<span class="built_in">string</span>(data, length))); <span class="comment">// ERROR</span></span><br></pre></td></tr></table></figure>
 <p>这里是由于存在函数重载, 需要显式指定函数. 同时成员函数需要使用<code>&amp;</code>来获取地址, 而非成员函数则存在到地址的隐式转换</p>
 <p>mem_fn 可以自动将一个函数推断为function对象</p>
-<h1 id="第零部分"><a href="#第零部分" class="headerlink" title="第零部分"></a>第零部分</h1><p><img src="https://img2018.cnblogs.com/blog/1414775/201906/1414775-20190617204757277-275139699.png" alt=""></p>
-<p><strong>static关键字</strong></p>
-<ul>
-<li>全局静态变量</li>
-<li>局部静态变量</li>
-<li>静态函数</li>
-<li>静态成员函数</li>
-<li>静态成员变量</li>
-</ul>
-<p>static变量如果未手动初始化则会自动进行初始化为0</p>
-<p>pthread_cond_wait 需要传入一个上锁的mutex, wait状态前会解锁 返回后会再次加锁</p>
-<p>进程线程同步和通信 字节对齐</p>
-<p>读写锁 自旋锁 互斥锁</p>
-<p>ps lsof命令</p>
-<p>进程间通信</p>
-<ol>
-<li>匿名管道: 具有亲缘关系的进程 半双工, 只存在于内存之中</li>
-<li>命名管道: 可以再无关的线程之间交换数据, 文件系统上存在对应的形式</li>
-<li>消息队列: 通过标识符标识, 消息队列面向记录,独立于收发进程 发送进程结束不会影响未取走的信息</li>
-<li>信号量: PV操作 sem系列操作 sys/sem semget semop semctl</li>
-<li>信号: 仅用于通知事件发生</li>
-<li>共享内存(经常搭配信号量): 需要同步操作, 速度最快</li>
-<li>套接字: 可以跨主机</li>
-</ol>
-<p>线程间通信</p>
-<ol>
-<li>临界区: </li>
-<li>互斥量: mutex</li>
-<li>信号量: pv操作 semaphore sem_init sem_wait sem_post sem_destory</li>
-<li>条件变量</li>
-</ol>
-<p>线程和进程</p>
-<ol>
-<li>一个线程只能属于一个进程, 一个进程可以有多个线程.</li>
-<li>一个线程挂掉很可能会影响本进程中其他线程, 进程之间互不影响</li>
-<li>进程拥有独立的内存单元, 多个线程共享进程的内存</li>
-<li>创建切换进程的开销大于线程</li>
-<li>线程之间通信简单, 同步较复杂. 进程之间几乎不需要同步通信复杂</li>
-</ol>
-<p>孤儿进程: 父进程退出后子进程依然运行 将被init进程收养</p>
-<p>僵尸进程: 所有进程在结束后都会进入这个状态, 此时依然保有有限的进程号,需要使用wait好waitpid收回. 子进程退出后会向父进程发送SIGCHLD然后父进程使用带WNHANG的while循环不断wait, 防止漏掉</p>
-<ul>
-<li>阻塞IO</li>
-<li>非阻塞IO</li>
-<li>信号驱动IO</li>
-<li>IO复用</li>
-<li>异步IO</li>
-</ul>
 ]]></content>
         
         <categories>
